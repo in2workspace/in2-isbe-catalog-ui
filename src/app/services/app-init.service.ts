@@ -8,8 +8,8 @@ import { environment } from "src/environments/environment";
 })
 export class AppInitService {
   constructor(private http: HttpClient) { }
-
-  init(): Promise<any> {
+  //TODO: enable app initializer
+  /*init(): Promise<any> {
     return new Promise((resolve, reject) => {
         const obs: Observer<any> = {
             next: ((config) => {
@@ -39,6 +39,25 @@ export class AppInitService {
             complete: () => {}
         }
         this.http.get<any>(`${environment.BASE_URL}/config`).subscribe(obs);
+    });
+  }*/
+  init(): Promise<any> {
+    return new Promise((resolve, reject) => {     
+      let config = {
+        siop: environment.SIOP_INFO
+      }   
+      environment.SIOP_INFO = {
+          enabled: true,
+          isRedirection: true,
+          pollPath: "",
+          pollCertPath: "",
+          clientID: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
+          callbackURL: "http://localhost:4200/dashboard",
+          verifierHost: "https://verifier.dome-marketplace-sbx.org",
+          verifierQRCodePath: '/oidc/authorize',
+          requestUri: "https://verifier.dome-marketplace-sbx.org/oid4vp/auth-request"
+      };   
+      resolve(config);
     });
   }
 }

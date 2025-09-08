@@ -1,6 +1,6 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FeaturedComponent } from "./offerings/featured/featured.component";
 import { GalleryComponent } from "./offerings/gallery/gallery.component";
@@ -13,21 +13,18 @@ import { ProductDetailsComponent } from "./pages/product-details/product-details
 import { ProductInventoryComponent } from "./pages/product-inventory/product-inventory.component";
 import { UserProfileComponent } from "./pages/user-profile/user-profile.component";
 import { SellerOfferingsComponent } from "./pages/seller-offerings/seller-offerings.component";
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule, FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from "./shared/shared.module";
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-import { HttpClient } from '@angular/common/http';
 import {CategoriesFilterComponent} from "./shared/categories-filter/categories-filter.component";
 import {CardComponent} from "./shared/card/card.component";
 import {BadgeComponent} from "./shared/badge/badge.component";
 import {BillingAccountFormComponent} from "./shared/billing-account-form/billing-account-form.component";
 import { NgOptimizedImage } from '@angular/common';
-import { FaIconComponent } from "@fortawesome/angular-fontawesome";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CategoryItemComponent} from "./shared/category-item/category-item.component";
-import { CartDrawerComponent } from "./shared/cart-drawer/cart-drawer.component";
 import {CategoriesPanelComponent} from "./shared/categories-panel/categories-panel.component";
 import { SearchCatalogComponent } from "./pages/search-catalog/search-catalog.component";
 import { ShoppingCartComponent } from "./pages/shopping-cart/shopping-cart.component";
@@ -69,9 +66,7 @@ import { UpdateCategoryComponent } from './pages/admin/categories/update-categor
 import { CategoriesRecursionListComponent } from './shared/categories-recursion-list/categories-recursion-list.component';
 import { ContactUsComponent } from './offerings/contact-us/contact-us.component';
 import { ContactUsFormComponent } from './pages/contact-us/contact-us-form.component';
-import { provideMatomo, MatomoModule, MatomoRouterModule, MatomoConfiguration, MatomoInitializationMode, MatomoInitializerService } from 'ngx-matomo-client';
-import { withRouter } from 'ngx-matomo-client'
-import { environment } from 'src/environments/environment';
+import { MatomoModule, MatomoRouterModule, MatomoInitializationMode, MatomoInitializerService } from 'ngx-matomo-client';
 import { AppInitService } from './services/app-init.service';
 import { appConfigFactory } from './app-config-factory';
 import { VerificationComponent } from './pages/admin/verification/verification.component';
@@ -82,7 +77,6 @@ import { OrganizationDetailsComponent } from './pages/organization-details/organ
 import { FaqComponent } from './offerings/faq/faq.component';
 import { NewPricePlanComponent } from './pages/seller-offerings/offerings/seller-offer/new-price-plan/new-price-plan.component';
 import { UpdatePricePlanComponent } from './pages/seller-offerings/offerings/seller-offer/update-price-plan/update-price-plan.component';
-import { MultipleSelectComponent } from './shared/multiple-select/multiple-select.component';
 import {CharacteristicComponent} from "./shared/characteristic/characteristic.component";
 import {PricePlanDrawerComponent} from "./shared/price-plan-drawer/price-plan-drawer.component";
 import {OfferComponent} from "./shared/forms/offer/offer.component";
@@ -105,7 +99,6 @@ import { OperatorRevenueSharingComponent } from "src/app/pages/admin/operator-re
     CategoryItemComponent,
     CardComponent,
     BadgeComponent,
-    //CartDrawerComponent,
     BillingAddressComponent,
     CheckoutComponent,
     ProductDetailsComponent,

@@ -191,10 +191,11 @@ export const local_items = {
 
   export const checkHeaderPreLogin = () => {
     // Mocks
-    cy.intercept( {method:'GET', url: 'http://proxy.docker:8004/stats'}, init_stat).as('stats')
-    cy.intercept( {method: 'GET', url: 'http://proxy.docker:8004/catalog/productOffering?*'}, product_offering).as('productOffering')
-    cy.intercept( {method: 'GET', url: 'http://proxy.docker:8004/config'}, init_config).as('config')
-    cy.intercept( {method:'GET', url: 'http://proxy.docker:8004/catalog/category?*'}, category_launched).as('category')
+    //TODO: update urls according to environment
+    //cy.intercept( {method:'GET', url: 'http://proxy.docker:8004/stats'}, init_stat).as('stats')
+    //cy.intercept( {method: 'GET', url: 'http://proxy.docker:8004/catalog/productOffering?*'}, product_offering).as('productOffering')
+    //cy.intercept( {method: 'GET', url: 'http://proxy.docker:8004/config'}, init_config).as('config')
+    //cy.intercept( {method:'GET', url: 'http://proxy.docker:8004/catalog/category?*'}, category_launched).as('category')
     // Verify mocks are called 1 time
     cy.visit('/', {onBeforeLoad(win) {
         win.localStorage.setItem('color-theme', 'dark');
