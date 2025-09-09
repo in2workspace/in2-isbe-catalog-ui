@@ -46,41 +46,41 @@ const routes: Routes = [
   },
   { path: 'shopping-cart',
   component: ShoppingCartComponent,
-  canActivate: [AuthGuard], data: { roles: [] }
+  //canActivate: [AuthGuard], data: { roles: [] }
   },
   { path: 'checkout',
     component: CheckoutComponent,
-    canActivate: [AuthGuard], data: { roles: [] }
+    //canActivate: [AuthGuard], data: { roles: [] }
   },
   { path: 'product-inventory',
   component: ProductInventoryComponent,
-  canActivate: [AuthGuard], data: { roles: [] }
+  //canActivate: [AuthGuard], data: { roles: [] }
   },
   { path: 'product-inventory/:id',
   component: ProductInvDetailComponent
   },
   { path: 'profile',
   component: UserProfileComponent,
-  canActivate: [AuthGuard], data: { roles: ['individual','orgAdmin'] }
+  //canActivate: [AuthGuard], data: { roles: ['individual','orgAdmin'] }
   },
   { path: 'my-offerings',
   component: SellerOfferingsComponent,
-  canActivate: [AuthGuard], data: { roles: ['seller'] }
+  ////canActivate: [AuthGuard], data: { roles: ['seller'] }
   },
   { path: 'admin',
   component: AdminComponent,
-  canActivate: [AuthGuard], data: { roles: ['admin', 'certifier'] }
+  ////canActivate: [AuthGuard], data: { roles: ['admin', 'certifier'] }
   },
   { path: 'contact-us',
     component: ContactUsFormComponent
   },
   { path: 'product-orders',
     component: ProductOrdersComponent,
-    canActivate: [AuthGuard], data: { roles: [] }
+    //canActivate: [AuthGuard], data: { roles: [] }
   },
   { path: 'usage-spec',
     component: UsageSpecsComponent,
-    canActivate: [AuthGuard], data: { roles: ['seller'] }
+    ////canActivate: [AuthGuard], data: { roles: ['seller'] }
   },
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 ]

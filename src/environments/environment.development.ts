@@ -1,6 +1,6 @@
 export const environment = {
     //BASE_URL: 'https://dome-marketplace.org',
-    BASE_URL: 'http://proxy.docker:8004',
+    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5',
     PAYMENT_URL: 'https://payment.dome-marketplace-sbx.org',
     //API_PORT: 8004,
     //API_PORT: 443,

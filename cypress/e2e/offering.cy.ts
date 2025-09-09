@@ -298,19 +298,19 @@ const interceptors = (productSpec:any, productOfferingPOST:any, newCatalog:any, 
     let specCall = 0
     let scall = 0
 
-    cy.intercept({method: 'GET', url: 'http://proxy.docker:8004/catalog/catalog?*'}, (res)=>{
+    cy.intercept({method: 'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5/catalog?*'}, (res)=>{
         res.reply({
             statusCode: 200,
             body: sr[scall++]
         })
     }).as('catalogs')
-    cy.intercept({method: 'GET', url: 'http://proxy.docker:8004/catalog/productOffering?*'}, (res)=>{
+    cy.intercept({method: 'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5/productOffering?*'}, (res)=>{
         res.reply({
             statusCode: 200,
             body: response[call++]
         })
     }).as('productOff')
-    cy.intercept({method: 'GET', url: 'http://proxy.docker:8004/catalog/productSpecification?*'}, (res)=>{
+    cy.intercept({method: 'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5/productSpecification?*'}, (res)=>{
         res.reply({
             statusCode: 200,
             body: specResponse[specCall++]
@@ -318,14 +318,14 @@ const interceptors = (productSpec:any, productOfferingPOST:any, newCatalog:any, 
     }).as('productSpec')
 
 
-    cy.intercept({method: 'GET', url: 'http://proxy.docker:8004/catalog/catalog/urn:ngsi-ld:catalog:32828e1d-4652-4f4c-b13e-327450ce83c6'}, (res)=>{
+    cy.intercept({method: 'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5/catalog/urn:ngsi-ld:catalog:32828e1d-4652-4f4c-b13e-327450ce83c6'}, (res)=>{
         res.reply({
             statusCode: 200,
             body: defaultCatalog
         })
     }).as('defaultCatalog')
 
-    cy.intercept({method: 'GET', url: 'http://proxy.docker:8004/catalog/category/urn:ngsi-ld:category:26435cca-2707-4c89-8f0c-79464573c9e2'}, (res)=>{
+    cy.intercept({method: 'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5/category/urn:ngsi-ld:category:26435cca-2707-4c89-8f0c-79464573c9e2'}, (res)=>{
         res.reply({
             statusCode: 200,
             body: defaultCategory
@@ -333,9 +333,9 @@ const interceptors = (productSpec:any, productOfferingPOST:any, newCatalog:any, 
     }).as('defaultCategory')
 
 
-    cy.intercept({method: 'POST', url: `http://proxy.docker:8004/catalog/catalog/${newCatalog.id}/productOffering`}, {statusCode: 201, body: productOfferingPOST}).as('offPOST')
+    cy.intercept({method: 'POST', url: `https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5/catalog/${newCatalog.id}/productOffering`}, {statusCode: 201, body: productOfferingPOST}).as('offPOST')
     if (offPricePOST){
-        cy.intercept({method: 'POST', url: 'http://proxy.docker:8004/catalog//productOfferingPrice'}, {statusCode: 201, body: offPricePOST}).as('offPricePOST')
+        cy.intercept({method: 'POST', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5//productOfferingPrice'}, {statusCode: 201, body: offPricePOST}).as('offPricePOST')
     }
 
 }
