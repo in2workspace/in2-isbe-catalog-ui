@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { OfferComponent } from './offer.component';
 
 describe('OfferComponent', () => {
@@ -9,9 +9,8 @@ describe('OfferComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [OfferComponent]
-    })
-    .compileComponents();
-    
+    }).compileComponents();
+
     fixture = TestBed.createComponent(OfferComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
