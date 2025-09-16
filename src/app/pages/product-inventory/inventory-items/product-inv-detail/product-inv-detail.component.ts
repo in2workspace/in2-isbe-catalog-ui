@@ -20,9 +20,10 @@ import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-product-inv-detail',
-  templateUrl: './product-inv-detail.component.html',
-  styleUrl: './product-inv-detail.component.css'
+    selector: 'app-product-inv-detail',
+    templateUrl: './product-inv-detail.component.html',
+    styleUrl: './product-inv-detail.component.css',
+    standalone: true
 })
 export class ProductInvDetailComponent implements OnInit {
 

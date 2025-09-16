@@ -5,9 +5,10 @@ import {DatePipe, NgClass} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
-  selector: 'categories-recursion',
-  templateUrl: './categories-recursion.component.html',
-  styleUrl: './categories-recursion.component.css'
+    selector: 'categories-recursion',
+    templateUrl: './categories-recursion.component.html',
+    styleUrl: './categories-recursion.component.css',
+    standalone: true
 })
 export class CategoriesRecursionComponent {
   @Input() child: Category;

@@ -12,11 +12,16 @@ import { ApiServiceService } from 'src/app/services/product-service.service';
 import { cartProduct } from '../../models/interfaces';
 import { TYPES } from 'src/app/models/types.const';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'app-cart-drawer',
-  templateUrl: './cart-drawer.component.html',
-  styleUrl: './cart-drawer.component.css'
+    selector: 'app-cart-drawer',
+    templateUrl: './cart-drawer.component.html',
+    styleUrl: './cart-drawer.component.css',
+    standalone: true,
+    imports: [FaIconComponent, NgClass, TranslateModule]
 })
 export class CartDrawerComponent implements OnInit{
   protected readonly faCartShopping = faCartShopping;

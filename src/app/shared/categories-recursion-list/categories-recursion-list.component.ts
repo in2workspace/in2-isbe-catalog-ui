@@ -3,9 +3,10 @@ import {Category} from "../../models/interfaces";
 import {EventMessageService} from "src/app/services/event-message.service";
 
 @Component({
-  selector: 'categories-recursion-list',
-  templateUrl: './categories-recursion-list.component.html',
-  styleUrl: './categories-recursion-list.component.css'
+    selector: 'categories-recursion-list',
+    templateUrl: './categories-recursion-list.component.html',
+    styleUrl: './categories-recursion-list.component.css',
+    standalone: true
 })
 export class CategoriesRecursionListComponent {
   @Input() child: Category;

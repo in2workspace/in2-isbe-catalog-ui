@@ -12,9 +12,10 @@ import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
 
 @Component({
-  selector: 'seller-offer',
-  templateUrl: './seller-offer.component.html',
-  styleUrl: './seller-offer.component.css'
+    selector: 'seller-offer',
+    templateUrl: './seller-offer.component.html',
+    styleUrl: './seller-offer.component.css',
+    standalone: true
 })
 export class SellerOfferComponent implements OnInit{
   protected readonly faIdCard = faIdCard;

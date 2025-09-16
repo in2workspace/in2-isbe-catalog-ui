@@ -16,9 +16,10 @@ type CharacteristicValueSpecification = components["schemas"]["CharacteristicVal
 type ProductSpecificationCharacteristic = components["schemas"]["CharacteristicSpecification"];
 
 @Component({
-  selector: 'update-service-spec',
-  templateUrl: './update-service-spec.component.html',
-  styleUrl: './update-service-spec.component.css'
+    selector: 'update-service-spec',
+    templateUrl: './update-service-spec.component.html',
+    styleUrl: './update-service-spec.component.css',
+    standalone: true
 })
 export class UpdateServiceSpecComponent implements OnInit {
   @Input() serv: any;

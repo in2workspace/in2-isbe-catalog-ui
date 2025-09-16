@@ -28,9 +28,10 @@ import { jwtDecode } from "jwt-decode";
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'bae-off-card',
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.css'
+    selector: 'bae-off-card',
+    templateUrl: './card.component.html',
+    styleUrl: './card.component.css',
+    standalone: true
 })
 export class CardComponent implements OnInit, AfterViewInit {
 

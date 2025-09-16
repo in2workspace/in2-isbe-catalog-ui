@@ -19,9 +19,10 @@ import { environment } from 'src/environments/environment';
 type OrganizationUpdate = components["schemas"]["Organization_Update"];
 
 @Component({
-  selector: 'org-info',
-  templateUrl: './org-info.component.html',
-  styleUrl: './org-info.component.css'
+    selector: 'org-info',
+    templateUrl: './org-info.component.html',
+    styleUrl: './org-info.component.css',
+    standalone: true
 })
 export class OrgInfoComponent {
   loading: boolean = false;

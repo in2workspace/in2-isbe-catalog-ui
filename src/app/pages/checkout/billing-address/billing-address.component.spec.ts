@@ -9,8 +9,8 @@ describe('BillingAddressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [BillingAddressComponent]
-    })
+    imports: [BillingAddressComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(BillingAddressComponent);

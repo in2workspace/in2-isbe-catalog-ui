@@ -27,13 +27,17 @@ import { ActivatedRoute } from '@angular/router';
 import { initFlowbite, Dropdown } from 'flowbite';
 import { QrVerifierService } from 'src/app/services/qr-verifier.service';
 import * as uuid from 'uuid';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import {ShoppingCartServiceService} from "../../services/shopping-cart-service.service";
+import { CartDrawerComponent } from '../cart-drawer/cart-drawer.component';
+import { FaLayersComponent, FaIconComponent, FaLayersCounterComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'bae-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+    selector: 'bae-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css'],
+    standalone: true,
+    imports: [FaLayersComponent, FaIconComponent, FaLayersCounterComponent, CartDrawerComponent, TranslateModule]
 })
 export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy{
 

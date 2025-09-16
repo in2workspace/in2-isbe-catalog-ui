@@ -27,9 +27,10 @@ type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
 
 
 @Component({
-  selector: 'create-offer',
-  templateUrl: './create-offer.component.html',
-  styleUrl: './create-offer.component.css'
+    selector: 'create-offer',
+    templateUrl: './create-offer.component.html',
+    styleUrl: './create-offer.component.css',
+    standalone: true
 })
 export class CreateOfferComponent implements OnInit {
 

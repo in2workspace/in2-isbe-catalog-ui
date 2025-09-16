@@ -12,11 +12,16 @@ import {EventMessageService} from "../../services/event-message.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 import { LoginInfo } from 'src/app/models/interfaces';
 import * as moment from 'moment';
+import { TranslateModule } from '@ngx-translate/core';
+import { FeedbackModalComponent } from '../feedback-modal/feedback-modal.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'bae-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.css']
+    selector: 'bae-footer',
+    templateUrl: './footer.component.html',
+    styleUrls: ['./footer.component.css'],
+    standalone: true,
+    imports: [FaIconComponent, FeedbackModalComponent, TranslateModule]
 })
 export class FooterComponent {
   protected readonly faLinkedin = faLinkedin;

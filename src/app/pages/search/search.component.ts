@@ -17,9 +17,10 @@ import { LoginInfo } from 'src/app/models/interfaces';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'bae-search',
-  templateUrl: './search.component.html',
-  styleUrl: './search.component.css'
+    selector: 'bae-search',
+    templateUrl: './search.component.html',
+    styleUrl: './search.component.css',
+    standalone: true
 })
 export class SearchComponent implements OnInit {
 

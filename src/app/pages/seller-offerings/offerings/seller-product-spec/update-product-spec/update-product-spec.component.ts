@@ -32,9 +32,10 @@ type ProductSpecificationRelationship = components["schemas"]["ProductSpecificat
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 
 @Component({
-  selector: 'update-product-spec',
-  templateUrl: './update-product-spec.component.html',
-  styleUrl: './update-product-spec.component.css'
+    selector: 'update-product-spec',
+    templateUrl: './update-product-spec.component.html',
+    styleUrl: './update-product-spec.component.css',
+    standalone: true
 })
 export class UpdateProductSpecComponent implements OnInit {
   @Input() prod: any;

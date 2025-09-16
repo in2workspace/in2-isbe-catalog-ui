@@ -21,9 +21,10 @@ import { Location } from '@angular/common';
 import {firstValueFrom} from "rxjs";
 
 @Component({
-  selector: 'app-product-details',
-  templateUrl: './product-details.component.html',
-  styleUrl: './product-details.component.css'
+    selector: 'app-product-details',
+    templateUrl: './product-details.component.html',
+    styleUrl: './product-details.component.css',
+    standalone: true
 })
 export class ProductDetailsComponent implements OnInit {
 

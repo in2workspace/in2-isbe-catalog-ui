@@ -9,8 +9,8 @@ describe('UpdateResourceSpecComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UpdateResourceSpecComponent]
-    })
+    imports: [UpdateResourceSpecComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(UpdateResourceSpecComponent);

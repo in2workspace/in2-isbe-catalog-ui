@@ -29,9 +29,10 @@ type ProductSpecificationRelationship = components["schemas"]["ProductSpecificat
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 
 @Component({
-  selector: 'create-product-spec',
-  templateUrl: './create-product-spec.component.html',
-  styleUrl: './create-product-spec.component.css'
+    selector: 'create-product-spec',
+    templateUrl: './create-product-spec.component.html',
+    styleUrl: './create-product-spec.component.css',
+    standalone: true
 })
 export class CreateProductSpecComponent implements OnInit {
 

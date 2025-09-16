@@ -23,9 +23,10 @@ import {ProductOfferingPrice_DTO} from 'src/app/models/interfaces';
 //type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
 
 @Component({
-  selector: 'new-price-plan',
-  templateUrl: './new-price-plan.component.html',
-  styleUrl: './new-price-plan.component.css'
+    selector: 'new-price-plan',
+    templateUrl: './new-price-plan.component.html',
+    styleUrl: './new-price-plan.component.css',
+    standalone: true
 })
 export class NewPricePlanComponent implements OnInit {
 

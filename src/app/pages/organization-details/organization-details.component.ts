@@ -7,9 +7,10 @@ import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-organization-details',
-  templateUrl: './organization-details.component.html',
-  styleUrl: './organization-details.component.css'
+    selector: 'app-organization-details',
+    templateUrl: './organization-details.component.html',
+    styleUrl: './organization-details.component.css',
+    standalone: true
 })
 export class OrganizationDetailsComponent implements OnInit {
 

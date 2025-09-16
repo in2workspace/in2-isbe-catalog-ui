@@ -10,9 +10,8 @@ describe('FeedbackModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FeedbackModalComponent],
-      imports: [HttpClientTestingModule]
-    })
+    imports: [HttpClientTestingModule, FeedbackModalComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(FeedbackModalComponent);

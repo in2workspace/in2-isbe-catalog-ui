@@ -12,9 +12,10 @@ import {components} from "src/app/models/product-catalog";
 type Catalog_Create = components["schemas"]["Catalog_Create"];
 
 @Component({
-  selector: 'create-catalog',
-  templateUrl: './create-catalog.component.html',
-  styleUrl: './create-catalog.component.css'
+    selector: 'create-catalog',
+    templateUrl: './create-catalog.component.html',
+    styleUrl: './create-catalog.component.css',
+    standalone: true
 })
 export class CreateCatalogComponent implements OnInit {
   partyId:any='';

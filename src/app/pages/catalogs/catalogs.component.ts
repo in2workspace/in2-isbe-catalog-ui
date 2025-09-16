@@ -9,9 +9,10 @@ import { environment } from 'src/environments/environment';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-catalogs',
-  templateUrl: './catalogs.component.html',
-  styleUrl: './catalogs.component.css'
+    selector: 'app-catalogs',
+    templateUrl: './catalogs.component.html',
+    styleUrl: './catalogs.component.css',
+    standalone: true
 })
 export class CatalogsComponent implements OnInit{
   catalogs:Catalog[]=[];

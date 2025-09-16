@@ -8,9 +8,10 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {EventMessageService} from "../../../services/event-message.service";
 
 @Component({
-  selector: 'app-billing-address',
-  templateUrl: './billing-address.component.html',
-  styleUrl: './billing-address.component.css'
+    selector: 'app-billing-address',
+    templateUrl: './billing-address.component.html',
+    styleUrl: './billing-address.component.css',
+    standalone: true
 })
 export class BillingAddressComponent {
   @Input() position: number = 0;

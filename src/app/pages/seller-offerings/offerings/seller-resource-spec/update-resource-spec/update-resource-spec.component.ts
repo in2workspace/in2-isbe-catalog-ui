@@ -15,9 +15,10 @@ type CharacteristicValueSpecification = components["schemas"]["ResourceSpecifica
 type ResourceSpecificationCharacteristic = components["schemas"]["ResourceSpecificationCharacteristic"];
 
 @Component({
-  selector: 'update-resource-spec',
-  templateUrl: './update-resource-spec.component.html',
-  styleUrl: './update-resource-spec.component.css'
+    selector: 'update-resource-spec',
+    templateUrl: './update-resource-spec.component.html',
+    styleUrl: './update-resource-spec.component.css',
+    standalone: true
 })
 export class UpdateResourceSpecComponent implements OnInit {
   @Input() res: any;

@@ -20,9 +20,10 @@ import { certifications } from 'src/app/models/certification-standards.const';
 import {ProductOfferingPrice_DTO} from 'src/app/models/interfaces';
 
 @Component({
-  selector: 'update-price-plan',
-  templateUrl: './update-price-plan.component.html',
-  styleUrl: './update-price-plan.component.css'
+    selector: 'update-price-plan',
+    templateUrl: './update-price-plan.component.html',
+    styleUrl: './update-price-plan.component.css',
+    standalone: true
 })
 export class UpdatePricePlanComponent implements OnInit {
 

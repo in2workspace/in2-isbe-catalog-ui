@@ -12,9 +12,10 @@ import {components} from "src/app/models/product-catalog";
 type Catalog_Update = components["schemas"]["Catalog_Update"];
 
 @Component({
-  selector: 'update-catalog',
-  templateUrl: './update-catalog.component.html',
-  styleUrl: './update-catalog.component.css'
+    selector: 'update-catalog',
+    templateUrl: './update-catalog.component.html',
+    styleUrl: './update-catalog.component.css',
+    standalone: true
 })
 export class UpdateCatalogComponent implements OnInit {
   @Input() cat: any;

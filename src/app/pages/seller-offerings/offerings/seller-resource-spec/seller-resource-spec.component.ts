@@ -13,9 +13,10 @@ import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
 
 @Component({
-  selector: 'seller-resource-spec',
-  templateUrl: './seller-resource-spec.component.html',
-  styleUrl: './seller-resource-spec.component.css'
+    selector: 'seller-resource-spec',
+    templateUrl: './seller-resource-spec.component.html',
+    styleUrl: './seller-resource-spec.component.css',
+    standalone: true
 })
 export class SellerResourceSpecComponent implements OnInit {
   protected readonly faIdCard = faIdCard;

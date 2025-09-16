@@ -9,8 +9,8 @@ describe('InventoryServicesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [InventoryServicesComponent]
-    })
+    imports: [InventoryServicesComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(InventoryServicesComponent);

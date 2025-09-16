@@ -3,9 +3,10 @@ import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import {faHandsHoldingHeart} from "@fortawesome/pro-solid-svg-icons";
 
 @Component({
-  selector: 'app-contact-us-form',
-  templateUrl: './contact-us-form.component.html',
-  styleUrl: './contact-us-form.component.css'
+    selector: 'app-contact-us-form',
+    templateUrl: './contact-us-form.component.html',
+    styleUrl: './contact-us-form.component.css',
+    standalone: true
 })
 
 export class ContactUsFormComponent implements OnInit {

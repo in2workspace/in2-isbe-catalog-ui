@@ -15,9 +15,10 @@ import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'billing-info',
-  templateUrl: './billing-info.component.html',
-  styleUrl: './billing-info.component.css'
+    selector: 'billing-info',
+    templateUrl: './billing-info.component.html',
+    styleUrl: './billing-info.component.css',
+    standalone: true
 })
 export class BillingInfoComponent implements OnInit{
   loading: boolean = false;

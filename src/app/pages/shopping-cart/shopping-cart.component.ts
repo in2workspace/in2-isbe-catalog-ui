@@ -17,9 +17,10 @@ import { Router } from '@angular/router';
 import {firstValueFrom} from "rxjs";
 
 @Component({
-  selector: 'app-shopping-cart',
-  templateUrl: './shopping-cart.component.html',
-  styleUrl: './shopping-cart.component.css'
+    selector: 'app-shopping-cart',
+    templateUrl: './shopping-cart.component.html',
+    styleUrl: './shopping-cart.component.css',
+    standalone: true
 })
 export class ShoppingCartComponent implements OnInit, AfterViewInit{
   protected readonly faCartShopping = faCartShopping;

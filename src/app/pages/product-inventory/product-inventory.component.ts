@@ -5,9 +5,10 @@ type ProductOffering = components["schemas"]["ProductOffering"];
 import {EventMessageService} from "../../services/event-message.service";
 
 @Component({
-  selector: 'app-product-inventory',
-  templateUrl: './product-inventory.component.html',
-  styleUrl: './product-inventory.component.css'
+    selector: 'app-product-inventory',
+    templateUrl: './product-inventory.component.html',
+    styleUrl: './product-inventory.component.css',
+    standalone: true
 })
 export class ProductInventoryComponent implements OnInit, AfterViewInit {
   show_prods:boolean = true;

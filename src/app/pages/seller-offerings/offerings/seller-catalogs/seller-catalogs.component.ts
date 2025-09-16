@@ -13,9 +13,10 @@ import { PaginationService } from 'src/app/services/pagination.service';
 import { initFlowbite } from 'flowbite';
 
 @Component({
-  selector: 'seller-catalogs',
-  templateUrl: './seller-catalogs.component.html',
-  styleUrl: './seller-catalogs.component.css'
+    selector: 'seller-catalogs',
+    templateUrl: './seller-catalogs.component.html',
+    styleUrl: './seller-catalogs.component.css',
+    standalone: true
 })
 export class SellerCatalogsComponent {
 

@@ -9,8 +9,8 @@ describe('ContactUsFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ContactUsFormComponent]
-    })
+    imports: [ContactUsFormComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(ContactUsFormComponent);

@@ -10,9 +10,10 @@ import { initFlowbite } from 'flowbite';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'user-info',
-  templateUrl: './user-info.component.html',
-  styleUrl: './user-info.component.css'
+    selector: 'user-info',
+    templateUrl: './user-info.component.html',
+    styleUrl: './user-info.component.css',
+    standalone: true
 })
 export class UserInfoComponent implements OnInit {
   loading: boolean = false;

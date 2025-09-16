@@ -30,9 +30,8 @@ const declarations: any[] = [
 
 
 @NgModule({
-    imports: [...imports, CategoriesPanelComponent],
-  exports: [...imports, ...declarations],
-  declarations: [...declarations],
-  providers:[DatePipe, TranslateService]
+    imports: [...imports, CategoriesPanelComponent, ...declarations],
+    exports: [...imports, ...declarations],
+    providers: [DatePipe, TranslateService]
 })
 export class SharedModule { }

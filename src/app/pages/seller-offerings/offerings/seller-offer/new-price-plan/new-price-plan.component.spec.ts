@@ -9,8 +9,8 @@ describe('NewPricePlanComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [NewPricePlanComponent]
-    })
+    imports: [NewPricePlanComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(NewPricePlanComponent);

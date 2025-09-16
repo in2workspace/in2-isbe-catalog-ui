@@ -12,9 +12,10 @@ import { initFlowbite } from 'flowbite';
 import {EventMessageService} from "../../services/event-message.service";
 
 @Component({
-  selector: 'app-admin',
-  templateUrl: './admin.component.html',
-  styleUrl: './admin.component.css'
+    selector: 'app-admin',
+    templateUrl: './admin.component.html',
+    styleUrl: './admin.component.css',
+    standalone: true
 })
 export class AdminComponent implements OnInit {
   show_categories:boolean = true;

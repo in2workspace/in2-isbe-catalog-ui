@@ -15,9 +15,10 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-search-catalog',
-  templateUrl: './search-catalog.component.html',
-  styleUrl: './search-catalog.component.css'
+    selector: 'app-search-catalog',
+    templateUrl: './search-catalog.component.html',
+    styleUrl: './search-catalog.component.css',
+    standalone: true
 })
 export class SearchCatalogComponent implements OnInit{
   constructor(

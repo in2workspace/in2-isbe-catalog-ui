@@ -21,9 +21,10 @@ import { PaymentService } from 'src/app/services/payment.service';
 
 
 @Component({
-  selector: 'app-checkout',
-  templateUrl: './checkout.component.html',
-  styleUrl: './checkout.component.css'
+    selector: 'app-checkout',
+    templateUrl: './checkout.component.html',
+    styleUrl: './checkout.component.css',
+    standalone: true
 })
 export class CheckoutComponent implements OnInit {
   protected readonly faCartShopping = faCartShopping;

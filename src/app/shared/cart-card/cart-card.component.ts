@@ -12,9 +12,10 @@ import { ShoppingCartServiceService } from 'src/app/services/shopping-cart-servi
 import {EventMessageService} from "../../services/event-message.service";
 
 @Component({
-  selector: 'cart-card',
-  templateUrl: './cart-card.component.html',
-  styleUrl: './cart-card.component.css'
+    selector: 'cart-card',
+    templateUrl: './cart-card.component.html',
+    styleUrl: './cart-card.component.css',
+    standalone: true
 })
 export class CartCardComponent implements OnInit {
   @Input() productOff: any;

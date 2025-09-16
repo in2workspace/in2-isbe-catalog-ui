@@ -12,9 +12,10 @@ import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
 
 @Component({
-  selector: 'admin-categories',
-  templateUrl: './categories.component.html',
-  styleUrl: './categories.component.css'
+    selector: 'admin-categories',
+    templateUrl: './categories.component.html',
+    styleUrl: './categories.component.css',
+    standalone: true
 })
 export class CategoriesComponent {
   protected readonly faIdCard = faIdCard;

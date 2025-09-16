@@ -9,8 +9,8 @@ describe('CategoriesRecursionListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CategoriesRecursionListComponent]
-    })
+    imports: [CategoriesRecursionListComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(CategoriesRecursionListComponent);

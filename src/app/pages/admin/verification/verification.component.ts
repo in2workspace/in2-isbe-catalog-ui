@@ -5,9 +5,10 @@ import { EventMessageService } from 'src/app/services/event-message.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'verification',
-  templateUrl: './verification.component.html',
-  styleUrl: './verification.component.css'
+    selector: 'verification',
+    templateUrl: './verification.component.html',
+    styleUrl: './verification.component.css',
+    standalone: true
 })
 export class VerificationComponent {
 

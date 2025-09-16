@@ -12,9 +12,10 @@ import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
 
 @Component({
-  selector: 'inventory-services',
-  templateUrl: './inventory-services.component.html',
-  styleUrl: './inventory-services.component.css'
+    selector: 'inventory-services',
+    templateUrl: './inventory-services.component.html',
+    styleUrl: './inventory-services.component.css',
+    standalone: true
 })
 export class InventoryServicesComponent implements OnInit {
 

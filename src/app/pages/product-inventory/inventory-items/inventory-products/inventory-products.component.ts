@@ -18,9 +18,10 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 
 @Component({
-  selector: 'inventory-products',
-  templateUrl: './inventory-products.component.html',
-  styleUrl: './inventory-products.component.css'
+    selector: 'inventory-products',
+    templateUrl: './inventory-products.component.html',
+    styleUrl: './inventory-products.component.css',
+    standalone: true
 })
 export class InventoryProductsComponent implements OnInit {
 

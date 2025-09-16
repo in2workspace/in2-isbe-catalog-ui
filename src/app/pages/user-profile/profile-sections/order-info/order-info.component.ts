@@ -18,9 +18,10 @@ import { environment } from 'src/environments/environment';
 import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 
 @Component({
-  selector: 'order-info',
-  templateUrl: './order-info.component.html',
-  styleUrl: './order-info.component.css'
+    selector: 'order-info',
+    templateUrl: './order-info.component.html',
+    styleUrl: './order-info.component.css',
+    standalone: true
 })
 
 export class OrderInfoComponent implements OnInit {

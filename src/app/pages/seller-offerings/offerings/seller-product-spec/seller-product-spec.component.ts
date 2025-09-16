@@ -13,9 +13,10 @@ import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
 
 @Component({
-  selector: 'seller-product-spec',
-  templateUrl: './seller-product-spec.component.html',
-  styleUrl: './seller-product-spec.component.css'
+    selector: 'seller-product-spec',
+    templateUrl: './seller-product-spec.component.html',
+    styleUrl: './seller-product-spec.component.css',
+    standalone: true
 })
 export class SellerProductSpecComponent implements OnInit{
   protected readonly faIdCard = faIdCard;

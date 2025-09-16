@@ -27,9 +27,10 @@ import { getLocaleId } from '@angular/common';
 
 
 @Component({
-  selector: 'app-billing-account-form',
-  templateUrl: './billing-account-form.component.html',
-  styleUrl: './billing-account-form.component.css'
+    selector: 'app-billing-account-form',
+    templateUrl: './billing-account-form.component.html',
+    styleUrl: './billing-account-form.component.css',
+    standalone: true
 })
 export class BillingAccountFormComponent implements OnInit {
 

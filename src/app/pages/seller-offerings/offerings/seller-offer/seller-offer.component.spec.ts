@@ -9,8 +9,8 @@ describe('SellerOfferComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SellerOfferComponent]
-    })
+    imports: [SellerOfferComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(SellerOfferComponent);

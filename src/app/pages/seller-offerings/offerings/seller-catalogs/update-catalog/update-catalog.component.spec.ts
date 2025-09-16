@@ -9,8 +9,8 @@ describe('UpdateCatalogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [UpdateCatalogComponent]
-    })
+    imports: [UpdateCatalogComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(UpdateCatalogComponent);

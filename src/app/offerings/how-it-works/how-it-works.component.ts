@@ -4,9 +4,10 @@ import {faCloudArrowDown} from "@fortawesome/pro-regular-svg-icons";
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-how-it-works',
-  templateUrl: './how-it-works.component.html',
-  styleUrl: './how-it-works.component.css'
+    selector: 'app-how-it-works',
+    templateUrl: './how-it-works.component.html',
+    styleUrl: './how-it-works.component.css',
+    standalone: true
 })
 export class HowItWorksComponent {
   protected readonly faCircleNodes = faCircleNodes;

@@ -10,9 +10,8 @@ describe('VerificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [VerificationComponent],
-      imports: [HttpClientTestingModule]
-    })
+    imports: [HttpClientTestingModule, VerificationComponent]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(VerificationComponent);

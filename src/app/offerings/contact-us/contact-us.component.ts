@@ -4,9 +4,10 @@ import { Router } from '@angular/router';
 import {EventMessageService} from "../../services/event-message.service";
 
 @Component({
-  selector: 'contact-us',
-  templateUrl: './contact-us.component.html',
-  styleUrl: './contact-us.component.css'
+    selector: 'contact-us',
+    templateUrl: './contact-us.component.html',
+    styleUrl: './contact-us.component.css',
+    standalone: true
 })
 export class ContactUsComponent {
   protected readonly faAtom = faAtom;

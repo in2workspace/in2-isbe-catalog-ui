@@ -24,9 +24,10 @@ type ProductOfferingPriceRefOrValue = components["schemas"]["ProductOfferingPric
 type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
 
 @Component({
-  selector: 'update-offer',
-  templateUrl: './update-offer.component.html',
-  styleUrl: './update-offer.component.css'
+    selector: 'update-offer',
+    templateUrl: './update-offer.component.html',
+    styleUrl: './update-offer.component.css',
+    standalone: true
 })
 export class UpdateOfferComponent implements OnInit{
   @Input() offer: any;

@@ -3,11 +3,16 @@ import {faMessagePen, faHandsHoldingHeart} from "@fortawesome/pro-solid-svg-icon
 import {EventMessageService} from "../../services/event-message.service";
 import { FeedbackServiceService } from "src/app/services/feedback-service.service"
 import { lastValueFrom } from 'rxjs';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
-  selector: 'feedback-modal',
-  templateUrl: './feedback-modal.component.html',
-  styleUrl: './feedback-modal.component.css'
+    selector: 'feedback-modal',
+    templateUrl: './feedback-modal.component.html',
+    styleUrl: './feedback-modal.component.css',
+    standalone: true,
+    imports: [FaIconComponent, NgClass, TranslateModule]
 })
 export class FeedbackModalComponent {
   constructor(

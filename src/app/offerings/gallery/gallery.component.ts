@@ -6,9 +6,10 @@ type ProductOffering = components["schemas"]["ProductOffering"];
 import { ApiServiceService } from 'src/app/services/product-service.service';
 
 @Component({
-  selector: 'bae-off-gallery',
-  templateUrl: './gallery.component.html',
-  styleUrl: './gallery.component.css'
+    selector: 'bae-off-gallery',
+    templateUrl: './gallery.component.html',
+    styleUrl: './gallery.component.css',
+    standalone: true
 })
 export class GalleryComponent implements OnInit {
 

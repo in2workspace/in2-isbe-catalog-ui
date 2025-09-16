@@ -6,9 +6,10 @@ import {Category} from "../../models/interfaces";
 import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
-  selector: 'bae-off-featured',
-  templateUrl: './featured.component.html',
-  styleUrl: './featured.component.css'
+    selector: 'bae-off-featured',
+    templateUrl: './featured.component.html',
+    styleUrl: './featured.component.css',
+    standalone: true
 })
 export class FeaturedComponent {
   constructor(

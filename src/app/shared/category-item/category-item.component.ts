@@ -7,9 +7,10 @@ import {EventMessageService} from "../../services/event-message.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 
 @Component({
-  selector: 'bae-category-item',
-  templateUrl: './category-item.component.html',
-  styleUrl: './category-item.component.css'
+    selector: 'bae-category-item',
+    templateUrl: './category-item.component.html',
+    styleUrl: './category-item.component.css',
+    standalone: true
 })
 export class CategoryItemComponent implements OnInit {
 

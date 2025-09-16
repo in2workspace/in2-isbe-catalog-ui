@@ -13,9 +13,10 @@ import {EventMessageService} from "../../services/event-message.service";
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-seller-offerings',
-  templateUrl: './seller-offerings.component.html',
-  styleUrl: './seller-offerings.component.css'
+    selector: 'app-seller-offerings',
+    templateUrl: './seller-offerings.component.html',
+    styleUrl: './seller-offerings.component.css',
+    standalone: true
 })
 export class SellerOfferingsComponent implements OnInit {
 

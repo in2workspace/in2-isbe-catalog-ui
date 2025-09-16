@@ -15,9 +15,10 @@ import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrl: './user-profile.component.css'
+    selector: 'app-user-profile',
+    templateUrl: './user-profile.component.html',
+    styleUrl: './user-profile.component.css',
+    standalone: true
 })
 export class UserProfileComponent implements OnInit{
   show_profile: boolean = true;

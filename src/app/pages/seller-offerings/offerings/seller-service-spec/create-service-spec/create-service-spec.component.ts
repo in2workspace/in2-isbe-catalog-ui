@@ -15,9 +15,10 @@ type CharacteristicValueSpecification = components["schemas"]["CharacteristicVal
 type ProductSpecificationCharacteristic = components["schemas"]["CharacteristicSpecification"];
 
 @Component({
-  selector: 'create-service-spec',
-  templateUrl: './create-service-spec.component.html',
-  styleUrl: './create-service-spec.component.css'
+    selector: 'create-service-spec',
+    templateUrl: './create-service-spec.component.html',
+    styleUrl: './create-service-spec.component.css',
+    standalone: true
 })
 export class CreateServiceSpecComponent implements OnInit {
 

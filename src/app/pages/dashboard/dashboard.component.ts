@@ -15,9 +15,10 @@ import { initFlowbite } from 'flowbite';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.css',
+    standalone: true
 })
 export class DashboardComponent implements OnInit {
 
