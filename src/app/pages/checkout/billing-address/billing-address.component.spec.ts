@@ -9,7 +9,7 @@ describe('BillingAddressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BillingAddressComponent]
+      declarations: [BillingAddressComponent]
     })
     .compileComponents();
     

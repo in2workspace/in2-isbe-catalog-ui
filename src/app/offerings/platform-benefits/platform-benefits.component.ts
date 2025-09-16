@@ -10,7 +10,8 @@ import {faLockOpen, faShieldCheck} from "@fortawesome/pro-regular-svg-icons";
 @Component({
   selector: 'app-platform-benefits',
   templateUrl: './platform-benefits.component.html',
-  styleUrl: './platform-benefits.component.css'
+  styleUrl: './platform-benefits.component.css',
+  standalone: true
 })
 export class PlatformBenefitsComponent {
   protected readonly faLeaf = faLeaf;

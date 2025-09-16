@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { FeedbackModalComponent } from './feedback-modal.component';
 
@@ -9,7 +10,8 @@ describe('FeedbackModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [FeedbackModalComponent]
+      declarations: [FeedbackModalComponent],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
     

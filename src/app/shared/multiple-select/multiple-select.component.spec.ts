@@ -9,7 +9,7 @@ describe('MultipleSelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MultipleSelectComponent]
+      imports: [MultipleSelectComponent]
     })
     .compileComponents();
     

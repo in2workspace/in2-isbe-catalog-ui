@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
+import { TranslateModule } from '@ngx-translate/core';
 import { PriceComponentsTableComponent } from './price-components-table.component';
 
 describe('PriceComponentsTableComponent', () => {
@@ -9,7 +10,7 @@ describe('PriceComponentsTableComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PriceComponentsTableComponent]
+      imports: [PriceComponentsTableComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
     

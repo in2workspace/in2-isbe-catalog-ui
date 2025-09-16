@@ -11,7 +11,8 @@ import {faCircle} from "@fortawesome/pro-regular-svg-icons";
 @Component({
   selector: 'bae-categories-filter',
   templateUrl: './categories-filter.component.html',
-  styleUrl: './categories-filter.component.css'
+  styleUrl: './categories-filter.component.css',
+  standalone: true
 })
 export class CategoriesFilterComponent implements OnInit {
 

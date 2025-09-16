@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { UsageListComponent } from './usage-list.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('UsageListComponent', () => {
   let component: UsageListComponent;
@@ -9,7 +11,7 @@ describe('UsageListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsageListComponent]
+      imports: [UsageListComponent,HttpClientTestingModule,TranslateModule.forRoot()]
     })
     .compileComponents();
     

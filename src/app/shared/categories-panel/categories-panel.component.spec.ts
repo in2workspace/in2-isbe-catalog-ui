@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { CategoriesPanelComponent } from './categories-panel.component';
 
