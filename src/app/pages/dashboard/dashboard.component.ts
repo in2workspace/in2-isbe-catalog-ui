@@ -6,19 +6,23 @@ import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { LoginInfo } from 'src/app/models/interfaces';
 import * as moment from 'moment';
-import { interval, Subscription} from 'rxjs';
 import { RefreshLoginServiceService } from "src/app/services/refresh-login-service.service"
 import { StatsServiceService } from "src/app/services/stats-service.service"
 import { LoginServiceService } from "src/app/services/login-service.service"
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { environment } from 'src/environments/environment';
+import { PlatformBenefitsComponent } from 'src/app/offerings/platform-benefits/platform-benefits.component';
+import { GalleryComponent } from 'src/app/offerings/gallery/gallery.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css',
-    standalone: true
+    standalone: true,
+    imports: [PlatformBenefitsComponent, GalleryComponent, TranslateModule, NgClass, ReactiveFormsModule]
 })
 export class DashboardComponent implements OnInit {
 

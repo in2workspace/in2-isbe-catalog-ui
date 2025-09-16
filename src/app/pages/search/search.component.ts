@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef, SimpleChanges, OnChanges, HostListener, AfterViewInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import {CategoriesFilterComponent} from "../../shared/categories-filter/categories-filter.component";
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
@@ -11,16 +11,20 @@ import {EventMessageService} from "../../services/event-message.service";
 import { LoginServiceService } from "src/app/services/login-service.service"
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginInfo } from 'src/app/models/interfaces';
 import * as moment from 'moment';
+import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CardComponent } from 'src/app/shared/card/card.component';
 
 @Component({
     selector: 'bae-search',
     templateUrl: './search.component.html',
     styleUrl: './search.component.css',
-    standalone: true
+    standalone: true,
+    imports: [FeedbackModalComponent, TranslateModule, CardComponent, ReactiveFormsModule, CategoriesFilterComponent, NgClass]
 })
 export class SearchComponent implements OnInit {
 

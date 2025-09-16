@@ -10,12 +10,17 @@ import {LocalStorageService} from "src/app/services/local-storage.service";
 import { LoginInfo } from 'src/app/models/interfaces';
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
+import { TranslateModule } from '@ngx-translate/core';
+import { CategoriesRecursionListComponent } from 'src/app/shared/categories-recursion-list/categories-recursion-list.component';
+import { DatePipe } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'admin-categories',
     templateUrl: './categories.component.html',
     styleUrl: './categories.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, CategoriesRecursionListComponent, DatePipe, FaIconComponent]
 })
 export class CategoriesComponent {
   protected readonly faIdCard = faIdCard;

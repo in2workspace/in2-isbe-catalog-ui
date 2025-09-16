@@ -4,12 +4,16 @@ import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
 import { ResourceSpecServiceService } from 'src/app/services/resource-spec-service.service';
 import { LoginInfo } from 'src/app/models/interfaces';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { noWhitespaceValidator } from 'src/app/validators/validators';
 
 import {components} from "src/app/models/resource-catalog";
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { MarkdownComponent } from 'ngx-markdown';
 type ResourceSpecification_Update = components["schemas"]["ResourceSpecification_Update"];
 type CharacteristicValueSpecification = components["schemas"]["ResourceSpecificationCharacteristicValue"];
 type ResourceSpecificationCharacteristic = components["schemas"]["ResourceSpecificationCharacteristic"];
@@ -18,7 +22,8 @@ type ResourceSpecificationCharacteristic = components["schemas"]["ResourceSpecif
     selector: 'update-resource-spec',
     templateUrl: './update-resource-spec.component.html',
     styleUrl: './update-resource-spec.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, NgClass, MarkdownComponent, FormsModule, ReactiveFormsModule]
 })
 export class UpdateResourceSpecComponent implements OnInit {
   @Input() res: any;

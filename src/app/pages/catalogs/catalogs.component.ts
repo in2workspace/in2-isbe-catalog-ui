@@ -7,12 +7,16 @@ import {components} from "../../models/product-catalog";
 type Catalog = components["schemas"]["Catalog"];
 import { environment } from 'src/environments/environment';
 import { FormControl } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-catalogs',
     templateUrl: './catalogs.component.html',
     styleUrl: './catalogs.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, MarkdownComponent, NgClass]
 })
 export class CatalogsComponent implements OnInit{
   catalogs:Catalog[]=[];

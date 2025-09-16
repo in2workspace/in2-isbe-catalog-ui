@@ -12,11 +12,13 @@ import { ResourceSpecServiceService } from 'src/app/services/resource-spec-servi
 import { PaginationService } from 'src/app/services/pagination.service';
 import { LoginInfo, ProductOfferingPrice_DTO } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
-import { FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { v4 as uuidv4 } from 'uuid';
 import { currencies } from 'currencies.json';
 import { lastValueFrom } from 'rxjs';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { OfferComponent } from 'src/app/shared/forms/offer/offer.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 type ProductOffering_Update = components["schemas"]["ProductOffering_Update"];
 type BundledProductOffering = components["schemas"]["BundledProductOffering"];
@@ -27,7 +29,8 @@ type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
     selector: 'update-offer',
     templateUrl: './update-offer.component.html',
     styleUrl: './update-offer.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, OfferComponent, TranslateModule]
 })
 export class UpdateOfferComponent implements OnInit{
   @Input() offer: any;

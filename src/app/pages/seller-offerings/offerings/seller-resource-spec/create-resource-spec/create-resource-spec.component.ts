@@ -4,12 +4,16 @@ import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
 import { ResourceSpecServiceService } from 'src/app/services/resource-spec-service.service';
 import { LoginInfo } from 'src/app/models/interfaces';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { noWhitespaceValidator } from 'src/app/validators/validators';
 
 import {components} from "src/app/models/resource-catalog";
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
+import { NgClass } from '@angular/common';
 type ResourceSpecification_Create = components["schemas"]["ResourceSpecification_Create"];
 type CharacteristicValueSpecification = components["schemas"]["ResourceSpecificationCharacteristicValue"];
 type ResourceSpecificationCharacteristic = components["schemas"]["ResourceSpecificationCharacteristic"];
@@ -18,7 +22,8 @@ type ResourceSpecificationCharacteristic = components["schemas"]["ResourceSpecif
     selector: 'create-resource-spec',
     templateUrl: './create-resource-spec.component.html',
     styleUrl: './create-resource-spec.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, FormsModule, ReactiveFormsModule]
 })
 export class CreateResourceSpecComponent implements OnInit {
 

@@ -4,12 +4,16 @@ import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
 import { ServiceSpecServiceService } from 'src/app/services/service-spec-service.service';
 import { LoginInfo } from 'src/app/models/interfaces';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { noWhitespaceValidator } from 'src/app/validators/validators';
 
 import {components} from "src/app/models/service-catalog";
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownModule } from 'ngx-markdown';
+import { NgClass } from '@angular/common';
 type ServiceSpecification_Create = components["schemas"]["ServiceSpecification_Create"];
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
 type ProductSpecificationCharacteristic = components["schemas"]["CharacteristicSpecification"];
@@ -18,7 +22,8 @@ type ProductSpecificationCharacteristic = components["schemas"]["CharacteristicS
     selector: 'create-service-spec',
     templateUrl: './create-service-spec.component.html',
     styleUrl: './create-service-spec.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, MarkdownModule, NgClass,FormsModule, ReactiveFormsModule]
 })
 export class CreateServiceSpecComponent implements OnInit {
 

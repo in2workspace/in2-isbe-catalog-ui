@@ -16,12 +16,20 @@ import * as moment from 'moment';
 import { FormControl } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { MarkdownComponent } from 'ngx-markdown';
+import { BadgeComponent } from 'src/app/shared/badge/badge.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { PricePlanDrawerComponent } from 'src/app/shared/price-plan-drawer/price-plan-drawer.component';
 
 @Component({
     selector: 'inventory-products',
     templateUrl: './inventory-products.component.html',
     styleUrl: './inventory-products.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, NgClass, MarkdownComponent, BadgeComponent, FaIconComponent]
 })
 export class InventoryProductsComponent implements OnInit {
 

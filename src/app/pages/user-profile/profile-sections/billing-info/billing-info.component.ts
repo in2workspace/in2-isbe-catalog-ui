@@ -13,12 +13,17 @@ import { initFlowbite } from 'flowbite';
 import {EventMessageService} from "src/app/services/event-message.service";
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { BillingAccountFormComponent } from 'src/app/shared/billing-account-form/billing-account-form.component';
 
 @Component({
     selector: 'billing-info',
     templateUrl: './billing-info.component.html',
     styleUrl: './billing-info.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, NgClass, BillingAccountFormComponent]
 })
 export class BillingInfoComponent implements OnInit{
   loading: boolean = false;

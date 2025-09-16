@@ -1,12 +1,16 @@
+import { NgClass } from '@angular/common';
 import {Component, HostListener, OnInit, ChangeDetectorRef} from '@angular/core';
-import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormArray, ReactiveFormsModule } from '@angular/forms';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import {faHandsHoldingHeart} from "@fortawesome/pro-solid-svg-icons";
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-contact-us-form',
     templateUrl: './contact-us-form.component.html',
     styleUrl: './contact-us-form.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, FaIconComponent, NgClass, ReactiveFormsModule]
 })
 
 export class ContactUsFormComponent implements OnInit {

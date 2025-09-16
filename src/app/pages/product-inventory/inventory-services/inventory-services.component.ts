@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { ProductInventoryServiceService } from 'src/app/services/product-inventory-service.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -10,12 +10,17 @@ import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 import { initFlowbite } from 'flowbite';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
+import { DatePipe } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'inventory-services',
     templateUrl: './inventory-services.component.html',
     styleUrl: './inventory-services.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, MarkdownComponent, DatePipe, FaIconComponent]
 })
 export class InventoryServicesComponent implements OnInit {
 

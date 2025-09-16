@@ -3,14 +3,16 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AccountServiceService } from 'src/app/services/account-service.service';
 import {EventMessageService} from "../../services/event-message.service";
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
     selector: 'app-organization-details',
     templateUrl: './organization-details.component.html',
     styleUrl: './organization-details.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, MarkdownComponent]
 })
 export class OrganizationDetailsComponent implements OnInit {
 

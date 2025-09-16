@@ -15,12 +15,15 @@ import { environment } from 'src/environments/environment';
 import {LocalStorageService} from "../../services/local-storage.service";
 import { Router } from '@angular/router';
 import {firstValueFrom} from "rxjs";
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-shopping-cart',
     templateUrl: './shopping-cart.component.html',
     styleUrl: './shopping-cart.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, NgClass]
 })
 export class ShoppingCartComponent implements OnInit, AfterViewInit{
   protected readonly faCartShopping = faCartShopping;

@@ -1,24 +1,24 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
-import { LoginInfo, billingAccountCart } from 'src/app/models/interfaces';
-import { ApiServiceService } from 'src/app/services/product-service.service';
-import { AccountServiceService } from 'src/app/services/account-service.service';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { LoginInfo } from 'src/app/models/interfaces';
 import {LocalStorageService} from "../../services/local-storage.service";
-import { ProductOrderService } from 'src/app/services/product-order-service.service';
-import { FastAverageColor } from 'fast-average-color';
 import {components} from "../../models/product-catalog";
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 type ProductOffering = components["schemas"]["ProductOffering"];
 import { initFlowbite } from 'flowbite';
 import {EventMessageService} from "../../services/event-message.service";
 import * as moment from 'moment';
-import { environment } from 'src/environments/environment';
+import { ProviderRevenueSharingComponent } from './profile-sections/provider-revenue-sharing/provider-revenue-sharing.component';
+import { BillingInfoComponent } from './profile-sections/billing-info/billing-info.component';
+import { OrderInfoComponent } from './profile-sections/order-info/order-info.component';
+import { OrgInfoComponent } from './profile-sections/org-info/org-info.component';
+import { UserInfoComponent } from './profile-sections/user-info/user-info.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-user-profile',
     templateUrl: './user-profile.component.html',
     styleUrl: './user-profile.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ProviderRevenueSharingComponent, BillingInfoComponent, OrderInfoComponent, OrgInfoComponent, UserInfoComponent, TranslateModule]
 })
 export class UserProfileComponent implements OnInit{
   show_profile: boolean = true;

@@ -1,22 +1,38 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
-import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 import {components} from "src/app/models/product-catalog";
 type Catalog = components["schemas"]["Catalog"];
-import { environment } from 'src/environments/environment';
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
 import { LoginInfo } from 'src/app/models/interfaces';
-import { initFlowbite } from 'flowbite';
 import {EventMessageService} from "../../services/event-message.service";
 import * as moment from 'moment';
+import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-modal.component';
+import { UpdateCatalogComponent } from './offerings/seller-catalogs/update-catalog/update-catalog.component';
+import { UpdateOfferComponent } from './offerings/seller-offer/update-offer/update-offer.component';
+import { UpdateResourceSpecComponent } from './offerings/seller-resource-spec/update-resource-spec/update-resource-spec.component';
+import { UpdateServiceSpecComponent } from './offerings/seller-service-spec/update-service-spec/update-service-spec.component';
+import { UpdateProductSpecComponent } from './offerings/seller-product-spec/update-product-spec/update-product-spec.component';
+import { CreateCatalogComponent } from './offerings/seller-catalogs/create-catalog/create-catalog.component';
+import { CreateOfferComponent } from './offerings/seller-offer/create-offer/create-offer.component';
+import { CreateResourceSpecComponent } from './offerings/seller-resource-spec/create-resource-spec/create-resource-spec.component';
+import { CreateServiceSpecComponent } from './offerings/seller-service-spec/create-service-spec/create-service-spec.component';
+import { CreateProductSpecComponent } from './offerings/seller-product-spec/create-product-spec/create-product-spec.component';
+import { SellerOfferComponent } from './offerings/seller-offer/seller-offer.component';
+import { SellerResourceSpecComponent } from './offerings/seller-resource-spec/seller-resource-spec.component';
+import { SellerServiceSpecComponent } from './offerings/seller-service-spec/seller-service-spec.component';
+import { SellerProductSpecComponent } from './offerings/seller-product-spec/seller-product-spec.component';
+import { SellerCatalogsComponent } from './offerings/seller-catalogs/seller-catalogs.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 
 @Component({
     selector: 'app-seller-offerings',
     templateUrl: './seller-offerings.component.html',
     styleUrl: './seller-offerings.component.css',
-    standalone: true
+    standalone: true,
+    imports: [FeedbackModalComponent, UpdateCatalogComponent, UpdateOfferComponent, UpdateResourceSpecComponent, UpdateServiceSpecComponent, UpdateProductSpecComponent, CreateCatalogComponent, CreateOfferComponent, CreateResourceSpecComponent,
+      CreateServiceSpecComponent, CreateProductSpecComponent, SellerOfferComponent, SellerResourceSpecComponent, SellerServiceSpecComponent, SellerProductSpecComponent,
+      SellerCatalogsComponent, TranslateModule, ErrorMessageComponent
+    ]
 })
 export class SellerOfferingsComponent implements OnInit {
 

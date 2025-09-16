@@ -1,16 +1,20 @@
-import { Component, Input, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild, NgModule } from '@angular/core';
 import { Router } from '@angular/router';
 import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
 import { ServiceSpecServiceService } from 'src/app/services/service-spec-service.service';
 import { LoginInfo } from 'src/app/models/interfaces';
-import { initFlowbite } from 'flowbite';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { noWhitespaceValidator } from 'src/app/validators/validators';
 
 import {components} from "src/app/models/service-catalog";
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { MarkdownComponent } from 'ngx-markdown';
 type ServiceSpecification_Update = components["schemas"]["ServiceSpecification_Update"];
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
 type ProductSpecificationCharacteristic = components["schemas"]["CharacteristicSpecification"];
@@ -19,7 +23,8 @@ type ProductSpecificationCharacteristic = components["schemas"]["CharacteristicS
     selector: 'update-service-spec',
     templateUrl: './update-service-spec.component.html',
     styleUrl: './update-service-spec.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, NgClass, MarkdownComponent, FormsModule, ReactiveFormsModule]
 })
 export class UpdateServiceSpecComponent implements OnInit {
   @Input() serv: any;

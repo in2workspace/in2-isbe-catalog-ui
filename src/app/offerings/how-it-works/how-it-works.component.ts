@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import {faCircleNodes} from "@fortawesome/pro-solid-svg-icons";
 import {faCloudArrowDown} from "@fortawesome/pro-regular-svg-icons";
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'app-how-it-works',
     templateUrl: './how-it-works.component.html',
     styleUrl: './how-it-works.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, FaIconComponent]
 })
 export class HowItWorksComponent {
   protected readonly faCircleNodes = faCircleNodes;

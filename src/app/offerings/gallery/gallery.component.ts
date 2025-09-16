@@ -4,12 +4,14 @@ import {CardComponent} from "../../shared/card/card.component";
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
 import { ApiServiceService } from 'src/app/services/product-service.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'bae-off-gallery',
     templateUrl: './gallery.component.html',
     styleUrl: './gallery.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, CardComponent]
 })
 export class GalleryComponent implements OnInit {
 

@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {EventMessageService} from "../../services/event-message.service";
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import {Category} from "../../models/interfaces";
 import {LocalStorageService} from "../../services/local-storage.service";
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
     selector: 'bae-off-featured',
     templateUrl: './featured.component.html',
     styleUrl: './featured.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, MarkdownComponent]
 })
 export class FeaturedComponent {
   constructor(

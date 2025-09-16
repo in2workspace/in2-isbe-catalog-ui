@@ -1,21 +1,21 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormControl } from '@angular/forms';
-import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 import {components} from "src/app/models/product-catalog";
 type Catalog = components["schemas"]["Catalog"];
-import { environment } from 'src/environments/environment';
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
-import { LoginInfo } from 'src/app/models/interfaces';
-import { initFlowbite } from 'flowbite';
 import {EventMessageService} from "../../services/event-message.service";
+import { OperatorRevenueSharingComponent } from './operator-revenue-sharing/operator-revenue-sharing.component';
+import { VerificationComponent } from './verification/verification.component';
+import { UpdateCategoryComponent } from './categories/update-category/update-category.component';
+import { CreateCategoryComponent } from './categories/create-category/create-category.component';
+import { CategoriesComponent } from './categories/categories.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.css',
-    standalone: true
+    standalone: true,
+    imports: [OperatorRevenueSharingComponent, VerificationComponent, UpdateCategoryComponent, CreateCategoryComponent,CategoriesComponent,TranslateModule]
 })
 export class AdminComponent implements OnInit {
   show_categories:boolean = true;

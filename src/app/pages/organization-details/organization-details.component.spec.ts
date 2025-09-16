@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { OrganizationDetailsComponent } from './organization-details.component';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
 
 describe('OrganizationDetailsComponent', () => {
   let component: OrganizationDetailsComponent;
@@ -9,6 +10,9 @@ describe('OrganizationDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { queryParamMap: convertToParamMap({}) } } }
+      ],
       imports: [OrganizationDetailsComponent]
     })
     .compileComponents();

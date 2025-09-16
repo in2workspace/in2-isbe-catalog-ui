@@ -11,12 +11,15 @@ import { LoginInfo } from 'src/app/models/interfaces';
 import {EventMessageService} from "src/app/services/event-message.service";
 import { PaginationService } from 'src/app/services/pagination.service';
 import { initFlowbite } from 'flowbite';
+import { TranslateModule } from '@ngx-translate/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'seller-catalogs',
     templateUrl: './seller-catalogs.component.html',
     styleUrl: './seller-catalogs.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, FaIconComponent]
 })
 export class SellerCatalogsComponent {
 

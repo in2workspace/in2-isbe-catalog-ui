@@ -11,12 +11,16 @@ import {LocalStorageService} from "src/app/services/local-storage.service";
 import { LoginInfo } from 'src/app/models/interfaces';
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
+import { TranslateModule } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'seller-resource-spec',
     templateUrl: './seller-resource-spec.component.html',
     styleUrl: './seller-resource-spec.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, DatePipe, FaIconComponent]
 })
 export class SellerResourceSpecComponent implements OnInit {
   protected readonly faIdCard = faIdCard;

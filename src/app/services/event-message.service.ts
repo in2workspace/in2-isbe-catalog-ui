@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Subject} from "rxjs";
-import {Category, cartProduct, FormChangeState, PricePlanChangeState, SubformType} from "../models/interfaces";
+import {Category, cartProduct, FormChangeState, PricePlanChangeState} from "../models/interfaces";
 import { LoginInfo } from 'src/app/models/interfaces';
 
 export interface EventMessage {

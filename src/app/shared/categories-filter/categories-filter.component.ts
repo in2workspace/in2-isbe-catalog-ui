@@ -7,12 +7,17 @@ import { ApiServiceService } from 'src/app/services/product-service.service';
 import { initFlowbite } from 'flowbite';
 import {faCircleCheck} from "@fortawesome/pro-solid-svg-icons";
 import {faCircle} from "@fortawesome/pro-regular-svg-icons";
+import { TranslateModule } from '@ngx-translate/core';
+import { CategoryItemComponent } from '../category-item/category-item.component';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'bae-categories-filter',
   templateUrl: './categories-filter.component.html',
   styleUrl: './categories-filter.component.css',
-  standalone: true
+  standalone: true,
+  imports: [TranslateModule,CategoryItemComponent,FaIconComponent,NgClass]
 })
 export class CategoriesFilterComponent implements OnInit {
 

@@ -10,12 +10,17 @@ import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 import { initFlowbite } from 'flowbite';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
+import { DatePipe } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'inventory-resources',
     templateUrl: './inventory-resources.component.html',
     styleUrl: './inventory-resources.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, MarkdownComponent, DatePipe, FaIconComponent]
 })
 export class InventoryResourcesComponent implements OnInit {
 

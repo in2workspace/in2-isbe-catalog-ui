@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { ProdSpecComponent } from './prod-spec.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ProdSpecComponent', () => {
   let component: ProdSpecComponent;
@@ -9,7 +10,7 @@ describe('ProdSpecComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProdSpecComponent]
+      imports: [ProdSpecComponent, HttpClientTestingModule]
     })
     .compileComponents();
     

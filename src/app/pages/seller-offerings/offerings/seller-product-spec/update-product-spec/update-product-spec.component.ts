@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import {components} from "src/app/models/product-catalog";
 import { environment } from 'src/environments/environment';
@@ -12,14 +12,18 @@ import { ResourceSpecServiceService } from 'src/app/services/resource-spec-servi
 import { PaginationService } from 'src/app/services/pagination.service';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
-import { FormGroup, FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry, NgxFileDropModule } from 'ngx-file-drop';
 import { certifications } from 'src/app/models/certification-standards.const'
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { QrVerifierService } from 'src/app/services/qr-verifier.service';
 import { jwtDecode } from "jwt-decode";
 import { noWhitespaceValidator } from 'src/app/validators/validators';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { DatePipe, NgClass } from '@angular/common';
+import { MarkdownComponent } from 'ngx-markdown';
 
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
@@ -35,7 +39,8 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
     selector: 'update-product-spec',
     templateUrl: './update-product-spec.component.html',
     styleUrl: './update-product-spec.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule]
 })
 export class UpdateProductSpecComponent implements OnInit {
   @Input() prod: any;

@@ -10,12 +10,17 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LoginInfo, cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
 import { ShoppingCartServiceService } from 'src/app/services/shopping-cart-service.service';
 import {EventMessageService} from "../../services/event-message.service";
+import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
     selector: 'cart-card',
     templateUrl: './cart-card.component.html',
     styleUrl: './cart-card.component.css',
-    standalone: true
+    standalone: true,
+    imports: [MarkdownComponent,ErrorMessageComponent, TranslateModule, NgClass]
 })
 export class CartCardComponent implements OnInit {
   @Input() productOff: any;

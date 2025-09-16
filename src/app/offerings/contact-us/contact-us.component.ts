@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import {faAtom} from "@fortawesome/pro-regular-svg-icons";
 import { Router } from '@angular/router';
 import {EventMessageService} from "../../services/event-message.service";
+import { TranslateModule } from '@ngx-translate/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'contact-us',
     templateUrl: './contact-us.component.html',
     styleUrl: './contact-us.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, FaIconComponent]
 })
 export class ContactUsComponent {
   protected readonly faAtom = faAtom;

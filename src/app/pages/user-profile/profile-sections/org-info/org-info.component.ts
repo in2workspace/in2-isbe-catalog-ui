@@ -3,7 +3,7 @@ import { LoginInfo } from 'src/app/models/interfaces';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
-import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { phoneNumbers, countries } from 'src/app/models/country.const'
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
@@ -13,8 +13,13 @@ import { v4 as uuidv4 } from 'uuid';
 import {getCountries, getCountryCallingCode, CountryCode} from 'libphonenumber-js'
 import {parsePhoneNumber} from 'libphonenumber-js/max'
 import {AttachmentServiceService} from "src/app/services/attachment-service.service";
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry, NgxFileDropModule } from 'ngx-file-drop';
 import { environment } from 'src/environments/environment';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { MarkdownComponent } from 'ngx-markdown';
 
 type OrganizationUpdate = components["schemas"]["Organization_Update"];
 
@@ -22,7 +27,8 @@ type OrganizationUpdate = components["schemas"]["Organization_Update"];
     selector: 'org-info',
     templateUrl: './org-info.component.html',
     styleUrl: './org-info.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent]
 })
 export class OrgInfoComponent {
   loading: boolean = false;

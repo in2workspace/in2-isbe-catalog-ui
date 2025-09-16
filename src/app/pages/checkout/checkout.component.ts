@@ -12,19 +12,21 @@ import {faCartShopping} from "@fortawesome/sharp-solid-svg-icons";
 import {environment} from "../../../environments/environment";
 import {TYPES} from "../../models/types.const";
 import {AccountServiceService} from "../../services/account-service.service";
-import {NumberFormatStyle} from "@angular/common";
 import * as moment from "moment/moment";
 import {ProductOrderService} from "../../services/product-order-service.service";
-import {BillingAddressComponent} from "./billing-address/billing-address.component";
 import {BillingAccountFormComponent} from "../../shared/billing-account-form/billing-account-form.component";
 import { PaymentService } from 'src/app/services/payment.service';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { NgClass } from '@angular/common';
+import { BillingAddressComponent } from './billing-address/billing-address.component';
 
 
 @Component({
     selector: 'app-checkout',
     templateUrl: './checkout.component.html',
     styleUrl: './checkout.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, BillingAccountFormComponent, BillingAccountFormComponent, TranslateModule, NgClass, BillingAddressComponent]
 })
 export class CheckoutComponent implements OnInit {
   protected readonly faCartShopping = faCartShopping;

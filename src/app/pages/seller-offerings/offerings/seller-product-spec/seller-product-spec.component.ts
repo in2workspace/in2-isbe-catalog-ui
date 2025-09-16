@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import {faIdCard, faSort, faSwatchbook, faSparkles} from "@fortawesome/pro-solid-svg-icons";
-import {components} from "src/app/models/product-catalog";
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { ProductSpecServiceService } from 'src/app/services/product-spec-service.service';
@@ -11,12 +10,17 @@ import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
 import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
+import { TranslateModule } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 
 @Component({
     selector: 'seller-product-spec',
     templateUrl: './seller-product-spec.component.html',
     styleUrl: './seller-product-spec.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, DatePipe, FaIconComponent, ErrorMessageComponent]
 })
 export class SellerProductSpecComponent implements OnInit{
   protected readonly faIdCard = faIdCard;

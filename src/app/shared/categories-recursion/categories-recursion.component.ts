@@ -1,14 +1,14 @@
-import { Component, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {Category} from "../../models/interfaces";
 import {EventMessageService} from "src/app/services/event-message.service";
-import {DatePipe, NgClass} from "@angular/common";
-import {TranslateModule} from "@ngx-translate/core";
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'categories-recursion',
     templateUrl: './categories-recursion.component.html',
     styleUrl: './categories-recursion.component.css',
-    standalone: true
+    standalone: true,
+    imports: [DatePipe]
 })
 export class CategoriesRecursionComponent {
   @Input() child: Category;
@@ -17,8 +17,7 @@ export class CategoriesRecursionComponent {
   @Input() path: string;
 
   constructor(
-    private cdr: ChangeDetectorRef,
-    private eventMessage: EventMessageService,
+    private readonly eventMessage: EventMessageService,
   ) {
 
   }

@@ -3,17 +3,21 @@ import { LoginInfo } from 'src/app/models/interfaces';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { phoneNumbers, countries } from 'src/app/models/country.const'
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
 import * as moment from 'moment';
+import { TranslateModule } from '@ngx-translate/core';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'user-info',
     templateUrl: './user-info.component.html',
     styleUrl: './user-info.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, ErrorMessageComponent, NgClass,ReactiveFormsModule]
 })
 export class UserInfoComponent implements OnInit {
   loading: boolean = false;

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { FooterComponent } from './footer.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FooterComponent', () => {
   let component: FooterComponent;
@@ -9,7 +10,7 @@ describe('FooterComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [FooterComponent]
+    imports: [FooterComponent, TranslateModule.forRoot()]
 });
     fixture = TestBed.createComponent(FooterComponent);
     component = fixture.componentInstance;

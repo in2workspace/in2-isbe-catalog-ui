@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { CategoriesRecursionListComponent } from './categories-recursion-list.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CategoriesRecursionListComponent', () => {
   let component: CategoriesRecursionListComponent;
@@ -9,7 +10,7 @@ describe('CategoriesRecursionListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [CategoriesRecursionListComponent]
+    imports: [CategoriesRecursionListComponent, HttpClientTestingModule]
 })
     .compileComponents();
     

@@ -10,7 +10,7 @@ describe('CategoriesPanelComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategoriesPanelComponent]
+      imports: [CategoriesPanelComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
     

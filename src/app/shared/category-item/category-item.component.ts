@@ -5,12 +5,16 @@ import {Category} from "../../models/interfaces";
 import {Subject} from "rxjs";
 import {EventMessageService} from "../../services/event-message.service";
 import {LocalStorageService} from "../../services/local-storage.service";
+import { NgClass } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'bae-category-item',
     templateUrl: './category-item.component.html',
     styleUrl: './category-item.component.css',
-    standalone: true
+    standalone: true,
+    imports: [FormsModule, NgClass, FaIconComponent]
 })
 export class CategoryItemComponent implements OnInit {
 

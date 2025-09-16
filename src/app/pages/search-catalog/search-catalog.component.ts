@@ -13,12 +13,19 @@ import {Category, LoginInfo} from "../../models/interfaces";
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { CardComponent } from 'src/app/shared/card/card.component';
+import { MarkdownComponent } from 'ngx-markdown';
+import { CategoriesFilterComponent } from 'src/app/shared/categories-filter/categories-filter.component';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-search-catalog',
     templateUrl: './search-catalog.component.html',
     styleUrl: './search-catalog.component.css',
-    standalone: true
+    standalone: true,
+    imports: [FeedbackModalComponent, TranslateModule, CardComponent, MarkdownComponent, CategoriesFilterComponent, NgClass]
 })
 export class SearchCatalogComponent implements OnInit{
   constructor(

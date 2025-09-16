@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { FeedbackModalComponent } from './feedback-modal.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('FeedbackModalComponent', () => {
   let component: FeedbackModalComponent;
@@ -10,7 +11,7 @@ describe('FeedbackModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule, FeedbackModalComponent]
+    imports: [HttpClientTestingModule, FeedbackModalComponent, TranslateModule.forRoot()]
 })
     .compileComponents();
     

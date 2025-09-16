@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { InvoicesInfoComponent } from './invoices-info.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('InvoiceInfoComponent', () => {
   let component: InvoicesInfoComponent;
@@ -9,7 +10,7 @@ describe('InvoiceInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [InvoicesInfoComponent]
+      imports: [InvoicesInfoComponent, HttpClientTestingModule]
     })
     .compileComponents();
 

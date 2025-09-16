@@ -1,17 +1,19 @@
-import {Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {billingAccountCart} from "../../../models/interfaces";
 import {TranslateModule} from "@ngx-translate/core";
-import {NgClass} from "@angular/common";
-import {BillingAccountFormComponent} from "../../../shared/billing-account-form/billing-account-form.component";
 import { AccountServiceService } from 'src/app/services/account-service.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import {EventMessageService} from "../../../services/event-message.service";
+import { CategoriesRecursionComponent } from 'src/app/shared/categories-recursion/categories-recursion.component';
+import { NgClass } from '@angular/common';
+import { BillingAccountFormComponent } from 'src/app/shared/billing-account-form/billing-account-form.component';
 
 @Component({
     selector: 'app-billing-address',
     templateUrl: './billing-address.component.html',
     styleUrl: './billing-address.component.css',
-    standalone: true
+    standalone: true,
+    imports: [CategoriesRecursionComponent, TranslateModule, NgClass, BillingAccountFormComponent]
 })
 export class BillingAddressComponent {
   @Input() position: number = 0;

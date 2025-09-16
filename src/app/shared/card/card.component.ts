@@ -26,12 +26,21 @@ import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { jwtDecode } from "jwt-decode";
 import { environment } from 'src/environments/environment';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { CartCardComponent } from '../cart-card/cart-card.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { DatePipe, NgClass } from '@angular/common';
+import { MarkdownComponent } from 'ngx-markdown';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { BadgeComponent } from '../badge/badge.component';
+import { PricePlanDrawerComponent } from '../price-plan-drawer/price-plan-drawer.component';
 
 @Component({
     selector: 'bae-off-card',
     templateUrl: './card.component.html',
     styleUrl: './card.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, CartCardComponent, TranslateModule, NgClass, DatePipe, MarkdownComponent, FaIconComponent, BadgeComponent, PricePlanDrawerComponent]
 })
 export class CardComponent implements OnInit, AfterViewInit {
 

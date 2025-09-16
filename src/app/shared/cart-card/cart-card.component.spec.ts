@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { CartCardComponent } from './cart-card.component';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('CartCardComponent', () => {
   let component: CartCardComponent;
@@ -9,7 +11,10 @@ describe('CartCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CartCardComponent]
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { queryParamMap: convertToParamMap({}) } } }
+      ],
+      imports: [CartCardComponent, HttpClientTestingModule]
     })
     .compileComponents();
     

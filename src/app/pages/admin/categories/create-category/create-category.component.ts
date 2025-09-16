@@ -5,17 +5,24 @@ import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
 import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import * as moment from 'moment';
 
 import {components} from "src/app/models/product-catalog";
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
+import { DatePipe, NgClass } from '@angular/common';
+import { CategoriesRecursionComponent } from 'src/app/shared/categories-recursion/categories-recursion.component';
+import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
 type Category_Create = components["schemas"]["Category_Create"];
 
 @Component({
     selector: 'create-category',
     templateUrl: './create-category.component.html',
     styleUrl: './create-category.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent,ReactiveFormsModule]
 })
 export class CreateCategoryComponent implements OnInit {
   partyId:any='';

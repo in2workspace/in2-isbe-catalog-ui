@@ -1,14 +1,19 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import {components} from "../../models/product-catalog";
 import { initFlowbite } from 'flowbite';
 type ProductOffering = components["schemas"]["ProductOffering"];
 import {EventMessageService} from "../../services/event-message.service";
+import { InventoryResourcesComponent } from './inventory-resources/inventory-resources.component';
+import { InventoryServicesComponent } from './inventory-services/inventory-services.component';
+import { InventoryProductsComponent } from './inventory-items/inventory-products/inventory-products.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-product-inventory',
     templateUrl: './product-inventory.component.html',
     styleUrl: './product-inventory.component.css',
-    standalone: true
+    standalone: true,
+    imports: [InventoryResourcesComponent, InventoryServicesComponent, InventoryProductsComponent, TranslateModule]
 })
 export class ProductInventoryComponent implements OnInit, AfterViewInit {
   show_prods:boolean = true;

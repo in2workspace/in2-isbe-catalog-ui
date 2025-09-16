@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { BillingAddressComponent } from './billing-address.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('BillingAddressComponent', () => {
   let component: BillingAddressComponent;
@@ -9,7 +10,7 @@ describe('BillingAddressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [BillingAddressComponent]
+    imports: [BillingAddressComponent, HttpClientTestingModule]
 })
     .compileComponents();
     

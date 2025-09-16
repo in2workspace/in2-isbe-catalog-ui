@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { ProductInvDetailComponent } from './product-inv-detail.component';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ProductInvDetailComponent', () => {
   let component: ProductInvDetailComponent;
@@ -9,7 +11,10 @@ describe('ProductInvDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [ProductInvDetailComponent]
+    providers: [
+      { provide: ActivatedRoute, useValue: { snapshot: { queryParamMap: convertToParamMap({}) } } }
+    ],
+    imports: [ProductInvDetailComponent, HttpClientTestingModule]
 })
     .compileComponents();
     

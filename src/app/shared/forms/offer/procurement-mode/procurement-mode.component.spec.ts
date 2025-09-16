@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { ProcurementModeComponent } from './procurement-mode.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ProcurementModeComponent', () => {
   let component: ProcurementModeComponent;
@@ -9,7 +10,7 @@ describe('ProcurementModeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProcurementModeComponent]
+      imports: [ProcurementModeComponent, TranslateModule.forRoot()]
     })
     .compileComponents();
     

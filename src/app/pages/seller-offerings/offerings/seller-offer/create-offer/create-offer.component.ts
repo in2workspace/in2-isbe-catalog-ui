@@ -19,6 +19,9 @@ import { currencies } from 'currencies.json';
 import { certifications } from 'src/app/models/certification-standards.const';
 import {ProductOfferingPrice_DTO} from 'src/app/models/interfaces';
 import { lastValueFrom } from 'rxjs';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { OfferComponent } from 'src/app/shared/forms/offer/offer.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 type ProductOffering_Create = components["schemas"]["ProductOffering_Create"];
 type BundledProductOffering = components["schemas"]["BundledProductOffering"];
@@ -30,7 +33,8 @@ type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
     selector: 'create-offer',
     templateUrl: './create-offer.component.html',
     styleUrl: './create-offer.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, OfferComponent, TranslateModule]
 })
 export class CreateOfferComponent implements OnInit {
 

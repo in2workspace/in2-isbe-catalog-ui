@@ -16,12 +16,16 @@ import {EventMessageService} from "src/app/services/event-message.service";
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
+import { TranslateModule } from '@ngx-translate/core';
+import { DatePipe, NgClass } from '@angular/common';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
     selector: 'order-info',
     templateUrl: './order-info.component.html',
     styleUrl: './order-info.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, DatePipe, NgClass, FaIconComponent]
 })
 
 export class OrderInfoComponent implements OnInit {

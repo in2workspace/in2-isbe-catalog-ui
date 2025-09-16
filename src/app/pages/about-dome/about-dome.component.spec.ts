@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { AboutDomeComponent } from './about-dome.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('AboutDomeComponent', () => {
   let component: AboutDomeComponent;
@@ -9,7 +10,7 @@ describe('AboutDomeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AboutDomeComponent]
+      imports: [AboutDomeComponent,TranslateModule.forRoot()]
     })
     .compileComponents();
     

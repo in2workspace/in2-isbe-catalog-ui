@@ -1,14 +1,18 @@
+import { NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 import { EventMessageService } from 'src/app/services/event-message.service';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'verification',
     templateUrl: './verification.component.html',
     styleUrl: './verification.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, NgClass, ReactiveFormsModule]
 })
 export class VerificationComponent {
 

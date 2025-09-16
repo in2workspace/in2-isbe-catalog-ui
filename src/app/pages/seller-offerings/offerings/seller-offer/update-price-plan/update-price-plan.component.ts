@@ -12,18 +12,23 @@ import { ResourceSpecServiceService } from 'src/app/services/resource-spec-servi
 import { PaginationService } from 'src/app/services/pagination.service';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { currencies } from 'currencies.json';
 import { certifications } from 'src/app/models/certification-standards.const';
 import {ProductOfferingPrice_DTO} from 'src/app/models/interfaces';
+import { TranslateModule } from '@ngx-translate/core';
+import { NgClass } from '@angular/common';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
     selector: 'update-price-plan',
     templateUrl: './update-price-plan.component.html',
     styleUrl: './update-price-plan.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, NgClass, PickerModule, MarkdownComponent, ReactiveFormsModule]
 })
 export class UpdatePricePlanComponent implements OnInit {
 

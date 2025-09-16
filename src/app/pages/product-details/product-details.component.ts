@@ -17,14 +17,21 @@ import { AccountServiceService } from 'src/app/services/account-service.service'
 import {EventMessageService} from "../../services/event-message.service";
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
-import { Location } from '@angular/common';
-import {firstValueFrom} from "rxjs";
+import { Location, NgClass } from '@angular/common';
+import { PricePlanDrawerComponent } from 'src/app/shared/price-plan-drawer/price-plan-drawer.component';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { CartCardComponent } from 'src/app/shared/cart-card/cart-card.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { MarkdownComponent } from 'ngx-markdown';
+import { BadgeComponent } from 'src/app/shared/badge/badge.component';
 
 @Component({
     selector: 'app-product-details',
     templateUrl: './product-details.component.html',
     styleUrl: './product-details.component.css',
-    standalone: true
+    standalone: true,
+    imports: [PricePlanDrawerComponent, ErrorMessageComponent, CartCardComponent, TranslateModule, FaIconComponent, MarkdownComponent, NgClass, BadgeComponent]
 })
 export class ProductDetailsComponent implements OnInit {
 

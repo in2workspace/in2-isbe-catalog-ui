@@ -1,17 +1,17 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {CardComponent} from "../../shared/card/card.component";
+import { Component } from '@angular/core';
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import {faLeaf, faHammer, faCircleNodes, faMagnifyingGlass} from "@fortawesome/pro-solid-svg-icons";
 import {faLockOpen, faShieldCheck} from "@fortawesome/pro-regular-svg-icons";
+import { TranslateModule } from '@ngx-translate/core';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 
 @Component({
   selector: 'app-platform-benefits',
   templateUrl: './platform-benefits.component.html',
   styleUrl: './platform-benefits.component.css',
-  standalone: true
+  standalone: true,
+  imports: [TranslateModule, FaIconComponent]
 })
 export class PlatformBenefitsComponent {
   protected readonly faLeaf = faLeaf;

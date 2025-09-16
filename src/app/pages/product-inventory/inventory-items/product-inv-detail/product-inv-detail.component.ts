@@ -8,22 +8,22 @@ import {faScaleBalanced, faArrowProgress, faArrowRightArrowLeft, faObjectExclude
 type Product = components["schemas"]["ProductOffering"];
 type ProductSpecification = components["schemas"]["ProductSpecification"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
-//type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
-import { certifications } from 'src/app/models/certification-standards.const'
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { LoginInfo, cartProduct,productSpecCharacteristicValueCart } from 'src/app/models/interfaces';
+import { LoginInfo } from 'src/app/models/interfaces';
 import { ProductInventoryServiceService } from 'src/app/services/product-inventory-service.service'
 import {EventMessageService} from "src/app/services/event-message.service";
-import { jwtDecode } from "jwt-decode";
 import * as moment from 'moment';
-import { environment } from 'src/environments/environment';
 import { Location } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownComponent } from 'ngx-markdown';
+import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 
 @Component({
     selector: 'app-product-inv-detail',
     templateUrl: './product-inv-detail.component.html',
     styleUrl: './product-inv-detail.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule, MarkdownComponent, ErrorMessageComponent]
 })
 export class ProductInvDetailComponent implements OnInit {
 

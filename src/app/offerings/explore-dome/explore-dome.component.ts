@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-explore-dome',
     templateUrl: './explore-dome.component.html',
     styleUrl: './explore-dome.component.css',
-    standalone: true
+    standalone: true,
+    imports: [TranslateModule]
 })
 export class ExploreDomeComponent {
   domeAbout: string = environment.DOME_ABOUT_LINK

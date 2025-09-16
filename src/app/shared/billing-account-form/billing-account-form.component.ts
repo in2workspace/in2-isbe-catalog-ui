@@ -8,7 +8,7 @@ import {
   HostListener,
   Input
 } from '@angular/core';
-import {FormGroup, FormControl, Validators, ReactiveFormsModule} from '@angular/forms';
+import {FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import {AccountServiceService} from 'src/app/services/account-service.service';
 import {LocalStorageService} from "../../services/local-storage.service";
 import {Router} from '@angular/router';
@@ -23,14 +23,16 @@ import {EventMessageService} from "../../services/event-message.service";
 import {getCountries, getCountryCallingCode, CountryCode} from 'libphonenumber-js'
 import {parsePhoneNumber} from 'libphonenumber-js/max'
 import {TranslateModule} from "@ngx-translate/core";
-import { getLocaleId } from '@angular/common';
+import { getLocaleId, NgClass } from '@angular/common';
+import { ErrorMessageComponent } from '../error-message/error-message.component';
 
 
 @Component({
     selector: 'app-billing-account-form',
     templateUrl: './billing-account-form.component.html',
     styleUrl: './billing-account-form.component.css',
-    standalone: true
+    standalone: true,
+    imports: [ErrorMessageComponent, TranslateModule, NgClass, ReactiveFormsModule]
 })
 export class BillingAccountFormComponent implements OnInit {
 

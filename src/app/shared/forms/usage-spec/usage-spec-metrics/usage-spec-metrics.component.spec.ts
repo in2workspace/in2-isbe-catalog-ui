@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { UsageSpecMetricsComponent } from './usage-spec-metrics.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('UsageSpecMetricsComponent', () => {
   let component: UsageSpecMetricsComponent;
@@ -9,7 +10,7 @@ describe('UsageSpecMetricsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [UsageSpecMetricsComponent]
+      imports: [UsageSpecMetricsComponent, TranslateModule.forRoot()]
     })
     .compileComponents();
     
