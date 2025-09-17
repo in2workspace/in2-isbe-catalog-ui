@@ -1,0 +1,63 @@
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observer } from "rxjs";
+import { environment } from "src/environments/environment";
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AppInitService {
+  constructor(private http: HttpClient) { }
+  //TODO: enable app initializer
+  /*init(): Promise<any> {
+    return new Promise((resolve, reject) => {
+        const obs: Observer<any> = {
+            next: ((config) => {
+                // Load dynamic environment data
+                environment.SIOP_INFO = config.siop;
+                environment.CHAT_API = config.chat;
+                environment.MATOMO_SITE_ID = config.matomoId;
+                environment.MATOMO_TRACKER_URL = config.matomoUrl;
+                environment.KNOWLEDGE_BASE_URL = config.knowledgeBaseUrl;
+                environment.TICKETING_SYSTEM_URL = config.ticketingUrl;
+                environment.SEARCH_ENABLED = config.searchEnabled;
+                environment.DOME_TRUST_LINK = config.domeTrust;
+                environment.DOME_ABOUT_LINK = config.domeAbout;
+                environment.PURCHASE_ENABLED = config.purchaseEnabled;
+                environment.DOME_REGISTER_LINK = config.domeRegister;
+                environment.DOME_PUBLISH_LINK = config.domePublish;
+                environment.KB_ONBOARDING_GUIDELINES_URL = config.domeOnboardingGuidelines;
+                environment.KB_GUIDELNES_URL = config.domeGuidelines;
+                environment.REGISTRATION_FORM_URL = config.domeRegistrationForm;
+                environment.DFT_CATALOG_ID = config.defaultId;
+                environment.PAYMENT_URL = config.paymentUrl
+                resolve(config);
+            }),
+            error: (error) => {
+                reject(error);
+            },
+            complete: () => {}
+        }
+        this.http.get<any>(`${environment.BASE_URL}/config`).subscribe(obs);
+    });
+  }*/
+  init(): Promise<any> {
+    return new Promise((resolve, reject) => {     
+      let config = {
+        siop: environment.SIOP_INFO
+      }   
+      environment.SIOP_INFO = {
+          enabled: true,
+          isRedirection: true,
+          pollPath: "",
+          pollCertPath: "",
+          clientID: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
+          callbackURL: "http://localhost:4200/dashboard",
+          verifierHost: "https://verifier.dome-marketplace-sbx.org",
+          verifierQRCodePath: '/oidc/authorize',
+          requestUri: "https://verifier.dome-marketplace-sbx.org/oid4vp/auth-request"
+      };   
+      resolve(config);
+    });
+  }
+}
