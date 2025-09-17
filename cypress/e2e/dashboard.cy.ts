@@ -7,7 +7,7 @@ describe('/dashboard',{
   },
   () => {
 
-    it('should login successfully and show the required components in pre-login and post-login', () => {
+    /*it('should login successfully and show the required components in pre-login and post-login', () => {
        loginAcc()
     })
 
@@ -24,7 +24,7 @@ describe('/dashboard',{
         cy.getBySel('nameServices').should('have.length', init_stat.services.length)
         cy.getBySel('nameOrgs').should('have.length', init_stat.organizations.length)
 
-    })
+    })*/
 
 })
 

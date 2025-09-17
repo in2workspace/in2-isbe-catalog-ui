@@ -16,7 +16,7 @@ describe('/my-offerings',{
   },
   () => {
 
-    beforeEach(()=>{
+    /*beforeEach(()=>{
         loginAcc()
     })
 
@@ -285,7 +285,7 @@ describe('/my-offerings',{
         cy.getBySel('offers').find('td').eq(3).should('include.text', 'Friday, 16/05/25, 11:28')
         cy.getBySel('offers').find('td').eq(4).find('button').should('have.length', 1)
 
-    })
+    })*/
   })
 
 

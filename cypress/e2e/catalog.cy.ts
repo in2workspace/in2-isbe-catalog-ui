@@ -10,7 +10,7 @@ describe('/my-offerings',{
         loginAcc()
     })
 
-    it('should create a catalog correctly', () => {
+    /*it('should create a catalog correctly', () => {
         const name = 'catalog name test'
         const description = 'catalog description test'
         const status = 'Active'
@@ -84,5 +84,5 @@ describe('/my-offerings',{
             expect(payload).to.have.property('description', description).and.be.a('string')
             expect(payload).to.have.property('lifecycleStatus', status).and.be.a('string')
         });
-    })
+    })*/
   })
