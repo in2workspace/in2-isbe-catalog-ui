@@ -4,6 +4,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { DashboardComponent } from './dashboard.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -14,7 +15,7 @@ describe('DashboardComponent', () => {
     providers: [
       { provide: ActivatedRoute, useValue: { snapshot: { queryParamMap: convertToParamMap({}) } } }
     ],
-      imports: [DashboardComponent, HttpClientTestingModule]
+      imports: [DashboardComponent, HttpClientTestingModule, TranslateModule.forRoot()]
     })
     .compileComponents();
     

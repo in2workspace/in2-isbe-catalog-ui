@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { InventoryServicesComponent } from './inventory-services.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('InventoryServicesComponent', () => {
   let component: InventoryServicesComponent;
@@ -9,7 +11,7 @@ describe('InventoryServicesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [InventoryServicesComponent]
+    imports: [InventoryServicesComponent, HttpClientTestingModule, TranslateModule.forRoot()]
 })
     .compileComponents();
     

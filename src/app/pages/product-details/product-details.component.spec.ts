@@ -2,6 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { ProductDetailsComponent } from './product-details.component';
+import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { MarkdownModule } from 'ngx-markdown';
 
 describe('ProductDetailsComponent', () => {
   let component: ProductDetailsComponent;
@@ -9,7 +14,11 @@ describe('ProductDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductDetailsComponent]
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: '123' }) } } }
+      ],
+      imports: [HttpClientTestingModule, TranslateModule.forRoot(), MarkdownModule.forRoot()],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
     

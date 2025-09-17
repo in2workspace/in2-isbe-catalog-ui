@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { VerificationComponent } from './verification.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('VerificationComponent', () => {
   let component: VerificationComponent;
@@ -10,7 +11,7 @@ describe('VerificationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [HttpClientTestingModule, VerificationComponent]
+    imports: [HttpClientTestingModule, VerificationComponent, TranslateModule.forRoot()]
 })
     .compileComponents();
     

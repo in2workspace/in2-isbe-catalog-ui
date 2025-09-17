@@ -5,7 +5,7 @@ import {environment} from "../../../../../environments/environment";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {PaginationService} from "../../../../services/pagination.service";
 import {ApiServiceService} from "../../../../services/product-service.service";
-import {AppModule} from "../../../../app.module";
+
 import {initFlowbite} from "flowbite";
 
 @Component({

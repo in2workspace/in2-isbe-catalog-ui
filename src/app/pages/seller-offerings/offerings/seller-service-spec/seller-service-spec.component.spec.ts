@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { SellerServiceSpecComponent } from './seller-service-spec.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('SellerServiceSpecComponent', () => {
   let component: SellerServiceSpecComponent;
@@ -9,7 +11,7 @@ describe('SellerServiceSpecComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [SellerServiceSpecComponent]
+    imports: [SellerServiceSpecComponent, HttpClientTestingModule, TranslateModule.forRoot()],
 })
     .compileComponents();
     

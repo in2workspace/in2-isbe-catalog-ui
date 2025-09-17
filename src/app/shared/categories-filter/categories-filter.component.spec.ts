@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { CategoriesFilterComponent } from './categories-filter.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CategoriesFilterComponent', () => {
   let component: CategoriesFilterComponent;
@@ -10,7 +11,7 @@ describe('CategoriesFilterComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CategoriesFilterComponent, HttpClientTestingModule],
+      imports: [CategoriesFilterComponent, HttpClientTestingModule, TranslateModule.forRoot()],
     })
     .compileComponents();
     

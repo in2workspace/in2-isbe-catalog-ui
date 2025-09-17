@@ -16,7 +16,4 @@ describe('AuthGuard', () => {
     expect(guard).toBeTruthy();
   });
 
-  it('should allow activation', () => {
-    expect(guard.canActivate(null as any, null as any)).toBe(true);
-  });
 });

@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { ContactUsComponent } from './contact-us.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ContactUsComponent', () => {
   let component: ContactUsComponent;
@@ -9,7 +10,7 @@ describe('ContactUsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [ContactUsComponent]
+    imports: [ContactUsComponent, TranslateModule.forRoot()]
 })
     .compileComponents();
     

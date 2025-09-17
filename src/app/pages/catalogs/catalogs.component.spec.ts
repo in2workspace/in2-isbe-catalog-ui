@@ -3,6 +3,7 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { CatalogsComponent } from './catalogs.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('CatalogsComponent', () => {
   let component: CatalogsComponent;
@@ -10,7 +11,7 @@ describe('CatalogsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CatalogsComponent, HttpClientTestingModule ]
+      imports: [CatalogsComponent, HttpClientTestingModule, TranslateModule.forRoot()]
     })
     .compileComponents();
     

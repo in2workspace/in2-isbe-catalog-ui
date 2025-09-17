@@ -2,19 +2,30 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { SearchComponent } from './search.component';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ActivatedRoute, convertToParamMap } from '@angular/router';
+import { MarkdownModule } from 'ngx-markdown';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
+  let activatedRouteMock: any;
 
   beforeEach(async () => {
+    activatedRouteMock = {
+      snapshot: {
+        paramMap: {
+          get: (key: string) => key === 'keywords' ? 'example' : null
+        }
+      }
+    };
+
     await TestBed.configureTestingModule({
       providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { queryParamMap: convertToParamMap({}) } } }
+        { provide: ActivatedRoute, useValue: activatedRouteMock }  
       ],
-      imports: [SearchComponent,HttpClientTestingModule]
+      imports: [TranslateModule.forRoot(),HttpClientTestingModule,  MarkdownModule.forRoot()] 
     })
     .compileComponents();
     
@@ -26,4 +37,5 @@ describe('SearchComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

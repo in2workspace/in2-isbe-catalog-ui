@@ -3,18 +3,22 @@ import { initFlowbite } from 'flowbite';
 import { TranslateService } from '@ngx-translate/core';
 import {LocalStorageService} from "./services/local-storage.service";
 import {EventMessageService} from "./services/event-message.service";
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { RefreshLoginServiceService } from "src/app/services/refresh-login-service.service";
 import * as moment from 'moment';
+import { FooterComponent } from './shared/footer/footer.component';
+import { ChatbotWidgetComponent } from './chatbot-widget/chatbot-widget.component';
+import { HeaderComponent } from './shared/header/header.component';
 
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  standalone: true
+  standalone: true,
+  imports: [FooterComponent, ChatbotWidgetComponent, RouterOutlet, HeaderComponent]
 })
 export class AppComponent implements OnInit {
   title = 'DOME Marketplace';

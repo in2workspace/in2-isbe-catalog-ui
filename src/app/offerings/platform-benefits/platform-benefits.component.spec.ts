@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { PlatformBenefitsComponent } from './platform-benefits.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('PlatformBenefitsComponent', () => {
   let component: PlatformBenefitsComponent;
@@ -9,7 +10,7 @@ describe('PlatformBenefitsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PlatformBenefitsComponent]
+      imports: [PlatformBenefitsComponent, TranslateModule.forRoot()]
     })
     .compileComponents();
     
