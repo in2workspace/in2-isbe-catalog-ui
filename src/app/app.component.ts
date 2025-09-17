@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
     this.translate.setDefaultLang('es');
     let currLang = this.localStorage.getItem('current_language')
     if(!currLang || currLang == null) {
-      this.localStorage.setItem('current_language', '');
+      this.localStorage.setItem('current_language', 'es');
       this.translate.use('es');
     } else {
       this.translate.use(currLang);
