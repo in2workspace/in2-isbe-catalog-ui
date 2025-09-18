@@ -3,8 +3,6 @@ import {components} from "../../models/product-catalog";
 import { initFlowbite } from 'flowbite';
 type ProductOffering = components["schemas"]["ProductOffering"];
 import {EventMessageService} from "../../services/event-message.service";
-import { InventoryResourcesComponent } from './inventory-resources/inventory-resources.component';
-import { InventoryServicesComponent } from './inventory-services/inventory-services.component';
 import { InventoryProductsComponent } from './inventory-items/inventory-products/inventory-products.component';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -13,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
     templateUrl: './product-inventory.component.html',
     styleUrl: './product-inventory.component.css',
     standalone: true,
-    imports: [InventoryResourcesComponent, InventoryServicesComponent, InventoryProductsComponent, TranslateModule]
+    imports: [InventoryProductsComponent, TranslateModule]
 })
 export class ProductInventoryComponent implements OnInit, AfterViewInit {
   show_prods:boolean = true;

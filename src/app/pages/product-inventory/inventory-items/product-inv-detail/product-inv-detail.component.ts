@@ -24,6 +24,7 @@ import { ErrorMessageComponent } from 'src/app/shared/error-message/error-messag
     imports: [TranslateModule, MarkdownComponent, ErrorMessageComponent]
 })
 export class ProductInvDetailComponent implements OnInit {
+  
 
   id:any;
   productOff: Product | undefined;
