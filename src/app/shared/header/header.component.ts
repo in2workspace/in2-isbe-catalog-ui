@@ -360,8 +360,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   }
 
   onLoginClick(){
-    console.log(environment.SIOP_INFO)
-    if (environment.SIOP_INFO.enabled === true /*&& this.qrVerifier.intervalId === undefined*/){
+    if (environment.SIOP_INFO.enabled === true && this.qrVerifier.intervalId === undefined){
       this.statePair = uuid.v4()
 
       let verifierUrl = `${environment.SIOP_INFO.verifierHost}${environment.SIOP_INFO.verifierQRCodePath}?state=${this.statePair}&client_id=${environment.SIOP_INFO.clientID}`
@@ -374,7 +373,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
 
         let finalUrl = newUrl.toString()
         let nonce = uuid.v4()
-        
 
         verifierUrl = `${verifierUrl}&response_type=code&request_uri=https://dome-marketplace-sbx.org/auth/vc/request.jwt&scope=openid%20learcredential&nonce=${nonce}`
         window.location.href = verifierUrl

@@ -32,11 +32,11 @@ export class AppComponent implements OnInit {
               private api: ApiServiceService,
               private refreshApi: RefreshLoginServiceService) {
     this.translate.addLangs(['en', 'es']);
-    this.translate.setDefaultLang('en');
+    this.translate.setDefaultLang('es');
     let currLang = this.localStorage.getItem('current_language')
     if(!currLang || currLang == null) {
-      this.localStorage.setItem('current_language', 'en');
-      this.translate.use('en');
+      this.localStorage.setItem('current_language', 'es');
+      this.translate.use('es');
     } else {
       this.translate.use(currLang);
     }

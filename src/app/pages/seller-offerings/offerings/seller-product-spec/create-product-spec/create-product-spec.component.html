@@ -397,7 +397,8 @@
                         <!-- Group container to enable hover effects -->
                         <div class="relative inline-block group">
                             <!-- Tooltip (Only exists if checkValidISOS() is true and only appears on hover) -->
-                            <div *ngIf="checkValidISOS()" 
+                            @if(checkValidISOS()) {
+                                <div
                                 class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 
                                     bg-gray-900 text-white text-xs rounded-lg p-2 shadow-lg z-50 
                                     transition-opacity duration-200 w-max max-w-xs whitespace-normal break-words 
@@ -405,7 +406,8 @@
                                     {{ 'CREATE_PROD_SPEC._file_check' | translate }}
                                 <!-- Tooltip Arrow -->
                                 <div class="absolute left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 bg-gray-900 rotate-45"></div>
-                            </div>
+                                </div>
+                            }
 
                             <!-- Button -->
                             <button type="button" (click)="toggleChars(); complianceDone = true;"
@@ -711,12 +713,14 @@
                         <label class="font-bold ml-6 dark:text-white">{{ 'CREATE_PROD_SPEC._add_prod_img_url' | translate }}</label>
                         <div class="relative w-full ml-6 mt-2 mb-2">
                             <!-- Tooltip (Above the Input, Positioned Up) -->
-                            <div *ngIf="attImageName.invalid && attImageName.touched"
-                                class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max bg-gray-900 text-white text-xs rounded-lg p-2 shadow-lg z-50">
-                                {{ 'CREATE_PROD_SPEC._file_name' | translate }}
-                                <!-- Tooltip Arrow -->
-                                <div class="absolute left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 bg-gray-900 rotate-45"></div>
-                            </div>
+                            @if(attImageName.invalid && attImageName.touched){
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max bg-gray-900 text-white text-xs rounded-lg p-2 shadow-lg z-50">
+                                    {{ 'CREATE_PROD_SPEC._file_name' | translate }}
+                                    <!-- Tooltip Arrow -->
+                                    <div class="absolute left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 bg-gray-900 rotate-45"></div>
+                                </div>
+                            }
+                            
                         
                             <div class="flex items-center h-fit w-full justify-between">
                                 <!-- Input Field -->

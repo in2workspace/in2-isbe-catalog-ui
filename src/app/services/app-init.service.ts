@@ -42,7 +42,6 @@ export class AppInitService {
     });
   }*/
   init(): Promise<any> {
-    console.log("Initializing app...");
     return new Promise((resolve, reject) => {     
       let config = {
         siop: environment.SIOP_INFO
