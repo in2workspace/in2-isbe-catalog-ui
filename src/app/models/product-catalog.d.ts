@@ -1906,10 +1906,7 @@ export interface components {
       productSpecificationRelationship?: components["schemas"]["ProductSpecificationRelationship"][];
       /** @description A related party defines party or party role linked to a specific entity. */
       relatedParty?: components["schemas"]["RelatedParty"][];
-      /** @description The ResourceSpecification is required to realize a ProductSpecification. */
-      resourceSpecification?: components["schemas"]["ResourceSpecificationRef"][];
-      /** @description ServiceSpecification(s) required to realize a ProductSpecification. */
-      serviceSpecification?: components["schemas"]["ServiceSpecificationRef"][];
+      
       targetProductSchema?: components["schemas"]["TargetProductSchema"];
       validFor?: components["schemas"]["TimePeriod"];
       /** @description When sub-classing, this defines the super-class */
@@ -1956,10 +1953,7 @@ export interface components {
       productSpecificationRelationship?: components["schemas"]["ProductSpecificationRelationship"][];
       /** @description A related party defines party or party role linked to a specific entity. */
       relatedParty?: components["schemas"]["RelatedParty"][];
-      /** @description The ResourceSpecification is required to realize a ProductSpecification. */
-      resourceSpecification?: components["schemas"]["ResourceSpecificationRef"][];
-      /** @description ServiceSpecification(s) required to realize a ProductSpecification. */
-      serviceSpecification?: components["schemas"]["ServiceSpecificationRef"][];
+
       targetProductSchema?: components["schemas"]["TargetProductSchema"];
       validFor?: components["schemas"]["TimePeriod"];
       /** @description When sub-classing, this defines the super-class */
@@ -2001,10 +1995,7 @@ export interface components {
       productSpecificationRelationship?: components["schemas"]["ProductSpecificationRelationship"][];
       /** @description A related party defines party or party role linked to a specific entity. */
       relatedParty?: components["schemas"]["RelatedParty"][];
-      /** @description The ResourceSpecification is required to realize a ProductSpecification. */
-      resourceSpecification?: components["schemas"]["ResourceSpecificationRef"][];
-      /** @description ServiceSpecification(s) required to realize a ProductSpecification. */
-      serviceSpecification?: components["schemas"]["ServiceSpecificationRef"][];
+      
       targetProductSchema?: components["schemas"]["TargetProductSchema"];
       validFor?: components["schemas"]["TimePeriod"];
       /**
@@ -2220,34 +2211,7 @@ export interface components {
       /** @description The actual type of the target instance when needed for disambiguation. */
       "@referredType"?: string;
     };
-    /**
-     * @description Resources are physical or non-physical components (or some combination of these) within an enterprise's infrastructure or inventory. They are typically consumed or used by services (for example a physical port assigned to a service) or contribute to the realization of a Product (for example, a SIM card). They can be drawn from the Application, Computing and Network domains, and include, for example, Network Elements, software, IT systems, content and information, and technology components.
-     * A ResourceSpecification is an abstract base class for representing a generic means for implementing a particular type of Resource. In essence, a ResourceSpecification defines the common attributes and relationships of a set of related Resources, while Resource defines a specific instance that is based on a particular ResourceSpecification.
-     */
-    ResourceSpecificationRef: {
-      /** @description unique identifier */
-      id: string;
-      /**
-       * Format: uri
-       * @description Hyperlink reference
-       */
-      href?: string;
-      /** @description Name of the related entity. */
-      name?: string;
-      /** @description Resource Specification version */
-      version?: string;
-      /** @description When sub-classing, this defines the super-class */
-      "@baseType"?: string;
-      /**
-       * Format: uri
-       * @description A URI to a JSON-Schema file that defines additional attributes and relationships
-       */
-      "@schemaLocation"?: string;
-      /** @description When sub-classing, this defines the sub-class Extensible name */
-      "@type"?: string;
-      /** @description The actual type of the target instance when needed for disambiguation. */
-      "@referredType"?: string;
-    };
+    
     /** @description ServiceLevelAgreement reference: A service level agreement (SLA) is a type of agreement that represents a formal negotiated agreement between two parties designed to create a common understanding about products, services, priorities, responsibilities, and so forth. The SLA is a set of appropriate procedures and targets formally or informally agreed between parties in order to achieve and maintain specified Quality of Service. */
     SLARef: {
       /** @description Unique identifier of service level agreement */
@@ -2294,30 +2258,7 @@ export interface components {
       "@referredType"?: string;
     };
     /** @description Service specification reference: ServiceSpecification(s) required to realize a ProductSpecification. */
-    ServiceSpecificationRef: {
-      /** @description unique identifier */
-      id: string;
-      /**
-       * Format: uri
-       * @description Hyperlink reference
-       */
-      href?: string;
-      /** @description Name of the related entity. */
-      name?: string;
-      /** @description Service specification version */
-      version?: string;
-      /** @description When sub-classing, this defines the super-class */
-      "@baseType"?: string;
-      /**
-       * Format: uri
-       * @description A URI to a JSON-Schema file that defines additional attributes and relationships
-       */
-      "@schemaLocation"?: string;
-      /** @description When sub-classing, this defines the sub-class Extensible name */
-      "@type"?: string;
-      /** @description The actual type of the target instance when needed for disambiguation. */
-      "@referredType"?: string;
-    };
+    
     /** @description The reference object to the schema and type of target product which is described by product specification */
     TargetProductSchema: {
       /**

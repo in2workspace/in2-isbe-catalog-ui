@@ -59,23 +59,7 @@
 
             <div id="details-container">            
                 <h2 #detailsContent class="text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-4">Description</h2>
-                <markdown class="dark:text-gray-200 text-wrap break-all" [data]="prodSpec.description"></markdown>
-                @if(serviceSpecs.length > 0){
-                    <div class="pb-2">                
-                        <h5 class="text-xl font-semibold tracking-tight text-primary-100 dark:text-primary-50">{{ 'PRODUCT_DETAILS._service_spec' | translate }}:</h5>
-                        @for(service of serviceSpecs; track service.id){
-                            <p class="pl-4 dark:text-gray-200"><b>{{service.name}}</b>:  <markdown class="text-gray-800 dark:text-gray-200 text-wrap break-all" [data]="service.description"></markdown></p>
-                        }
-                    </div>
-                }
-                @if(resourceSpecs.length > 0){
-                    <div class="pb-2">                
-                        <h5 class="text-xl font-semibold tracking-tight text-primary-100 dark:text-primary-50">{{ 'PRODUCT_DETAILS._resource_spec' | translate }}:</h5>
-                        @for(resource of resourceSpecs; track resource.id){
-                            <p class="pl-4 dark:text-gray-200"><b>{{resource.name}}</b>: <markdown class="text-gray-800 dark:text-gray-200 text-wrap break-all" [data]="resource.description"></markdown></p>
-                        }
-                    </div>
-                }
+                <markdown class="dark:text-gray-200 text-wrap break-all" [data]="prodSpec.description"></markdown>           
 
             <h2 class="text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-8 pt-12">Price Plan</h2>
             @if(prod?.productPrice != undefined){

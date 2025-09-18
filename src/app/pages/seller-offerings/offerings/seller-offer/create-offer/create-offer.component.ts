@@ -1,23 +1,17 @@
 import { Component, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+
 import {components} from "src/app/models/product-catalog";
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { ProductSpecServiceService } from 'src/app/services/product-spec-service.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
-import {AttachmentServiceService} from "src/app/services/attachment-service.service";
-import { ServiceSpecServiceService } from 'src/app/services/service-spec-service.service';
-import { ResourceSpecServiceService } from 'src/app/services/resource-spec-service.service';
 import { PaginationService } from 'src/app/services/pagination.service';
-import { LoginInfo } from 'src/app/models/interfaces';
+import { LoginInfo,ProductOfferingPrice_DTO } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { v4 as uuidv4 } from 'uuid';
 import { currencies } from 'currencies.json';
-import { certifications } from 'src/app/models/certification-standards.const';
-import {ProductOfferingPrice_DTO} from 'src/app/models/interfaces';
 import { lastValueFrom } from 'rxjs';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { OfferComponent } from 'src/app/shared/forms/offer/offer.component';
@@ -217,17 +211,12 @@ export class CreateOfferComponent implements OnInit {
   @ViewChild('usageUnitUpdate') usageUnitUpdate!: ElementRef;
 
   constructor(
-    private router: Router,
-    private api: ApiServiceService,
-    private prodSpecService: ProductSpecServiceService,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private elementRef: ElementRef,
-    private attachmentService: AttachmentServiceService,
-    private servSpecService: ServiceSpecServiceService,
-    private resSpecService: ResourceSpecServiceService,
-    private paginationService: PaginationService
+    private readonly api: ApiServiceService,
+    private readonly prodSpecService: ProductSpecServiceService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly localStorage: LocalStorageService,
+    private readonly eventMessage: EventMessageService,
+    private readonly paginationService: PaginationService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'CategoryAdded') {

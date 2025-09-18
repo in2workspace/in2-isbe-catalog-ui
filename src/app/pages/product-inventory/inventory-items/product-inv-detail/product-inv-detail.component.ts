@@ -1,9 +1,8 @@
-import { Component, OnInit, ElementRef, ViewChild,ChangeDetectorRef, HostListener } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import {components} from "src/app/models/product-catalog";
 import { initFlowbite } from 'flowbite';
-import { PriceServiceService } from 'src/app/services/price-service.service';
 import {faScaleBalanced, faArrowProgress, faArrowRightArrowLeft, faObjectExclude, faSwap, faGlobe, faBook, faShieldHalved, faAtom, faDownload} from "@fortawesome/pro-solid-svg-icons";
 type Product = components["schemas"]["ProductOffering"];
 type ProductSpecification = components["schemas"]["ProductSpecification"];
@@ -11,7 +10,6 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { ProductInventoryServiceService } from 'src/app/services/product-inventory-service.service'
-import {EventMessageService} from "src/app/services/event-message.service";
 import * as moment from 'moment';
 import { Location } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
@@ -32,8 +30,6 @@ export class ProductInvDetailComponent implements OnInit {
   check_logged:boolean=false;
   images: AttachmentRefOrValue[]  = [];
   attatchments: AttachmentRefOrValue[]  = [];
-  serviceSpecs:any[] = [];
-  resourceSpecs:any[]=[];
   prod:any = {};
   prodSpec:ProductSpecification = {};
   checkCustom:boolean=false;
@@ -51,16 +47,12 @@ export class ProductInvDetailComponent implements OnInit {
   protected readonly faDownload = faDownload;
 
   constructor(
-    private cdr: ChangeDetectorRef,
-    private route: ActivatedRoute,
-    private api: ApiServiceService,
-    private priceService: PriceServiceService,
-    private router: Router,
-    private elementRef: ElementRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private inventoryServ: ProductInventoryServiceService,
-    private location: Location
+    private readonly cdr: ChangeDetectorRef,
+    private readonly route: ActivatedRoute,
+    private readonly api: ApiServiceService,
+    private readonly localStorage: LocalStorageService,
+    private readonly inventoryServ: ProductInventoryServiceService,
+    private readonly location: Location
   ) {
   }
 
@@ -96,13 +88,8 @@ export class ProductInvDetailComponent implements OnInit {
         version: offering.version
       };
 
-      console.log(this.productOff)
-
       this.organizeAttachments();
       this.completeCharacteristics();
-
-      // Fetch service & resource specs concurrently
-      await this.fetchSpecifications();
 
       this.cdr.detectChanges();
     } catch (error) {
@@ -140,23 +127,6 @@ export class ProductInvDetailComponent implements OnInit {
       this.images = profile;
       this.attatchments = this.productOff?.attachment?.filter((item: any) => item.name !== 'Profile Picture') ?? [];
     }
-  }
-
-  private async fetchSpecifications() {
-    const serviceSpecRequests = this.prodSpec?.serviceSpecification?.map((spec: any) =>
-      this.api.getServiceSpec(spec.id)
-    ) ?? [];
-    const resourceSpecRequests = this.prodSpec?.resourceSpecification?.map((spec: any) =>
-      this.api.getResourceSpec(spec.id)
-    ) ?? [];
-
-    const [serviceSpecs, resourceSpecs] = await Promise.all([
-      Promise.all(serviceSpecRequests),
-      Promise.all(resourceSpecRequests)
-    ]);
-
-    this.serviceSpecs = serviceSpecs;
-    this.resourceSpecs = resourceSpecs;
   }
 
   private async loadPricePlan(priceId: string) {

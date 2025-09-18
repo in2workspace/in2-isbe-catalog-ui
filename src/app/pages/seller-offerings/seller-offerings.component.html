@@ -27,12 +27,6 @@
         <li>
           <a (click)="goToProdSpec()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'OFFERINGS._prod_spec' | translate }}</a>
         </li>
-        <li>
-          <a (click)="goToServiceSpec()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'OFFERINGS._serv_spec' | translate }}</a>
-        </li>
-        <li>
-          <a (click)="goToResourceSpec()" class="cursor-pointer block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{{ 'OFFERINGS._res_spec' | translate }}</a>
-        </li>
       </ul>
   </div>
       
@@ -52,12 +46,6 @@
             <button (click)="goToProdSpec()" id="prod-spec-button" class="block w-full rounded-t-lg px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
               {{ 'OFFERINGS._prod_spec' | translate }}
             </button>
-            <button (click)="goToServiceSpec()" id="sev-spec-button" class="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-                {{ 'OFFERINGS._serv_spec' | translate }}
-            </button>
-            <button (click)="goToResourceSpec()" id="res-spec-button" class="block w-full px-4 py-2 border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-                {{ 'OFFERINGS._res_spec' | translate }}
-            </button>
           </div>
         </div>
 
@@ -67,23 +55,11 @@
         @if(show_prod_specs){
           <seller-product-spec></seller-product-spec>
         }
-        @if(show_service_specs){
-          <seller-service-spec></seller-service-spec>
-        }
-        @if(show_resource_specs){
-          <seller-resource-spec></seller-resource-spec>
-        }
         @if(show_offers){
           <seller-offer></seller-offer>
         }
         @if(show_create_prod_spec){
           <create-product-spec></create-product-spec>
-        }
-        @if(show_create_serv_spec){
-          <create-service-spec></create-service-spec>
-        }
-        @if(show_create_res_spec){
-          <create-resource-spec></create-resource-spec>
         }
         @if(show_create_offer){
           <create-offer></create-offer>
@@ -93,12 +69,6 @@
         }
         @if(show_update_prod_spec){
           <update-product-spec [prod]="prod_to_update"></update-product-spec>
-        }
-        @if(show_update_serv_spec){
-          <update-service-spec [serv]="serv_to_update"></update-service-spec>
-        }
-        @if(show_update_res_spec){
-          <update-resource-spec [res]="res_to_update"></update-resource-spec>
         }
         @if(show_update_offer){
           <update-offer [offer]="offer_to_update"></update-offer>

@@ -7,8 +7,6 @@ import { ProductSpecServiceService } from 'src/app/services/product-spec-service
 import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
 import {AttachmentServiceService} from "src/app/services/attachment-service.service";
-import { ServiceSpecServiceService } from 'src/app/services/service-spec-service.service';
-import { ResourceSpecServiceService } from 'src/app/services/resource-spec-service.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
@@ -30,8 +28,6 @@ type CharacteristicValueSpecification = components["schemas"]["CharacteristicVal
 type ProductSpecification_Update = components["schemas"]["ProductSpecification_Update"];
 type BundledProductSpecification = components["schemas"]["BundledProductSpecification"];
 type ProductSpecificationCharacteristic = components["schemas"]["ProductSpecificationCharacteristic"];
-type ServiceSpecificationRef = components["schemas"]["ServiceSpecificationRef"];
-type ResourceSpecificationRef = components["schemas"]["ResourceSpecificationRef"];
 type ProductSpecificationRelationship = components["schemas"]["ProductSpecificationRelationship"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 
@@ -47,8 +43,6 @@ export class UpdateProductSpecComponent implements OnInit {
 
   //PAGE SIZES:
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
-  SERV_SPEC_LIMIT: number = environment.SERV_SPEC_LIMIT;
-  RES_SPEC_LIMIT: number = environment.RES_SPEC_LIMIT;
   DOME_TRUST_LINK: string = environment.DOME_TRUST_LINK;
   BUNDLE_ENABLED: boolean= environment.BUNDLE_ENABLED;
   MAX_FILE_SIZE: number=environment.MAX_FILE_SIZE;
@@ -58,14 +52,12 @@ export class UpdateProductSpecComponent implements OnInit {
   showBundle:boolean=false;
   showCompliance:boolean=false;
   showChars:boolean=false;
-  showResource:boolean=false;
-  showService:boolean=false;
   showAttach:boolean=false;
   showRelationships:boolean=false;
   showSummary:boolean=false;
 
-  stepsElements:string[]=['general-info','bundle','compliance','chars','resource','service','attach','relationships','summary'];
-  stepsCircles:string[]=['general-circle','bundle-circle','compliance-circle','chars-circle','resource-circle','service-circle','attach-circle','relationships-circle','summary-circle'];
+  stepsElements:string[]=['general-info','bundle','compliance','chars','attach','relationships','summary'];
+  stepsCircles:string[]=['general-circle','bundle-circle','compliance-circle','chars-circle','attach-circle','relationships-circle','summary-circle'];
 
   showPreview:boolean=false;
   showEmoji:boolean=false;
@@ -118,24 +110,6 @@ export class UpdateProductSpecComponent implements OnInit {
   checkExistingSelfAtt:boolean=false;
   showUploadAtt:boolean=false;
 
-  //SERVICE INFO:
-  serviceSpecPage=0;
-  serviceSpecPageCheck:boolean=false;
-  loadingServiceSpec:boolean=false;
-  loadingServiceSpec_more:boolean=false;
-  serviceSpecs:any[]=[];
-  nextServiceSpecs:any[]=[];
-  selectedServiceSpecs:ServiceSpecificationRef[]=[];
-
-  //RESOURCE INFO:
-  resourceSpecPage=0;
-  resourceSpecPageCheck:boolean=false;
-  loadingResourceSpec:boolean=false;
-  loadingResourceSpec_more:boolean=false;
-  resourceSpecs:any[]=[];
-  nextResourceSpecs:any[]=[];
-  selectedResourceSpecs:ResourceSpecificationRef[]=[];
-
   //RELATIONSHIPS INFO:  
   relToCreate:any;
   showCreateRel:boolean=false;
@@ -176,21 +150,16 @@ export class UpdateProductSpecComponent implements OnInit {
   filenameRegex = /^[A-Za-z0-9_.-]+$/;
 
   constructor(
-    private router: Router,
-    private api: ApiServiceService,
-    private prodSpecService: ProductSpecServiceService,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private elementRef: ElementRef,
-    private attachmentService: AttachmentServiceService,
-    private servSpecService: ServiceSpecServiceService,
-    private resSpecService: ResourceSpecServiceService,
-    private qrVerifier: QrVerifierService,
-    private paginationService: PaginationService
+    private readonly prodSpecService: ProductSpecServiceService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly localStorage: LocalStorageService,
+    private readonly eventMessage: EventMessageService,
+    private readonly attachmentService: AttachmentServiceService,
+    private readonly qrVerifier: QrVerifierService,
+    private readonly paginationService: PaginationService
   ) {
-    for(let i=0; i<certifications.length; i++){
-      this.availableISOS.push(certifications[i])
+    for(const element of certifications){
+      this.availableISOS.push(element)
     }
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -201,11 +170,11 @@ export class UpdateProductSpecComponent implements OnInit {
 
   @HostListener('document:click')
   onClick() {
-    if(this.showEmoji==true){
+    if(this.showEmoji){
       this.showEmoji=false;
       this.cdr.detectChanges();
     }
-    if(this.showUploadFile==true){
+    if(this.showUploadFile){
       this.showUploadFile=false;
       this.cdr.detectChanges();
     }
@@ -218,7 +187,6 @@ export class UpdateProductSpecComponent implements OnInit {
 
   ngOnInit() {
     this.initPartyInfo();
-    console.log(this.prod)
     this.populateProductInfo();
     initFlowbite();
   }
@@ -251,21 +219,16 @@ export class UpdateProductSpecComponent implements OnInit {
       //Ver como añadir los productos al bundle
       this.prodSpecsBundle=this.prod.bundledProductSpecification;
       //prod.bundledProductSpecification
-
-      console.log('is bundle')
     }
 
     //COMPLIANCE PROFILE
     if(this.prod.productSpecCharacteristic){     
-      console.log(certifications)
-      console.log('--')
-      console.log(this.prod.productSpecCharacteristic)
-      for(let i = 0; i < this.prod.productSpecCharacteristic.length; i++) {
+      for(const element of this.prod.productSpecCharacteristic) {
         // Check if this is a VC
-        if (this.prod.productSpecCharacteristic[i].name == 'Compliance:VC') {
+        if (element.name == 'Compliance:VC') {
           // Decode the token
           try {
-            const decoded = jwtDecode(this.prod.productSpecCharacteristic[i].productSpecCharacteristicValue[0].value)
+            const decoded = jwtDecode(element.productSpecCharacteristicValue[0].value)
             let credential: any = null
 
             if ('verifiableCredential' in decoded) {
@@ -284,67 +247,42 @@ export class UpdateProductSpecComponent implements OnInit {
               }
             }
           } catch (e) {
-            console.log(e)
+            console.error(e)
           }
-
-          // Add verified certifcates
-
-          //let cert = certifications.find(item => `${item.name}:VC` === this.prod.productSpecCharacteristic[i].name)
-          //if (cert) {
-          //  const val = this.prod.productSpecCharacteristic[i].productSpecCharacteristicValue[0].value
-            //this.verifiedISO[cert.name] = val
-          //}
           continue
         }
 
 
-        const index = this.availableISOS.findIndex(item => item.name === this.prod.productSpecCharacteristic[i].name);
+        const index = this.availableISOS.findIndex(item => item.name === element.name);
         if (index !== -1) {
-          console.log('adding sel iso')
           this.selectedISOS.push({
-            name: this.prod.productSpecCharacteristic[i].name,
-            url: this.prod.productSpecCharacteristic[i].productSpecCharacteristicValue[0].value,
+            name: element.name,
+            url: element.productSpecCharacteristicValue[0].value,
             mandatory: this.availableISOS[index].mandatory,
             domesupported: this.availableISOS[index].domesupported
           });
           this.availableISOS.splice(index, 1);
         }
-        if (this.prod.productSpecCharacteristic[i].name == 'Compliance:SelfAtt') {
-          this.selfAtt=this.prod.productSpecCharacteristic[i]
+        if (element.name == 'Compliance:SelfAtt') {
+          this.selfAtt=element
           this.checkExistingSelfAtt=true;
         }
       }
-      console.log('selected isos')
-      console.log(this.selectedISOS)
-      console.log('available')
-      console.log(this.availableISOS)
-      console.log('API PROD ISOS')
-      console.log(this.prod.productSpecCharacteristic)
     }
 
     //CHARS
     if(this.prod.productSpecCharacteristic){
-      for(let i=0; i < this.prod.productSpecCharacteristic.length; i++){
-        const index = this.selectedISOS.findIndex(item => item.name === this.prod.productSpecCharacteristic[i].name);
+      for(const element of this.prod.productSpecCharacteristic){
+        const index = this.selectedISOS.findIndex(item => item.name === element.name);
         if (index == -1) {
           this.prodChars.push({
             id: 'urn:ngsi-ld:characteristic:'+uuidv4(),
-            name: this.prod.productSpecCharacteristic[i].name,
-            description: this.prod.productSpecCharacteristic[i].description ? this.prod.productSpecCharacteristic[i].description : '',
-            productSpecCharacteristicValue: this.prod.productSpecCharacteristic[i].productSpecCharacteristicValue
+            name: element.name,
+            description: element.description ? element.description : '',
+            productSpecCharacteristicValue: element.productSpecCharacteristicValue
           });
         }
       }
-    }
-
-    //RESOURCE
-    if(this.prod.resourceSpecification){
-      this.selectedResourceSpecs=this.prod.resourceSpecification;
-    }
-
-    //SERVICE
-    if(this.prod.serviceSpecification){
-      this.selectedServiceSpecs=this.prod.serviceSpecification;
     }
 
     //ATTACHMENTS
@@ -358,18 +296,16 @@ export class UpdateProductSpecComponent implements OnInit {
     }
 
     //RELATIONSHIPS
-    console.log('----- RELACIONES')
-    console.log(this.prod.productSpecificationRelationship)
     if(this.prod.productSpecificationRelationship){
-      for(let i=0; i< this.prod.productSpecificationRelationship.length; i++){
-        this.prodSpecService.getResSpecById(this.prod.productSpecificationRelationship[i].id).then(data => {
+      for(const element of this.prod.productSpecificationRelationship){
+        this.prodSpecService.getResSpecById(element.id).then(data => {
 
           this.prodRelationships.push({
-            id: this.prod.productSpecificationRelationship[i].id,
-            href: this.prod.productSpecificationRelationship[i].id,
+            id: element.id,
+            href: element.id,
             //Que tipo de relacion le pongo? no viene en el prodspec
-            relationshipType: this.prod.productSpecificationRelationship[i].relationshipType ?? this.selectedRelType,
-            name: this.prod.productSpecificationRelationship[i].name,
+            relationshipType: element.relationshipType ?? this.selectedRelType,
+            name: element.name,
             productSpec: data
           });
         })
@@ -401,8 +337,6 @@ export class UpdateProductSpecComponent implements OnInit {
     this.showGeneral=true;
     this.showCompliance=false;
     this.showChars=false;
-    this.showResource=false;
-    this.showService=false;
     this.showAttach=false;
     this.showRelationships=false;
     this.showSummary=false;
@@ -417,8 +351,6 @@ export class UpdateProductSpecComponent implements OnInit {
     this.showGeneral=false;
     this.showCompliance=false;
     this.showChars=false;
-    this.showResource=false;
-    this.showService=false;
     this.showAttach=false;
     this.showRelationships=false;
     this.showSummary=false;
@@ -431,7 +363,7 @@ export class UpdateProductSpecComponent implements OnInit {
     this.prodSpecs=[];
     this.bundlePage=0;
     this.bundleChecked=!this.bundleChecked;
-    if(this.bundleChecked==true){
+    if(this.bundleChecked){
       this.loadingBundle=true;
       this.getProdSpecs(false);
     } else {
@@ -440,15 +372,13 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   async getProdSpecs(next:boolean){
-    if(next==false){
+    if(!next){
       this.loadingBundle=true;
     }
     
     let options = {
       "filters": ['Active','Launched'],
-      "partyId": this.partyId,
-      //"sort": undefined,
-      //"isBundle": false
+      "partyId": this.partyId
     }
 
     this.paginationService.getItemsPaginated(this.bundlePage, this.PROD_SPEC_LIMIT, next, this.prodSpecs,this.nextProdSpecs, options,
@@ -469,10 +399,8 @@ export class UpdateProductSpecComponent implements OnInit {
   addProdToBundle(prod:any){
     const index = this.prodSpecsBundle.findIndex(item => item.id === prod.id);
     if (index !== -1) {
-      console.log('eliminar')
       this.prodSpecsBundle.splice(index, 1);
     } else {
-      console.log('añadir')
       this.prodSpecsBundle.push({
         id: prod.id,
         href: prod.href,
@@ -481,7 +409,6 @@ export class UpdateProductSpecComponent implements OnInit {
       });
     }    
     this.cdr.detectChanges();
-    console.log(this.prodSpecsBundle)
   }
 
   isProdInBundle(prod:any){
@@ -499,8 +426,6 @@ export class UpdateProductSpecComponent implements OnInit {
     this.showGeneral=false;
     this.showCompliance=true;
     this.showChars=false;
-    this.showResource=false;
-    this.showService=false;
     this.showAttach=false;
     this.showRelationships=false;
     this.showSummary=false;
@@ -514,40 +439,29 @@ export class UpdateProductSpecComponent implements OnInit {
   addISO(iso:any){
     const index = this.availableISOS.findIndex(item => item.name === iso.name);
     if (index !== -1) {
-      console.log('seleccionar')
       this.availableISOS.splice(index, 1);
       this.selectedISOS.push({name: iso.name, url: '', mandatory: iso.mandatory, domesupported: iso.domesupported});
     }
     this.buttonISOClicked=!this.buttonISOClicked;
     this.cdr.detectChanges();
-    console.log(this.availableISOS)
-    console.log(this.selectedISOS)
   }
 
   removeISO(iso:any){
     const index = this.selectedISOS.findIndex(item => item.name === iso.name);
     if (index !== -1) {
-      console.log('seleccionar')
       this.selectedISOS.splice(index, 1);
       this.availableISOS.push({name: iso.name, mandatory: iso.mandatory, domesupported: iso.domesupported});
-
-      //if (iso.name in this.verifiedISO) {
-      //  delete this.verifiedISO[iso.name]
-      //}
     }  
-    this.cdr.detectChanges();
-    console.log(this.prodSpecsBundle)    
+    this.cdr.detectChanges();    
   }
 
   removeSelfAtt(){
     const index = this.finishChars.findIndex(item => item.name === this.selfAtt.name);
     if (index !== -1) {
-      console.log('seleccionar')
       this.finishChars.splice(index, 1);
     }
     this.selfAtt='';
     this.cdr.detectChanges();
-    console.log(this.finishChars)
   }
 
   checkValidISOS():boolean{
@@ -564,12 +478,9 @@ export class UpdateProductSpecComponent implements OnInit {
   addISOValue(sel:any){
     const index = this.selectedISOS.findIndex(item => item.name === sel.name);
     const nativeElement = document.getElementById('iso-'+sel.name);
-    console.log(sel.url)
-    console.log(this.selectedISOS)
   }
 
   verifyCredential() {
-    console.log('verifing credential')
     const state = `cert:${uuidv4()}`
 
     const qrWin = this.qrVerifier.launchPopup(`${environment.SIOP_INFO.verifierHost}${environment.SIOP_INFO.verifierQRCodePath}?state=${state}&client_callback=${environment.SIOP_INFO.callbackURL}&client_id=${environment.SIOP_INFO.clientID}`,  'Scan QR code',  500, 500)
@@ -586,8 +497,6 @@ export class UpdateProductSpecComponent implements OnInit {
         this.complianceVC = data.vc;
       }
 
-      //this.verifiedISO[sel.name] = data.vc
-      console.log(`We got the vc: ${data['vc']}`)
     })
   }
 
@@ -603,14 +512,10 @@ export class UpdateProductSpecComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          console.log('dropped')       
-
           if (file) {
             const reader = new FileReader();
             reader.onload = (e: any) => {
               const base64String: string = e.target.result.split(',')[1];
-              console.log('BASE 64....')
-              console.log(base64String); // You can use this base64 string as needed
               let prod_name='';
               if(this.generalForm.value.name!=null){
                 prod_name=this.generalForm.value.name.replaceAll(/\s/g,'')+'_';
@@ -646,17 +551,14 @@ export class UpdateProductSpecComponent implements OnInit {
                 const index = this.selectedISOS.findIndex(item => item.name === sel.name);
                 this.attachmentService.uploadFile(fileBody).subscribe({
                   next: data => {
-                      console.log(data)
                       this.selectedISOS[index].url=data.content;
-                      //this.selectedISOS[index].attachmentType=file.type;
                       this.showUploadFile=false;
                       this.cdr.detectChanges();
-                      console.log('uploaded')
                   },
                   error: error => {
                       console.error('There was an error while uploading file!', error);
                       if(error.error.error){
-                        console.log(error)
+                        console.error(error)
                         this.errorMessage='Error: '+error.error.error;
                       } else {
                         this.errorMessage='There was an error while uploading the file!';
@@ -695,12 +597,11 @@ export class UpdateProductSpecComponent implements OnInit {
                       this.showUploadFile=false;
                       this.showUploadAtt=false;
                       this.cdr.detectChanges();
-                      console.log('uploaded')
                   },
                   error: error => {
                       console.error('There was an error while uploading the file!', error);
                       if(error.error.error){
-                        console.log(error)
+                        console.error(error)
                         this.errorMessage='Error: '+error.error.error;
                       } else {
                         this.errorMessage='There was an error while uploading the file!';
@@ -716,10 +617,8 @@ export class UpdateProductSpecComponent implements OnInit {
                 });
               }
               if(this.showAttach){
-                console.log(file)
                 this.attachmentService.uploadFile(fileBody).subscribe({
                   next: data => {
-                      console.log(data)
                       if(sel == 'img'){
                         if(file.type.startsWith("image")){
                           this.showImgPreview=true;
@@ -741,12 +640,10 @@ export class UpdateProductSpecComponent implements OnInit {
                       }
 
                       this.cdr.detectChanges();
-                      console.log('uploaded')
                   },
                   error: error => {
                       console.error('There was an error while uploading file!', error);
                       if(error.error.error){
-                        console.log(error)
                         this.errorMessage='Error: '+error.error.error;
                       } else {
                         this.errorMessage='There was an error while uploading the file!';
@@ -769,7 +666,6 @@ export class UpdateProductSpecComponent implements OnInit {
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
       }
     }
   }
@@ -807,8 +703,6 @@ export class UpdateProductSpecComponent implements OnInit {
     this.showGeneral=false;
     this.showCompliance=false;
     this.showChars=true;
-    this.showResource=false;
-    this.showService=false;
     this.showAttach=false;
     this.showRelationships=false;
     this.showSummary=false;
@@ -822,164 +716,12 @@ export class UpdateProductSpecComponent implements OnInit {
     initFlowbite();
   }
 
-  toggleResource(){
-    this.loadingResourceSpec=true;
-    this.resourceSpecs=[];
-    this.resourceSpecPage=0;
-    this.getResSpecs(false);
-    this.selectStep('resource','resource-circle');
-    this.showBundle=false;
-    this.showGeneral=false;
-    this.showCompliance=false;
-    this.showChars=false;
-    this.showResource=true;
-    this.showService=false;
-    this.showAttach=false;
-    this.showRelationships=false;
-    this.showSummary=false;
-    this.showPreview=false;
-    this.refreshChars();
-    initFlowbite();
-  }
-
-  async getResSpecs(next:boolean){
-    if(next==false){
-      this.loadingResourceSpec=true;
-    }
-    
-    let options = {
-      "filters": ['Active','Launched'],
-      "partyId": this.partyId,
-      //"sort": undefined,
-      //"isBundle": false
-    }
-
-    this.paginationService.getItemsPaginated(this.resourceSpecPage, this.RES_SPEC_LIMIT, next, this.resourceSpecs,this.nextResourceSpecs, options,
-      this.resSpecService.getResourceSpecByUser.bind(this.resSpecService)).then(data => {
-      this.resourceSpecPageCheck=data.page_check;      
-      this.resourceSpecs=data.items;
-      this.nextResourceSpecs=data.nextItems;
-      this.resourceSpecPage=data.page;
-      this.loadingResourceSpec=false;
-      this.loadingResourceSpec_more=false;
-    })
-  }
-
-  async nextRes(){
-    await this.getResSpecs(true);
-  }
-
-  addResToSelected(res:any){
-    const index = this.selectedResourceSpecs.findIndex(item => item.id === res.id);
-    if (index !== -1) {
-      console.log('eliminar')
-      this.selectedResourceSpecs.splice(index, 1);
-    } else {
-      console.log('añadir')
-      this.selectedResourceSpecs.push({
-        id: res.id,
-        href: res.href,
-        name: res.name
-      });
-    }    
-    this.cdr.detectChanges();
-    console.log(this.selectedResourceSpecs)
-  }
-
-  isResSelected(res:any){
-    const index = this.selectedResourceSpecs.findIndex(item => item.id === res.id);
-    if (index !== -1) {
-      return true
-    } else {
-      return false;
-    } 
-  }
-
-  toggleService(){
-    this.loadingServiceSpec=true;
-    this.serviceSpecs=[];
-    this.serviceSpecPage=0;
-    this.getServSpecs(false);
-    this.selectStep('service','service-circle');
-    this.showBundle=false;
-    this.showGeneral=false;
-    this.showCompliance=false;
-    this.showChars=false;
-    this.showResource=false;
-    this.showService=true;
-    this.showAttach=false;
-    this.showRelationships=false;
-    this.showSummary=false;
-    this.showPreview=false;
-    this.refreshChars();
-    initFlowbite();
-  }
-
-  async getServSpecs(next:boolean){
-    if(next==false){
-      this.loadingServiceSpec=true;
-    }
-    
-    let options = {
-      "filters": ['Active','Launched'],
-      "partyId": this.partyId,
-      //"sort": undefined,
-      //"isBundle": false
-    }
-
-    this.paginationService.getItemsPaginated(this.serviceSpecPage, this.SERV_SPEC_LIMIT, next, this.serviceSpecs,this.nextServiceSpecs, options,
-      this.servSpecService.getServiceSpecByUser.bind(this.servSpecService)).then(data => {
-      this.serviceSpecPageCheck=data.page_check;      
-      this.serviceSpecs=data.items;
-      this.nextServiceSpecs=data.nextItems;
-      this.serviceSpecPage=data.page;
-      this.loadingServiceSpec=false;
-      this.loadingServiceSpec_more=false;
-    })
-  }
-
-  async nextServ(){
-    this.loadingServiceSpec_more=true;
-    this.serviceSpecPage=this.serviceSpecPage+this.SERV_SPEC_LIMIT;
-    this.cdr.detectChanges;
-    console.log(this.serviceSpecPage)
-    await this.getServSpecs(true);
-  }
-
-  addServToSelected(serv:any){
-    const index = this.selectedServiceSpecs.findIndex(item => item.id === serv.id);
-    if (index !== -1) {
-      console.log('eliminar')
-      this.selectedServiceSpecs.splice(index, 1);
-    } else {
-      console.log('añadir')
-      this.selectedServiceSpecs.push({
-        id: serv.id,
-        href: serv.href,
-        name: serv.name
-      });
-    }    
-    this.cdr.detectChanges();
-    console.log(this.selectedServiceSpecs)
-  }
-
-  isServSelected(serv:any){
-    const index = this.selectedServiceSpecs.findIndex(item => item.id === serv.id);
-    if (index !== -1) {
-      return true
-    } else {
-      return false;
-    } 
-  }
-
   toggleAttach(){
     this.selectStep('attach','attach-circle');
     this.showBundle=false;
     this.showGeneral=false;
     this.showCompliance=false;
     this.showChars=false;
-    this.showResource=false;
-    this.showService=false;
     this.showAttach=true;
     this.showRelationships=false;
     this.showSummary=false;
@@ -994,7 +736,6 @@ export class UpdateProductSpecComponent implements OnInit {
     this.showImgPreview=false;
     const index = this.prodAttachments.findIndex(item => item.url === this.imgPreview);
     if (index !== -1) {
-      console.log('eliminar')
       this.prodAttachments.splice(index, 1);
     }
     this.imgPreview='';
@@ -1016,7 +757,6 @@ export class UpdateProductSpecComponent implements OnInit {
   removeAtt(att:any){
     const index = this.prodAttachments.findIndex(item => item.url === att.url);
     if (index !== -1) {
-      console.log('eliminar')
       if(this.prodAttachments[index].name=='Profile Picture'){
         this.showImgPreview=false;
         this.imgPreview='';
@@ -1028,7 +768,6 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   saveAtt(){
-    console.log('saving')
     this.prodAttachments.push({
       name: this.attachName.nativeElement.value,
       url: this.attachToCreate.url,
@@ -1055,8 +794,6 @@ export class UpdateProductSpecComponent implements OnInit {
     this.showGeneral=false;
     this.showCompliance=false;
     this.showChars=false;
-    this.showResource=false;
-    this.showService=false;
     this.showAttach=false;
     this.showRelationships=true;
     this.showSummary=false;
@@ -1066,15 +803,13 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   async getProdSpecsRel(next:boolean){
-    if(next==false){
+    if(!next){
       this.loadingprodSpecRel=true;
     }
     
     let options = {
       "filters": ['Active','Launched'],
-      "partyId": this.partyId,
-      //"sort": undefined,
-      //"isBundle": false
+      "partyId": this.partyId
     }
 
     this.paginationService.getItemsPaginated(this.prodSpecRelPage, this.PROD_SPEC_LIMIT, next, this.prodSpecRels, this.nextProdSpecRels, options,
@@ -1097,7 +832,6 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   onRelChange(event: any) {
-    console.log('relation type changed')
     this.selectedRelType=event.target.value;
     this.cdr.detectChanges();
   }
@@ -1108,17 +842,14 @@ export class UpdateProductSpecComponent implements OnInit {
       id: this.selectedProdSpec.id,
       href: this.selectedProdSpec.href,
       relationshipType: this.selectedRelType,
-      name: this.selectedProdSpec.name
-      //productSpec: this.selectedProdSpec      
+      name: this.selectedProdSpec.name    
     });
     this.selectedRelType='migration';
-    console.log(this.prodRelationships)
   }
 
   deleteRel(rel:any){
     const index = this.prodRelationships.findIndex(item => item.id === rel.id);
     if (index !== -1) {
-      console.log('eliminar')
       this.prodRelationships.splice(index, 1);
     }   
     this.cdr.detectChanges(); 
@@ -1173,9 +904,9 @@ export class UpdateProductSpecComponent implements OnInit {
       this.stepsElements.splice(index, 1);
       this.selectMenu(document.getElementById(step),'text-primary-100 dark:text-primary-50')
       this.unselectMenu(document.getElementById(step),'text-gray-500') 
-      for(let i=0; i<this.stepsElements.length;i++){
-        this.unselectMenu(document.getElementById(this.stepsElements[i]),'text-primary-100 dark:text-primary-50')
-        this.selectMenu(document.getElementById(this.stepsElements[i]),'text-gray-500') 
+      for(const element of this.stepsElements){
+        this.unselectMenu(document.getElementById(element),'text-primary-100 dark:text-primary-50')
+        this.selectMenu(document.getElementById(element),'text-gray-500') 
       }
       this.stepsElements.push(step);
     }
@@ -1184,9 +915,9 @@ export class UpdateProductSpecComponent implements OnInit {
       this.stepsCircles.splice(circleIndex, 1);
       this.selectMenu(document.getElementById(stepCircle),'border-primary-100 dark:border-primary-50')
       this.unselectMenu(document.getElementById(stepCircle),'border-gray-400');
-      for(let i=0; i<this.stepsCircles.length;i++){
-        this.unselectMenu(document.getElementById(this.stepsCircles[i]),'border-primary-100 dark:border-primary-50')
-        this.selectMenu(document.getElementById(this.stepsCircles[i]),'border-gray-400');
+      for(const element of this.stepsCircles){
+        this.unselectMenu(document.getElementById(element),'border-primary-100 dark:border-primary-50')
+        this.selectMenu(document.getElementById(element),'border-gray-400');
       }
       this.stepsCircles.push(stepCircle);
     }
@@ -1211,7 +942,6 @@ export class UpdateProductSpecComponent implements OnInit {
 
   addCharValue(){
     if(this.stringCharSelected){
-      console.log('string')
       if(this.creatingChars.length==0){
         this.creatingChars.push({
           isDefault:true,
@@ -1225,7 +955,6 @@ export class UpdateProductSpecComponent implements OnInit {
       }
       this.stringValue='';  
     } else if (this.numberCharSelected){
-      console.log('number')
       if(this.creatingChars.length==0){
         this.creatingChars.push({
           isDefault:true,
@@ -1242,7 +971,6 @@ export class UpdateProductSpecComponent implements OnInit {
       this.numberUnit='';
       this.numberValue='';
     }else{
-      console.log('range')
       if(this.creatingChars.length==0){
         this.creatingChars.push({
           isDefault:true,
@@ -1264,9 +992,7 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   removeCharValue(char:any,idx:any){
-    console.log(this.creatingChars)
     this.creatingChars.splice(idx, 1);
-    console.log(this.creatingChars)
   }
 
   selectDefaultChar(char:any,idx:any){
@@ -1284,7 +1010,7 @@ export class UpdateProductSpecComponent implements OnInit {
       this.prodChars.push({
         id: 'urn:ngsi-ld:characteristic:'+uuidv4(),
         name: this.charsForm.value.name,
-        description: this.charsForm.value.description != null ? this.charsForm.value.description : '',
+        description: this.charsForm.value.description ?? '',
         productSpecCharacteristicValue: this.creatingChars
       })
     }
@@ -1302,11 +1028,9 @@ export class UpdateProductSpecComponent implements OnInit {
   deleteChar(char:any){
     const index = this.prodChars.findIndex(item => item.id === char.id);
     if (index !== -1) {
-      console.log('eliminar')
       this.prodChars.splice(index, 1);
     }   
     this.cdr.detectChanges();
-    console.log(this.prodChars)    
   }
 
   checkInput(value: string): boolean {
@@ -1314,22 +1038,22 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   showFinish() {
-    for(let i=0; i< this.prodChars.length; i++){
-      const index = this.finishChars.findIndex(item => item.name === this.prodChars[i].name);
+    for(const element of this.prodChars){
+      const index = this.finishChars.findIndex(item => item.name === element.name);
       if (index == -1) {
-        this.finishChars.push(this.prodChars[i])
+        this.finishChars.push(element)
       }
     }
     // Load compliance profile
-    for(let i = 0; i < this.selectedISOS.length; i++){
-      const index = this.finishChars.findIndex(item => item.name === this.selectedISOS[i].name);
+    for(const element of this.selectedISOS){
+      const index = this.finishChars.findIndex(item => item.name === element.name);
       if (index == -1) {
         this.finishChars.push({
           id: 'urn:ngsi-ld:characteristic:'+uuidv4(),
-          name: this.selectedISOS[i].name,
+          name: element.name,
           productSpecCharacteristicValue: [{
             isDefault: true,
-            value: this.selectedISOS[i].url
+            value: element.url
           }]
         })
       }
@@ -1349,28 +1073,26 @@ export class UpdateProductSpecComponent implements OnInit {
 
     if(this.generalForm.value.name!=null && this.generalForm.value.version!=null && this.generalForm.value.brand!=null){
       let rels = [];
-      for(let i=0; i<this.prodRelationships.length;i++){
+      for(const element of this.prodRelationships){
         rels.push({
-          id: this.prodRelationships[i].id,
-          href: this.prodRelationships[i].href,
-          name: this.prodRelationships[i].name,
-          relationshipType: this.prodRelationships[i].relationshipType
+          id: element.id,
+          href: element.href,
+          name: element.name,
+          relationshipType: element.relationshipType
         })
       }
       this.productSpecToUpdate = {
         name: this.generalForm.value.name,
-        description: this.generalForm.value.description != null ? this.generalForm.value.description : '',
+        description: this.generalForm.value.description ?? '',
         version: this.generalForm.value.version,
         brand: this.generalForm.value.brand,
-        productNumber: this.generalForm.value.number != null ? this.generalForm.value.number : '',
+        productNumber: this.generalForm.value.number ?? '',
         lifecycleStatus: this.prodStatus,
         //isBundle: this.bundleChecked,
         //bundledProductSpecification: this.prodSpecsBundle,
         productSpecCharacteristic: this.finishChars,
         productSpecificationRelationship: rels,
-        attachment: this.prodAttachments,
-        resourceSpecification: this.selectedResourceSpecs,
-        serviceSpecification: this.selectedServiceSpecs  
+        attachment: this.prodAttachments
       }
     }
     this.selectStep('summary','summary-circle');
@@ -1378,8 +1100,6 @@ export class UpdateProductSpecComponent implements OnInit {
     this.showGeneral=false;
     this.showCompliance=false;
     this.showChars=false;
-    this.showResource=false;
-    this.showService=false;
     this.showAttach=false;
     this.showRelationships=false;
     this.showSummary=true;
@@ -1408,12 +1128,11 @@ export class UpdateProductSpecComponent implements OnInit {
     this.prodSpecService.updateProdSpec(this.productSpecToUpdate, this.prod.id).subscribe({
       next: data => {
         this.goBack();
-        console.log('actualiado producto')
       },
       error: error => {
         console.error('There was an error while updating!', error);
         if(error.error.error){
-          console.log(error)
+          console.error(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
           this.errorMessage='There was an error while uploading the product!';
@@ -1491,7 +1210,6 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   addEmoji(event:any){
-    console.log(event)
     this.showEmoji=false;
     const currentText = this.generalForm.value.description;
     this.generalForm.patchValue({
