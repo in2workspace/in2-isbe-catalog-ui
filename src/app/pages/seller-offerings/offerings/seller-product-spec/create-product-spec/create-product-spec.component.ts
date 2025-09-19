@@ -18,6 +18,7 @@ import { ErrorMessageComponent } from 'src/app/shared/error-message/error-messag
 import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe, NgClass } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
+import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
 type ProductSpecification_Create = components["schemas"]["ProductSpecification_Create"];
@@ -31,7 +32,7 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
     templateUrl: './create-product-spec.component.html',
     styleUrl: './create-product-spec.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, DatePipe, MarkdownComponent, ReactiveFormsModule, FormsModule]
+    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, DatePipe, MarkdownComponent, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
 })
 export class CreateProductSpecComponent implements OnInit {
 
@@ -72,7 +73,7 @@ export class CreateProductSpecComponent implements OnInit {
     brand: new FormControl('', [Validators.required, noWhitespaceValidator]),
     version: new FormControl('0.1', [Validators.required,Validators.pattern('^-?[0-9]\\d*(\\.\\d*)?$'), noWhitespaceValidator]),
     number: new FormControl(''),
-    description: new FormControl('', Validators.maxLength(100000)),
+    description: new FormControl(''),
   });
 
   //CHARS INFO
@@ -967,78 +968,6 @@ export class CreateProductSpecComponent implements OnInit {
           this.showError = false;
         }, 3000);
       }
-    });
-  }
-
-  //Markdown actions:
-  addBold() {
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + ' **bold text** '
-    });
-  }
-
-  addItalic() {
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + ' _italicized text_ '
-    });
-  }
-
-  addList(){
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + '\n- First item\n- Second item'
-    });    
-  }
-
-  addOrderedList(){
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + '\n1. First item\n2. Second item'
-    });    
-  }
-
-  addCode(){
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + '\n`code`'
-    });    
-  }
-
-  addCodeBlock(){
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + '\n```\ncode\n```'
-    }); 
-  }
-
-  addBlockquote(){
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + '\n> blockquote'
-    });    
-  }
-
-  addLink(){
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + ' [title](https://www.example.com) '
-    });    
-  } 
-
-  addTable(){
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + '\n| Syntax | Description |\n| ----------- | ----------- |\n| Header | Title |\n| Paragraph | Text |'
-    });
-  }
-
-  addEmoji(event:any){
-    this.showEmoji=false;
-    const currentText = this.generalForm.value.description;
-    this.generalForm.patchValue({
-      description: currentText + event.emoji.native
     });
   }
 
