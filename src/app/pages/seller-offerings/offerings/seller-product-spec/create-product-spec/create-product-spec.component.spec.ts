@@ -251,5 +251,242 @@ describe('CreateProductSpecComponent', () => {
   it('should isValidFilename return false for invalid name', () => {
     expect(component.isValidFilename('file@name.txt')).toBe(false);
   });
+
+  it('should call goBack and emit event', () => {
+    const spy = jest.spyOn(component['eventMessage'], 'emitSellerProductSpec');
+    component.goBack();
+    expect(spy).toHaveBeenCalledWith(true);
+  });
+
+  it('should togglePreview sets description from generalForm', () => {
+    component.generalForm.controls['description'].setValue('desc');
+    component.togglePreview();
+    expect(component.description).toBe('desc');
+    component.generalForm.controls['description'].setValue('');
+    component.togglePreview();
+    expect(component.description).toBe('');
+  });
+
+  it('should toggleBundleCheck enable and disable bundle', async () => {
+    component.bundleChecked = false;
+    component.prodSpecs = [1, 2];
+    const getProdSpecsSpy = jest.spyOn(component, 'getProdSpecs').mockImplementation(async () => {});
+    component.toggleBundleCheck();
+    expect(component.bundleChecked).toBe(true);
+    expect(getProdSpecsSpy).toHaveBeenCalledWith(false);
+
+    component.bundleChecked = true;
+    component.prodSpecsBundle = [{ id: '1' }];
+    component.toggleBundleCheck();
+    expect(component.bundleChecked).toBe(false);
+    expect(component.prodSpecsBundle.length).toBe(0);
+  });
+
+  it('should isProdInBundle return correct boolean', () => {
+    const prod = { id: '1' };
+    component.prodSpecsBundle = [{ id: '1' }];
+    expect(component.isProdInBundle(prod)).toBe(true);
+    component.prodSpecsBundle = [];
+    expect(component.isProdInBundle(prod)).toBe(false);
+  });
+
+  it('should addISO and removeISO update arrays', () => {
+    const iso = { name: 'ISO2', mandatory: false, domesupported: true };
+    component.availableISOS = [iso];
+    component.selectedISOS = [];
+    component.addISO(iso);
+    expect(component.selectedISOS[0].name).toBe('ISO2');
+    component.removeISO(iso);
+    expect(component.availableISOS[0].name).toBe('ISO2');
+  });
+
+  it('should removeCharValue remove by index', () => {
+    component.creatingChars = [{ value: {} }, { value: {} }];
+    component.removeCharValue(component.creatingChars[0], 0);
+    expect(component.creatingChars.length).toBe(1);
+    expect(component.creatingChars[0].value).toBe('{}');
+  });
+
+  it('should selectDefaultChar set only one default', () => {
+    component.creatingChars = [
+      { isDefault: false, value: {} },
+      { isDefault: true, value: {} }
+    ];
+    component.selectDefaultChar(component.creatingChars[0], 0);
+    expect(component.creatingChars[0].isDefault).toBe(true);
+    expect(component.creatingChars[1].isDefault).toBe(false);
+  });
+
+  it('should refreshChars reset char fields', () => {
+    component.stringValue = 'x';
+    component.numberValue = 'y';
+    component.numberUnit = 'z';
+    component.fromValue = 'a';
+    component.toValue = 'b';
+    component.rangeUnit = 'c';
+    component.stringCharSelected = false;
+    component.numberCharSelected = true;
+    component.rangeCharSelected = true;
+    component.creatingChars = [{ value: {} }];
+    component.refreshChars();
+    expect(component.stringValue).toBe('');
+    expect(component.numberValue).toBe('');
+    expect(component.numberUnit).toBe('');
+    expect(component.fromValue).toBe('');
+    expect(component.toValue).toBe('');
+    expect(component.rangeUnit).toBe('');
+    expect(component.stringCharSelected).toBe(true);
+    expect(component.numberCharSelected).toBe(false);
+    expect(component.rangeCharSelected).toBe(false);
+    expect(component.creatingChars.length).toBe(0);
+  });
+
+  it('should removeClass remove class from element', () => {
+    const elem = { className: 'foo bar' } as any;
+    component.removeClass(elem, 'bar');
+    expect(elem.className.includes('bar')).toBe(false);
+  });
+
+  it('should addClass add class to element', () => {
+    const elem = { className: 'foo' } as any;
+    component.addClass(elem, 'bar');
+    expect(elem.className.includes('bar')).toBe(true);
+  });
+
+  it('should unselectMenu remove class if present', () => {
+    const elem = { className: 'foo bar', classNameMatch: true } as any;
+    component.unselectMenu(elem, 'bar');
+    expect(elem.className.includes('bar')).toBe(false);
+  });
+
+  it('should selectMenu add class if not present', () => {
+    const elem = { className: 'foo' } as any;
+    component.selectMenu(elem, 'bar');
+    expect(elem.className.includes('bar')).toBe(true);
+  });
+
+  it('should selectStep update stepsElements and stepsCircles', () => {
+    document.body.innerHTML = `
+      <div id="general-info" class="text-gray-500"></div>
+      <div id="general-circle" class="border-gray-400"></div>
+    `;
+    component.stepsElements = ['general-info', 'bundle'];
+    component.stepsCircles = ['general-circle', 'bundle-circle'];
+    component.selectStep('general-info', 'general-circle');
+    expect(component.stepsElements.includes('general-info')).toBe(true);
+    expect(component.stepsCircles.includes('general-circle')).toBe(true);
+  });
+
+  it('should clearAtt reset attachToCreate', () => {
+    component.attachToCreate = { url: 'abc', attachmentType: 'xyz' };
+    component.clearAtt();
+    expect(component.attachToCreate.url).toBe('');
+    expect(component.attachToCreate.attachmentType).toBe('');
+  });
+
+  it('should saveImgFromURL push image and reset', () => {
+    component.imgURL = { nativeElement: { value: 'http://img.com/img.jpg' } } as any;
+    component.prodAttachments = [];
+    component.attImageName.setValue('img.jpg');
+    component.saveImgFromURL();
+    expect(component.prodAttachments.length).toBe(1);
+    expect(component.showImgPreview).toBe(true);
+    expect(component.imgPreview).toBe('http://img.com/img.jpg');
+    expect(component.attImageName.value).toBe(null);
+  });
+
+  it('should removeImg remove image preview', () => {
+    component.prodAttachments = [{ url: 'img1', name: 'Profile Picture' }];
+    component.imgPreview = 'img1';
+    component.showImgPreview = true;
+    component.removeImg();
+    expect(component.prodAttachments.length).toBe(0);
+    expect(component.imgPreview).toBe('');
+    expect(component.showImgPreview).toBe(false);
+  });
+
+  it('should saveRel add relationship and reset selectedRelType', () => {
+    component.selectedProdSpec = { id: 'rel2', href: 'href2', name: 'Rel2' };
+    component.selectedRelType = 'migration';
+    component.prodRelationships = [];
+    component.saveRel();
+    expect(component.prodRelationships.length).toBe(1);
+    expect(component.selectedRelType).toBe('migration');
+  });
+
+  it('should onRelChange update selectedRelType', () => {
+    component.selectedRelType = '';
+    component.onRelChange({ target: { value: 'replacement' } });
+    expect(component.selectedRelType).toBe('replacement');
+  });
+
+  it('should checkInput return true for empty string', () => {
+    expect(component.checkInput('')).toBe(true);
+  });
+
+  it('should dropped handle files', () => {
+    const file = new File([''], 'filename.txt');
+    const fileEntry = {
+      isFile: true,
+      file: (cb: any) => cb(file)
+    } as any;
+    const droppedFile = { fileEntry } as any;
+    component.dropped([droppedFile], null);
+    expect(component.files.length).toBe(1);
+  });
+
+  it('should fileOver and fileLeave log events', () => {
+    const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    component.fileOver('event');
+    component.fileLeave('event');
+    expect(logSpy).toHaveBeenCalled();
+    logSpy.mockRestore();
+  });
+
+  it('should toggleUploadSelfAtt and toggleUploadFile set flags', () => {
+    component.showUploadFile = false;
+    component.showUploadAtt = false;
+    component.toggleUploadSelfAtt();
+    expect(component.showUploadFile).toBe(true);
+    expect(component.showUploadAtt).toBe(true);
+
+    component.showUploadFile = false;
+    component.selectedISO = null;
+    component.toggleUploadFile('sel');
+    expect(component.showUploadFile).toBe(true);
+    expect(component.selectedISO).toBe('sel');
+  });
+
+  it('should uploadFile log uploading', () => {
+    const logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+    component.uploadFile();
+    expect(logSpy).toHaveBeenCalledWith('uploading...');
+    logSpy.mockRestore();
+  });
+
+  it('should initPartyInfo set partyId from localStorage', () => {
+    const loginInfo = {
+      expire: Math.floor(Date.now() / 1000) + 10,
+      logged_as: '1',
+      id: '1',
+      partyId: 'party1',
+      organizations: []
+    };
+    jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(loginInfo);
+    component.initPartyInfo();
+    expect(component.partyId).toBe('party1');
+  });
+
+  it('should initPartyInfo set partyId from organizations', () => {
+    const loginInfo = {
+      expire: Math.floor(Date.now() / 1000) + 10,
+      logged_as: '2',
+      id: '1',
+      organizations: [{ id: '2', partyId: 'party2' }]
+    };
+    jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(loginInfo);
+    component.initPartyInfo();
+    expect(component.partyId).toBe('party2');
+  });
   
 });
