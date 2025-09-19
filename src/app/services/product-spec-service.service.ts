@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {components} from "../models/product-catalog";
@@ -14,7 +14,7 @@ export class ProductSpecServiceService {
   public static readonly API_PRODUCT_SPEC: string = environment.PRODUCT_SPEC;
   public static readonly PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
 
-  constructor(private readonly http: HttpClient) { }
+  private readonly http = inject(HttpClient);
 
   getProdSpecByUser(page:any,status:any[],partyId:any,sort?:any,isBundle?:any) {
     let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}?limit=${ProductSpecServiceService.PROD_SPEC_LIMIT}&offset=${page}&relatedParty.id=${partyId}`;    
