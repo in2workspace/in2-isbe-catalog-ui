@@ -304,7 +304,7 @@ describe('CreateProductSpecComponent', () => {
     component.creatingChars = [{ value: {} }, { value: {} }];
     component.removeCharValue(component.creatingChars[0], 0);
     expect(component.creatingChars.length).toBe(1);
-    expect(component.creatingChars[0].value).toBe('{}');
+    expect(component.creatingChars[0].value).toBe({});
   });
 
   it('should selectDefaultChar set only one default', () => {
