@@ -221,7 +221,45 @@ describe('UpdateProductSpecComponent', () => {
         expect(prodSpecSvc.updateProdSpec).toHaveBeenCalled();
         expect(events.emitSellerProductSpec).toHaveBeenCalledWith(false);
     });
-    
+
+    it('onClick hides emoji and upload file popups and calls detectChanges', () => {
+        component.showEmoji = true;
+        component.showUploadFile = true;
+        const detectSpy = jest.spyOn(component['cdr'], 'detectChanges');
+        component.onClick();
+        expect(component.showEmoji).toBe(false);
+        expect(component.showUploadFile).toBe(false);
+        expect(detectSpy).toHaveBeenCalledTimes(2);
+    });
+
+    it('onClick does nothing if both flags are false', () => {
+        component.showEmoji = false;
+        component.showUploadFile = false;
+        const detectSpy = jest.spyOn(component['cdr'], 'detectChanges');
+        component.onClick();
+        expect(detectSpy).not.toHaveBeenCalled();
+    });
+
+    it('onClick only hides emoji if only showEmoji is true', () => {
+        component.showEmoji = true;
+        component.showUploadFile = false;
+        const detectSpy = jest.spyOn(component['cdr'], 'detectChanges');
+        component.onClick();
+        expect(component.showEmoji).toBe(false);
+        expect(component.showUploadFile).toBe(false);
+        expect(detectSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('onClick only hides upload file if only showUploadFile is true', () => {
+        component.showEmoji = false;
+        component.showUploadFile = true;
+        const detectSpy = jest.spyOn(component['cdr'], 'detectChanges');
+        component.onClick();
+        expect(component.showEmoji).toBe(false);
+        expect(component.showUploadFile).toBe(false);
+        expect(detectSpy).toHaveBeenCalledTimes(1);
+    });
+
     it('addISO should move ISO from availableISOS to selectedISOS', () => {
         component.availableISOS = [{ name: 'ISO1', mandatory: false, domesupported: false }];
         component.selectedISOS = [];
