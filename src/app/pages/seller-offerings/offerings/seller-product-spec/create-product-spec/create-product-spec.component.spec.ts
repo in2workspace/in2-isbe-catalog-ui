@@ -116,4 +116,140 @@ describe('CreateProductSpecComponent', () => {
     expect(component.showSummary).toBe(true);
     expect(component.productSpecToCreate?.name).toBe('Prod');
   });
+
+  it('should add and remove product from bundle', () => {
+    const prod = { id: '1', href: 'href1', lifecycleStatus: 'Active', name: 'Prod1' };
+    component.prodSpecsBundle = [];
+    component.addProdToBundle(prod);
+    expect(component.prodSpecsBundle.length).toBe(1);
+    expect(component.isProdInBundle(prod)).toBe(true);
+    component.addProdToBundle(prod);
+    expect(component.prodSpecsBundle.length).toBe(0);
+    expect(component.isProdInBundle(prod)).toBe(false);
+  });
+
+  it('should add and remove ISO', () => {
+    const iso = { name: 'ISO1', mandatory: true, domesupported: false };
+    component.availableISOS = [iso];
+    component.selectedISOS = [];
+    component.addISO(iso);
+    expect(component.selectedISOS.length).toBe(1);
+    expect(component.availableISOS.length).toBe(0);
+    component.removeISO(iso);
+    expect(component.selectedISOS.length).toBe(0);
+    expect(component.availableISOS.length).toBe(1);
+  });
+
+  it('should checkValidISOS returns true if any ISO url is empty', () => {
+    component.selectedISOS = [{ name: 'ISO1', url: '', mandatory: true, domesupported: false }];
+    expect(component.checkValidISOS()).toBe(true);
+    component.selectedISOS = [{ name: 'ISO1', url: 'http://url', mandatory: true, domesupported: false }];
+    expect(component.checkValidISOS()).toBe(false);
+  });
+
+  it('should removeSelfAtt from finishChars', () => {
+    component.finishChars = [{ name: 'SelfAtt' }];
+    component.selfAtt = { name: 'SelfAtt' };
+    component.removeSelfAtt();
+    expect(component.finishChars.length).toBe(0);
+    expect(component.selfAtt).toBe('');
+  });
+
+  it('should removeAtt and handle Profile Picture', () => {
+    const att = { url: 'img1', name: 'Profile Picture' };
+    component.prodAttachments = [att];
+    component.imgPreview = 'img1';
+    component.showImgPreview = true;
+    component.removeAtt(att);
+    expect(component.prodAttachments.length).toBe(0);
+    expect(component.showImgPreview).toBe(false);
+    expect(component.imgPreview).toBe('');
+  });
+
+  it('should saveAtt and clear fields', () => {
+    component.attachName = { nativeElement: { value: 'file1', reset: () => {} } } as any;
+    component.attachToCreate = { url: 'url1', attachmentType: 'type1' };
+    component.prodAttachments = [];
+    component.attFileName.setValue('file1');
+    component.saveAtt();
+    expect(component.prodAttachments.length).toBe(1);
+    expect(component.attachToCreate.url).toBe('');
+    expect(component.attachToCreate.attachmentType).toBe('');
+    expect(component.showNewAtt).toBe(false);
+    expect(component.attFileName.value).toBe(null);
+  });
+
+  it('should clearAtt reset attachToCreate', () => {
+    component.attachToCreate = { url: 'url1', attachmentType: 'type1' };
+    component.clearAtt();
+    expect(component.attachToCreate.url).toBe('');
+    expect(component.attachToCreate.attachmentType).toBe('');
+  });
+
+  it('should add and delete characteristic', () => {
+    const char = { id: 'char1', name: 'Char1', productSpecCharacteristicValue: [] };
+    component.prodChars = [];
+    component.prodChars.push(char);
+    component.deleteChar(char);
+    expect(component.prodChars.length).toBe(0);
+  });
+
+  it('should add and delete relationship', () => {
+    const rel = { id: 'rel1', href: 'href', relationshipType: 'migration', name: 'Rel1' };
+    component.prodRelationships = [rel];
+    component.deleteRel(rel);
+    expect(component.prodRelationships.length).toBe(0);
+  });
+
+  it('should selectRelationship sets selectedProdSpec', () => {
+    const rel = { id: 'rel1', href: 'href', name: 'Rel1' };
+    component.selectRelationship(rel);
+    expect(component.selectedProdSpec).toBe(rel);
+  });
+
+  it('should onTypeChange set correct flags', () => {
+    component.onTypeChange({ target: { value: 'string' } });
+    expect(component.stringCharSelected).toBe(true);
+    component.onTypeChange({ target: { value: 'number' } });
+    expect(component.numberCharSelected).toBe(true);
+    component.onTypeChange({ target: { value: 'range' } });
+    expect(component.rangeCharSelected).toBe(true);
+  });
+
+  it('should addCharValue for number type', () => {
+    component.stringCharSelected = false;
+    component.numberCharSelected = true;
+    component.rangeCharSelected = false;
+    component.numberValue = '42';
+    component.numberUnit = 'kg';
+    component.creatingChars = [];
+    component.addCharValue();
+    expect(component.creatingChars.length).toBe(1);
+    expect(component.creatingChars[0].value).toBe('42');
+    expect(component.creatingChars[0].unitOfMeasure).toBe('kg');
+  });
+
+  it('should addCharValue for range type', () => {
+    component.stringCharSelected = false;
+    component.numberCharSelected = false;
+    component.rangeCharSelected = true;
+    component.fromValue = '1';
+    component.toValue = '10';
+    component.rangeUnit = 'm';
+    component.creatingChars = [];
+    component.addCharValue();
+    expect(component.creatingChars.length).toBe(1);
+    expect(component.creatingChars[0].valueFrom).toBe('1');
+    expect(component.creatingChars[0].valueTo).toBe('10');
+    expect(component.creatingChars[0].unitOfMeasure).toBe('m');
+  });
+
+  it('should checkInput returns false for non-whitespace', () => {
+    expect(component.checkInput('abc')).toBe(false);
+  });
+
+  it('should isValidFilename return false for invalid name', () => {
+    expect(component.isValidFilename('file@name.txt')).toBe(false);
+  });
+  
 });
