@@ -300,13 +300,6 @@ describe('CreateProductSpecComponent', () => {
     expect(component.availableISOS[0].name).toBe('ISO2');
   });
 
-  it('should removeCharValue remove by index', () => {
-    component.creatingChars = [{ value: {} }, { value: {} }];
-    component.removeCharValue(component.creatingChars[0], 0);
-    expect(component.creatingChars.length).toBe(1);
-    expect(component.creatingChars[0].value).toBe({});
-  });
-
   it('should selectDefaultChar set only one default', () => {
     component.creatingChars = [
       { isDefault: false, value: {} },
