@@ -6,13 +6,13 @@
     </td>
     <td class="hidden md:flex px-6 py-4 w-fit">
         @if(child.lifecycleStatus == 'Active'){
-            <span class="h-fit bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{child.lifecycleStatus}}</span>
+            <span class="h-fit bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{child.lifecycleStatus}}</span>
         } @else if(child.lifecycleStatus == 'Launched') {
-            <span class="h-fit bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{child.lifecycleStatus}}</span>
+            <span class="h-fit bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{child.lifecycleStatus}}</span>
         } @else if(child.lifecycleStatus == 'Retired') {
-            <span class="h-fit bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{child.lifecycleStatus}}</span>
+            <span class="h-fit bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{child.lifecycleStatus}}</span>
         } @else if(child.lifecycleStatus == 'Obsolete') {
-            <span class="h-fit bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{child.lifecycleStatus}}</span>
+            <span class="h-fit bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{child.lifecycleStatus}}</span>
         }
     </td>
     <td class="hidden md:flex px-6 py-4 w-fit">

@@ -404,20 +404,20 @@
                                         </td>
                                         <td class="hidden md:table-cell px-6 py-4">
                                             @if(prod.lifecycleStatus == 'Active'){
-                                                <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{prod.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{prod.lifecycleStatus}}</span>
                                             } @else if(prod.lifecycleStatus == 'Launched') {
-                                                <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{prod.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{prod.lifecycleStatus}}</span>
                                             } @else if(prod.lifecycleStatus == 'Retired') {
-                                                <span class="bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{prod.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{prod.lifecycleStatus}}</span>
                                             } @else if(prod.lifecycleStatus == 'Obsolete') {
-                                                <span class="bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{prod.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{prod.lifecycleStatus}}</span>
                                             }
                                         </td>
                                         <td class="hidden md:table-cell px-6 py-4">
                                             @if(prod.isBundle == false){
-                                                <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{ 'UPDATE_OFFER._simple' | translate }}</span>
+                                                <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{ 'UPDATE_OFFER._simple' | translate }}</span>
                                             } @else {
-                                                <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'UPDATE_OFFER._bundle' | translate }}</span>
+                                                <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'UPDATE_OFFER._bundle' | translate }}</span>
                                             }
                                         </td>
                                         <td class="hidden md:table-cell px-6 py-4">
@@ -467,7 +467,7 @@
                 <div class="m-4">
                 @if(bundleChecked){
                     <div class="flex justify-center w-full m-4">
-                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-blue-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
                           <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                           </svg>
@@ -514,20 +514,20 @@
                                             </td>
                                             <td class="px-6 py-4">
                                                 @if(prod.lifecycleStatus == 'Active'){
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{prod.lifecycleStatus}}</span>
                                                 } @else if(prod.lifecycleStatus == 'Launched') {
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{prod.lifecycleStatus}}</span>
                                                 } @else if(prod.lifecycleStatus == 'Retired') {
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{prod.lifecycleStatus}}</span>
                                                 } @else if(prod.lifecycleStatus == 'Obsolete') {
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{prod.lifecycleStatus}}</span>
                                                 }
                                             </td>
                                             <td class="hidden md:table-cell px-6 py-4">
                                                 @if(prod.isBundle == false){
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{ 'OFFERINGS._simple' | translate }}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{ 'OFFERINGS._simple' | translate }}</span>
                                                 } @else {
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'OFFERINGS._bundle' | translate }}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'OFFERINGS._bundle' | translate }}</span>
                                                 }
                                             </td>
                                             <td class="hidden md:table-cell px-6 py-4">
@@ -606,13 +606,13 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             @if(cat.lifecycleStatus == 'Active'){
-                                                <span class="bg-blue-100 bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{cat.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{cat.lifecycleStatus}}</span>
                                             } @else if(cat.lifecycleStatus == 'Launched') {
-                                                <span class="bg-blue-100 bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{cat.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{cat.lifecycleStatus}}</span>
                                             } @else if(cat.lifecycleStatus == 'suspended') {
-                                                <span class="bg-blue-100 bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{cat.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{cat.lifecycleStatus}}</span>
                                             } @else if(cat.lifecycleStatus == 'terminated') {
-                                                <span class="bg-blue-100 bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{cat.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{cat.lifecycleStatus}}</span>
                                             }
                                         </td>
                                         <td class="hidden md:table-cell px-6 py-4">
@@ -668,7 +668,7 @@
                     } @else {
                         @if(categories.length==0){
                             <div class="flex justify-center w-full m-4">
-                                <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-blue-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                                <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
                                     <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                     </svg>
@@ -717,7 +717,7 @@
                                     }
                                 } @empty {
                                     <div class="flex justify-center w-full m-4">
-                                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-blue-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
                                             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                             </svg>
@@ -888,7 +888,7 @@
                 <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_OFFER._sla' | translate }}</h2>
                     @if (createdSLAs.length === 0){
                         <div class="flex justify-center w-full m-4">
-                          <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-blue-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                          <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
                             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                             </svg>
@@ -1025,7 +1025,7 @@
                 <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_OFFER._price_plans' | translate }}</h2>
                 @if(createdPrices.length==0){
                     <div class="flex justify-center w-full m-4">
-                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-blue-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
                           <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                           </svg>
@@ -1265,13 +1265,13 @@
                     <div class="mb-4">
                         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'UPDATE_OFFER._status' | translate }}</label>
                         @if(offerToUpdate?.lifecycleStatus == 'Active'){
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{offerToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{offerToUpdate?.lifecycleStatus}}</span>
                         } @else if(offerToUpdate?.lifecycleStatus == 'Launched') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{offerToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{offerToUpdate?.lifecycleStatus}}</span>
                         } @else if(offerToUpdate?.lifecycleStatus == 'Retired') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{offerToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{offerToUpdate?.lifecycleStatus}}</span>
                         } @else if(offerToUpdate?.lifecycleStatus == 'Obsolete') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{offerToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{offerToUpdate?.lifecycleStatus}}</span>
                         }
                     </div>
 
@@ -1304,13 +1304,13 @@
                                             </td>
                                             <td class="px-6 py-4">
                                                 @if(bun.lifecycleStatus == 'Active'){
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{bun.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{bun.lifecycleStatus}}</span>
                                                 } @else if(bun.lifecycleStatus == 'Launched') {
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{bun.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{bun.lifecycleStatus}}</span>
                                                 } @else if(bun.lifecycleStatus == 'Retired') {
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{bun.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{bun.lifecycleStatus}}</span>
                                                 } @else if(bun.lifecycleStatus == 'Obsolete') {
-                                                    <span class="bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{bun.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{bun.lifecycleStatus}}</span>
                                                 }
                                             </td>
                                         </tr>

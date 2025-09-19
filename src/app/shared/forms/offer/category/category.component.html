@@ -18,7 +18,7 @@
 } @else {
   @if(categories.length==0){
     <div class="flex justify-center w-full m-4">
-      <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-blue-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+      <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
         <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
              fill="currentColor" viewBox="0 0 20 20">
           <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1
@@ -52,7 +52,7 @@
             [ngClass]="{
               'bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600': level === 0,
               'bg-gray-100 dark:bg-gray-600 hover:bg-gray-200 dark:hover:bg-gray-500': level > 0,
-              'bg-blue-500 dark:bg-blue-900 transition-colors duration-300': isCategorySelected(category)
+              'bg-purple-500 dark:bg-purple-900 transition-colors duration-300': isCategorySelected(category)
             }"
             class="border-b dark:border-gray-500 transition-all duration-200 cursor-pointer"
             (click)="manageCategory(category)">

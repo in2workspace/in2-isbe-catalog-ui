@@ -44,9 +44,9 @@
                         <hr class="h-px my-1 bg-primary-100 border-0 dark:bg-primary-100">
                         <div class="">
                           @for(category of cat.category; track category.id) {
-                            <span class="inline-block bg-blue-300 text-primary-100 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full w-fit text-wrap break-all">{{category.name}}</span>
+                            <span class="inline-block bg-purple-300 text-primary-100 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full w-fit text-wrap break-all">{{category.name}}</span>
                           } @empty {
-                            <span class="inline-block bg-blue-300 text-primary-100 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full w-fit text-wrap break-all">{{'CATALOGS._no_cat' | translate}}</span>                            
+                            <span class="inline-block bg-purple-300 text-primary-100 text-xs font-bold me-2 px-2.5 py-0.5 rounded-full w-fit text-wrap break-all">{{'CATALOGS._no_cat' | translate}}</span>                            
                           }
                         </div>
                         <div class="flex sticky top-[100vh] justify-center align-items-bottom">
@@ -124,11 +124,11 @@
    <!-- CATEGORIES -->
    <div class="p-4 flex flex-wrap gap-2">
      @for(category of showingCat.category; track category.id) {
-       <span class="inline-block bg-blue-300 text-primary-100 text-xs font-bold px-2.5 py-0.5 rounded-full text-wrap break-all">
+       <span class="inline-block bg-purple-300 text-primary-100 text-xs font-bold px-2.5 py-0.5 rounded-full text-wrap break-all">
          {{ category.name }}
        </span>
      } @empty {
-       <span class="inline-block bg-blue-300 text-primary-100 text-xs font-bold px-2.5 py-0.5 rounded-full text-wrap break-all">
+       <span class="inline-block bg-purple-300 text-primary-100 text-xs font-bold px-2.5 py-0.5 rounded-full text-wrap break-all">
          {{ 'CATALOGS._no_cat' | translate }}
        </span>
      }
