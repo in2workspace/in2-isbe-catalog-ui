@@ -21,5 +21,5 @@ export class AboutDomeComponent {
   protected readonly faBadgeCheck = faBadgeCheck;
   protected readonly faHandHoldingCircleDollar = faHandHoldingCircleDollar;
   protected readonly faChartNetwork = faChartNetwork;
-  domePublish: string = environment.DOME_PUBLISH_LINK
+  domePublish: string = environment.ISBE_PUBLISH_LINK
 }

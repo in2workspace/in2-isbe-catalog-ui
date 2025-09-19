@@ -49,7 +49,7 @@ export class UpdateProductSpecComponent implements OnInit {
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
   SERV_SPEC_LIMIT: number = environment.SERV_SPEC_LIMIT;
   RES_SPEC_LIMIT: number = environment.RES_SPEC_LIMIT;
-  DOME_TRUST_LINK: string = environment.DOME_TRUST_LINK;
+  ISBE_TRUST_LINK: string = environment.ISBE_TRUST_LINK;
   BUNDLE_ENABLED: boolean= environment.BUNDLE_ENABLED;
   MAX_FILE_SIZE: number=environment.MAX_FILE_SIZE;
 
