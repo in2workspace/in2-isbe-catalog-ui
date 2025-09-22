@@ -19,84 +19,7 @@ import { NgClass } from '@angular/common';
     imports: [TranslateModule, MarkdownComponent, NgClass]
 })
 export class CatalogsComponent implements OnInit{
-  catalogs:Catalog[]=[
-    {
-        "id": "urn:ngsi-ld:catalog:721d9e67-0a46-4126-a12e-8f91670ceaf7",
-        "href": "urn:ngsi-ld:catalog:721d9e67-0a46-4126-a12e-8f91670ceaf7",
-        "description": "",
-        "lifecycleStatus": "Launched",
-        "name": "OBS Catalogue",
-        "category": [
-            {
-                "id": "urn:ngsi-ld:category:814efafb-b2be-4d7e-b83d-0d447d9f68ac",
-                "href": "urn:ngsi-ld:category:814efafb-b2be-4d7e-b83d-0d447d9f68ac",
-                "name": "OBS Catalogue"
-            }
-        ],
-        "relatedParty": [
-            {
-                "id": "urn:ngsi-ld:organization:6c53e937-212b-4e8b-997c-4d8695f789d1",
-                "role": "Owner",
-                "@referredType": ""
-            }
-        ],
-        "validFor": {
-            "startDateTime": "2025-08-13T11:55:31.053Z"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:catalog:cd93ad8f-0052-4938-9843-cca9dc17156e",
-        "href": "urn:ngsi-ld:catalog:cd93ad8f-0052-4938-9843-cca9dc17156e",
-        "catalogType": "product",
-        "description": "Dawex dev-test catalog in Sandbox",
-        "lifecycleStatus": "Launched",
-        "name": "Dawex",
-        "version": "1.0",
-        "category": [
-            {
-                "id": "urn:ngsi-ld:category:a14a4067-a5c9-4122-b2a7-28ee2dd85036",
-                "href": "urn:ngsi-ld:category:a14a4067-a5c9-4122-b2a7-28ee2dd85036",
-                "name": "Data product distribution and exchange"
-            }
-        ],
-        "relatedParty": [
-            {
-                "id": "urn:ngsi-ld:organization:5ca475ec-52d3-4a0c-a1d5-0071ef09b59d",
-                "href": "urn:ngsi-ld:organization:5ca475ec-52d3-4a0c-a1d5-0071ef09b59d",
-                "name": "did:elsi:NTRFR-810307207",
-                "role": "Owner",
-                "@referredType": "Organization"
-            }
-        ],
-        "validFor": {
-            "startDateTime": "2025-06-26T00:00:00Z"
-        }
-    },
-    {
-        "id": "urn:ngsi-ld:catalog:5b15d259-b2af-4b96-a281-d549f8c82fcb",
-        "href": "urn:ngsi-ld:catalog:5b15d259-b2af-4b96-a281-d549f8c82fcb",
-        "description": "",
-        "lifecycleStatus": "Launched",
-        "name": "testy catalg",
-        "category": [
-            {
-                "id": "urn:ngsi-ld:category:39a55d2f-6014-4cab-8f40-cc564e2e253b",
-                "href": "urn:ngsi-ld:category:39a55d2f-6014-4cab-8f40-cc564e2e253b",
-                "name": "testy catalg"
-            }
-        ],
-        "relatedParty": [
-            {
-                "id": "urn:ngsi-ld:organization:2bcbe859-e316-42f2-919c-f470cff9e235",
-                "role": "Owner",
-                "@referredType": ""
-            }
-        ],
-        "validFor": {
-            "startDateTime": "2025-09-19T11:14:26.115Z"
-        }
-    }
-];
+  catalogs:Catalog[]=[];
   nextCatalogs:Catalog[]=[];
   page:number=0;
   CATALOG_LIMIT: number = environment.CATALOG_LIMIT;
@@ -126,8 +49,8 @@ export class CatalogsComponent implements OnInit{
   }
 
   ngOnInit() {
-    //this.loading=true;
-    //this.getCatalogs(false);
+    this.loading=true;
+    this.getCatalogs(false);
     let input = document.querySelector('[type=search]')
     if(input!=undefined){
       input.addEventListener('input', e => {
@@ -135,7 +58,7 @@ export class CatalogsComponent implements OnInit{
         console.log(`Input updated`)
         if(this.searchField.value==''){
           this.filter=undefined;
-          //this.getCatalogs(false);
+          this.getCatalogs(false);
         }
       });
     }

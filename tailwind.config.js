@@ -20,13 +20,13 @@ module.exports = {
         },
         secondary: {
           //Secondary light
-          50: '#5A43A4',
+          50: '#BEA9FF',
           //Secondary dark
-          100: '#BEA9FF',
+          100: '#5A43A4',
           //Color they use as bg when dark theme
-          200: '#000000',
+          200: '#5A43A4',
           //Dark theme table background and inputs
-          300: '#BEA9FF'
+          300: '#FF7E56'
         },
       },
       transitionProperty: {

@@ -147,7 +147,7 @@
                         <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'UPDATE_OFFER._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                     </div>
                     <label class="font-bold text-lg col-span-2 dark:text-white">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
                         <div class="mb-2 col-span-2">
@@ -155,9 +155,9 @@
                             <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-200 sm:text-base">
                                 @if(offerStatus=='Active'){
                                     <li (click)="setOfferStatus('Active')"
-                                    class="cursor-pointer flex w-fit md:w-full items-center text-blue-500 after:w-full after:h-1 after:border-b after:border-gray-700 dark:after:border-gray-400 after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
+                                    class="cursor-pointer flex w-fit md:w-full items-center text-purple-500 after:w-full after:h-1 after:border-b after:border-gray-700 dark:after:border-gray-400 after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
                                         <span class="flex items-center">
-                                            <svg class="w-6 h-6 text-blue-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <svg class="w-6 h-6 text-purple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.737 8.737a21.49 21.49 0 0 1 3.308-2.724m0 0c3.063-2.026 5.99-2.641 7.331-1.3 1.827 1.828.026 6.591-4.023 10.64-4.049 4.049-8.812 5.85-10.64 4.023-1.33-1.33-.736-4.218 1.249-7.253m6.083-6.11c-3.063-2.026-5.99-2.641-7.331-1.3-1.827 1.828-.026 6.591 4.023 10.64m3.308-9.34a21.497 21.497 0 0 1 3.308 2.724m2.775 3.386c1.985 3.035 2.579 5.923 1.248 7.253-1.336 1.337-4.245.732-7.295-1.275M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
                                             </svg>
                                             Active
@@ -230,7 +230,7 @@
                         <label for="prod-version" class="font-bold text-lg dark:text-white">{{ 'UPDATE_OFFER._version' | translate }}</label>
                         <input formControlName="version" type="text" id="prod-version"
                         [ngClass]="generalForm.get('version')?.invalid == true ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                     </div>
                     <label for="prod-name" class="font-bold text-lg col-span-2 dark:text-white">{{ 'UPDATE_OFFER._description' | translate }}</label>
                     <div class="w-full col-span-2 mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-secondary-200 dark:border-secondary-200">
@@ -340,14 +340,14 @@
                 </form>
                 <div class="flex w-full justify-items-end justify-end ml-4">
                     @if(BUNDLE_ENABLED){
-                    <button type="button" (click)="toggleBundle();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="toggleBundle();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'UPDATE_OFFER._next' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
                         </svg>
                     </button>
                     }@else{
-                        <button type="button" (click)="toggleProdSpec();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button type="button" (click)="toggleProdSpec();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'CREATE_OFFER._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -368,7 +368,7 @@
                 @if(bundleChecked){
                     @if(loadingBundle){
                         <div role="status" class="w-full h-fit flex justify-center align-middle">
-                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                             </svg>
@@ -404,7 +404,7 @@
                                         </td>
                                         <td class="hidden md:table-cell px-6 py-4">
                                             @if(prod.lifecycleStatus == 'Active'){
-                                                <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{prod.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{prod.lifecycleStatus}}</span>
                                             } @else if(prod.lifecycleStatus == 'Launched') {
                                                 <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{prod.lifecycleStatus}}</span>
                                             } @else if(prod.lifecycleStatus == 'Retired') {
@@ -415,7 +415,7 @@
                                         </td>
                                         <td class="hidden md:table-cell px-6 py-4">
                                             @if(prod.isBundle == false){
-                                                <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{ 'UPDATE_OFFER._simple' | translate }}</span>
+                                                <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'UPDATE_OFFER._simple' | translate }}</span>
                                             } @else {
                                                 <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'UPDATE_OFFER._bundle' | translate }}</span>
                                             }
@@ -424,7 +424,7 @@
                                             {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                         </td>
                                         <td class="px-6 py-4">
-                                            <input id="select-checkbox" [checked]="isProdInBundle(prod)" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <input id="select-checkbox" [checked]="isProdInBundle(prod)" type="checkbox" value="" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         </td>
                                     </tr>
                                 }
@@ -445,7 +445,7 @@
                         }
                     } @else {
                         <div role="status" class="w-full h-full flex justify-center align-middle mt-2">
-                        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                             <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                         </svg>
@@ -454,7 +454,7 @@
                     }
                 }
                 <div class="flex w-full justify-items-end justify-end ml-4">
-                    <button type="button" (click)="toggleProdSpec();" [disabled]="offersBundle.length<2 && bundleChecked" [ngClass]="(offersBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="toggleProdSpec();" [disabled]="offersBundle.length<2 && bundleChecked" [ngClass]="(offersBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'UPDATE_OFFER._next' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -480,7 +480,7 @@
                 } @else{
                     @if(loadingProdSpec){
                         <div role="status" class="w-full h-fit flex justify-center align-middle">
-                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                             </svg>
@@ -514,7 +514,7 @@
                                             </td>
                                             <td class="px-6 py-4">
                                                 @if(prod.lifecycleStatus == 'Active'){
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{prod.lifecycleStatus}}</span>
                                                 } @else if(prod.lifecycleStatus == 'Launched') {
                                                     <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{prod.lifecycleStatus}}</span>
                                                 } @else if(prod.lifecycleStatus == 'Retired') {
@@ -525,7 +525,7 @@
                                             </td>
                                             <td class="hidden md:table-cell px-6 py-4">
                                                 @if(prod.isBundle == false){
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{ 'OFFERINGS._simple' | translate }}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'OFFERINGS._simple' | translate }}</span>
                                                 } @else {
                                                     <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'OFFERINGS._bundle' | translate }}</span>
                                                 }
@@ -551,7 +551,7 @@
                             }
                         } @else {
                             <div role="status" class="w-full h-full flex justify-center align-middle mt-2">
-                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                             </svg>
@@ -561,7 +561,7 @@
                     }
                 }
                 <div class="flex w-full justify-items-end justify-end ml-4">
-                    <button type="button" (click)="toggleCategories();" [disabled]="selectedProdSpec.id=='' && !bundleChecked" [ngClass]="selectedProdSpec.id=='' && !bundleChecked ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="toggleCategories();" [disabled]="selectedProdSpec.id=='' && !bundleChecked" [ngClass]="selectedProdSpec.id=='' && !bundleChecked ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'UPDATE_OFFER._next' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -575,7 +575,7 @@
                 <div class="m-4">
                 @if(loadingCatalog){
                     <div role="status" class="w-full h-fit flex justify-center align-middle">
-                        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                             <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                         </svg>
@@ -606,7 +606,7 @@
                                         </td>
                                         <td class="px-6 py-4">
                                             @if(cat.lifecycleStatus == 'Active'){
-                                                <span class="bg-purple-100 bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{cat.lifecycleStatus}}</span>
+                                                <span class="bg-purple-100 bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{cat.lifecycleStatus}}</span>
                                             } @else if(cat.lifecycleStatus == 'Launched') {
                                                 <span class="bg-purple-100 bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{cat.lifecycleStatus}}</span>
                                             } @else if(cat.lifecycleStatus == 'suspended') {
@@ -636,7 +636,7 @@
                         }
                     } @else {
                         <div role="status" class="w-full h-full flex justify-center align-middle mt-2">
-                        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                             <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                         </svg>
@@ -645,7 +645,7 @@
                     }
                 }
                 <div class="flex w-full justify-items-end justify-end m-4">
-                    <button type="button" (click)="toggleCategories();" [disabled]="selectedCatalog.id==''" [ngClass]="selectedCatalog.id=='' ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="toggleCategories();" [disabled]="selectedCatalog.id==''" [ngClass]="selectedCatalog.id=='' ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'UPDATE_OFFER._next' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -659,7 +659,7 @@
                 <div class="m-4">
                     @if(loadingCategory){
                         <div role="status" class="w-full h-fit flex justify-center align-middle">
-                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                             </svg>
@@ -703,7 +703,7 @@
                                             {{cat.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                         </td>
                                         <td class="flex px-6 py-4 w-fit justify-end">
-                                            <input id="select-checkbox" [checked]="isCategorySelected(cat)" type="checkbox" value="" (click)="addCategory(cat)" class="flex w-4 h-4 justify-end text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                            <input id="select-checkbox" [checked]="isCategorySelected(cat)" type="checkbox" value="" (click)="addCategory(cat)" class="flex w-4 h-4 justify-end text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                         </td>
                                     </tr>
                                     @if(cat.children.length>0){
@@ -733,7 +733,7 @@
                         }
                     }
                     <div class="flex w-full justify-items-end justify-end ml-4 mt-4">
-                        <button type="button" (click)="toggleLicense();"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button type="button" (click)="toggleLicense();"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'UPDATE_OFFER._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -751,7 +751,7 @@
                                 <label for="treatment" class="font-bold text-lg dark:text-white">{{ 'UPDATE_OFFER._treatment' | translate }}</label>
                                 <input formControlName="treatment" type="text" id="treatment"
                                 [ngClass]="licenseForm.get('treatment')?.invalid == true && licenseForm.value.treatment!='' ? 'border-red-600' : 'border-gray-300'"
-                                class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                                class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
                                 <label for="description" class="font-bold text-lg dark:text-white">{{ 'UPDATE_OFFER._description' | translate }}</label>
                                 <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-secondary-200 dark:border-secondary-200">
@@ -859,14 +859,14 @@
                                 </div>
                             </form>
                             <div class="flex w-full justify-items-center justify-center ml-4 mt-4">
-                                <button type="button" (click)="clearLicense()" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                                <button type="button" (click)="clearLicense()" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                                     {{ 'UPDATE_OFFER._cancel' | translate }}
                                 </button>
                             </div>
                         </div>
                     } @else {
                         <div class="flex w-full justify-items-center justify-center ml-4">
-                            <button type="button" (click)="freeLicenseSelected=!freeLicenseSelected" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                            <button type="button" (click)="freeLicenseSelected=!freeLicenseSelected" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                                 {{ 'UPDATE_OFFER._create_license' | translate }}
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -875,7 +875,7 @@
                         </div>
                     }
                     <div class="flex w-full justify-items-end justify-end m-4">
-                        <button type="button" (click)="togglePrice();" [disabled]="!licenseForm.valid && !freeLicenseSelected" [ngClass]="!licenseForm.valid && !freeLicenseSelected ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button type="button" (click)="togglePrice();" [disabled]="!licenseForm.valid && !freeLicenseSelected" [ngClass]="!licenseForm.valid && !freeLicenseSelected ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'UPDATE_OFFER._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -950,7 +950,7 @@
                     }
                     @if(availableSLAs.length!=0){
                         <div class="flex w-full justify-items-center justify-center ml-4">
-                            <button type="button" (click)="showCreateSLAMetric()" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                            <button type="button" (click)="showCreateSLAMetric()" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                                 {{ 'UPDATE_OFFER._new_metric' | translate }}
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -959,7 +959,7 @@
                         </div>
                     }
                     @if(showCreateSLA){
-                        <select id="type" (change)="onSLAChange($event)" class="ml-4 mt-4 shadow bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <select id="type" (change)="onSLAChange($event)" class="ml-4 mt-4 shadow bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                             @for(avSLA of availableSLAs; track avSLA){
                                 <option value="{{avSLA}}">{{avSLA}}</option>
                             }
@@ -967,9 +967,9 @@
                         @if(updatesSelected){
                             <div class="flex m-4">
                                 <div class="flex flex-row w-full ml-4">
-                                    <input type="number" pattern="[0-9]*.[0-9]*"  #updatemetric class="block p-2.5 w-3/4 z-20 text-sm text-gray-900 bg-white rounded-l-lg rounded-s-gray-100 rounded-s-2 border-l border-gray-300 focus:ring-blue-500 focus:border-blue-500" required />
+                                    <input type="number" pattern="[0-9]*.[0-9]*"  #updatemetric class="block p-2.5 w-3/4 z-20 text-sm text-gray-900 bg-white rounded-l-lg rounded-s-gray-100 rounded-s-2 border-l border-gray-300 focus:ring-purple-500 focus:border-purple-500" required />
 
-                                    <select id="type" (change)="onSLAMetricChange($event)" class="bg-white border-r border-gray-300 0text-gray-90 text-sm rounded-r-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5">
+                                    <select id="type" (change)="onSLAMetricChange($event)" class="bg-white border-r border-gray-300 0text-gray-90 text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-1/4 p-2.5">
                                         <option value="day">Day</option>
                                         <option value="week">Week</option>
                                         <option value="month">Month</option>
@@ -980,9 +980,9 @@
                         @if(responseSelected){
                             <div class="flex m-4">
                                 <div class="flex flex-row w-full ml-4">
-                                    <input type="number" pattern="[0-9]*.[0-9]*"  #responsemetric class="block p-2.5 w-3/4 z-20 text-sm text-gray-900 bg-white rounded-l-lg rounded-s-gray-100 rounded-s-2 border-l border-gray-300 focus:ring-blue-500 focus:border-blue-500" required />
+                                    <input type="number" pattern="[0-9]*.[0-9]*"  #responsemetric class="block p-2.5 w-3/4 z-20 text-sm text-gray-900 bg-white rounded-l-lg rounded-s-gray-100 rounded-s-2 border-l border-gray-300 focus:ring-purple-500 focus:border-purple-500" required />
 
-                                    <select id="type" (change)="onSLAMetricChange($event)" class="bg-white border-r border-gray-300 0text-gray-90 text-sm rounded-r-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5">
+                                    <select id="type" (change)="onSLAMetricChange($event)" class="bg-white border-r border-gray-300 0text-gray-90 text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-1/4 p-2.5">
                                         <option value="ms">Ms</option>
                                         <option value="s">S</option>
                                         <option value="min">Min</option>
@@ -993,9 +993,9 @@
                         @if(delaySelected){
                             <div class="flex m-4">
                                 <div class="flex flex-row w-full ml-4">
-                                    <input type="number" pattern="[0-9]*.[0-9]*" #delaymetric class="block p-2.5 w-3/4 z-20 text-sm text-gray-900 bg-white rounded-l-lg rounded-s-gray-100 rounded-s-2 border-l border-gray-300 focus:ring-blue-500 focus:border-blue-500" required />
+                                    <input type="number" pattern="[0-9]*.[0-9]*" #delaymetric class="block p-2.5 w-3/4 z-20 text-sm text-gray-900 bg-white rounded-l-lg rounded-s-gray-100 rounded-s-2 border-l border-gray-300 focus:ring-purple-500 focus:border-purple-500" required />
 
-                                    <select id="type" (change)="onSLAMetricChange($event)" class="bg-white border-r border-gray-300 0text-gray-90 text-sm rounded-r-lg focus:ring-blue-500 focus:border-blue-500 block w-1/4 p-2.5">
+                                    <select id="type" (change)="onSLAMetricChange($event)" class="bg-white border-r border-gray-300 0text-gray-90 text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-1/4 p-2.5">
                                         <option value="ms">Ms</option>
                                         <option value="s">S</option>
                                         <option value="min">Min</option>
@@ -1004,7 +1004,7 @@
                             </div>
                         }
                         <div class="flex w-full justify-items-center justify-center ml-4">
-                            <button type="button" (click)="addSLA()" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                            <button type="button" (click)="addSLA()" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                                 {{ 'UPDATE_OFFER._add_metric' | translate }}
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
@@ -1013,7 +1013,7 @@
                         </div>
                     }
                 <div class="flex w-full justify-items-end justify-end m-4">
-                    <button type="button" (click)="togglePrice();"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="togglePrice();"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'UPDATE_OFFER._next' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -1066,7 +1066,7 @@
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
                                                 </svg>
                                             </button>
-                                            <button type="button" (click)="showUpdatePrice(price);$event.stopPropagation();" class="ml-2 text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center me-2">
+                                            <button type="button" (click)="showUpdatePrice(price);$event.stopPropagation();" class="ml-2 text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center me-2">
                                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd" d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z" clip-rule="evenodd"/>
                                                 </svg>
@@ -1087,7 +1087,7 @@
                 </div>
                 @if(!showCreatePrice){
                     <div class="flex w-full justify-items-center justify-center ml-4">
-                        <button type="button" (click)="showNewPrice()" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button type="button" (click)="showNewPrice()" class="flex text-white justify-center bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'UPDATE_OFFER._new_price' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -1102,7 +1102,7 @@
                     <update-price-plan [selectedProdSpec]=selectedProdSpec [priceToUpdate]=priceToUpdate></update-price-plan>
                 }
                 <div class="flex w-full justify-items-end justify-end m-4">
-                    <button type="button" (click)="toggleProcurement();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="toggleProcurement();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'CREATE_OFFER._next' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -1117,7 +1117,7 @@
 
                 <div class="flex flex-row">
                     <select id="procurement" [(ngModel)]="procurementMode"
-                    class="mb-2 mr-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    class="mb-2 mr-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                         @for(mode of procurementModes; track mode){
                             <option value="{{mode.id}}">{{mode.name}}</option>
                         }
@@ -1125,7 +1125,7 @@
                 </div>
 
                 <div class="flex w-full justify-items-end justify-end m-4">
-                    <button type="button" (click)="toggleReplication();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="toggleReplication();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'CREATE_OFFER._next' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -1138,21 +1138,21 @@
                 <p class="mb-3 text-gray-500 dark:text-gray-400">Define in which marketplaces of the DOME Ecosystem your Product Offering might appear (marketplace operators might not publish your offering, depending on their business choices):</p>
                 <div class="flex">
                     <div class="flex items-center me-4">
-                        <input id="inline-radio" type="radio" value="" name="replication-buttons" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="inline-radio" type="radio" value="" name="replication-buttons" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">All marketplaces</label>
                     </div>
                     <div class="flex items-center me-4">
-                        <input id="inline-2-radio" type="radio" value="" name="replication-buttons" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="inline-2-radio" type="radio" value="" name="replication-buttons" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Selected marketplaces</label>
                     </div>
                     <div class="flex items-center me-4">
-                        <input checked id="inline-checked-radio" type="radio" value="" name="replication-buttons" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input checked id="inline-checked-radio" type="radio" value="" name="replication-buttons" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-checked-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">This marketplace only</label>
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-4">
                     <select id="type"
-                     class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                     class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                         <option selected>Member States</option>
                         <option value="Austria">Austria</option>
                         <option value="Belgium">Belgium</option>
@@ -1164,7 +1164,7 @@
                         <option value="Romania">Romania</option>
                         <option value="Spain">Spain</option>
                     </select>
-                    <select id="type" class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <select id="type" class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                         <option selected>Marketplaces</option>
                         <option value="BEIA Software Services">BEIA Software Services</option>
                         <option value="CloudFerro">CloudFerro</option>
@@ -1178,7 +1178,7 @@
                 <p class="mb-3 text-gray-500 dark:text-gray-400">Within the above selection, never publish in the following marketplaces:</p>
                 <div class="grid grid-cols-2 gap-4 mt-4">
                     <select id="type"
-                     class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                     class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                         <option selected>Member States</option>
                         <option value="Austria">Austria</option>
                         <option value="Belgium">Belgium</option>
@@ -1190,7 +1190,7 @@
                         <option value="Romania">Romania</option>
                         <option value="Spain">Spain</option>
                     </select>
-                    <select id="type" class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    <select id="type" class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                         <option selected>Marketplaces</option>
                         <option value="BEIA Software Services">BEIA Software Services</option>
                         <option value="CloudFerro">CloudFerro</option>
@@ -1207,20 +1207,20 @@
                 <p class="mb-3 text-gray-500 dark:text-gray-400">Define which customers, in the the DOME Ecosystem, will see your Product Offerings:</p>
                 <div class="flex flex-col">
                     <div class="flex items-center me-4">
-                        <input checked id="inline-radio" type="radio" value="" name="visibility-buttons" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input checked id="inline-radio" type="radio" value="" name="visibility-buttons" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Any customer (including guests)</label>
                     </div>
                     <div class="flex items-center me-4">
-                        <input id="inline-2-radio" type="radio" value="" name="visibility-buttons" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <input id="inline-2-radio" type="radio" value="" name="visibility-buttons" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                         <label for="inline-2-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Authenticated customers from any country</label>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="flex items-center me-4">
-                            <input id="inline-checked-radio" type="radio" value="" name="visibility-buttons" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <input id="inline-checked-radio" type="radio" value="" name="visibility-buttons" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                             <label for="inline-checked-radio" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Authenticated customers from companies incorporated in specific countries:</label>
                         </div>
                         <select id="type"
-                        class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        class="mb-2 shadow bg-white dark:bg-secondary-300 border border-gray-300 text-gray-900 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                         <option selected>Member States</option>
                         <option value="Austria">Austria</option>
                         <option value="Belgium">Belgium</option>
@@ -1235,7 +1235,7 @@
                     </div>
                 </div>
                 <div class="flex w-full justify-items-end justify-end m-4">
-                    <button type="button" (click)="showFinish();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="showFinish();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'CREATE_OFFER._next' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -1249,14 +1249,14 @@
                     <div class="mb-4 md:grid md:grid-cols-2 gap-4">
                         <div>
                             <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_OFFER._name' | translate }}</label>
-                            <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                 {{offerToUpdate?.name}}
                             </label>
 
                         </div>
                         <div>
                             <label for="prod-version" class="font-bold text-lg dark:text-white">{{ 'UPDATE_OFFER._version' | translate }}</label>
-                            <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                 {{offerToUpdate?.version}}
                             </label>
                         </div>
@@ -1265,7 +1265,7 @@
                     <div class="mb-4">
                         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'UPDATE_OFFER._status' | translate }}</label>
                         @if(offerToUpdate?.lifecycleStatus == 'Active'){
-                            <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{offerToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{offerToUpdate?.lifecycleStatus}}</span>
                         } @else if(offerToUpdate?.lifecycleStatus == 'Launched') {
                             <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{offerToUpdate?.lifecycleStatus}}</span>
                         } @else if(offerToUpdate?.lifecycleStatus == 'Retired') {
@@ -1304,7 +1304,7 @@
                                             </td>
                                             <td class="px-6 py-4">
                                                 @if(bun.lifecycleStatus == 'Active'){
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{bun.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{bun.lifecycleStatus}}</span>
                                                 } @else if(bun.lifecycleStatus == 'Launched') {
                                                     <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{bun.lifecycleStatus}}</span>
                                                 } @else if(bun.lifecycleStatus == 'Retired') {
@@ -1423,7 +1423,7 @@
                     <h2 class="font-bold text-lg dark:text-white">{{ 'UPDATE_OFFER._license' | translate }}</h2>
                     <div>
                         <label for="treatment" class="font-bold text-base dark:text-white">{{ 'UPDATE_OFFER._treatment' | translate }}</label>
-                        <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                             {{createdLicense.treatment}}
                         </label>
                         @if(createdLicense.description!==''){
@@ -1435,7 +1435,7 @@
                     </div>
                 }
                 <div class="flex w-full justify-items-end justify-end m-4">
-                    <button type="button" (click)="updateOffer();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <button type="button" (click)="updateOffer();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                         {{ 'UPDATE_OFFER._finish' | translate }}
                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

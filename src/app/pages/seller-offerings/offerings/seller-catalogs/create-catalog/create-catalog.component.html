@@ -60,7 +60,7 @@
                         <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'CREATE_CATALOG._name' | translate }}</label>
                         <input data-cy="catalogName" formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                        class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                         
                         
                         <label class="font-bold text-lg col-span-2 dark:text-white">{{ 'CREATE_CATALOG._description' | translate }}</label>
@@ -68,7 +68,7 @@
 
                     </form>
                     <div class="flex w-full justify-items-end justify-end">
-                        <button data-cy="catalogNext" type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button data-cy="catalogNext" type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'CREATE_CATALOG._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -82,7 +82,7 @@
                 <div class="m-8">
                     <div>
                         <label class="font-bold text-lg dark:text-white">{{ 'CREATE_CATALOG._name' | translate }}</label>
-                        <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                             {{catalogToCreate?.name}}
                         </label>
                     </div>
@@ -90,7 +90,7 @@
                     <div class="mb-4">
                         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'CREATE_CATALOG._status' | translate }}</label>
                         @if(catalogToCreate?.lifecycleStatus == 'Active'){
-                            <span class="bg-purple-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{catalogToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{catalogToCreate?.lifecycleStatus}}</span>
                         } @else if(catalogToCreate?.lifecycleStatus == 'Launched') {
                             <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{catalogToCreate?.lifecycleStatus}}</span>
                         } @else if(catalogToCreate?.lifecycleStatus == 'Retired') {
@@ -109,7 +109,7 @@
                     
                     
                     <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button data-cy="catalogFinish" type="button" (click)="createCatalog();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button data-cy="catalogFinish" type="button" (click)="createCatalog();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'CREATE_CATALOG._create' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

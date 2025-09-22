@@ -43,7 +43,7 @@
             }@else{
               <!-- Dropdown Selector -->
               <select *ngIf="!char.value.options?.[0]?.valueFrom"
-                      class="mb-2 bg-gray-50 dark:bg-secondary-300 border text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:text-gray-100"
+                      class="mb-2 bg-gray-50 dark:bg-secondary-300 border text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:text-gray-100"
                       (change)="changeProfileValue($index, $event)">
                 <option *ngFor="let opt of char.value.options" [value]="opt.value" [selected]="opt.isDefault">
                   {{ opt.value }} <span *ngIf="opt.unitOfMeasure">({{ opt.unitOfMeasure }})</span>
@@ -63,7 +63,7 @@
         </button>
       </div>
     } @else {
-      <div class="p-4 my-2 text-sm text-center text-blue-800 rounded-lg bg-purple-50 dark:bg-secondary-100 dark:text-blue-400" role="alert">
+      <div class="p-4 my-2 text-sm text-center text-purple-800 rounded-lg bg-purple-50 dark:bg-secondary-100 dark:text-purple-400" role="alert">
         <span class="font-medium">{{ 'FORMS.PRICE_PLANS._prod_spec_no_chars' | translate }}</span>
       </div>
     }

@@ -24,7 +24,7 @@
                 [ngClass]="contactForm.get('email')?.touched && contactForm.get('email')?.invalid
                 ? 'border-red-600'
                 : 'border-gray-300 dark:border-secondary-200'"  
-                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                 @if(contactForm.get('email')?.invalid && contactForm.get('email')?.errors?.['maxlength']){
                     <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'CONTACTUS._emaillong' | translate }}</span></p>
                 }
@@ -41,7 +41,7 @@
                 [ngClass]="contactForm.get('name')?.touched && contactForm.get('name')?.invalid
                 ? 'border-red-600'
                 : 'border-gray-300 dark:border-secondary-200'"  
-                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />        
+                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />        
                 @if(contactForm.get('name')?.invalid && contactForm.get('name')?.errors?.['maxlength']){
                     <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'CONTACTUS._fieldlong' | translate }}</span></p>
                 }
@@ -55,7 +55,7 @@
                 [ngClass]="contactForm.get('lastname')?.touched && contactForm.get('lastname')?.invalid
                 ? 'border-red-600'
                 : 'border-gray-300 dark:border-secondary-200'"              
-                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />        
+                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />        
                 @if(contactForm.get('lastname')?.invalid && contactForm.get('lastname')?.errors?.['maxlength']){
                     <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'CONTACTUS._fieldlong' | translate }}</span></p>
                 }
@@ -71,7 +71,7 @@
                 [ngClass]="contactForm.get('organization')?.touched && contactForm.get('organization')?.invalid
                 ? 'border-red-600'
                 : 'border-gray-300 dark:border-secondary-200'"  
-                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />        
+                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />        
                 @if(contactForm.get('organization')?.invalid && contactForm.get('organization')?.errors?.['maxlength']){
                     <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'CONTACTUS._mandatory' | translate }}</span></p>
                 }
@@ -85,7 +85,7 @@
                 [ngClass]="contactForm.get('role')?.touched && contactForm.get('role')?.invalid
                 ? 'border-red-600'
                 : 'border-gray-300 dark:border-secondary-200'"  
-                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />        
+                class="mb-2 bg-gray-50 dark:bg-secondary-300 border dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />        
                 @if(contactForm.get('role')?.invalid && contactForm.get('role')?.errors?.['maxlength']){
                     <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'CONTACTUS._fieldlong' | translate }}</span></p>
                 }

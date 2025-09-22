@@ -3,9 +3,9 @@
     <!-- HEADER SEARCH BAR -->
     <!--<form class="max-w-lg w-1/2 pr-4 z-10">
             <div class="relative">
-                <input type="search" id="search" [formControl]="searchField" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                <input type="search" id="search" [formControl]="searchField" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500 dark:bg-gray-700 dark:border-s-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-purple-500"
                 placeholder="Filter products..." />
-                <button type="submit" (click)="filterInventoryByKeywords()" class="absolute top-0 end-0 inline-flex items-center p-2.5 text-sm font-medium h-full text-white bg-primary-100 rounded-e-lg border border-blue-700 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                <button type="submit" (click)="filterInventoryByKeywords()" class="absolute top-0 end-0 inline-flex items-center p-2.5 text-sm font-medium h-full text-white bg-primary-100 rounded-e-lg border border-purple-700 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>                  
@@ -88,7 +88,7 @@
         <!-- END FILTERS -->
         @if(loading){
             <div role="status" class="w-full h-full flex justify-center align-middle">
-                <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                 </svg>
@@ -108,7 +108,7 @@
                             </div>
                         </div>
                         
-                        <div class="bg-cover bg-right-bottom bg-opacity-25 rounded-lg" style="background-image: url(assets/logos/dome-logo-element-colour.png)">
+                        <div class="bg-cover bg-right-bottom bg-opacity-25 rounded-lg" style="background-image: url(assets/logos/bg_2.png)">
                             <div class="px-5 py-5 bg-secondary-50/95 dark:bg-secondary-100/95 rounded-lg">
                             <div class="h-[30px] overflow-y-hidden overflow-x-hidden">
                             @for (cat of inv.product?.category; track cat.id) {
@@ -132,7 +132,7 @@
                                 </div>
                                 }
                                 <!--@if(inv.status == 'suspended'){
-                                <button type="button" data-tooltip-target="renew-default" (click)="showRenewModal(inv);$event.stopPropagation();" class="flex text-blue-600 border border-blue-600 hover:bg-purple-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-400 font-medium rounded-full text-sm p-2 text-center inline-flex items-center">
+                                <button type="button" data-tooltip-target="renew-default" (click)="showRenewModal(inv);$event.stopPropagation();" class="flex text-purple-600 border border-purple-600 hover:bg-purple-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-purple-400 font-medium rounded-full text-sm p-2 text-center inline-flex items-center">
                                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
                                     </svg>                                                                        
@@ -150,7 +150,7 @@
                                 <div>V: {{inv.product?.version || 'latest'}}</div>
                                 <div class="flex items-center justify-center rounded-lg">
                                 @if(inv.status == 'active'){
-                                    <span class="bg-purple-100 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{inv.status}}</span>
+                                    <span class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{inv.status}}</span>
                                 } @else if(inv.status == 'created') {
                                     <span class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{inv.status}}</span>
                                 } @else if(inv.status == 'suspended') {
@@ -202,7 +202,7 @@
                 }
             } @else {
                 <div role="status" class="w-full h-full flex justify-center align-middle mt-2">
-                <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                 </svg>
@@ -434,7 +434,7 @@
                                         <div class="border border-gray-200 rounded-lg shadow bg-white dark:bg-secondary-200 dark:border-gray-800 shadow-md p-8 h-full">
                                             <h3 class="text-2xl font-bold mb-4 dark:text-white">{{char.name}}</h3>
                                             <div class="flex items-center pl-4">
-                                                <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 dark:bg-gray-600 dark:border-gray-800 rounded-full focus:ring-blue-500 focus:ring-2">
+                                                <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 dark:bg-gray-600 dark:border-gray-800 rounded-full focus:ring-purple-500 focus:ring-2">
                                                 @if(char.value){
                                                     <label for="disabled-checked-checkbox" class="ms-2 text-sm font-medium text-gray-700 dark:text-gray-200 dark:bg-secondary-200 dark:border-gray-800 text-wrap break-all">{{char.value}} ({{char.unitOfMeasure}})</label>
                                                 } @else {
@@ -519,7 +519,7 @@
                   <button (click)="renewModal=false;$event.stopPropagation();" type="button" class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
                     {{ 'PRODUCT_INVENTORY._cancel' | translate }}
                   </button>
-                  <button (click)="renewProduct(prodToRenew.id)" type="submit" class="py-2 px-3 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-blue-900">
+                  <button (click)="renewProduct(prodToRenew.id)" type="submit" class="py-2 px-3 text-sm font-medium text-center text-white bg-purple-600 rounded-lg hover:bg-purple-700 focus:ring-4 focus:outline-none focus:ring-purple-300 dark:bg-purple-500 dark:hover:bg-purple-600 dark:focus:ring-purple-900">
                     {{ 'PRODUCT_INVENTORY._yes_sure' | translate }}
                   </button>
               </div>
