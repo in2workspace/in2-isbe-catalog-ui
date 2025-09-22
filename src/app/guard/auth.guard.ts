@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
     const requiredRoles = route.data['roles'] as Array<string>;
     let userRoles: string | any[] = [];
 
-    if(JSON.stringify(aux) != '{}' /*&& (((aux.expire - moment().unix())-4) > 0)*/) {
+    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as == aux.id){
         userRoles.push('individual')
         for(let i=0; i < aux.roles.length; i++){

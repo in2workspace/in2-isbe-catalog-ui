@@ -52,7 +52,7 @@ export class UserProfileComponent implements OnInit{
 
   initPartyInfo(){
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' /*&& (((aux.expire - moment().unix())-4) > 0)*/) {
+    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       this.token=aux.token;
       this.email=aux.email;
       if(aux.logged_as==aux.id){

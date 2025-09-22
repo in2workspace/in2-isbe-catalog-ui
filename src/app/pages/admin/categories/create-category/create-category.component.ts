@@ -91,7 +91,7 @@ export class CreateCategoryComponent implements OnInit {
 
   initPartyInfo(){
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' /*&& (((aux.expire - moment().unix())-4) > 0)*/) {
+    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
         this.partyId = aux.partyId;
       } else {

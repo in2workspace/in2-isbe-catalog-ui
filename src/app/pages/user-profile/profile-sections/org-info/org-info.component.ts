@@ -141,7 +141,7 @@ export class OrgInfoComponent {
 
   initPartyInfo(){
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' /*&& (((aux.expire - moment().unix())-4) > 0)*/) {
+    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
       this.partyId = loggedOrg.partyId;
 

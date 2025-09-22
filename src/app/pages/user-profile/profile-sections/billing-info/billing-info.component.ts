@@ -99,7 +99,7 @@ export class BillingInfoComponent implements OnInit{
 
   initPartyInfo(){
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' /*&& (((aux.expire - moment().unix())-4) > 0)*/) {
+    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if (aux.logged_as !== aux.id) {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
         this.partyId = loggedOrg.partyId;

@@ -136,7 +136,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     console.log(this.defaultLang)
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     console.log('aux: ' + aux)
-    if(JSON.stringify(aux) != '{}' /*&& (((aux.expire - moment().unix())-4) > 0)*/) {
+    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       this.loginInfo=aux;
       this.is_logged=true;
       this.orgs=aux.organizations;
@@ -186,7 +186,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'LoginProcess') {
         let aux = this.localStorage.getObject('login_items') as LoginInfo;
-        if(JSON.stringify(aux) != '{}' /*&& (((aux.expire - moment().unix())-4) > 0)*/) {
+        if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
           this.loginInfo=aux;
           this.is_logged=true;
           this.cdr.detectChanges();
