@@ -110,9 +110,7 @@ export class ProductDetailsComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
     private api: ApiServiceService,
-    private priceService: PriceServiceService,
     private router: Router,
-    private elementRef: ElementRef,
     private localStorage: LocalStorageService,
     private cartService: ShoppingCartServiceService,
     private eventMessage: EventMessageService,
@@ -210,8 +208,8 @@ export class ProductDetailsComponent implements OnInit {
         let prodPrices: any[] | undefined= prod.productOfferingPrice;
         let prices: any[]=[];
         if(prodPrices!== undefined){
-          for(let j=0; j < prodPrices.length; j++){
-            this.api.getProductPrice(prodPrices[j].id).then(price => {
+          for(const element of prodPrices){
+            this.api.getProductPrice(element.id).then(price => {
               prices.push(price);
               console.log(price)
               if(price.priceType == 'custom'){
@@ -227,43 +225,25 @@ export class ProductDetailsComponent implements OnInit {
             return char.name != 'Compliance:VC' && char.name != 'Compliance:SelfAtt'
           })
 
-          console.log('-- prod spec')
-          console.log(this.prodSpec.productSpecCharacteristic)
 
-          for(let i=0; i<certifications.length; i++){
+          for(const element of certifications){
             //Now we only show the certifications that are attached when creating/updating the product
             let compProf = this.prodSpec.productSpecCharacteristic.find((p => {
-              return p.name === certifications[i].name
+              return p.name === element.name
             }));
             if(compProf){
-              let cert:any = certifications[i]
+              let cert:any = element
               cert.href = compProf.productSpecCharacteristicValue?.at(0)?.value
-              this.complianceProf.push(certifications[i])
+              this.complianceProf.push(element)
             }
             //Deleting certifications out of characteristics' array
-            const index = this.prodChars.findIndex(item => item.name === certifications[i].name);
+            const index = this.prodChars.findIndex(item => item.name === element.name);
             if(index!==-1){
               this.prodChars.splice(index, 1);
             }
           }
         }
-        if(this.prodSpec.serviceSpecification != undefined){
-          for(let j=0; j < this.prodSpec.serviceSpecification.length; j++){
-            this.api.getServiceSpec(this.prodSpec.serviceSpecification[j].id).then(serv => {
-              this.serviceSpecs.push(serv);
-            })
-          }
-        }
-        if(this.prodSpec.resourceSpecification != undefined){
-          for(let j=0; j < this.prodSpec.resourceSpecification.length; j++){
-            this.api.getResourceSpec(this.prodSpec.resourceSpecification[j].id).then(res => {
-              this.resourceSpecs.push(res);
-            })
-          }
-        }
 
-        console.log('serv specs')
-        console.log(this.serviceSpecs)
         this.productOff={
           id: prod.id,
           name: prod.name,

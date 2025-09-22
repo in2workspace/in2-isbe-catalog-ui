@@ -22,28 +22,32 @@
                 <div class="flex flex-col">
                   <p data-cy="vServices" class="mb-2 text-left text-lg font-normal lg:text-xl text-secondary-50 h-fit">{{services.length}} verified services</p>
                   @for (serv of services; track serv; let pos = $index) {
-                    <a data-cy="nameServices"  *ngIf="currentIndexServ === pos"
-                       [style.display]="'-webkit-box'"
-                       [style.webkitBoxOrient]="'vertical'"
-                       [style.webkitLineClamp]="'2'"
-                       class="text-md text-wrap break-all line-clamp-2 mb-2 font-medium block items-center 
-                              px-2.5 py-0.5 rounded-md text-primary-100 bg-secondary-50 w-fit animate-in">
-                      {{ serv }}
-                    </a>
+                    @if(currentIndexServ === pos){                    
+                      <a data-cy="nameServices"
+                        [style.display]="'-webkit-box'"
+                        [style.webkitBoxOrient]="'vertical'"
+                        [style.webkitLineClamp]="'2'"
+                        class="text-md text-wrap break-all line-clamp-2 mb-2 font-medium block items-center 
+                                px-2.5 py-0.5 rounded-md text-primary-100 bg-secondary-50 w-fit animate-in">
+                        {{ serv }}
+                      </a>
+                    }
                   }
                   
                 </div>
                 <div class="flex flex-col">
                   <p data-cy="rPublishers" class="mb-2 text-left text-lg font-normal lg:text-xl text-secondary-50">{{publishers.length}} registered providers</p>
                   @for (pub of publishers; track pub; let pos = $index) {
-                    <a data-cy="nameOrgs" *ngIf="currentIndexPub === pos"
-                    [style.display]="'-webkit-box'"
-                    [style.webkitBoxOrient]="'vertical'"
-                    [style.webkitLineClamp]="'2'"
-                       class="text-md text-wrap break-all line-clamp-2 font-medium block items-center 
-                              px-2.5 py-0.5 rounded-md text-primary-100 bg-secondary-50 w-fit animate-in">
-                      {{ pub }}
-                    </a>
+                    @if(currentIndexPub === pos){
+                      <a data-cy="nameOrgs"
+                      [style.display]="'-webkit-box'"
+                      [style.webkitBoxOrient]="'vertical'"
+                      [style.webkitLineClamp]="'2'"
+                        class="text-md text-wrap break-all line-clamp-2 font-medium block items-center 
+                                px-2.5 py-0.5 rounded-md text-primary-100 bg-secondary-50 w-fit animate-in">
+                        {{ pub }}
+                      </a>
+                    }
                   }
                   
                 </div>

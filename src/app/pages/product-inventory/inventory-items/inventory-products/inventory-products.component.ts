@@ -1,12 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener, Input } from '@angular/core';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { ProductInventoryServiceService } from 'src/app/services/product-inventory-service.service';
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import { ProductOrderService } from 'src/app/services/product-order-service.service';
-import { PriceServiceService } from 'src/app/services/price-service.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 import {EventMessageService} from "src/app/services/event-message.service";
-import { FastAverageColor } from 'fast-average-color';
 import {components} from "src/app/models/product-catalog";
 import { Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
@@ -22,8 +19,6 @@ import { NgClass } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { BadgeComponent } from 'src/app/shared/badge/badge.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { PricePlanDrawerComponent } from 'src/app/shared/price-plan-drawer/price-plan-drawer.component';
-
 @Component({
     selector: 'inventory-products',
     templateUrl: './inventory-products.component.html',
@@ -69,15 +64,13 @@ export class InventoryProductsComponent implements OnInit {
   checkFrom:boolean=true;
 
   constructor(
-    private inventoryService: ProductInventoryServiceService,
-    private localStorage: LocalStorageService,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private priceService: PriceServiceService,
-    private router: Router,
-    private orderService: ProductOrderService,
-    private eventMessage: EventMessageService,
-    private paginationService: PaginationService
+    private readonly inventoryService: ProductInventoryServiceService,
+    private readonly localStorage: LocalStorageService,
+    private readonly api: ApiServiceService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly router: Router,
+    private readonly eventMessage: EventMessageService,
+    private readonly paginationService: PaginationService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -97,7 +90,7 @@ export class InventoryProductsComponent implements OnInit {
     this.loading = true;
 
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
+    if(JSON.stringify(aux) != '{}' &&  (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
         this.partyId = aux.partyId;
       } else {
@@ -109,8 +102,6 @@ export class InventoryProductsComponent implements OnInit {
     let input = document.querySelector('[type=search]')
     if(input!=undefined){
       input.addEventListener('input', e => {
-        // Easy way to get the value of the element who trigger the current `e` event
-        console.log(`Input updated`)
         if(this.searchField.value==''){
           this.keywordFilter=undefined;
           this.getInventory(false);
@@ -122,11 +113,11 @@ export class InventoryProductsComponent implements OnInit {
 
   @HostListener('document:click')
   onClick() {
-    if(this.unsubscribeModal==true){
+    if(this.unsubscribeModal){
       this.unsubscribeModal=false;
       this.cdr.detectChanges();
     }
-    if(this.prodToRenew==true){
+    if(this.prodToRenew){
       this.prodToRenew=false;
       this.cdr.detectChanges();
     }   
@@ -154,7 +145,7 @@ export class InventoryProductsComponent implements OnInit {
   }
 
   async getInventory(next:boolean){
-    if(next == false){
+    if(!next){
       this.loading = true;
     }
 
