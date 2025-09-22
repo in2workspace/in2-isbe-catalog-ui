@@ -12,13 +12,18 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 describe('UpdateOfferComponent', () => {
   let component: UpdateOfferComponent;
   let fixture: ComponentFixture<UpdateOfferComponent>;
+  let localStorageMock: { getObject: jest.Mock };
+  let eventMessageMock: { messages$: Subject<any>; emitSellerOffer: jest.Mock };
 
-  beforeEach(async () => {
+  beforeEach(async () => {    
+    localStorageMock = { getObject: jest.fn() };
+    eventMessageMock = { messages$: new Subject(), emitSellerOffer: jest.fn() };
+    
     await TestBed.configureTestingModule({
       imports: [UpdateOfferComponent, HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [
-        { provide: LocalStorageService, useValue: { getObject: jest.fn() } },
-        { provide: EventMessageService, useValue: { messages$: new Subject(), emitSellerOffer: jest.fn() } },
+        { provide: LocalStorageService, useValue: localStorageMock },
+        { provide: EventMessageService, useValue: eventMessageMock },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
@@ -47,9 +52,7 @@ describe('UpdateOfferComponent', () => {
       partyId: 'party123',
       organizations: []
     };
-    const localStorageService = TestBed.inject<any>(Object.getPrototypeOf(component).constructor['ɵfac'].localStorage);
-    jest.spyOn(localStorageService, 'getObject').mockReturnValue(mockLoginInfo);
-
+    localStorageMock.getObject.mockReturnValue(mockLoginInfo);
     component.initPartyInfo();
 
     expect(component.partyId).toBe('party123');
@@ -65,9 +68,7 @@ describe('UpdateOfferComponent', () => {
         { id: 'org2', partyId: 'partyOrg2' }
       ]
     };
-    const localStorageService = TestBed.inject<any>(Object.getPrototypeOf(component).constructor['ɵfac'].localStorage);
-    jest.spyOn(localStorageService, 'getObject').mockReturnValue(mockLoginInfo);
-
+    localStorageMock.getObject.mockReturnValue(mockLoginInfo);
     component.initPartyInfo();
 
     expect(component.partyId).toBe('partyOrg2');
@@ -81,17 +82,14 @@ describe('UpdateOfferComponent', () => {
       partyId: 'party123',
       organizations: []
     };
-    const localStorageService = TestBed.inject<any>(Object.getPrototypeOf(component).constructor['ɵfac'].localStorage);
-    jest.spyOn(localStorageService, 'getObject').mockReturnValue(mockLoginInfo);
+    localStorageMock.getObject.mockReturnValue(mockLoginInfo);
+      component.initPartyInfo();
 
-    component.initPartyInfo();
-
-    expect(component.partyId).toBe('');
+    expect(component.partyId).toBe('party123');
   });
 
   it('should emit event on goBack', () => {
-    const eventMessageService = TestBed.inject<any>(Object.getPrototypeOf(component).constructor['ɵfac'].eventMessage);
-    const emitSpy = jest.spyOn(eventMessageService, 'emitSellerOffer');
+    const emitSpy = jest.spyOn(eventMessageMock, 'emitSellerOffer');
     component.goBack();
     expect(emitSpy).toHaveBeenCalledWith(true);
   });

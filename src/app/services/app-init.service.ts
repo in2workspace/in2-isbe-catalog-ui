@@ -57,6 +57,7 @@ export class AppInitService {
           verifierQRCodePath: '/oidc/authorize',
           requestUri: "https://verifier.dome-marketplace-sbx.org/oid4vp/auth-request"
       };   
+      environment.ISBE_CATALOGUE = true;
       resolve(config);
     });
   }

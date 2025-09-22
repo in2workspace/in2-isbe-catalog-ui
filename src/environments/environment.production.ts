@@ -1,6 +1,7 @@
 export const environment = {
     BASE_URL: '',
     PAYMENT_URL: 'https://payment.dome-marketplace-sbx.org',
+    ISBE_CATALOGUE: true,
     LEGACY_PREFIX: '/ux',
     PRODUCT_CATALOG: '/catalog',
     SERVICE: '/service',

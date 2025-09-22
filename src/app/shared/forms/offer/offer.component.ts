@@ -19,6 +19,7 @@ import {FormChangeState, PricePlanChangeState} from "../../../models/interfaces"
 import {Subscription} from "rxjs";
 import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
+import { environment } from 'src/environments/environment';
 
 type ProductOffering_Create = components["schemas"]["ProductOffering_Create"];
 type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
@@ -52,14 +53,8 @@ export class OfferComponent implements OnInit, OnDestroy{
   productOfferForm: FormGroup;
   currentStep = 0;
   highestStep = 0;
-  steps = [
-    'General Info',
-    'Product Specification',
-    'Catalogue',
-    'Category',
-    'Price Plans',
-    'Summary'
-  ];
+  
+  steps: string[] = [];
   isFormValid = false;
   selectedProdSpec: any;
   pricePlans:any = [];
@@ -68,6 +63,8 @@ export class OfferComponent implements OnInit, OnDestroy{
   bundleChecked:boolean=false;
   offersBundle:any[]=[];
   loadingData:boolean=false;
+  
+  isSimpleFlow: boolean = environment.ISBE_CATALOGUE;
 
   offerToCreate:ProductOffering_Create | undefined;
 
@@ -79,16 +76,46 @@ export class OfferComponent implements OnInit, OnDestroy{
               private eventMessage: EventMessageService,
               private fb: FormBuilder) {
 
-    this.productOfferForm = this.fb.group({
-      generalInfo: this.fb.group({}),
-      prodSpec: new FormControl(null, [Validators.required]),
-      catalogue: new FormControl(null, [Validators.required]),
-      category: new FormControl([]),
-      license: this.fb.group({}),
-      pricePlans: new FormControl([]),
-      procurementMode: this.fb.group({}),
-      replicationMode: this.fb.group({})
-    });
+    if (this.isSimpleFlow) {
+      this.steps = [
+        'General Info',
+        'Product Specification',
+        'Catalogue',
+        'Category',
+        'Price Plans',
+        'Summary'
+      ];
+      this.productOfferForm = this.fb.group({
+        generalInfo: this.fb.group({}),
+        prodSpec: new FormControl(null, [Validators.required]),
+        catalogue: new FormControl(null, [Validators.required]),
+        category: new FormControl([]),
+        pricePlans: new FormControl([])
+      });
+    } else {
+      this.steps = [
+        'General Info',
+        'Product Specification',
+        'Catalogue',
+        'Category',
+        'License',
+        'Price Plans',
+        'Procurement Mode',
+        'Summary'
+      ];
+      this.productOfferForm = this.fb.group({
+        generalInfo: this.fb.group({}),
+        prodSpec: new FormControl(null, [Validators.required]),
+        catalogue: new FormControl(null, [Validators.required]),
+        category: new FormControl([]),
+        license: this.fb.group({}),
+        pricePlans: new FormControl([]),
+        procurementMode: this.fb.group({}),
+        replicationMode: this.fb.group({})
+      });
+    }
+
+    
 
     // Subscribe to form validation changes
     this.productOfferForm.statusChanges.subscribe(status => {
@@ -99,18 +126,14 @@ export class OfferComponent implements OnInit, OnDestroy{
     this.formSubscription = this.eventMessage.messages$.subscribe(message => {
       if (message.type === 'SubformChange') {
         const changeState = message.value as FormChangeState;
-        console.log('Received subform change:', changeState);
         this.handleSubformChange(changeState);
       }
     });
   }
 
   handleSubformChange(change: FormChangeState) {
-    console.log('📝 Subform change received:', change);
     this.formChanges[change.subformType] = change;
     this.hasChanges = Object.keys(this.formChanges).length > 0;
-    console.log('📝 Has changes:', this.hasChanges);
-    console.log(this.formChanges[change.subformType])
   }
 
   ngOnDestroy() {
@@ -136,27 +159,29 @@ export class OfferComponent implements OnInit, OnDestroy{
   }
 
   validateCurrentStep(): boolean {
-    switch (this.currentStep) {
-      case 0: // General Info
+    const stepName = this.steps[this.currentStep];
+    switch (stepName) {
+      case 'General Info':
         return this.productOfferForm.get('generalInfo')?.valid || false;
-      case 1: // Product Specification
+      case 'Product Specification':
         return !!this.productOfferForm.get('prodSpec')?.value;
-      case 2: // Catalogue
+      case 'Catalogue':
         return !!this.productOfferForm.get('catalogue')?.value;
-      case 3: // Category
-        return true; // Las categorías no son obligatorias
-      case 4: // License
-        return this.productOfferForm.get('license')?.valid || false;
-      case 5: // Price Plans
+      case 'Category':
         return true;
-      case 6: // Procurement Mode
+      case 'License':
+        return this.productOfferForm.get('license')?.valid || false;
+      case 'Price Plans':
+        return true;
+      case 'Procurement Mode':
         return this.productOfferForm.get('procurementMode')?.valid || false;
-      /*case 7: // Replication & Visibility
-        return this.productOfferForm.get('replicationMode')?.valid || false;*/
+      case 'Summary':
+        return true;
       default:
         return true;
     }
   }
+
 
   canNavigate(index: number) {
     if(this.formType == 'create'){
@@ -175,10 +200,7 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   submitForm() {
     if (this.formType === 'update') {
-      this.eventMessage.emitUpdateOffer(true);
-      console.log('🔄 Starting offer update process...');
-      console.log('📝 Current form changes:', this.formChanges);
-      
+      this.eventMessage.emitUpdateOffer(true);      
       // Aquí irá la lógica de actualización
       // Por ahora solo mostramos los cambios
       this.updateOffer();
@@ -191,17 +213,30 @@ export class OfferComponent implements OnInit, OnDestroy{
   async ngOnInit() {
     if (this.formType === 'update' && this.offer) {
       this.loadingData=true;
-      this.steps = [
-        'General Info',
-        'Product Specification',
-        //'Catalogue',
-        'Category',
-        'License',
-        'Price Plans',
-        'Procurement Mode',
-        //'Replication & Visibility',
-        'Summary'
-      ];
+      if (this.isSimpleFlow) {
+        this.steps = [
+          'General Info',
+          'Product Specification',
+          'Category',
+          'Price Plans',
+          'Summary'
+        ];
+        
+      } else {
+        this.steps = [
+          'General Info',
+          'Product Specification',
+          //'Catalogue',
+          'Category',
+          'License',
+          'Price Plans',
+          'Procurement Mode',
+          //'Replication & Visibility',
+          'Summary'
+        ];
+        
+      }
+      
       await this.loadOfferData();
       this.loadingData=false;
     }
@@ -248,24 +283,6 @@ export class OfferComponent implements OnInit, OnDestroy{
           description: this.offer.productOfferingTerm[0].description
         }
       });
-
-      //PROCUREMENT
-      /*console.log('Checking procurement terms...');
-      this.offer.productOfferingTerm.forEach((term: any) => {
-        console.log('Checking term:', term);
-        if(term.name == 'procurement') {
-          console.log('Found procurement term:', term);
-          const procurementValue = {
-            id: term.description,
-            name: term.description
-          };
-          console.log('Setting procurement value:', procurementValue);
-          this.productOfferForm.patchValue({
-            procurementMode: procurementValue
-          });
-          console.log('Form value after patch:', this.productOfferForm.value);
-        }
-      })*/
     }
 
     // Price Plans
@@ -296,9 +313,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       if(pricePlan.priceType){
         priceInfo.priceType=pricePlan.priceType;
       }
-      /*if(pricePlan.prodSpecCharValueUse){
-        priceInfo.selectedCharacteristic=pricePlan.prodSpecCharValueUse;
-      }*/
+      
       if(pricePlan?.price?.unit){
         priceInfo.currency=pricePlan?.price?.unit
       }
@@ -816,73 +831,112 @@ export class OfferComponent implements OnInit, OnDestroy{
   }
 
   saveOfferInfo(): void {
-    const formValue = this.productOfferForm.value;
+    const v = this.productOfferForm.getRawValue?.() ?? this.productOfferForm.value;
 
-    const categories = formValue.category.map((cat: any) => ({
-      id: cat.id,
-      href: cat.id
-    }));
+    if (!v?.generalInfo?.name) {
+      this.errorMessage = 'Falta la información general (nombre).';
+      this.showError = true;
+      setTimeout(() => (this.showError = false), 3000);
+      return;
+    }
+    if (this.formType === 'create' && !this.bundleChecked && !v?.prodSpec?.id) {
+      this.errorMessage = 'Debes seleccionar una Product Specification.';
+      this.showError = true;
+      setTimeout(() => (this.showError = false), 3000);
+      return;
+    }
+    if (this.formType === 'create' && !v?.catalogue?.id) {
+      this.errorMessage = 'Debes seleccionar un Catálogo para crear la oferta.';
+      this.showError = true;
+      setTimeout(() => (this.showError = false), 3000);
+      return;
+    }
 
-    const prices = formValue.pricePlans.map((plan: any) => ({
-      id: plan.id,
-      href: plan.id
-    }));
+    const categories = Array.isArray(v?.category)
+      ? v.category
+          .filter((cat: any) => cat?.id)
+          .map((cat: any) => ({ id: cat.id, href: cat.id }))
+      : [];
 
-    const generalInfo = formValue.generalInfo;
-    const lifecycleStatus = this.formType === 'update' ? generalInfo.status : 'Active';
+    const prices = Array.isArray(v?.pricePlans)
+      ? v.pricePlans
+          .filter((plan: any) => !!plan?.id)
+          .map((plan: any) => ({ id: plan.id, href: plan.id }))
+      : [];
+
+    const generalInfo = v?.generalInfo ?? {};
+    const lifecycleStatus =
+      this.formType === 'update'
+        ? generalInfo?.status ?? this.offer?.lifecycleStatus ?? 'Active'
+        : 'Active';
+
+    const terms: any[] = [];
+
+    const licenseName = v?.license?.treatment ?? '';
+    const licenseDesc = v?.license?.description ?? '';
+    terms.push({ name: licenseName, description: licenseDesc });
+
+    const procurementValue = v?.procurementMode?.mode ?? v?.procurementMode?.id ?? '';
+    if (procurementValue) {
+      terms.push({ name: 'procurement', description: procurementValue });
+    }
+
+    const licenseTerm = terms[0] ?? { name: '', description: '' };
+    const otherTerms = terms.slice(1).filter(
+      (t) =>
+        typeof t?.name === 'string' &&
+        t.name.trim() !== '' &&
+        typeof t?.description === 'string' &&
+        t.description.trim() !== ''
+    );
+    const productOfferingTerm = [licenseTerm, ...otherTerms];
 
     const offer: any = {
-      name: generalInfo.name,
-      description: generalInfo.description || '',
+      name: generalInfo?.name,
+      description: generalInfo?.description || '',
       lifecycleStatus,
       isBundle: this.bundleChecked,
-      bundledProductOffering: this.offersBundle,
+      bundledProductOffering: Array.isArray(this.offersBundle) ? this.offersBundle : [],
       place: [],
-      version: generalInfo.version,
+      version: generalInfo?.version,
       category: categories,
       productOfferingPrice: prices,
       validFor: {
         startDateTime: new Date().toISOString()
       },
-      productOfferingTerm: [
-        {
-          name: formValue.license.treatment || '',
-          description: formValue.license.description || ''
-        },
-        {
-          name: 'procurement',
-          description: formValue.procurementMode.mode
-        }
-      ]
+      productOfferingTerm
     };
 
-    if (!this.bundleChecked && this.formType === 'create') {
+    if (!this.bundleChecked && this.formType === 'create' && v?.prodSpec?.id) {
       offer.productSpecification = {
-        id: formValue.prodSpec.id,
-        href: formValue.prodSpec.href
+        id: v.prodSpec.id,
+        href: v.prodSpec.href ?? v.prodSpec.id
       };
     }
 
     this.offerToCreate = offer;
 
-    const request$ = this.formType === 'create'
-      ? this.api.postProductOffering(offer, formValue.catalogue.id)
-      : this.api.updateProductOffering(offer, this.offer.id);
+    const request$ =
+      this.formType === 'create'
+        ? this.api.postProductOffering(offer, v?.catalogue?.id)
+        : this.api.updateProductOffering(offer, this.offer.id);
 
     request$.subscribe({
       next: (data) => {
-        console.log('product offer created:');
-        console.log(data);
+        console.log('product offer saved/updated:', data);
         this.goBack();
       },
       error: (error) => {
         console.error('Error during offer save/update:', error);
-        this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : 'An error occurred while saving the offer!';
+        this.errorMessage = error?.error?.error
+          ? 'Error: ' + error.error.error
+          : 'An error occurred while saving the offer!';
         this.showError = true;
         setTimeout(() => (this.showError = false), 3000);
       }
     });
   }
+
 
   goBack() {
     this.eventMessage.emitSellerOffer(true);

@@ -4,6 +4,7 @@ export const environment = {
     PAYMENT_URL: 'https://payment.dome-marketplace-sbx.org',
     //API_PORT: 8004,
     //API_PORT: 443,
+    ISBE_CATALOGUE: true,
     LEGACY_PREFIX: '',
     PRODUCT_CATALOG: '/catalog',
     SERVICE: '/service',

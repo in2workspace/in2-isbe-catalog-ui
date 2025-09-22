@@ -22,7 +22,7 @@ export class RequestInterceptor implements HttpInterceptor {
   
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         let aux = this.localStorage.getObject('login_items') as LoginInfo;
-        if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
+        if(JSON.stringify(aux) != '{}' /*&& (((aux.expire - moment().unix())-4) > 0)*/) {
             if(aux.logged_as != aux.id){
                 let modifiedRequest = request.clone({
                     setHeaders: {

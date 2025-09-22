@@ -18,7 +18,8 @@ export class ProductSpecServiceService {
 
   getProdSpecByUser(page:any,status:any[],partyId:any,sort?:any,isBundle?:any) {
     let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}?limit=${ProductSpecServiceService.PROD_SPEC_LIMIT}&offset=${page}&relatedParty.id=${partyId}`;    
-
+    //TO dO: delete
+    //let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}?limit=${ProductSpecServiceService.PROD_SPEC_LIMIT}&offset=${page}`;  
     if(sort!=undefined){
       url=url+'&sort='+sort
     }

@@ -82,7 +82,7 @@ export class CatalogueComponent implements ControlValueAccessor, OnInit, AfterVi
     let options = {
       "keywords": undefined,
       "filters": ['Active','Launched'],
-      "partyId": this.partyId
+      "partyId": this.partyId //TO DO: delete comment
     }
 
     this.paginationService.getItemsPaginated(this.catalogPage, this.CATALOG_LIMIT, next, this.catalogs,this.nextCatalogs, options,

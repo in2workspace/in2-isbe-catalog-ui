@@ -210,6 +210,8 @@ export class ApiServiceService {
 
   getCatalogsByUser(page:any,filter:any,status:any[],partyId:any) {
     let url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&relatedParty.id=${partyId}`;
+    //TO DO: delete
+    //let url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}`;
     let lifeStatus=''
     if(status)
     if(status.length>0){
