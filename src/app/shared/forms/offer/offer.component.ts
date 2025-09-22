@@ -57,10 +57,7 @@ export class OfferComponent implements OnInit, OnDestroy{
     'Product Specification',
     'Catalogue',
     'Category',
-    'License',
     'Price Plans',
-    'Procurement Mode',
-    //'Replication & Visibility',
     'Summary'
   ];
   isFormValid = false;
