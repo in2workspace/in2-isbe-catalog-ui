@@ -193,9 +193,9 @@ export const local_items = {
     // Mocks
     //TODO: update urls according to environment
     //cy.intercept( {method:'GET', url: 'http://proxy.docker:8004/stats'}, init_stat).as('stats')
-    //cy.intercept( {method: 'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5/productOffering?*'}, product_offering).as('productOffering')
+    //cy.intercept( {method: 'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4/productOffering?*'}, product_offering).as('productOffering')
     //cy.intercept( {method: 'GET', url: 'http://proxy.docker:8004/config'}, init_config).as('config')
-    //cy.intercept( {method:'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v5/category?*'}, category_launched).as('category')
+    //cy.intercept( {method:'GET', url: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4/category?*'}, category_launched).as('category')
     // Verify mocks are called 1 time
     cy.visit('/', {onBeforeLoad(win) {
         win.localStorage.setItem('color-theme', 'dark');
