@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 import { UpdateOfferComponent } from './update-offer.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TranslateModule } from '@ngx-translate/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Subject } from 'rxjs';
+import { EventMessageService } from 'src/app/services/event-message.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 
 describe('UpdateOfferComponent', () => {
@@ -9,9 +15,20 @@ describe('UpdateOfferComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [UpdateOfferComponent]
-})
+      imports: [UpdateOfferComponent, HttpClientTestingModule, TranslateModule.forRoot()],
+      providers: [
+        { provide: LocalStorageService, useValue: { getObject: jest.fn() } },
+        { provide: EventMessageService, useValue: { messages$: new Subject(), emitSellerOffer: jest.fn() } },
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA]
+    })
+    .overrideComponent(UpdateOfferComponent, {
+      set: { imports: [TranslateModule] },
+    })
     .compileComponents();
+
+    const ls = TestBed.inject(LocalStorageService) as any;
+    ls.getObject.mockReturnValue({});
     
     fixture = TestBed.createComponent(UpdateOfferComponent);
     component = fixture.componentInstance;
