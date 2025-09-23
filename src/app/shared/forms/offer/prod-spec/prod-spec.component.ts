@@ -110,7 +110,7 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
     let options = {
       "filters": ['Active','Launched'],
-      "partyId": this.partyId //TO DO: delete comment
+      "partyId": this.partyId
     }
 
     this.paginationService.getItemsPaginated(this.prodSpecPage, this.PROD_SPEC_LIMIT, next, this.prodSpecs,this.nextProdSpecs, options,

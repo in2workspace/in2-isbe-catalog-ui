@@ -356,9 +356,9 @@ export class OfferComponent implements OnInit, OnDestroy{
       console.log('price components---')
       console.log(relatedPrices)
       //if(pricePlan.bundledPopRelationship){
-      if(pricePlan.isBundle==true){  
-      for(let i=0;i<pricePlan.bundledPopRelationship.length;i++){
-        let data = await this.api.getOfferingPrice(pricePlan.bundledPopRelationship[i].id)
+      if(pricePlan.isBundle){  
+      for(const element of pricePlan.bundledPopRelationship){
+        let data = await this.api.getOfferingPrice(element.id)
           let priceComp:any = {
             id:data.id,
             href:data.href,
@@ -471,8 +471,6 @@ export class OfferComponent implements OnInit, OnDestroy{
   }
 
   private async createPriceComponent(component: any, currency: string): Promise<any> {
-    console.log('component format')
-    console.log(component)
     let priceComp: ProductOfferingPrice = {
       name: component.name,
       description: component.description ?? component?.newValue.description,
@@ -526,10 +524,6 @@ export class OfferComponent implements OnInit, OnDestroy{
   }
 
   private async updatePriceComponent(component: any, currency: string): Promise<any> {
-    console.log('update function')
-    console.log(component)
-    console.log(currency)
-    console.log('------')
     let priceComp: ProductOfferingPrice = {
       name: component.newValue.name,
       description: component.newValue.description,
@@ -544,7 +538,6 @@ export class OfferComponent implements OnInit, OnDestroy{
     }
 
     if (component.newValue.priceType === 'usage') {
-      console.log(component.newValue)
       priceComp.unitOfMeasure = { 
         amount: 1,
         units: component.newValue.usageUnit     
@@ -554,8 +547,6 @@ export class OfferComponent implements OnInit, OnDestroy{
       priceComp['@schemaLocation'] = "https://raw.githubusercontent.com/laraminones/tmf-new-schemas/main/UsageSpecId.json";
       (priceComp as any).usagespecid = component.newValue.usageSpecId;
 
-      console.log('----- here')
-      console.log(priceComp)
     }
 
     if (component.newValue.selectedCharacteristic) {
@@ -582,8 +573,6 @@ export class OfferComponent implements OnInit, OnDestroy{
       const discount = await this.createPriceAlteration(discountMock, currency);
       priceComp.popRelationship = [{ id: discount.id, href: discount.id, name: discount.name }];
     }
-    console.log('update price comp')
-    console.log(priceComp)
     const updated = await lastValueFrom(this.api.updateOfferingPrice(priceComp,component.id));
     return { id: updated.id, href: updated.id, name: updated.name };
   }
@@ -667,9 +656,6 @@ export class OfferComponent implements OnInit, OnDestroy{
       price['@schemaLocation'] = "https://raw.githubusercontent.com/laraminones/tmf-new-schemas/main/UsageSpecId.json";
       (price as any).usagespecid = comp.usageSpecId ?? plan?.newValue?.priceComponents[0].usageSpecId;
 
-
-      console.log('----- here')
-      console.log(price)
     }
 
     if (comp?.discountValue != null) {
@@ -705,10 +691,6 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   async updatePricePlan(plan: any, compRel: any[], modifiedFields: string[]): Promise<ProductOfferingPrice> {
 
-    console.log('plan info')
-    console.log(plan)
-    console.log(plan.id)
-    console.log(compRel)
     let price : ProductOfferingPrice = {
       name: plan.newValue.name,
       isBundle: true,
@@ -737,9 +719,6 @@ export class OfferComponent implements OnInit, OnDestroy{
         price['@baseType'] = "ProductOfferingPrice";
         price['@schemaLocation'] = "https://raw.githubusercontent.com/laraminones/tmf-new-schemas/main/UsageSpecId.json";
         (price as any).usagespecid = plan?.newValue?.priceComponents[0].usageSpecId;
-
-        console.log('----- here')
-        console.log(price)
       }
   
       if (plan.newValue.priceComponents[0]?.selectedCharacteristic) {
@@ -747,9 +726,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       }
 
       if(plan.oldValue?.priceComponents && plan.oldValue?.priceComponents.length>1){
-        console.log('tenia bundle pero ahora undefined')
         price.bundledPopRelationship=undefined
-        console.log(price)
       }
 
       if(plan.newValue.priceComponents[0].prodSpecCharValueUse != null){
@@ -760,7 +737,6 @@ export class OfferComponent implements OnInit, OnDestroy{
       }
   
       if (plan.newValue.priceComponents[0].discountValue != null) {
-        console.log(plan.newValue.priceComponents[0])
         const discount = await this.createPriceAlteration(plan.newValue.priceComponents[0], plan.newValue.currency);
         price.popRelationship = [{ id: discount.id, href: discount.id, name: discount.name }];
       }
@@ -857,6 +833,10 @@ export class OfferComponent implements OnInit, OnDestroy{
           .filter((cat: any) => cat?.id)
           .map((cat: any) => ({ id: cat.id, href: cat.id }))
       : [];
+    
+    if (categories.length === 0 && v?.catalog?.defaultCategoryId) {
+      categories.push({ id: v.catalog.defaultCategoryId, href: v.catalog.defaultCategoryHref ?? v.catalog.defaultCategoryId });
+    }
 
     const prices = Array.isArray(v?.pricePlans)
       ? v.pricePlans
@@ -918,13 +898,13 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     const request$ =
       this.formType === 'create'
-        ? this.api.postProductOffering(offer, v?.catalogue?.id)
+        ? this.api.postProductOffering(offer)
         : this.api.updateProductOffering(offer, this.offer.id);
 
     request$.subscribe({
       next: (data) => {
         console.log('product offer saved/updated:', data);
-        this.goBack();
+        this.goBack();          
       },
       error: (error) => {
         console.error('Error during offer save/update:', error);

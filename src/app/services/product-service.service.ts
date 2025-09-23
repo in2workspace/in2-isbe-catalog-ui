@@ -210,8 +210,6 @@ export class ApiServiceService {
 
   getCatalogsByUser(page:any,filter:any,status:any[],partyId:any) {
     let url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&relatedParty.id=${partyId}`;
-    //TO DO: delete
-    //let url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}`;
     let lifeStatus=''
     if(status)
     if(status.length>0){
@@ -246,7 +244,6 @@ export class ApiServiceService {
 
   updateCatalog(catalog:any,id:any){
     let url = `${ApiServiceService.BASE_URL}/catalog/${id}`;
-
     return this.http.patch<any>(url, catalog);
   }
 
@@ -280,9 +277,9 @@ export class ApiServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  postProductOffering(prod:any,catalogId:any){
+  postProductOffering(prod:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/catalog/${catalogId}/productOffering`;
+    let url = `${ApiServiceService.BASE_URL}/productOffering`;
     return this.http.post<any>(url, prod);
   }
 
