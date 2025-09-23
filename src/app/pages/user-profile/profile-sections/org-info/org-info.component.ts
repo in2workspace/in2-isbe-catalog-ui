@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
@@ -10,7 +10,6 @@ import { initFlowbite } from 'flowbite';
 import * as moment from 'moment';
 import {components} from "../../../../models/party-catalog";
 import { v4 as uuidv4 } from 'uuid';
-import {getCountries, getCountryCallingCode, CountryCode} from 'libphonenumber-js'
 import {parsePhoneNumber} from 'libphonenumber-js/max'
 import {AttachmentServiceService} from "src/app/services/attachment-service.service";
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry, NgxFileDropModule } from 'ngx-file-drop';
@@ -117,12 +116,11 @@ export class OrgInfoComponent {
   public files: NgxFileDropEntry[] = [];
 
   constructor(
-    private localStorage: LocalStorageService,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private accountService: AccountServiceService,
-    private eventMessage: EventMessageService,
-    private attachmentService: AttachmentServiceService,
+    private readonly localStorage: LocalStorageService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly accountService: AccountServiceService,
+    private readonly eventMessage: EventMessageService,
+    private readonly attachmentService: AttachmentServiceService,
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -156,8 +154,6 @@ export class OrgInfoComponent {
   getProfile(){
     this.contactmediums=[];
     this.accountService.getOrgInfo(this.seller).then(data=> {
-      console.log('--org info--')
-      console.log(data)
       this.profile=data;
       this.loadProfileData(this.profile)
       this.loading=false;
@@ -196,7 +192,6 @@ export class OrgInfoComponent {
       })       
     }
     for(let i=0; i<this.contactmediums.length; i++){
-      console.log(this.contactmediums)
       if(this.contactmediums[i].mediumType == 'Email'){
         mediums.push({
           mediumType: 'Email',
@@ -206,7 +201,6 @@ export class OrgInfoComponent {
             emailAddress: this.contactmediums[i].characteristic.emailAddress
           }
         })
-        console.log(this.contactmediums[i])
       } else if(this.contactmediums[i].mediumType == 'PostalAddress'){
         mediums.push({
           mediumType: this.contactmediums[i].mediumType,
@@ -237,7 +231,6 @@ export class OrgInfoComponent {
       "contactMedium": mediums,
       "partyCharacteristic": chars
     }
-    console.log(profile)
     this.accountService.updateOrgInfo(this.seller,profile).subscribe({
       next: data => {
         this.profileForm.reset();
@@ -250,7 +243,7 @@ export class OrgInfoComponent {
       error: error => {
           console.error('There was an error while updating!', error);
           if(error.error.error){
-            console.log(error)
+            console.error(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
             this.errorMessage='There was an error while updating profile!';
@@ -327,7 +320,6 @@ export class OrgInfoComponent {
             const phoneNumber = parsePhoneNumber(this.phonePrefix.code + this.mediumForm.value.telephoneNumber);
             if (phoneNumber) {
             if (!phoneNumber.isValid()) {
-                console.log('NUMERO INVALIDO')
                 this.mediumForm.controls['telephoneNumber'].setErrors({'invalidPhoneNumber': true});
                 this.toastVisibility = true;
                 setTimeout(() => {
@@ -393,7 +385,6 @@ export class OrgInfoComponent {
       }
     }
     this.mediumForm.reset();
-    console.log(this.contactmediums)
   }
 
   removeMedium(medium:any){
@@ -455,7 +446,6 @@ export class OrgInfoComponent {
                 const phoneNumber = parsePhoneNumber(this.phonePrefix.code + this.mediumForm.value.telephoneNumber);
                 if (phoneNumber) {
                   if (!phoneNumber.isValid()) {
-                    console.log('NUMERO INVALIDO')
                     this.mediumForm.controls['telephoneNumber'].setErrors({'invalidPhoneNumber': true});
                     this.toastVisibility = true;
                     setTimeout(() => {
@@ -519,7 +509,6 @@ export class OrgInfoComponent {
   }
 
   selectPrefix(pref:any) {
-    console.log(pref)
     this.prefixCheck = false;
     this.phonePrefix = pref;
   }
@@ -592,32 +581,19 @@ export class OrgInfoComponent {
       this.mediumForm.get('telephoneNumber')?.setValue('');
       this.cdr.detectChanges();
     }
-    console.log(this.mediumForm)
-    console.log(this.printAllActiveValidators());
 
   }
-  showMedium(){
-    console.log('--- SHOW MEDIUM')
-    console.log(this.mediumForm)
-    console.log(this.printAllActiveValidators());
-    console.log('--value')
-    console.log(this.mediumForm.get('email')?.value)
-  }
-
+  
   printActiveValidators(controlName: string) {
     const control = this.mediumForm.get(controlName);
     if (!control || !control.validator) {
-      console.log(`No active validators for ${controlName}`);
       return;
     }
   
     const validatorFn = control.validator({} as AbstractControl);
     if (!validatorFn) {
-      console.log(`No active validators for ${controlName}`);
       return;
     }
-  
-    console.log(`Active validators for ${controlName}:`, Object.keys(validatorFn));
   }
 
   printAllActiveValidators() {
@@ -635,15 +611,12 @@ export class OrgInfoComponent {
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-        fileEntry.file((file: File) => {
-          console.log('dropped')       
+        fileEntry.file((file: File) => { 
 
           if (file) {
             const reader = new FileReader();
             reader.onload = (e: any) => {
               const base64String: string = e.target.result.split(',')[1];
-              console.log('BASE 64....')
-              console.log(base64String); // You can use this base64 string as needed
               let fileBody = {
                 content: {
                   name: 'orglogo'+file.name,
@@ -673,7 +646,6 @@ export class OrgInfoComponent {
               }
               this.attachmentService.uploadFile(fileBody).subscribe({
                 next: data => {
-                    console.log(data)
                     if(sel=='img'){
                       if(file.type.startsWith("image")){
                         this.showImgPreview=true;
@@ -687,12 +659,11 @@ export class OrgInfoComponent {
                       }
                     }
                     this.cdr.detectChanges();
-                    console.log('uploaded')
                 },
                 error: error => {
                     console.error('There was an error while uploading!', error);
                     if(error.error.error){
-                      console.log(error)
+                      console.error(error)
                       this.errorMessage='Error: '+error.error.error;
                     } else {
                       this.errorMessage='There was an error while uploading the file!';
@@ -714,7 +685,6 @@ export class OrgInfoComponent {
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
       }
     }
   }
@@ -728,7 +698,6 @@ export class OrgInfoComponent {
   }
  
   public fileLeave(event: any){
-    console.log('leave')
     console.log(event);
   }
 
