@@ -44,7 +44,6 @@ export class UpdateProductSpecComponent implements OnInit {
 
   //PAGE SIZES:
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
-  DOME_TRUST_LINK: string = environment.DOME_TRUST_LINK;
   BUNDLE_ENABLED: boolean= environment.BUNDLE_ENABLED;
   MAX_FILE_SIZE: number=environment.MAX_FILE_SIZE;
 

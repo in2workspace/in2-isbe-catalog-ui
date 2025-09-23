@@ -2,14 +2,14 @@
     <div class="mb-4 grid grid-cols-2 gap-4">
         <div>
             <label class="font-bold text-lg dark:text-white">{{ 'CREATE_OFFER._name' | translate }}</label>
-            <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                 {{ productOfferForm.get('generalInfo.name')?.value }}
             </label>
 
         </div>
        <div>
             <label for="prod-version" class="font-bold text-lg dark:text-white">{{ 'CREATE_OFFER._version' | translate }}</label>
-            <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                 {{ productOfferForm.get('generalInfo.version')?.value }}
             </label>
         </div>
@@ -18,13 +18,13 @@
   <div class="mb-4">
         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'CREATE_OFFER._status' | translate }}</label>
         @if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Active'){
-            <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
+            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Launched') {
-            <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
+            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Retired') {
-            <span class="bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
+            <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Obsolete') {
-            <span class="bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{productOfferForm.get('generalInfo.status')?.get('status')?.value}}</span>
+            <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{productOfferForm.get('generalInfo.status')?.get('status')?.value}}</span>
         }
     </div>
    
@@ -57,13 +57,13 @@
                             </td>
                             <td class="px-6 py-4">
                                 @if(bun.lifecycleStatus == 'Active'){
-                                    <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{bun.lifecycleStatus}}</span>
+                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{bun.lifecycleStatus}}</span>
                                 } @else if(bun.lifecycleStatus == 'Launched') {
-                                    <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{bun.lifecycleStatus}}</span>
+                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{bun.lifecycleStatus}}</span>
                                 } @else if(bun.lifecycleStatus == 'Retired') {
-                                    <span class="bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{bun.lifecycleStatus}}</span>
+                                    <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{bun.lifecycleStatus}}</span>
                                 } @else if(bun.lifecycleStatus == 'Obsolete') {
-                                    <span class="bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{bun.lifecycleStatus}}</span>
+                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{bun.lifecycleStatus}}</span>
                                 }
                             </td>
                         </tr>
@@ -97,13 +97,13 @@
                     </td>
                     <td class="px-6 py-4">
                         @if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'active'){
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
                         } @else if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'Launched') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
                         } @else if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'suspended') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
                         } @else if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'terminated') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
                         }
                     </td>
                     <td class="hidden md:table-cell px-6 py-4">
@@ -221,7 +221,7 @@
     <h2 class="font-bold text-lg dark:text-white">{{ 'CREATE_OFFER._license' | translate }}</h2>
     <div>
         <label for="treatment" class="font-bold text-base dark:text-white">{{ 'CREATE_OFFER._treatment' | translate }}</label>
-        <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
             {{productOfferForm.get('license')?.get('treatment')?.value}}
         </label>
         @if(productOfferForm.get('license')?.get('description')?.value!==''){

@@ -60,7 +60,7 @@
                         <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'CREATE_CATEGORIES._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" />
+                        class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                         
                         <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'CREATE_CATEGORIES._description' | translate }}</label>
                         <app-markdown-textarea formControlName="description"></app-markdown-textarea>
@@ -72,7 +72,7 @@
                         @if(parentSelectionCheck){
                             @if(categories.length==0){
                                 <div class="flex justify-center w-full m-4">
-                                    <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-blue-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                                    <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
                                         <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                         </svg>
@@ -107,7 +107,7 @@
                                                 {{cat.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} 
                                             </td>
                                             <td class="flex px-6 py-4 w-fit justify-end">
-                                                <input id="select-checkbox" [checked]="isCategorySelected(cat)" type="checkbox" value="" (click)="addCategory(cat)" class="flex w-4 h-4 justify-end text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input id="select-checkbox" [checked]="isCategorySelected(cat)" type="checkbox" value="" (click)="addCategory(cat)" class="flex w-4 h-4 justify-end text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                             </td>
                                         </tr>
                                         @if(cat.children.length>0){
@@ -128,7 +128,7 @@
 
                     </form>
                     <div class="flex w-full justify-items-end justify-end">
-                        <button type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid || (parentSelectionCheck == true && selectedCategory==undefined)" [ngClass]="!generalForm.valid || (parentSelectionCheck == true && selectedCategory==undefined) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid || (parentSelectionCheck == true && selectedCategory==undefined)" [ngClass]="!generalForm.valid || (parentSelectionCheck == true && selectedCategory==undefined) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'CREATE_CATEGORIES._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -142,7 +142,7 @@
                 <div class="m-8">
                     <div>
                         <label class="font-bold text-lg dark:text-white">{{ 'CREATE_CATEGORIES._name' | translate }}</label>
-                        <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                             {{categoryToCreate?.name}}
                         </label>
                     </div>
@@ -150,13 +150,13 @@
                     <div class="mb-4">
                         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'CREATE_CATEGORIES._status' | translate }}</label>
                         @if(categoryToCreate?.lifecycleStatus == 'Active'){
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-blue-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-blue-400">{{categoryToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{categoryToCreate?.lifecycleStatus}}</span>
                         } @else if(categoryToCreate?.lifecycleStatus == 'Launched') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{categoryToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{categoryToCreate?.lifecycleStatus}}</span>
                         } @else if(categoryToCreate?.lifecycleStatus == 'Retired') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{categoryToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{categoryToCreate?.lifecycleStatus}}</span>
                         } @else if(categoryToCreate?.lifecycleStatus == 'Obsolete') {
-                            <span class="bg-blue-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{categoryToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{categoryToCreate?.lifecycleStatus}}</span>
                         }
                     </div>
 
@@ -176,7 +176,7 @@
                     
                     
                     <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button type="button" (click)="createCategory();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button type="button" (click)="createCategory();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'CREATE_CATEGORIES._create' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

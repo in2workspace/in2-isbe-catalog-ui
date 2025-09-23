@@ -2,7 +2,7 @@
     "_yes": "Yes",
     "_no": "No",
     "DASHBOARD": {
-        "_title": "DOME Marketplace is out! See what's new",
+        "_title": "ISBE Catalog is out! See what's new",
         "_header": "Digital Trust to move forward",
         "_subheader": "Join the first open distributed marketplace ecosystem for cloud, edge & AI services in Europe.",
         "_new": "New",
@@ -74,7 +74,7 @@
     },
     "HOWITWORKS":{
         "_title": "How It Works",
-        "_subtitle": "Discover how DOME Marketplace connects you to Europe's finest cloud and edge services",
+        "_subtitle": "Discover how ISBE Catalog connects you to Europe's finest cloud and edge services",
         "CUSTOMERS":{
             "_title": "For customers",
             "_subtitle": "Discover",
@@ -171,7 +171,7 @@
         "_rights": "All Rights Reserved"
     },
     "HEADER": {
-        "_marketplace": "DOME MARKETPLACE",
+        "_marketplace": "ISBE Catalog",
         "_open_menu": "Open main menu",
         "_home": "Home",
         "_catalogs": "Catalogues",
@@ -1188,28 +1188,28 @@
     "_next": "Next step"
   },
   "ABOUT_DOME": {
-    "_title": "Discover DOME Marketplace",
+    "_title": "Discover ISBE Catalog",
     "_subtitle": "Your one-stop-shop for trusted Cloud and Edge services.",
-    "_whatisdome": "What is DOME Marketplace?",
-    "_description": "DOME Marketplace is a comprehensive online catalogue of cloud and edge offerings, available through a collection of independent marketplaces and different product and service providers.",
-    "_description2": "The uniqueness of the DOME marketplace is its ability to generate and use verifiable credentials ensuring the publication of trusted services, according to EU regulation. In other words, it enables a standardised process to verify that services and providers are certified and trustable.",
-    "_benefits": "Among its benefits, DOME Marketplace offers several advantages to users:",
+    "_whatisdome": "What is ISBE Catalog?",
+    "_description": "ISBE Catalog is a comprehensive online catalogue of cloud and edge offerings, available through a collection of independent marketplaces and different product and service providers.",
+    "_description2": "The uniqueness of the ISBE Catalog is its ability to generate and use verifiable credentials ensuring the publication of trusted services, according to EU regulation. In other words, it enables a standardised process to verify that services and providers are certified and trustable.",
+    "_benefits": "Among its benefits, ISBE Catalog offers several advantages to users:",
     "_trusted": "Provides trusted and standardised access to service providers’ offers, matching customers’ demands.",
     "_verified": "Ensures verified and comparable qualifications across services and products.",
     "_transactions": "Facilitates simple and transparent transactions and service management.",
     "_whydome": "Why choose DOME?",
-    "_whydescription": "DOME Marketplace, with this single aggregated catalogue of products delivered by pre-validated European suppliers, aims to streamline the procurement journey, improve vendor selection, reduce search and evaluation time, facilitate product comparison, accelerate purchasing processes and simplify spending analysis, benefiting both buyers and suppliers within the European ecosystem.",
+    "_whydescription": "ISBE Catalog, with this single aggregated catalogue of products delivered by pre-validated European suppliers, aims to streamline the procurement journey, improve vendor selection, reduce search and evaluation time, facilitate product comparison, accelerate purchasing processes and simplify spending analysis, benefiting both buyers and suppliers within the European ecosystem.",
     "_publish": "Publish Your Service",
-    "_central": "DOME Marketplace: A central piece of Europe’s Digital future.",
-    "_aligned": "DOME Marketplace is aligned with Europe’s vision of a digital future powered by cloud computing. The marketplace has been deployed by the DOME project, as part of the European Commission’s strategy to co-invest with Member States in the development of new digital infrastructures, as well as to improve existing capabilities at both national and EU levels.",
-    "_singlepoint": "The goal is to provide European companies and public organisations with the single-point access to trusted cloud and edge services, necessary for digital transformation. In this context, DOME Marketplace has been designed to offer a better and greater availability of trusted cloud and edge services, offered by providers and marketplaces members of the DOME ecosystem,",
+    "_central": "ISBE Catalog: A central piece of Europe’s Digital future.",
+    "_aligned": "ISBE Catalog is aligned with Europe’s vision of a digital future powered by cloud computing. The marketplace has been deployed by the DOME project, as part of the European Commission’s strategy to co-invest with Member States in the development of new digital infrastructures, as well as to improve existing capabilities at both national and EU levels.",
+    "_singlepoint": "The goal is to provide European companies and public organisations with the single-point access to trusted cloud and edge services, necessary for digital transformation. In this context, ISBE Catalog has been designed to offer a better and greater availability of trusted cloud and edge services, offered by providers and marketplaces members of the DOME ecosystem,",
     "_focus": "focusing on increasing the adoption of these services among public and private entities, particularly in sectors that handle sensitive data, and who may be lagging behind in cloud adoption. This marketplace is a fundamental part of the EU’s objective to strengthen open strategic digital autonomy and boost Europe’s digital future.",
     "_explore": "Explore the DOME project website if you want to know more!",
     "_domeproject": "Dome Project"
   },
   "CONTACTUS": {
     "_title": "Let's get in touch",
-    "_subtitle": "We are glad you are interested in the DOME Marketplace! Please share your questions or thoughts with us and we'll get back to you shortly.",
+    "_subtitle": "We are glad you are interested in the ISBE Catalog! Please share your questions or thoughts with us and we'll get back to you shortly.",
     "_fill": "Please fill in this form to contact us",
     "_email": "Email",
     "_firstname": "First name",
@@ -1227,12 +1227,12 @@
     "_indicating": "indicating in the subject line: 'Exercise of rights'. You are also entitled to be assisted by a Data Protection Authority. Find more information about personal data processing in",
     "_here": "our here",
     "_submit": "Submit",
-    "_thanks": "Thank you for contacting DOME Marketplace."
+    "_thanks": "Thank you for contacting ISBE Catalog."
   },
   "FEEDBACK": {
     "_tap": "Tap the stars below to rate the service:",
     "_write": "Write your feedback here:",
     "_send": "Send",
-    "_thanks": "Thank you for contacting DOME Marketplace."
+    "_thanks": "Thank you for contacting ISBE Catalog."
   }
 }

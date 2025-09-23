@@ -19,7 +19,7 @@ import { HeaderComponent } from './shared/header/header.component';
   imports: [FooterComponent, RouterOutlet, HeaderComponent]
 })
 export class AppComponent implements OnInit {
-  title = 'DOME Marketplace';
+  title = 'ISBE Catalog';
   showPanel = false;
 
   constructor(private readonly translate: TranslateService,

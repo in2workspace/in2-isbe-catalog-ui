@@ -21,11 +21,11 @@ export class AppInitService {
                 environment.KNOWLEDGE_BASE_URL = config.knowledgeBaseUrl;
                 environment.TICKETING_SYSTEM_URL = config.ticketingUrl;
                 environment.SEARCH_ENABLED = config.searchEnabled;
-                environment.DOME_TRUST_LINK = config.domeTrust;
-                environment.DOME_ABOUT_LINK = config.domeAbout;
+                environment.ISBE_TRUST_LINK = config.domeTrust;
+                environment.ISBE_ABOUT_LINK = config.domeAbout;
                 environment.PURCHASE_ENABLED = config.purchaseEnabled;
-                environment.DOME_REGISTER_LINK = config.domeRegister;
-                environment.DOME_PUBLISH_LINK = config.domePublish;
+                environment.ISBE_REGISTER_LINK = config.domeRegister;
+                environment.ISBE_PUBLISH_LINK = config.domePublish;
                 environment.KB_ONBOARDING_GUIDELINES_URL = config.domeOnboardingGuidelines;
                 environment.KB_GUIDELNES_URL = config.domeGuidelines;
                 environment.REGISTRATION_FORM_URL = config.domeRegistrationForm;

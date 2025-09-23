@@ -30,8 +30,8 @@ export class DashboardComponent implements OnInit {
   showContact:boolean=false;
   searchField = new FormControl();
   searchEnabled = environment.SEARCH_ENABLED;
-  domePublish: string = environment.DOME_PUBLISH_LINK
-  domeRegister: string = environment.DOME_REGISTER_LINK
+  domePublish: string = environment.ISBE_PUBLISH_LINK
+  domeRegister: string = environment.ISBE_REGISTER_LINK
   services: string[] = []
   publishers: string[] = []
   categories:any[]=[];
