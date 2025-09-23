@@ -3,9 +3,8 @@ import { initFlowbite } from 'flowbite';
 import { TranslateService } from '@ngx-translate/core';
 import {LocalStorageService} from "./services/local-storage.service";
 import {EventMessageService} from "./services/event-message.service";
-import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { LoginInfo } from 'src/app/models/interfaces';
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import { RefreshLoginServiceService } from "src/app/services/refresh-login-service.service";
 import * as moment from 'moment';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -23,13 +22,11 @@ export class AppComponent implements OnInit {
   title = 'ISBE Catalog';
   showPanel = false;
 
-  constructor(private translate: TranslateService,
-              private localStorage: LocalStorageService,
-              private eventMessage: EventMessageService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private api: ApiServiceService,
-              private refreshApi: RefreshLoginServiceService) {
+  constructor(private readonly translate: TranslateService,
+              private readonly localStorage: LocalStorageService,
+              private readonly eventMessage: EventMessageService,
+              private readonly router: Router,
+              private readonly refreshApi: RefreshLoginServiceService) {
     this.translate.addLangs(['en', 'es']);
     this.translate.setDefaultLang('es');
     let currLang = this.localStorage.getItem('current_language')
@@ -41,15 +38,8 @@ export class AppComponent implements OnInit {
     }
     if(!this.localStorage.getObject('selected_categories'))
       this.localStorage.setObject('selected_categories', []);
-
-    /*this.eventMessage.messages$.subscribe(ev => {
-      if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
-        this.checkPanel();
-      }
-
-    })*/
-
   }
+
   ngOnInit(): void {
     initFlowbite();
     if(!this.localStorage.getObject('selected_categories'))
@@ -58,7 +48,6 @@ export class AppComponent implements OnInit {
       this.localStorage.setObject('cart_items', []);
     if(!this.localStorage.getObject('login_items'))
       this.localStorage.setObject('login_items', {});
-    //this.checkPanel();
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'LoginProcess') {
         this.refreshApi.stopInterval();
@@ -69,8 +58,6 @@ export class AppComponent implements OnInit {
         console.log(((info.expire - moment().unix()) - 4))
 
         this.refreshApi.startInterval(((info.expire - moment().unix())-4)*1000, ev);
-
-        //this.refreshApi.startInterval(3000, ev.value);
       }
     })
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
@@ -91,14 +78,4 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
-  /*checkPanel() {
-    const filters = this.localStorage.getObject('selected_categories') as Category[] || [] ;
-    const oldState = this.showPanel;
-    this.showPanel = filters.length > 0;
-    if(this.showPanel != oldState) {
-      this.eventMessage.emitFilterShown(this.showPanel);
-      this.localStorage.setItem('is_filter_panel_shown', this.showPanel.toString())
-    }
-  }*/
 }

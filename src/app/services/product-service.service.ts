@@ -244,7 +244,6 @@ export class ApiServiceService {
 
   updateCatalog(catalog:any,id:any){
     let url = `${ApiServiceService.BASE_URL}/catalog/${id}`;
-
     return this.http.patch<any>(url, catalog);
   }
 
@@ -278,9 +277,9 @@ export class ApiServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  postProductOffering(prod:any,catalogId:any){
+  postProductOffering(prod:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/catalog/${catalogId}/productOffering`;
+    let url = `${ApiServiceService.BASE_URL}/productOffering`;
     return this.http.post<any>(url, prod);
   }
 

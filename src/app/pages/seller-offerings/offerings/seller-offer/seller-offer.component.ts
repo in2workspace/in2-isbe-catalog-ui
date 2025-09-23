@@ -1,8 +1,6 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {faIdCard, faSort, faSwatchbook, faSparkles} from "@fortawesome/pro-solid-svg-icons";
-import {components} from "src/app/models/product-catalog";
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { PaginationService } from 'src/app/services/pagination.service';
@@ -43,12 +41,10 @@ export class SellerOfferComponent implements OnInit{
   isBundle:any=undefined;
 
   constructor(
-    private router: Router,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private paginationService: PaginationService
+    private readonly api: ApiServiceService,
+    private readonly localStorage: LocalStorageService,
+    private readonly eventMessage: EventMessageService,
+    private readonly paginationService: PaginationService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -76,8 +72,6 @@ export class SellerOfferComponent implements OnInit{
     let input = document.querySelector('[type=search]')
     if(input!=undefined){
       input.addEventListener('input', e => {
-        // Easy way to get the value of the element who trigger the current `e` event
-        console.log(`Input updated`)
         if(this.searchField.value==''){
           this.filter=undefined;
           this.getOffers(false);
@@ -130,11 +124,7 @@ export class SellerOfferComponent implements OnInit{
     const index = this.status.findIndex(item => item === filter);
     if (index !== -1) {
       this.status.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.status)
     } else {
-      console.log('añade filtro')
-      console.log(this.status)
       this.status.push(filter)
     }
     this.getOffers(false);
@@ -158,11 +148,6 @@ export class SellerOfferComponent implements OnInit{
       this.isBundle=undefined
     }
     this.getOffers(false);
-  }
-
-
-  filterInventoryByKeywords(){
-
   }
 
 }

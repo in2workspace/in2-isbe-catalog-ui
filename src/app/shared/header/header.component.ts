@@ -374,7 +374,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
         let finalUrl = newUrl.toString()
         let nonce = uuid.v4()
 
-        verifierUrl = `${verifierUrl}&response_type=code&request_uri=https://dome-marketplace-sbx.org/auth/vc/request.jwt&scope=openid%20learcredential&nonce=${nonce}`
+        verifierUrl = `${verifierUrl}&response_type=code&request_uri=https://deploy-preview-2--isbecatalog.netlify.app/auth/vc/request.jwt&scope=openid%20learcredential&nonce=${nonce}`
         window.location.href = verifierUrl
       } else {
         // Old verifier format
