@@ -60,7 +60,7 @@ export const environment = {
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: '',
     ISBE_YOUTUBE: 'https://www.youtube.com/@REDISBE',
-    ISBE_X: 'https://x.com/REDISBE' '',
+    ISBE_X: 'https://x.com/REDISBE',
     BUNDLE_ENABLED: false,
     DFT_CATALOG_ID: '',
     MAX_FILE_SIZE:3145728
