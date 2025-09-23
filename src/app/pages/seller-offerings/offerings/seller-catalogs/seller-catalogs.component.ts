@@ -103,7 +103,7 @@ export class SellerCatalogsComponent implements OnInit{
     let options = {
       "keywords": this.filter,
       "filters": this.status,
-      "seller": this.seller
+      "seller": "did:elsi:"+this.seller
     }
 
     this.paginationService.getItemsPaginated(this.page, this.CATALOG_LIMIT, next, this.catalogs, this.nextCatalogs, options,

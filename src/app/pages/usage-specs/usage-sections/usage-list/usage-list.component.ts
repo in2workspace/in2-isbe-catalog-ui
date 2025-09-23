@@ -63,7 +63,7 @@ export class UsageListComponent  implements OnInit {
     }
     
     let options = {
-      "seller": this.seller
+      "seller": "did:elsi:"+this.seller
     }
     
     this.paginationService.getItemsPaginated(this.page, this.USAGE_SPEC_LIMIT, next, this.usageSpecs,this.nextUsageSpecs, options,

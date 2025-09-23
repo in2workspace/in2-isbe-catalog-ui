@@ -100,7 +100,7 @@ export class SellerOfferComponent implements OnInit{
     
     let options = {
       "filters": this.status,
-      "seller": this.seller,
+      "seller": "did:elsi:"+this.seller,
       "sort": this.sort,
       "isBundle": this.isBundle
     }

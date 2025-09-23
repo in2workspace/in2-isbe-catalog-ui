@@ -262,7 +262,7 @@ export class CreateProductSpecComponent implements OnInit {
     
     let options = {
       "filters": ['Active','Launched'],
-      "seller": this.seller
+      "seller": "did:elsi:"+this.seller
     }
 
     this.paginationService.getItemsPaginated(this.bundlePage, this.PROD_SPEC_LIMIT, next, this.prodSpecs,this.nextProdSpecs, options,
@@ -633,7 +633,7 @@ export class CreateProductSpecComponent implements OnInit {
     
     let options = {
       "filters": ['Active','Launched'],
-      "seller": this.seller
+      "seller": "did:elsi:"+this.seller
     }
 
     this.paginationService.getItemsPaginated(this.prodSpecRelPage, this.PROD_SPEC_LIMIT, next, this.prodSpecRels, this.nextProdSpecRels, options,

@@ -152,7 +152,7 @@ export class InventoryProductsComponent implements OnInit {
     let options = {
       "keywords": this.keywordFilter,
       "filters": this.filters,
-      "seller": this.seller
+      "seller": "did:elsi:"+this.seller
     }
     
     await this.paginationService.getItemsPaginated(this.page, this.INVENTORY_LIMIT, next, this.inventory, this.nextInventory, options,

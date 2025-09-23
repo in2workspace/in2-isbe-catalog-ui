@@ -25,10 +25,7 @@ export class ProductOrderService {
   }
 
   getProductOrders(seller:any,page:any,filters:any[],date:any,role:any){
-    console.log('getProductOrders');
     let url = `${ProductOrderService.BASE_URL}${ProductOrderService.API_ORDERING}/productOrder?limit=${ProductOrderService.ORDER_LIMIT}&offset=${page}&seller=${seller}&relatedParty.role=${role}`;
-
-    //let url = `${ProductOrderService.BASE_URL}${ProductOrderService.API_ORDERING}/productOrder?limit=${ProductOrderService.ORDER_LIMIT}&offset=${page}&seller=${seller}&relatedParty.role=Seller`;
     let status=''
     if(filters.length>0){
       for(let i=0; i < filters.length; i++){

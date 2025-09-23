@@ -147,7 +147,7 @@ export class InvoicesInfoComponent implements OnInit {
 
     let options = {
       "filters": this.filters,
-      "seller": this.seller,
+      "seller": "did:elsi:"+this.seller,
       "selectedDate": this.selectedDate,
       "invoices": this.invoices,
       "role": this.role,

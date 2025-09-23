@@ -48,7 +48,7 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
   selectedProdSpecInternal: ProductSpec | null = null;
   private originalValue: ProductSpec | null = null;
-  private formSubscription: Subscription | null = null;
+  private readonly formSubscription: Subscription | null = null;
   private hasBeenModified: boolean = false;
   isEditMode: boolean = false;
 
@@ -64,19 +64,16 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
   protected readonly FormControl = FormControl;
 
-  constructor(private prodSpecService: ProductSpecServiceService,
-              private paginationService: PaginationService) {
-    console.log('🔄 Initializing ProdSpecComponent');
+  constructor(private readonly prodSpecService: ProductSpecServiceService,
+              private readonly paginationService: PaginationService) {
   }
 
   async ngOnInit() {
-    console.log('📝 Initializing form in', this.formType, 'mode');
     this.isEditMode = this.formType === 'update';
     await this.getSellerProdSpecs(false);
   }
 
   ngOnDestroy() {
-    console.log('🗑️ Destroying ProdSpecComponent');
     if (this.formSubscription) {
       this.formSubscription.unsubscribe();
     }
@@ -92,8 +89,6 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
           originalValue: this.originalValue,
           currentValue: this.selectedProdSpecInternal
         };
-
-        console.log('🚀 Emitting final change state:', changeState);
         this.formChange.emit(changeState);
       } else {
         console.log('📝 No real changes detected, skipping emission');
@@ -110,7 +105,7 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
     let options = {
       "filters": ['Active','Launched'],
-      "seller": this.seller
+      "seller": "did:elsi:"+this.seller
     }
 
     this.paginationService.getItemsPaginated(this.prodSpecPage, this.PROD_SPEC_LIMIT, next, this.prodSpecs,this.nextProdSpecs, options,
@@ -147,7 +142,6 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
   onTouched: () => void = () => {};
 
   writeValue(prodSpec: ProductSpec): void {
-    console.log('📝 Writing value:', prodSpec);
     this.selectedProdSpecInternal = prodSpec;
     if (this.isEditMode) {
       this.originalValue = prodSpec;
@@ -170,11 +164,8 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
   toggleSelection(prod: ProductSpec): void {
     if (this.isEditMode) {
-      console.log('📝 Cannot change product spec in update mode');
       return;
     }
-    
-    console.log('🔄 Toggling selection:', prod);
     // Si el producto ya está seleccionado, lo deseleccionamos. Si no, lo seleccionamos.
     this.selectedProdSpecInternal = this.selectedProdSpecInternal?.id === prod.id ? null : prod;
     this.onChange(this.selectedProdSpecInternal);

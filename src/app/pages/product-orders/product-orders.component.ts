@@ -148,7 +148,7 @@ export class ProductOrdersComponent implements OnInit {
 
     let options = {
       "filters": this.filters,
-      "seller": this.seller,
+      "seller": "did:elsi:"+this.seller,
       "selectedDate": this.selectedDate,
       "orders": this.orders,
       "role": this.role

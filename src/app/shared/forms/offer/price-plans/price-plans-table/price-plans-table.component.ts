@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgIf} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-price-plans-table',
@@ -24,6 +25,8 @@ export class PricePlansTableComponent {
   }
   @Output() edit = new EventEmitter<any>(); // Emitir evento al editar
   @Output() delete = new EventEmitter<number>(); // Emitir evento al eliminar
+
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   showDeleteModal = false;
   pricePlanToDelete: any | null = null;
