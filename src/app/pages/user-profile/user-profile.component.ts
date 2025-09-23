@@ -28,7 +28,7 @@ export class UserProfileComponent implements OnInit{
   show_revenue: boolean = false;
   loggedAsUser: boolean = true;
   profile:any;
-  partyId:any='';
+  seller:any='';
   token:string='';
   email:string='';
 
@@ -56,20 +56,20 @@ export class UserProfileComponent implements OnInit{
       this.token=aux.token;
       this.email=aux.email;
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
         this.loggedAsUser=true;
         this.show_profile=true;
         this.show_org_profile=false;
         this.getProfile();
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.partyId = loggedOrg.partyId;
+        this.seller = loggedOrg.seller;
         this.loggedAsUser=false;
         this.show_profile=false;
         this.show_org_profile=true;
         this.getOrgProfile(); 
       }
-      //this.partyId = aux.partyId;
+      //this.seller = aux.seller;
       
     }
     initFlowbite();

@@ -27,7 +27,7 @@ type Category_Update = components["schemas"]["Category_Update"];
 export class UpdateCategoryComponent implements OnInit {
   @Input() category: any;
 
-  partyId:any='';
+  seller:any='';
   categoryToUpdate:Category_Update | undefined;
 
   categories:any[]=[];
@@ -98,10 +98,10 @@ export class UpdateCategoryComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId
+        this.seller = loggedOrg.seller
       }
     }
     this.getCategories();

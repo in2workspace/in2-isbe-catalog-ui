@@ -48,7 +48,7 @@ export class RefreshLoginServiceService {
           "email": refreshed.email,
           "token": refreshed.accessToken,
           "expire": refreshed.expire,
-          "partyId": aux['partyId'],
+          "seller": aux['seller'],
           "roles": refreshed.roles,
           "organizations": aux['organizations'],
           "logged_as": aux['logged_as']

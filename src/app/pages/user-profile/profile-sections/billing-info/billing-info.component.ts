@@ -29,7 +29,7 @@ export class BillingInfoComponent implements OnInit{
   loading: boolean = false;
   orders:any[]=[];
   profile:any;
-  partyId:any='';
+  seller:any='';
   partyInfo:any = {
     id: '',
     name: '',
@@ -102,23 +102,23 @@ export class BillingInfoComponent implements OnInit{
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if (aux.logged_as !== aux.id) {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId;
+        this.seller = loggedOrg.seller;
         console.log('loggedOrg info')
         console.log(loggedOrg)
         this.partyInfo = {
-          id: this.partyId,
+          id: this.seller,
           name: loggedOrg.name,
-          href : this.partyId,
+          href : this.seller,
           role: "Owner"
         }
       } else {
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
         console.log('init party info')
         console.log(aux)
         this.partyInfo = {
-          id: this.partyId,
+          id: this.seller,
           name: aux.user,
-          href : this.partyId,
+          href : this.seller,
           role: "Owner"
         }
       }

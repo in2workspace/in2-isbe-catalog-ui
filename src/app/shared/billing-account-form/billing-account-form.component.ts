@@ -56,7 +56,7 @@ export class BillingAccountFormComponent implements OnInit {
   prefixCheck: boolean = false;
   toastVisibility: boolean = false;
 
-  partyId: any;
+  seller: any;
   partyInfo:any = {
     id: '',
     name: '',
@@ -104,24 +104,24 @@ export class BillingAccountFormComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if (JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix()) - 4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
         console.log('init party info')
         console.log(aux)
         this.partyInfo = {
-          id: this.partyId,
+          id: this.seller,
           name: aux.user,
-          href : this.partyId,
+          href : this.seller,
           role: "Owner"
         }
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId;
+        this.seller = loggedOrg.seller;
         console.log('loggedOrg info')
         console.log(loggedOrg)
         this.partyInfo = {
-          id: this.partyId,
+          id: this.seller,
           name: loggedOrg.name,
-          href : this.partyId,
+          href : this.seller,
           role: "Owner"
         }
       }

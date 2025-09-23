@@ -36,6 +36,8 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 })
 export class CreateProductSpecComponent implements OnInit {
 
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
+
   //PAGE SIZES:
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
   BUNDLE_ENABLED: boolean= environment.BUNDLE_ENABLED;
@@ -65,7 +67,7 @@ export class CreateProductSpecComponent implements OnInit {
   showPreview:boolean=false;
   showEmoji:boolean=false;
   description:string='';  
-  partyId:any='';
+  seller:any='';
 
   //PRODUCT GENERAL INFO:
   generalForm = new FormGroup({
@@ -81,6 +83,7 @@ export class CreateProductSpecComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.maxLength(100), noWhitespaceValidator]),
     description: new FormControl('')
   });
+  
   stringCharSelected:boolean=true;
   numberCharSelected:boolean=false;
   rangeCharSelected:boolean=false;
@@ -125,11 +128,9 @@ export class CreateProductSpecComponent implements OnInit {
 
   //ATTACHMENT INFO
   showImgPreview:boolean=false;
-  showNewAtt:boolean=false;
   imgPreview:any='';
   prodAttachments:AttachmentRefOrValue[]=[];
   attachToCreate:AttachmentRefOrValue={url:'',attachmentType:''};
-  attFileName = new FormControl('', [Validators.required, Validators.pattern('[a-zA-Z0-9 _.-]*')]);
   attImageName = new FormControl('', [Validators.required, Validators.pattern('^https?:\\/\\/.*\\.(?:png|jpg|jpeg|gif|bmp|webp)$')])
 
   //FINAL PRODUCT USING API CALL STRUCTURE
@@ -186,16 +187,20 @@ export class CreateProductSpecComponent implements OnInit {
 
   ngOnInit() {
     this.initPartyInfo();
+    if (this.IS_ISBE) {
+      this.stepsElements = this.stepsElements.filter(s => s !== 'compliance');
+      this.stepsCircles = this.stepsCircles.filter(c => c !== 'compliance-circle');
+    }
   }
 
   initPartyInfo(){
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId
+        this.seller = loggedOrg.seller
       }
     }
   }
@@ -257,7 +262,7 @@ export class CreateProductSpecComponent implements OnInit {
     
     let options = {
       "filters": ['Active','Launched'],
-      "partyId": this.partyId
+      "seller": this.seller
     }
 
     this.paginationService.getItemsPaginated(this.bundlePage, this.PROD_SPEC_LIMIT, next, this.prodSpecs,this.nextProdSpecs, options,
@@ -603,35 +608,6 @@ export class CreateProductSpecComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
-  removeAtt(att:any){
-    const index = this.prodAttachments.findIndex(item => item.url === att.url);
-    if (index !== -1) {
-      if(this.prodAttachments[index].name=='Profile Picture'){
-        this.showImgPreview=false;
-        this.imgPreview='';
-        this.cdr.detectChanges();
-      }
-      this.prodAttachments.splice(index, 1);
-    }  
-    this.cdr.detectChanges();
-  }
-
-  saveAtt(){
-    this.prodAttachments.push({
-      name: this.attachName.nativeElement.value,
-      url: this.attachToCreate.url,
-      attachmentType: this.attachToCreate.attachmentType
-    })
-    this.attachName.nativeElement.value='';
-    this.attachToCreate={url:'',attachmentType:''};
-    this.showNewAtt=false;
-    this.attFileName.reset();
-  }
-
-  clearAtt(){
-    this.attachToCreate={url:'',attachmentType:''};
-  }
-
   toggleRelationship(){
     this.prodSpecRels=[];
     this.prodSpecRelPage=0;
@@ -657,7 +633,7 @@ export class CreateProductSpecComponent implements OnInit {
     
     let options = {
       "filters": ['Active','Launched'],
-      "partyId": this.partyId
+      "seller": this.seller
     }
 
     this.paginationService.getItemsPaginated(this.prodSpecRelPage, this.PROD_SPEC_LIMIT, next, this.prodSpecRels, this.nextProdSpecRels, options,
@@ -931,7 +907,7 @@ export class CreateProductSpecComponent implements OnInit {
         attachment: this.prodAttachments,
         relatedParty: [
           {
-              id: this.partyId,
+              id: this.seller,
               role: "Owner",
               "@referredType": ''
           }

@@ -55,14 +55,14 @@
           @case ('Product Specification') {
             <app-prod-spec-form formControlName="prodSpec"
                                 [data]="offer"
-                                [partyId]="partyId"
+                                [seller]="seller"
                                 [formType]="formType"
                                 (formChange)="handleSubformChange($event)">
             </app-prod-spec-form>
           }
 
           @case ('Catalogue') {
-            <app-catalogue formControlName="catalogue" [partyId]="partyId"></app-catalogue>
+            <app-catalogue formControlName="catalogue" [seller]="seller"></app-catalogue>
           }
 
           @case ('Category') {

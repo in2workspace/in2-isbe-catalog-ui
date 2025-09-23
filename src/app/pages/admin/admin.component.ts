@@ -26,7 +26,7 @@ export class AdminComponent implements OnInit {
   show_verification:boolean = false;
   show_revenue:boolean = false;
 
-  isIsbe: boolean = environment.ISBE_CATALOGUE;
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   category_to_update:any;
   constructor(

@@ -25,16 +25,16 @@ export class UsageServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getUsageSpecs(page:any,partyId:any) {
+  getUsageSpecs(page:any,seller:any) {
 
-    let url = `${UsageServiceService.BASE_URL}/usage/usageSpecification?limit=${UsageServiceService.USAGE_SPEC_LIMIT}&offset=${page}&relatedParty.id=${partyId}`;
+    let url = `${UsageServiceService.BASE_URL}/usage/usageSpecification?limit=${UsageServiceService.USAGE_SPEC_LIMIT}&offset=${page}&seller=${seller}`;
 
     return lastValueFrom(this.http.get<any[]>(url));
   }
 
-  getAllUsageSpecs(partyId:any) {
+  getAllUsageSpecs(seller:any) {
 
-    let url = `${UsageServiceService.BASE_URL}/usage/usageSpecification?relatedParty.id=${partyId}`;
+    let url = `${UsageServiceService.BASE_URL}/usage/usageSpecification?seller=${seller}`;
 
     return lastValueFrom(this.http.get<any[]>(url));
   }

@@ -23,7 +23,7 @@ export class UserInfoComponent implements OnInit {
   loading: boolean = false;
   orders:any[]=[];
   profile:any;
-  partyId:any='';
+  seller:any='';
   token:string='';
   email:string='';
   userProfileForm = new FormGroup({
@@ -72,26 +72,26 @@ export class UserInfoComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId
+        this.seller = loggedOrg.seller
         console.log(aux.organizations)
-        this.accountService.getOrgInfo(this.partyId).then(data=> {
+        this.accountService.getOrgInfo(this.seller).then(data=> {
           console.log('org')
           console.log(data)
         })
       }
       this.token=aux.token;
       this.email=aux.email;
-      //this.partyId = aux.partyId;
+      //this.seller = aux.seller;
       this.getProfile();
     }
     initFlowbite();
   }
 
   getProfile(){
-    this.accountService.getUserInfo(this.partyId).then(data=> {
+    this.accountService.getUserInfo(this.seller).then(data=> {
       console.log(data)
       this.profile=data;
       this.loadProfileData(this.profile)
@@ -105,8 +105,8 @@ export class UserInfoComponent implements OnInit {
 
   updateProfile(){
     let profile = {
-      "id": this.partyId,
-      "href": this.partyId,
+      "id": this.seller,
+      "href": this.seller,
       "countryOfBirth": this.userProfileForm.value.country,
       "familyName": this.userProfileForm.value.lastname,
       "gender": this.userProfileForm.value.gender,
@@ -118,7 +118,7 @@ export class UserInfoComponent implements OnInit {
       "birthDate": this.userProfileForm.value.birthdate
     }
     console.log(profile)
-    this.accountService.updateUserInfo(this.partyId,profile).subscribe({
+    this.accountService.updateUserInfo(this.seller,profile).subscribe({
       next: data => {
         this.userProfileForm.reset();
         this.getProfile();

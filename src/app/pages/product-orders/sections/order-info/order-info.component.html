@@ -551,15 +551,15 @@
 
     <!-- Display notes when available -->
     <div *ngFor="let note of selectedOrder?.note" class="flex"
-         [ngClass]="{'justify-end': note.author === partyId, 'justify-start': note.author !== partyId}">
+         [ngClass]="{'justify-end': note.author === seller, 'justify-start': note.author !== seller}">
 
       <div class="max-w-xs p-3 rounded-lg shadow-md"
-           [ngClass]="{'bg-purple-200 text-purple-900': note.author === partyId, 'bg-gray-200 text-gray-800': note.author !== partyId}">
+           [ngClass]="{'bg-purple-200 text-purple-900': note.author === seller, 'bg-gray-200 text-gray-800': note.author !== seller}">
 
         <p class="text-sm">{{ note.text }}</p>
         <span class="text-xs block mt-1 text-gray-500">
           <!-- Si el usuario está en caché, mostrarlo. Si no, mostrar "Loading..." mientras se obtiene el nombre -->
-              {{ note.author === partyId
+              {{ note.author === seller
               ? currentUser
               : (userCache.get(note.author) || 'Loading...' )
               }} - {{note.date | date:'EEEE, dd/MM/yy, HH:mm'}}

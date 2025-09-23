@@ -3,7 +3,7 @@ import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} fr
 import {GeneralInfoComponent} from "./general-info/general-info.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {ProdSpecComponent} from "./prod-spec/prod-spec.component";
-import {NgClass, NgIf} from "@angular/common";
+import {NgClass} from "@angular/common";
 import {ApiServiceService} from "../../../services/product-service.service";
 import {CategoryComponent} from "./category/category.component";
 import {LicenseComponent} from "./license/license.component";
@@ -12,11 +12,10 @@ import {CatalogueComponent} from "./catalogue/catalogue.component";
 import {ProcurementModeComponent} from "./procurement-mode/procurement-mode.component"
 import {ReplicationVisibilityComponent} from "./replication-visibility/replication-visibility.component"
 import {OfferSummaryComponent} from "./offer-summary/offer-summary.component"
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import {components} from "src/app/models/product-catalog";
 import {EventMessageService} from "src/app/services/event-message.service";
 import {FormChangeState, PricePlanChangeState} from "../../../models/interfaces";
-import {Subscription} from "rxjs";
 import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { environment } from 'src/environments/environment';
@@ -48,7 +47,7 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   @Input() formType: 'create' | 'update' = 'create';
   @Input() offer: any = {};
-  @Input() partyId: any;
+  @Input() seller: any;
 
   productOfferForm: FormGroup;
   currentStep = 0;
@@ -69,12 +68,12 @@ export class OfferComponent implements OnInit, OnDestroy{
   offerToCreate:ProductOffering_Create | undefined;
 
   private formChanges: { [key: string]: FormChangeState } = {};
-  private formSubscription: Subscription | null = null;
+  private readonly formSubscription: Subscription | null = null;
   hasChanges: boolean = false;
 
-  constructor(private api: ApiServiceService,
-              private eventMessage: EventMessageService,
-              private fb: FormBuilder) {
+  constructor(private readonly api: ApiServiceService,
+              private readonly eventMessage: EventMessageService,
+              private readonly fb: FormBuilder) {
 
     if (this.isSimpleFlow) {
       this.steps = [
@@ -114,8 +113,6 @@ export class OfferComponent implements OnInit, OnDestroy{
         replicationMode: this.fb.group({})
       });
     }
-
-    
 
     // Subscribe to form validation changes
     this.productOfferForm.statusChanges.subscribe(status => {
@@ -243,8 +240,6 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   }
   async loadOfferData() {
-    console.log('Loading offer into form...', this.offer);
-
     // Product Specification
     if (this.offer.productSpecification) {
       await this.api.getProductSpecification(this.offer.productSpecification.id).then(async data => {
@@ -263,9 +258,7 @@ export class OfferComponent implements OnInit, OnDestroy{
     }
 
     //LICENSE
-    if(this.offer.productOfferingTerm){
-      console.log('Found productOfferingTerm:', this.offer.productOfferingTerm);
-      
+    if(this.offer.productOfferingTerm){      
       // Mantener el primer término (licencia) incluso si está vacío
       const licenseTerm = this.offer.productOfferingTerm[0];
       
@@ -290,8 +283,6 @@ export class OfferComponent implements OnInit, OnDestroy{
      for (let pop of this.offer.productOfferingPrice) {
       let relatedPrices:any[] = [];
        const pricePlan = await this.api.getOfferingPrice(pop.id);
-       console.log('-- price plan ----')
-       console.log(pricePlan)
        let configProfileCheck = true;
        let realCharsLength = 0;
        for(let i=0;i<this.selectedProdSpec?.productSpecCharacteristic.length;i++){
@@ -353,8 +344,7 @@ export class OfferComponent implements OnInit, OnDestroy{
         relatedPrices.push(pricePlanTmp)
         priceInfo.priceComponents=relatedPrices;
       }
-      console.log('price components---')
-      console.log(relatedPrices)
+      
       //if(pricePlan.bundledPopRelationship){
       if(pricePlan.isBundle){  
       for(const element of pricePlan.bundledPopRelationship){
@@ -384,8 +374,7 @@ export class OfferComponent implements OnInit, OnDestroy{
 
           if(data?.popRelationship){
             let alter = await this.api.getOfferingPrice(data?.popRelationship[0].id)
-            console.log('----- alter')
-            console.log(alter)
+            
             if(alter.percentage){
               priceComp.discountValue=alter?.percentage
               priceComp.discountUnit='percentage'
@@ -401,7 +390,7 @@ export class OfferComponent implements OnInit, OnDestroy{
           relatedPrices.push(priceComp)
       }
       priceInfo.priceComponents=relatedPrices;
-      console.log(priceInfo)
+      
       }
       if(pricePlan.priceType=='usage'){
         priceInfo.usageUnit=pricePlan.unitOfMeasure.units
@@ -413,9 +402,9 @@ export class OfferComponent implements OnInit, OnDestroy{
       }
 
       this.pricePlans.push(priceInfo);
-      console.log(this.pricePlans)
+      
      }
-     console.log('Price Plans existentes: ', this.pricePlans);
+     
 
     this.productOfferForm.patchValue({
       pricePlans: this.pricePlans // Cargar si existe, o dejar en null
@@ -491,7 +480,7 @@ export class OfferComponent implements OnInit, OnDestroy{
     }
 
     if (priceType === 'usage') {
-      console.log(component.newValue)
+      
       priceComp.unitOfMeasure = {
         amount: 1,
         units: component.usageUnit ?? component.newValue.usageUnit      
@@ -500,9 +489,6 @@ export class OfferComponent implements OnInit, OnDestroy{
       priceComp['@schemaLocation'] = "https://raw.githubusercontent.com/laraminones/tmf-new-schemas/main/UsageSpecId.json";
       (priceComp as any).usagespecid = component.newValue.usageSpecId;
 
-
-      console.log('-- here')
-      console.log(priceComp)
     }
 
     if (component?.selectedCharacteristic || component?.newValue?.selectedCharacteristic) {
@@ -517,8 +503,6 @@ export class OfferComponent implements OnInit, OnDestroy{
       const discount = await this.createPriceAlteration(component, currency);
       priceComp.popRelationship = [{ id: discount.id, href: discount.id, name: discount.name }];
     }
-    console.log('create price comp')
-    console.log(priceComp)
     const created = await lastValueFrom(this.api.postOfferingPrice(priceComp));
     return { id: created.id, href: created.id, name: created.name };
   }
@@ -903,7 +887,6 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     request$.subscribe({
       next: (data) => {
-        console.log('product offer saved/updated:', data);
         this.goBack();          
       },
       error: (error) => {
@@ -952,9 +935,6 @@ export class OfferComponent implements OnInit, OnDestroy{
   }
 
   async updateOffer() {
-    console.log('🔄 Starting offer update process...');
-    console.log('📝 Current form changes:', this.formChanges);
-
     // Preparar el payload base con los datos que no han cambiado
     const basePayload: any = {
       name: this.offer.name,
@@ -969,8 +949,6 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     // Procesar cada cambio emitido por los subformularios
     for (const [subformType, change] of Object.entries(this.formChanges)) {
-      console.log(`📝 Processing changes for ${subformType}:`, change);
-
       switch (subformType) {
         case 'generalInfo':
           // Actualizar información general
@@ -1015,72 +993,52 @@ export class OfferComponent implements OnInit, OnDestroy{
           basePayload.productOfferingPrice = change.currentValue.map((plan: any) => ({
             id: plan.id,
             href: plan.id
-          }));
-          console.log('Cambio en el plan de precios')
-          console.log(basePayload.productOfferingPrice)
-          console.log((change as PricePlanChangeState).modifiedPricePlans)          
+          }));     
           let pricePlanChangeInfo = (change as PricePlanChangeState).modifiedPricePlans;
-          for(let i=0;i< pricePlanChangeInfo.length; i++){
+          for(const element of pricePlanChangeInfo){
             let finalPriceComps:any[]=[];
-            if(pricePlanChangeInfo[i].priceComponents.added.length>0){
+            if(element.priceComponents.added.length>0){
               //Crear price comp
-              for(let j=0;j< pricePlanChangeInfo[i].priceComponents.added.length; j++){
+              for(const elementAdded of element.priceComponents.added){
                 //finalPriceComps.push(this.createPriceComponent(pricePlanChangeInfo[i].priceComponents.added[j],change.currentValue.currency))
-                let compCreated = await this.createPriceComponent(pricePlanChangeInfo[i].priceComponents.added[j],pricePlanChangeInfo[i]?.newValue.currency)
+                let compCreated = await this.createPriceComponent(elementAdded,element?.newValue.currency)
                 finalPriceComps.push(compCreated)
-              } 
-              console.log('The following price comps has been created:')
-              console.log(finalPriceComps)
+              }
             }
-            if(pricePlanChangeInfo[i].priceComponents.modified.length>0){
+            if(element.priceComponents.modified.length>0){
               //Modificar price comp
-              for(let j=0; j < pricePlanChangeInfo[i].priceComponents.modified.length ;j++){
+              for(const priceComponent of element.priceComponents.modified){
                 //Revisar que en el caso de actualizar un componente que tenga el mismo id que el price plan (que antes no fuese bundle) ahora hay que crear el componente
-                console.log('antes del check')
-                console.log(pricePlanChangeInfo[i])
-                console.log(pricePlanChangeInfo[i]?.oldValue.isBundle)
-                console.log((!pricePlanChangeInfo[i]?.oldValue.isBundle && pricePlanChangeInfo[i].priceComponents.added.length>0))
-                console.log(pricePlanChangeInfo[i].priceComponents.modified[j].id == pricePlanChangeInfo[i].id)
-                if((pricePlanChangeInfo[i].priceComponents.modified[j].id == pricePlanChangeInfo[i].id) && (!pricePlanChangeInfo[i]?.oldValue.isBundle && pricePlanChangeInfo[i].priceComponents.added.length>0)){
-                  console.log('Si entra en el check')
-                  let compUpdated = await this.createPriceComponent(pricePlanChangeInfo[i].priceComponents.modified[j],pricePlanChangeInfo[i]?.newValue.currency)
+                if((priceComponent.id == element.id) && (!element?.oldValue.isBundle && element.priceComponents.added.length>0)){
+                  let compUpdated = await this.createPriceComponent(priceComponent,element?.newValue.currency)
                   finalPriceComps.push(compUpdated)
-                } else if(pricePlanChangeInfo[i].priceComponents.modified[j].id != pricePlanChangeInfo[i].id){
-                  let compUpdated = await this.updatePriceComponent(pricePlanChangeInfo[i].priceComponents.modified[j],pricePlanChangeInfo[i]?.newValue.currency)
+                } else if(priceComponent.id != element.id){
+                  let compUpdated = await this.updatePriceComponent(priceComponent,element?.newValue.currency)
                   finalPriceComps.push(compUpdated)
                 } 
-                
-                console.log('The following price comp has been updated:')
-                console.log(pricePlanChangeInfo[i].priceComponents.modified[j])
               }
             }
             //Modificar el plan
-            if (!pricePlanChangeInfo[i].id.startsWith('temp-id')) {
-              let updatedPricePlan = await this.updatePricePlan(pricePlanChangeInfo[i],finalPriceComps,pricePlanChangeInfo[i].modifiedFields);
-            
-              console.log('Modified price plan')
+            if (!element.id.startsWith('temp-id')) {
+              let updatedPricePlan = await this.updatePricePlan(element,finalPriceComps,element.modifiedFields);
               console.log(updatedPricePlan)
             } else {
               if (finalPriceComps.length > 1) {
-                let createdPricePlan = await this.createBundledPricePlan(pricePlanChangeInfo[i],finalPriceComps);
+                let createdPricePlan = await this.createBundledPricePlan(element,finalPriceComps);
                 const created = await lastValueFrom(this.api.postOfferingPrice(createdPricePlan));
                 let index = basePayload.productOfferingPrice.findIndex(
-                  (plan: any) => plan.id === pricePlanChangeInfo[i].id
+                  (plan: any) => plan.id === element.id
                 );
                 basePayload.productOfferingPrice[index].id = created.id;
                 basePayload.productOfferingPrice[index].href = created.id;
-                console.log('New price plan')
-                console.log(createdPricePlan)
               } else {
-                let createdPricePlan = await this.createSinglePricePlan(pricePlanChangeInfo[i],finalPriceComps[0]);
+                let createdPricePlan = await this.createSinglePricePlan(element,finalPriceComps[0]);
                 const created = await lastValueFrom(this.api.postOfferingPrice(createdPricePlan));
                 let index = basePayload.productOfferingPrice.findIndex(
-                  (plan: any) => plan.id === pricePlanChangeInfo[i].id
+                  (plan: any) => plan.id === element.id
                 );
                 basePayload.productOfferingPrice[index].id = created.id;
                 basePayload.productOfferingPrice[index].href = created.id;
-                console.log('New price plan')
-                console.log(createdPricePlan)
               }
             }
           }
@@ -1127,12 +1085,9 @@ export class OfferComponent implements OnInit, OnDestroy{
       basePayload.productOfferingTerm = [licenseTerm, ...otherTerms];
     }
 
-    console.log('📝 Final update payload:', basePayload);
-
     try {
       // Llamar a la API para actualizar la oferta
       await lastValueFrom(this.api.updateProductOffering(basePayload, this.offer.id));
-      console.log('✅ Offer updated successfully');
       this.goBack();
     } catch (error: any) {
       console.error('❌ Error updating offer:', error);

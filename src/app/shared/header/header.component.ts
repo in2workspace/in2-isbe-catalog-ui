@@ -311,7 +311,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
       "email": aux.email,
       "token": aux.token,
       "expire": aux.expire,
-      "partyId": aux.partyId,
+      "seller": aux.seller,
       "roles": aux.roles,
       "organizations": aux.organizations,
       "logged_as": aux.id};
@@ -332,7 +332,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
       "email": aux.email,
       "token": aux.token,
       "expire": aux.expire,
-      "partyId": aux.partyId,
+      "seller": aux.seller,
       "roles": aux.roles,
       "organizations": aux.organizations,
       "logged_as": this.orgs[idx].id };

@@ -19,17 +19,17 @@ export class InvoicesService {
 
   constructor(private http: HttpClient,private localStorage: LocalStorageService) { }
 
-  getInvoices(partyId:any, page:any, filters:any[], date:any, role:any){
+  getInvoices(seller:any, page:any, filters:any[], date:any, role:any){
 
     console.log('Reading invoices')
-    console.log(partyId)
+    console.log(seller)
     console.log(role)
 
 
     // TODO. Qué le pasa a esta petición? devuelve algo raro....
     let url = `${InvoicesService.BASE_URL}${InvoicesService.BASE_PATCH}${InvoicesService.API_ORDERING}?limit=1000&offset=${page}`;
   
-    url += `&relatedParty.id=${partyId}&relatedParty.role=${role}`
+    url += `&seller=${seller}&relatedParty.role=${role}`
 
     // let status=''
     // if(filters.length>0){

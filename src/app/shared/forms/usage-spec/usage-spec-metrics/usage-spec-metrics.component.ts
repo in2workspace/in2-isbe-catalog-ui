@@ -25,7 +25,7 @@ export class UsageSpecMetricsComponent {
 
   @Input() formType!: string;
   @Input() data: any;
-  @Input() partyId: any;
+  @Input() seller: any;
   @Output() formChange = new EventEmitter<FormChangeState>();
 
   metrics:any[]=[];

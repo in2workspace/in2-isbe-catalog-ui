@@ -339,10 +339,10 @@ export class CheckoutComponent implements OnInit {
       this.contact.username = aux.username;
     }
     if (aux.logged_as == aux.id) {
-      this.relatedParty = aux.partyId;
+      this.relatedParty = aux.seller;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.relatedParty = loggedOrg.partyId
+      this.relatedParty = loggedOrg.seller
     }
 
     console.log('--- Login Info ---')

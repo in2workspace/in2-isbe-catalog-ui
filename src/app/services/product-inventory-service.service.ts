@@ -21,7 +21,7 @@ export class ProductInventoryServiceService {
   constructor(private http: HttpClient,private localStorage: LocalStorageService) { }
 
   getInventory(page:any,id:any,filters:any[],keywords:any) {
-    let url = `${ProductInventoryServiceService.BASE_URL}${ProductInventoryServiceService.API_INVENTORY}/product?limit=${ProductInventoryServiceService.INVENTORY_LIMIT}&offset=${page}&relatedParty.id=${id}`
+    let url = `${ProductInventoryServiceService.BASE_URL}${ProductInventoryServiceService.API_INVENTORY}/product?limit=${ProductInventoryServiceService.INVENTORY_LIMIT}&offset=${page}&seller=${id}`
     let status=''
     if(filters.length>0){
       for(let i=0; i < filters.length; i++){
@@ -51,7 +51,7 @@ export class ProductInventoryServiceService {
 
 
   getResourceInventory(page:any,filters:any[],id:any){
-    let url = `${ProductInventoryServiceService.BASE_URL}/resourceInventory/resource?limit=${ProductInventoryServiceService.INVENTORY_RES_LIMIT}&offset=${page}&relatedParty.id=${id}`
+    let url = `${ProductInventoryServiceService.BASE_URL}/resourceInventory/resource?limit=${ProductInventoryServiceService.INVENTORY_RES_LIMIT}&offset=${page}&seller=${id}`
     let status=''
     if(filters.length>0){
       for(let i=0; i < filters.length; i++){
@@ -68,7 +68,7 @@ export class ProductInventoryServiceService {
   }
 
   getServiceInventory(page:any,filters:any[],id:any){
-    let url = `${ProductInventoryServiceService.BASE_URL}/serviceInventory/service?limit=${ProductInventoryServiceService.INVENTORY_SERV_LIMIT}&offset=${page}&relatedParty.id=${id}`
+    let url = `${ProductInventoryServiceService.BASE_URL}/serviceInventory/service?limit=${ProductInventoryServiceService.INVENTORY_SERV_LIMIT}&offset=${page}&seller=${id}`
     let status=''
     if(filters.length>0){
       for(let i=0; i < filters.length; i++){

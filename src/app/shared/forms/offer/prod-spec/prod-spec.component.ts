@@ -42,7 +42,7 @@ interface ProductSpec {
 export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() formType!: string;
   @Input() data: any;
-  @Input() partyId: any;
+  @Input() seller: any;
   @Input() bundleChecked: boolean = false;
   @Output() formChange = new EventEmitter<FormChangeState>();
 
@@ -110,7 +110,7 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
     let options = {
       "filters": ['Active','Launched'],
-      "partyId": this.partyId
+      "seller": this.seller
     }
 
     this.paginationService.getItemsPaginated(this.prodSpecPage, this.PROD_SPEC_LIMIT, next, this.prodSpecs,this.nextProdSpecs, options,

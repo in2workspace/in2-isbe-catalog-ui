@@ -24,7 +24,7 @@ type Catalog_Create = components["schemas"]["Catalog_Create"];
     imports: [ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, MarkdownTextareaComponent, ReactiveFormsModule]
 })
 export class CreateCatalogComponent implements OnInit {
-  partyId:any='';
+  seller:any='';
 
   catalogToCreate:Catalog_Create | undefined;
 
@@ -83,10 +83,10 @@ export class CreateCatalogComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId
+        this.seller = loggedOrg.seller
       }
     }
   }
@@ -111,7 +111,7 @@ export class CreateCatalogComponent implements OnInit {
         lifecycleStatus: "Active",
         relatedParty: [
           {
-              id: this.partyId,
+              id: this.seller,
               //href: "http://proxy.docker:8004/party/individual/urn:ngsi-ld:individual:803ee97b-1671-4526-ba3f-74681b22ccf3",
               role: "Owner",
               "@referredType": ''

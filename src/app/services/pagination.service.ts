@@ -40,8 +40,8 @@ export class PaginationService {
       if("filters" in options){
         params.push(options.filters)
       }
-      if("partyId" in options){
-        params.push(options.partyId.toString())
+      if("seller" in options){
+        params.push(options.seller.toString())
       }
       if("catalogId" in options){
         params.push(options.catalogId.toString())
@@ -496,9 +496,9 @@ export class PaginationService {
     }
   }*/
 
-  /*async getOrders(page:number,filters:Category[],partyId:any,selectedDate:any,orders:any[],role:any): Promise<any[]> {
+  /*async getOrders(page:number,filters:Category[],seller:any,selectedDate:any,orders:any[],role:any): Promise<any[]> {
     try{
-      orders = await this.orderService.getProductOrders(partyId,page,filters,selectedDate,role)
+      orders = await this.orderService.getProductOrders(seller,page,filters,selectedDate,role)
       for(let i=0;i<orders.length;i++){
         let items:any[] = [];
         let bill = await this.accountService.getBillingAccountById(orders[i].billingAccount.id)
@@ -548,10 +548,10 @@ export class PaginationService {
     }
   }*/
 
-  async getOrders(page: number, filters: Category[], partyId: any, selectedDate: any, orders: any[], role: any): Promise<any[]> {
+  async getOrders(page: number, filters: Category[], seller: any, selectedDate: any, orders: any[], role: any): Promise<any[]> {
     try {
       // Get Orders
-      orders = await this.orderService.getProductOrders(partyId, page, filters, selectedDate, role);
+      orders = await this.orderService.getProductOrders(seller, page, filters, selectedDate, role);
       console.log('getOrders', orders);
       // Obtener todas las cuentas de facturación en paralelo
       const billingAccounts = await Promise.all(orders.map(order => this.accountService.getBillingAccountById(order.billingAccount.id)));
@@ -656,10 +656,10 @@ export class PaginationService {
     }
   
   /*
-  async getInventory(page:number,keywords:any,filters:Category[],partyId:any): Promise<any[]>{
+  async getInventory(page:number,keywords:any,filters:Category[],seller:any): Promise<any[]>{
     let inv:any[]=[]
     try {
-      let data = await this.inventoryService.getInventory(page,partyId,filters,keywords)
+      let data = await this.inventoryService.getInventory(page,seller,filters,keywords)
       console.log('inv request')
       console.log(data)
       inv = await this.getOffers(data);
@@ -668,12 +668,12 @@ export class PaginationService {
     }
   }*/
 
-  async getInventory(page: number, keywords: any, filters: Category[], partyId: any): Promise<any[]> {
+  async getInventory(page: number, keywords: any, filters: Category[], seller: any): Promise<any[]> {
     try {
       console.log('Fetching inventory...');
 
       // Obtener inventario desde el servicio
-      const data = await this.inventoryService.getInventory(page, partyId, filters, keywords);
+      const data = await this.inventoryService.getInventory(page, seller, filters, keywords);
       console.log('Inventory received:', data);
 
       // Obtener ofertas del inventario
@@ -685,13 +685,13 @@ export class PaginationService {
     }
   }
 
-  async getInvoices(page:number, filters:Category[], partyId:any, selectedDate:any, role:any): Promise<any[]> {
+  async getInvoices(page:number, filters:Category[], seller:any, selectedDate:any, role:any): Promise<any[]> {
     console.log("---getInvoices---")
     let invoices = []
     try{
-      invoices = await this.invoicesService.getInvoices(partyId,page,filters,selectedDate,role)
+      invoices = await this.invoicesService.getInvoices(seller,page,filters,selectedDate,role)
     } finally {
-      console.log("params:", partyId,page,filters,selectedDate,role)
+      console.log("params:", seller,page,filters,selectedDate,role)
       console.log("---getInvoices result:---", invoices)
       console.log(invoices)
       return invoices

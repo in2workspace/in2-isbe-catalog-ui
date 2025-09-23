@@ -22,7 +22,7 @@ export class UsageListComponent  implements OnInit {
   nextUsageSpecs:any[]=[];
   loading:boolean=false;
   loading_more:boolean=false;
-  partyId:any='';
+  seller:any='';
   page:number=0;
   page_check:boolean = true;
   USAGE_SPEC_LIMIT: number = environment.USAGE_SPEC_LIMIT;
@@ -38,7 +38,7 @@ export class UsageListComponent  implements OnInit {
   async ngOnInit() {
     this.initPartyInfo();
     this.loading=true;
-    /*this.usageService.getUsageSpecs(this.partyId).then(data => {
+    /*this.usageService.getUsageSpecs(this.seller).then(data => {
       this.usageSpecs=data;
       this.loading=false;
     })*/
@@ -49,10 +49,10 @@ export class UsageListComponent  implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId
+        this.seller = loggedOrg.seller
       }
     }
   }
@@ -63,7 +63,7 @@ export class UsageListComponent  implements OnInit {
     }
     
     let options = {
-      "partyId": this.partyId
+      "seller": this.seller
     }
     
     this.paginationService.getItemsPaginated(this.page, this.USAGE_SPEC_LIMIT, next, this.usageSpecs,this.nextUsageSpecs, options,

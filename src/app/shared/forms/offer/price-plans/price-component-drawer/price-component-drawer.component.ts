@@ -44,7 +44,7 @@ export class PriceComponentDrawerComponent implements OnInit {
   selectedUsageSpec:any;
   selectedMetric:any;
   showMetricSelect:boolean=false;
-  partyId:any='';
+  seller:any='';
   showPopover = false;
 
   constructor(
@@ -118,7 +118,7 @@ export class PriceComponentDrawerComponent implements OnInit {
       }
     }
     this.initPartyInfo();
-    this.usageService.getAllUsageSpecs(this.partyId).then(data => {
+    this.usageService.getAllUsageSpecs(this.seller).then(data => {
       this.usageSpecs=data;
       if(this.priceComponentForm.get('usageSpecId')){
         this.selectedUsageSpec = this.usageSpecs.find((element: { id: any; }) => element.id == this.priceComponentForm.get('usageSpecId')?.value)
@@ -133,10 +133,10 @@ export class PriceComponentDrawerComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId
+        this.seller = loggedOrg.seller
       }
     }
   }

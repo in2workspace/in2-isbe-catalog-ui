@@ -35,7 +35,7 @@ export class SellerCatalogsComponent implements OnInit{
   loading_more: boolean = false;
   page_check:boolean = true;
   filter:any=undefined;
-  partyId:any;
+  seller:any;
   status:any[]=[];
 
   constructor(
@@ -70,10 +70,10 @@ export class SellerCatalogsComponent implements OnInit{
     this.nextCatalogs=[];
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(aux.logged_as==aux.id){
-      this.partyId = aux.partyId;
+      this.seller = aux.seller;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.partyId = loggedOrg.partyId
+      this.seller = loggedOrg.seller
     }
 
     this.getCatalogs(false);
@@ -103,7 +103,7 @@ export class SellerCatalogsComponent implements OnInit{
     let options = {
       "keywords": this.filter,
       "filters": this.status,
-      "partyId": this.partyId
+      "seller": this.seller
     }
 
     this.paginationService.getItemsPaginated(this.page, this.CATALOG_LIMIT, next, this.catalogs, this.nextCatalogs, options,

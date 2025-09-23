@@ -34,7 +34,7 @@ export class OrgInfoComponent {
   loading: boolean = false;
   orders:any[]=[];
   profile:any;
-  partyId:any='';
+  seller:any='';
   token:string='';
   email:string='';
   selectedDate:any;
@@ -143,11 +143,11 @@ export class OrgInfoComponent {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.partyId = loggedOrg.partyId;
+      this.seller = loggedOrg.seller;
 
       this.token=aux.token;
       this.email=aux.email;
-      //this.partyId = aux.partyId;
+      //this.seller = aux.seller;
       this.getProfile();
     }
     initFlowbite();
@@ -155,7 +155,7 @@ export class OrgInfoComponent {
 
   getProfile(){
     this.contactmediums=[];
-    this.accountService.getOrgInfo(this.partyId).then(data=> {
+    this.accountService.getOrgInfo(this.seller).then(data=> {
       console.log('--org info--')
       console.log(data)
       this.profile=data;
@@ -238,7 +238,7 @@ export class OrgInfoComponent {
       "partyCharacteristic": chars
     }
     console.log(profile)
-    this.accountService.updateOrgInfo(this.partyId,profile).subscribe({
+    this.accountService.updateOrgInfo(this.seller,profile).subscribe({
       next: data => {
         this.profileForm.reset();
         this.getProfile();

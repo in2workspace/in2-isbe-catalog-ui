@@ -457,29 +457,29 @@ describe('CreateProductSpecComponent', () => {
     logSpy.mockRestore();
   });
 
-  it('should initPartyInfo set partyId from localStorage', () => {
+  it('should initPartyInfo set seller from localStorage', () => {
     const loginInfo = {
       expire: Math.floor(Date.now() / 1000) + 10,
       logged_as: '1',
       id: '1',
-      partyId: 'party1',
+      seller: 'party1',
       organizations: []
     };
     jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(loginInfo);
     component.initPartyInfo();
-    expect(component.partyId).toBe('party1');
+    expect(component.seller).toBe('party1');
   });
 
-  it('should initPartyInfo set partyId from organizations', () => {
+  it('should initPartyInfo set seller from organizations', () => {
     const loginInfo = {
       expire: Math.floor(Date.now() / 1000) + 10,
       logged_as: '2',
       id: '1',
-      organizations: [{ id: '2', partyId: 'party2' }]
+      organizations: [{ id: '2', seller: 'party2' }]
     };
     jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(loginInfo);
     component.initPartyInfo();
-    expect(component.partyId).toBe('party2');
+    expect(component.seller).toBe('party2');
   });
   
 });

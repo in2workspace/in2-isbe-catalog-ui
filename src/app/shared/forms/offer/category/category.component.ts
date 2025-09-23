@@ -40,7 +40,7 @@ interface Category {
 export class CategoryComponent implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
   @Input() formType!: string;
   @Input() data: any;
-  @Input() partyId: any;
+  @Input() seller: any;
   @Output() formChange = new EventEmitter<FormChangeState>();
 
   //CATEGORIES

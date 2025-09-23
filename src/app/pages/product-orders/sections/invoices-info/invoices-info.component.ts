@@ -34,7 +34,7 @@ export class InvoicesInfoComponent implements OnInit {
   invoices:any[]=[];
   nextInvoices:any[]=[];
   profile:any;
-  partyId:any='';
+  seller:any='';
   showInvoiceDetails:boolean=false;
   invoiceToShow:any;
   dateRange = new FormControl();
@@ -101,7 +101,7 @@ export class InvoicesInfoComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.seller;
         let userRoles = aux.roles.map((elem: any) => {
           return elem.name
         })
@@ -110,7 +110,7 @@ export class InvoicesInfoComponent implements OnInit {
         }
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.partyId = loggedOrg.partyId;
+        this.seller = loggedOrg.seller;
         let orgRoles = loggedOrg.roles.map((elem: any) => {
           return elem.name
         })
@@ -118,7 +118,7 @@ export class InvoicesInfoComponent implements OnInit {
           this.isSeller=true;
         }
       }
-      //this.partyId = aux.partyId;
+      //this.seller = aux.seller;
       this.page=0;
       this.invoices=[];
       this.getInvoices(false);
@@ -147,7 +147,7 @@ export class InvoicesInfoComponent implements OnInit {
 
     let options = {
       "filters": this.filters,
-      "partyId": this.partyId,
+      "seller": this.seller,
       "selectedDate": this.selectedDate,
       "invoices": this.invoices,
       "role": this.role,

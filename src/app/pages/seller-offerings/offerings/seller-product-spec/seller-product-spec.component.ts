@@ -39,7 +39,7 @@ export class SellerProductSpecComponent implements OnInit{
   page_check:boolean = true;
   filter:any=undefined;
   status:any[]=[];
-  partyId:any;
+  seller:any;
   sort:any=undefined;
   isBundle:any=undefined;
 
@@ -68,10 +68,10 @@ export class SellerProductSpecComponent implements OnInit{
     this.prodSpecs=[];
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(aux.logged_as==aux.id){
-      this.partyId = aux.partyId;
+      this.seller = aux.seller;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.partyId = loggedOrg.partyId
+      this.seller = loggedOrg.seller
     }
 
     this.getProdSpecs(false);
@@ -108,7 +108,7 @@ export class SellerProductSpecComponent implements OnInit{
     
     let options = {
       "filters": this.status,
-      "partyId": this.partyId,
+      "seller": this.seller,
       "sort": this.sort,
       "isBundle": this.isBundle
     }

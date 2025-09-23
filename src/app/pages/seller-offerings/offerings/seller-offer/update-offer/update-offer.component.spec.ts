@@ -44,48 +44,48 @@ describe('UpdateOfferComponent', () => {
     expect(component).toBeTruthy();
   });
   
-  it('should initialize partyId from localStorage when logged_as equals id', () => {
+  it('should initialize seller from localStorage when logged_as equals id', () => {
     const mockLoginInfo = {
       expire: Math.floor(Date.now() / 1000) + 1000,
       logged_as: 'user1',
       id: 'user1',
-      partyId: 'party123',
+      seller: 'party123',
       organizations: []
     };
     localStorageMock.getObject.mockReturnValue(mockLoginInfo);
     component.initPartyInfo();
 
-    expect(component.partyId).toBe('party123');
+    expect(component.seller).toBe('party123');
   });
 
-  it('should initialize partyId from organizations when logged_as does not equal id', () => {
+  it('should initialize seller from organizations when logged_as does not equal id', () => {
     const mockLoginInfo = {
       expire: Math.floor(Date.now() / 1000) + 1000,
       logged_as: 'org2',
       id: 'user1',
-      partyId: 'party123',
+      seller: 'party123',
       organizations: [
-        { id: 'org2', partyId: 'partyOrg2' }
+        { id: 'org2', seller: 'partyOrg2' }
       ]
     };
     localStorageMock.getObject.mockReturnValue(mockLoginInfo);
     component.initPartyInfo();
 
-    expect(component.partyId).toBe('partyOrg2');
+    expect(component.seller).toBe('partyOrg2');
   });
 
-  it('should not set partyId if login info is expired', () => {
+  it('should not set seller if login info is expired', () => {
     const mockLoginInfo = {
       expire: Math.floor(Date.now() / 1000) - 1000,
       logged_as: 'user1',
       id: 'user1',
-      partyId: 'party123',
+      seller: 'party123',
       organizations: []
     };
     localStorageMock.getObject.mockReturnValue(mockLoginInfo);
       component.initPartyInfo();
 
-    expect(component.partyId).toBe('');
+    expect(component.seller).toBe('');
   });
 
   it('should emit event on goBack', () => {

@@ -35,7 +35,7 @@ export class UsageSpecComponent implements OnInit {
 
   @Input() formType: 'create' | 'update' = 'create';
   @Input() usageSpec: any = {};
-  @Input() partyId: any;
+  @Input() seller: any;
 
   usageSpecForm: FormGroup;
   currentStep = 0;
@@ -187,8 +187,8 @@ export class UsageSpecComponent implements OnInit {
       specCharacteristic: metrics,
       relatedParty: [
         {
-          id: this.partyId,
-          href: this.partyId,
+          id: this.seller,
+          href: this.seller,
         }
       ],
     }

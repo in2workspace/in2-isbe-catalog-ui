@@ -82,8 +82,8 @@ export class ApiServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getProductOfferByOwner(page:any,status:any[],partyId:any,sort:any,isBundle:any) {
-    let url = `${ApiServiceService.BASE_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&relatedParty=${partyId}`;
+  getProductOfferByOwner(page:any,status:any[],seller:any,sort:any,isBundle:any) {
+    let url = `${ApiServiceService.BASE_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&relatedParty=${seller}`;
 
     if(sort!=undefined){
       url=url+'&sort='+sort
@@ -208,8 +208,8 @@ export class ApiServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getCatalogsByUser(page:any,filter:any,status:any[],partyId:any) {
-    let url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&relatedParty.id=${partyId}`;
+  getCatalogsByUser(page:any,filter:any,status:any[],seller:any) {
+    let url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&seller=${seller}`;
     let lifeStatus=''
     if(status)
     if(status.length>0){

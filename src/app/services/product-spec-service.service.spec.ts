@@ -23,12 +23,12 @@ describe('ProductSpecServiceService', () => {
   it('should call getProdSpecByUser with correct URL and params', async () => {
     const page = 1;
     const status = ['ACTIVE', 'INACTIVE'];
-    const partyId = '123';
+    const seller = '123';
     const sort = 'name';
     const isBundle = true;
-    const expectedUrl = `${environment.BASE_URL}${environment.PRODUCT_SPEC}?limit=${environment.PROD_SPEC_LIMIT}&offset=${page}&relatedParty.id=${partyId}&sort=${sort}&isBundle=${isBundle}&lifecycleStatus=ACTIVE,INACTIVE`;
+    const expectedUrl = `${environment.BASE_URL}${environment.PRODUCT_SPEC}?limit=${environment.PROD_SPEC_LIMIT}&offset=${page}&seller=${seller}&sort=${sort}&isBundle=${isBundle}&lifecycleStatus=ACTIVE,INACTIVE`;
 
-    const promise = service.getProdSpecByUser(page, status, partyId, sort, isBundle);
+    const promise = service.getProdSpecByUser(page, status, seller, sort, isBundle);
     const req = httpMock.expectOne(expectedUrl);
     expect(req.request.method).toBe('GET');
     req.flush({ data: [] });
@@ -38,10 +38,10 @@ describe('ProductSpecServiceService', () => {
   it('should call getProdSpecByUser without optional params', async () => {
     const page = 0;
     const status: string[] = [];
-    const partyId = '456';
-    const expectedUrl = `${environment.BASE_URL}${environment.PRODUCT_SPEC}?limit=${environment.PROD_SPEC_LIMIT}&offset=${page}&relatedParty.id=${partyId}`;
+    const seller = '456';
+    const expectedUrl = `${environment.BASE_URL}${environment.PRODUCT_SPEC}?limit=${environment.PROD_SPEC_LIMIT}&offset=${page}&seller=${seller}`;
 
-    const promise = service.getProdSpecByUser(page, status, partyId);
+    const promise = service.getProdSpecByUser(page, status, seller);
     const req = httpMock.expectOne(expectedUrl);
     expect(req.request.method).toBe('GET');
     req.flush({});

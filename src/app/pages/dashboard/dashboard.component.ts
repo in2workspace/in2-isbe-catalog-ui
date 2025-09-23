@@ -95,7 +95,7 @@ export class DashboardComponent implements OnInit {
           "email": data.email,
           "token": data.accessToken,
           "expire": data.expire,
-          "partyId": data.partyId,
+          "seller": data.seller,
           "roles": data.roles,
           "organizations": data.organizations,
           "logged_as": data.id } as LoginInfo;
