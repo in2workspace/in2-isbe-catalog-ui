@@ -35,7 +35,7 @@ export class SellerOfferComponent implements OnInit{
   loading_more: boolean = false;
   page_check:boolean = true;
   filter:any=undefined;
-  status:any[]=['Active','Launched'];
+  status:any[]=[];
   partyId:any;
   sort:any=undefined;
   isBundle:any=undefined;

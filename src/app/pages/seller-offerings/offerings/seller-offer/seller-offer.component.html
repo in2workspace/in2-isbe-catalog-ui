@@ -40,7 +40,7 @@
             <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
   
                 <li class="flex items-center">
-                <input id="active" type="checkbox" value="" checked (change)="onStateFilterChange('Active')"
+                <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
                     class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
     
                 <label for="active" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
@@ -49,7 +49,7 @@
                 </li>
     
                 <li class="flex items-center">
-                <input id="launched" type="checkbox" value="" checked (change)="onStateFilterChange('Launched')"
+                <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
                     class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
     
                 <label for="launched" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">

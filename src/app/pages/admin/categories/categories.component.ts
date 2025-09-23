@@ -34,7 +34,7 @@ export class CategoriesComponent {
   CATEGOY_LIMIT: number = environment.CATEGORY_LIMIT;
   loading: boolean = false;
   partyId:any;
-  status:any[]=['Active','Launched'];
+  status:any[]=[];
 
   constructor(
     private router: Router,
