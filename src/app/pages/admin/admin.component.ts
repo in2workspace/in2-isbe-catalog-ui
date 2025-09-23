@@ -9,13 +9,15 @@ import { UpdateCategoryComponent } from './categories/update-category/update-cat
 import { CreateCategoryComponent } from './categories/create-category/create-category.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-admin',
     templateUrl: './admin.component.html',
     styleUrl: './admin.component.css',
     standalone: true,
-    imports: [OperatorRevenueSharingComponent, VerificationComponent, UpdateCategoryComponent, CreateCategoryComponent,CategoriesComponent,TranslateModule]
+    imports: [OperatorRevenueSharingComponent, VerificationComponent, UpdateCategoryComponent, CreateCategoryComponent,CategoriesComponent,TranslateModule, NgClass]
 })
 export class AdminComponent implements OnInit {
   show_categories:boolean = true;
@@ -23,6 +25,8 @@ export class AdminComponent implements OnInit {
   show_update_categories:boolean = false;
   show_verification:boolean = false;
   show_revenue:boolean = false;
+
+  isIsbe: boolean = environment.ISBE_CATALOGUE;
 
   category_to_update:any;
   constructor(
