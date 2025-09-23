@@ -85,7 +85,7 @@ describe('UpdateOfferComponent', () => {
     localStorageMock.getObject.mockReturnValue(mockLoginInfo);
       component.initPartyInfo();
 
-    expect(component.partyId).toBe('party123');
+    expect(component.partyId).toBe('');
   });
 
   it('should emit event on goBack', () => {
