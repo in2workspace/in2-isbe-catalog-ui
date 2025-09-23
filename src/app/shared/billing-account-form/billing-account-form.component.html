@@ -5,7 +5,7 @@
         [ngClass]="billingForm.get('name')?.touched && billingForm.get('name')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 dark:border-secondary-200'"  
-        class="mb-2 bg-gray-50 border text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 border text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
         @if(billingForm.get('name')?.touched && billingForm.get('name')?.hasError('required')){
             <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -19,7 +19,7 @@
         [ngClass]="billingForm.get('country')?.touched && billingForm.get('country')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 dark:border-secondary-200'" 
-        class="mb-2 bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
         @if(billingForm.get('country')?.touched && billingForm.get('country')?.hasError('required')){
             <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -33,7 +33,7 @@
         [ngClass]="billingForm.get('city')?.touched && billingForm.get('city')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 dark:border-secondary-200'" 
-        class="mb-2 bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
         @if(billingForm.get('city')?.touched && billingForm.get('city')?.hasError('required')){
             <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -47,7 +47,7 @@
         [ngClass]="billingForm.get('stateOrProvince')?.touched && billingForm.get('stateOrProvince')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 dark:border-secondary-200'" 
-        class="mb-2 bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
         @if(billingForm.get('stateOrProvince')?.touched && billingForm.get('stateOrProvince')?.hasError('required')){
             <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -61,7 +61,7 @@
         [ngClass]="billingForm.get('postCode')?.touched && billingForm.get('postCode')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 dark:border-secondary-200'" 
-        class="mb-2 bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
         @if(billingForm.get('postCode')?.touched && billingForm.get('postCode')?.hasError('required')){
             <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -75,7 +75,7 @@
         [ngClass]="billingForm.get('street')?.touched && billingForm.get('street')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 dark:border-secondary-200'" 
-        class="mb-2 min-h-fit bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" rows="4"></textarea>
+        class="mb-2 min-h-fit bg-gray-50 text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" rows="4"></textarea>
         @if(billingForm.get('street')?.touched && billingForm.get('street')?.hasError('required')){
             <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -90,7 +90,7 @@
         ? 'border-red-600'
         : 'border-gray-300 dark:border-secondary-200'" 
         formControlName="email" name="email"
-        class="mb-2 bg-gray-50 border text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 border text-gray-900 dark:bg-secondary-300 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
         @if(billingForm.get('email')?.invalid && billingForm.get('email')?.errors?.['maxlength']){
             <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'BILLING._too_long_email' | translate }}</span></p>
         }
@@ -104,7 +104,7 @@
     <div class="col-span-2 lg:col-span-1">
         <label for="phoneType" class="mb-3 block text-sm font-semibold leading-none text-body-dark dark:text-white">{{ 'BILLING._phone_type' | translate }}</label>
         <select id="phoneType" formControlName="telephoneType"
-        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
             <option value="Mobile">Mobile</option>
             <option value="Landline">Landline</option>
             <option value="Office">Office</option>
@@ -137,7 +137,7 @@
                     </div>
                 }
                 <input id="phoneNumber" formControlName="telephoneNumber" name="phoneNumber" type="number" [ngClass]="billingForm.get('telephoneNumber')?.touched && billingForm.get('telephoneNumber')?.invalid == true ? 'border-red-600' : 'border-gray-300 dark:border-secondary-200'"
-                class="mb-2 bg-gray-50 border text-gray-900 text-sm rounded-r-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-secondary-300 dark:text-white">
+                class="mb-2 bg-gray-50 border text-gray-900 text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5 dark:bg-secondary-300 dark:text-white">
             </div>
             @if(billingForm.get('telephoneNumber')?.invalid  && billingForm.get('telephoneNumber')?.errors?.['min'] && billingForm.get('telephoneNumber')?.touched){
                 <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">You cannot enter negative numbers.</span></p>

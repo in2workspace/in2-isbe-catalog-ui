@@ -10,6 +10,6 @@ import { environment } from 'src/environments/environment';
     imports: [TranslateModule]
 })
 export class ExploreDomeComponent {
-  domeAbout: string = environment.DOME_ABOUT_LINK
+  domeAbout: string = environment.ISBE_ABOUT_LINK
 
 }

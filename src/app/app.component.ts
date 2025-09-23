@@ -9,7 +9,6 @@ import { ApiServiceService } from 'src/app/services/product-service.service';
 import { RefreshLoginServiceService } from "src/app/services/refresh-login-service.service";
 import * as moment from 'moment';
 import { FooterComponent } from './shared/footer/footer.component';
-import { ChatbotWidgetComponent } from './chatbot-widget/chatbot-widget.component';
 import { HeaderComponent } from './shared/header/header.component';
 
 
@@ -18,10 +17,10 @@ import { HeaderComponent } from './shared/header/header.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [FooterComponent, ChatbotWidgetComponent, RouterOutlet, HeaderComponent]
+  imports: [FooterComponent, RouterOutlet, HeaderComponent]
 })
 export class AppComponent implements OnInit {
-  title = 'DOME Marketplace';
+  title = 'ISBE Catalog';
   showPanel = false;
 
   constructor(private translate: TranslateService,

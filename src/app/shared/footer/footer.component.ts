@@ -1,10 +1,4 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {
-  faCartShopping,
-  faHandHoldingBox,
-  faAddressCard,
-  faArrowRightFromBracket,  
-} from "@fortawesome/sharp-solid-svg-icons";
+import { Component } from '@angular/core';
 import { faLinkedin, faYoutube, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -27,13 +21,13 @@ export class FooterComponent {
   protected readonly faLinkedin = faLinkedin;
   protected readonly faYoutube = faYoutube;
   protected readonly faXTwitter = faXTwitter;
-  protected readonly DOME_LINKEDIN = environment.DOME_LINKEDIN;
-  protected readonly DOME_YOUTUBE = environment.DOME_YOUTUBE;
-  protected readonly DOME_X = environment.DOME_X;
+  protected readonly ISBE_LINKEDIN = environment.ISBE_LINKEDIN;
+  protected readonly ISBE_YOUTUBE = environment.ISBE_YOUTUBE;
+  protected readonly ISBE_X = environment.ISBE_X;
   feedback:boolean=false;
   checkLogged:boolean=false;
 
-  constructor(private router: Router,private eventMessage: EventMessageService,private localStorage: LocalStorageService,) {
+  constructor(private readonly router: Router,private readonly eventMessage: EventMessageService,private readonly localStorage: LocalStorageService,) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'CloseFeedback') {
         this.feedback = false;
@@ -45,7 +39,6 @@ export class FooterComponent {
     })
   }
   
-
   goTo(path:string) {
     this.router.navigate([path]);
   }
