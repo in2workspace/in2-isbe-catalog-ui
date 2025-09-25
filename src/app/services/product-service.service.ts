@@ -83,7 +83,7 @@ export class ApiServiceService {
   }
 
   getProductOfferByOwner(page:any,status:any[],seller:any,sort:any,isBundle:any) {
-    let url = `${ApiServiceService.BASE_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&relatedParty=${seller}`;
+    let url = `${ApiServiceService.BASE_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&seller=${seller}`;
 
     if(sort!=undefined){
       url=url+'&sort='+sort

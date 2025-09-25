@@ -35,7 +35,7 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
   billing_accounts: billingAccountCart[] =[];
   selectedBilling:any;
   loading: boolean = false;
-  relatedParty:string='';
+  seller:string='';
 
   constructor(
     private eventMessage: EventMessageService,
@@ -53,12 +53,12 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
     //initFlowbite();
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(aux.logged_as==aux.id){
-      this.relatedParty = aux.seller;
+      this.seller = aux.seller;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
       console.log('loggedorg')
       console.log(loggedOrg)
-      this.relatedParty = loggedOrg.seller
+      this.seller = loggedOrg.seller
     }
     this.loading=true;
     this.showBackDrop=true;
@@ -264,10 +264,10 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
     let productOrder = {
       "state": "acknowledged",
       "productOrderItem": products,
-      "relatedParty": [
+      "seller": [
         {
-            "id": this.relatedParty,
-            "href": this.relatedParty,
+            "id": this.seller,
+            "href": this.seller,
             "role": "Customer"
         }
       ],
@@ -368,10 +368,10 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
     return {
       state: 'acknowledged',
       productOrderItem: products,
-      relatedParty: [
+      seller: [
         {
-          id: this.relatedParty,
-          href: this.relatedParty,
+          id: this.seller,
+          href: this.seller,
           role: 'Customer',
         },
       ],

@@ -29,7 +29,7 @@ export class InvoicesService {
     // TODO. Qué le pasa a esta petición? devuelve algo raro....
     let url = `${InvoicesService.BASE_URL}${InvoicesService.BASE_PATCH}${InvoicesService.API_ORDERING}?limit=1000&offset=${page}`;
   
-    url += `&seller=${seller}&relatedParty.role=${role}`
+    url += `&seller=${seller}&seller.role=${role}`
 
     // let status=''
     // if(filters.length>0){

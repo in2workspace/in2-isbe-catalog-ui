@@ -81,7 +81,7 @@ export class CatalogueComponent implements ControlValueAccessor, OnInit, AfterVi
     
     let options = {
       "keywords": undefined,
-      "filters": ['Active','Launched'],
+      "filters": [], //TODO: check  "filters": ['Active','Launched'],
       "seller": "did:elsi:"+this.seller
     }
 
