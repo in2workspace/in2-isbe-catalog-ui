@@ -23,8 +23,8 @@ export class ProductInventoryComponent implements OnInit, AfterViewInit {
   openProdId:any=undefined;
 
   constructor(
-    private cdr: ChangeDetectorRef,
-    private eventMessage: EventMessageService
+    private readonly cdr: ChangeDetectorRef,
+    private readonly eventMessage: EventMessageService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'OpenServiceDetails') {
