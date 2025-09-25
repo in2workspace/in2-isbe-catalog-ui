@@ -53,12 +53,11 @@ describe('CreateOfferComponent', () => {
       expire: Math.floor(Date.now() / 1000) + 1000,
       logged_as: '123',
       id: '123',
-      seller: 'party-abc',
       organizations: []
     };
     jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(mockLoginInfo);
     component.initPartyInfo();
-    expect(component.seller).toBe('party-abc');
+    expect(component.seller).toBe('123');
   });
 
   it('should initialize seller from organizations when logged_as does not equal id', () => {
@@ -73,13 +72,13 @@ describe('CreateOfferComponent', () => {
     };
     jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(mockLoginInfo);
     component.initPartyInfo();
-    expect(component.seller).toBe('party-def');
+    expect(component.seller).toBe('456');
   });
 
   it('should not set seller if login_items is empty object', () => {
     jest.spyOn(component['localStorage'], 'getObject').mockReturnValue({});
     component.initPartyInfo();
-    expect(component.seller).toBe('party-abc');
+    expect(component.seller).toBe('123');
   });
 
   it('should not set seller if session is expired', () => {
@@ -87,12 +86,11 @@ describe('CreateOfferComponent', () => {
       expire: Math.floor(Date.now() / 1000) - 1000,
       logged_as: '123',
       id: '123',
-      seller: 'party-abc',
       organizations: []
     };
     jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(mockLoginInfo);
     component.initPartyInfo();
-    expect(component.seller).toBe('party-abc');
+    expect(component.seller).toBe('123');
   });
 
   it('should emit event on goBack', () => {

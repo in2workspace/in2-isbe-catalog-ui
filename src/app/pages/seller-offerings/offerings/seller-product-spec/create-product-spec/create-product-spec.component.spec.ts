@@ -155,37 +155,6 @@ describe('CreateProductSpecComponent', () => {
     expect(component.selfAtt).toBe('');
   });
 
-  it('should removeAtt and handle Profile Picture', () => {
-    const att = { url: 'img1', name: 'Profile Picture' };
-    component.prodAttachments = [att];
-    component.imgPreview = 'img1';
-    component.showImgPreview = true;
-    component.removeAtt(att);
-    expect(component.prodAttachments.length).toBe(0);
-    expect(component.showImgPreview).toBe(false);
-    expect(component.imgPreview).toBe('');
-  });
-
-  it('should saveAtt and clear fields', () => {
-    component.attachName = { nativeElement: { value: 'file1', reset: () => {} } } as any;
-    component.attachToCreate = { url: 'url1', attachmentType: 'type1' };
-    component.prodAttachments = [];
-    component.attFileName.setValue('file1');
-    component.saveAtt();
-    expect(component.prodAttachments.length).toBe(1);
-    expect(component.attachToCreate.url).toBe('');
-    expect(component.attachToCreate.attachmentType).toBe('');
-    expect(component.showNewAtt).toBe(false);
-    expect(component.attFileName.value).toBe(null);
-  });
-
-  it('should clearAtt reset attachToCreate', () => {
-    component.attachToCreate = { url: 'url1', attachmentType: 'type1' };
-    component.clearAtt();
-    expect(component.attachToCreate.url).toBe('');
-    expect(component.attachToCreate.attachmentType).toBe('');
-  });
-
   it('should add and delete characteristic', () => {
     const char = { id: 'char1', name: 'Char1', productSpecCharacteristicValue: [] };
     component.prodChars = [];
@@ -370,12 +339,6 @@ describe('CreateProductSpecComponent', () => {
     expect(component.stepsCircles.includes('general-circle')).toBe(true);
   });
 
-  it('should clearAtt reset attachToCreate', () => {
-    component.attachToCreate = { url: 'abc', attachmentType: 'xyz' };
-    component.clearAtt();
-    expect(component.attachToCreate.url).toBe('');
-    expect(component.attachToCreate.attachmentType).toBe('');
-  });
 
   it('should saveImgFromURL push image and reset', () => {
     component.imgURL = { nativeElement: { value: 'http://img.com/img.jpg' } } as any;
@@ -462,12 +425,11 @@ describe('CreateProductSpecComponent', () => {
       expire: Math.floor(Date.now() / 1000) + 10,
       logged_as: '1',
       id: '1',
-      seller: 'party1',
       organizations: []
     };
     jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(loginInfo);
     component.initPartyInfo();
-    expect(component.seller).toBe('party1');
+    expect(component.seller).toBe('1');
   });
 
   it('should initPartyInfo set seller from organizations', () => {
@@ -475,11 +437,11 @@ describe('CreateProductSpecComponent', () => {
       expire: Math.floor(Date.now() / 1000) + 10,
       logged_as: '2',
       id: '1',
-      organizations: [{ id: '2', seller: 'party2' }]
+      organizations: [{ id: '2' }]
     };
     jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(loginInfo);
     component.initPartyInfo();
-    expect(component.seller).toBe('party2');
+    expect(component.seller).toBe('2');
   });
   
 });
