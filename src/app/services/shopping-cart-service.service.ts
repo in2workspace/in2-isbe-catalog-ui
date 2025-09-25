@@ -29,8 +29,6 @@ export class ShoppingCartServiceService {
     return cart;
   }
   async addItemShoppingCart(item:any){
-    console.log('adding to cart')
-    console.log(item)
     //POST - El item va en el body de la petición
     let url = `${ShoppingCartServiceService.BASE_URL}${ShoppingCartServiceService.API_CART}/item/`;
 
@@ -44,8 +42,6 @@ export class ShoppingCartServiceService {
     let url = `${ShoppingCartServiceService.BASE_URL}${ShoppingCartServiceService.API_CART}/item/${id}`;
     await lastValueFrom(this.http.delete<any>(url));
     await this.refreshCart(); // Actualiza el carrito tras la operación
-
-    //return this.http.delete<any>(url);
   }
 
   async emptyShoppingCart(){

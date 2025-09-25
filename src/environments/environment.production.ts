@@ -59,7 +59,7 @@ export const environment = {
     ISBE_ABOUT_LINK: '',
     ISBE_REGISTER_LINK: '',
     ISBE_PUBLISH_LINK:'',
-    ISBE_LINKEDIN: '',
+    ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',
     ISBE_YOUTUBE: 'https://www.youtube.com/@REDISBE',
     ISBE_X: 'https://x.com/REDISBE',
     BUNDLE_ENABLED: false,

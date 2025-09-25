@@ -68,27 +68,20 @@ export class DashboardComponent implements OnInit {
 
   startTagTransition() {
     setInterval(() => {
-      this.currentIndexServ = (this.currentIndexServ + 1) % this.services.length;
-      this.currentIndexPub = (this.currentIndexPub + 1) % this.publishers.length;
+      this.currentIndexServ = (this.currentIndexServ + 1) % this.services?.length;
+      this.currentIndexPub = (this.currentIndexPub + 1) % this.publishers?.length;
     }, this.delay);
   }
 
   async ngOnInit() {
     this.statsService.getStats().then(data=> {
-      this.services=data?.services;
-      this.publishers=data?.organizations;
+      this.services=data?.services ?? [];
+      this.publishers=data?.organizations ?? [];
       this.startTagTransition();
     })
     this.isFilterPanelShown = JSON.parse(this.localStorage.getItem('is_filter_panel_shown') as string);
-    //this.route.snapshot.paramMap.get('id');
-    console.log('--- route data')
-    console.log(this.route.queryParams)
-    console.log(this.route.snapshot.queryParamMap.get('token'))
     if(this.route.snapshot.queryParamMap.get('token') != null){    
       this.loginService.getLogin(this.route.snapshot.queryParamMap.get('token')).then(data => {
-        console.log('---- loginangular response ----')
-        console.log(data)
-        console.log(data.username)
         let info = {
           "id": data.id,
           "user": data.username,
@@ -107,25 +100,9 @@ export class DashboardComponent implements OnInit {
 
         this.localStorage.addLoginInfo(info);
         this.eventMessage.emitLogin(info);
-        console.log('----')
-        //this.refreshApi.stopInterval();
-        //this.refreshApi.startInterval(((data.expire - moment().unix())-4)*1000, data);
-        //this.refreshApi.startInterval(3000, data);
       })      
       this.router.navigate(['/dashboard'])
-    } else {
-      console.log('sin token')
-      //this.localStorage.clear()
-      let aux = this.localStorage.getObject('login_items') as LoginInfo;
-      if (JSON.stringify(aux) != '{}') {
-        console.log(aux)
-        console.log('moment')
-        console.log(aux['expire'])
-        console.log(moment().unix())
-        console.log(aux['expire'] - moment().unix())
-        console.log(aux['expire'] - moment().unix() <= 5)
-      }
-    }
+    } 
     this.api.getLaunchedCategories().then(data => {
       for(let i=0; i < data.length; i++){
         if(data[i].isRoot==true){
@@ -139,7 +116,6 @@ export class DashboardComponent implements OnInit {
     this.showContact = true;
 
     this.cdr.detectChanges();
-    console.log('----')
   }
   filterSearch(event: any) {
     if(this.searchField.value!='' && this.searchField.value != null){
