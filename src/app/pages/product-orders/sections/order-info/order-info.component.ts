@@ -208,7 +208,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.seller = aux.seller;
+        this.seller = aux.id;
         this.currentUser = aux.user;
         let userRoles = aux.roles.map((elem: any) => {
           return elem.name
@@ -218,7 +218,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
         }
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.seller = loggedOrg.seller;
+        this.seller = loggedOrg.id;
         let orgRoles = loggedOrg.roles.map((elem: any) => {
           return elem.name
         })
@@ -226,7 +226,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
           this.isSeller=true;
         }
       }
-      //this.seller = aux.seller;
+      //this.seller = aux.id;
       this.page = 0;
       this.orders = [];
       this.getOrders(false);

@@ -59,10 +59,10 @@ export class CategoriesComponent {
     this.categories=[];
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(aux.logged_as==aux.id){
-      this.seller = aux.seller;
+      this.seller = aux.id;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.seller = loggedOrg.seller
+      this.seller = loggedOrg.id
     }
 
     this.getCategories();

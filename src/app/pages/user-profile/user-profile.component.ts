@@ -59,21 +59,14 @@ export class UserProfileComponent implements OnInit{
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       this.token=aux.token;
       this.email=aux.email;
-      if(aux.logged_as==aux.id){
-        this.seller = aux.seller;
+      
+        this.seller = aux.id;
         this.loggedAsUser=true;
         this.show_profile=true;
         this.show_org_profile=false;
         this.getProfile();
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.seller = loggedOrg.seller;
-        this.loggedAsUser=false;
-        this.show_profile=false;
-        this.show_org_profile=true;
-        this.getOrgProfile(); 
-      }
-      //this.seller = aux.seller;
+      
+      //this.seller = aux.id;
       
     }
     initFlowbite();

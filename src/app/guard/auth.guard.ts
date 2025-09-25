@@ -10,7 +10,7 @@ import * as moment from 'moment';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private localStorage: LocalStorageService, private router: Router) {}
+  constructor(private readonly localStorage: LocalStorageService, private readonly router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -18,18 +18,19 @@ export class AuthGuard implements CanActivate {
   ): Observable<boolean> | Promise<boolean> | boolean {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     const requiredRoles = route.data['roles'] as Array<string>;
+    const isIsbe = route.data['is_isbe'] as boolean;
     let userRoles: string | any[] = [];
 
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as == aux.id){
         userRoles.push('individual')
-        for(let i=0; i < aux.roles.length; i++){
-          userRoles.push(aux.roles[i].name)
+        for(const element of aux.roles){
+          userRoles.push(element.name)
         }
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        for(let i=0;i<loggedOrg.roles.length;i++){
-          userRoles.push(loggedOrg.roles[i].name)
+        for(const element of loggedOrg.roles){
+          userRoles.push(element.name)
         }
       }
     } else {
@@ -44,6 +45,11 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/dashboard']);  // Navigate to an access denied page or login page
         return false;
       }
+    }
+
+    if (isIsbe) {
+      this.router.navigate(['/dashboard']);  // Navigate to an access denied page or login page
+      return false;
     }
     
     return true;

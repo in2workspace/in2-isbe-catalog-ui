@@ -102,7 +102,7 @@ export class BillingInfoComponent implements OnInit{
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if (aux.logged_as !== aux.id) {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.seller;
+        this.seller = loggedOrg.id;
         console.log('loggedOrg info')
         console.log(loggedOrg)
         this.partyInfo = {
@@ -112,7 +112,7 @@ export class BillingInfoComponent implements OnInit{
           role: "Owner"
         }
       } else {
-        this.seller = aux.seller;
+        this.seller = aux.id;
         console.log('init party info')
         console.log(aux)
         this.partyInfo = {

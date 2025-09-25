@@ -21,10 +21,10 @@ import { Router } from '@angular/router';
 import {EventMessageService} from "../../services/event-message.service";
 import { environment } from 'src/environments/environment';
 import { LoginInfo } from 'src/app/models/interfaces';
-import { Subscription, timer} from 'rxjs';
+import { Subscription } from 'rxjs';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
-import { initFlowbite, Dropdown } from 'flowbite';
+import { initFlowbite } from 'flowbite';
 import { QrVerifierService } from 'src/app/services/qr-verifier.service';
 import * as uuid from 'uuid';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
@@ -47,16 +47,14 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
 
   constructor(themeToggleDarkIcon: ElementRef,
               themeToggleLightIcon: ElementRef,
-              private translate: TranslateService,
-              private localStorage: LocalStorageService,
-              private api: ApiServiceService,
-              private loginService: LoginServiceService,
-              private cdr: ChangeDetectorRef,
-              private route: ActivatedRoute,
-              private eventMessage: EventMessageService,
-              private router: Router,
-              private qrVerifier: QrVerifierService,
-              private sc: ShoppingCartServiceService) {
+              private readonly translate: TranslateService,
+              private readonly localStorage: LocalStorageService,
+              private readonly loginService: LoginServiceService,
+              private readonly cdr: ChangeDetectorRef,
+              private readonly eventMessage: EventMessageService,
+              private readonly router: Router,
+              private readonly qrVerifier: QrVerifierService,
+              private readonly sc: ShoppingCartServiceService) {
 
     this.themeToggleDarkIcon = themeToggleDarkIcon;
     this.themeToggleLightIcon = themeToggleLightIcon;
@@ -86,10 +84,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   domeAbout: string = environment.ISBE_ABOUT_LINK
   domeRegister: string = environment.ISBE_REGISTER_LINK
   domePublish: string = environment.ISBE_PUBLISH_LINK
-  public static BASE_URL: String = environment.BASE_URL;
+  public static readonly BASE_URL: String = environment.BASE_URL;
   isNavBarOpen:boolean = false;
   flagDropdownOpen:boolean=false;
   cartCount: number = 0;
+
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   ngOnDestroy(): void {
       this.qrWindow?.close()

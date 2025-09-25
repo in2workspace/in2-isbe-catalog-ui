@@ -1,6 +1,5 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
+import { Component, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import { LoginInfo } from 'src/app/models/interfaces';
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
 import { FormGroup, FormControl, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
@@ -141,11 +140,11 @@ export class OrgInfoComponent {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.seller = loggedOrg.seller;
+      this.seller = loggedOrg.id;
 
       this.token=aux.token;
       this.email=aux.email;
-      //this.seller = aux.seller;
+      //this.seller = aux.id;
       this.getProfile();
     }
     initFlowbite();
