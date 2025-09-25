@@ -190,7 +190,8 @@
                         }
                     }
             </div>-->
-            <h2 class="text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-8 pt-12">{{ 'CARD._comp_profile' | translate }}</h2>
+            @if (!IS_ISBE){
+                <h2 class="text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-8 pt-12">{{ 'CARD._comp_profile' | translate }}</h2>
 
               
             <div class="container mx-auto px-4">
@@ -252,6 +253,9 @@
                     }
                 </div>
             </div>
+
+            }
+            
 
             <h2 class="text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-8 pt-12">{{ 'PRODUCT_DETAILS._product_pricing' | translate }}</h2>
             @if(productOff?.productOfferingPrice != undefined){

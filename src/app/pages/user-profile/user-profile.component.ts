@@ -5,20 +5,22 @@ import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
 import { initFlowbite } from 'flowbite';
 import {EventMessageService} from "../../services/event-message.service";
-import * as moment from 'moment';
 import { ProviderRevenueSharingComponent } from './profile-sections/provider-revenue-sharing/provider-revenue-sharing.component';
 import { BillingInfoComponent } from './profile-sections/billing-info/billing-info.component';
 import { OrderInfoComponent } from './profile-sections/order-info/order-info.component';
 import { OrgInfoComponent } from './profile-sections/org-info/org-info.component';
 import { UserInfoComponent } from './profile-sections/user-info/user-info.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
+import { NgClass } from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-user-profile',
     templateUrl: './user-profile.component.html',
     styleUrl: './user-profile.component.css',
     standalone: true,
-    imports: [ProviderRevenueSharingComponent, BillingInfoComponent, OrderInfoComponent, OrgInfoComponent, UserInfoComponent, TranslateModule]
+    imports: [ProviderRevenueSharingComponent, BillingInfoComponent, OrderInfoComponent, OrgInfoComponent, UserInfoComponent, TranslateModule, NgClass]
 })
 export class UserProfileComponent implements OnInit{
   show_profile: boolean = true;
@@ -28,14 +30,16 @@ export class UserProfileComponent implements OnInit{
   show_revenue: boolean = false;
   loggedAsUser: boolean = true;
   profile:any;
-  partyId:any='';
+  seller:any='';
   token:string='';
   email:string='';
 
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
+
   constructor(
-    private localStorage: LocalStorageService,
-    private cdr: ChangeDetectorRef,
-    private eventMessage: EventMessageService
+    private readonly localStorage: LocalStorageService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly eventMessage: EventMessageService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -55,21 +59,14 @@ export class UserProfileComponent implements OnInit{
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       this.token=aux.token;
       this.email=aux.email;
-      if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+      
+        this.seller = aux.id;
         this.loggedAsUser=true;
         this.show_profile=true;
         this.show_org_profile=false;
         this.getProfile();
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.partyId = loggedOrg.partyId;
-        this.loggedAsUser=false;
-        this.show_profile=false;
-        this.show_org_profile=true;
-        this.getOrgProfile(); 
-      }
-      //this.partyId = aux.partyId;
+      
+      //this.seller = aux.id;
       
     }
     initFlowbite();

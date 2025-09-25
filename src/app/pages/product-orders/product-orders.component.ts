@@ -35,7 +35,7 @@ export class ProductOrdersComponent implements OnInit {
   orders:any[]=[];
   nextOrders:any[]=[];
   profile:any;
-  partyId:any='';
+  seller:any='';
   showOrderDetails:boolean=false;
   orderToShow:any;
   dateRange = new FormControl();
@@ -103,7 +103,7 @@ export class ProductOrdersComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.id;
         let userRoles = aux.roles.map((elem: any) => {
           return elem.name
         })
@@ -112,7 +112,7 @@ export class ProductOrdersComponent implements OnInit {
         }
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.partyId = loggedOrg.partyId;
+        this.seller = loggedOrg.id;
         let orgRoles = loggedOrg.roles.map((elem: any) => {
           return elem.name
         })
@@ -120,7 +120,7 @@ export class ProductOrdersComponent implements OnInit {
           this.isSeller=true;
         }
       }
-      //this.partyId = aux.partyId;
+      //this.seller = aux.id;
       this.page=0;
       this.orders=[];
       this.getOrders(false);
@@ -148,7 +148,7 @@ export class ProductOrdersComponent implements OnInit {
 
     let options = {
       "filters": this.filters,
-      "partyId": this.partyId,
+      "seller": "did:elsi:"+this.seller,
       "selectedDate": this.selectedDate,
       "orders": this.orders,
       "role": this.role

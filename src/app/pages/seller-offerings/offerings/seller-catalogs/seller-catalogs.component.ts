@@ -1,5 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 import {components} from "src/app/models/product-catalog";
@@ -21,7 +20,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
     standalone: true,
     imports: [TranslateModule, FaIconComponent]
 })
-export class SellerCatalogsComponent {
+export class SellerCatalogsComponent implements OnInit{
 
   protected readonly faIdCard = faIdCard;
   protected readonly faSort = faSort;
@@ -36,16 +35,15 @@ export class SellerCatalogsComponent {
   loading_more: boolean = false;
   page_check:boolean = true;
   filter:any=undefined;
-  partyId:any;
-  status:any[]=['Active','Launched'];
+  seller:any;
+  status:any[]=[];
 
   constructor(
-    private router: Router,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private paginationService: PaginationService
+    private readonly api: ApiServiceService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly localStorage: LocalStorageService,
+    private readonly eventMessage: EventMessageService,
+    private readonly paginationService: PaginationService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -72,10 +70,10 @@ export class SellerCatalogsComponent {
     this.nextCatalogs=[];
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(aux.logged_as==aux.id){
-      this.partyId = aux.partyId;
+      this.seller = aux.id;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.partyId = loggedOrg.partyId
+      this.seller = loggedOrg.id
     }
 
     this.getCatalogs(false);
@@ -83,7 +81,6 @@ export class SellerCatalogsComponent {
     if(input!=undefined){
       input.addEventListener('input', e => {
         // Easy way to get the value of the element who trigger the current `e` event
-        console.log(`Input updated`)
         if(this.searchField.value==''){
           this.filter=undefined;
           this.getCatalogs(false);
@@ -106,7 +103,7 @@ export class SellerCatalogsComponent {
     let options = {
       "keywords": this.filter,
       "filters": this.status,
-      "partyId": this.partyId
+      "seller": "did:elsi:"+this.seller
     }
 
     this.paginationService.getItemsPaginated(this.page, this.CATALOG_LIMIT, next, this.catalogs, this.nextCatalogs, options,
@@ -124,7 +121,6 @@ export class SellerCatalogsComponent {
     //this.loading_more=true;
     this.page=this.page+this.CATALOG_LIMIT;
     this.cdr.detectChanges;
-    console.log(this.page)
     await this.getCatalogs(true);
   }
 
@@ -136,11 +132,7 @@ export class SellerCatalogsComponent {
     const index = this.status.findIndex(item => item === filter);
     if (index !== -1) {
       this.status.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.status)
     } else {
-      console.log('añade filtro')
-      console.log(this.status)
       this.status.push(filter)
     }
     this.loading=true;

@@ -33,8 +33,8 @@ export class CategoriesComponent {
   page:number=0;
   CATEGOY_LIMIT: number = environment.CATEGORY_LIMIT;
   loading: boolean = false;
-  partyId:any;
-  status:any[]=['Active','Launched'];
+  seller:any;
+  status:any[]=[];
 
   constructor(
     private router: Router,
@@ -59,10 +59,10 @@ export class CategoriesComponent {
     this.categories=[];
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(aux.logged_as==aux.id){
-      this.partyId = aux.partyId;
+      this.seller = aux.id;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.partyId = loggedOrg.partyId
+      this.seller = loggedOrg.id
     }
 
     this.getCategories();

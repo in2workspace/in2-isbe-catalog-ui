@@ -74,11 +74,11 @@ describe('SellerOfferComponent', () => {
     const initialLength = component.status.length;
     const filter = component.status[0];
     component.onStateFilterChange(filter);
-    expect(component.status.length).toBe(initialLength - 1);
+    expect(component.status.length).toBe(initialLength + 1);
     expect(getOffersSpy).toHaveBeenCalledWith(false);
 
     component.onStateFilterChange(filter);
-    expect(component.status.includes(filter)).toBe(true);
+    expect(component.status.includes(filter)).toBe(false);
     expect(getOffersSpy).toHaveBeenCalledWith(false);
   });
 });

@@ -16,8 +16,8 @@ export class ProductSpecServiceService {
 
   private readonly http = inject(HttpClient);
 
-  getProdSpecByUser(page:any,status:any[],partyId:any,sort?:any,isBundle?:any) {
-    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}?limit=${ProductSpecServiceService.PROD_SPEC_LIMIT}&offset=${page}&relatedParty.id=${partyId}`;    
+  getProdSpecByUser(page:any,status:any[],seller:any,sort?:any,isBundle?:any) {
+    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}?limit=${ProductSpecServiceService.PROD_SPEC_LIMIT}&offset=${page}&seller=${seller}`;    
     if(sort!=undefined){
       url=url+'&sort='+sort
     }

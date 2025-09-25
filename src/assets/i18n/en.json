@@ -1101,6 +1101,7 @@
       "_locked_after_first_plan": "Locked. You can't change it after defining the first price plan.",
       "_actions": "Actions",
       "_no_price_plans": "This offer has no Price Plans at this moment. So currently it is FREE.",
+      "_no_price_plans_info": "This offer has no Price Plans information.",
       "_no_price_plans_components": "This offer has no Price Components. You need to add at least one!",
       "_sure_delete": "Are you sure you want to delete this Price Plan?",
       "_cant_be_undone": "This action can't be undone",

@@ -23,7 +23,7 @@ describe('/my-offerings',{
     it('should create a offering correctly', () => {
 
         const newCatalog = { id: 'test', href: 'test',name: 'catalogTest', description: '', lifecycleStatus: 'Launched', relatedParty: [{
-            id: local_items.partyId,
+            id: local_items.seller,
             role: 'Owner',
             '@referredType': ''
         }]}
@@ -74,7 +74,7 @@ describe('/my-offerings',{
     it('should create a offering with recurring price plan correctly', () => {
 
         const newCatalog = { id: 'catalogId', href: 'catalogId',name: 'catalogTest', description: '', lifecycleStatus: 'Launched', relatedParty: [{
-            id: local_items.partyId,
+            id: local_items.seller,
             role: 'Owner',
             '@referredType': ''
         }]}
@@ -145,7 +145,7 @@ describe('/my-offerings',{
     it('should create a offering with per usage price plan correctly', () => {
 
         const newCatalog = { id: 'catalogId', href: 'catalogId',name: 'catalogTest', description: '', lifecycleStatus: 'Launched', relatedParty: [{
-            id: local_items.partyId,
+            id: local_items.seller,
             role: 'Owner',
             '@referredType': ''
         }]}
@@ -217,7 +217,7 @@ describe('/my-offerings',{
     it('should create a offering with recurring-prepaid price plan correctly', () => {
 
         const newCatalog = { id: 'catalogId', href: 'catalogId',name: 'catalogTest', description: '', lifecycleStatus: 'Launched', relatedParty: [{
-            id: local_items.partyId,
+            id: local_items.seller,
             role: 'Owner',
             '@referredType': ''
         }]}

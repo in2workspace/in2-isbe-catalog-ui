@@ -1,9 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {faIdCard, faSort, faSwatchbook, faSparkles} from "@fortawesome/pro-solid-svg-icons";
 import { environment } from 'src/environments/environment';
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import { ProductSpecServiceService } from 'src/app/services/product-spec-service.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
@@ -38,19 +36,16 @@ export class SellerProductSpecComponent implements OnInit{
   loading_more: boolean = false;
   page_check:boolean = true;
   filter:any=undefined;
-  status:any[]=['Active','Launched'];
-  partyId:any;
+  status:any[]=[];
+  seller:any;
   sort:any=undefined;
   isBundle:any=undefined;
 
   constructor(
-    private router: Router,
-    private api: ApiServiceService,
-    private prodSpecService: ProductSpecServiceService,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private paginationService: PaginationService
+    private readonly prodSpecService: ProductSpecServiceService,
+    private readonly localStorage: LocalStorageService,
+    private readonly eventMessage: EventMessageService,
+    private readonly paginationService: PaginationService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -68,18 +63,16 @@ export class SellerProductSpecComponent implements OnInit{
     this.prodSpecs=[];
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(aux.logged_as==aux.id){
-      this.partyId = aux.partyId;
+      this.seller = aux.id;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.partyId = loggedOrg.partyId
+      this.seller = loggedOrg.id
     }
 
     this.getProdSpecs(false);
     let input = document.querySelector('[type=search]')
     if(input!=undefined){
       input.addEventListener('input', e => {
-        // Easy way to get the value of the element who trigger the current `e` event
-        console.log(`Input updated`)
         if(this.searchField.value==''){
           this.filter=undefined;
           this.getProdSpecs(false);
@@ -108,7 +101,7 @@ export class SellerProductSpecComponent implements OnInit{
     
     let options = {
       "filters": this.status,
-      "partyId": this.partyId,
+      "seller": "did:elsi:"+this.seller,
       "sort": this.sort,
       "isBundle": this.isBundle
     }
@@ -136,11 +129,7 @@ export class SellerProductSpecComponent implements OnInit{
     const index = this.status.findIndex(item => item === filter);
     if (index !== -1) {
       this.status.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.status)
     } else {
-      console.log('añade filtro')
-      console.log(this.status)
       this.status.push(filter)
     }
     this.getProdSpecs(false);

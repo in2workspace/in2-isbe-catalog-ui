@@ -41,7 +41,7 @@ export class CheckoutComponent implements OnInit {
   loading: boolean = false;
   loading_baddrs: boolean = false;
   addBill: boolean = false;
-  relatedParty: string = '';
+  seller: string = '';
   contact = {email: '', username: ''};
   formatter: any;
   preferred: boolean = false;
@@ -240,10 +240,10 @@ export class CheckoutComponent implements OnInit {
   private createProductOrder(products: any[]) {
     return {
       productOrderItem: products,
-      relatedParty: [
+      seller: [
         {
-          id: this.relatedParty,
-          href: this.relatedParty,
+          id: this.seller,
+          href: this.seller,
           role: 'Customer'
         }
       ],
@@ -339,10 +339,10 @@ export class CheckoutComponent implements OnInit {
       this.contact.username = aux.username;
     }
     if (aux.logged_as == aux.id) {
-      this.relatedParty = aux.partyId;
+      this.seller = aux.seller;
     } else {
       let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.relatedParty = loggedOrg.partyId
+      this.seller = loggedOrg.seller
     }
 
     console.log('--- Login Info ---')

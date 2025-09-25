@@ -23,7 +23,7 @@ export class ProviderRevenueSharingComponent implements OnInit {
   referral:any;
   support:any;
 
-  partyId:any='';
+  seller:any='';
 
   constructor(
     private localStorage: LocalStorageService,
@@ -34,7 +34,7 @@ export class ProviderRevenueSharingComponent implements OnInit {
 
   async ngOnInit() {
     this.initPartyInfo();
-    let info = await this.revenueService.getRevenue(this.partyId);
+    let info = await this.revenueService.getRevenue(this.seller);
     console.log('------')
     console.log(info)
     for(let i=0; i<info.length; i++){
@@ -58,10 +58,10 @@ export class ProviderRevenueSharingComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.id;
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.partyId = loggedOrg.partyId;
+        this.seller = loggedOrg.id;
       }      
     }
   }

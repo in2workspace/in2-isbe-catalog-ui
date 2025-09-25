@@ -1,8 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import {components} from "src/app/models/product-catalog";
 import { environment } from 'src/environments/environment';
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import { ProductSpecServiceService } from 'src/app/services/product-spec-service.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
@@ -42,6 +40,8 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 export class UpdateProductSpecComponent implements OnInit {
   @Input() prod: any;
 
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
+
   //PAGE SIZES:
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
   BUNDLE_ENABLED: boolean= environment.BUNDLE_ENABLED;
@@ -62,7 +62,7 @@ export class UpdateProductSpecComponent implements OnInit {
   showPreview:boolean=false;
   showEmoji:boolean=false;
   description:string='';  
-  partyId:any='';
+  seller:any='';
 
   //PRODUCT GENERAL INFO:
   generalForm = new FormGroup({
@@ -188,6 +188,10 @@ export class UpdateProductSpecComponent implements OnInit {
   ngOnInit() {
     this.initPartyInfo();
     this.populateProductInfo();
+    if (this.IS_ISBE) {
+      this.stepsElements = this.stepsElements.filter(s => s !== 'compliance');
+      this.stepsCircles = this.stepsCircles.filter(c => c !== 'compliance-circle');
+    }
     initFlowbite();
   }
 
@@ -195,10 +199,10 @@ export class UpdateProductSpecComponent implements OnInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.id;
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.partyId = loggedOrg.partyId
+        this.seller = loggedOrg.id
       }
     }
   }
@@ -378,7 +382,7 @@ export class UpdateProductSpecComponent implements OnInit {
     
     let options = {
       "filters": ['Active','Launched'],
-      "partyId": this.partyId
+      "seller": "did:elsi:"+this.seller
     }
 
     this.paginationService.getItemsPaginated(this.bundlePage, this.PROD_SPEC_LIMIT, next, this.prodSpecs,this.nextProdSpecs, options,
@@ -809,7 +813,7 @@ export class UpdateProductSpecComponent implements OnInit {
     
     let options = {
       "filters": ['Active','Launched'],
-      "partyId": this.partyId
+      "seller": "did:elsi:"+this.seller
     }
 
     this.paginationService.getItemsPaginated(this.prodSpecRelPage, this.PROD_SPEC_LIMIT, next, this.prodSpecRels, this.nextProdSpecRels, options,

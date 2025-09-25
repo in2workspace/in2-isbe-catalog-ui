@@ -101,7 +101,7 @@ export const login_token = () => {
         },
         "username": "admin",
         "expire": moment().unix() + 100,
-        "partyId": "urn:ngsi-ld:individual:b73dd8ce-b63f-4c5b-be07-ca7ea10ad78e",
+        "seller": "urn:ngsi-ld:individual:b73dd8ce-b63f-4c5b-be07-ca7ea10ad78e",
         "accessToken": "f10d5c048d9eaf400f3a5d0702e19ebe11172338",
         "refreshToken": "a957fb1afc717c1f44fc6d4523482643019ce58b",
         "idp": "local",
@@ -170,7 +170,7 @@ export const local_items = {
     "email": "admin@test.com",
     "token": "f7ecd97a3219a38131a06feebd92d3d7fb98ffff",
     "expire": 1741025677,
-    "partyId": "urn:ngsi-ld:individual:b73dd8ce-b63f-4c5b-be07-ca7ea10ad78e",
+    "seller": "urn:ngsi-ld:individual:b73dd8ce-b63f-4c5b-be07-ca7ea10ad78e",
     "roles": [
       {
         "id": "1af053c1-44dd-479f-a50f-e0c40a592b2f",

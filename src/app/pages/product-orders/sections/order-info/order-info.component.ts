@@ -36,7 +36,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
   orders:any[]=[];
   nextOrders:any[]=[];
   profile:any;
-  partyId:any='';
+  seller:any='';
   showOrderDetails:boolean=false;
   orderToShow:any;
   dateRange = new FormControl();
@@ -167,7 +167,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
       const newNote = {
         text: `Order state updated to ${state}`,
         id: `urn:ngsi-ld:note:${uuidv4()}`,
-        author: this.partyId,
+        author: this.seller,
         date: new Date().toISOString()
       };
 
@@ -208,7 +208,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
       if(aux.logged_as==aux.id){
-        this.partyId = aux.partyId;
+        this.seller = aux.id;
         this.currentUser = aux.user;
         let userRoles = aux.roles.map((elem: any) => {
           return elem.name
@@ -218,7 +218,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
         }
       } else {
         let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.partyId = loggedOrg.partyId;
+        this.seller = loggedOrg.id;
         let orgRoles = loggedOrg.roles.map((elem: any) => {
           return elem.name
         })
@@ -226,7 +226,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
           this.isSeller=true;
         }
       }
-      //this.partyId = aux.partyId;
+      //this.seller = aux.id;
       this.page = 0;
       this.orders = [];
       this.getOrders(false);
@@ -306,7 +306,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
 
     let options = {
       "filters": this.filters,
-      "partyId": this.partyId,
+      "seller": "did:elsi:"+this.seller,
       "selectedDate": this.selectedDate,
       "orders": this.orders,
       "role": this.role
@@ -461,7 +461,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
     const newNote = {
       text: this.newNoteText,
       id: `urn:ngsi-ld:note:${uuidv4()}`,
-      author: this.partyId,
+      author: this.seller,
       date: new Date().toISOString()
     };
 
@@ -509,32 +509,32 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
     return '';
   }
 
-  async getUsername(partyId: string): Promise<string> {
-    if (this.userCache.has(partyId)) {
-      return this.userCache.get(partyId)!;
+  async getUsername(seller: string): Promise<string> {
+    if (this.userCache.has(seller)) {
+      return this.userCache.get(seller)!;
     }
 
     try {
       let username: string;
 
-      if (partyId.startsWith('urn:ngsi-ld:individual:')) {
+      if (seller.startsWith('urn:ngsi-ld:individual:')) {
         // Get individual user info
-        const userInfo = await this.accountService.getUserInfo(partyId);
-        username = `${userInfo?.givenName || ''} ${userInfo?.familyName || ''}`.trim() || `Unknown (${partyId})`;
-      } else if (partyId.startsWith('urn:ngsi-ld:organization:')) {
+        const userInfo = await this.accountService.getUserInfo(seller);
+        username = `${userInfo?.givenName || ''} ${userInfo?.familyName || ''}`.trim() || `Unknown (${seller})`;
+      } else if (seller.startsWith('urn:ngsi-ld:organization:')) {
         // Get organization info
-        const orgInfo = await this.accountService.getOrgInfo(partyId);
-        username = orgInfo?.tradingName || `Unknown Organization (${partyId})`;
+        const orgInfo = await this.accountService.getOrgInfo(seller);
+        username = orgInfo?.tradingName || `Unknown Organization (${seller})`;
       } else {
-        username = `Unknown (${partyId})`;
+        username = `Unknown (${seller})`;
       }
 
       // Store in cache
-      this.userCache.set(partyId, username);
+      this.userCache.set(seller, username);
       return username;
     } catch (error) {
-      console.error('Error fetching name for', partyId, error);
-      return `Unknown (${partyId})`;
+      console.error('Error fetching name for', seller, error);
+      return `Unknown (${seller})`;
     }
   }
 

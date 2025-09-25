@@ -5,8 +5,8 @@
         <div class="pt-8 pb-32 px-4 w-full text-left lg:pt-16 lg:px-12 bg-cover bg-right-bottom items-center justify-between" style="background-image: url(assets/images/bg_1.png)">
             <div class="flex flex-row mx-auto max-w-screen-xl">
                 <div class="flex flex-col">
-                    <h1 class="mb-4 text-left text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl text-secondary-50">{{ 'CONTACTUS._title' | translate }}</h1>
-                    <p class="text-left text-lg font-normal lg:text-xl text-secondary-50">{{ 'CONTACTUS._subtitle' | translate }}</p>
+                    <h1 class="mb-4 text-left text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl text-primary-100">{{ 'CONTACTUS._title' | translate }}</h1>
+                    <p class="text-left text-lg font-normal lg:text-xl text-primary-100">{{ 'CONTACTUS._subtitle' | translate }}</p>
                 
                 </div>
                 <div class="w-full">
@@ -100,7 +100,7 @@
             [ngClass]="contactForm.get('message')?.touched && contactForm.get('message')?.invalid
             ? 'border-red-600'
             : 'border-gray-300 dark:border-secondary-200'"  
-            class="block w-full min-h-fit rounded-lg px-2 text-sm text-gray-800 dark:text-gray-200 border bg-white dark:bg-secondary-300" placeholder="Add product description..." ></textarea>
+            class="block w-full min-h-fit rounded-lg px-2 text-sm text-gray-800 dark:text-gray-200 border bg-white dark:bg-secondary-300" placeholder="Añadir descripción del producto..." ></textarea>
             @if(contactForm.get('message')?.touched && contactForm.get('message')?.hasError('required')){
                 <p class="text-sm text-red-600 dark:text-red-500"><span class="font-medium">{{ 'CONTACTUS._mandatory' | translate }}</span></p>
             }

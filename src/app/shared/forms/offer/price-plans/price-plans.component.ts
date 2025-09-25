@@ -17,6 +17,7 @@ import { NgClass } from "@angular/common";
 import { EventMessageService } from "src/app/services/event-message.service";
 import { FormChangeState, PricePlanChangeState } from "src/app/models/interfaces";
 import { Subscription, debounceTime, distinctUntilChanged, filter } from "rxjs";
+import { environment } from 'src/environments/environment';
 
 interface PriceComponent {
   id: string;
@@ -90,6 +91,8 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
   @Input() form!: FormGroup;  // Recibe el formulario del padre
   @Input() prodSpec: any | null = null;  // Y con este se acceder a prodSpec
   @Output() formChange = new EventEmitter<FormChangeState>();
+
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   pricePlansForm = this.fb.array<FormGroup>([], { validators: [] });
   paymentOnline = false;  // Estado global del checkbox

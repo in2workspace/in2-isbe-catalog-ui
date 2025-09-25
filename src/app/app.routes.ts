@@ -17,6 +17,8 @@ import { ProductInventoryComponent } from './pages/product-inventory/product-inv
 import { ProductOrdersComponent } from './pages/product-orders/product-orders.component';
 import { ShoppingCartComponent } from './pages/shopping-cart/shopping-cart.component';
 import { UsageSpecsComponent } from './pages/usage-specs/usage-specs.component';
+import { environment } from 'src/environments/environment';
+import { AuthGuard } from './guard/auth.guard';
 
 
 export const routes: Routes = [
@@ -46,11 +48,11 @@ export const routes: Routes = [
     },
     { path: 'shopping-cart',
     component: ShoppingCartComponent,
-    //canActivate: [AuthGuard], data: { roles: [] }
+    canActivate: [AuthGuard], data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
     },
     { path: 'checkout',
       component: CheckoutComponent,
-      //canActivate: [AuthGuard], data: { roles: [] }
+      canActivate: [AuthGuard], data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
     },
     { path: 'product-inventory',
     component: ProductInventoryComponent,
@@ -76,11 +78,11 @@ export const routes: Routes = [
     },
     { path: 'product-orders',
       component: ProductOrdersComponent,
-      //canActivate: [AuthGuard], data: { roles: [] }
+      canActivate: [AuthGuard], data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
     },
     { path: 'usage-spec',
       component: UsageSpecsComponent,
-      ////canActivate: [AuthGuard], data: { roles: ['seller'] }
+      canActivate: [AuthGuard], data: { roles: ['seller'], is_isbe: environment.ISBE_CATALOGUE }
     },
     { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
   ]

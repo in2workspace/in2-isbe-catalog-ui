@@ -23,7 +23,7 @@ export interface LoginInfo {
   email: string,
   token: string,
   expire: number,
-  partyId: string,
+  seller: string,
   username: string,
   roles: any[],
   organizations: any[],

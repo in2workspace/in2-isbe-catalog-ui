@@ -42,23 +42,23 @@ export class AccountServiceService {
     return this.http.delete<any>(url);
   }
 
-  getUserInfo(partyId:any){
-    let url = `${AccountServiceService.BASE_URL}/party/individual/${partyId}`;
+  getUserInfo(seller:any){
+    let url = `${AccountServiceService.BASE_URL}/party/individual/${seller}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getOrgInfo(partyId:any){
-    let url = `${AccountServiceService.BASE_URL}/party/organization/${partyId}`;
+  getOrgInfo(seller:any){
+    let url = `${AccountServiceService.BASE_URL}/party/organization/${seller}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  updateUserInfo(partyId:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}/party/individual/${partyId}`;   
+  updateUserInfo(seller:any,profile:any){
+    let url = `${AccountServiceService.BASE_URL}/party/individual/${seller}`;   
     return this.http.patch<any>(url, profile);
   }
 
-  updateOrgInfo(partyId:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}/party/organization/${partyId}`;   
+  updateOrgInfo(seller:any,profile:any){
+    let url = `${AccountServiceService.BASE_URL}/party/organization/${seller}`;   
     return this.http.patch<any>(url, profile);
   }
 }
