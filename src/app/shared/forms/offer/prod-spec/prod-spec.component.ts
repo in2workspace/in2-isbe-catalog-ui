@@ -104,7 +104,7 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
     }
 
     let options = {
-      "filters": [], //TODO: check "filters": ['Active','Launched']
+      "filters": ['Active','Launched'],
       "seller": "did:elsi:"+this.seller
     }
 

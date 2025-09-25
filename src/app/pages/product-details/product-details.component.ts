@@ -54,6 +54,7 @@ export class ProductDetailsComponent implements OnInit {
   @ViewChild('detailsScrollAnchor') detailsScrollAnchor!: ElementRef; 
   
 
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
   id:any;
   productOff: Product | undefined;
   category: string = 'none';
