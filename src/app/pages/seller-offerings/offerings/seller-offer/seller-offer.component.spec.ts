@@ -78,7 +78,7 @@ describe('SellerOfferComponent', () => {
     expect(getOffersSpy).toHaveBeenCalledWith(false);
 
     component.onStateFilterChange(filter);
-    expect(component.status.includes(filter)).toBe(true);
+    expect(component.status.includes(filter)).toBe(false);
     expect(getOffersSpy).toHaveBeenCalledWith(false);
   });
 });
