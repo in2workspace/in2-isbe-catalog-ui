@@ -1,57 +1,50 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import {LocalStorageService} from "../services/local-storage.service";
-import { Observable } from 'rxjs';
-import { LoginInfo } from '../models/interfaces';
-import * as moment from 'moment';
+// src/app/guards/auth.guard.ts
+import { inject } from '@angular/core';
+import { CanActivateFn, Router, UrlTree, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
+import { RoleType } from '../models/user-data-authentication-response.dto';
+import { AuthService } from './auth.service';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class AuthGuard implements CanActivate {
+type PowerReq = { function: string; action: string };
 
-  constructor(private readonly localStorage: LocalStorageService, private readonly router: Router) {}
+export const AuthGuard: CanActivateFn = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot
+): Observable<boolean | UrlTree> => {
+  const router = inject(Router);
+  const auth = inject(AuthService);
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    const requiredRoles = route.data['roles'] as Array<string>;
-    const isIsbe = route.data['is_isbe'] as boolean;
-    let userRoles: string | any[] = [];
+  const redirect = (reason: string) =>
+    router.createUrlTree(['/dashboard'], { queryParams: { returnUrl: state.url, reason } });
 
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as == aux.id){
-        userRoles.push('individual')
-        for(const element of aux.roles){
-          userRoles.push(element.name)
-        }
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        for(const element of loggedOrg.roles){
-          userRoles.push(element.name)
-        }
-      }
-    } else {
-      this.router.navigate(['/dashboard']);
-      return false;
-    }
+  return auth.checkAuth$().pipe(
+    switchMap((isAuth) => {
+      if (!isAuth) return of<UrlTree | boolean>(redirect('unauthenticated'));
 
-    if (requiredRoles.length != 0) {
-      const hasRequiredRoles = requiredRoles.some(role => userRoles.includes(role));
+      const requiredRoles = (route.data['roles'] as RoleType[] | undefined) ?? [];
+      const requiredPowers = (route.data['powers'] as PowerReq[] | undefined) ?? [];
+      const isIsbe = route.data['is_isbe'] as boolean | undefined;
 
-      if (!hasRequiredRoles) {
-        this.router.navigate(['/dashboard']);  // Navigate to an access denied page or login page
-        return false;
-      }
-    }
+      return auth.getUserData().pipe(
+        take(1),
+        map((user) => {
+          if (!user) return redirect('no_user');
+          if (isIsbe) return redirect('blocked_isbe');
 
-    if (isIsbe) {
-      this.router.navigate(['/dashboard']);  // Navigate to an access denied page or login page
-      return false;
-    }
-    
-    return true;
-  }
-}
+          if (requiredRoles.length) {
+            const okRole = requiredRoles.includes(user.role as RoleType);
+            if (!okRole) return redirect('missing_role');
+          }
+
+          if (requiredPowers.length) {
+            const okPowers = requiredPowers.every((p) => auth.hasPower(p.function, p.action));
+            if (!okPowers) return redirect('missing_power');
+          }
+
+          return true;
+        })
+      );
+    })
+  );
+};

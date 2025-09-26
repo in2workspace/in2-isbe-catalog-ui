@@ -1,7 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
-import { provideHttpClient, withInterceptorsFromDi, HttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -11,6 +11,8 @@ import { routes } from './app/app.routes';
 import { AppInitService } from './app/services/app-init.service';
 import { MatomoInitializationMode, MatomoInitializerService, MatomoModule } from 'ngx-matomo-client';
 import { appConfigFactory } from './app/app-config-factory';
+import { AuthInterceptor } from './app/interceptors/requests-interceptor';
+import { AuthModule } from 'angular-auth-oidc-client';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -20,6 +22,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     provideAnimationsAsync(),
     AppInitService,
     {

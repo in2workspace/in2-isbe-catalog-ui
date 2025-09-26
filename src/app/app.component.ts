@@ -9,6 +9,7 @@ import { RefreshLoginServiceService } from "src/app/services/refresh-login-servi
 import * as moment from 'moment';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { AuthService } from './guard/auth.service';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
               private readonly localStorage: LocalStorageService,
               private readonly eventMessage: EventMessageService,
               private readonly router: Router,
+              private readonly authService: AuthService,
               private readonly refreshApi: RefreshLoginServiceService) {
     this.translate.addLangs(['en', 'es']);
     this.translate.setDefaultLang('es');
@@ -52,14 +54,10 @@ export class AppComponent implements OnInit {
       if(ev.type === 'LoginProcess') {
         this.refreshApi.stopInterval();
         let info = ev.value as LoginInfo;
-
-        console.log('STARTING INTERVAL')
-        console.log(info.expire)
-        console.log(((info.expire - moment().unix()) - 4))
-
         this.refreshApi.startInterval(((info.expire - moment().unix())-4)*1000, ev);
       }
     })
+    console.log(this.authService.getUserData())
     let aux = this.localStorage.getObject('login_items') as LoginInfo;
     if(JSON.stringify(aux) === '{}'){
       //this.siopInfo.getSiopInfo().subscribe((data)=>{
@@ -69,8 +67,6 @@ export class AppComponent implements OnInit {
     else if (((aux.expire - moment().unix())-4) > 0) {
       this.refreshApi.stopInterval();
       this.refreshApi.startInterval(((aux.expire - moment().unix())-4)*1000, aux);
-      console.log('token')
-      console.log(aux.token)
     }
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

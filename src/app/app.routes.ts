@@ -56,22 +56,23 @@ export const routes: Routes = [
     },
     { path: 'product-inventory',
     component: ProductInventoryComponent,
-    //canActivate: [AuthGuard], data: { roles: [] }
+    canActivate: [AuthGuard], data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
     },
     { path: 'product-inventory/:id',
-    component: ProductInvDetailComponent
+    component: ProductInvDetailComponent,
+    canActivate: [AuthGuard], data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
     },
     { path: 'profile',
     component: UserProfileComponent,
-    //canActivate: [AuthGuard], data: { roles: ['individual','orgAdmin'] }
+    canActivate: [AuthGuard], data: { roles: ['individual','orgAdmin'] }
     },
     { path: 'my-offerings',
     component: SellerOfferingsComponent,
-    ////canActivate: [AuthGuard], data: { roles: ['seller'] }
+    canActivate: [AuthGuard], data: { roles: ['seller'] }
     },
     { path: 'admin',
     component: AdminComponent,
-    ////canActivate: [AuthGuard], data: { roles: ['admin', 'certifier'] }
+    canActivate: [AuthGuard], data: { roles: ['admin', 'certifier'] }
     },
     { path: 'contact-us',
       component: ContactUsFormComponent
