@@ -1,90 +1,94 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscription, interval } from 'rxjs';
-import * as moment from 'moment';
-import {LocalStorageService} from "./local-storage.service";
-import { LoginInfo } from '../models/interfaces';
-import { LoginServiceService } from 'src/app/services/login-service.service';
-import { environment } from "src/environments/environment";
 import { Router } from '@angular/router';
+import { Subscription, timer, firstValueFrom } from 'rxjs';
+import * as moment from 'moment';
+import { LoginServiceService } from 'src/app/services/login-service.service';
+import { AuthService } from 'src/app/guard/auth.service';
+import { decodeJwt } from 'src/app/guard/jwt.util';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class RefreshLoginServiceService {
-  private intervalObservable: Observable<number>;
-  private intervalSubscription: Subscription | undefined;
+  private sub?: Subscription;
+  private readonly LEEWAY_SECONDS = 4;
+  private readonly EXTERNAL_TOKEN_KEY = 'accessToken';
 
   constructor(
-    private localStorage: LocalStorageService,
-    private api: LoginServiceService,
-    private router: Router
-    ) {
-    //this.intervalObservable = interval(1000); // Default interval duration set to 1000 milliseconds (1 second)
-  }
+    private readonly api: LoginServiceService,
+    private readonly router: Router,
+    private readonly auth: AuthService
+  ) {}
 
-  startInterval(intervalDuration: number, data:any): void {
-    this.intervalObservable = interval(intervalDuration);
+  
+  startInterval(dueMs: number): void {
+    this.stopInterval();
+    if (!Number.isFinite(dueMs) || dueMs <= 0) return;
 
-    console.log('start interval')
-    console.log(intervalDuration)
-
-    this.intervalSubscription = this.intervalObservable.subscribe(() => {
-      console.log('login subscription')
-      console.log(data.expire - moment().unix())
-      console.log(data.expire - moment().unix() <= 5)
-      console.log((data.expire - moment().unix()) - 5)
-
-      let aux = this.localStorage.getObject('login_items') as LoginInfo;
-
-      console.log('usuario antes')
-      console.log(aux)
-
-      this.api.getLogin(aux['token']).then(refreshed => {
-        this.stopInterval()
-
-        this.localStorage.setObject('login_items', {
-          "id": refreshed.id,
-          "user": refreshed.username,
-          "email": refreshed.email,
-          "token": refreshed.accessToken,
-          "expire": refreshed.expire,
-          "seller": aux['seller'],
-          "roles": refreshed.roles,
-          "organizations": aux['organizations'],
-          "logged_as": aux['logged_as']
-        });
-
-        console.log('usuario despues')
-        console.log(this.localStorage.getObject('login_items') as LoginInfo)
-
-        // Start the interval only if the token has been really refreshed
-        // Otherwise close the session
-        if (refreshed.expire > moment().unix() + 4) {
-          this.startInterval(((refreshed.expire - moment().unix())-4)*1000, refreshed)
-        } else {
-          this.stopInterval();
-          this.localStorage.setObject('login_items',{});
-          this.api.logout().catch((err) => {
-            console.log('Something happened')
-            console.log(err)
-          })
-
-          this.router.navigate(['/dashboard']).then(() => {
-            console.log('LOGOUT MADE')
-            window.location.reload()
-          }).catch((err) => {
-            console.log('Something happened router')
-            console.log(err)
-          })
-        }
-      })
+    this.sub = timer(dueMs).subscribe(() => {
+      this.refreshOnce().catch((err) => {
+        console.error('Refresh error:', err);
+        this.handleLogoutFlow();
+      });
     });
   }
 
+  
+  scheduleFromExp(expSeconds: number): void {
+    const now = moment().unix();
+    const remaining = expSeconds - now - this.LEEWAY_SECONDS;
+    const dueMs = Math.max(0, remaining * 1000);
+    this.startInterval(dueMs);
+  }
+
+  async scheduleFromCurrentToken(): Promise<void> {
+    const token = await firstValueFrom(this.auth.getToken());
+    if (!token) return this.stopInterval();
+
+    const exp = decodeJwt<Record<string, any>>(token)?.['exp'] as number | undefined;
+    if (!exp) return this.stopInterval();
+
+    this.scheduleFromExp(this.normalizeEpochSeconds(exp));
+  }
+
   stopInterval(): void {
-    if (this.intervalSubscription) {
-      console.log('stop interval')
-      this.intervalSubscription.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
+      this.sub = undefined;
     }
   }
+
+  private async refreshOnce(): Promise<void> {
+    const token = await firstValueFrom(this.auth.getToken());
+    if (!token) {
+      this.handleLogoutFlow();
+      return;
+    }
+    const refreshed = await this.api.getLogin(token);
+    const now = moment().unix();
+    const stillValid = refreshed?.expire && refreshed.expire > now + this.LEEWAY_SECONDS;
+    if (!refreshed?.accessToken || !stillValid) {
+      this.handleLogoutFlow();
+      return;
+    }
+    localStorage.setItem(this.EXTERNAL_TOKEN_KEY, refreshed.accessToken);
+    this.auth.reloadFromSession?.();
+
+    this.scheduleFromExp(refreshed.expire);
+  }
+
+  private handleLogoutFlow(): void {
+    this.stopInterval();
+    localStorage.removeItem(this.EXTERNAL_TOKEN_KEY);
+
+    this.api.logout?.().catch((err) => console.warn('logout API error', err));
+
+    this.router
+      .navigate(['/dashboard'])
+      .then(() => window.location.reload())
+      .catch((err) => console.warn('router error on logout', err));
+  }
+
+  private normalizeEpochSeconds(expLike: number): number {
+    return expLike > 10_000_000_000 ? Math.floor(expLike / 1000) : expLike;
+  }
+
 }

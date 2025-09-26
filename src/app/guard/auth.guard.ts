@@ -3,7 +3,6 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router, UrlTree, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
-import { RoleType } from '../models/user-data-authentication-response.dto';
 import { AuthService } from './auth.service';
 
 type PowerReq = { function: string; action: string };
@@ -22,7 +21,7 @@ export const AuthGuard: CanActivateFn = (
     switchMap((isAuth) => {
       if (!isAuth) return of<UrlTree | boolean>(redirect('unauthenticated'));
 
-      const requiredRoles = (route.data['roles'] as RoleType[] | undefined) ?? [];
+      //const requiredRoles = (route.data['roles'] as RoleType[] | undefined) ?? [];
       const requiredPowers = (route.data['powers'] as PowerReq[] | undefined) ?? [];
       const isIsbe = route.data['is_isbe'] as boolean | undefined;
 
