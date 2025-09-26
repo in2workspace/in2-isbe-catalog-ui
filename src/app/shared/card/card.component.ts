@@ -7,8 +7,7 @@ import {
   ElementRef, ViewChild, AfterViewInit
 } from '@angular/core';
 import {components} from "../../models/product-catalog";
-import { FastAverageColor } from 'fast-average-color';
-import {faScaleBalanced, faArrowProgress, faArrowRightArrowLeft, faObjectExclude, faSwap, faGlobe, faBook, faShieldHalved, faAtom, faClose, faEllipsis} from "@fortawesome/pro-solid-svg-icons";
+import { faAtom, faClose, faEllipsis} from "@fortawesome/pro-solid-svg-icons";
 type Product = components["schemas"]["ProductOffering"];
 type ProductSpecification = components["schemas"]["ProductSpecification"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
@@ -24,7 +23,6 @@ import { LoginInfo, cartProduct,productSpecCharacteristicValueCart } from '../..
 import { ShoppingCartServiceService } from 'src/app/services/shopping-cart-service.service';
 import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
-import { jwtDecode } from "jwt-decode";
 import { environment } from 'src/environments/environment';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { CartCardComponent } from '../cart-card/cart-card.component';
@@ -46,6 +44,8 @@ export class CardComponent implements OnInit, AfterViewInit {
 
   @Input() productOff: Product | undefined;
   @Input() cardId: number;
+
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   category: string = 'none';
   categories: any[] | undefined  = [];
@@ -91,14 +91,14 @@ export class CardComponent implements OnInit, AfterViewInit {
 
 
   constructor(
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private api: ApiServiceService,
-    private priceService: PriceServiceService,
-    private cartService: ShoppingCartServiceService,
-    private accService: AccountServiceService,
-    private router: Router
+    private readonly cdr: ChangeDetectorRef,
+    private readonly localStorage: LocalStorageService,
+    private readonly eventMessage: EventMessageService,
+    private readonly api: ApiServiceService,
+    private readonly priceService: PriceServiceService,
+    private readonly cartService: ShoppingCartServiceService,
+    private readonly accService: AccountServiceService,
+    private readonly router: Router
     ) {
       this.targetModal = document.getElementById('details-modal');
       this.modal = new Modal(this.targetModal);
@@ -192,8 +192,6 @@ export class CardComponent implements OnInit, AfterViewInit {
       this.categories = this.productOff?.category;
       this.checkMoreCats=false;
     }
-    //this.price = this.productOff?.productOfferingPrice?.at(0)?.price?.value + ' ' +
-    //  this.productOff?.productOfferingPrice?.at(0)?.price?.unit ?? 'n/a';
     let profile = this.productOff?.attachment?.filter(item => item.name === 'Profile Picture') ?? [];
     if(profile.length==0){
       this.images = this.productOff?.attachment?.filter(item => item.attachmentType === 'Picture') ?? [];
@@ -204,8 +202,6 @@ export class CardComponent implements OnInit, AfterViewInit {
     if(specId != undefined){
       this.api.getProductSpecification(specId).then(spec => {
         this.prodSpec = spec;
-        console.log('prod spec')
-        console.log(this.prodSpec)
         this.getOwner();
 
         if(this.prodSpec.productSpecCharacteristic != undefined) {
@@ -224,15 +220,17 @@ export class CardComponent implements OnInit, AfterViewInit {
 
     this.prepareOffData();
 
-    this.cartService.getShoppingCart().then(data => {
-      const exists = data.some((item: any) => item.id === this.productOff?.id);
-      if (exists) {
-        this.productAlreadyInCart=true;
-      } else {
-        this.productAlreadyInCart=false;
-      }
-    })
-
+    if(!this.IS_ISBE){
+      this.cartService.getShoppingCart().then(data => {
+        const exists = data.some((item: any) => item.id === this.productOff?.id);
+        if (exists) {
+          this.productAlreadyInCart=true;
+        } else {
+          this.productAlreadyInCart=false;
+        }
+      })
+    }
+    
     this.cdr.detectChanges();
   }
 
@@ -256,135 +254,7 @@ export class CardComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     initFlowbite();
-    /*const fac = new FastAverageColor();
-    fac.getColorAsync(this.myProdImage.nativeElement)
-      .then(color => {
-        this.bgColor = color.rgba;
-      })
-      .catch(e => {
-        console.error(e);
-      });*/
   }
-
-  /* async addProductToCart(productOff:Product| undefined,options:boolean){
-    //this.localStorage.addCartItem(productOff as Product);
-    if(options==true){
-      console.log('termschecked:')
-      console.log(this.selected_terms)
-      if(productOff!= undefined && productOff?.productOfferingPrice != undefined){
-        let prodOptions = {
-          "id": productOff?.id,
-          "name": productOff?.name,
-          "image": this.getProductImage(),
-          "href": productOff.href,
-          "options": {
-            "characteristics": this.selected_chars,
-            "pricing": this.selected_price
-          },
-          "termsAccepted": this.selected_terms
-        }
-        this.lastAddedProd=prodOptions;
-      await this.cartService.addItemShoppingCart(prodOptions).subscribe({
-        next: data => {
-            console.log(data)
-            console.log('Update successful');
-            //TOGGLE TOAST
-            this.toastVisibility=true;
-
-            this.cdr.detectChanges();
-            //document.getElementById("progress-bar")?.classList.toggle("hover:w-100");
-            let element = document.getElementById("progress-bar")
-            let parent = document.getElementById("toast-add-cart")
-            if (element != null && parent != null) {
-              element.style.width = '0%'
-              element.offsetWidth
-              element.style.width = '100%'
-              setTimeout(() => {
-                this.toastVisibility=false
-              }, 3500);
-            }
-        },
-        error: error => {
-            console.error('There was an error while updating!', error);
-            if(error.error.error){
-              console.log(error)
-              this.errorMessage='Error: '+error.error.error;
-            } else {
-              this.errorMessage='There was an error while adding item to the cart!';
-            }
-            this.showError=true;
-            setTimeout(() => {
-              this.showError = false;
-            }, 3000);
-        }
-      });
-    }
-    } else {
-      if(productOff!= undefined && productOff?.productOfferingPrice != undefined){
-        let prodOptions = {
-          "id": productOff?.id,
-          "name": productOff?.name,
-          "image": this.getProductImage(),
-          "href": productOff.href,
-          "options": {
-            "characteristics": this.selected_chars,
-            "pricing": this.selected_price
-          },
-          "termsAccepted": true
-        }
-        this.lastAddedProd=prodOptions;
-      await this.cartService.addItemShoppingCart(prodOptions).subscribe({
-        next: data => {
-            console.log(data)
-            console.log('Update successful');
-            //TOGGLE TOAST
-            this.toastVisibility=true;
-
-            this.cdr.detectChanges();
-            //document.getElementById("progress-bar")?.classList.toggle("hover:w-100");
-            let element = document.getElementById("progress-bar")
-            let parent = document.getElementById("toast-add-cart")
-            if (element != null && parent != null) {
-              element.style.width = '0%'
-              element.offsetWidth
-              element.style.width = '100%'
-              setTimeout(() => {
-                this.toastVisibility=false
-              }, 3500);
-            }
-        },
-        error: error => {
-            console.error('There was an error while updating!', error);
-            if(error.error.error){
-              console.log(error)
-              this.errorMessage='Error: '+error.error.error;
-            } else {
-              this.errorMessage='There was an error while adding item to the cart!';
-            }
-            this.showError=true;
-            setTimeout(() => {
-              this.showError = false;
-            }, 3000);
-        }
-      });
-    }
-    }
-    if(productOff!== undefined){
-      this.eventMessage.emitAddedCartItem(productOff as cartProduct);
-    }
-
-    if(this.cartSelection==true){
-      this.cartSelection=false;
-      this.check_char=false;
-      this.check_terms=false;
-      this.check_prices=false;
-      this.selected_chars=[];
-      this.selected_price={};
-      this.selected_terms=false;
-      this.cdr.detectChanges();
-    }
-    this.cdr.detectChanges();
-  } */
 
 
   async addProductToCart(productOff: Product | undefined, options: boolean) {

@@ -21,7 +21,7 @@ describe('/dashboard',{
         cy.getBySel('vServices').should('have.text', '1 verified services')
         cy.getBySel('rPublishers').should('exist')
         cy.getBySel('rPublishers').should('have.text', '1 registered providers')
-        cy.getBySel('nameServices').should('have.length', init_stat.services.length)
+        cy.getBySel('nameServices').should('have.length', init_stat.services?.length)
         cy.getBySel('nameOrgs').should('have.length', init_stat.organizations.length)
 
     })*/

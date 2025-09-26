@@ -91,8 +91,6 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    console.log('------------producto')
-    console.log(this.productOff)
     // Escuchar eventos de teclado (por si necesitas otros)
     document.addEventListener('keydown', this.handleEscape.bind(this));
     // Configurar los términos y condiciones
@@ -109,10 +107,7 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
       this.form.controls['tsAccepted'].setValue(true);
       this.cdr.detectChanges();
     }
-    console.log(this.tsAndCs)
     let profile = this.productOff?.attachment?.filter(item => item.name === 'Profile Picture') ?? [];
-    console.log('profile...')
-    console.log(profile)
     if(profile.length==0){
       this.images = this.productOff?.attachment?.filter(item => item.attachmentType === 'Picture') ?? [];
     } else {
@@ -136,7 +131,6 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
         this.form.controls['tsAccepted'].setValue(false);
         this.cdr.detectChanges();
       }
-      console.log(this.tsAndCs)
     }
   }
 
@@ -182,8 +176,6 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
   // Handle price plan selection
   async onPricePlanSelected(pricePlan: any) {
     this.metrics=[];
-    console.log('precio')
-    console.log(pricePlan)
     this.form.get('selectedPricePlan')?.setValue(pricePlan);
 
 
@@ -225,28 +217,7 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
   
     }
 
-    console.log('metrics----')
-    console.log(this.metrics)
-
-    /*if(this.metrics.length>0){
-      this.selectedMetric=this.metrics[0]
-      this.selectedUnitOfMeasure=this.metrics[0].unitOfMeasure
-      const grouped = this.metrics.reduce((acc, metric) => {
-        const key = metric.usagespecid;
-      
-        if (!acc[key]) {
-          acc[key] = [];
-        }
-      
-        acc[key].push(metric);
-      
-        return acc;
-      }, {} as Record<string, typeof this.metrics>);
-      this.groupedMetrics=grouped;        
-    }  */
-
     this.selectedPricePlan = pricePlan;
-    console.log(this.selectedPricePlan);
     this.calculatePrice();
   }
 
@@ -259,8 +230,6 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
   onMetricChange(event: Event, metric: any) {
     const input = event.target as HTMLInputElement;
     metric.value = input.valueAsNumber; // update the metric's value with the new input
-    console.log('Metric changed:', metric.unitOfMeasure, 'Value:', metric.value);
-    console.log(this.metrics)
     this.calculatePrice();
   }
 
@@ -297,17 +266,9 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
   updateOrderChars() {
     const selectedCharacteristics = this.form.get('characteristics')?.value;
 
-    console.log('chars....')
-    console.log(selectedCharacteristics)
-    console.log('general chars...')
-    console.log(this.filteredCharacteristics)
-    console.log('keys of selected chars...')
-    console.log(this.getKeys(selectedCharacteristics))
-
     this.orderChars = [];
     for(let i=0; i<this.getKeys(selectedCharacteristics).length;i++){
       let idx = this.filteredCharacteristics.findIndex(item => item.id === this.getKeys(selectedCharacteristics)[i]);
-      console.log(this.filteredCharacteristics[idx])
 
       let value = this.getValues(selectedCharacteristics)[i]
       let valueType = this.filteredCharacteristics[idx].valueType
@@ -370,8 +331,6 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
           value: this.metrics[i].value
         })
       }
-      console.log('formato metrics')
-      console.log(prod.metrics)
     }
 
     let orderItems = [];
@@ -384,15 +343,9 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
 
     if (!selectedPricePlan) return;
 
-    console.log('--- prod ---')
-    console.log(prod)
-    console.log('--- prod ---')
-
     this.isLoading = true;
     this.priceService.calculatePrice(prodOrder).subscribe({
       next: (response) => {
-        console.log('calculate price...')
-        console.log(response.orderTotalPrice)
         this.price = response.orderTotalPrice; // Updates the price
         this.price = this.price.map((item) => ({
           ...item,
@@ -439,12 +392,9 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
     try {
       // Añadir producto al carrito
       await this.cartService.addItemShoppingCart(prodOptions);
-      console.log('Update successful');
 
       // Emitir eventos
       this.eventMessage.emitAddedCartItem(prodOptions as cartProduct);
-
-      console.log('Order Payload:', orderPayload);
     } catch (error) {
       console.error('There was an error while updating the cart:', error);
     }
