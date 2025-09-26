@@ -27,10 +27,6 @@ export class PaginationService {
 
   async getItemsPaginated(page:number, pageSize:any, next:boolean, items:any[], nextItems:any[], options:any,
     handler: (...params: any[]) => Promise<any>): Promise<any> {
-
-      console.log('options')
-      console.log(options)
-
     try {
       let params: any[] = [page];
       if("keywords" in options){
@@ -68,8 +64,6 @@ export class PaginationService {
         page=0;
         params[0]=page;
 
-        console.log('------ Calling handler')
-        console.log(params)
         let data = await handler(...params)
         items=data;
         page=page+pageSize;
@@ -86,7 +80,7 @@ export class PaginationService {
       page=page+pageSize;
 
     } catch(err) {
-      console.log(err)
+      console.error(err)
     } finally {
       let page_check=true;
       if(nextItems.length>0){
@@ -246,7 +240,6 @@ export class PaginationService {
 
   async getProducts(page: number, keywords: any, filters?: Category[]): Promise<ProductOffering[]> {
     try {
-      console.log('-------------------------- getProducts ----------------------------');
       // Get data from API
       const productOfferings: ProductOffering[] = filters && filters.length > 0
         ? await this.api.getProductsByCategory(filters, page, keywords)
@@ -313,7 +306,6 @@ export class PaginationService {
 
   async getProductsByCatalog(page: number, keywords: any, filters?: Category[], id?: any): Promise<ProductOffering[]> {
     try {
-      console.log('-------------------------- getProductsByCatalog ----------------------------');
       // Get data from API
       const productOfferings: ProductOffering[] = filters && filters.length > 0
         ? await this.api.getProductsByCategoryAndCatalog(filters, id, page)
@@ -552,7 +544,6 @@ export class PaginationService {
     try {
       // Get Orders
       orders = await this.orderService.getProductOrders(seller, page, filters, selectedDate, role);
-      console.log('getOrders', orders);
       // Obtener todas las cuentas de facturación en paralelo
       const billingAccounts = await Promise.all(orders.map(order => this.accountService.getBillingAccountById(order.billingAccount.id)));
 
@@ -561,7 +552,6 @@ export class PaginationService {
         // Obtener detalles de los productos en paralelo
         const items = await Promise.all(order.productOrderItem.map(async (productOrderItem:any) => {
           try {
-            console.log('Soy un productOrderItem???????: ', productOrderItem);
             const offer = await this.api.getProductById(productOrderItem.productOffering.id);
             const spec = await this.api.getProductSpecification(offer.productSpecification.id);
 
@@ -613,7 +603,6 @@ export class PaginationService {
         };
       }));
 
-      console.log('Orders processed:', ordersWithDetails);
       return ordersWithDetails;
     } catch (error) {
       console.error('Error fetching orders:', error);
@@ -670,11 +659,8 @@ export class PaginationService {
 
   async getInventory(page: number, keywords: any, filters: Category[], seller: any): Promise<any[]> {
     try {
-      console.log('Fetching inventory...');
-
       // Obtener inventario desde el servicio
       const data = await this.inventoryService.getInventory(page, seller, filters, keywords);
-      console.log('Inventory received:', data);
 
       // Obtener ofertas del inventario
       return await this.getOffers(data);
@@ -686,14 +672,11 @@ export class PaginationService {
   }
 
   async getInvoices(page:number, filters:Category[], seller:any, selectedDate:any, role:any): Promise<any[]> {
-    console.log("---getInvoices---")
+
     let invoices = []
     try{
       invoices = await this.invoicesService.getInvoices(seller,page,filters,selectedDate,role)
     } finally {
-      console.log("params:", seller,page,filters,selectedDate,role)
-      console.log("---getInvoices result:---", invoices)
-      console.log(invoices)
       return invoices
     }
   }

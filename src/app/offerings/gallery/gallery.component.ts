@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import {CardComponent} from "../../shared/card/card.component";
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
@@ -18,15 +17,14 @@ export class GalleryComponent implements OnInit {
   products: ProductOffering[]=[];
 
   constructor(
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef) {
+    private readonly api: ApiServiceService,
+    private readonly cdr: ChangeDetectorRef) {
   }
 
   //Must be under environment.PRODUCT_LIMIT (i.e. 6 atm)
   gallery_limit=4;
 
   ngOnInit() {
-    console.log('API RESPONSE:')
     this.api.getProducts(0,undefined).then(data => {
       for(let i=0; i < this.gallery_limit && i < data.length; i++){
           let attachment: any[]= []
@@ -94,9 +92,6 @@ export class GalleryComponent implements OnInit {
           })
         }
     })
-
-    console.log('Productos...')
-    console.log(this.products)
   }
 
 }
