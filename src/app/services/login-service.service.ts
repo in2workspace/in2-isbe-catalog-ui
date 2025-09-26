@@ -21,8 +21,6 @@ export class LoginServiceService {
 
     let header = {}
 
-    // Adding the local token options for reading the profile
-    // from session when the portal is served from proxy nodejs
     if (token != 'local') {
       header = {
         headers: new HttpHeaders()

@@ -2,11 +2,8 @@ import {Component, HostListener, OnInit, ChangeDetectorRef} from '@angular/core'
 import {EventMessageService} from "../../services/event-message.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import { ActivatedRoute } from '@angular/router';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LoginInfo } from 'src/app/models/interfaces';
-import * as moment from 'moment';
-import { RefreshLoginServiceService } from "src/app/services/refresh-login-service.service"
 import { StatsServiceService } from "src/app/services/stats-service.service"
 import { LoginServiceService } from "src/app/services/login-service.service"
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -38,16 +35,15 @@ export class DashboardComponent implements OnInit {
   currentIndexServ: number = 0;
   currentIndexPub: number = 0;
   delay: number = 2000;
-  //loginSubscription: Subscription = new Subscription();;
-  constructor(private localStorage: LocalStorageService,
-              private eventMessage: EventMessageService,
-              private statsService : StatsServiceService,
-              private route: ActivatedRoute,
-              private router: Router,
-              private api: ApiServiceService,
-              private loginService: LoginServiceService,
-              private cdr: ChangeDetectorRef,
-              private refreshApi: RefreshLoginServiceService) {
+  
+  constructor(private readonly localStorage: LocalStorageService,
+              private readonly eventMessage: EventMessageService,
+              private readonly statsService : StatsServiceService,
+              private readonly route: ActivatedRoute,
+              private readonly router: Router,
+              private readonly api: ApiServiceService,
+              private readonly loginService: LoginServiceService,
+              private readonly cdr: ChangeDetectorRef) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'FilterShown') {
         this.isFilterPanelShown = ev.value as boolean;
@@ -60,7 +56,7 @@ export class DashboardComponent implements OnInit {
   }
   @HostListener('document:click')
   onClick() {
-    if(this.showContact==true){
+    if(this.showContact){
       this.showContact=false;
       this.cdr.detectChanges();
     }
@@ -93,20 +89,19 @@ export class DashboardComponent implements OnInit {
           "organizations": data.organizations,
           "logged_as": data.id } as LoginInfo;
 
-        // Using organization session by default if provided
         if (info.organizations != null && info.organizations.length > 0) {
           info.logged_as = info.organizations[0].id
         }
 
-        this.localStorage.addLoginInfo(info);
+        this.localStorage.setItem("accessToken",data.accessToken);
         this.eventMessage.emitLogin(info);
       })      
       this.router.navigate(['/dashboard'])
     } 
     this.api.getLaunchedCategories().then(data => {
-      for(let i=0; i < data.length; i++){
-        if(data[i].isRoot==true){
-          this.categories.push(data[i])
+      for(const element of data){
+        if(element.isRoot){
+          this.categories.push(element)
         }        
       }
       initFlowbite();
@@ -117,6 +112,7 @@ export class DashboardComponent implements OnInit {
 
     this.cdr.detectChanges();
   }
+
   filterSearch(event: any) {
     if(this.searchField.value!='' && this.searchField.value != null){
       this.router.navigate(['/search', {keywords: this.searchField.value}]);

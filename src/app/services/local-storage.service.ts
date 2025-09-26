@@ -76,12 +76,12 @@ export class LocalStorageService {
     }
   }
 
-  addLoginInfo(value: LoginInfo): void {
+  /*addLoginInfo(value: LoginInfo): void {
     localStorage.setItem("login_items", JSON.stringify(value));
   }
 
   removeLoginInfo(): void {
     localStorage.setItem("login_items", JSON.stringify({}));
-  }
+  }*/
 
 }

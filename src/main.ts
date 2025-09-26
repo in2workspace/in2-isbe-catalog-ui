@@ -1,7 +1,8 @@
+// main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
-import { provideHttpClient, withInterceptorsFromDi, HttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -12,6 +13,9 @@ import { AppInitService } from './app/services/app-init.service';
 import { MatomoInitializationMode, MatomoInitializerService, MatomoModule } from 'ngx-matomo-client';
 import { appConfigFactory } from './app/app-config-factory';
 
+import { AuthModule, AuthInterceptor } from 'angular-auth-oidc-client';
+import { environment } from 'src/environments/environment';
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
 }
@@ -21,6 +25,7 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
+
     AppInitService,
     {
       provide: APP_INITIALIZER,
@@ -28,6 +33,7 @@ bootstrapApplication(AppComponent, {
       deps: [AppInitService, MatomoInitializerService],
       multi: true
     },
+
     importProvidersFrom(
       MarkdownModule.forRoot(),
       TranslateModule.forRoot({
@@ -38,7 +44,24 @@ bootstrapApplication(AppComponent, {
           deps: [HttpClient]
         }
       }),
-      MatomoModule.forRoot({ mode: MatomoInitializationMode.AUTO_DEFERRED })
-    )
+      MatomoModule.forRoot({ mode: MatomoInitializationMode.AUTO_DEFERRED }),
+
+      AuthModule.forRoot({
+        config: {
+          postLoginRoute: '/dashboard',
+          authority: "https://certauth.evidenceledger.eu/",
+          redirectUrl: window.location.origin,
+          postLogoutRedirectUri: window.location.origin,
+          clientId: environment.SIOP_INFO.clientID,
+          responseType: 'code',
+          silentRenew: true,
+          useRefreshToken: true,
+          ignoreNonceAfterRefresh: true,
+          triggerRefreshWhenIdTokenExpired: false,
+          secureRoutes: [environment.BASE_URL].filter((route): route is string => route !== undefined)
+        },
+      })
+    ), 
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ]
 });
