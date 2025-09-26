@@ -1,6 +1,5 @@
 import { MatomoInitializerService } from 'ngx-matomo-client';
-import { AppInitService } from './services/app-init.service'; // Adjust path as necessary
-import { inject } from '@angular/core';
+import { AppInitService } from './services/app-init.service';
 
 export function appConfigFactory(appInitService: AppInitService, matomoInitializer: MatomoInitializerService): () => Promise<any> {
   return () => {
