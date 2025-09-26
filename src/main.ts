@@ -1,4 +1,3 @@
-// main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
@@ -49,10 +48,10 @@ bootstrapApplication(AppComponent, {
       AuthModule.forRoot({
         config: {
           postLoginRoute: '/dashboard',
-          authority: "https://certauth.evidenceledger.eu/",
+          authority: "https://certauth.evidenceledger.eu",
           redirectUrl: window.location.origin,
           postLogoutRedirectUri: window.location.origin,
-          clientId: environment.SIOP_INFO.clientID,
+          clientId: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
           responseType: 'code',
           silentRenew: true,
           useRefreshToken: true,
