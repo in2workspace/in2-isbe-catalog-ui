@@ -1,8 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import {LocalStorageService} from "src/app/services/local-storage.service";
-import { LoginInfo } from 'src/app/models/interfaces';
 import {EventMessageService} from "../../services/event-message.service";
-import * as moment from 'moment';
 import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-modal.component';
 import { UpdateCatalogComponent } from './offerings/seller-catalogs/update-catalog/update-catalog.component';
 import { UpdateOfferComponent } from './offerings/seller-offer/update-offer/update-offer.component';
@@ -15,6 +12,8 @@ import { SellerProductSpecComponent } from './offerings/seller-product-spec/sell
 import { SellerCatalogsComponent } from './offerings/seller-catalogs/seller-catalogs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'app-seller-offerings',
@@ -54,15 +53,13 @@ export class SellerOfferingsComponent implements OnInit {
   };
 
   constructor(
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly cdr: ChangeDetectorRef,
     private readonly eventMessage: EventMessageService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'SellerProductSpec') {   
-        if(ev.value == true && (JSON.stringify(this.userInfo) != '{}' && (((this.userInfo.expire - moment().unix())-4) > 0))) {
-          this.feedback=true;
-        }  
+        this.feedback=true;
         this.goToProdSpec();
       }
       if(ev.type === 'SellerCreateProductSpec' && ev.value == true) {        
@@ -99,12 +96,19 @@ export class SellerOfferingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userInfo = this.localStorage.getObject('login_items') as LoginInfo;
+    this.auth.loginInfo$
+      .pipe(take(1))
+      .subscribe(li => {
+        this.userInfo = li ?? null;
+      });
+
     const saved = localStorage.getItem('activeSection');
 
-    if (saved) this.activeSection = saved;
-    if (saved && this.sectionActions[saved]) {
-      this.sectionActions[saved].call(this); // bind `this` context
+    if (saved) {
+      this.activeSection = saved;
+      if (this.sectionActions[saved]) {
+        this.sectionActions[saved].call(this);
+      }
     }
   }
 

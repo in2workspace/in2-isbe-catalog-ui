@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CategoriesRecursionListComponent } from 'src/app/shared/categories-recursion-list/categories-recursion-list.component';
 import { DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'admin-categories',
@@ -35,13 +36,13 @@ export class CategoriesComponent {
   loading: boolean = false;
   seller:any;
   status:any[]=[];
+  
 
   constructor(
-    private router: Router,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
+    private readonly api: ApiServiceService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly eventMessage: EventMessageService,
+    private readonly auth: AuthService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -57,13 +58,10 @@ export class CategoriesComponent {
   initCatalogs(){
     this.loading=true;
     this.categories=[];
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(aux.logged_as==aux.id){
-      this.seller = aux.id;
-    } else {
-      let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.seller = loggedOrg.id
-    }
+    this.auth.loginInfo$.subscribe(li => {
+      this.seller = this.auth.getSellerId(li);
+    });
+
 
     this.getCategories();
     initFlowbite();

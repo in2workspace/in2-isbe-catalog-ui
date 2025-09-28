@@ -1,27 +1,14 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
-import { LoginInfo, billingAccountCart } from 'src/app/models/interfaces';
-import { ApiServiceService } from 'src/app/services/product-service.service';
-import { AccountServiceService } from 'src/app/services/account-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
-import { ProductOrderService } from 'src/app/services/product-order-service.service';
-import { PaginationService } from 'src/app/services/pagination.service';
-import { FastAverageColor } from 'fast-average-color';
-import {components} from "src/app/models/product-catalog";
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { phoneNumbers, countries } from 'src/app/models/country.const'
-import { initFlowbite } from 'flowbite';
 import {EventMessageService} from "src/app/services/event-message.service";
-import * as moment from 'moment';
-import { environment } from 'src/environments/environment';
-import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UsageListComponent } from "src/app/pages/usage-specs/usage-sections/usage-list/usage-list.component"
 import { UsageSpecComponent } from "src/app/shared/forms/usage-spec/usage-spec.component"
 import { CreateUsageSpecComponent } from "./usage-sections/create-usage-spec/create-usage-spec.component"
 import { UpdateUsageSpecComponent } from './usage-sections/update-usage-spec/update-usage-spec.component'
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
   selector: 'app-usage-specs',
@@ -48,8 +35,7 @@ export class UsageSpecsComponent implements OnInit {
   usageSpecToUpdate:any;
 
   constructor(
-    private localStorage: LocalStorageService,
-    private cdr: ChangeDetectorRef,
+    private auth: AuthService,
     private eventMessage: EventMessageService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
@@ -69,7 +55,11 @@ export class UsageSpecsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userInfo = this.localStorage.getObject('login_items') as LoginInfo;
+    this.auth.loginInfo$
+    .pipe(take(1))
+    .subscribe(li => {
+      this.userInfo = li ?? null;
+    });
   }
 
   goToUsageSpec(){

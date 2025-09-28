@@ -11,6 +11,8 @@ import { initFlowbite } from 'flowbite';
 import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'seller-offer',
@@ -42,7 +44,7 @@ export class SellerOfferComponent implements OnInit{
 
   constructor(
     private readonly api: ApiServiceService,
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly eventMessage: EventMessageService,
     private readonly paginationService: PaginationService
   ) {
@@ -57,28 +59,30 @@ export class SellerOfferComponent implements OnInit{
     this.initOffers();
   }
 
-  initOffers(){
-    this.loading=true;
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(aux.logged_as==aux.id){
-      this.seller = aux.id;
-    } else {
-      let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.seller = loggedOrg.id
-    }
-    this.offers=[];
-    this.nextOffers=[];
-    this.getOffers(false);
-    let input = document.querySelector('[type=search]')
-    if(input!=undefined){
-      input.addEventListener('input', e => {
-        if(this.searchField.value==''){
-          this.filter=undefined;
-          this.getOffers(false);
+  initOffers(): void {
+    this.loading = true;
+    this.offers = [];
+    this.nextOffers = [];
+
+    this.auth.sellerId$
+      .pipe(take(1))
+      .subscribe(id => {
+        this.seller = id || '';
+
+        this.getOffers(false);
+
+        const input = document.querySelector<HTMLInputElement>('[type=search]');
+        if (input) {
+          input.oninput = () => {
+            if (this.searchField.value === '') {
+              this.filter = undefined;
+              this.getOffers(false);
+            }
+          };
         }
+
+        initFlowbite();
       });
-    }
-    initFlowbite();
   }
 
   ngAfterViewInit(){

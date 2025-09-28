@@ -1,3 +1,4 @@
+// auth.guard.ts
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -18,14 +19,14 @@ export class AuthGuard implements CanActivate {
           this.auth.login();
           return of(false);
         }
-        return this.auth.user$.pipe(
+        return this.auth.loginInfo$.pipe(
           take(1),
-          map(user => {
-            if (!user) return this.router.createUrlTree(['/dashboard']);
+          map(li => {
+            if (!li) return this.router.createUrlTree(['/dashboard']);
             if (isIsbe) return this.router.createUrlTree(['/dashboard']);
 
             if (requiredRoles.length > 0) {
-              const roles = user.roles ?? [];
+              const roles = (li.roles ?? []).map(r => r.name ?? r.id ?? r);
               const ok = requiredRoles.some(r => roles.includes(r));
               if (!ok) return this.router.createUrlTree(['/dashboard']);
             }

@@ -1,23 +1,20 @@
-import { Component, OnInit, ChangeDetectorRef, SimpleChanges, OnChanges, HostListener, AfterViewInit } from '@angular/core';
-import { CommonModule, NgClass } from '@angular/common';
+import { Component, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
+import { NgClass } from '@angular/common';
 import {CategoriesFilterComponent} from "../../shared/categories-filter/categories-filter.component";
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import { PaginationService } from 'src/app/services/pagination.service'
 import {LocalStorageService} from "../../services/local-storage.service";
 import {Category} from "../../models/interfaces";
 import {EventMessageService} from "../../services/event-message.service";
-import { LoginServiceService } from "src/app/services/login-service.service"
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoginInfo } from 'src/app/models/interfaces';
-import * as moment from 'moment';
 import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { CardComponent } from 'src/app/shared/card/card.component';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'bae-search',
@@ -44,13 +41,11 @@ export class SearchComponent implements OnInit {
   feedback:boolean=false;
 
   constructor(
-    private api: ApiServiceService,
+    private auth: AuthService,
     private cdr: ChangeDetectorRef,
     private route: ActivatedRoute,
-    private router: Router,
     private localStorage: LocalStorageService,
     private eventMessage: EventMessageService,
-    private loginService: LoginServiceService,
     private paginationService: PaginationService) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
@@ -88,23 +83,21 @@ export class SearchComponent implements OnInit {
     let input = document.querySelector('[type=search]')
     if(input!=undefined){
       input.addEventListener('input', async e => {
-        // Easy way to get the value of the element who trigger the current `e` event
-        console.log(`Input updated`)
         if(this.searchField.value==''){
           this.keywords=undefined;
-          console.log('EVENT CLEAR')
           await this.getProducts(false);
         }
       });
     }
     setTimeout(() => {
-      const userInfo = this.localStorage.getObject('login_items') as LoginInfo;
-
-      // The user is logged in
-      if ((JSON.stringify(userInfo) != '{}' && (((userInfo.expire - moment().unix())-4) > 0))) {
-        this.feedback = true;
-      }
+      this.auth.isAuthenticated$
+        .pipe(take(1))
+        .subscribe(isAuth => {
+          this.feedback = isAuth;
+          this.cdr.detectChanges();
+        });
     });
+
   }
 
   @HostListener('document:click')

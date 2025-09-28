@@ -21,6 +21,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe, NgClass } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
@@ -152,7 +154,7 @@ export class UpdateProductSpecComponent implements OnInit {
   constructor(
     private readonly prodSpecService: ProductSpecServiceService,
     private readonly cdr: ChangeDetectorRef,
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly eventMessage: EventMessageService,
     private readonly attachmentService: AttachmentServiceService,
     private readonly qrVerifier: QrVerifierService,
@@ -196,15 +198,11 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-    }
+   this.auth.sellerId$
+    .pipe(take(1))
+    .subscribe(id => {
+      this.seller = id || '';
+    });
   }
 
   populateProductInfo(){

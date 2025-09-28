@@ -1,3 +1,4 @@
+// legacy-auth-adapter.service.ts
 import { Injectable } from '@angular/core';
 
 export interface LegacySession {
@@ -5,6 +6,7 @@ export interface LegacySession {
   accessToken?: string;
   roles: string[];
   exp?: number;
+  claims?: any;
 }
 
 function base64UrlDecode(input: string): string {
@@ -38,27 +40,23 @@ export class LegacyTokenAdapterService {
 
     const now = Math.floor(Date.now() / 1000);
     const exp = typeof claims.exp === 'number' ? claims.exp : 0;
-    //if (!exp || exp - now - 4 <= 0) return { isAuthenticated: false, roles: [] };
+    // if (!exp || exp - now - 4 <= 0) return { isAuthenticated: false, roles: [] };
 
     let roles: string[] = [];
-
-    if (Array.isArray(claims.roles)) {
-      roles = claims.roles;
-    } else if (typeof claims.role === 'string') {
-      roles = [claims.role];
-    } else if (claims.realm_access?.roles) {
-      roles = claims.realm_access.roles;
-    } else if (claims.resource_access) {
-      const all = Object.values<any>(claims.resource_access)
-        .flatMap((r: any) => r?.roles ?? []);
+    if (Array.isArray(claims.roles)) roles = claims.roles;
+    else if (typeof claims.role === 'string') roles = [claims.role];
+    else if (claims.realm_access?.roles) roles = claims.realm_access.roles;
+    else if (claims.resource_access) {
+      const all = Object.values<any>(claims.resource_access).flatMap((r: any) => r?.roles ?? []);
       roles = Array.from(new Set(all));
-    } 
+    }
 
     return {
       isAuthenticated: true,
       accessToken: token,
       roles,
-      exp
+      exp,
+      claims,
     };
   }
 

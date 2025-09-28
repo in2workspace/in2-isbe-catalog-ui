@@ -19,6 +19,8 @@ import { NgClass } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { BadgeComponent } from 'src/app/shared/badge/badge.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 @Component({
     selector: 'inventory-products',
     templateUrl: './inventory-products.component.html',
@@ -65,7 +67,7 @@ export class InventoryProductsComponent implements OnInit {
 
   constructor(
     private readonly inventoryService: ProductInventoryServiceService,
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly api: ApiServiceService,
     private readonly cdr: ChangeDetectorRef,
     private readonly router: Router,
@@ -88,17 +90,13 @@ export class InventoryProductsComponent implements OnInit {
 
   initInventory(){
     this.loading = true;
-
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' &&  (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-      this.getInventory(false);
-    }
+    this.auth.sellerId$
+      .pipe(take(1))
+      .subscribe(id => {
+        this.seller = id || '';
+        this.getInventory(false);
+    });
+    
     let input = document.querySelector('[type=search]')
     if(input!=undefined){
       input.addEventListener('input', e => {

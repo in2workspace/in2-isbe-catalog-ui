@@ -110,16 +110,21 @@
           </div>
         </div>-->
         @if (is_logged) {
-        <!-- User menu section -->
-        <div data-cy="loggedAcc" id="loggedAcc" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end" class="relative mr-2 inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer">
-          <span class="font-medium text-gray-600 dark:text-gray-300">{{usercharacters}}</span>
-        </div>
+          <div data-cy="loggedAcc" id="loggedAcc" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end"
+            class="relative mr-2 inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 cursor-pointer">
+            <span class="font-medium text-gray-600 dark:text-gray-300">{{ usercharacters }}</span>
+          </div>
         } @else {
-          <a data-cy="registerAcc" id="register" href="{{domeRegister}}" target="_blank" type="button" class="hidden lg:block w-full mr-2 text-white dark:text-gray-400 hover:bg-secondary-50 hover:text-primary-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5 text-center" aria-current="page">{{ 'HEADER._register' | translate }}</a>
-          <button data-cy="login" id="login" (click)="onLoginClick()" type="button" class="w-full mr-2 text-white dark:text-gray-400 hover:bg-secondary-50 hover:text-primary-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5">
+          <a data-cy="registerAcc" id="register" [href]="domeRegister" target="_blank"
+            class="hidden lg:block w-full mr-2 text-white dark:text-gray-400 hover:bg-secondary-50 hover:text-primary-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5 text-center">
+            {{ 'HEADER._register' | translate }}
+          </a>
+          <button data-cy="login" id="login" (click)="onLoginClick()" type="button"
+                  class="w-full mr-2 text-white dark:text-gray-400 hover:bg-secondary-50 hover:text-primary-100 dark:hover:bg-gray-700 rounded-lg text-sm p-2.5">
             Login
           </button>
         }
+
         <button #navbarbutton type="button" (click)="toggleNavBar();$event.stopPropagation();"
         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-dropdown" aria-expanded="false">
           <span class="sr-only">{{ 'HEADER._open_menu' | translate }}</span>
@@ -159,45 +164,60 @@
       </div>
       }
       @if (is_logged) {
-        <!-- User menu Dropdown menu -->
         <div id="userDropdown" class="z-50 hidden bg-secondary-50 divide-y divide-primary-100/50 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 ">
           <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
-            <div>{{username}}</div>
-            <div class="font-medium truncate line-clamp-2">{{email}}</div>
+            <div>{{ username }}</div>
+            <div class="font-medium truncate line-clamp-2">{{ email }}</div>
           </div>
           <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
-            @if(loggedAsOrg == false || roles.includes('orgAdmin')) {
+            @if (!loggedAsOrg || roles.includes('orgAdmin')) {
               <li>
-                <button id="userProfile" (click)="goTo('/profile')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><fa-icon [icon]="faAddressCard" class="mr-2"></fa-icon>{{ 'HEADER._profile' | translate }}</button>
+                <button id="userProfile" (click)="goTo('/profile')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <fa-icon [icon]="faAddressCard" class="mr-2"></fa-icon>{{ 'HEADER._profile' | translate }}
+                </button>
               </li>
             }
-            @if(roles.includes('seller')){
+            @if (roles.includes('seller')) {
               <li>
-                <button id="myOfferings" (click)="goTo('/my-offerings')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><fa-icon [icon]="faHandHoldingBox" class="mr-2"></fa-icon>{{ 'HEADER._offerings' | translate }}</button>
+                <button id="myOfferings" (click)="goTo('/my-offerings')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <fa-icon [icon]="faHandHoldingBox" class="mr-2"></fa-icon>{{ 'HEADER._offerings' | translate }}
+                </button>
               </li>
             }
-            @if((isAdmin && loggedAsOrg == false) || roles.includes('certifier')) {
+            @if ((isAdmin && !loggedAsOrg) || roles.includes('certifier')) {
               <li>
-                <button id="administration" (click)="goTo('/admin')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><fa-icon [icon]="faCogs" class="mr-2"></fa-icon>{{ 'HEADER._admin' | translate }}</button>
+                <button id="administration" (click)="goTo('/admin')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <fa-icon [icon]="faCogs" class="mr-2"></fa-icon>{{ 'HEADER._admin' | translate }}
+                </button>
               </li>
             }
-            @if(!IS_ISBE){
+            @if (!IS_ISBE) {
               <li>
-                <button id="usageSpecs" (click)="goTo('/usage-spec')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><fa-icon [icon]="faRuler" class="mr-2"></fa-icon>Usage Spec</button>
+                <button id="usageSpecs" (click)="goTo('/usage-spec')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                  <fa-icon [icon]="faRuler" class="mr-2"></fa-icon>Usage Spec
+                </button>
               </li>
             }
             <li>
-              <button id="myInventory" (click)="goTo('/product-inventory')"class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><fa-icon [icon]="faBoxesStacked" class="mr-2"></fa-icon>{{ 'HEADER._inventory' | translate }}</button>
+              <button id="myInventory" (click)="goTo('/product-inventory')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <fa-icon [icon]="faBoxesStacked" class="mr-2"></fa-icon>{{ 'HEADER._inventory' | translate }}
+              </button>
             </li>
           </ul>
           <div class="py-1">
-            @if(orgs.length > 0 && isAdmin) {
-              <button data-dropdown-toggle="orgs-dropdown" data-dropdown-placement="left-start" class="flex w-full justify-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><fa-icon [icon]="faAnglesLeft" class="mr-2"></fa-icon>{{ 'HEADER._change_session' | translate }}</button>
+            @if (orgs.length > 0 && isAdmin) {
+              <button data-dropdown-toggle="orgs-dropdown" data-dropdown-placement="left-start"
+                      class="flex w-full justify-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+                <fa-icon [icon]="faAnglesLeft" class="mr-2"></fa-icon>{{ 'HEADER._change_session' | translate }}
+              </button>
             }
-            <button id="signOut" (click)="logout();" class="flex w-full justify-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"><fa-icon [icon]="faArrowRightFromBracket" class="mr-2"></fa-icon>{{ 'HEADER._sign_out' | translate }}</button>
+            <button id="signOut" (click)="logout()" class="flex w-full justify-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">
+              <fa-icon [icon]="faArrowRightFromBracket" class="mr-2"></fa-icon>{{ 'HEADER._sign_out' | translate }}
+            </button>
           </div>
         </div>
       }
+
     </div>
     <div id="support-dropdown" class="z-50 hidden bg-secondary-50 divide-y divide-primary-100/50 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 ">
       <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
@@ -211,20 +231,27 @@
     </div>
     <div id="orgs-dropdown" class="z-50 hidden bg-secondary-50 divide-y divide-primary-100/50 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600 ">
       <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="avatarButton">
-          @for (org of orgs; track org.id; let idx = $index) {
-            @if(org.id != loginInfo.logged_as || loginInfo.logged_as == loginInfo.id){
-              <li>
-                <button (click)="changeSession(idx,false);hideDropdown('orgs-dropdown');" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><fa-icon [icon]="faUsers" class="mr-2"></fa-icon>{{ org.name }}</button>
-              </li>
-            }
-          }
-          @if(loggedAsOrg){
+        @for (org of orgs; track org.id; let idx = $index) {
+          @if (org.id !== currentOrgId) {
             <li>
-              <button (click)="changeSession(0,true);hideDropdown('orgs-dropdown');" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"><fa-icon [icon]="faUser" class="mr-2"></fa-icon>{{ loginInfo.user }}</button>
+              <button (click)="changeSession(idx, false); hideDropdown('orgs-dropdown');"
+                      class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                <fa-icon [icon]="faUsers" class="mr-2"></fa-icon>{{ org.name }}
+              </button>
             </li>
           }
+        }
+        @if (loggedAsOrg) {
+          <li>
+            <button (click)="changeSession(0, true); hideDropdown('orgs-dropdown');"
+                    class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+              <fa-icon [icon]="faUser" class="mr-2"></fa-icon>{{ username }}
+            </button>
+          </li>
+        }
       </ul>
     </div>
+
   </nav>
   @if (showCart) {
     <div class="flex h-screen w-full backdrop-blur-sm absolute top-0 right-0 z-40">

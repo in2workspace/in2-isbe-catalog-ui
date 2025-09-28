@@ -1,8 +1,10 @@
 import { Injectable, signal, WritableSignal, inject } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { take, switchMap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { take, switchMap, map } from 'rxjs/operators';
 import { LegacyTokenAdapterService } from './legacy-auth-adapter.service';
+import { claimsToLoginInfo, LoginInfo } from './login-info.mapper';
+import { OrgContextService } from '../services/org-context.service';
 
 export interface AppUser {
   sub?: string;
@@ -26,7 +28,12 @@ export class AuthService {
   private readonly tokenSubject = new BehaviorSubject<string>('');
   accessToken$ = this.tokenSubject.asObservable();
 
+  private readonly loginInfoSubject = new BehaviorSubject<LoginInfo | null>(null);
+  loginInfo$ = this.loginInfoSubject.asObservable();
+
   role: WritableSignal<string | null> = signal(null);
+
+  private readonly orgCtx = inject(OrgContextService);
 
   constructor() {
     this.checkAuth().pipe(take(1)).subscribe();
@@ -39,21 +46,57 @@ export class AuthService {
         if (isAuthenticated) {
           const u = this.mapUser(userData);
           this.setState(true, u, accessToken ?? '', this.pickPrimaryRole(u));
+
+          try {
+            const li = claimsToLoginInfo(userData, accessToken ?? '');
+            this.loginInfoSubject.next(li);
+          } catch {
+            this.loginInfoSubject.next(null);
+          }
+
           return of(true);
         }
 
         const legacy = this.legacy.read();
         if (legacy.isAuthenticated) {
-          const u: AppUser = { name: 'legacy', roles: legacy.roles };
-          this.setState(true, u, legacy.accessToken ?? '', this.pickPrimaryRole(u));
+          const uFromClaims = this.mapUser(legacy.claims ?? {});
+          if ((!uFromClaims.roles || uFromClaims.roles.length === 0) && legacy.roles?.length) {
+            uFromClaims.roles = legacy.roles;
+          }
+          this.setState(true, uFromClaims, legacy.accessToken ?? '', this.pickPrimaryRole(uFromClaims));
+
+          try {
+            const li = claimsToLoginInfo(legacy.claims ?? {}, legacy.accessToken ?? '');
+            this.loginInfoSubject.next(li);
+          } catch {
+            this.loginInfoSubject.next(null);
+          }
+
           return of(true);
         }
 
         this.clearState();
+        this.loginInfoSubject.next(null);
         return of(false);
       })
     );
   }
+
+  getSellerId(li: LoginInfo | null): string | null {
+    if (!li) return null;
+    if (li.logged_as === li.id) return li.id;
+    const org = li.organizations.find(o => o.id === li.logged_as);
+    return org?.id ?? null;
+  }
+
+  sellerId$ = combineLatest([this.loginInfo$, this.orgCtx.getOrganization()]).pipe(
+    map(([li, orgId]) => {
+      if (!li) return '';
+      const effective = orgId ?? li.logged_as ?? null;
+      if (!effective || effective === li.id) return li.id;
+      return li.organizations.find(o => o.id === effective)?.id ?? li.id;
+    })
+  );
 
   login(): void {
     this.oidc.authorize();
@@ -62,6 +105,7 @@ export class AuthService {
   logout(): void {
     this.legacy.clear();
     this.oidc.logoffAndRevokeTokens();
+    this.loginInfoSubject.next(null);
   }
 
   async getAccessToken(): Promise<string> {
@@ -75,6 +119,7 @@ export class AuthService {
     this.tokenSubject.next(token);
     this.role.set(role);
   }
+
   private clearState() {
     this.setState(false, null, '', null);
   }

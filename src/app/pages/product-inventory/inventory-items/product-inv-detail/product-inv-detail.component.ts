@@ -15,6 +15,8 @@ import { Location } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { MarkdownComponent } from 'ngx-markdown';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'app-product-inv-detail',
@@ -51,7 +53,7 @@ export class ProductInvDetailComponent implements OnInit {
     private readonly cdr: ChangeDetectorRef,
     private readonly route: ActivatedRoute,
     private readonly api: ApiServiceService,
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly inventoryServ: ProductInventoryServiceService,
     private readonly location: Location
   ) {
@@ -110,12 +112,13 @@ export class ProductInvDetailComponent implements OnInit {
     })
   }
 
-  private handleLoginState() {
-    const aux = this.localStorage.getObject('login_items') as LoginInfo;
-    const isValidSession = aux && Object.keys(aux).length > 0 && (aux.expire - moment().unix() - 4) > 0;
-
-    this.check_logged = isValidSession;
-    this.cdr.detectChanges();
+  private handleLoginState(): void {
+    this.auth.isAuthenticated$
+      .pipe(take(1))
+      .subscribe(isAuth => {
+        this.check_logged = isAuth;
+        this.cdr.detectChanges();
+      });
   }
 
   private organizeAttachments() {

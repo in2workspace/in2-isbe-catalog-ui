@@ -32,6 +32,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { BadgeComponent } from '../badge/badge.component';
 import { PricePlanDrawerComponent } from '../price-plan-drawer/price-plan-drawer.component';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'bae-off-card',
@@ -92,7 +93,7 @@ export class CardComponent implements OnInit, AfterViewInit {
 
   constructor(
     private readonly cdr: ChangeDetectorRef,
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly eventMessage: EventMessageService,
     private readonly api: ApiServiceService,
     private readonly priceService: PriceServiceService,
@@ -174,14 +175,10 @@ export class CardComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit() {
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      this.check_logged=true;
+    this.auth.isAuthenticated$.subscribe(isAuth => {
+      this.check_logged = isAuth;
       this.cdr.detectChanges();
-    } else {
-      this.check_logged=false,
-      this.cdr.detectChanges();
-    }
+    });
 
     this.category = this.productOff?.category?.at(0)?.name ?? 'none';
     if(this.productOff?.category!=undefined&&this.productOff?.category.length>5){

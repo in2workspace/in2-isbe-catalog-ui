@@ -15,6 +15,8 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { DatePipe, NgClass } from '@angular/common';
 import { CategoriesRecursionComponent } from 'src/app/shared/categories-recursion/categories-recursion.component';
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 type Category_Create = components["schemas"]["Category_Create"];
 
 @Component({
@@ -60,12 +62,10 @@ export class CreateCategoryComponent implements OnInit {
   showError:boolean=false;
 
   constructor(
-    private router: Router,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private elementRef: ElementRef,
-    private api: ApiServiceService
+    private readonly cdr: ChangeDetectorRef,
+    private readonly eventMessage: EventMessageService,
+    private readonly api: ApiServiceService,
+    private readonly auth: AuthService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -89,18 +89,13 @@ export class CreateCategoryComponent implements OnInit {
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-    }
-    this.getCategories();
+  initPartyInfo() {
+    this.auth.sellerId$.pipe(take(1)).subscribe(sellerId => {
+      this.seller = sellerId || '';
+      this.getCategories();
+    });
   }
+
 
   goBack() {
     this.eventMessage.emitAdminCategories(true);

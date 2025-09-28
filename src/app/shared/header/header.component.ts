@@ -1,4 +1,15 @@
-import {AfterViewInit, Component, ElementRef, OnInit, ViewChild, ChangeDetectorRef, HostListener, DoCheck, OnDestroy} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ChangeDetectorRef,
+  HostListener,
+  DoCheck,
+  OnDestroy,
+  inject,
+} from '@angular/core';
 import {
   faCartShopping,
   faHandHoldingBox,
@@ -13,99 +24,120 @@ import {
   faCogs,
   faReceipt,
   faRuler
-} from "@fortawesome/sharp-solid-svg-icons";
-import {LocalStorageService} from "../../services/local-storage.service";
-import { ApiServiceService } from 'src/app/services/product-service.service';
-import { LoginServiceService } from 'src/app/services/login-service.service';
-import { Router } from '@angular/router';
-import {EventMessageService} from "../../services/event-message.service";
-import { environment } from 'src/environments/environment';
-import { LoginInfo } from 'src/app/models/interfaces';
-import { Subscription } from 'rxjs';
-import * as moment from 'moment';
-import { ActivatedRoute } from '@angular/router';
-import { initFlowbite } from 'flowbite';
-import { QrVerifierService } from 'src/app/services/qr-verifier.service';
-import * as uuid from 'uuid';
+} from '@fortawesome/sharp-solid-svg-icons';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import {ShoppingCartServiceService} from "../../services/shopping-cart-service.service";
+import { Router, NavigationEnd } from '@angular/router';
+import { initFlowbite } from 'flowbite';
+import * as uuid from 'uuid';
+import { combineLatest, Subject, Subscription, takeUntil } from 'rxjs';
+
+import { LocalStorageService } from '../../services/local-storage.service';
+import { LoginServiceService } from 'src/app/services/login-service.service';
+import { EventMessageService } from '../../services/event-message.service';
+import { QrVerifierService } from 'src/app/services/qr-verifier.service';
+import { ShoppingCartServiceService } from '../../services/shopping-cart-service.service';
+
 import { CartDrawerComponent } from '../cart-drawer/cart-drawer.component';
 import { FaLayersComponent, FaIconComponent, FaLayersCounterComponent } from '@fortawesome/angular-fontawesome';
 
+import { environment } from 'src/environments/environment';
+
+import { OrgContextService } from 'src/app/services/org-context.service';
+import { AuthService } from 'src/app/guard/auth.service';
+
 @Component({
-    selector: 'bae-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css'],
-    standalone: true,
-    imports: [FaLayersComponent, FaIconComponent, FaLayersCounterComponent, CartDrawerComponent, TranslateModule]
+  selector: 'bae-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css'],
+  standalone: true,
+  imports: [FaLayersComponent, FaIconComponent, FaLayersCounterComponent, CartDrawerComponent, TranslateModule]
 })
-export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy{
+export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
-  @ViewChild('theme_toggle_dark_icon') themeToggleDarkIcon: ElementRef;
-  @ViewChild('theme_toggle_light_icon') themeToggleLightIcon: ElementRef;
-  @ViewChild('navbarbutton') navbarbutton: ElementRef;
+  @ViewChild('theme_toggle_dark_icon') themeToggleDarkIcon!: ElementRef;
+  @ViewChild('theme_toggle_light_icon') themeToggleLightIcon!: ElementRef;
+  @ViewChild('navbarbutton') navbarbutton!: ElementRef;
 
-  constructor(themeToggleDarkIcon: ElementRef,
-              themeToggleLightIcon: ElementRef,
-              private readonly translate: TranslateService,
-              private readonly localStorage: LocalStorageService,
-              private readonly loginService: LoginServiceService,
-              private readonly cdr: ChangeDetectorRef,
-              private readonly eventMessage: EventMessageService,
-              private readonly router: Router,
-              private readonly qrVerifier: QrVerifierService,
-              private readonly sc: ShoppingCartServiceService) {
+  private readonly translate = inject(TranslateService);
+  private readonly localStorage = inject(LocalStorageService);
+  private readonly loginService = inject(LoginServiceService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly eventMessage = inject(EventMessageService);
+  private readonly router = inject(Router);
+  private readonly qrVerifier = inject(QrVerifierService);
+  private readonly sc = inject(ShoppingCartServiceService);
+  private readonly auth = inject(AuthService);
+  private readonly orgCtx = inject(OrgContextService);
 
-    this.themeToggleDarkIcon = themeToggleDarkIcon;
-    this.themeToggleLightIcon = themeToggleLightIcon;
-  }
   qrWindow: Window | null = null;
-  statePair:string
-  catalogs: any[] | undefined  = [];
-  langs: any[] = [];
-  defaultLang:any;
-  showCart:boolean=false;
-  is_logged:boolean=false;
-  showLogin:boolean=false;
-  loggedAsOrg:boolean=false;
-  isAdmin:boolean;
-  loginInfo:any;
-  orgs:any[]=[];
-  username:string='';
-  email:string='';
-  usercharacters:string='';
-  loginSubscription: Subscription = new Subscription();
-  roles:string[]=[];
-  knowledge: string = environment.KNOWLEDGE_BASE_URL
-  knowledge_onboarding: string = environment.KB_ONBOARDING_GUIDELINES_URL
-  knowledge_guidelines: string = environment.KB_GUIDELNES_URL
-  registration: string = environment.REGISTRATION_FORM_URL
-  ticketing: string = environment.TICKETING_SYSTEM_URL
-  domeAbout: string = environment.ISBE_ABOUT_LINK
-  domeRegister: string = environment.ISBE_REGISTER_LINK
-  domePublish: string = environment.ISBE_PUBLISH_LINK
-  public static readonly BASE_URL: String = environment.BASE_URL;
-  isNavBarOpen:boolean = false;
-  flagDropdownOpen:boolean=false;
-  cartCount: number = 0;
+  statePair: string = '';
+  catalogs: any[] = [];
+  langs: string[] = [];
+  defaultLang: string = 'es';
+  showCart = false;
+  is_logged = false;
+  showLogin = false;
+  loggedAsOrg = false;
+  isAdmin = false;
+  orgs: any[] = [];
+  roles: string[] = [];
+  username = '';
+  email = '';
+  usercharacters = '';
+  cartCount = 0;
+  isNavBarOpen = false;
+  flagDropdownOpen = false;
+  currentOrgId: string | null = null;
 
+  knowledge: string = environment.KNOWLEDGE_BASE_URL;
+  knowledge_onboarding: string = environment.KB_ONBOARDING_GUIDELINES_URL;
+  knowledge_guidelines: string = environment.KB_GUIDELNES_URL;
+  registration: string = environment.REGISTRATION_FORM_URL;
+  ticketing: string = environment.TICKETING_SYSTEM_URL;
+  domeAbout: string = environment.ISBE_ABOUT_LINK;
+  domeRegister: string = environment.ISBE_REGISTER_LINK;
+  domePublish: string = environment.ISBE_PUBLISH_LINK;
+
+  public static readonly BASE_URL: string = environment.BASE_URL;
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
+  loginSubscription: Subscription = new Subscription();
+  private readonly destroy$ = new Subject<void>();
+
+  protected readonly faCartShopping = faCartShopping;
+  protected readonly faHandHoldingBox = faHandHoldingBox;
+  protected readonly faAddressCard = faAddressCard;
+  protected readonly faArrowRightFromBracket = faArrowRightFromBracket;
+  protected readonly faBoxesStacked = faBoxesStacked;
+  protected readonly faClipboardCheck = faClipboardCheck;
+  protected readonly faBrain = faBrain;
+  protected readonly faAnglesLeft = faAnglesLeft;
+  protected readonly faUser = faUser;
+  protected readonly faUsers = faUsers;
+  protected readonly faCogs = faCogs;
+  protected readonly faReceipt = faReceipt;
+  protected readonly faRuler = faRuler;
+
   ngOnDestroy(): void {
-      this.qrWindow?.close()
-      this.qrWindow=null
+    this.qrWindow?.close();
+    this.qrWindow = null;
+    this.loginSubscription.unsubscribe();
+
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   ngDoCheck(): void {
-    if(this.qrWindow!=null && this.qrWindow.closed){
-      this.qrVerifier.stopChecking(this.qrWindow)
-      this.qrWindow=null
+    if (this.qrWindow?.closed) {
+      this.qrVerifier.stopChecking(this.qrWindow);
+      this.qrWindow = null;
     }
   }
+
   @HostListener('document:click')
   onClick() {
-    if(this.showCart==true){
-      this.showCart=false;
+    if (this.showCart) {
+      this.showCart = false;
       this.cdr.detectChanges();
     }
     if (this.isNavBarOpen) {
@@ -113,119 +145,125 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     }
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) {
-    if (this.isNavBarOpen) {
+  @HostListener('window:resize')
+  onResize() {
+    if (this.isNavBarOpen && this.navbarbutton) {
       this.navbarbutton.nativeElement.blur();
       this.isNavBarOpen = false;
     }
   }
 
-  async ngOnInit(){
-    this.langs = this.translate.getLangs();
-    //this.defaultLang = this.translate.getDefaultLang();
-    let currLang = this.localStorage.getItem('current_language')
-    if(!currLang || currLang == null) {
-      this.defaultLang = this.translate.getDefaultLang();
-    } else {
-      this.defaultLang = currLang;
-    }
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      this.loginInfo=aux;
-      this.is_logged=true;
-      this.orgs=aux.organizations;
-      for(let i=0; i < aux.roles.length; i++){
-        if(aux.roles[i].name == 'admin'){
-          this.isAdmin=true;
-          this.cdr.detectChanges();
-        }
-      }
-      if(aux.logged_as == aux.id){
-        this.username=aux.user;
-        this.usercharacters=(aux.user.slice(0, 2)).toUpperCase();
-        this.email=aux.email;
-        for(let i=0;i<aux.roles.length;i++){
-          this.roles.push(aux.roles[i].name)
-        }
-      } else {
-        let loggedOrg = this.orgs.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.loggedAsOrg=true;
-        this.username=loggedOrg.name;
-        this.usercharacters=(loggedOrg.name.slice(0, 2)).toUpperCase();
-        this.email=loggedOrg.description;
-        for(let i=0;i<loggedOrg.roles.length;i++){
-          this.roles.push(loggedOrg.roles[i].name)
-        }
-      }
-      this.cdr.detectChanges();
+  async ngOnInit() {
+    this.langs = this.translate.getLangs().length ? this.translate.getLangs() : ['es', 'en'];
+    const currLang = this.localStorage.getItem('current_language');
+    this.defaultLang = currLang ?? 'es';
+    this.translate.use(this.defaultLang);
+    
+    if (!this.localStorage.getObject('selected_categories')) {
+      this.localStorage.setObject('selected_categories', []);
     }
 
-    this.sc.cart$.subscribe(cart => {
-      this.cartCount = cart.length; // Updates counter on icon
+    this.sc.cart$.pipe(takeUntil(this.destroy$)).subscribe(cart => {
+      this.cartCount = cart.length;
     });
 
-    this.eventMessage.messages$.subscribe(ev => {
-      if(ev.type === 'ToggleCartDrawer') {
-        this.showCart=false;
+    this.eventMessage.messages$.pipe(takeUntil(this.destroy$)).subscribe(ev => {
+      if (ev.type === 'ToggleCartDrawer') {
+        this.showCart = false;
         this.cdr.detectChanges();
       }
-    })
+    });
+    
+    this.auth.isAuthenticated$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(isAuth => {
+        this.is_logged = isAuth;
+        this.cdr.detectChanges();
+      });
 
-    this.eventMessage.messages$.subscribe(ev => {
-      if(ev.type === 'LoginProcess') {
-        let aux = this.localStorage.getObject('login_items') as LoginInfo;
-        if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-          this.loginInfo=aux;
-          this.is_logged=true;
-          this.cdr.detectChanges();
-          this.orgs=aux.organizations;
-          for(let i=0; i < aux.roles.length; i++){
-            if(aux.roles[i].name == 'admin'){
-              this.isAdmin=true;
-              this.cdr.detectChanges();
-            }
-          }
-          if(aux.logged_as == aux.id){
-            this.username=aux.user;
-            this.usercharacters=(aux.user.slice(0, 2)).toUpperCase();
-            this.email=aux.email;
-            for(let i=0;i<aux.roles.length;i++){
-              this.roles.push(aux.roles[i].name)
-            }
-          } else {
-            let loggedOrg = this.orgs.find((element: { id: any; }) => element.id == aux.logged_as)
-            this.loggedAsOrg=true;
-            this.username=loggedOrg.name;
-            this.usercharacters=(loggedOrg.name.slice(0, 2)).toUpperCase();
-            this.email=loggedOrg.description;
-            for(let i=0;i<loggedOrg.roles.length;i++){
-              this.roles.push(loggedOrg.roles[i].name)
-            }
-          }
-          this.cdr.detectChanges();
+    combineLatest([
+      this.auth.loginInfo$,
+      this.orgCtx.getOrganization(),
+    ])
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(([li, orgId]) => {
+      this.resetUserUI();
+
+      if (!li) {
+        this.is_logged = false;
+        this.cdr.detectChanges();
+        return;
+      }
+
+      this.is_logged = true;
+
+      this.username = li.username || li.user || '';
+      this.email = li.email || '';
+      this.usercharacters = (this.username || 'NA').slice(0, 2).toUpperCase();
+
+      this.roles = (li.roles || []).map(r => r.name ?? r.id ?? r);
+      this.orgs  = li.organizations || [];
+
+      const effectiveOrgId = orgId ?? li.logged_as ?? null;
+
+      if (effectiveOrgId && this.orgCtx.current !== effectiveOrgId) {
+        this.orgCtx.setOrganization(effectiveOrgId);
+      }
+
+      this.currentOrgId = effectiveOrgId;
+      this.loggedAsOrg  = !!effectiveOrgId;
+
+      if (this.loggedAsOrg) {
+        const org = this.orgs.find(o => o.id === effectiveOrgId);
+        if (org) {
+          this.username = org.name ?? this.username;
+          this.usercharacters = (org.name ?? 'NA').slice(0, 2).toUpperCase();
+          this.email = (org).description ?? this.email;
+
+          const orgRoles = Array.isArray(org.roles)
+            ? org.roles.map((r: any) => r.name ?? r.id ?? r)
+            : [];
+          if (orgRoles.length) this.roles = orgRoles;
         }
       }
-    })
+
+      this.isAdmin = this.roles.includes('admin');
+      this.cdr.detectChanges();
+    });
+
+    this.router.events
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
   }
 
   ngAfterViewInit() {
     initFlowbite();
-    // Change the icons inside the button based on previous settings
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      this.themeToggleLightIcon.nativeElement.classList.remove('hidden');
+
+    const isDark = localStorage.getItem('color-theme') === 'dark' ||
+      (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+
+    if (isDark) {
+      this.themeToggleLightIcon?.nativeElement.classList.remove('hidden');
     } else {
-      this.themeToggleDarkIcon.nativeElement.classList.remove('hidden');
+      this.themeToggleDarkIcon?.nativeElement.classList.remove('hidden');
     }
   }
-  toggleDarkMode() {
-    // toggle icons inside button
-    this.themeToggleDarkIcon.nativeElement.classList.toggle('hidden');
-    this.themeToggleLightIcon.nativeElement.classList.toggle('hidden');
 
-    // if set via local storage previously
-    if (localStorage.getItem('color-theme')) {
-      if (localStorage.getItem('color-theme') === 'light') {
+  hideDropdown(id: string) {
+    this.closeDropdown(id);
+  }
+
+  toggleDarkMode() {
+    this.themeToggleDarkIcon?.nativeElement.classList.toggle('hidden');
+    this.themeToggleLightIcon?.nativeElement.classList.toggle('hidden');
+
+    const current = localStorage.getItem('color-theme');
+    if (current) {
+      if (current === 'light') {
         document.documentElement.classList.add('dark');
         localStorage.setItem('color-theme', 'dark');
         document.body.setAttribute('data-theme', 'dark');
@@ -234,8 +272,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
         localStorage.setItem('color-theme', 'light');
         document.body.removeAttribute('data-theme');
       }
-
-      // if NOT set via local storage previously
     } else {
       if (document.documentElement.classList.contains('dark')) {
         document.documentElement.classList.remove('dark');
@@ -249,143 +285,90 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     }
   }
 
-  goToCatalogSearch(id:any) {
+  goToCatalogSearch(id: any) {
     this.router.navigate(['/search/catalogue', id]);
   }
 
-  goTo(path:string) {
+  goTo(path: string) {
     this.closeUserDropdown();
     this.router.navigate([path]);
   }
 
-  toggleCartDrawer(){
-    this.showCart=!this.showCart;
+  toggleCartDrawer() {
+    this.showCart = !this.showCart;
     this.cdr.detectChanges();
   }
 
-  async toggleLogin(){
-    this.showLogin=true;
-    //this.api.getLogin()
-    //await (window.location.href='http://localhost:8004/login');
-
+  async toggleLogin() {
+    this.showLogin = true;
     this.loginService.doLogin();
     this.cdr.detectChanges();
   }
 
-  async logout(){
+  async logout() {
     this.closeUserDropdown();
-    this.localStorage.setObject('login_items',{});
-    this.is_logged=false;
-    this.username='';
-    this.email='';
-    this.usercharacters='';
-    if(this.router.url === '/dashboard'){
+    this.resetUserUI();
+    await this.loginService.logout();
+    if (this.router.url === '/dashboard') {
       window.location.reload();
     } else {
       this.router.navigate(['/dashboard']);
     }
-    await this.loginService.logout();
     this.cdr.detectChanges();
   }
 
-  changeSession(idx:number,exitOrgLogin:boolean){
+  changeSession(idx: number, exitOrgLogin: boolean) {
     this.closeUserDropdown();
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(exitOrgLogin){
-      this.loginInfo = {"id": aux.id,
-      "user": aux.user,
-      "email": aux.email,
-      "token": aux.token,
-      "expire": aux.expire,
-      "seller": aux.seller,
-      "roles": aux.roles,
-      "organizations": aux.organizations,
-      "logged_as": aux.id};
-      this.localStorage.setObject('login_items',this.loginInfo);
-      this.loggedAsOrg=false;
-      this.username=aux.user;
-      this.usercharacters=(this.loginInfo.user.slice(0, 2)).toUpperCase();
-      this.email=aux.email;
-      this.roles=[];
-      for(let i=0;i<this.loginInfo.roles.length;i++){
-        this.roles.push(this.loginInfo.roles[i].name)
-      }
-      this.eventMessage.emitChangedSession(this.loginInfo)
-      this.cdr.detectChanges();
+
+    if (exitOrgLogin) {
+      this.orgCtx.setOrganization(null);
+      this.loggedAsOrg = false;
     } else {
-      this.loginInfo = {"id": aux.id,
-      "user": aux.user,
-      "email": aux.email,
-      "token": aux.token,
-      "expire": aux.expire,
-      "seller": aux.seller,
-      "roles": aux.roles,
-      "organizations": aux.organizations,
-      "logged_as": this.orgs[idx].id };
-      this.localStorage.setObject('login_items',this.loginInfo);
-      this.loggedAsOrg=true;
-      this.username=this.orgs[idx].name;
-      this.usercharacters=(this.orgs[idx].name.slice(0, 2)).toUpperCase();
-      this.email=this.orgs[idx].description;
-      this.roles=[];
-      for(let i=0;i<this.orgs[idx].roles.length;i++){
-        this.roles.push(this.orgs[idx].roles[i].name)
+      const org = this.orgs?.[idx];
+      if (org?.id) {
+        this.orgCtx.setOrganization(org.id);
+        this.loggedAsOrg = true;
       }
-      this.eventMessage.emitChangedSession(this.loginInfo)
-      this.cdr.detectChanges();
     }
+
+    this.cdr.detectChanges();
     initFlowbite();
   }
+  
+  onLoginClick() {
+    if (environment.SIOP_INFO.enabled === true && this.qrVerifier.intervalId === undefined) {
+      this.statePair = uuid.v4();
 
-  hideDropdown(dropdownId:any){
-    this.closeUserDropdown();
-    const dropdown = document.getElementById(dropdownId);
-    if (dropdown) {
-      dropdown.classList.add('hidden');
-    }
-  }
-
-  onLoginClick(){
-    if (environment.SIOP_INFO.enabled === true && this.qrVerifier.intervalId === undefined){
-      this.statePair = uuid.v4()
-
-      let verifierUrl = `${environment.SIOP_INFO.verifierHost}${environment.SIOP_INFO.verifierQRCodePath}?state=${this.statePair}&client_id=${environment.SIOP_INFO.clientID}`
+      let verifierUrl = `${environment.SIOP_INFO.verifierHost}${environment.SIOP_INFO.verifierQRCodePath}?state=${this.statePair}&client_id=${environment.SIOP_INFO.clientID}`;
 
       if (environment.SIOP_INFO.isRedirection) {
-        // New verifier format
-        let oldUrl = new URL(window.location.href)
-        let newUrl = new URL(oldUrl.origin)
-        newUrl.pathname = environment.SIOP_INFO.requestUri
+        const oldUrl = new URL(window.location.href);
+        const newUrl = new URL(oldUrl.origin);
+        newUrl.pathname = environment.SIOP_INFO.requestUri;
 
-        let finalUrl = newUrl.toString()
-        let nonce = uuid.v4()
-
-        verifierUrl = `${verifierUrl}&response_type=code&request_uri=https://deploy-preview-2--isbecatalog.netlify.app/auth/vc/request.jwt&scope=openid%20learcredential&nonce=${nonce}`
-        window.location.href = verifierUrl
+        const nonce = uuid.v4();
+        verifierUrl = `${verifierUrl}&response_type=code&request_uri=${encodeURIComponent('https://deploy-preview-2--isbecatalog.netlify.app/auth/vc/request.jwt')}&scope=openid%20learcredential&nonce=${nonce}`;
+        window.location.href = verifierUrl;
       } else {
-        // Old verifier format
-        let originalUrl = new URL(environment.SIOP_INFO.callbackURL);
-        let newUrl = new URL(window.location.href);
-
+        const originalUrl = new URL(environment.SIOP_INFO.callbackURL);
+        const newUrl = new URL(window.location.href);
         newUrl.pathname = originalUrl.pathname;
-        newUrl.search = originalUrl.search
+        newUrl.search = originalUrl.search;
 
-        // Get the final URL string
-        let finalUrl = newUrl.toString();
-        console.group(finalUrl)
-
-        verifierUrl = `${verifierUrl}&client_callback=${finalUrl}`
-        this.qrWindow = this.qrVerifier.launchPopup(verifierUrl,  'Scan QR code',  500, 500);
-        this.initChecking()
+        const finalUrl = newUrl.toString();
+        verifierUrl = `${verifierUrl}&client_callback=${finalUrl}`;
+        this.qrWindow = this.qrVerifier.launchPopup(verifierUrl, 'Scan QR code', 500, 500);
+        this.initChecking();
       }
-    }
-    else if (environment.SIOP_INFO.enabled === false){
-      window.location.replace(`${environment.BASE_URL}` +  '/login')
+    } else if (environment.SIOP_INFO.enabled === false) {
+      this.loginService.doLogin();
     }
   }
 
-  private initChecking():void {
-    this.qrVerifier.pollServer(this.qrWindow, this.statePair);
+  private initChecking(): void {
+    if (this.qrWindow) {
+      this.qrVerifier.pollServer(this.qrWindow, this.statePair);
+    }
   }
 
   toggleNavBar() {
@@ -395,42 +378,30 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   switchLanguage(language: string) {
     this.translate.use(language);
     this.localStorage.setItem('current_language', language);
-    this.defaultLang=language;
+    this.defaultLang = language;
   }
 
   closeUserDropdown() {
     const dropdown = document.getElementById('userDropdown');
-    if (dropdown) {
-      dropdown.classList.add('hidden');
-    }
+    if (dropdown) dropdown.classList.add('hidden');
   }
 
-  closeDropdown(id:string) {
+  closeDropdown(id: string) {
     const dropdown = document.getElementById(id);
-    if (dropdown) {
-      dropdown.classList.add('hidden');
-    }
+    if (dropdown) dropdown.classList.add('hidden');
   }
 
-  openDropdown(id:string){
+  openDropdown(id: string) {
     const dropdown = document.getElementById(id);
-    if (dropdown) {
-      dropdown.classList.remove('hidden');
-    }
+    if (dropdown) dropdown.classList.remove('hidden');
   }
-  
 
-  protected readonly faCartShopping = faCartShopping;
-  protected readonly faHandHoldingBox = faHandHoldingBox;
-  protected readonly faAddressCard = faAddressCard;
-  protected readonly faArrowRightFromBracket = faArrowRightFromBracket;
-  protected readonly faBoxesStacked = faBoxesStacked;
-  protected readonly faClipboardCheck = faClipboardCheck;
-  protected readonly faBrain = faBrain;
-  protected readonly faAnglesLeft = faAnglesLeft;
-  protected readonly faUser = faUser;
-  protected  readonly faUsers = faUsers;
-  protected readonly faCogs = faCogs;
-  protected readonly faReceipt = faReceipt;
-  protected readonly faRuler = faRuler;
+  private resetUserUI() {
+    this.isAdmin = false;
+    this.roles = [];
+    this.username = '';
+    this.email = '';
+    this.usercharacters = '';
+    this.loggedAsOrg = false;
+  }
 }
