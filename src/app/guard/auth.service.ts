@@ -18,6 +18,7 @@ export interface AppUser {
 export class AuthService {
   private readonly oidc = inject(OidcSecurityService);
   private readonly legacy = inject(LegacyTokenAdapterService);
+  private readonly orgCtx = inject(OrgContextService);
 
   private readonly isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
   isAuthenticated$ = this.isAuthenticatedSubject.asObservable();
@@ -32,8 +33,6 @@ export class AuthService {
   loginInfo$ = this.loginInfoSubject.asObservable();
 
   role: WritableSignal<string | null> = signal(null);
-
-  private readonly orgCtx = inject(OrgContextService);
 
   constructor() {
     this.checkAuth().pipe(take(1)).subscribe();
@@ -54,24 +53,27 @@ export class AuthService {
             this.loginInfoSubject.next(null);
           }
 
+          console.info('[Auth] OIDC session (CertAuth) established.');
           return of(true);
         }
 
         const legacy = this.legacy.read();
         if (legacy.isAuthenticated) {
-          const uFromClaims = this.mapUser(legacy.claims ?? {});
+          const claims = legacy['claims'] ?? this.decodeJwtPayload(legacy.accessToken || '');
+          const uFromClaims = this.mapUser(claims || {});
           if ((!uFromClaims.roles || uFromClaims.roles.length === 0) && legacy.roles?.length) {
             uFromClaims.roles = legacy.roles;
           }
           this.setState(true, uFromClaims, legacy.accessToken ?? '', this.pickPrimaryRole(uFromClaims));
 
           try {
-            const li = claimsToLoginInfo(legacy.claims ?? {}, legacy.accessToken ?? '');
+            const li = claimsToLoginInfo(claims || {}, legacy.accessToken ?? '');
             this.loginInfoSubject.next(li);
           } catch {
             this.loginInfoSubject.next(null);
           }
 
+          console.info('[Auth] Legacy session from localStorage.');
           return of(true);
         }
 
@@ -80,13 +82,6 @@ export class AuthService {
         return of(false);
       })
     );
-  }
-
-  getSellerId(li: LoginInfo | null): string | null {
-    if (!li) return null;
-    if (li.logged_as === li.id) return li.id;
-    const org = li.organizations.find(o => o.id === li.logged_as);
-    return org?.id ?? null;
   }
 
   sellerId$ = combineLatest([this.loginInfo$, this.orgCtx.getOrganization()]).pipe(
@@ -141,5 +136,19 @@ export class AuthService {
 
   private pickPrimaryRole(u: AppUser | null): string | null {
     return u?.roles?.[0] ?? null;
+  }
+
+  private decodeJwtPayload<T = any>(token: string): T | null {
+    try {
+      if (!token) return null;
+      const parts = token.split('.');
+      if (parts.length < 2) return null;
+      const b64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const pad = b64.length % 4 ? 4 - (b64.length % 4) : 0;
+      const json = atob(b64 + (pad ? '='.repeat(pad) : ''));
+      return JSON.parse(json) as T;
+    } catch {
+      return null;
+    }
   }
 }

@@ -1,4 +1,4 @@
-// legacy-auth-adapter.service.ts
+// legacy-auth-adapter.service.ts TODO: delete, just for testing
 import { Injectable } from '@angular/core';
 
 export interface LegacySession {

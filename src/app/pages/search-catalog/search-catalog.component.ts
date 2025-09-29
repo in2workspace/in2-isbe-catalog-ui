@@ -51,6 +51,7 @@ export class SearchCatalogComponent implements OnInit{
     })
   }
 
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
   id:any;
   catalog:any;
   providerName:string='';
@@ -79,8 +80,6 @@ export class SearchCatalogComponent implements OnInit{
       const owner = this.catalog.relatedParty.find((item: { role: string; }) => item.role === 'Owner');
       if(owner.id.startsWith('urn:ngsi-ld:individual')){
         this.accService.getUserInfo(owner.id).then(info  => {
-          console.log('info')
-          console.log(info)
           this.providerName=info.givenName;
           const provdesc = info.partyCharacteristic.find((item: { name: string; }) => item.name === 'description')
           this.providerDescription=provdesc.value;

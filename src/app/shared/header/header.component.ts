@@ -336,6 +336,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   }
   
   onLoginClick() {
+    if (environment.AUTH_MODE === 'oidc') {
+      this.auth.login();
+      return;
+    }
     if (environment.SIOP_INFO.enabled === true && this.qrVerifier.intervalId === undefined) {
       this.statePair = uuid.v4();
 

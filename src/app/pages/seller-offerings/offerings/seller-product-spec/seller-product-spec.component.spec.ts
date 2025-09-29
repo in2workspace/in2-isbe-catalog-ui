@@ -4,6 +4,9 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { SellerProductSpecComponent } from './seller-product-spec.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthService } from 'src/app/guard/auth.service';
+import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
 
 describe('SellerProductSpecComponent', () => {
   let component: SellerProductSpecComponent;
@@ -11,6 +14,10 @@ describe('SellerProductSpecComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthService, useValue: authServiceMock }, 
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
+      ],
       imports: [SellerProductSpecComponent, TranslateModule.forRoot(), HttpClientTestingModule]
     })
     .compileComponents();

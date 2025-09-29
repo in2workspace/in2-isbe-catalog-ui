@@ -818,8 +818,8 @@ export class OfferComponent implements OnInit, OnDestroy{
           .map((cat: any) => ({ id: cat.id, href: cat.id }))
       : [];
     
-    if (categories.length === 0 && v?.catalog?.defaultCategoryId) {
-      categories.push({ id: v.catalog.defaultCategoryId, href: v.catalog.defaultCategoryHref ?? v.catalog.defaultCategoryId });
+    if (v?.catalog?.categories) {
+      categories.push(v.catalog.categories);
     }
 
     const prices = Array.isArray(v?.pricePlans)

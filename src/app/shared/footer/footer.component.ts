@@ -25,6 +25,8 @@ export class FooterComponent {
   feedback:boolean=false;
   checkLogged:boolean=false;
 
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
+
   constructor(
     private readonly router: Router,
     private readonly eventMessage: EventMessageService,

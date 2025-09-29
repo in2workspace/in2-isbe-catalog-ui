@@ -35,6 +35,7 @@ export const environment = {
     CATEGORY_LIMIT: 100,
     TAX_RATE: 20,
     CHAT_API: 'https://eng-gpt.dome-marketplace-sbx.org/predict',
+    AUTH_MODE: 'oidc',
     SIOP_INFO: {
         enabled: false,
         isRedirection: false,

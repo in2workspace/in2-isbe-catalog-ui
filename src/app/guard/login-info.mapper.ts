@@ -48,7 +48,7 @@ function rolesFromPowers(vc: any): string[] {
 
   const orgName = (mandator?.organization || '').toLowerCase();
   if (orgName.includes('in2')) {
-    roleSet.add('admin');
+    //roleSet.add('admin'); //TODO: check
   }
 
   return Array.from(roleSet);

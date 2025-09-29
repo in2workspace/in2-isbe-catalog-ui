@@ -35,6 +35,7 @@ export const environment = {
     //SIOP: false,
     TAX_RATE: 20,
     CHAT_API: 'https://eng-gpt.dome-marketplace-dev.org/predict',
+    AUTH_MODE: 'oidc',
     SIOP_INFO: {
         enabled: false,
         isRedirection: false,

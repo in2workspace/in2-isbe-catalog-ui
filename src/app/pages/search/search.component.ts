@@ -40,6 +40,8 @@ export class SearchComponent implements OnInit {
   showPanel = false;
   feedback:boolean=false;
 
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
+
   constructor(
     private auth: AuthService,
     private cdr: ChangeDetectorRef,

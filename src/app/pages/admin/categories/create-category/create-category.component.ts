@@ -220,8 +220,6 @@ export class CreateCategoryComponent implements OnInit {
       if(this.isParent==false){
         this.categoryToCreate.parentId=this.selectedCategory.id;
       }
-      console.log('CATEGORY TO CREATE:')
-      console.log(this.categoryToCreate)
       this.showGeneral=false;
       this.showSummary=true;
       this.selectStep('summary','summary-circle');
@@ -237,7 +235,6 @@ export class CreateCategoryComponent implements OnInit {
       error: error => {
         console.error('There was an error while updating!', error);
         if(error.error.error){
-          console.log(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
           this.errorMessage='There was an error while creating the category!';

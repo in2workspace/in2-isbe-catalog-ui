@@ -4,6 +4,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { UsageListComponent } from './usage-list.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
 
 describe('UsageListComponent', () => {
   let component: UsageListComponent;
@@ -11,6 +13,9 @@ describe('UsageListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
+      ],
       imports: [UsageListComponent,HttpClientTestingModule,TranslateModule.forRoot()]
     })
     .compileComponents();

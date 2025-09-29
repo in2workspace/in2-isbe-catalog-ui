@@ -52,6 +52,7 @@ bootstrapApplication(AppComponent, {
           redirectUrl: window.location.origin,
           postLogoutRedirectUri: window.location.origin,
           clientId: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
+          scope: 'openid learcredential',     
           responseType: 'code',
           silentRenew: true,
           useRefreshToken: true,

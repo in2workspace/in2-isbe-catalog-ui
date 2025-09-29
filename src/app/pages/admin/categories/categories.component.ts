@@ -15,6 +15,7 @@ import { CategoriesRecursionListComponent } from 'src/app/shared/categories-recu
 import { DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'admin-categories',
@@ -58,11 +59,9 @@ export class CategoriesComponent {
   initCatalogs(){
     this.loading=true;
     this.categories=[];
-    this.auth.loginInfo$.subscribe(li => {
-      this.seller = this.auth.getSellerId(li);
+    this.auth.sellerId$.pipe(take(1)).subscribe(id => {
+      this.seller = id;
     });
-
-
     this.getCategories();
     initFlowbite();
   }

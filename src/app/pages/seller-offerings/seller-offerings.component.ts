@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
     selector: 'app-seller-offerings',
@@ -51,6 +52,8 @@ export class SellerOfferingsComponent implements OnInit {
     offers: this.goToOffers,
     productspec: this.goToProdSpec
   };
+
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   constructor(
     private readonly auth: AuthService,
