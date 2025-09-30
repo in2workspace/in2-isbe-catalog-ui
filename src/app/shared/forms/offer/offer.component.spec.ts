@@ -159,7 +159,6 @@ describe('OfferComponent', () => {
     );
 
     component.productOfferForm.get('prodSpec')?.setValue({ id: '1' });
-    component.productOfferForm.get('catalogue')?.setValue({ id: '1' });
     component.productOfferForm.get('category')?.setValue([]);
     component.productOfferForm.get('pricePlans')?.setValue([{ id: '1' }]);
 

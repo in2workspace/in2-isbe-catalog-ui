@@ -803,7 +803,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       setTimeout(() => (this.showError = false), 3000);
       return;
     }
-    if (this.formType === 'create' && !v?.catalogue?.id) {
+    if (this.formType === 'create' && !v?.catalogue?.id && !this.IS_ISBE) {
       this.errorMessage = 'Debes seleccionar un Catálogo para crear la oferta.';
       this.showError = true;
       setTimeout(() => (this.showError = false), 3000);
