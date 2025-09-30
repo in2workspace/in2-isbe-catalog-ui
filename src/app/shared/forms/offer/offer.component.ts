@@ -63,7 +63,7 @@ export class OfferComponent implements OnInit, OnDestroy{
   offersBundle:any[]=[];
   loadingData:boolean=false;
   
-  isSimpleFlow: boolean = environment.ISBE_CATALOGUE;
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   offerToCreate:ProductOffering_Create | undefined;
 
@@ -75,11 +75,10 @@ export class OfferComponent implements OnInit, OnDestroy{
               private readonly eventMessage: EventMessageService,
               private readonly fb: FormBuilder) {
 
-    if (this.isSimpleFlow) {
+    if (this.IS_ISBE) {
       this.steps = [
         'General Info',
         'Product Specification',
-        'Catalogue',
         'Category',
         'Price Plans',
         'Summary'
@@ -87,7 +86,6 @@ export class OfferComponent implements OnInit, OnDestroy{
       this.productOfferForm = this.fb.group({
         generalInfo: this.fb.group({}),
         prodSpec: new FormControl(null, [Validators.required]),
-        catalogue: new FormControl(null, [Validators.required]),
         category: new FormControl([]),
         pricePlans: new FormControl([])
       });
@@ -210,7 +208,7 @@ export class OfferComponent implements OnInit, OnDestroy{
   async ngOnInit() {
     if (this.formType === 'update' && this.offer) {
       this.loadingData=true;
-      if (this.isSimpleFlow) {
+      if (this.IS_ISBE) {
         this.steps = [
           'General Info',
           'Product Specification',
@@ -817,10 +815,6 @@ export class OfferComponent implements OnInit, OnDestroy{
           .filter((cat: any) => cat?.id)
           .map((cat: any) => ({ id: cat.id, href: cat.id }))
       : [];
-    
-    if (v?.catalog?.categories) {
-      categories.push(v.catalog.categories);
-    }
 
     const prices = Array.isArray(v?.pricePlans)
       ? v.pricePlans

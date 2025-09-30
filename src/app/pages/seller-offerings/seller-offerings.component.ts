@@ -46,7 +46,7 @@ export class SellerOfferingsComponent implements OnInit {
 
   feedback:boolean=false;
   userInfo:any;
-  activeSection: string = 'catalogs'; // default
+  activeSection: string = 'catalogs';
   sectionActions : Record<string, () => void> = {
     catalogs: this.goToCatalogs,
     offers: this.goToOffers,
@@ -106,6 +106,16 @@ export class SellerOfferingsComponent implements OnInit {
       });
 
     const saved = localStorage.getItem('activeSection');
+
+    if (this.IS_ISBE) {
+      this.show_catalogs = false;
+
+      if (saved === 'catalogs' || !saved) {
+        this.activeSection = 'offers';
+        this.goToOffers();
+        return;
+      }
+    }
 
     if (saved) {
       this.activeSection = saved;

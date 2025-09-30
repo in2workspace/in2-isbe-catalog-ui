@@ -28,9 +28,16 @@ export const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'search/:id', component: ProductDetailsComponent },
   { path: 'org-details/:id', component: OrganizationDetailsComponent },
-  { path: 'search/catalogue/:id', component: SearchCatalogComponent },
-  { path: 'catalogues', component: CatalogsComponent },
 
+  { path: 'search/catalogue/:id', component: SearchCatalogComponent ,
+    canActivate: [AuthGuard],
+    data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
+  },
+  { path: 'catalogues', 
+    component: CatalogsComponent ,
+    canActivate: [AuthGuard],
+    data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
+  },  
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,

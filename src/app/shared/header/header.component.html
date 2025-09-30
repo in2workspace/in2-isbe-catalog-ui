@@ -44,11 +44,14 @@
                     {{ 'HEADER._services' | translate }}
                   </button>
                 </li>
-                <li>
-                  <button id="searchCatalogues" (click)="goTo('/catalogues'); closeDropdown('searchDropdownMenu')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
-                    {{ 'HEADER._catalogs' | translate }}
-                  </button>
-                </li>
+                @if(!IS_ISBE){
+                  <li>
+                    <button id="searchCatalogues" (click)="goTo('/catalogues'); closeDropdown('searchDropdownMenu')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                      {{ 'HEADER._catalogs' | translate }}
+                    </button>
+                  </li>
+                }
+                
             </ul>
           </div>
   

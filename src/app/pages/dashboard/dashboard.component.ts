@@ -35,6 +35,8 @@ export class DashboardComponent implements OnInit {
   currentIndexServ: number = 0;
   currentIndexPub: number = 0;
   delay: number = 2000;
+
+  IS_ISBE = environment.ISBE_CATALOGUE;
   
   constructor(private readonly localStorage: LocalStorageService,
               private readonly eventMessage: EventMessageService,
