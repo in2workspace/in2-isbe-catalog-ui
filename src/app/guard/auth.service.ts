@@ -1,8 +1,7 @@
 import { Injectable, signal, WritableSignal, inject } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { take, switchMap, map } from 'rxjs/operators';
-import { LegacyTokenAdapterService } from './legacy-auth-adapter.service';
+import { take, switchMap, map, catchError } from 'rxjs/operators';
 import { claimsToLoginInfo, LoginInfo } from './login-info.mapper';
 import { OrgContextService } from '../services/org-context.service';
 
@@ -17,7 +16,6 @@ export interface AppUser {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly oidc = inject(OidcSecurityService);
-  private readonly legacy = inject(LegacyTokenAdapterService);
   private readonly orgCtx = inject(OrgContextService);
 
   private readonly isAuthenticatedSubject = new BehaviorSubject<boolean>(false);
@@ -34,14 +32,14 @@ export class AuthService {
 
   role: WritableSignal<string | null> = signal(null);
 
-  constructor() {
-    this.checkAuth().pipe(take(1)).subscribe();
-  }
 
   checkAuth(): Observable<boolean> {
-    return this.oidc.checkAuth().pipe(
-      take(1),
-      switchMap(({ isAuthenticated, accessToken, userData }) => {
+  return this.oidc.checkAuth().pipe(
+    take(1),
+    catchError((err) => {
+      return of({ isAuthenticated: false, accessToken: '', userData: {} } as any);
+    }),
+    switchMap(({ isAuthenticated, accessToken, userData }) => {
         if (isAuthenticated) {
           const u = this.mapUser(userData);
           this.setState(true, u, accessToken ?? '', this.pickPrimaryRole(u));
@@ -54,26 +52,6 @@ export class AuthService {
           }
 
           console.info('[Auth] OIDC session (CertAuth) established.');
-          return of(true);
-        }
-
-        const legacy = this.legacy.read();
-        if (legacy.isAuthenticated) {
-          const claims = legacy['claims'] ?? this.decodeJwtPayload(legacy.accessToken || '');
-          const uFromClaims = this.mapUser(claims || {});
-          if ((!uFromClaims.roles || uFromClaims.roles.length === 0) && legacy.roles?.length) {
-            uFromClaims.roles = legacy.roles;
-          }
-          this.setState(true, uFromClaims, legacy.accessToken ?? '', this.pickPrimaryRole(uFromClaims));
-
-          try {
-            const li = claimsToLoginInfo(claims || {}, legacy.accessToken ?? '');
-            this.loginInfoSubject.next(li);
-          } catch {
-            this.loginInfoSubject.next(null);
-          }
-
-          console.info('[Auth] Legacy session from localStorage.');
           return of(true);
         }
 
@@ -98,7 +76,6 @@ export class AuthService {
   }
 
   logout(): void {
-    this.legacy.clear();
     this.oidc.logoffAndRevokeTokens();
     this.loginInfoSubject.next(null);
   }
@@ -138,17 +115,4 @@ export class AuthService {
     return u?.roles?.[0] ?? null;
   }
 
-  private decodeJwtPayload<T = any>(token: string): T | null {
-    try {
-      if (!token) return null;
-      const parts = token.split('.');
-      if (parts.length < 2) return null;
-      const b64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
-      const pad = b64.length % 4 ? 4 - (b64.length % 4) : 0;
-      const json = atob(b64 + (pad ? '='.repeat(pad) : ''));
-      return JSON.parse(json) as T;
-    } catch {
-      return null;
-    }
-  }
 }

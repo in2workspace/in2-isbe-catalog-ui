@@ -14,6 +14,7 @@ import { appConfigFactory } from './app/app-config-factory';
 
 import { AuthModule, AuthInterceptor } from 'angular-auth-oidc-client';
 import { environment } from 'src/environments/environment';
+import { AuthService } from './app/guard/auth.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -49,13 +50,14 @@ bootstrapApplication(AppComponent, {
         config: {
           postLoginRoute: '/dashboard',
           authority: "https://certauth.evidenceledger.eu",
-          redirectUrl: window.location.origin,
-          postLogoutRedirectUri: window.location.origin,
-          clientId: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
-          scope: 'openid learcredential',     
+          redirectUrl: "https://deploy-preview-2--isbecatalog.netlify.app/",
+          postLogoutRedirectUri: "https://deploy-preview-2--isbecatalog.netlify.app/",
+          clientId: "https://catalog.redisbe.com",
+          scope: "openid eidas",
           responseType: 'code',
           silentRenew: true,
           useRefreshToken: true,
+          historyCleanupOff: false,
           ignoreNonceAfterRefresh: true,
           triggerRefreshWhenIdTokenExpired: false,
           secureRoutes: [environment.BASE_URL].filter((route): route is string => route !== undefined)
@@ -63,5 +65,11 @@ bootstrapApplication(AppComponent, {
       })
     ), 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      useFactory: (auth: AuthService) => () => auth.checkAuth().toPromise(),
+      deps: [AuthService],
+    }
   ]
 });

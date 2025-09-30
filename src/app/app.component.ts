@@ -44,8 +44,6 @@ export class AppComponent implements OnInit {
       this.localStorage.setObject('cart_items', []);
     }
 
-    this.auth.checkAuth().subscribe();
-
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
