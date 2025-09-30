@@ -1,11 +1,10 @@
+import { cli } from "cypress";
+
 export const environment = {
-    BASE_URL: 'http://localhost:8004',
-    PAYMENT_URL: 'https://payment.dome-marketplace-sbx.org',
+    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4',
+    PAYMENT_URL: '',
     ISBE_CATALOGUE: true,
     LEGACY_PREFIX: '',
-    //API_PORT: 8632,
-    //API_PORT: 8004,
-    //API ENDPOINTS
     PRODUCT_CATALOG: '/catalog',
     SERVICE: '/service',
     RESOURCE: '/resource',
@@ -20,8 +19,7 @@ export const environment = {
     BILLING: '/billing',
 
     CUSTOMER_BILLING:'/appliedCustomerBillingRate',
-    CONSUMER_BILLING_URL: 'http://localhost:8640',
-    //API PAGINATION
+    CONSUMER_BILLING_URL: '',
     PRODUCT_LIMIT: 6,
     CATALOG_LIMIT: 8,
     INVENTORY_LIMIT: 6,
@@ -34,18 +32,18 @@ export const environment = {
     INVOICE_LIMIT: 100,
     SIOP: false,
     TAX_RATE: 20,
-    CHAT_API: 'https://85.215.243.214:5000/predict',
     AUTH_MODE: 'oidc',
     SIOP_INFO: {
-        enabled: false,
-        isRedirection: false,
+        enabled: true,
+        isRedirection: true,
         pollPath: "",
         pollCertPath: "",
-        clientID: "",
-        callbackURL: "",
-        verifierHost: "",
-        verifierQRCodePath: "",
-        requestUri: ""
+        //clientID: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
+        clientID: "https://catalog.redisbe.com",
+        callbackURL: "http://localhost:4200/dashboard",
+        verifierHost: "https://verifier.dome-marketplace-sbx.org",
+        verifierQRCodePath: '/oidc/authorize',
+        requestUri: "https://verifier.dome-marketplace-sbx.org/oid4vp/auth-request"
     },
     MATOMO_TRACKER_URL: "",
     MATOMO_SITE_ID: "",
@@ -56,7 +54,7 @@ export const environment = {
     REGISTRATION_FORM_URL: "",
     SEARCH_ENABLED: true,
     PURCHASE_ENABLED: false,
-    ISBE_TRUST_LINK: "https://dome-certification.dome-marketplace.org",
+    ISBE_TRUST_LINK: "",
     ISBE_ABOUT_LINK: '',
     ISBE_REGISTER_LINK: '',
     ISBE_PUBLISH_LINK:'',
@@ -66,4 +64,9 @@ export const environment = {
     BUNDLE_ENABLED: false,
     DFT_CATALOG_ID: '',
     MAX_FILE_SIZE:3145728,
+    SCOPE: "openid eidas",
+    RESPONSE_TYPE: 'code',
+    AUTHORITY: "https://certauth.evidenceledger.eu",
+    REDIRECT_URL: "https://deploy-preview-2--isbecatalog.netlify.app/",
+    POST_LOGIN_ROUTE: '/dashboard'
 };

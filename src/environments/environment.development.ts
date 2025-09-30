@@ -1,9 +1,6 @@
 export const environment = {
-    //BASE_URL: 'https://dome-marketplace.org',
     BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4',
-    PAYMENT_URL: 'https://payment.dome-marketplace-sbx.org',
-    //API_PORT: 8004,
-    //API_PORT: 443,
+    PAYMENT_URL: '',
     ISBE_CATALOGUE: true,
     LEGACY_PREFIX: '',
     PRODUCT_CATALOG: '/catalog',
@@ -20,10 +17,9 @@ export const environment = {
     CHARGING: '/charging',
 
     CUSTOMER_BILLING:'/appliedCustomerBillingRate',
-    CONSUMER_BILLING_URL: 'http://localhost:8640',
+    CONSUMER_BILLING_URL: '',
     INVOICE_LIMIT: 100,
 
-    //API PAGINATION
     PRODUCT_LIMIT: 6,
     CATALOG_LIMIT: 8,
     INVENTORY_LIMIT: 6,
@@ -34,14 +30,13 @@ export const environment = {
     ORDER_LIMIT: 1000,
     CATEGORY_LIMIT: 100,
     TAX_RATE: 20,
-    CHAT_API: 'https://eng-gpt.dome-marketplace-sbx.org/predict',
     AUTH_MODE: 'oidc',
     SIOP_INFO: {
         enabled: false,
         isRedirection: false,
         pollPath: "",
         pollCertPath: "",
-        clientID: "",
+        clientID: "https://catalog.redisbe.com",
         callbackURL: "",
         verifierHost: "",
         verifierQRCodePath: "",
@@ -50,10 +45,10 @@ export const environment = {
     MATOMO_TRACKER_URL: "",
     MATOMO_SITE_ID: "",
     TICKETING_SYSTEM_URL: "",
-    KNOWLEDGE_BASE_URL: "https://knowledgebase.dome-marketplace.org/",
-    KB_ONBOARDING_GUIDELINES_URL: "https://knowledgebase.dome-marketplace.org/",
-    KB_GUIDELNES_URL:"https://knowledgebase.dome-marketplace.org/",
-    REGISTRATION_FORM_URL: "https://knowledgebase.dome-marketplace.org/",
+    KNOWLEDGE_BASE_URL: "",
+    KB_ONBOARDING_GUIDELINES_URL: "",
+    KB_GUIDELNES_URL:"",
+    REGISTRATION_FORM_URL: "",
     SEARCH_ENABLED: true,
     PURCHASE_ENABLED: true,
     ISBE_TRUST_LINK: "",
@@ -65,5 +60,10 @@ export const environment = {
     ISBE_X: 'https://x.com/REDISBE',
     BUNDLE_ENABLED: false,
     DFT_CATALOG_ID: '',
-    MAX_FILE_SIZE:3145728
+    MAX_FILE_SIZE:3145728,
+    SCOPE: "openid eidas",
+    RESPONSE_TYPE: 'code',
+    AUTHORITY: "https://certauth.evidenceledger.eu",
+    REDIRECT_URL: "https://deploy-preview-2--isbecatalog.netlify.app/",
+    POST_LOGIN_ROUTE: '/dashboard'
 };

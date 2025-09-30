@@ -1,6 +1,6 @@
 export const environment = {
-    BASE_URL: '',
-    PAYMENT_URL: 'https://payment.dome-marketplace-sbx.org',
+    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4',
+    PAYMENT_URL: '',
     ISBE_CATALOGUE: true,
     LEGACY_PREFIX: '/ux',
     PRODUCT_CATALOG: '/catalog',
@@ -18,10 +18,9 @@ export const environment = {
     BILLING: '/billing',
     CHARGING: '/charging',
 
-    CONSUMER_BILLING_URL: 'http://localhost:8640',
+    CONSUMER_BILLING_URL: '',
     INVOICE_LIMIT: 100,
 
-    //API PAGINATION
     PRODUCT_LIMIT: 6,
     CATALOG_LIMIT: 8,
     INVENTORY_LIMIT: 6,
@@ -32,16 +31,14 @@ export const environment = {
     ORDER_LIMIT: 1000,
     CATEGORY_LIMIT: 100,
     SIOP: true,
-    //SIOP: false,
     TAX_RATE: 20,
-    CHAT_API: 'https://eng-gpt.dome-marketplace-dev.org/predict',
     AUTH_MODE: 'oidc',
     SIOP_INFO: {
         enabled: false,
         isRedirection: false,
         pollPath: "",
         pollCertPath: "",
-        clientID: "",
+        clientID: "https://catalog.redisbe.com",
         callbackURL: "",
         verifierHost: "",
         verifierQRCodePath: "",
@@ -56,7 +53,7 @@ export const environment = {
     REGISTRATION_FORM_URL: "",
     SEARCH_ENABLED: true,
     PURCHASE_ENABLED: false,
-    ISBE_TRUST_LINK: "https://dome-certification.dome-marketplace.org",
+    ISBE_TRUST_LINK: "",
     ISBE_ABOUT_LINK: '',
     ISBE_REGISTER_LINK: '',
     ISBE_PUBLISH_LINK:'',
@@ -65,5 +62,11 @@ export const environment = {
     ISBE_X: 'https://x.com/REDISBE',
     BUNDLE_ENABLED: false,
     DFT_CATALOG_ID: '',
-    MAX_FILE_SIZE:3145728
+    MAX_FILE_SIZE:3145728,
+    SCOPE: "openid eidas",
+    RESPONSE_TYPE: 'code',
+    AUTHORITY: "https://certauth.evidenceledger.eu",
+    REDIRECT_URL: "https://deploy-preview-2--isbecatalog.netlify.app/",
+    POST_LOGIN_ROUTE: '/dashboard'
+
 };

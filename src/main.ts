@@ -8,7 +8,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MarkdownModule } from 'ngx-markdown';
 import { routes } from './app/app.routes';
-import { AppInitService } from './app/services/app-init.service';
 import { MatomoInitializationMode, MatomoInitializerService, MatomoModule } from 'ngx-matomo-client';
 import { appConfigFactory } from './app/app-config-factory';
 
@@ -25,12 +24,10 @@ bootstrapApplication(AppComponent, {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimationsAsync(),
-
-    AppInitService,
     {
       provide: APP_INITIALIZER,
       useFactory: appConfigFactory,
-      deps: [AppInitService, MatomoInitializerService],
+      deps: [MatomoInitializerService],
       multi: true
     },
 
@@ -48,13 +45,13 @@ bootstrapApplication(AppComponent, {
 
       AuthModule.forRoot({
         config: {
-          postLoginRoute: '/dashboard',
-          authority: "https://certauth.evidenceledger.eu",
-          redirectUrl: "https://deploy-preview-2--isbecatalog.netlify.app/",
-          postLogoutRedirectUri: "https://deploy-preview-2--isbecatalog.netlify.app/",
-          clientId: "https://catalog.redisbe.com",
-          scope: "openid eidas",
-          responseType: 'code',
+          postLoginRoute: environment.POST_LOGIN_ROUTE,
+          authority: environment.AUTHORITY,
+          redirectUrl: environment.REDIRECT_URL,
+          postLogoutRedirectUri: environment.REDIRECT_URL,
+          clientId: environment.SIOP_INFO.clientID,
+          scope: environment.SCOPE,
+          responseType: environment.RESPONSE_TYPE,
           silentRenew: true,
           useRefreshToken: true,
           historyCleanupOff: false,
