@@ -71,19 +71,23 @@
                     <bae-badge class="mr-2" [category]=cat></bae-badge>
                 }
 
-                <a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2"
-                    [ngClass]="complianceLevel == 'NL' ? 'bg-red-200 text-red-700' : complianceLevel == 'BL' ? 'bg-orange-200 text-orange-700' : complianceLevel == 'P' ? 'bg-yellow-200 text-yellow-700' : 'bg-green-200 text-green-700'">
-                    <fa-icon [icon]="faAtom" class="mr-2" [ngClass]="complianceLevel == 'NL' ? 'text-red-700' : complianceLevel == 'BL' ? 'text-orange-700' : complianceLevel == 'P' ? 'text-yellow-700' : 'text-green-700'"></fa-icon>
-                    @if(complianceLevel=='NL'){
-                        No level
-                    }@else if(complianceLevel=='BL'){
-                        Baseline
-                    } @else if(complianceLevel=='P') {
-                        Professional
-                    } @else {
-                        Professional+
-                    }
-                </a>
+                @if(!IS_ISBE){
+                    <a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2"
+                        [ngClass]="complianceLevel == 'NL' ? 'bg-red-200 text-red-700' : complianceLevel == 'BL' ? 'bg-orange-200 text-orange-700' : complianceLevel == 'P' ? 'bg-yellow-200 text-yellow-700' : 'bg-green-200 text-green-700'">
+                        <fa-icon [icon]="faAtom" class="mr-2" [ngClass]="complianceLevel == 'NL' ? 'text-red-700' : complianceLevel == 'BL' ? 'text-orange-700' : complianceLevel == 'P' ? 'text-yellow-700' : 'text-green-700'"></fa-icon>
+                        @if(complianceLevel=='NL'){
+                            No level
+                        }@else if(complianceLevel=='BL'){
+                            Baseline
+                        } @else if(complianceLevel=='P') {
+                            Professional
+                        } @else {
+                            Professional+
+                        }
+                    </a>
+                }
+
+                
             </div>
         </div>
         <div class="hidden lg:block overflow-hidden rounded-r-lg">
