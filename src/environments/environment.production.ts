@@ -38,7 +38,7 @@ export const environment = {
         isRedirection: false,
         pollPath: "",
         pollCertPath: "",
-        clientID: "https://catalog.redisbe.com",
+        clientID: "https://catalog.isbeonboard.com",
         callbackURL: "",
         verifierHost: "",
         verifierQRCodePath: "",
@@ -66,7 +66,7 @@ export const environment = {
     SCOPE: "openid eidas",
     RESPONSE_TYPE: 'code',
     AUTHORITY: "https://certauth.evidenceledger.eu",
-    REDIRECT_URL: "https://deploy-preview-2--isbecatalog.netlify.app/",
+    REDIRECT_URL: "https://isbecatalog.netlify.app/",
     POST_LOGIN_ROUTE: '/dashboard'
 
 };

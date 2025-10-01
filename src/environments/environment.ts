@@ -39,7 +39,7 @@ export const environment = {
         pollPath: "",
         pollCertPath: "",
         //clientID: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
-        clientID: "https://catalog.redisbe.com",
+        clientID: "https://catalog.isbeonboard.com",
         callbackURL: "http://localhost:4200/dashboard",
         verifierHost: "https://verifier.dome-marketplace-sbx.org",
         verifierQRCodePath: '/oidc/authorize',
@@ -67,6 +67,6 @@ export const environment = {
     SCOPE: "openid eidas",
     RESPONSE_TYPE: 'code',
     AUTHORITY: "https://certauth.evidenceledger.eu",
-    REDIRECT_URL: "https://deploy-preview-2--isbecatalog.netlify.app/",
+    REDIRECT_URL: "https://isbecatalog.netlify.app/",
     POST_LOGIN_ROUTE: '/dashboard'
 };
