@@ -52,7 +52,7 @@ export const environment = {
     KB_ONBOARDING_GUIDELINES_URL: "",
     KB_GUIDELNES_URL:"",
     REGISTRATION_FORM_URL: "",
-    SEARCH_ENABLED: true,
+    SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
     ISBE_TRUST_LINK: "",
     ISBE_ABOUT_LINK: '',

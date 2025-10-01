@@ -15,13 +15,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CardComponent } from 'src/app/shared/card/card.component';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
+import { CategoriesPanelComponent } from 'src/app/shared/categories-panel/categories-panel.component';
 
 @Component({
     selector: 'bae-search',
     templateUrl: './search.component.html',
     styleUrl: './search.component.css',
     standalone: true,
-    imports: [FeedbackModalComponent, TranslateModule, CardComponent, ReactiveFormsModule, CategoriesFilterComponent, NgClass]
+    imports: [FeedbackModalComponent, TranslateModule, CardComponent, ReactiveFormsModule, CategoriesFilterComponent, NgClass, CategoriesPanelComponent]
 })
 export class SearchComponent implements OnInit {
 
