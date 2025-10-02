@@ -94,8 +94,8 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   knowledge_guidelines: string = environment.KB_GUIDELNES_URL;
   registration: string = environment.REGISTRATION_FORM_URL;
   ticketing: string = environment.TICKETING_SYSTEM_URL;
-  domeAbout: string = environment.ISBE_ABOUT_LINK;
-  domeRegister: string = environment.ISBE_REGISTER_LINK;
+  isbeAbout: string = environment.ISBE_ABOUT_LINK;
+  isbeRegister: string = environment.ISBE_REGISTER_LINK;
   domePublish: string = environment.ISBE_PUBLISH_LINK;
 
   public static readonly BASE_URL: string = environment.BASE_URL;

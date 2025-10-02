@@ -77,11 +77,11 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     if (this.IS_ISBE) {
       this.steps = [
-        'General Info',
-        'Product Specification',
-        'Category',
-        'Price Plans',
-        'Summary'
+        'CREATE_OFFER._general',
+        'CREATE_OFFER._prod_spec',
+        'CREATE_OFFER._category',
+        'CREATE_OFFER._price_plans',
+        'CREATE_OFFER._summary'
       ];
       this.productOfferForm = this.fb.group({
         generalInfo: this.fb.group({}),
@@ -91,14 +91,14 @@ export class OfferComponent implements OnInit, OnDestroy{
       });
     } else {
       this.steps = [
-        'General Info',
-        'Product Specification',
-        'Catalogue',
-        'Category',
-        'License',
-        'Price Plans',
-        'Procurement Mode',
-        'Summary'
+        'CREATE_OFFER._general',
+        'CREATE_OFFER._prod_spec',
+        'CREATE_OFFER._catalog',
+        'CREATE_OFFER._category',
+        'CREATE_OFFER._license',
+        'CREATE_OFFER._price_plans',
+        'CREATE_OFFER._procurement',
+        'CREATE_OFFER._summary'
       ];
       this.productOfferForm = this.fb.group({
         generalInfo: this.fb.group({}),
@@ -210,24 +210,21 @@ export class OfferComponent implements OnInit, OnDestroy{
       this.loadingData=true;
       if (this.IS_ISBE) {
         this.steps = [
-          'General Info',
-          'Product Specification',
-          'Category',
-          'Price Plans',
-          'Summary'
+          'CREATE_OFFER._general',
+          'CREATE_OFFER._prod_spec',
+          'CREATE_OFFER._category',
+          'CREATE_OFFER._price_plans',
+          'CREATE_OFFER._summary'
         ];
         
       } else {
         this.steps = [
-          'General Info',
-          'Product Specification',
-          //'Catalogue',
-          'Category',
-          'License',
-          'Price Plans',
-          'Procurement Mode',
-          //'Replication & Visibility',
-          'Summary'
+          'CREATE_OFFER._general',
+          'CREATE_OFFER._prod_spec',
+          'CREATE_OFFER._category',
+          'CREATE_OFFER._license',
+          'CREATE_OFFER._price_plans',
+          'CREATE_OFFER._summary'
         ];
         
       }
@@ -813,7 +810,7 @@ export class OfferComponent implements OnInit, OnDestroy{
     const categories = Array.isArray(v?.category)
       ? v.category
           .filter((cat: any) => cat?.id)
-          .map((cat: any) => ({ id: cat.id, href: cat.id }))
+          .map((cat: any) => ({ id: cat.id, href: cat.id, name: cat.name }))
       : [];
 
     const prices = Array.isArray(v?.pricePlans)
@@ -1090,4 +1087,16 @@ export class OfferComponent implements OnInit, OnDestroy{
       setTimeout(() => (this.showError = false), 3000);
     }
   }
+
+  getStepKey(step: string) {
+    const mapping: any = {
+      'CREATE_OFFER._general': 'General Info',
+      'CREATE_OFFER._prod_spec': 'Product Specification',
+      'CREATE_OFFER._category': 'Category',
+      'CREATE_OFFER._price_plans': 'Price Plans',
+      'CREATE_OFFER._summary': 'Summary'
+    };
+    return mapping[step];
+  }
+
 }

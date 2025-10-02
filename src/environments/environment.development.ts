@@ -52,7 +52,7 @@ export const environment = {
     SEARCH_ENABLED: false,
     PURCHASE_ENABLED: true,
     ISBE_TRUST_LINK: "",
-    ISBE_ABOUT_LINK: '',
+    ISBE_ABOUT_LINK: 'https://redisbe.com/',
     ISBE_REGISTER_LINK: '',
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',

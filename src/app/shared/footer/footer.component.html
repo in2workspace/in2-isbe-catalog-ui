@@ -23,9 +23,11 @@
       <li>
         <a target="_blank" class="mr-4 hover:underline md:mr-6">{{ 'FOOTER._licensing' | translate }}</a>
       </li>
-      <li>
-        <a (click)="goTo('/contact-us')" target="_blank" class="hover:underline cursor-pointer">{{ 'FOOTER._contact' | translate }}</a>
-      </li>
+      @if(!IS_ISBE){
+        <li>
+          <a (click)="goTo('/contact-us')" target="_blank" class="hover:underline cursor-pointer">{{ 'FOOTER._contact' | translate }}</a>
+        </li>
+      }
     </ul>
   </div>
 

@@ -24,7 +24,10 @@ import { AuthGuard } from './guard/auth.guard';
 
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'about', component: AboutDomeComponent },
+  { path: 'about', component: AboutDomeComponent ,
+    canActivate: [AuthGuard],
+    data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
+  },
   { path: 'search', component: SearchComponent },
   { path: 'search/:id', component: ProductDetailsComponent },
   { path: 'org-details/:id', component: OrganizationDetailsComponent },
@@ -69,18 +72,19 @@ export const routes: Routes = [
   {
     path: 'my-offerings',
     component: SellerOfferingsComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['seller'] }
+    /*canActivate: [AuthGuard],
+    data: { roles: ['seller'] }*/
   },
   {
     path: 'admin',
     component: AdminComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['admin', 'certifier'] }
+    /*canActivate: [AuthGuard],
+    data: { roles: ['admin', 'certifier'] }*/
   },
-
-  { path: 'contact-us', component: ContactUsFormComponent },
-
+  { path: 'contact-us', component: ContactUsFormComponent ,
+    canActivate: [AuthGuard],
+    data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
+  },
   {
     path: 'product-orders',
     component: ProductOrdersComponent,

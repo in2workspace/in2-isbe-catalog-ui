@@ -18,13 +18,13 @@
   <div class="mb-4">
         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'CREATE_OFFER._status' | translate }}</label>
         @if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Active'){
-            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
+            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Launched') {
-            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
+            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Retired') {
-            <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{productOfferForm.get('generalInfo')?.get('status')?.value}}</span>
+            <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Obsolete') {
-            <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{productOfferForm.get('generalInfo.status')?.get('status')?.value}}</span>
+            <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
         }
     </div>
    
@@ -34,44 +34,6 @@
             <markdown class="bg-gray-50 dark:bg-secondary-300 dark:text-white text-gray-900 text-wrap break-all" [data]="productOfferForm.get('generalInfo.description')?.value"></markdown>
         </div>
     }
-<!--
-    @if(productOfferForm.get('pricePlans')){
-        <label class="font-bold text-lg dark:text-white">{{ 'CREATE_OFFER._bundle' | translate }}</label>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
-                    <tr>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'CREATE_OFFER._name' | translate }}
-                        </th>
-                        <th scope="col" class="px-6 py-3">
-                            {{ 'CREATE_OFFER._status' | translate }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @for (bun of offersBundle; track bun) {
-                        <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
-                            <td class="px-6 py-4 text-wrap break-all">
-                                {{bun.name}}
-                            </td>
-                            <td class="px-6 py-4">
-                                @if(bun.lifecycleStatus == 'Active'){
-                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{bun.lifecycleStatus}}</span>
-                                } @else if(bun.lifecycleStatus == 'Launched') {
-                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{bun.lifecycleStatus}}</span>
-                                } @else if(bun.lifecycleStatus == 'Retired') {
-                                    <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{bun.lifecycleStatus}}</span>
-                                } @else if(bun.lifecycleStatus == 'Obsolete') {
-                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{bun.lifecycleStatus}}</span>
-                                }
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-    }-->
 
     @if(productOfferForm.get('catalogue')?.value){
         <label class="font-bold text-lg dark:text-white">{{ 'CREATE_OFFER._catalog' | translate }}</label>

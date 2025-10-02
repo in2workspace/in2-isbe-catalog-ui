@@ -1,12 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef, HostListener, Input } from '@angular/core';
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
-import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import * as moment from 'moment';
 
 import {components} from "src/app/models/product-catalog";
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';

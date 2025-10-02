@@ -250,7 +250,9 @@
     "_billing_check": "Debes crear al menos una dirección de facturación para poder realizar un pedido.",
     "_click_here": "Haz clic aquí",
     "_free": "Gratis",
+    "_no_price": "Sin información de precio",
     "_free_desc": "La oferta es gratuita",
+    "_no_price_desc": "La oferta no tiene información de precio",
     "_loading_purchase": "Cargando compra",
     "_contact": "Contacto",
     "_update": "Actualizar",
@@ -830,7 +832,8 @@
     "_no_offer": "No hay ofertas.",
     "_previous": "Paso anterior",
     "_next_step": "Siguiente paso",
-    "_no_subcats": "No hay subcategorías"
+    "_no_subcats": "No hay subcategorías", 
+    "_procurement": "Modo de adquisición"
   },
   "UPDATE_OFFER": {
     "_back": "Atrás",

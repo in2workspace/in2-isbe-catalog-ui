@@ -1,4 +1,3 @@
-import { cli } from "cypress";
 
 export const environment = {
     BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4',
@@ -55,7 +54,7 @@ export const environment = {
     SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
     ISBE_TRUST_LINK: "",
-    ISBE_ABOUT_LINK: '',
+    ISBE_ABOUT_LINK: 'https://redisbe.com/',
     ISBE_REGISTER_LINK: '',
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',

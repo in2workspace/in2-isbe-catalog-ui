@@ -296,13 +296,13 @@
                                             </td>
                                             <td class="hidden md:table-cell px-6 py-4">
                                                 @if(prod.lifecycleStatus == 'Active'){
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                                                 } @else if(prod.lifecycleStatus == 'Launched') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
                                                 } @else if(prod.lifecycleStatus == 'Retired') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
                                                 } @else if(prod.lifecycleStatus == 'Obsolete') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{prod.lifecycleStatus}}</span>
+                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
                                                 }
                                             </td>
                                             <td class="hidden md:table-cell px-6 py-4">
@@ -1181,13 +1181,13 @@
                         <div class="mb-4">
                             <label class="font-bold text-lg mr-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
                             @if(productSpecToUpdate?.lifecycleStatus == 'Active'){
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{productSpecToUpdate?.lifecycleStatus}}</span>
+                                <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Launched') {
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{productSpecToUpdate?.lifecycleStatus}}</span>
+                                <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Retired') {
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{productSpecToUpdate?.lifecycleStatus}}</span>
+                                <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Obsolete') {
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{productSpecToUpdate?.lifecycleStatus}}</span>
+                                <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
                             }
                         </div>
 
@@ -1227,13 +1227,13 @@
                                                 </td>
                                                 <td class="px-6 py-4">
                                                     @if(bun.lifecycleStatus == 'Active'){
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{bun.lifecycleStatus}}</span>
+                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                                                     } @else if(bun.lifecycleStatus == 'Launched') {
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{bun.lifecycleStatus}}</span>
+                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
                                                     } @else if(bun.lifecycleStatus == 'Retired') {
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{bun.lifecycleStatus}}</span>
+                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
                                                     } @else if(bun.lifecycleStatus == 'Obsolete') {
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{bun.lifecycleStatus}}</span>
+                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
                                                     }
                                                 </td>
                                             </tr>

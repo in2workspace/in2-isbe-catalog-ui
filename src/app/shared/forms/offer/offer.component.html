@@ -32,7 +32,7 @@
                   [class.text-white]="currentStep === i">
               {{ i + 1 }}
             </span>
-            <span class="md:block mt-2 hidden">{{ step }}</span>
+            <span class="md:block mt-2 hidden">{{ step | translate }}</span>
           </li>
         }
       </ol>
@@ -42,7 +42,7 @@
       </h3>
 
       <div class="md:p-8">
-        @switch (steps[currentStep]) {
+        @switch (getStepKey(steps[currentStep])) {
           @case ('General Info') {
             <app-general-info-form 
               [data]="offer" 

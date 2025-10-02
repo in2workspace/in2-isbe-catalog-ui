@@ -32,32 +32,38 @@ export class AuthService {
 
   role: WritableSignal<string | null> = signal(null);
 
-
   checkAuth(): Observable<boolean> {
-  return this.oidc.checkAuth().pipe(
-    take(1),
-    catchError((err) => {
-      return of({ isAuthenticated: false, accessToken: '', userData: {} } as any);
-    }),
-    switchMap(({ isAuthenticated, accessToken, userData }) => {
-        if (isAuthenticated) {
-          const u = this.mapUser(userData);
-          this.setState(true, u, accessToken ?? '', this.pickPrimaryRole(u));
-
-          try {
-            const li = claimsToLoginInfo(userData, accessToken ?? '');
-            this.loginInfoSubject.next(li);
-          } catch {
-            this.loginInfoSubject.next(null);
-          }
-
-          console.info('[Auth] OIDC session (CertAuth) established.');
-          return of(true);
+    return this.oidc.checkAuth().pipe(
+      take(1),
+      catchError(() => of({ isAuthenticated: false, accessToken: '', userData: {} } as any)),
+      switchMap(async ({ isAuthenticated, accessToken, userData }) => {
+        if (!isAuthenticated) {
+          this.clearState();
+          this.loginInfoSubject.next(null);
+          return false;
         }
 
-        this.clearState();
-        this.loginInfoSubject.next(null);
-        return of(false);
+        const idToken = await this.oidc.getAccessToken().pipe(take(1)).toPromise().catch(() => '');
+        console.log(idToken)
+        let claims: any =
+          (idToken && this.decodeJwtPayload(idToken)) ||
+          (accessToken && this.decodeJwtPayload(accessToken)) ||
+          userData ||
+          {};
+
+        const u = this.mapUserFromClaims(claims);
+        console.log(u)
+        this.setState(true, u, accessToken ?? '', this.pickPrimaryRole(u));
+
+        try {
+          const li = claimsToLoginInfo(claims, accessToken ?? '');
+          this.loginInfoSubject.next(li);
+        } catch {
+          this.loginInfoSubject.next(null);
+        }
+
+        console.info('[Auth] OIDC session establecida');
+        return true;
       })
     );
   }
@@ -96,18 +102,25 @@ export class AuthService {
     this.setState(false, null, '', null);
   }
 
-  private mapUser(userData: any): AppUser {
+  private mapUserFromClaims(claims: any): AppUser {
     const roles: string[] =
-      userData?.roles ||
-      (userData?.role ? [userData.role] : []) ||
-      userData?.realm_access?.roles ||
+      claims?.roles ||
+      (claims?.role ? [claims.role] : []) ||
+      claims?.realm_access?.roles ||
       [];
+
+    const name =
+      (claims?.name ??
+      `${claims?.given_name ?? ''} ${claims?.family_name ?? ''}`.trim()) ||
+      claims?.preferred_username ||
+      '';
+
     return {
-      sub: userData?.sub,
-      name: userData?.name ?? `${userData?.given_name ?? ''} ${userData?.family_name ?? ''}`.trim(),
-      email: userData?.email,
+      sub: claims?.sub,
+      name,
+      email: claims?.email,
       roles,
-      ...userData
+      ...claims
     };
   }
 
@@ -115,4 +128,17 @@ export class AuthService {
     return u?.roles?.[0] ?? null;
   }
 
+  private decodeJwtPayload<T = any>(token: string): T | null {
+    try {
+      if (!token) return null;
+      const parts = token.split('.');
+      if (parts.length < 2) return null;
+      const b64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+      const pad = b64.length % 4 ? 4 - (b64.length % 4) : 0;
+      const json = atob(b64 + (pad ? '='.repeat(pad) : ''));
+      return JSON.parse(json) as T;
+    } catch {
+      return null;
+    }
+  }
 }
