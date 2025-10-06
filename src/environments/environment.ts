@@ -1,9 +1,13 @@
 
 export const environment = {
-    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/productCatalogManagement/v4',
+    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/',
+    PRODUCT_CATALOG_MANAGEMENT_URL: 'productCatalogManagement/v4',
+    PARTY_URL: 'party/v4',
     PAYMENT_URL: '',
     ISBE_CATALOGUE: true,
     LEGACY_PREFIX: '',
+    ORGANIZATION: '/organization',
+    INDIVIDUAL: '/individual',
     PRODUCT_CATALOG: '/catalog',
     SERVICE: '/service',
     RESOURCE: '/resource',

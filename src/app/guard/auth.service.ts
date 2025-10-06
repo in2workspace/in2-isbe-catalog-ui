@@ -60,7 +60,6 @@ export class AuthService {
           this.loginInfoSubject.next(null);
         }
 
-        console.info('[Auth] OIDC session establecida');
         return true;
       })
     );

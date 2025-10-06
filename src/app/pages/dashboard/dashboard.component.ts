@@ -2,8 +2,7 @@ import {Component, HostListener, OnInit, ChangeDetectorRef} from '@angular/core'
 import {EventMessageService} from "../../services/event-message.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { LoginInfo } from 'src/app/models/interfaces';
+import { Router } from '@angular/router';
 import { StatsServiceService } from "src/app/services/stats-service.service"
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
@@ -41,8 +40,6 @@ export class DashboardComponent implements OnInit {
   constructor(private readonly localStorage: LocalStorageService,
               private readonly eventMessage: EventMessageService,
               private readonly statsService : StatsServiceService,
-              private readonly route: ActivatedRoute,
-              private readonly auth: AuthService,
               private readonly router: Router,
               private readonly api: ApiServiceService,
               private readonly cdr: ChangeDetectorRef) {
@@ -78,10 +75,29 @@ export class DashboardComponent implements OnInit {
       this.startTagTransition();
     })
     this.isFilterPanelShown = JSON.parse(this.localStorage.getItem('is_filter_panel_shown') as string);
-    if(this.route.snapshot.queryParamMap.get('token') != null){    
-      this.auth.login();
+    //TODO: check with verifier login
+    /*if(this.route.snapshot.queryParamMap.get('token') != null){    
+      this.loginService.getLogin(this.route.snapshot.queryParamMap.get('token')).then(data => {
+        let info = {
+          "id": data.id,
+          "user": data.username,
+          "email": data.email,
+          "token": data.accessToken,
+          "expire": data.expire,
+          "seller": data.seller,
+          "roles": data.roles,
+          "organizations": data.organizations,
+          "logged_as": data.id } as LoginInfo;
+
+        if (info.organizations != null && info.organizations.length > 0) {
+          info.logged_as = info.organizations[0].id
+        }
+
+        this.localStorage.setItem("accessToken",data.accessToken);
+        this.eventMessage.emitLogin(info);
+      })      
       this.router.navigate(['/dashboard'])
-    } 
+    }*/ 
     this.api.getLaunchedCategories().then(data => {
       for(const element of data){
         if(element.isRoot){

@@ -96,7 +96,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   isbeRegister: string = environment.ISBE_REGISTER_LINK;
   domePublish: string = environment.ISBE_PUBLISH_LINK;
 
-  public static readonly BASE_URL: string = environment.BASE_URL;
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   loginSubscription: Subscription = new Subscription();

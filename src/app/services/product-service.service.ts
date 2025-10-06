@@ -14,7 +14,7 @@ import { jwtDecode } from "jwt-decode";
 })
 export class ApiServiceService {
   public static BASE_URL: String = environment.BASE_URL;
-  //public static API_PRODUCT: String = environment.PRODUCT_CATALOG;
+  public static PRODUCT_CATALOG_MANAGEMENT_URL: String = environment.PRODUCT_CATALOG_MANAGEMENT_URL;
   public static PRODUCT_LIMIT: number = environment.PRODUCT_LIMIT;
   public static CATALOG_LIMIT: number= environment.CATALOG_LIMIT;
   public static CATEGORY_LIMIT: number = environment.CATEGORY_LIMIT;
@@ -22,7 +22,7 @@ export class ApiServiceService {
   constructor(private http: HttpClient,private localStorage: LocalStorageService) { }
 
   getProducts(page:any,keywords:any) {
-    let url = `${ApiServiceService.BASE_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&lifecycleStatus=Launched`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&lifecycleStatus=Launched`;
     if(keywords!=undefined){
       url=url+'&keyword='+keywords;
     }
@@ -40,7 +40,7 @@ export class ApiServiceService {
       }
     }
 
-    const baseUrl = `${ApiServiceService.BASE_URL}/productOffering`;
+    const baseUrl = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering`;
     const query = `limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&lifecycleStatus=Launched`;
 
     // Add the ID string only when some categories are selected
@@ -57,7 +57,7 @@ export class ApiServiceService {
   }
 
   getProductsByCatalog(catalogId:any,page:any){
-    let url = `${ApiServiceService.BASE_URL}/catalog/${catalogId}/productOffering?lifecycleStatus=Launched&limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}`
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/catalog/${catalogId}/productOffering?lifecycleStatus=Launched&limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}`
 
     return lastValueFrom(this.http.get<any[]>(url));
   }
@@ -71,19 +71,19 @@ export class ApiServiceService {
         id_str = id_str+','+ids[i].id
       }
     }
-    let url = `${ApiServiceService.BASE_URL}/catalog/${catalogId}/productOffering?lifecycleStatus=Launched&${id_str}&limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/catalog/${catalogId}/productOffering?lifecycleStatus=Launched&${id_str}&limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}`;
 
     return lastValueFrom(this.http.get<any[]>(url));
   }
 
   getProductById(id:any) {
-    let url = `${ApiServiceService.BASE_URL}/productOffering/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering/${id}`;
 
     return lastValueFrom(this.http.get<any>(url));
   }
 
   getProductOfferByOwner(page:any,status:any[],seller:any,sort:any,isBundle:any) {
-    let url = `${ApiServiceService.BASE_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&seller=${seller}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&seller=${seller}`;
 
     if(sort!=undefined){
       url=url+'&sort='+sort
@@ -107,19 +107,19 @@ export class ApiServiceService {
   }
 
   getProductSpecification(id:any) {
-    let url = `${ApiServiceService.BASE_URL}/productSpecification/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productSpecification/${id}`;
 
     return lastValueFrom(this.http.get<any>(url));
   }
 
   getProductPrice(id:any) {
-    let url = `${ApiServiceService.BASE_URL}/productOfferingPrice/${id}`
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOfferingPrice/${id}`
 
     return lastValueFrom(this.http.get<any>(url));
   }
 
   getLaunchedCategories() {
-    let url = `${ApiServiceService.BASE_URL}/category?limit=${ApiServiceService.CATEGORY_LIMIT}&lifecycleStatus=Launched`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/category?limit=${ApiServiceService.CATEGORY_LIMIT}&lifecycleStatus=Launched`;
 
     return lastValueFrom(
       this.http.get<any[]>(url).pipe(
@@ -132,7 +132,7 @@ export class ApiServiceService {
   }
 
   getCategories(status:any[]){
-    let url = `${ApiServiceService.BASE_URL}/category?limit=${ApiServiceService.CATEGORY_LIMIT}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/category?limit=${ApiServiceService.CATEGORY_LIMIT}`;
     let lifeStatus=''
     if(status.length>0){
       for(let i=0; i < status.length; i++){
@@ -174,42 +174,40 @@ export class ApiServiceService {
   }
 
   getCategoryById(id:any) {
-    let url = `${ApiServiceService.BASE_URL}/category/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/category/${id}`;
 
     return lastValueFrom(this.http.get<any>(url));
   }
 
   getCategoriesByParentId(id:any){
-    let url = `${ApiServiceService.BASE_URL}/category?parentId=${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/category?parentId=${id}`;
 
     return lastValueFrom(this.http.get<any[]>(url));
   }
 
   postCategory(category:any){
-    let url = `${ApiServiceService.BASE_URL}/category`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/category`;
 
     return this.http.post<any>(url, category);
   }
 
   updateCategory(category:any,id:any){
-    let url = `${ApiServiceService.BASE_URL}/category/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/category/${id}`;
 
     return this.http.patch<any>(url, category);
   }
 
   getCatalogs(page:any,filter:any): Promise<any> {
-    let url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&lifecycleStatus=Launched`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&lifecycleStatus=Launched`;
     if(filter!=undefined){
-      url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&lifecycleStatus=Launched&body=${filter}`;
+      url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&lifecycleStatus=Launched&body=${filter}`;
     }
-    console.log('getcatalogs')
-    console.log(this)
 
     return lastValueFrom(this.http.get<any>(url));
   }
 
   getCatalogsByUser(page:any,filter:any,status:any[],seller:any) {
-    let url = `${ApiServiceService.BASE_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&seller=${seller}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/catalog?limit=${ApiServiceService.CATALOG_LIMIT}&offset=${page}&seller=${seller}`;
     let lifeStatus=''
     if(status)
     if(status.length>0){
@@ -231,73 +229,73 @@ export class ApiServiceService {
   }
 
   getCatalog(id:any){
-    let url = `${ApiServiceService.BASE_URL}/catalog/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/catalog/${id}`;
 
     return lastValueFrom(this.http.get<any>(url));
   }
 
   postCatalog(catalog:any){
-    let url = `${ApiServiceService.BASE_URL}/catalog`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/catalog`;
 
     return this.http.post<any>(url, catalog);
   }
 
   updateCatalog(catalog:any,id:any){
-    let url = `${ApiServiceService.BASE_URL}/catalog/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/catalog/${id}`;
     return this.http.patch<any>(url, catalog);
   }
 
   getServiceSpec(id:any){
-    let url = `${ApiServiceService.BASE_URL}/service/serviceSpecification/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/service/serviceSpecification/${id}`;
 
     return lastValueFrom(this.http.get<any>(url));
   }
 
   getResourceSpec(id:any){
-    let url = `${ApiServiceService.BASE_URL}/resource/resourceSpecification/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/resource/resourceSpecification/${id}`;
 
     return lastValueFrom(this.http.get<any>(url));
   }
 
   postOfferingPrice(price:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/productOfferingPrice`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOfferingPrice`;
     return this.http.post<any>(url, price);
   }
 
   updateOfferingPrice(price:any,id:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/productOfferingPrice/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOfferingPrice/${id}`;
     return this.http.patch<any>(url, price);
   }
 
   getOfferingPrice(id:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/productOfferingPrice/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOfferingPrice/${id}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
   postProductOffering(prod:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/productOffering`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering`;
     return this.http.post<any>(url, prod);
   }
 
   updateProductOffering(prod:any,id:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/productOffering/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering/${id}`;
     return this.http.patch<any>(url, prod);
   }
 
   postSLA(sla:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/SLAManagement/sla`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/SLAManagement/sla`;
     return this.http.post<any>(url, sla);
   }
 
   getSLA(id:any){
     //POST - El item va en el body de la petición
-    let url = `${ApiServiceService.BASE_URL}/SLAManagement/sla/${id}`;
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/SLAManagement/sla/${id}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
@@ -331,8 +329,5 @@ export class ApiServiceService {
     }
 
     return level;
-    //return 'BL'
-    //return 'P'
-    //return 'PP'
   }
 }
