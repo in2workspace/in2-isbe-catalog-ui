@@ -1,8 +1,12 @@
 export const environment = {
-    BASE_URL: '',
-    PAYMENT_URL: 'https://payment.dome-marketplace-sbx.org',
+    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/',
+    PRODUCT_CATALOG_MANAGEMENT_URL: 'productCatalogManagement/v4',
+    PARTY_URL: 'party/v4',
+    PAYMENT_URL: '',
     ISBE_CATALOGUE: true,
     LEGACY_PREFIX: '/ux',
+    ORGANIZATION: '/organization',
+    INDIVIDUAL: '/individual',
     PRODUCT_CATALOG: '/catalog',
     SERVICE: '/service',
     RESOURCE: '/resource',
@@ -18,10 +22,9 @@ export const environment = {
     BILLING: '/billing',
     CHARGING: '/charging',
 
-    CONSUMER_BILLING_URL: 'http://localhost:8640',
+    CONSUMER_BILLING_URL: '',
     INVOICE_LIMIT: 100,
 
-    //API PAGINATION
     PRODUCT_LIMIT: 6,
     CATALOG_LIMIT: 8,
     INVENTORY_LIMIT: 6,
@@ -32,15 +35,14 @@ export const environment = {
     ORDER_LIMIT: 1000,
     CATEGORY_LIMIT: 100,
     SIOP: true,
-    //SIOP: false,
     TAX_RATE: 20,
-    CHAT_API: 'https://eng-gpt.dome-marketplace-dev.org/predict',
+    AUTH_MODE: 'oidc',
     SIOP_INFO: {
         enabled: false,
         isRedirection: false,
         pollPath: "",
         pollCertPath: "",
-        clientID: "",
+        clientID: "https://catalog.isbeonboard.com",
         callbackURL: "",
         verifierHost: "",
         verifierQRCodePath: "",
@@ -53,10 +55,10 @@ export const environment = {
     KB_ONBOARDING_GUIDELINES_URL: "",
     KB_GUIDELNES_URL:"",
     REGISTRATION_FORM_URL: "",
-    SEARCH_ENABLED: true,
+    SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
-    ISBE_TRUST_LINK: "https://dome-certification.dome-marketplace.org",
-    ISBE_ABOUT_LINK: '',
+    ISBE_TRUST_LINK: "",
+    ISBE_ABOUT_LINK: 'https://redisbe.com/',
     ISBE_REGISTER_LINK: '',
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',
@@ -64,5 +66,11 @@ export const environment = {
     ISBE_X: 'https://x.com/REDISBE',
     BUNDLE_ENABLED: false,
     DFT_CATALOG_ID: '',
-    MAX_FILE_SIZE:3145728
+    MAX_FILE_SIZE:3145728,
+    SCOPE: "openid eidas",
+    RESPONSE_TYPE: 'code',
+    AUTHORITY: "https://certauth.evidenceledger.eu",
+    REDIRECT_URL: "https://isbecatalog.netlify.app/",
+    POST_LOGIN_ROUTE: '/dashboard'
+
 };

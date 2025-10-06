@@ -5,13 +5,13 @@ import {components} from "src/app/models/product-catalog";
 type Catalog = components["schemas"]["Catalog"];
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
-import { LoginInfo } from 'src/app/models/interfaces';
 import {EventMessageService} from "src/app/services/event-message.service";
 import { PaginationService } from 'src/app/services/pagination.service';
 import { initFlowbite } from 'flowbite';
 import { TranslateModule } from '@ngx-translate/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'seller-catalogs',
@@ -41,7 +41,7 @@ export class SellerCatalogsComponent implements OnInit{
   constructor(
     private readonly api: ApiServiceService,
     private readonly cdr: ChangeDetectorRef,
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly eventMessage: EventMessageService,
     private readonly paginationService: PaginationService
   ) {
@@ -64,30 +64,30 @@ export class SellerCatalogsComponent implements OnInit{
     this.eventMessage.emitSellerUpdateCatalog(cat);
   }
 
-  initCatalogs(){
-    this.loading=true;
-    this.catalogs=[];
-    this.nextCatalogs=[];
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(aux.logged_as==aux.id){
-      this.seller = aux.id;
-    } else {
-      let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.seller = loggedOrg.id
-    }
+  initCatalogs(): void {
+    this.loading = true;
+    this.catalogs = [];
+    this.nextCatalogs = [];
 
-    this.getCatalogs(false);
-    let input = document.querySelector('[type=search]')
-    if(input!=undefined){
-      input.addEventListener('input', e => {
-        // Easy way to get the value of the element who trigger the current `e` event
-        if(this.searchField.value==''){
-          this.filter=undefined;
-          this.getCatalogs(false);
+    this.auth.sellerId$
+      .pipe(take(1))
+      .subscribe(id => {
+        this.seller = id || '';
+
+        this.getCatalogs(false);
+
+        const input = document.querySelector<HTMLInputElement>('[type=search]');
+        if (input) {
+          input.addEventListener('input', () => {
+            if (this.searchField.value === '') {
+              this.filter = undefined;
+              this.getCatalogs(false);
+            }
+          }, { once: false });
         }
+
+        initFlowbite();
       });
-    }
-    initFlowbite();
   }
 
   ngAfterViewInit(){
@@ -95,11 +95,10 @@ export class SellerCatalogsComponent implements OnInit{
   }
 
   async getCatalogs(next:boolean){
-    if(next==false){
+    if(!next){
       this.loading=true;
     }
 
-    //async getItemsPaginated(page:number, pageSize:any, next:boolean, items:any[], nextItems:any[], options:any
     let options = {
       "keywords": this.filter,
       "filters": this.status,
@@ -118,7 +117,6 @@ export class SellerCatalogsComponent implements OnInit{
   }
 
   async next(){
-    //this.loading_more=true;
     this.page=this.page+this.CATALOG_LIMIT;
     this.cdr.detectChanges;
     await this.getCatalogs(true);

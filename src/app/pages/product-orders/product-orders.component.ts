@@ -21,6 +21,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { OrderInfoComponent } from "./sections/order-info/order-info.component";
 import { InvoicesInfoComponent } from "./sections/invoices-info/invoices-info.component";
+import { combineLatest, take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
+import { OrgContextService } from 'src/app/services/org-context.service';
 
 @Component({
   selector: 'app-product-orders',
@@ -59,13 +62,11 @@ export class ProductOrdersComponent implements OnInit {
   protected readonly faSwatchbook = faSwatchbook;
 
   constructor(
-    private localStorage: LocalStorageService,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private accountService: AccountServiceService,
-    private orderService: ProductOrderService,
-    private eventMessage: EventMessageService,
-    private paginationService: PaginationService
+    private readonly auth: AuthService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly eventMessage: EventMessageService,
+    private readonly paginationService: PaginationService,
+    private readonly orgCtx: OrgContextService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -99,33 +100,33 @@ export class ProductOrdersComponent implements OnInit {
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-        let userRoles = aux.roles.map((elem: any) => {
-          return elem.name
-        })
-        if (userRoles.includes("seller")) {
-          this.isSeller=true;
+  initPartyInfo(): void {
+    combineLatest([this.auth.loginInfo$, this.auth.sellerId$])
+      .pipe(take(1))
+      .subscribe(([li, sellerId]) => {
+        if (!li) {
+          initFlowbite();
+          return;
         }
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.seller = loggedOrg.id;
-        let orgRoles = loggedOrg.roles.map((elem: any) => {
-          return elem.name
-        })
-        if (orgRoles.includes("seller")) {
-          this.isSeller=true;
+        this.seller = sellerId || '';
+        const currentOrgId = this.orgCtx.current ?? li.logged_as ?? null;
+        let roles: string[] = (li.roles || []).map(r => r.name ?? r.id ?? r);
+
+        if (currentOrgId && currentOrgId !== li.id) {
+          const org = (li.organizations || []).find(o => o.id === currentOrgId);
+          if (org?.roles?.length) {
+            roles = org.roles.map(r => r.name ?? r.id ?? r);
+          }
         }
-      }
-      //this.seller = aux.id;
-      this.page=0;
-      this.orders=[];
-      this.getOrders(false);
-    }
-    initFlowbite();
+
+        this.isSeller = roles.includes('seller');
+
+        this.page = 0;
+        this.orders = [];
+        this.getOrders(false);
+
+        initFlowbite();
+      });
   }
 
   ngAfterViewInit(){

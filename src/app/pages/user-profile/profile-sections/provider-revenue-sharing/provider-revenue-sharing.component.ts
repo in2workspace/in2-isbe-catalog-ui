@@ -6,6 +6,8 @@ import {LocalStorageService} from "src/app/services/local-storage.service";
 import { LoginInfo } from 'src/app/models/interfaces';
 import { RevenueSharingService } from 'src/app/services/revenue-sharing.service'
 import * as moment from 'moment';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
   selector: 'provider-revenue-sharing',
@@ -26,7 +28,7 @@ export class ProviderRevenueSharingComponent implements OnInit {
   seller:any='';
 
   constructor(
-    private localStorage: LocalStorageService,
+    private auth: AuthService,
     private revenueService: RevenueSharingService
   ) {
   }
@@ -35,35 +37,29 @@ export class ProviderRevenueSharingComponent implements OnInit {
   async ngOnInit() {
     this.initPartyInfo();
     let info = await this.revenueService.getRevenue(this.seller);
-    console.log('------')
-    console.log(info)
-    for(let i=0; i<info.length; i++){
-      if(info[i].label == 'Subscription'){
-        this.subscription = info[i]
-      } else if(info[i].label == 'Billing History'){
-        this.billing = info[i]
-      } else if(info[i].label == 'Revenue Summary'){
-        this.revenueSummary = info[i]
-      } else if (info[i].label == 'Revenue Volume Monitoring'){
-        this.revenue = info[i]
-      } else if(info[i].label == 'Referral Program Area'){
-        this.referral = info[i]
-      } else if(info[i].label == 'Support'){
-        this.support = info[i]
+    for(const element of info){
+      if(element.label == 'Subscription'){
+        this.subscription = element
+      } else if(element.label == 'Billing History'){
+        this.billing = element
+      } else if(element.label == 'Revenue Summary'){
+        this.revenueSummary = element
+      } else if (element.label == 'Revenue Volume Monitoring'){
+        this.revenue = element
+      } else if(element.label == 'Referral Program Area'){
+        this.referral = element
+      } else if(element.label == 'Support'){
+        this.support = element
       }
     }
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.seller = loggedOrg.id;
-      }      
-    }
+  initPartyInfo(): void {
+    this.auth.sellerId$
+      .pipe(take(1))
+      .subscribe(id => {
+        this.seller = id || '';
+      });
   }
 
 }

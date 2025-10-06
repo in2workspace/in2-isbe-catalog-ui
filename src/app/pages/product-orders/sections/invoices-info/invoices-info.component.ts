@@ -20,6 +20,9 @@ import { environment } from 'src/environments/environment';
 import {faIdCard, faSort, faSwatchbook, faEdit, faSave} from "@fortawesome/pro-solid-svg-icons";
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { combineLatest, take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
+import { OrgContextService } from 'src/app/services/org-context.service';
 
 @Component({
   selector: 'app-invoices-info',
@@ -63,14 +66,13 @@ export class InvoicesInfoComponent implements OnInit {
   protected readonly faSave = faSave;
 
   constructor(
-    private localStorage: LocalStorageService,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private accountService: AccountServiceService,
-    private invoicesService: InvoicesService,
-    private eventMessage: EventMessageService,
-    private paginationService: PaginationService,
-    private router: Router
+    private readonly auth: AuthService,
+    private readonly orgCtx: OrgContextService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly invoicesService: InvoicesService,
+    private readonly eventMessage: EventMessageService,
+    private readonly paginationService: PaginationService,
+    private readonly router: Router
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -97,33 +99,28 @@ export class InvoicesInfoComponent implements OnInit {
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-        let userRoles = aux.roles.map((elem: any) => {
-          return elem.name
-        })
-        if (userRoles.includes("seller")) {
-          this.isSeller=true;
+  initPartyInfo(): void {
+    combineLatest([this.auth.loginInfo$, this.auth.sellerId$])
+      .pipe(take(1))
+      .subscribe(([li, sellerId]) => {
+        if (!li) { initFlowbite(); return; }
+
+        this.seller = sellerId || '';
+
+        const currentOrgId = this.orgCtx.current ?? li.logged_as ?? null;
+        let roles: string[] = (li.roles || []).map(r => r.name ?? r.id ?? r);
+        if (currentOrgId && currentOrgId !== li.id) {
+          const org = (li.organizations || []).find(o => o.id === currentOrgId);
+          if (org?.roles?.length) roles = org.roles.map(r => r.name ?? r.id ?? r);
         }
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as);
-        this.seller = loggedOrg.id;
-        let orgRoles = loggedOrg.roles.map((elem: any) => {
-          return elem.name
-        })
-        if (orgRoles.includes("seller")) {
-          this.isSeller=true;
-        }
-      }
-      //this.seller = aux.id;
-      this.page=0;
-      this.invoices=[];
-      this.getInvoices(false);
-    }
-    initFlowbite();
+        this.isSeller = roles.includes('seller');
+
+        this.page = 0;
+        this.invoices = [];
+        this.getInvoices(false);
+
+        initFlowbite();
+      });
   }
 
   ngAfterViewInit(){
@@ -140,7 +137,6 @@ export class InvoicesInfoComponent implements OnInit {
   }
 
   async getInvoices(next:boolean){
-    console.log("-getOrders--")
     if(next==false){
       this.loading=true;
     }
@@ -156,9 +152,6 @@ export class InvoicesInfoComponent implements OnInit {
 
     this.paginationService.getItemsPaginated(this.page, this.INVOICE_LIMIT, next, this.invoices, this.nextInvoices, options,
       this.paginationService.getInvoices.bind(this.paginationService)).then(data => {
-      console.log('--pag')
-      console.log(data)
-      console.log(this.invoices)
       this.page_check = data.page_check;
       this.invoices = data.items;
       this.name = data.name;
@@ -178,12 +171,8 @@ export class InvoicesInfoComponent implements OnInit {
     const index = this.filters.findIndex(item => item === filter);
     if (index !== -1) {
       this.filters.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.filters)
     } else {
-      console.log('añade filtro')
       this.filters.push(filter)
-      console.log(this.filters)
     }
     this.getInvoices(false);
   }
@@ -261,14 +250,12 @@ export class InvoicesInfoComponent implements OnInit {
   }
 
   toggleShowDetails(invoice:any){
-    console.log(invoice)
     this.showInvoiceDetails=true;
     this.invoiceToShow=invoice;
   }
 
   async onRoleChange(role: any) {
     this.role=role;
-    console.log('ROLE',this.role);
     await this.getInvoices(false);
   }
 

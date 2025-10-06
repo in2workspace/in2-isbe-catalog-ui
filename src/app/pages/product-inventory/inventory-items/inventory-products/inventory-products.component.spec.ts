@@ -4,6 +4,9 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { InventoryProductsComponent } from './inventory-products.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthService } from 'src/app/guard/auth.service';
+import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
 
 describe('InventoryProductsComponent', () => {
   let component: InventoryProductsComponent;
@@ -11,8 +14,12 @@ describe('InventoryProductsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [InventoryProductsComponent, HttpClientTestingModule, TranslateModule.forRoot() ],
-})
+      providers: [
+        { provide: AuthService, useValue: authServiceMock }, 
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
+      ],
+      imports: [InventoryProductsComponent, HttpClientTestingModule, TranslateModule.forRoot() ],
+    })
     .compileComponents();
     
     fixture = TestBed.createComponent(InventoryProductsComponent);

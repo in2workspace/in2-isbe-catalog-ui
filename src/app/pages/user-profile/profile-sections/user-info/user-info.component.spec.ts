@@ -3,6 +3,9 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { UserInfoComponent } from './user-info.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthService } from 'src/app/guard/auth.service';
+import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
 
 describe('UserInfoComponent', () => {
   let component: UserInfoComponent;
@@ -10,8 +13,12 @@ describe('UserInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [UserInfoComponent, HttpClientTestingModule]
-})
+      providers: [
+        { provide: AuthService, useValue: authServiceMock }, 
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
+      ],
+      imports: [UserInfoComponent, HttpClientTestingModule]
+    })
     .compileComponents();
     
     fixture = TestBed.createComponent(UserInfoComponent);

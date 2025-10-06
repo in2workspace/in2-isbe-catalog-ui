@@ -1,6 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { LoginInfo } from 'src/app/models/interfaces';
-import {LocalStorageService} from "../../services/local-storage.service";
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
 import { initFlowbite } from 'flowbite';
@@ -13,7 +11,8 @@ import { UserInfoComponent } from './profile-sections/user-info/user-info.compon
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { NgClass } from '@angular/common';
-import * as moment from 'moment';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'app-user-profile',
@@ -37,11 +36,11 @@ export class UserProfileComponent implements OnInit{
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   constructor(
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly cdr: ChangeDetectorRef,
     private readonly eventMessage: EventMessageService
   ) {
-    this.eventMessage.messages$.subscribe(ev => {
+    this.eventMessage.messages$.subscribe(ev => { 
       if(ev.type === 'ChangedSession') {
         this.initPartyInfo();
       }
@@ -54,22 +53,30 @@ export class UserProfileComponent implements OnInit{
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      this.token=aux.token;
-      this.email=aux.email;
-      
+  initPartyInfo() {
+    this.auth.loginInfo$
+      .pipe(take(1))
+      .subscribe(aux => {
+        if (!aux) return;
+
+        this.token = aux.token;
+        this.email = aux.email;
+
+        console.log(aux);
+
         this.seller = aux.id;
-        this.loggedAsUser=true;
-        this.show_profile=true;
-        this.show_org_profile=false;
-        this.getProfile();
-      
-      //this.seller = aux.id;
-      
-    }
-    initFlowbite();
+        this.loggedAsUser = aux.logged_as === aux.id;
+        console.log(this.loggedAsUser)
+        this.show_profile = this.loggedAsUser;
+        this.show_org_profile = !this.loggedAsUser;
+
+        if(this.loggedAsUser){
+          this.getProfile();
+        } else {
+          this.getOrgProfile();
+        }
+        initFlowbite();
+      });
   }
 
   getProfile(){

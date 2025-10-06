@@ -1,12 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef, HostListener, Input } from '@angular/core';
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
-import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
-import * as moment from 'moment';
 
 import {components} from "src/app/models/product-catalog";
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
@@ -15,6 +11,8 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { DatePipe, NgClass } from '@angular/common';
 import { CategoriesRecursionComponent } from 'src/app/shared/categories-recursion/categories-recursion.component';
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 type Category_Update = components["schemas"]["Category_Update"];
 
 @Component({
@@ -65,12 +63,10 @@ export class UpdateCategoryComponent implements OnInit {
   showError:boolean=false;
 
   constructor(
-    private router: Router,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private elementRef: ElementRef,
-    private api: ApiServiceService
+    private readonly cdr: ChangeDetectorRef,
+    private readonly eventMessage: EventMessageService,
+    private readonly api: ApiServiceService,
+    private readonly auth: AuthService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -94,18 +90,14 @@ export class UpdateCategoryComponent implements OnInit {
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-    }
-    this.getCategories();
-    this.populateCatInfo();
+  initPartyInfo(): void {
+    this.auth.sellerId$
+      .pipe(take(1))
+      .subscribe(sellerId => {
+        this.seller = sellerId || '';
+        this.getCategories();
+        this.populateCatInfo();
+      });
   }
 
 
@@ -129,7 +121,6 @@ export class UpdateCategoryComponent implements OnInit {
   }
 
   getCategories(){
-    console.log('Getting categories...')
     this.api.getLaunchedCategories().then(data => {      
       for(let i=0; i < data.length; i++){
         this.findChildren(data[i],data);
@@ -251,20 +242,26 @@ export class UpdateCategoryComponent implements OnInit {
         name: this.generalForm.value.name,
         description: this.generalForm.value.description != null ? this.generalForm.value.description : '',
         lifecycleStatus: this.catStatus,
+        version: this.incrementVersion(this.category.version),
         isRoot: this.isParent
       }
       if(this.isParent==false){
         this.categoryToUpdate.parentId=this.selectedCategory.id;
       }
-      console.log(this.isParent)
-      console.log('CATEGORY TO UPDATE:')
-      console.log(this.categoryToUpdate)
       this.showGeneral=false;
       this.showSummary=true;
       this.selectStep('summary','summary-circle');
     }
     this.showPreview=false;
   }
+
+  incrementVersion(version: string): string {
+    const [major, minor] = version.split('.').map(Number);
+    const newMajor = major + 1;
+    const newMinor = 0;
+    return `${newMajor}.${newMinor}`;
+  }
+
 
   updateCategory(){
     this.api.updateCategory(this.categoryToUpdate,this.category.id).subscribe({
@@ -274,10 +271,10 @@ export class UpdateCategoryComponent implements OnInit {
       error: error => {
         console.error('There was an error while updating!', error);
         if(error.error.error){
-          console.log(error)
+          console.error(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
-          this.errorMessage='There was an error while creating the category!';
+          this.errorMessage='¡Hubo un error al crear la categoría!';
         }
         this.showError=true;
         setTimeout(() => {

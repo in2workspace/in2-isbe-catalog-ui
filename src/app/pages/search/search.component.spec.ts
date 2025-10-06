@@ -6,6 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MarkdownModule } from 'ngx-markdown';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthService } from 'src/app/guard/auth.service';
+import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -23,7 +26,9 @@ describe('SearchComponent', () => {
 
     await TestBed.configureTestingModule({
       providers: [
-        { provide: ActivatedRoute, useValue: activatedRouteMock }  
+        { provide: ActivatedRoute, useValue: activatedRouteMock },  
+        { provide: AuthService, useValue: authServiceMock }, 
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
       ],
       imports: [TranslateModule.forRoot(),HttpClientTestingModule,  MarkdownModule.forRoot()] 
     })

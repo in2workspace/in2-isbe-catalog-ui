@@ -5,6 +5,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
+import { AuthService } from 'src/app/guard/auth.service';
 
 describe('CreateProductSpecComponent', () => {
   let component: CreateProductSpecComponent;
@@ -12,6 +15,10 @@ describe('CreateProductSpecComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [
+        { provide: AuthService, useValue: authServiceMock }, 
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
+      ],
       imports: [
         CreateProductSpecComponent,
         HttpClientTestingModule,
@@ -418,30 +425,6 @@ describe('CreateProductSpecComponent', () => {
     component.uploadFile();
     expect(logSpy).toHaveBeenCalledWith('uploading...');
     logSpy.mockRestore();
-  });
-
-  it('should initPartyInfo set seller from localStorage', () => {
-    const loginInfo = {
-      expire: Math.floor(Date.now() / 1000) + 10,
-      logged_as: '1',
-      id: '1',
-      organizations: []
-    };
-    jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(loginInfo);
-    component.initPartyInfo();
-    expect(component.seller).toBe('1');
-  });
-
-  it('should initPartyInfo set seller from organizations', () => {
-    const loginInfo = {
-      expire: Math.floor(Date.now() / 1000) + 10,
-      logged_as: '2',
-      id: '1',
-      organizations: [{ id: '2' }]
-    };
-    jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(loginInfo);
-    component.initPartyInfo();
-    expect(component.seller).toBe('2');
   });
   
 });

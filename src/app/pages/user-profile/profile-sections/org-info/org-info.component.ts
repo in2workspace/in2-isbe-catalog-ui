@@ -18,6 +18,8 @@ import { NgClass } from '@angular/common';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { MarkdownComponent } from 'ngx-markdown';
+import { combineLatest, take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 type OrganizationUpdate = components["schemas"]["Organization_Update"];
 
@@ -29,6 +31,7 @@ type OrganizationUpdate = components["schemas"]["Organization_Update"];
     imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent]
 })
 export class OrgInfoComponent {
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
   loading: boolean = false;
   orders:any[]=[];
   profile:any;
@@ -115,7 +118,7 @@ export class OrgInfoComponent {
   public files: NgxFileDropEntry[] = [];
 
   constructor(
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly cdr: ChangeDetectorRef,
     private readonly accountService: AccountServiceService,
     private readonly eventMessage: EventMessageService,
@@ -136,18 +139,23 @@ export class OrgInfoComponent {
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.seller = loggedOrg.id;
+  initPartyInfo(): void {
+    combineLatest([
+      this.auth.loginInfo$,
+      this.auth.sellerId$,
+      this.auth.accessToken$,
+    ])
+    .pipe(take(1))
+    .subscribe(([li, sellerId, accessToken]) => {
+      if (!li) { initFlowbite(); return; }
 
-      this.token=aux.token;
-      this.email=aux.email;
-      //this.seller = aux.id;
+      this.seller = sellerId || '';
+      this.email  = li.email || '';
+      this.token  = accessToken || li.token || '';
+
       this.getProfile();
-    }
-    initFlowbite();
+      initFlowbite();
+    });
   }
 
   getProfile(){
@@ -245,7 +253,7 @@ export class OrgInfoComponent {
             console.error(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
-            this.errorMessage='There was an error while updating profile!';
+            this.errorMessage='¡Hubo un error al actualizar el perfil!';
           }
           this.showError=true;
           setTimeout(() => {
@@ -665,10 +673,10 @@ export class OrgInfoComponent {
                       console.error(error)
                       this.errorMessage='Error: '+error.error.error;
                     } else {
-                      this.errorMessage='There was an error while uploading the file!';
+                      this.errorMessage='¡Hubo un error al cargar el archivo!';
                     }
                     if (error.status === 413) {
-                      this.errorMessage='File size too large! Must be under 3MB.';
+                      this.errorMessage='¡El archivo es demasiado grande! Debe ser inferior a 3 MB.';
                     }
                     this.showError=true;
                     setTimeout(() => {

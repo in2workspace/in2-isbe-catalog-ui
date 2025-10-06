@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, HostListener, OnInit} from '@angular/core';
-import {firstValueFrom} from 'rxjs';
+import {combineLatest, firstValueFrom, take} from 'rxjs';
 import {TranslateModule} from "@ngx-translate/core";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {EventMessageService} from "../../services/event-message.service";
@@ -19,6 +19,7 @@ import { PaymentService } from 'src/app/services/payment.service';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { NgClass } from '@angular/common';
 import { BillingAddressComponent } from './billing-address/billing-address.component';
+import { AuthService } from 'src/app/guard/auth.service';
 
 
 @Component({
@@ -52,48 +53,40 @@ export class CheckoutComponent implements OnInit {
   showError: boolean = false;
 
   constructor(
-    private localStorage: LocalStorageService,
-    private account: AccountServiceService,
-    private orderService: ProductOrderService,
-    private eventMessage: EventMessageService,
-    private priceService: PriceServiceService,
-    private cartService: ShoppingCartServiceService,
-    private paymentService: PaymentService,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private router: Router,
-    private route: ActivatedRoute) {
+    private readonly account: AccountServiceService,
+    private readonly orderService: ProductOrderService,
+    private readonly eventMessage: EventMessageService,
+    private readonly cartService: ShoppingCartServiceService,
+    private readonly paymentService: PaymentService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly auth: AuthService
+  ) {
     // Bind the method to preserve context
     this.orderProduct = this.orderProduct.bind(this);
     this.eventMessage.messages$.subscribe(ev => {
       if (ev.type === 'BillAccChanged') {
         this.getBilling();
       }
-      if (ev.value == true) {
+      if (ev.value) {
         this.addBill = false;
       }
       if (ev.type === 'ChangedSession') {
         this.initCheckoutData();
       }
       if(ev.type === 'AddedCartItem') {
-        console.log('Elemento añadido')
         this.cartService.getShoppingCart().then(data => {
-          console.log('---CARRITO API---')
-          console.log(data)
           this.items=data;
           this.cdr.detectChanges();
           this.getTotalPrice();
-          console.log('------------------')
         })
       }
       if(ev.type === 'RemovedCartItem') {
         this.cartService.getShoppingCart().then(data => {
-          console.log('---CARRITO API---')
-          console.log(data)
           this.items=data;
           this.cdr.detectChanges();
           this.getTotalPrice();
-          console.log('------------------')
         })
       }
     })
@@ -101,7 +94,7 @@ export class CheckoutComponent implements OnInit {
 
   @HostListener('document:click')
   onClick() {
-    if (this.addBill == true) {
+    if (this.addBill) {
       this.addBill = false;
       this.cdr.detectChanges();
     }
@@ -135,59 +128,44 @@ export class CheckoutComponent implements OnInit {
     this.check_custom = false;
     this.cdr.detectChanges();
     let priceInfo: any = {};
-    for (let i = 0; i < this.items.length; i++) {
-      console.log('totalprice')
-      console.log(this.items[i])
+    for (const element of this.items) {
       insertCheck = false;
       if (this.totalPrice.length == 0) {
-        priceInfo = this.getPrice(this.items[i]);
+        priceInfo = this.getPrice(element);
         if (priceInfo != null) {
           this.totalPrice.push(priceInfo);
           console.log('Añade primero')
         }
       } else {
         for (let j = 0; j < this.totalPrice.length; j++) {
-          priceInfo = this.getPrice(this.items[i]);
+          priceInfo = this.getPrice(element);
           if (priceInfo != null) {
             if (priceInfo.priceType == this.totalPrice[j].priceType && priceInfo.unit == this.totalPrice[j].unit && priceInfo.text == this.totalPrice[j].text) {
               this.totalPrice[j].price = this.totalPrice[j].price + priceInfo.price;
               insertCheck = true;
-              console.log('suma')
             }
-            console.log('precio segundo')
-            console.log(priceInfo)
           }
         }
         if (insertCheck == false && priceInfo != null) {
           this.totalPrice.push(priceInfo);
           insertCheck = true;
-          console.log('añade segundo')
         }
       }
     }
-    console.log(this.totalPrice)
   }
 
   goToInventory() {
-    //this.router.navigate(['/product-inventory']);
     this.router.navigate(['/product-orders']);
   }
 
   async orderProduct() {
-    console.log('buying');
-    console.log(moment().utc());
-
     this.loading_purchase = true;
 
     const products = this.items
       .filter(item => item.options.pricing)
       .map(item => this.createProductPayload(item));
 
-    console.log('Productos creados:', products);
-
     const productOrder = this.createProductOrder(products);
-    console.log('--- order ---');
-    console.log(productOrder);
 
     try {
       const response = await firstValueFrom(this.orderService.postProductOrder(productOrder));
@@ -259,8 +237,6 @@ export class CheckoutComponent implements OnInit {
   private async emptyShoppingCart() {
     try {
       const response = await this.cartService.emptyShoppingCart();
-      console.log(response);
-      console.log('EMPTY');
     } catch (error) {
       this.handleError(error, 'There was an error while emptying the cart!');
     }
@@ -287,10 +263,6 @@ export class CheckoutComponent implements OnInit {
       //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
     });
 
-    // Method 1: Get query params once
-    console.log('--- Query Params ---');
-    console.log(this.route.snapshot.queryParams);
-
     // Check if we are comming from a purchase
     const qParams:any = this.route.snapshot.queryParams;
     if (qParams.client && qParams.action && qParams.ref) {
@@ -308,9 +280,6 @@ export class CheckoutComponent implements OnInit {
       firstValueFrom(this.paymentService.completePayment(params)).then((response) => {
         this.loading_purchase = false;
 
-        console.log('--- Payment Response ---')
-        console.log(response)
-
         if (qParams.action == 'accept' && response.status == 200) {
           // Success request
           this.emptyShoppingCart().then(() => this.goToInventory());
@@ -322,8 +291,6 @@ export class CheckoutComponent implements OnInit {
         }  
       }).catch((error) => {
         this.loading_purchase = true;
-        console.log('--- Payment Error ---')
-        console.log(error)
         this.initCheckoutData();
       });
 
@@ -332,42 +299,35 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  initCheckoutData() {
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if (aux) {
-      this.contact.email = aux.email;
-      this.contact.username = aux.username;
-    }
-    if (aux.logged_as == aux.id) {
-      this.seller = aux.seller;
-    } else {
-      let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.seller = loggedOrg.seller
-    }
+  initCheckoutData(): void {
+    combineLatest([this.auth.loginInfo$, this.auth.sellerId$])
+      .pipe(take(1))
+      .subscribe(([li, sellerId]) => {
+        if (li) {
+          this.contact.email = li.email || '';
+          this.contact.username = li.username || li.user || '';
+        } else {
+          this.contact.email = '';
+          this.contact.username = '';
+        }
+        this.seller = sellerId || '';
 
-    console.log('--- Login Info ---')
-    console.log(aux)
+        this.cartService.getShoppingCart().then(data => {
+          this.items = data;
+          this.cdr.detectChanges();
+          this.getTotalPrice();
+        });
 
-    this.cartService.getShoppingCart().then(data => {
-      console.log('---CARRITO API---')
-      console.log(data)
-      this.items = data;
-      this.cdr.detectChanges();
-      this.getTotalPrice();
-      console.log('------------------')
-    })
-    console.log('--- ITEMS ---')
-    console.log(this.items)
-
-    this.loading_baddrs = true;
-    this.getBilling();
+        this.loading_baddrs = true;
+        this.getBilling();
+      });
   }
 
   getBilling() {
     let isBillSelected = false;
     this.billingAddresses = [];
     this.account.getBillingAccount().then(data => {
-      for (let i = 0; i < data.length; i++) {
+      for (const element of data) {
         isBillSelected = false;
         let email = ''
         let phone = ''
@@ -379,31 +339,31 @@ export class CheckoutComponent implements OnInit {
           "stateOrProvince": '',
           "street": ''
         }
-        if (data[i].contact) {
-          for (let j = 0; j < data[i].contact[0].contactMedium.length; j++) {
-            if (data[i].contact[0].contactMedium[j].mediumType == 'Email') {
-              email = data[i].contact[0].contactMedium[j].characteristic.emailAddress
-            } else if (data[i].contact[0].contactMedium[j].mediumType == 'PostalAddress') {
+        if (element.contact) {
+          for (let j = 0; j < element.contact[0].contactMedium.length; j++) {
+            if (element.contact[0].contactMedium[j].mediumType == 'Email') {
+              email = element.contact[0].contactMedium[j].characteristic.emailAddress
+            } else if (element.contact[0].contactMedium[j].mediumType == 'PostalAddress') {
               address = {
-                "city": data[i].contact[0].contactMedium[j].characteristic.city,
-                "country": data[i].contact[0].contactMedium[j].characteristic.country,
-                "postCode": data[i].contact[0].contactMedium[j].characteristic.postCode,
-                "stateOrProvince": data[i].contact[0].contactMedium[j].characteristic.stateOrProvince,
-                "street": data[i].contact[0].contactMedium[j].characteristic.street1
+                "city": element.contact[0].contactMedium[j].characteristic.city,
+                "country": element.contact[0].contactMedium[j].characteristic.country,
+                "postCode": element.contact[0].contactMedium[j].characteristic.postCode,
+                "stateOrProvince": element.contact[0].contactMedium[j].characteristic.stateOrProvince,
+                "street": element.contact[0].contactMedium[j].characteristic.street1
               }
-            } else if (data[i].contact[0].contactMedium[j].mediumType == 'TelephoneNumber') {
-              phone = data[i].contact[0].contactMedium[j].characteristic.phoneNumber
-              phoneType = data[i].contact[0].contactMedium[j].characteristic.contactType
+            } else if (element.contact[0].contactMedium[j].mediumType == 'TelephoneNumber') {
+              phone = element.contact[0].contactMedium[j].characteristic.phoneNumber
+              phoneType = element.contact[0].contactMedium[j].characteristic.contactType
             }
-            if (data[i].contact[0].contactMedium[j].preferred == true) {
+            if (element.contact[0].contactMedium[j].preferred == true) {
               isBillSelected = true;
             }
           }
         }
         const baddr = {
-          "id": data[i].id,
-          "href": data[i].href,
-          "name": data[i].name,
+          "id": element.id,
+          "href": element.href,
+          "name": element.name,
           "email": email ?? '',
           "postalAddress": address ?? {},
           "telephoneNumber": phone ?? '',

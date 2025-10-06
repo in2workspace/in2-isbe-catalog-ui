@@ -10,14 +10,16 @@ type ProductOffering = components["schemas"]["ProductOffering"];
 })
 export class ProductSpecServiceService {
 
+  
   public static readonly BASE_URL: string = environment.BASE_URL;
+  public static readonly API_CATALOG: string = environment.PRODUCT_CATALOG_MANAGEMENT_URL;
   public static readonly API_PRODUCT_SPEC: string = environment.PRODUCT_SPEC;
   public static readonly PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
 
   private readonly http = inject(HttpClient);
 
   getProdSpecByUser(page:any,status:any[],seller:any,sort?:any,isBundle?:any) {
-    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}?limit=${ProductSpecServiceService.PROD_SPEC_LIMIT}&offset=${page}&seller=${seller}`;    
+    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_CATALOG}${ProductSpecServiceService.API_PRODUCT_SPEC}?limit=${ProductSpecServiceService.PROD_SPEC_LIMIT}&offset=${page}&seller=${seller}`;    
     if(sort!=undefined){
       url=url+'&sort='+sort
     }
@@ -41,18 +43,18 @@ export class ProductSpecServiceService {
   }
 
   getResSpecById(id:any){
-    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}/${id}`;
+    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_CATALOG}${ProductSpecServiceService.API_PRODUCT_SPEC}/${id}`;
  
     return lastValueFrom(this.http.get<any>(url));
   }
 
   postProdSpec(body:any){
-    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}`;
+    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_CATALOG}${ProductSpecServiceService.API_PRODUCT_SPEC}`;
     return this.http.post<any>(url, body);
   }
 
   updateProdSpec(body:any,id:any){
-    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_PRODUCT_SPEC}/${id}`;
+    let url = `${ProductSpecServiceService.BASE_URL}${ProductSpecServiceService.API_CATALOG}${ProductSpecServiceService.API_PRODUCT_SPEC}/${id}`;
     return this.http.patch<any>(url, body);
   }
 }

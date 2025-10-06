@@ -9,6 +9,8 @@ import { initFlowbite } from 'flowbite';
 import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { LoginInfo } from 'src/app/models/interfaces';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-price-component-drawer',
@@ -48,10 +50,10 @@ export class PriceComponentDrawerComponent implements OnInit {
   showPopover = false;
 
   constructor(
-    private fb: FormBuilder,
-    private cdr: ChangeDetectorRef,
-    private usageService: UsageServiceService,
-    private localStorage: LocalStorageService
+    private readonly fb: FormBuilder,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly usageService: UsageServiceService,
+    private readonly auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -61,9 +63,9 @@ export class PriceComponentDrawerComponent implements OnInit {
       this.initialized = true;
     }, 50);
 
-    for(let i=0;i<this.prodChars.length;i++){
-      if (!certifications.some(certification => certification.name === this.prodChars[i].name)) {
-        this.filteredChars.push(this.prodChars[i]);
+    for(const element of this.prodChars){
+      if (!certifications.some(certification => certification.name === element.name)) {
+        this.filteredChars.push(element);
       }
     }
 
@@ -85,8 +87,6 @@ export class PriceComponentDrawerComponent implements OnInit {
     if (this.component) {
       this.priceComponentForm.patchValue(this.component);
       this.cdr.detectChanges();
-      console.log('---- Editing the following price component...')
-      console.log(this.priceComponentForm.value)
       
       const selectedCharControl = this.priceComponentForm.get('selectedCharacteristic');
       const selectedCharValue = selectedCharControl?.value;
@@ -111,10 +111,7 @@ export class PriceComponentDrawerComponent implements OnInit {
       const selectedChar = this.priceComponentForm.get('selectedCharacteristic')?.value?.[0];
 
       if (selectedChar) {
-        console.log(selectedChar)
         this.selectedCharacteristic = selectedChar;
-        console.log('selected char')
-        console.log(this.selectedCharacteristic)
       }
     }
     this.initPartyInfo();
@@ -130,15 +127,11 @@ export class PriceComponentDrawerComponent implements OnInit {
 
 
   initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-    }
+   this.auth.sellerId$
+    .pipe(take(1))
+    .subscribe(id => {
+      this.seller = id || '';
+    });
   }
 
   submitForm() {
@@ -224,8 +217,6 @@ export class PriceComponentDrawerComponent implements OnInit {
     this.priceComponentForm.patchValue({
       usageSpecId: this.selectedUsageSpec.id
     })
-    console.log(this.selectedUsageSpec)
-    console.log(this.priceComponentForm)
   }
 
   changePriceComponentMetric(event: any){

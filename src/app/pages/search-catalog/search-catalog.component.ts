@@ -1,7 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import { PriceServiceService } from 'src/app/services/price-service.service';
 import { PaginationService } from 'src/app/services/pagination.service';
 import { initFlowbite } from 'flowbite';
 import {components} from "../../models/product-catalog";
@@ -9,16 +8,17 @@ type ProductOffering = components["schemas"]["ProductOffering"];
 import {EventMessageService} from "../../services/event-message.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 import {AccountServiceService} from "src/app/services/account-service.service"
-import {Category, LoginInfo} from "../../models/interfaces";
+import {Category} from "../../models/interfaces";
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
 import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-modal.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { CardComponent } from 'src/app/shared/card/card.component';
 import { MarkdownComponent } from 'ngx-markdown';
 import { CategoriesFilterComponent } from 'src/app/shared/categories-filter/categories-filter.component';
 import { NgClass } from '@angular/common';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'app-search-catalog',
@@ -32,7 +32,7 @@ export class SearchCatalogComponent implements OnInit{
     private route: ActivatedRoute,
     private api: ApiServiceService,
     private accService: AccountServiceService,
-    private priceService: PriceServiceService, 
+    private auth: AuthService, 
     private cdr: ChangeDetectorRef,
     private eventMessage: EventMessageService,
     private localStorage: LocalStorageService,
@@ -51,6 +51,7 @@ export class SearchCatalogComponent implements OnInit{
     })
   }
 
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
   id:any;
   catalog:any;
   providerName:string='';
@@ -79,8 +80,6 @@ export class SearchCatalogComponent implements OnInit{
       const owner = this.catalog.relatedParty.find((item: { role: string; }) => item.role === 'Owner');
       if(owner.id.startsWith('urn:ngsi-ld:individual')){
         this.accService.getUserInfo(owner.id).then(info  => {
-          console.log('info')
-          console.log(info)
           this.providerName=info.givenName;
           const provdesc = info.partyCharacteristic.find((item: { name: string; }) => item.name === 'description')
           this.providerDescription=provdesc.value;
@@ -109,8 +108,6 @@ export class SearchCatalogComponent implements OnInit{
           }
         })
       }      
-      console.log('--- catalogo')
-      console.log(this.catalog)
     })
 
     await this.getProducts(false);
@@ -120,14 +117,12 @@ export class SearchCatalogComponent implements OnInit{
         this.getProducts(false);
       }
     })
-    console.log('Productos:')
-    console.log(this.products)
-    const userInfo = this.localStorage.getObject('login_items') as LoginInfo;
-
-    // The user is logged in
-    if ((JSON.stringify(userInfo) != '{}' && (((userInfo.expire - moment().unix())-4) > 0))) {
-      this.feedback=true;
-    }
+    this.auth.isAuthenticated$
+      .pipe(take(1))
+      .subscribe(isAuth => {
+        this.feedback = isAuth;
+        this.cdr.detectChanges();
+    });
   }
 
   @HostListener('document:click')

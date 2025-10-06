@@ -1,22 +1,19 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
-import { LoginInfo, billingAccountCart } from 'src/app/models/interfaces';
-import { ApiServiceService } from 'src/app/services/product-service.service';
+import { Component, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
+import { billingAccountCart } from 'src/app/models/interfaces';
 import { AccountServiceService } from 'src/app/services/account-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
-import { ProductOrderService } from 'src/app/services/product-order-service.service';
 import {components} from "src/app/models/product-catalog";
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormControl } from '@angular/forms';
 type ProductOffering = components["schemas"]["ProductOffering"];
-import { phoneNumbers, countries } from 'src/app/models/country.const'
+import { countries } from 'src/app/models/country.const'
 import { initFlowbite } from 'flowbite';
 import {EventMessageService} from "src/app/services/event-message.service";
-import * as moment from 'moment';
-import { environment } from 'src/environments/environment';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
 import { BillingAccountFormComponent } from 'src/app/shared/billing-account-form/billing-account-form.component';
+import { combineLatest, take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
+import { OrgContextService } from 'src/app/services/org-context.service';
 
 @Component({
     selector: 'billing-info',
@@ -52,13 +49,11 @@ export class BillingInfoComponent implements OnInit{
   showError:boolean=false;
 
   constructor(
-    private localStorage: LocalStorageService,
-    private api: ApiServiceService,
-    private cdr: ChangeDetectorRef,
-    private router: Router,
-    private accountService: AccountServiceService,
-    private orderService: ProductOrderService,
-    private eventMessage: EventMessageService
+    private readonly auth: AuthService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly accountService: AccountServiceService,
+    private readonly eventMessage: EventMessageService,
+    private readonly orgCtx: OrgContextService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'BillAccChanged') {
@@ -75,15 +70,15 @@ export class BillingInfoComponent implements OnInit{
 
   @HostListener('document:click')
   onClick() {
-    if(this.editBill==true){
+    if(this.editBill){
       this.editBill=false;
       this.cdr.detectChanges();
     }
-    if(this.deleteBill==true){
+    if(this.deleteBill){
       this.deleteBill=false;
       this.cdr.detectChanges();
     }
-    if(this.showOrderDetails==true){
+    if(this.showOrderDetails){
       this.showOrderDetails=false;
       this.cdr.detectChanges();
     }
@@ -97,41 +92,42 @@ export class BillingInfoComponent implements OnInit{
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if (aux.logged_as !== aux.id) {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id;
-        console.log('loggedOrg info')
-        console.log(loggedOrg)
-        this.partyInfo = {
-          id: this.seller,
-          name: loggedOrg.name,
-          href : this.seller,
-          role: "Owner"
+  initPartyInfo(): void {
+    combineLatest([this.auth.loginInfo$, this.auth.sellerId$])
+      .pipe(take(1))
+      .subscribe(([li, sellerId]) => {
+        if (!li) { initFlowbite(); return; }
+
+        this.seller = sellerId || '';
+        const activeId = this.orgCtx.current ?? li.logged_as ?? li.id;
+
+        if (activeId && activeId !== li.id) {
+          const org = (li.organizations || []).find(o => o.id === activeId);
+          this.partyInfo = {
+            id: this.seller,
+            name: org?.name ?? this.seller,
+            href: this.seller,
+            role: 'Owner'
+          };
+        } else {
+          this.partyInfo = {
+            id: this.seller,
+            name: li.user || li.username || this.seller,
+            href: this.seller,
+            role: 'Owner'
+          };
         }
-      } else {
-        this.seller = aux.id;
-        console.log('init party info')
-        console.log(aux)
-        this.partyInfo = {
-          id: this.seller,
-          name: aux.user,
-          href : this.seller,
-          role: "Owner"
-        }
-      }
-      this.getBilling();
-    }
-    initFlowbite();
+
+        this.getBilling();
+        initFlowbite();
+      });
   }
 
   getBilling(){
     let isBillSelected=false;
     this.accountService.getBillingAccount().then(data => {
       this.billing_accounts=[];
-      for(let i=0; i< data.length;i++){
+      for(const element of data){
         isBillSelected=false;
         let email =''
         let phone=''
@@ -143,30 +139,30 @@ export class BillingInfoComponent implements OnInit{
           "stateOrProvince": '',
           "street": ''
         }
-        for(let j=0; j<data[i].contact[0].contactMedium.length;j++){
-          if(data[i].contact[0].contactMedium[j].mediumType == 'Email'){
-            email = data[i].contact[0].contactMedium[j].characteristic.emailAddress
-          } else if (data[i].contact[0].contactMedium[j].mediumType == 'PostalAddress'){
+        for(let j=0; j<element.contact[0].contactMedium.length;j++){
+          if(element.contact[0].contactMedium[j].mediumType == 'Email'){
+            email = element.contact[0].contactMedium[j].characteristic.emailAddress
+          } else if (element.contact[0].contactMedium[j].mediumType == 'PostalAddress'){
             address = {
-              "city": data[i].contact[0].contactMedium[j].characteristic.city,
-              "country": data[i].contact[0].contactMedium[j].characteristic.country,
-              "postCode": data[i].contact[0].contactMedium[j].characteristic.postCode,
-              "stateOrProvince": data[i].contact[0].contactMedium[j].characteristic.stateOrProvince,
-              "street": data[i].contact[0].contactMedium[j].characteristic.street1
+              "city": element.contact[0].contactMedium[j].characteristic.city,
+              "country": element.contact[0].contactMedium[j].characteristic.country,
+              "postCode": element.contact[0].contactMedium[j].characteristic.postCode,
+              "stateOrProvince": element.contact[0].contactMedium[j].characteristic.stateOrProvince,
+              "street": element.contact[0].contactMedium[j].characteristic.street1
             }
-          } else if (data[i].contact[0].contactMedium[j].mediumType == 'TelephoneNumber'){
-            phone = data[i].contact[0].contactMedium[j].characteristic.phoneNumber
-            phoneType = data[i].contact[0].contactMedium[j].characteristic.contactType
+          } else if (element.contact[0].contactMedium[j].mediumType == 'TelephoneNumber'){
+            phone = element.contact[0].contactMedium[j].characteristic.phoneNumber
+            phoneType = element.contact[0].contactMedium[j].characteristic.contactType
           }
-          if(data[i].contact[0].contactMedium[j].preferred==true){
+          if(element.contact[0].contactMedium[j].preferred==true){
             isBillSelected=true;
           }
         }
-        console.log(data[i])
+        console.log(element)
         this.billing_accounts.push({
-          "id": data[i].id,
-          "href": data[i].href,
-          "name": data[i].name,
+          "id": element.id,
+          "href": element.href,
+          "name": element.name,
           "email": email,
           "postalAddress": address,
           "telephoneNumber": phone,
@@ -175,9 +171,9 @@ export class BillingInfoComponent implements OnInit{
         })
         if(isBillSelected){
           this.selectedBilling={
-            "id": data[i].id,
-            "href": data[i].href,
-            "name": data[i].name,
+            "id": element.id,
+            "href": element.href,
+            "name": element.name,
             "email": email,
             "postalAddress": address,
             "telephoneNumber": phone,
@@ -268,7 +264,7 @@ export class BillingInfoComponent implements OnInit{
             console.log(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
-            this.errorMessage='There was an error while updating billing account!';
+            this.errorMessage='¡Hubo un error al actualizar la cuenta de facturación!';
           }
           this.showError=true;
           setTimeout(() => {

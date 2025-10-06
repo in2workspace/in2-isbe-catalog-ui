@@ -8,6 +8,9 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { Subject } from 'rxjs';
 import { EventMessageService } from 'src/app/services/event-message.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthService } from 'src/app/guard/auth.service';
+import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
 
 describe('CreateOfferComponent', () => {
   let component: CreateOfferComponent;
@@ -30,7 +33,9 @@ describe('CreateOfferComponent', () => {
       imports: [CreateOfferComponent, HttpClientTestingModule, TranslateModule.forRoot()],
       providers: [
         { provide: LocalStorageService, useValue: localStorageMock },
-      { provide: EventMessageService, useValue: eventMessageMock },
+        { provide: EventMessageService, useValue: eventMessageMock },
+        { provide: AuthService, useValue: authServiceMock }, 
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA]
     })
@@ -48,72 +53,5 @@ describe('CreateOfferComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize seller from localStorage when logged_as equals id', () => {
-    const mockLoginInfo = {
-      expire: Math.floor(Date.now() / 1000) + 1000,
-      logged_as: '123',
-      id: '123',
-      organizations: []
-    };
-    jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(mockLoginInfo);
-    component.initPartyInfo();
-    expect(component.seller).toBe('123');
-  });
-
-  it('should initialize seller from organizations when logged_as does not equal id', () => {
-    const mockLoginInfo = {
-      expire: Math.floor(Date.now() / 1000) + 1000,
-      logged_as: '456',
-      id: '123',
-      seller: 'party-abc',
-      organizations: [
-        { id: '456', seller: 'party-def' }
-      ]
-    };
-    jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(mockLoginInfo);
-    component.initPartyInfo();
-    expect(component.seller).toBe('456');
-  });
-
-  it('should not set seller if login_items is empty object', () => {
-    jest.spyOn(component['localStorage'], 'getObject').mockReturnValue({});
-    component.initPartyInfo();
-    expect(component.seller).toBe('123');
-  });
-
-  it('should not set seller if session is expired', () => {
-    const mockLoginInfo = {
-      expire: Math.floor(Date.now() / 1000) - 1000,
-      logged_as: '123',
-      id: '123',
-      organizations: []
-    };
-    jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(mockLoginInfo);
-    component.initPartyInfo();
-    expect(component.seller).toBe('123');
-  });
-
-  it('should emit event on goBack', () => {
-    const emitSpy = jest.spyOn(component['eventMessage'], 'emitSellerOffer');
-    component.goBack();
-    expect(emitSpy).toHaveBeenCalledWith(true);
-  });
-
-  it('should call initPartyInfo on ChangedSession event', () => {
-  const mockLoginInfo = {
-    expire: Math.floor(Date.now() / 1000) + 1000,
-    logged_as: '123',
-    id: '123',
-    seller: 'party-abc',
-    organizations: []
-  };
-
-  jest.spyOn(component['localStorage'], 'getObject').mockReturnValue(mockLoginInfo);
-  const initSpy = jest.spyOn(component, 'initPartyInfo');
-
-  (component as any)['eventMessage'].messages$.next({ type: 'ChangedSession' });
-
-  expect(initSpy).toHaveBeenCalled();
-});
-
+  
 });

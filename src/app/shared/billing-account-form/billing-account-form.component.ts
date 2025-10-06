@@ -25,6 +25,9 @@ import {parsePhoneNumber} from 'libphonenumber-js/max'
 import {TranslateModule} from "@ngx-translate/core";
 import { getLocaleId, NgClass } from '@angular/common';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
+import { combineLatest, take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
+import { OrgContextService } from 'src/app/services/org-context.service';
 
 
 @Component({
@@ -69,11 +72,11 @@ export class BillingAccountFormComponent implements OnInit {
   showError:boolean=false;
 
   constructor(
-    private localStorage: LocalStorageService,
+    private auth: AuthService,
     private cdr: ChangeDetectorRef,
-    private router: Router,
     private accountService: AccountServiceService,
-    private eventMessage: EventMessageService
+    private eventMessage: EventMessageService,
+    private orgCtx: OrgContextService
   ) {
     getLocaleId;
     this.eventMessage.messages$.subscribe(ev => {
@@ -100,32 +103,36 @@ export class BillingAccountFormComponent implements OnInit {
 
   }
 
-  initUserData(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if (JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix()) - 4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-        console.log('init party info')
-        console.log(aux)
+  initUserData(): void {
+    combineLatest([
+      this.auth.loginInfo$,
+      this.auth.sellerId$,
+      this.orgCtx.getOrganization(),
+    ])
+    .pipe(take(1))
+    .subscribe(([li, sellerId, orgId]) => {
+      if (!li) return;
+      this.seller = sellerId || '';
+
+      const activeId = orgId ?? li.logged_as ?? li.id;
+
+      if (activeId && activeId !== li.id) {
+        const org = (li.organizations || []).find(o => o.id === activeId);
         this.partyInfo = {
           id: this.seller,
-          name: aux.user,
-          href : this.seller,
-          role: "Owner"
-        }
+          name: org?.name ?? this.seller,
+          href: this.seller,
+          role: 'Owner',
+        };
       } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id;
-        console.log('loggedOrg info')
-        console.log(loggedOrg)
         this.partyInfo = {
           id: this.seller,
-          name: loggedOrg.name,
-          href : this.seller,
-          role: "Owner"
-        }
+          name: li.user || li.username || this.seller,
+          href: this.seller,
+          role: 'Owner',
+        };
       }
-    }
+    });
   }
 
   setDefaultValues() {
@@ -166,13 +173,10 @@ export class BillingAccountFormComponent implements OnInit {
   }
 
   createBilling() {
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-
     try{
         const phoneNumber = parsePhoneNumber(this.phonePrefix.code + this.billingForm.value.telephoneNumber);
         if (phoneNumber) {
         if (!phoneNumber.isValid()) {
-            console.log('NUMERO INVALIDO')
             this.billingForm.controls['telephoneNumber'].setErrors({'invalidPhoneNumber': true});
             this.toastVisibility = true;
             setTimeout(() => {
@@ -249,7 +253,7 @@ export class BillingAccountFormComponent implements OnInit {
             console.log(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
-            this.errorMessage='There was an error while creating billing account!';
+            this.errorMessage='¡Hubo un error al crear la cuenta de facturación!';
           }
           this.showError=true;
           setTimeout(() => {
@@ -261,7 +265,6 @@ export class BillingAccountFormComponent implements OnInit {
   }
 
   updateBilling() {
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
     try{
         const phoneNumber = parsePhoneNumber(this.phonePrefix.code + this.billingForm.value.telephoneNumber);
         if (phoneNumber) {
@@ -348,7 +351,7 @@ export class BillingAccountFormComponent implements OnInit {
               console.log(error)
               this.errorMessage='Error: '+error.error.error;
             } else {
-              this.errorMessage='There was an error while updating billing account!';
+              this.errorMessage='¡Hubo un error al actualizar la cuenta de facturación!';
             }
             this.showError=true;
             setTimeout(() => {
@@ -361,17 +364,13 @@ export class BillingAccountFormComponent implements OnInit {
   }
 
   selectPrefix(pref:any) {
-    console.log(pref)
     this.prefixCheck = false;
     this.phonePrefix = pref;
   }
 
   detectCountry() {
     const userLanguage = navigator.language;
-    // Extract the country code from the language setting
-    // Assuming the language setting is in the format 'en-US'
     const countryCode = userLanguage.split('-')[1];
-    // Set detectedCountry based on the countryCode
     let detectedCountry = countryCode.toUpperCase() as CountryCode;  
     let code = getCountryCallingCode(detectedCountry);
     if (code) {

@@ -18,8 +18,8 @@ export const init_config = {
     'matomoId': '',
     'matomoUrl': '',
     'searchEnabled': false,
-    'domeAbout': 'https://dome-marketplace.eu/about/',
-    'domeRegister': 'https://dome-marketplace.github.io/onboarding/',
+    'isbeAbout': 'https://dome-marketplace.eu/about/',
+    'isbeRegister': 'https://dome-marketplace.github.io/onboarding/',
     'domePublish': 'https://knowledgebase.dome-marketplace.org/shelves/company-onboarding-process',
     'purchaseEnabled': false,
     'defaultId': 'urn:ngsi-ld:catalog:32828e1d-4652-4f4c-b13e-327450ce83c6'

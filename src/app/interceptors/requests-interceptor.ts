@@ -6,59 +6,37 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {LocalStorageService} from "../services/local-storage.service";
-import { LoginInfo } from '../models/interfaces';
-import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { OrgContextService } from '../services/org-context.service';
 
 @Injectable()
-export class RequestInterceptor implements HttpInterceptor {
+export class OrgAndTermsInterceptor implements HttpInterceptor {
+  public static readonly BASE_URL: string = environment.BASE_URL;
+  public static readonly API_ORDERING: string = environment.PRODUCT_ORDER;
+  public static readonly ORDER_LIMIT: number = environment.ORDER_LIMIT;
 
-    public static BASE_URL: String = environment.BASE_URL;
-    public static API_ORDERING: String = environment.PRODUCT_ORDER;
-    public static ORDER_LIMIT: Number = environment.ORDER_LIMIT;
+  constructor(private readonly orgCtx: OrgContextService) {}
 
-    constructor(private localStorage: LocalStorageService) { }
-  
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        let aux = this.localStorage.getObject('login_items') as LoginInfo;
-        if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-            if(aux.logged_as != aux.id){
-                let modifiedRequest = request.clone({
-                    setHeaders: {
-                    'Authorization': 'Bearer '+aux.token,
-                    'X-Organization': aux.logged_as
-                    },
-                });
-                if (request.url.startsWith(`${RequestInterceptor.BASE_URL}${RequestInterceptor.API_ORDERING}/productOrder`)) {
-                    modifiedRequest = request.clone({
-                        setHeaders: {
-                        'Authorization': 'Bearer '+aux.token,
-                        'X-Organization': aux.logged_as,
-                        'X-Terms-Accepted': 'true'
-                        },
-                    });
-                }  
-                return next.handle(modifiedRequest);
-            } else {
-                let modifiedRequest = request.clone({
-                    setHeaders: {
-                    'Authorization': 'Bearer '+aux.token,
-                    },
-                });
-                if (request.url.startsWith(`${RequestInterceptor.BASE_URL}${RequestInterceptor.API_ORDERING}/productOrder`)) {
-                    modifiedRequest = request.clone({
-                        setHeaders: {
-                        'Authorization': 'Bearer '+aux.token,
-                        'X-Terms-Accepted': 'true'
-                        },
-                    });
-                }  
-                return next.handle(modifiedRequest);
-            }            
-        } else {
-            console.log('not logged')
-            return next.handle(request);
-        } 
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let headers: Record<string, string> = {};
+
+    const org = this.orgCtx.current;
+    if (org) {
+      headers['X-Organization'] = org;
     }
+
+    const isOrderingEndpoint = request.url.startsWith(
+      `${OrgAndTermsInterceptor.BASE_URL}${OrgAndTermsInterceptor.API_ORDERING}/productOrder`
+    );
+    if (isOrderingEndpoint) {
+      headers['X-Terms-Accepted'] = 'true';
+    }
+
+    if (Object.keys(headers).length === 0) {
+      return next.handle(request);
+    }
+
+    const modified = request.clone({ setHeaders: headers });
+    return next.handle(modified);
+  }
 }

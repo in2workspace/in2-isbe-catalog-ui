@@ -1,14 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsageSpecComponent } from 'src/app/shared/forms/usage-spec/usage-spec.component'
-import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import {TranslateModule} from "@ngx-translate/core";
-import {NgClass, NgIf} from "@angular/common";
-import { lastValueFrom } from 'rxjs';
-import {components} from "src/app/models/product-catalog";
+import {NgClass} from "@angular/common";
+import { take } from 'rxjs';
 import {EventMessageService} from "src/app/services/event-message.service";
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { LoginInfo } from 'src/app/models/interfaces';
-import * as moment from 'moment';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
   selector: 'create-usage-spec',
@@ -26,10 +23,8 @@ export class CreateUsageSpecComponent implements OnInit {
   seller:any='';
 
   constructor(
-    private cdr: ChangeDetectorRef,
-    private el: ElementRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
+    private readonly auth: AuthService,
+    private readonly eventMessage: EventMessageService,
   ){}
 
   ngOnInit() {
@@ -37,15 +32,11 @@ export class CreateUsageSpecComponent implements OnInit {
   }
 
   initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-    }
+   this.auth.sellerId$
+    .pipe(take(1))
+    .subscribe(id => {
+      this.seller = id || '';
+    });
   }
 
   goBack() {

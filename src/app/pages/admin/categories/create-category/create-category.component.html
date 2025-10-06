@@ -150,13 +150,13 @@
                     <div class="mb-4">
                         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'CREATE_CATEGORIES._status' | translate }}</label>
                         @if(categoryToCreate?.lifecycleStatus == 'Active'){
-                            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{categoryToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                         } @else if(categoryToCreate?.lifecycleStatus == 'Launched') {
-                            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{categoryToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
                         } @else if(categoryToCreate?.lifecycleStatus == 'Retired') {
-                            <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{categoryToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
                         } @else if(categoryToCreate?.lifecycleStatus == 'Obsolete') {
-                            <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{categoryToCreate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
                         }
                     </div>
 

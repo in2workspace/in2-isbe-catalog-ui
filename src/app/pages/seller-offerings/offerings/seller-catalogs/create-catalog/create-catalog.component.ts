@@ -14,7 +14,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MarkdownComponent } from 'ngx-markdown';
 import { NgClass } from '@angular/common';
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
+import { AuthService } from 'src/app/guard/auth.service';
+import { catchError, EMPTY, finalize, switchMap, take, tap } from 'rxjs';
 type Catalog_Create = components["schemas"]["Catalog_Create"];
+type Category_Create = components["schemas"]["Category_Create"];
 
 @Component({
     selector: 'create-catalog',
@@ -27,6 +30,7 @@ export class CreateCatalogComponent implements OnInit {
   seller:any='';
 
   catalogToCreate:Catalog_Create | undefined;
+  categoryToCreate:Category_Create | undefined;
 
   stepsElements:string[]=['general-info','summary'];
   stepsCircles:string[]=['general-circle','summary-circle'];
@@ -51,14 +55,13 @@ export class CreateCatalogComponent implements OnInit {
 
   errorMessage:any='';
   showError:boolean=false;
+  private inFlight = false;
 
   constructor(
-    private router: Router,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private elementRef: ElementRef,
-    private api: ApiServiceService
+    private readonly auth: AuthService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly eventMessage: EventMessageService,
+    private readonly api: ApiServiceService
   ) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
@@ -80,15 +83,11 @@ export class CreateCatalogComponent implements OnInit {
   }
 
   initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-    }
+   this.auth.sellerId$
+    .pipe(take(1))
+    .subscribe(id => {
+      this.seller = id || '';
+    });
   }
 
   goBack() {
@@ -112,7 +111,6 @@ export class CreateCatalogComponent implements OnInit {
         relatedParty: [
           {
               id: this.seller,
-              //href: "http://proxy.docker:8004/party/individual/urn:ngsi-ld:individual:803ee97b-1671-4526-ba3f-74681b22ccf3",
               role: "Owner",
               "@referredType": ''
           }
@@ -125,24 +123,55 @@ export class CreateCatalogComponent implements OnInit {
     this.showPreview=false;
   }
 
-  createCatalog(){
-    this.api.postCatalog(this.catalogToCreate).subscribe({
-      next: data => {
-        this.goBack();
-      },
-      error: error => {
-        console.error('There was an error while updating!', error);
-        if(error.error.error){
-          this.errorMessage='Error: '+error.error.error;
-        } else {
-          this.errorMessage='There was an error while creating the catalog!';
-        }
-        this.showError=true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
-      }
-    })
+  
+
+  private getApiErrorMessage(err: any, fallback: string): string {
+    return err?.error?.error
+      ?? err?.error?.message
+      ?? err?.message
+      ?? fallback;
+  }
+
+  createCatalog(): void {
+    if (this.inFlight) return;
+
+    const name = this.catalogToCreate?.name?.trim();
+    if (!name) {
+      this.errorMessage = 'Proporcione un nombre de catálogo.';
+      this.showError = true;
+      setTimeout(() => (this.showError = false), 3000);
+      return;
+    }
+
+    this.categoryToCreate = {
+      name,
+      lifecycleStatus: 'Active',
+      isRoot: true,
+    };
+
+    this.inFlight = true;
+
+    this.api.postCategory(this.categoryToCreate).pipe(
+      tap(cat => {
+        this.catalogToCreate!.category = [cat];
+      }),
+      switchMap(() => this.api.postCatalog(this.catalogToCreate!)),
+      tap(() => this.goBack()),
+      catchError(err => {
+        const creatingCategory = !this.catalogToCreate?.category;
+        const fallback = creatingCategory
+          ? '¡Hubo un error al crear la categoría!'
+          : '¡Hubo un error al crear el catálogo!';
+
+        this.errorMessage = this.getApiErrorMessage(err, fallback);
+        this.showError = true;
+        setTimeout(() => (this.showError = false), 3000);
+        return EMPTY;
+      }),
+      finalize(() => {
+        this.inFlight = false;
+      })
+    ).subscribe();
   }
 
   //STEPS METHODS

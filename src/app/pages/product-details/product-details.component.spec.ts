@@ -7,6 +7,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { MarkdownModule } from 'ngx-markdown';
+import { oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 describe('ProductDetailsComponent', () => {
   let component: ProductDetailsComponent;
@@ -15,7 +17,8 @@ describe('ProductDetailsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: '123' }) } } }
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: '123' }) } } },
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
       ],
       imports: [HttpClientTestingModule, TranslateModule.forRoot(), MarkdownModule.forRoot()],
       schemas: [NO_ERRORS_SCHEMA]

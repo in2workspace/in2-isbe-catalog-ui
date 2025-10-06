@@ -12,6 +12,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'seller-product-spec',
@@ -43,7 +45,7 @@ export class SellerProductSpecComponent implements OnInit{
 
   constructor(
     private readonly prodSpecService: ProductSpecServiceService,
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly eventMessage: EventMessageService,
     private readonly paginationService: PaginationService
   ) {
@@ -61,13 +63,9 @@ export class SellerProductSpecComponent implements OnInit{
   initProdSpecs(){
     this.loading=true;
     this.prodSpecs=[];
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(aux.logged_as==aux.id){
-      this.seller = aux.id;
-    } else {
-      let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      this.seller = loggedOrg.id
-    }
+    this.auth.sellerId$.pipe(take(1)).subscribe(id => {
+      this.seller = id ?? '';
+    });
 
     this.getProdSpecs(false);
     let input = document.querySelector('[type=search]')

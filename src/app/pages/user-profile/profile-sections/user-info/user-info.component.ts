@@ -1,15 +1,15 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { LoginInfo } from 'src/app/models/interfaces';
 import { AccountServiceService } from 'src/app/services/account-service.service';
 import {LocalStorageService} from "src/app/services/local-storage.service";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { countries } from 'src/app/models/country.const'
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
-import * as moment from 'moment';
 import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { NgClass } from '@angular/common';
+import { combineLatest, take } from 'rxjs';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'user-info',
@@ -46,7 +46,7 @@ export class UserInfoComponent implements OnInit {
   successVisibility:boolean=false;
 
   constructor(
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly cdr: ChangeDetectorRef,
     private readonly accountService: AccountServiceService,
     private readonly eventMessage: EventMessageService
@@ -66,21 +66,23 @@ export class UserInfoComponent implements OnInit {
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-      this.token=aux.token;
-      this.email=aux.email;
-      //this.seller = aux.id;
+  initPartyInfo(): void {
+    combineLatest([
+      this.auth.sellerId$,
+      this.auth.loginInfo$,
+      this.auth.accessToken$,
+    ])
+    .pipe(take(1))
+    .subscribe(([sellerId, li, accessToken]) => {
+      if (!li) { initFlowbite(); return; }
+
+      this.seller = sellerId || '';
+      this.email  = li.email || '';
+      this.token  = accessToken || li.token || '';
+
       this.getProfile();
-    }
-    initFlowbite();
+      initFlowbite();
+    });
   }
 
   getProfile(){
@@ -125,7 +127,7 @@ export class UserInfoComponent implements OnInit {
             console.log(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
-            this.errorMessage='There was an error while updating profile!';
+            this.errorMessage='¡Hubo un error al actualizar el perfil!';
           }
           this.showError=true;
           setTimeout(() => {

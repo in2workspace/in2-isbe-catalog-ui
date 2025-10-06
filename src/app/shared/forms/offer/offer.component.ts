@@ -63,7 +63,7 @@ export class OfferComponent implements OnInit, OnDestroy{
   offersBundle:any[]=[];
   loadingData:boolean=false;
   
-  isSimpleFlow: boolean = environment.ISBE_CATALOGUE;
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   offerToCreate:ProductOffering_Create | undefined;
 
@@ -75,32 +75,30 @@ export class OfferComponent implements OnInit, OnDestroy{
               private readonly eventMessage: EventMessageService,
               private readonly fb: FormBuilder) {
 
-    if (this.isSimpleFlow) {
+    if (this.IS_ISBE) {
       this.steps = [
-        'General Info',
-        'Product Specification',
-        'Catalogue',
-        'Category',
-        'Price Plans',
-        'Summary'
+        'CREATE_OFFER._general',
+        'CREATE_OFFER._prod_spec',
+        'CREATE_OFFER._category',
+        'CREATE_OFFER._price_plans',
+        'CREATE_OFFER._summary'
       ];
       this.productOfferForm = this.fb.group({
         generalInfo: this.fb.group({}),
         prodSpec: new FormControl(null, [Validators.required]),
-        catalogue: new FormControl(null, [Validators.required]),
         category: new FormControl([]),
         pricePlans: new FormControl([])
       });
     } else {
       this.steps = [
-        'General Info',
-        'Product Specification',
-        'Catalogue',
-        'Category',
-        'License',
-        'Price Plans',
-        'Procurement Mode',
-        'Summary'
+        'CREATE_OFFER._general',
+        'CREATE_OFFER._prod_spec',
+        'CREATE_OFFER._catalog',
+        'CREATE_OFFER._category',
+        'CREATE_OFFER._license',
+        'CREATE_OFFER._price_plans',
+        'CREATE_OFFER._procurement',
+        'CREATE_OFFER._summary'
       ];
       this.productOfferForm = this.fb.group({
         generalInfo: this.fb.group({}),
@@ -210,26 +208,23 @@ export class OfferComponent implements OnInit, OnDestroy{
   async ngOnInit() {
     if (this.formType === 'update' && this.offer) {
       this.loadingData=true;
-      if (this.isSimpleFlow) {
+      if (this.IS_ISBE) {
         this.steps = [
-          'General Info',
-          'Product Specification',
-          'Category',
-          'Price Plans',
-          'Summary'
+          'CREATE_OFFER._general',
+          'CREATE_OFFER._prod_spec',
+          'CREATE_OFFER._category',
+          'CREATE_OFFER._price_plans',
+          'CREATE_OFFER._summary'
         ];
         
       } else {
         this.steps = [
-          'General Info',
-          'Product Specification',
-          //'Catalogue',
-          'Category',
-          'License',
-          'Price Plans',
-          'Procurement Mode',
-          //'Replication & Visibility',
-          'Summary'
+          'CREATE_OFFER._general',
+          'CREATE_OFFER._prod_spec',
+          'CREATE_OFFER._category',
+          'CREATE_OFFER._license',
+          'CREATE_OFFER._price_plans',
+          'CREATE_OFFER._summary'
         ];
         
       }
@@ -431,7 +426,7 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   private handleApiError(error: any): void {
     console.error('Error while creating offer price!', error);
-    this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : 'Error creating offer price!';
+    this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Error al crear precio de oferta!';
     this.showError = true;
     setTimeout(() => (this.showError = false), 3000);
   }
@@ -805,7 +800,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       setTimeout(() => (this.showError = false), 3000);
       return;
     }
-    if (this.formType === 'create' && !v?.catalogue?.id) {
+    if (this.formType === 'create' && !v?.catalogue?.id && !this.IS_ISBE) {
       this.errorMessage = 'Debes seleccionar un Catálogo para crear la oferta.';
       this.showError = true;
       setTimeout(() => (this.showError = false), 3000);
@@ -815,12 +810,8 @@ export class OfferComponent implements OnInit, OnDestroy{
     const categories = Array.isArray(v?.category)
       ? v.category
           .filter((cat: any) => cat?.id)
-          .map((cat: any) => ({ id: cat.id, href: cat.id }))
+          .map((cat: any) => ({ id: cat.id, href: cat.id, name: cat.name }))
       : [];
-    
-    if (categories.length === 0 && v?.catalog?.defaultCategoryId) {
-      categories.push({ id: v.catalog.defaultCategoryId, href: v.catalog.defaultCategoryHref ?? v.catalog.defaultCategoryId });
-    }
 
     const prices = Array.isArray(v?.pricePlans)
       ? v.pricePlans
@@ -893,7 +884,7 @@ export class OfferComponent implements OnInit, OnDestroy{
         console.error('Error during offer save/update:', error);
         this.errorMessage = error?.error?.error
           ? 'Error: ' + error.error.error
-          : 'An error occurred while saving the offer!';
+          : '¡Se produjo un error al guardar la oferta!';
         this.showError = true;
         setTimeout(() => (this.showError = false), 3000);
       }
@@ -970,7 +961,8 @@ export class OfferComponent implements OnInit, OnDestroy{
           // Actualizar categorías
           basePayload.category = change.currentValue.map((cat: any) => ({
             id: cat.id,
-            href: cat.id
+            href: cat.id,
+            name: cat.name
           }));
           break;
 
@@ -1091,9 +1083,21 @@ export class OfferComponent implements OnInit, OnDestroy{
       this.goBack();
     } catch (error: any) {
       console.error('❌ Error updating offer:', error);
-      this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : 'An error occurred while updating the offer!';
+      this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Se produjo un error al actualizar la oferta!';
       this.showError = true;
       setTimeout(() => (this.showError = false), 3000);
     }
   }
+
+  getStepKey(step: string) {
+    const mapping: any = {
+      'CREATE_OFFER._general': 'General Info',
+      'CREATE_OFFER._prod_spec': 'Product Specification',
+      'CREATE_OFFER._category': 'Category',
+      'CREATE_OFFER._price_plans': 'Price Plans',
+      'CREATE_OFFER._summary': 'Summary'
+    };
+    return mapping[step];
+  }
+
 }

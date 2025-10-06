@@ -1,19 +1,20 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, map } from 'rxjs';
-import { Category, LoginInfo } from '../models/interfaces';
+import { lastValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {components} from "../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
 import {LocalStorageService} from "./local-storage.service";
-import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountServiceService {
-  public static BASE_URL: String = environment.BASE_URL;
-  public static API_ACCOUNT: String = environment.ACCOUNT;
+  public static readonly BASE_URL: String = environment.BASE_URL;
+  public static readonly PARTY_URL: String = environment.PARTY_URL;
+  public static readonly INDIVIDUAL: String = environment.INDIVIDUAL;
+  public static readonly ORGANIZATION: String = environment.ORGANIZATION;
+  public static readonly API_ACCOUNT: String = environment.ACCOUNT;
 
   constructor(private http: HttpClient,private localStorage: LocalStorageService) { }
 
@@ -43,22 +44,22 @@ export class AccountServiceService {
   }
 
   getUserInfo(seller:any){
-    let url = `${AccountServiceService.BASE_URL}/party/individual/${seller}`;
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/${seller}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
   getOrgInfo(seller:any){
-    let url = `${AccountServiceService.BASE_URL}/party/organization/${seller}`;
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
   updateUserInfo(seller:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}/party/individual/${seller}`;   
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/${seller}`;   
     return this.http.patch<any>(url, profile);
   }
 
   updateOrgInfo(seller:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}/party/organization/${seller}`;   
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;   
     return this.http.patch<any>(url, profile);
   }
 }

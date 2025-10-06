@@ -250,7 +250,9 @@
     "_billing_check": "Debes crear al menos una dirección de facturación para poder realizar un pedido.",
     "_click_here": "Haz clic aquí",
     "_free": "Gratis",
+    "_no_price": "Sin información de precio",
     "_free_desc": "La oferta es gratuita",
+    "_no_price_desc": "La oferta no tiene información de precio",
     "_loading_purchase": "Cargando compra",
     "_contact": "Contacto",
     "_update": "Actualizar",
@@ -513,7 +515,7 @@
     "_add_prod_img": "Añadir imagen del producto",
     "_drop_files": "Suelta un archivo para adjuntar o",
     "_select_files": "selecciona un archivo.",
-    "_add_prod_img_url": "Añadir imagen mediante URL",
+    "_add_prod_img_url": "Añadir imagen del producto mediante URL",
     "_add_att": "Adjuntos",
     "_no_att": "No se han incluido adjuntos.",
     "_new_att": "Añadir nuevo adjunto",
@@ -588,7 +590,7 @@
     "_add_prod_img": "Añadir imagen del producto",
     "_drop_files": "Suelta un archivo para adjuntar o",
     "_select_files": "selecciona un archivo.",
-    "_add_prod_img_url": "Añadir imagen mediante URL",
+    "_add_prod_img_url": "Añadir imagen del producto mediante URL",
     "_add_att": "Adjuntos",
     "_no_att": "No se han incluido adjuntos.",
     "_new_att": "Añadir nuevo adjunto",
@@ -830,7 +832,8 @@
     "_no_offer": "No hay ofertas.",
     "_previous": "Paso anterior",
     "_next_step": "Siguiente paso",
-    "_no_subcats": "No hay subcategorías"
+    "_no_subcats": "No hay subcategorías", 
+    "_procurement": "Modo de adquisición"
   },
   "UPDATE_OFFER": {
     "_back": "Atrás",

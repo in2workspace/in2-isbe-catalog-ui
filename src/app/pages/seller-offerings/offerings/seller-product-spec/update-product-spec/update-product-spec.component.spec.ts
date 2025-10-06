@@ -6,6 +6,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { of } from 'rxjs';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
+import { AuthService } from 'src/app/guard/auth.service';
+import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
 
 jest.mock('flowbite', () => ({
   initFlowbite: jest.fn(),
@@ -79,6 +82,8 @@ describe('UpdateProductSpecComponent', () => {
         { provide: (require('src/app/services/local-storage.service').LocalStorageService), useClass: LocalStorageServiceMock },
         { provide: (require('src/app/services/event-message.service').EventMessageService), useClass: EventMessageServiceMock },
         { provide: (require('src/app/services/attachment-service.service').AttachmentServiceService), useClass: AttachmentServiceServiceMock },
+        { provide: AuthService, useValue: authServiceMock }, 
+        { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
       ],
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();

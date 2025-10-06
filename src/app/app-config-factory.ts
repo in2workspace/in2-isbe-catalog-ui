@@ -1,15 +1,16 @@
 import { MatomoInitializerService } from 'ngx-matomo-client';
-import { AppInitService } from './services/app-init.service'; // Adjust path as necessary
-import { inject } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
-export function appConfigFactory(appInitService: AppInitService, matomoInitializer: MatomoInitializerService): () => Promise<any> {
+export function appConfigFactory(matomoInitializer: MatomoInitializerService) {
   return () => {
-    return appInitService.init().then(conf => {
-      const matomoConfigOptions = {
-        siteId: conf.matomoId,
-        trackerUrl: conf.matomoUrl
-      }
-      matomoInitializer.initializeTracker(matomoConfigOptions)
-    });
-  }
+    const siteId = environment.MATOMO_SITE_ID;
+    const trackerUrl = environment.MATOMO_TRACKER_URL;
+
+    if (siteId && trackerUrl) {
+      matomoInitializer.initializeTracker({
+        siteId,
+        trackerUrl
+      });
+    }
+  };
 }

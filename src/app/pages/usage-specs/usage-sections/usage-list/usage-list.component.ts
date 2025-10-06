@@ -1,14 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {EventMessageService} from "src/app/services/event-message.service";
 import { UsageServiceService } from 'src/app/services/usage-service.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PaginationService } from 'src/app/services/pagination.service';
-import { LoginInfo } from 'src/app/models/interfaces';
-import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'usage-list',
@@ -28,37 +27,29 @@ export class UsageListComponent  implements OnInit {
   USAGE_SPEC_LIMIT: number = environment.USAGE_SPEC_LIMIT;
 
   constructor(
-    private eventMessage: EventMessageService,
-    private usageService: UsageServiceService,
-    private localStorage: LocalStorageService,
-    private paginationService: PaginationService
+    private readonly eventMessage: EventMessageService,
+    private readonly usageService: UsageServiceService,
+    private readonly paginationService: PaginationService,
+    private readonly auth: AuthService
   ) {
   }
 
   async ngOnInit() {
     this.initPartyInfo();
     this.loading=true;
-    /*this.usageService.getUsageSpecs(this.seller).then(data => {
-      this.usageSpecs=data;
-      this.loading=false;
-    })*/
     await this.getUsageSpecs(false);
   }
 
   initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-    }
+   this.auth.sellerId$
+    .pipe(take(1))
+    .subscribe(id => {
+      this.seller = id || '';
+    });
   }
 
   async getUsageSpecs(next:boolean){
-    if(next==false){
+    if(!next){
       this.loading=true;
     }
     

@@ -14,9 +14,10 @@ import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import {LocalStorageService} from "../../services/local-storage.service";
 import { Router } from '@angular/router';
-import {firstValueFrom} from "rxjs";
+import {firstValueFrom, take} from "rxjs";
 import { TranslateModule } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'app-shopping-cart',
@@ -38,37 +39,26 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
   seller:string='';
 
   constructor(
-    private eventMessage: EventMessageService,
-    private api: ApiServiceService,
-    private account: AccountServiceService,
-    private cartService: ShoppingCartServiceService,
-    private cdr: ChangeDetectorRef,
-    private localStorage: LocalStorageService,
-    private orderService: ProductOrderService,
-    private router: Router) {
+    private readonly eventMessage: EventMessageService,
+    private readonly auth: AuthService,
+    private readonly account: AccountServiceService,
+    private readonly cartService: ShoppingCartServiceService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly orderService: ProductOrderService,
+    private readonly router: Router) {
 
   }
 
   ngOnInit(): void {
-    //initFlowbite();
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(aux.logged_as==aux.id){
-      this.seller = aux.seller;
-    } else {
-      let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-      console.log('loggedorg')
-      console.log(loggedOrg)
-      this.seller = loggedOrg.seller
-    }
+    this.auth.sellerId$.pipe(take(1)).subscribe(id => {
+      this.seller = id ?? '';
+    });
     this.loading=true;
     this.showBackDrop=true;
     this.cartService.getShoppingCart().then(data => {
-      console.log('---CARRITO API---')
-      console.log(data)
       this.items=data;
       this.cdr.detectChanges();
       this.getTotalPrice();
-      console.log('------------------')
       initFlowbite();
     })
     this.account.getBillingAccount().then(data => {
@@ -121,13 +111,9 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
           }
         }
       }
-      console.log('billing account...')
-      console.log(this.billing_accounts)
       this.loading=false;
       this.cdr.detectChanges();
     })
-    console.log('Elementos en el carrito....')
-    console.log(this.items)
   }
 
   ngAfterViewInit() {

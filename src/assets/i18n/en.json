@@ -830,7 +830,8 @@
         "_no_offer": "There's no offerings.",
         "_previous": "Previous step",
         "_next_step": "Next step",
-        "_no_subcats": "There's no subcategories"
+        "_no_subcats": "There's no subcategories",
+        "_procurement": "Procurement Mode"
     },
     "UPDATE_OFFER":{
         "_back": "Back",

@@ -16,7 +16,7 @@ describe('/dashboard',{
         cy.getBySel('browseServices').should('not.be.disabled')
         cy.getBySel('mainText').should('exist')
         cy.getBySel('publishOff').should('exist')
-        cy.getBySel('publishOff').should('have.attr', 'href', init_config.domeRegister)
+        cy.getBySel('publishOff').should('have.attr', 'href', init_config.isbeRegister)
         cy.getBySel('vServices').should('exist')
         cy.getBySel('vServices').should('have.text', '1 verified services')
         cy.getBySel('rPublishers').should('exist')

@@ -1,57 +1,37 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import {LocalStorageService} from "../services/local-storage.service";
-import { Observable } from 'rxjs';
-import { LoginInfo } from '../models/interfaces';
-import * as moment from 'moment';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, UrlTree } from '@angular/router';
+import { Observable, combineLatest } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
+  constructor(private readonly auth: AuthService, private readonly router: Router) {}
 
-  constructor(private readonly localStorage: LocalStorageService, private readonly router: Router) {}
+  canActivate(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    const requiredRoles: string[] = route.data['roles'] ?? [];
+    const isIsbe: boolean = route.data['is_isbe'] ?? false;
 
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean {
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    const requiredRoles = route.data['roles'] as Array<string>;
-    const isIsbe = route.data['is_isbe'] as boolean;
-    let userRoles: string | any[] = [];
-
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as == aux.id){
-        userRoles.push('individual')
-        for(const element of aux.roles){
-          userRoles.push(element.name)
+    return combineLatest([this.auth.isAuthenticated$, this.auth.loginInfo$]).pipe(
+      take(1),
+      map(([isAuth, li]) => {
+        if (!isAuth || !li) {
+          this.auth.login(); 
+          return false;
         }
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        for(const element of loggedOrg.roles){
-          userRoles.push(element.name)
+
+        if (isIsbe) {
+          return this.router.createUrlTree(['/dashboard']);
         }
-      }
-    } else {
-      this.router.navigate(['/dashboard']);
-      return false;
-    }
 
-    if (requiredRoles.length != 0) {
-      const hasRequiredRoles = requiredRoles.some(role => userRoles.includes(role));
+        if (requiredRoles.length > 0) {
+          const roles = (li.roles ?? []).map(r => r.name ?? r.id ?? r);
+          const ok = requiredRoles.some(r => roles.includes(r));
+          if (!ok) return this.router.createUrlTree(['/dashboard']);
+        }
 
-      if (!hasRequiredRoles) {
-        this.router.navigate(['/dashboard']);  // Navigate to an access denied page or login page
-        return false;
-      }
-    }
-
-    if (isIsbe) {
-      this.router.navigate(['/dashboard']);  // Navigate to an access denied page or login page
-      return false;
-    }
-    
-    return true;
+        return true;
+      })
+    );
   }
 }

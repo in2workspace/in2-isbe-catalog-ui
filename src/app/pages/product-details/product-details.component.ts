@@ -25,6 +25,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { MarkdownComponent } from 'ngx-markdown';
 import { BadgeComponent } from 'src/app/shared/badge/badge.component';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'app-product-details',
@@ -108,15 +110,15 @@ export class ProductDetailsComponent implements OnInit {
 
 
   constructor(
-    private cdr: ChangeDetectorRef,
-    private route: ActivatedRoute,
-    private api: ApiServiceService,
-    private router: Router,
-    private localStorage: LocalStorageService,
-    private cartService: ShoppingCartServiceService,
-    private eventMessage: EventMessageService,
-    private accService: AccountServiceService,
-    private location: Location
+    private readonly cdr: ChangeDetectorRef,
+    private readonly route: ActivatedRoute,
+    private readonly api: ApiServiceService,
+    private readonly router: Router,
+    private readonly auth: AuthService,
+    private readonly cartService: ShoppingCartServiceService,
+    private readonly eventMessage: EventMessageService,
+    private readonly accService: AccountServiceService,
+    private readonly location: Location
   ) {
     this.showTermsMore=false;
     this.eventMessage.messages$.subscribe(ev => {
@@ -186,33 +188,24 @@ export class ProductDetailsComponent implements OnInit {
 
   ngOnInit() {
     initFlowbite();
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      this.check_logged=true;
-      this.cdr.detectChanges();
-    } else {
-      this.check_logged=false,
-      this.cdr.detectChanges();
-    }
+    this.auth.isAuthenticated$
+      .pipe(take(1))
+      .subscribe(isAuth => {
+        this.check_logged = isAuth;
+        this.cdr.detectChanges();
+    });
     window.scrollTo(0, 0);
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log('--- Details ID:')
-    console.log(this.id)
     this.api.getProductById(this.id).then(prod => {
-      console.log('prod')
-      console.log(prod)
       this.api.getProductSpecification(prod.productSpecification.id).then(spec => {
         this.prodSpec=spec;
         this.getOwner();
         let attachment = spec.attachment
-        console.log(spec.attachment)
         let prodPrices: any[] | undefined= prod.productOfferingPrice;
         let prices: any[]=[];
         if(prodPrices!== undefined){
           for(const element of prodPrices){
             this.api.getProductPrice(element.id).then(price => {
-              prices.push(price);
-              console.log(price)
               if(price.priceType == 'custom'){
                 this.checkCustom=true;
               }
@@ -263,8 +256,6 @@ export class ProductDetailsComponent implements OnInit {
         this.price = this.productOff?.productOfferingPrice?.at(0)?.price?.value + ' ' + this.productOff?.productOfferingPrice?.at(0)?.price?.unit ?? 'n/a';
 
         let profile = this.productOff?.attachment?.filter(item => item.name === 'Profile Picture') ?? [];
-        console.log('profile...')
-        console.log(profile)
         if(profile.length==0){
           this.images = this.productOff?.attachment?.filter(item => item.attachmentType === 'Picture') ?? [];
           this.attatchments = this.productOff?.attachment?.filter(item => item.attachmentType != 'Picture') ?? [];
@@ -333,7 +324,6 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   toggleCartSelection(){
-    console.log('Add to cart...')
     if (this.productOff?.productOfferingPrice != undefined){
       if(this.productOff?.productOfferingPrice.length > 1){
         this.check_prices=true;
@@ -371,7 +361,6 @@ export class ProductDetailsComponent implements OnInit {
           }
         }
       }
-      console.log(this.selected_chars)
     }
 
     if (this.check_prices==false && this.check_char == false && this.check_terms == false){
@@ -381,121 +370,6 @@ export class ProductDetailsComponent implements OnInit {
       this.cdr.detectChanges();
     }
   }
-
-  /*async addProductToCart(productOff:Product| undefined,options:boolean){
-    //this.localStorage.addCartItem(productOff as Product);
-    if(options==true){
-      console.log('termschecked:')
-      console.log(this.selected_terms)
-      if(productOff!= undefined && productOff?.productOfferingPrice != undefined){
-        let prodOptions = {
-          "id": productOff?.id,
-          "name": productOff?.name,
-          "image": this.getProductImage(),
-          "href": productOff.href,
-          "options": {
-            "characteristics": this.selected_chars,
-            "pricing": this.selected_price
-          },
-          "termsAccepted": this.selected_terms
-        }
-        this.lastAddedProd=prodOptions;
-      await this.cartService.addItemShoppingCart(prodOptions).subscribe({
-        next: data => {
-            console.log(data)
-            console.log('Update successful');
-            //TOGGLE TOAST
-            this.toastVisibility=true;
-
-            this.cdr.detectChanges();
-            //document.getElementById("progress-bar")?.classList.toggle("hover:w-100");
-            let element = document.getElementById("progress-bar")
-            let parent = document.getElementById("toast-add-cart")
-            if (element != null && parent != null) {
-              element.style.width = '0%'
-              element.offsetWidth
-              element.style.width = '100%'
-              setTimeout(() => {
-                this.toastVisibility=false
-              }, 3500);
-            }
-        },
-        error: error => {
-            console.error('There was an error while updating!', error);
-            if(error.error.error){
-              console.log(error)
-              this.errorMessage='Error: '+error.error.error;
-            } else {
-              this.errorMessage='There was an error while adding item to the cart!';
-            }
-            this.showError=true;
-            setTimeout(() => {
-              this.showError = false;
-            }, 3000);
-        }
-      });
-    }
-    } else {
-      if(productOff!= undefined && productOff?.productOfferingPrice != undefined){
-        let prodOptions = {
-          "id": productOff?.id,
-          "name": productOff?.name,
-          "image": this.getProductImage(),
-          "href": productOff.href,
-          "options": {
-            "characteristics": this.selected_chars,
-            "pricing": this.selected_price
-          },
-          "termsAccepted": true
-        }
-        this.lastAddedProd=prodOptions;
-      await this.cartService.addItemShoppingCart(prodOptions).subscribe({
-        next: data => {
-            console.log(data)
-            console.log('Update successful');
-            //TOGGLE TOAST
-            this.toastVisibility=true;
-
-            this.cdr.detectChanges();
-            //document.getElementById("progress-bar")?.classList.toggle("hover:w-100");
-            let element = document.getElementById("progress-bar")
-            let parent = document.getElementById("toast-add-cart")
-            if (element != null && parent != null) {
-              element.style.width = '0%'
-              element.offsetWidth
-              element.style.width = '100%'
-              setTimeout(() => {
-                this.toastVisibility=false
-              }, 3500);
-            }
-        },
-        error: error => {
-            console.error('There was an error while updating!', error);
-            this.errorMessage='There was an error while adding item to the cart!';
-            this.showError=true;
-            setTimeout(() => {
-              this.showError = false;
-            }, 3000);
-        }
-      });
-    }
-    }
-    if(productOff!== undefined){
-      this.eventMessage.emitAddedCartItem(productOff as cartProduct);
-    }
-
-    if(this.cartSelection==true){
-      this.cartSelection=false;
-      this.check_char=false;
-      this.check_terms=false;
-      this.check_prices=false;
-      this.selected_chars=[];
-      this.selected_price={};
-      this.selected_terms=false;
-      this.cdr.detectChanges();
-    }
-    this.cdr.detectChanges();
-  } */
 
 
   async addProductToCart(productOff: Product | undefined, options: boolean) {
@@ -507,7 +381,6 @@ export class ProductDetailsComponent implements OnInit {
     try {
       // Añadir el producto al carrito
       await this.cartService.addItemShoppingCart(prodOptions);
-      console.log('Update successful');
       this.showToast();
 
       // Emitir evento de producto añadido
@@ -575,7 +448,6 @@ async deleteProduct(product: Product | undefined){
     if(product !== undefined) {
       //this.localStorage.removeCartItem(product);
       await this.cartService.removeItemShoppingCart(product.id);
-      console.log('removed');
       this.eventMessage.emitRemovedCartItem(product as Product);
     }
     this.toastVisibility=false;
@@ -758,7 +630,6 @@ async deleteProduct(product: Product | undefined){
         if(parties[i].id.includes('organization')){
           this.accService.getOrgInfo(parties[i].id).then(org => {
             this.orgInfo=org;
-            console.log(this.orgInfo)
           })
         }
       }

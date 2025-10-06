@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
-import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
-import { LoginInfo } from 'src/app/models/interfaces';
-import * as moment from 'moment';
 import { OfferComponent } from 'src/app/shared/forms/offer/offer.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'create-offer',
@@ -19,7 +17,7 @@ export class CreateOfferComponent implements OnInit {
   seller:any='';
 
   constructor(
-    private readonly localStorage: LocalStorageService,
+    private readonly auth: AuthService,
     private readonly eventMessage: EventMessageService
   ) {
     this.eventMessage.messages$.subscribe(ev => {      
@@ -34,15 +32,11 @@ export class CreateOfferComponent implements OnInit {
   }
 
   initPartyInfo(){
-    let aux = this.localStorage.getObject('login_items') as LoginInfo;
-    if(JSON.stringify(aux) != '{}' && (((aux.expire - moment().unix())-4) > 0)) {
-      if(aux.logged_as==aux.id){
-        this.seller = aux.id;
-      } else {
-        let loggedOrg = aux.organizations.find((element: { id: any; }) => element.id == aux.logged_as)
-        this.seller = loggedOrg.id
-      }
-    }
+   this.auth.sellerId$
+    .pipe(take(1))
+    .subscribe(id => {
+      this.seller = id || '';
+    });
   }
 
   goBack() {

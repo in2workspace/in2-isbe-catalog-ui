@@ -96,7 +96,7 @@ const config: Config = {
 
   // Line to handle ES modules
   transformIgnorePatterns: [
-     "node_modules/(?!@angular|@ngx-translate/core|@fortawesome/angular-fontawesome|ngx-markdown|@ctrl/ngx-emoji-mart|ngx-file-drop)"
+     "node_modules/(?!@angular|@ngx-translate/core|@fortawesome/angular-fontawesome|ngx-markdown|@ctrl/ngx-emoji-mart|ngx-file-drop|angular-auth-oidc-client)"
   ],
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
