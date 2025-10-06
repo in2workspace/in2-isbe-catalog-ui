@@ -796,7 +796,7 @@ export interface components {
       /** @description Unique identifier of the parent category */
       parentId?: string;
       /** @description Category version */
-      version?: string;
+      version: string;
       /** @description A product offering represents entities that are orderable from the provider of the catalog, this resource includes pricing information. */
       productOffering?: components["schemas"]["ProductOfferingRef"][];
       /** @description The category resource is used to group product offerings, service and resource candidates in logical containers. Categories can contain other (sub-)categories and/or product offerings. */

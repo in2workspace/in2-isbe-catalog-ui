@@ -152,7 +152,8 @@
                 </button>
             </div>
         } @else {
-            <div class="flex w-full justify-center justify-items-center">
+            @if(!IS_ISBE){
+                <div class="flex w-full justify-center justify-items-center">
                 <ngx-file-drop class="m-4 p-4 w-full" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event,'img')" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
                     <ng-template class="w-full" ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
                         <div class="w-full flex flex-col justify-items-center justify-center">
@@ -169,6 +170,8 @@
                 </ngx-file-drop>
             </div>
             <label for="att-name" class="font-bold ml-6 dark:text-white">{{ 'PROFILE._add_logo_url' | translate }}</label>
+            }
+            
             <div class="relative w-full ml-6 mt-2 mb-2">
                 <!-- Tooltip (Above the Input, Positioned Up) -->
                 @if(attImageName.invalid && attImageName.touched){
@@ -203,7 +206,7 @@
        
         <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 dark:text-white m-4">{{ 'PROFILE._contact_info' | translate }}</h2>
         <hr class="h-px mr-4 ml-4 bg-primary-100 dark:bg-white border-0">
-        <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="m-4 bg-white relative overflow-x-auto shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
                     <tr>

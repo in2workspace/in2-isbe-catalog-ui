@@ -121,7 +121,6 @@ export class UpdateCategoryComponent implements OnInit {
   }
 
   getCategories(){
-    console.log('Getting categories...')
     this.api.getLaunchedCategories().then(data => {      
       for(let i=0; i < data.length; i++){
         this.findChildren(data[i],data);
@@ -243,20 +242,26 @@ export class UpdateCategoryComponent implements OnInit {
         name: this.generalForm.value.name,
         description: this.generalForm.value.description != null ? this.generalForm.value.description : '',
         lifecycleStatus: this.catStatus,
+        version: this.incrementVersion(this.category.version),
         isRoot: this.isParent
       }
       if(this.isParent==false){
         this.categoryToUpdate.parentId=this.selectedCategory.id;
       }
-      console.log(this.isParent)
-      console.log('CATEGORY TO UPDATE:')
-      console.log(this.categoryToUpdate)
       this.showGeneral=false;
       this.showSummary=true;
       this.selectStep('summary','summary-circle');
     }
     this.showPreview=false;
   }
+
+  incrementVersion(version: string): string {
+    const [major, minor] = version.split('.').map(Number);
+    const newMajor = major + 1;
+    const newMinor = 0;
+    return `${newMajor}.${newMinor}`;
+  }
+
 
   updateCategory(){
     this.api.updateCategory(this.categoryToUpdate,this.category.id).subscribe({
@@ -266,7 +271,7 @@ export class UpdateCategoryComponent implements OnInit {
       error: error => {
         console.error('There was an error while updating!', error);
         if(error.error.error){
-          console.log(error)
+          console.error(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
           this.errorMessage='¡Hubo un error al crear la categoría!';
