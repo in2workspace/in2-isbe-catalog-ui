@@ -1238,5 +1238,46 @@
     "_write": "Escribe aquí tus comentarios:",
     "_send": "Enviar",
     "_thanks": "Gracias por contactar con ISBE Catalog."
+  },
+  "COUNTRY": {
+    "AT": "Austria",
+    "BE": "Bélgica",
+    "BG": "Bulgaria",
+    "HR": "Croacia",
+    "CY": "Chipre",
+    "CZ": "Chequia",
+    "DK": "Dinamarca",
+    "EE": "Estonia",
+    "FI": "Finlandia",
+    "FR": "Francia",
+    "DE": "Alemania",
+    "GR": "Grecia",
+    "HU": "Hungría",
+    "IE": "Irlanda",
+    "IT": "Italia",
+    "LV": "Letonia",
+    "LT": "Lituania",
+    "LU": "Luxemburgo",
+    "MT": "Malta",
+    "NL": "Países Bajos",
+    "PL": "Polonia",
+    "PT": "Portugal",
+    "RO": "Rumanía",
+    "SK": "Eslovaquia",
+    "SI": "Eslovenia",
+    "ES": "España",
+    "SE": "Suecia"
+  },
+  "CONTACT_TYPE": {
+    "EMAIL": "Correo electrónico",
+    "POSTAL": "Dirección postal",
+    "PHONE": "Número de teléfono",
+    "MOBILE": "Móvil",
+    "LANDLINE": "Teléfono fijo",
+    "OFFICE": "Oficina",
+    "HOME": "Casa",
+    "OTHER": "Otro"
   }
+
+
 }
