@@ -137,7 +137,7 @@ export class CreateCatalogComponent implements OnInit {
 
     const name = this.catalogToCreate?.name?.trim();
     if (!name) {
-      this.errorMessage = 'Please provide a catalog name.';
+      this.errorMessage = 'Proporcione un nombre de catálogo.';
       this.showError = true;
       setTimeout(() => (this.showError = false), 3000);
       return;
@@ -160,8 +160,8 @@ export class CreateCatalogComponent implements OnInit {
       catchError(err => {
         const creatingCategory = !this.catalogToCreate?.category;
         const fallback = creatingCategory
-          ? 'There was an error while creating the category!'
-          : 'There was an error while creating the catalog!';
+          ? '¡Hubo un error al crear la categoría!'
+          : '¡Hubo un error al crear el catálogo!';
 
         this.errorMessage = this.getApiErrorMessage(err, fallback);
         this.showError = true;

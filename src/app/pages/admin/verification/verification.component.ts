@@ -50,7 +50,7 @@ export class VerificationComponent {
           console.log(error)
           this.errorMessage = 'Error: ' + error.error.error;
         } else {
-          this.errorMessage = 'There was an error while uploading the product!';
+          this.errorMessage = '¡Hubo un error al cargar el producto!';
         }
         this.showError = true;
         setTimeout(() => {

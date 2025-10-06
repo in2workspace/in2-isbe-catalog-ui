@@ -49,7 +49,7 @@ export class AccountServiceService {
   }
 
   getOrgInfo(seller:any){
-    let url = `${AccountServiceService.BASE_URL}/party/organization/urn:ngsi-ld:organization:${seller}`;
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
@@ -59,7 +59,7 @@ export class AccountServiceService {
   }
 
   updateOrgInfo(seller:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/${seller}`;   
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;   
     return this.http.patch<any>(url, profile);
   }
 }

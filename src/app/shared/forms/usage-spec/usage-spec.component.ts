@@ -260,7 +260,7 @@ export class UsageSpecComponent implements OnInit {
       this.goBack();
     } catch (error: any) {
       console.error('❌ Error updating Usage Spec:', error);
-      this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : 'An error occurred while updating the Usage Spec!';
+      this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Se produjo un error al actualizar la especificación de uso!';
       this.showError = true;
       setTimeout(() => (this.showError = false), 3000);
     }

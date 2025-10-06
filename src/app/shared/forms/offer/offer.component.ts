@@ -426,7 +426,7 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   private handleApiError(error: any): void {
     console.error('Error while creating offer price!', error);
-    this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : 'Error creating offer price!';
+    this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Error al crear precio de oferta!';
     this.showError = true;
     setTimeout(() => (this.showError = false), 3000);
   }
@@ -884,7 +884,7 @@ export class OfferComponent implements OnInit, OnDestroy{
         console.error('Error during offer save/update:', error);
         this.errorMessage = error?.error?.error
           ? 'Error: ' + error.error.error
-          : 'An error occurred while saving the offer!';
+          : '¡Se produjo un error al guardar la oferta!';
         this.showError = true;
         setTimeout(() => (this.showError = false), 3000);
       }
@@ -1082,7 +1082,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       this.goBack();
     } catch (error: any) {
       console.error('❌ Error updating offer:', error);
-      this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : 'An error occurred while updating the offer!';
+      this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Se produjo un error al actualizar la oferta!';
       this.showError = true;
       setTimeout(() => (this.showError = false), 3000);
     }

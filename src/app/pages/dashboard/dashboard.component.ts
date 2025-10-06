@@ -3,7 +3,6 @@ import {EventMessageService} from "../../services/event-message.service";
 import {LocalStorageService} from "../../services/local-storage.service";
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { Router } from '@angular/router';
-import { StatsServiceService } from "src/app/services/stats-service.service"
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { environment } from 'src/environments/environment';
@@ -11,7 +10,6 @@ import { PlatformBenefitsComponent } from 'src/app/offerings/platform-benefits/p
 import { GalleryComponent } from 'src/app/offerings/gallery/gallery.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
-import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -39,7 +37,6 @@ export class DashboardComponent implements OnInit {
   
   constructor(private readonly localStorage: LocalStorageService,
               private readonly eventMessage: EventMessageService,
-              private readonly statsService : StatsServiceService,
               private readonly router: Router,
               private readonly api: ApiServiceService,
               private readonly cdr: ChangeDetectorRef) {
@@ -69,11 +66,6 @@ export class DashboardComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.statsService.getStats().then(data=> {
-      this.services=data?.services ?? [];
-      this.publishers=data?.organizations ?? [];
-      this.startTagTransition();
-    })
     this.isFilterPanelShown = JSON.parse(this.localStorage.getItem('is_filter_panel_shown') as string);
     //TODO: check with verifier login
     /*if(this.route.snapshot.queryParamMap.get('token') != null){    
