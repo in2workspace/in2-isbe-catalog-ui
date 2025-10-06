@@ -56,7 +56,6 @@ function rolesFromPowers(vc: any): string[] {
 
 
 export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
-  const sub: string = claims?.sub ?? '';
   const exp: number = claims?.exp ?? 0;
 
   const vc = claims?.vc ?? {};
@@ -87,7 +86,7 @@ export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
     : [];
 
   return {
-    id: sub || (mandatee?.id ?? ''),
+    id: vc?.id,
     user: userLocalPart,
     email,
     token,
@@ -96,6 +95,6 @@ export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
     username,
     roles: roleObjects,
     organizations,
-    logged_as: orgId || (sub || ''),
+    logged_as: orgId,
   };
 }

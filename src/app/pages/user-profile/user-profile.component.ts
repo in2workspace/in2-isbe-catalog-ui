@@ -40,7 +40,7 @@ export class UserProfileComponent implements OnInit{
     private readonly cdr: ChangeDetectorRef,
     private readonly eventMessage: EventMessageService
   ) {
-    this.eventMessage.messages$.subscribe(ev => {
+    this.eventMessage.messages$.subscribe(ev => { 
       if(ev.type === 'ChangedSession') {
         this.initPartyInfo();
       }
@@ -62,12 +62,19 @@ export class UserProfileComponent implements OnInit{
         this.token = aux.token;
         this.email = aux.email;
 
+        console.log(aux);
+
         this.seller = aux.id;
         this.loggedAsUser = aux.logged_as === aux.id;
+        console.log(this.loggedAsUser)
         this.show_profile = this.loggedAsUser;
         this.show_org_profile = !this.loggedAsUser;
 
-        this.getProfile();
+        if(this.loggedAsUser){
+          this.getProfile();
+        } else {
+          this.getOrgProfile();
+        }
         initFlowbite();
       });
   }

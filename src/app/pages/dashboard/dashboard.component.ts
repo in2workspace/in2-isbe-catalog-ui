@@ -5,7 +5,6 @@ import { ApiServiceService } from 'src/app/services/product-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { StatsServiceService } from "src/app/services/stats-service.service"
-import { LoginServiceService } from "src/app/services/login-service.service"
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { environment } from 'src/environments/environment';
@@ -13,6 +12,7 @@ import { PlatformBenefitsComponent } from 'src/app/offerings/platform-benefits/p
 import { GalleryComponent } from 'src/app/offerings/gallery/gallery.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
+import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -42,9 +42,9 @@ export class DashboardComponent implements OnInit {
               private readonly eventMessage: EventMessageService,
               private readonly statsService : StatsServiceService,
               private readonly route: ActivatedRoute,
+              private readonly auth: AuthService,
               private readonly router: Router,
               private readonly api: ApiServiceService,
-              private readonly loginService: LoginServiceService,
               private readonly cdr: ChangeDetectorRef) {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'FilterShown') {
@@ -79,25 +79,7 @@ export class DashboardComponent implements OnInit {
     })
     this.isFilterPanelShown = JSON.parse(this.localStorage.getItem('is_filter_panel_shown') as string);
     if(this.route.snapshot.queryParamMap.get('token') != null){    
-      this.loginService.getLogin(this.route.snapshot.queryParamMap.get('token')).then(data => {
-        let info = {
-          "id": data.id,
-          "user": data.username,
-          "email": data.email,
-          "token": data.accessToken,
-          "expire": data.expire,
-          "seller": data.seller,
-          "roles": data.roles,
-          "organizations": data.organizations,
-          "logged_as": data.id } as LoginInfo;
-
-        if (info.organizations != null && info.organizations.length > 0) {
-          info.logged_as = info.organizations[0].id
-        }
-
-        this.localStorage.setItem("accessToken",data.accessToken);
-        this.eventMessage.emitLogin(info);
-      })      
+      this.auth.login();
       this.router.navigate(['/dashboard'])
     } 
     this.api.getLaunchedCategories().then(data => {

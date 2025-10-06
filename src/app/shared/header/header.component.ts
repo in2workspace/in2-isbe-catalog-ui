@@ -32,7 +32,6 @@ import * as uuid from 'uuid';
 import { combineLatest, Subject, Subscription, takeUntil } from 'rxjs';
 
 import { LocalStorageService } from '../../services/local-storage.service';
-import { LoginServiceService } from 'src/app/services/login-service.service';
 import { EventMessageService } from '../../services/event-message.service';
 import { QrVerifierService } from 'src/app/services/qr-verifier.service';
 import { ShoppingCartServiceService } from '../../services/shopping-cart-service.service';
@@ -60,7 +59,6 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
 
   private readonly translate = inject(TranslateService);
   private readonly localStorage = inject(LocalStorageService);
-  private readonly loginService = inject(LoginServiceService);
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly eventMessage = inject(EventMessageService);
   private readonly router = inject(Router);
@@ -301,14 +299,14 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
 
   async toggleLogin() {
     this.showLogin = true;
-    this.loginService.doLogin();
+    this.auth.login();
     this.cdr.detectChanges();
   }
 
   async logout() {
     this.closeUserDropdown();
     this.resetUserUI();
-    await this.loginService.logout();
+    await this.auth.logout();
     if (this.router.url === '/dashboard') {
       window.location.reload();
     } else {
@@ -365,7 +363,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
         this.initChecking();
       }
     } else if (environment.SIOP_INFO.enabled === false) {
-      this.loginService.doLogin();
+      this.auth.login();
     }
   }
 

@@ -797,8 +797,11 @@
                             <div data-popper-arrow></div>
                         </div>
                     </div>
-
-                    <h4 class="text-lg font-bold ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_prod_img' | translate }}</h4>
+                    @if(!IS_ISBE){
+                        <h4 class="text-lg font-bold ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_prod_img' | translate }}</h4> 
+                    }@else{
+                        <h4 class="text-lg font-bold ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</h4> 
+                    }
                     @if(showImgPreview){
                         <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto m-4 shadow-lg">
                             <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
@@ -809,23 +812,25 @@
                             </button>
                         </div>
                     } @else {
-                        <div class="flex w-full justify-center justify-items-center">
-                            <ngx-file-drop class="m-4 p-4 w-full" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event,'img')" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
-                                <ng-template class="w-full" ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
-                                    <div class="w-full flex flex-col justify-items-center justify-center">
-                                        <svg class="w-12 h-12 text-primary-100 mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"/>
-                                        </svg>
-                                        <div class="flex w-full justify-center">
-                                            <p class="text-gray-500 mr-2 w-fit">{{ 'UPDATE_PROD_SPEC._drop_files' | translate }}
-                                                <button (click)="openFileSelector()" class="font-medium text-purple-600 dark:text-purple-500 hover:underline">{{ 'UPDATE_PROD_SPEC._select_files' | translate }}</button>
-                                            </p> 
+                        @if(!IS_ISBE){
+                            <div class="flex w-full justify-center justify-items-center">
+                                <ngx-file-drop class="m-4 p-4 w-full" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event,'img')" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+                                    <ng-template class="w-full" ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                                        <div class="w-full flex flex-col justify-items-center justify-center">
+                                            <svg class="w-12 h-12 text-primary-100 mx-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"/>
+                                            </svg>
+                                            <div class="flex w-full justify-center">
+                                                <p class="text-gray-500 mr-2 w-fit">{{ 'UPDATE_PROD_SPEC._drop_files' | translate }}
+                                                    <button (click)="openFileSelector()" class="font-medium text-purple-600 dark:text-purple-500 hover:underline">{{ 'UPDATE_PROD_SPEC._select_files' | translate }}</button>
+                                                </p> 
+                                            </div>
                                         </div>
-                                    </div>
-                                </ng-template>
-                            </ngx-file-drop>
-                        </div>
-                        <label class="font-bold ml-6 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</label>
+                                    </ng-template>
+                                </ngx-file-drop>
+                            </div>
+                            <label class="font-bold ml-6 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</label>
+                        }
                         <div class="relative w-full ml-6 mt-2 mb-2">
                             <!-- Tooltip (Above the Input, Positioned Up) -->
                             @if(attImageName.invalid && attImageName.touched){

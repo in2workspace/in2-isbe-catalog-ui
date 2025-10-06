@@ -44,7 +44,6 @@ export class AuthService {
         }
 
         const idToken = await this.oidc.getAccessToken().pipe(take(1)).toPromise().catch(() => '');
-        console.log(idToken)
         let claims: any =
           (idToken && this.decodeJwtPayload(idToken)) ||
           (accessToken && this.decodeJwtPayload(accessToken)) ||
@@ -52,7 +51,6 @@ export class AuthService {
           {};
 
         const u = this.mapUserFromClaims(claims);
-        console.log(u)
         this.setState(true, u, accessToken ?? '', this.pickPrimaryRole(u));
 
         try {
@@ -84,6 +82,7 @@ export class AuthService {
   logout(): void {
     this.oidc.logoffAndRevokeTokens();
     this.loginInfoSubject.next(null);
+    sessionStorage.clear();
   }
 
   async getAccessToken(): Promise<string> {

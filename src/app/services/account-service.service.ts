@@ -48,7 +48,7 @@ export class AccountServiceService {
   }
 
   getOrgInfo(seller:any){
-    let url = `${AccountServiceService.BASE_URL}/party/organization/${seller}`;
+    let url = `${AccountServiceService.BASE_URL}/party/organization/urn:ngsi-ld:organization:${seller}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
