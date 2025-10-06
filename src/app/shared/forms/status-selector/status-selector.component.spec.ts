@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { StatusSelectorComponent } from './status-selector.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('StatusSelectorComponent', () => {
   let component: StatusSelectorComponent;
@@ -9,7 +10,7 @@ describe('StatusSelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [StatusSelectorComponent]
+      imports: [StatusSelectorComponent, TranslateModule.forRoot()],
     })
     .compileComponents();
     
