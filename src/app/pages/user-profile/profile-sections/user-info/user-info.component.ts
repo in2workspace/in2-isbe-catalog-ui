@@ -127,7 +127,7 @@ export class UserInfoComponent implements OnInit {
             console.log(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
-            this.errorMessage='There was an error while updating profile!';
+            this.errorMessage='¡Hubo un error al actualizar el perfil!';
           }
           this.showError=true;
           setTimeout(() => {

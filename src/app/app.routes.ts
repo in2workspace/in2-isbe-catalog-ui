@@ -72,14 +72,14 @@ export const routes: Routes = [
   {
     path: 'my-offerings',
     component: SellerOfferingsComponent,
-    /*canActivate: [AuthGuard],
-    data: { roles: ['seller'] }*/
+    canActivate: [AuthGuard],
+    data: { roles: ['seller'] }
   },
   {
     path: 'admin',
     component: AdminComponent,
-    /*canActivate: [AuthGuard],
-    data: { roles: ['admin', 'certifier'] }*/
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'certifier'] }
   },
   { path: 'contact-us', component: ContactUsFormComponent ,
     canActivate: [AuthGuard],

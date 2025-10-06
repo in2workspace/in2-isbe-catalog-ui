@@ -205,7 +205,7 @@ export class InventoryProductsComponent implements OnInit {
             console.log(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
-            this.errorMessage='There was an error while unsubscribing!';
+            this.errorMessage='¡Hubo un error al cancelar la suscripción!';
           }
           this.showError=true;
           setTimeout(() => {

@@ -961,7 +961,8 @@ export class OfferComponent implements OnInit, OnDestroy{
           // Actualizar categorías
           basePayload.category = change.currentValue.map((cat: any) => ({
             id: cat.id,
-            href: cat.id
+            href: cat.id,
+            name: cat.name
           }));
           break;
 

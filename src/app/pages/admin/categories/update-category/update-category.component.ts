@@ -269,7 +269,7 @@ export class UpdateCategoryComponent implements OnInit {
           console.log(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
-          this.errorMessage='There was an error while creating the category!';
+          this.errorMessage='¡Hubo un error al crear la categoría!';
         }
         this.showError=true;
         setTimeout(() => {

@@ -253,7 +253,7 @@ export class BillingAccountFormComponent implements OnInit {
             console.log(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
-            this.errorMessage='There was an error while creating billing account!';
+            this.errorMessage='¡Hubo un error al crear la cuenta de facturación!';
           }
           this.showError=true;
           setTimeout(() => {
@@ -351,7 +351,7 @@ export class BillingAccountFormComponent implements OnInit {
               console.log(error)
               this.errorMessage='Error: '+error.error.error;
             } else {
-              this.errorMessage='There was an error while updating billing account!';
+              this.errorMessage='¡Hubo un error al actualizar la cuenta de facturación!';
             }
             this.showError=true;
             setTimeout(() => {

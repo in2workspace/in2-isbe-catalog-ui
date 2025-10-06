@@ -563,7 +563,7 @@ export class UpdateProductSpecComponent implements OnInit {
                         console.error(error)
                         this.errorMessage='Error: '+error.error.error;
                       } else {
-                        this.errorMessage='There was an error while uploading the file!';
+                        this.errorMessage='¡Hubo un error al cargar el archivo!';
                       }
                       if (error.status === 413) {
                         this.errorMessage='File size too large! Must be under 3MB.';
@@ -606,7 +606,7 @@ export class UpdateProductSpecComponent implements OnInit {
                         console.error(error)
                         this.errorMessage='Error: '+error.error.error;
                       } else {
-                        this.errorMessage='There was an error while uploading the file!';
+                        this.errorMessage='¡Hubo un error al cargar el archivo!';
                       }
                       if (error.status === 413) {
                         this.errorMessage='File size too large! Must be under 3MB.';
@@ -648,10 +648,10 @@ export class UpdateProductSpecComponent implements OnInit {
                       if(error.error.error){
                         this.errorMessage='Error: '+error.error.error;
                       } else {
-                        this.errorMessage='There was an error while uploading the file!';
+                        this.errorMessage='¡Hubo un error al cargar el archivo!';
                       }
                       if (error.status === 413) {
-                        this.errorMessage='File size too large! Must be under 3MB.';
+                        this.errorMessage='¡El archivo es demasiado grande! Debe ser inferior a 3 MB.';
                       }
                       this.showError=true;
                       setTimeout(() => {
@@ -1137,7 +1137,7 @@ export class UpdateProductSpecComponent implements OnInit {
           console.error(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
-          this.errorMessage='There was an error while uploading the product!';
+          this.errorMessage='¡Hubo un error al cargar el producto!';
         }
         this.showError=true;
         setTimeout(() => {

@@ -142,7 +142,7 @@ export class UpdateCatalogComponent implements OnInit {
           console.log(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
-          this.errorMessage='There was an error while updating the catalog!';
+          this.errorMessage='¡Hubo un error al actualizar el catálogo!';
         }
         this.showError=true;
         setTimeout(() => {
