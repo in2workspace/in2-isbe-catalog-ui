@@ -31,6 +31,7 @@ type OrganizationUpdate = components["schemas"]["Organization_Update"];
     imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent]
 })
 export class OrgInfoComponent {
+  IS_ISBE: boolean = environment.ISBE_CATALOGUE;
   loading: boolean = false;
   orders:any[]=[];
   profile:any;
