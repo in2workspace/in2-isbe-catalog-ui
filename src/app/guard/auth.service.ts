@@ -51,10 +51,12 @@ export class AuthService {
           {};
 
         const u = this.mapUserFromClaims(claims);
+        console.log('Authenticated user:', u, claims);
         this.setState(true, u, accessToken ?? '', this.pickPrimaryRole(u));
 
         try {
           const li = claimsToLoginInfo(claims, accessToken ?? '');
+          console.log('Login info:', li);
           this.loginInfoSubject.next(li);
         } catch {
           this.loginInfoSubject.next(null);

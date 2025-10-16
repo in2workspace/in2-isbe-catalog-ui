@@ -62,11 +62,12 @@ export class UserProfileComponent implements OnInit{
         this.token = aux.token;
         this.email = aux.email;
 
-        console.log(aux);
-
         this.seller = aux.id;
         this.loggedAsUser = aux.logged_as === aux.id;
-        console.log(this.loggedAsUser)
+        console.log(aux);
+        console.log(aux.logged_as);
+        console.log(aux.id);
+        console.log('logged as user?', this.loggedAsUser);
         this.show_profile = this.loggedAsUser;
         this.show_org_profile = !this.loggedAsUser;
 
@@ -85,7 +86,7 @@ export class UserProfileComponent implements OnInit{
     this.show_orders=false;
     this.show_org_profile=false;
     this.show_revenue=false;
-    this.selectGeneral();
+    this.selectAccount();
   }
 
   getOrgProfile(){
@@ -94,7 +95,7 @@ export class UserProfileComponent implements OnInit{
     this.show_orders=false;
     this.show_org_profile=true;
     this.show_revenue=false;
-    this.selectGeneral();
+    this.selectOrganization();
   }
 
   getBilling(){
@@ -129,13 +130,30 @@ export class UserProfileComponent implements OnInit{
     this.cdr.detectChanges();
   }
 
-  selectGeneral(){
+  selectAccount(){
     let bill_button = document.getElementById('bill-button')
-    let general_button = document.getElementById('general-button')
+    
+    let account_button = document.getElementById('account-button')
+    let org_button = document.getElementById('org-button')
     let order_button = document.getElementById('order-button')
     let revenue_button = document.getElementById('revenue-button')
 
-    this.selectMenu(general_button,'text-white bg-primary-100');
+    this.selectMenu(account_button,'text-white bg-primary-100');
+    this.unselectMenu(org_button,'text-white bg-primary-100');
+    this.unselectMenu(bill_button,'text-white bg-primary-100');
+    this.unselectMenu(order_button,'text-white bg-primary-100');
+    this.unselectMenu(revenue_button,'text-white bg-primary-100');
+  }
+
+  selectOrganization(){
+    let bill_button = document.getElementById('bill-button')
+    let account_button = document.getElementById('account-button')
+    let org_button = document.getElementById('org-button')
+    let order_button = document.getElementById('order-button')
+    let revenue_button = document.getElementById('revenue-button')
+
+    this.selectMenu(org_button,'text-white bg-primary-100');
+    this.unselectMenu(account_button,'text-white bg-primary-100');
     this.unselectMenu(bill_button,'text-white bg-primary-100');
     this.unselectMenu(order_button,'text-white bg-primary-100');
     this.unselectMenu(revenue_button,'text-white bg-primary-100');
@@ -143,37 +161,48 @@ export class UserProfileComponent implements OnInit{
 
   selectBilling(){
     let bill_button = document.getElementById('bill-button')
-    let general_button = document.getElementById('general-button')
+    
+    let account_button = document.getElementById('account-button')
+    let org_button = document.getElementById('org-button')
     let order_button = document.getElementById('order-button')
     let revenue_button = document.getElementById('revenue-button')
 
     this.selectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(general_button,'text-white bg-primary-100');
+    this.unselectMenu(org_button,'text-white bg-primary-100');
+    this.unselectMenu(account_button,'text-white bg-primary-100');
     this.unselectMenu(order_button,'text-white bg-primary-100');
     this.unselectMenu(revenue_button,'text-white bg-primary-100');
   }
 
   selectOrder(){
     let bill_button = document.getElementById('bill-button')
-    let general_button = document.getElementById('general-button')
+    
+    let account_button = document.getElementById('account-button')
+    let org_button = document.getElementById('org-button')
     let order_button = document.getElementById('order-button')
     let revenue_button = document.getElementById('revenue-button')
 
     this.selectMenu(order_button,'text-white bg-primary-100');
     this.unselectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(general_button,'text-white bg-primary-100');
+    
+    this.unselectMenu(org_button,'text-white bg-primary-100');
+    this.unselectMenu(account_button,'text-white bg-primary-100');
     this.unselectMenu(revenue_button,'text-white bg-primary-100');
   }
 
   selectRevenue(){
     let bill_button = document.getElementById('bill-button')
-    let general_button = document.getElementById('general-button')
+    
+    let account_button = document.getElementById('account-button')
+    let org_button = document.getElementById('org-button')
     let order_button = document.getElementById('order-button')
     let revenue_button = document.getElementById('revenue-button')
 
     this.selectMenu(revenue_button,'text-white bg-primary-100');
     this.unselectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(general_button,'text-white bg-primary-100');
+    
+    this.unselectMenu(org_button,'text-white bg-primary-100');
+    this.unselectMenu(account_button,'text-white bg-primary-100');
     this.unselectMenu(order_button,'text-white bg-primary-100');
   }
 

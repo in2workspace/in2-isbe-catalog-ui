@@ -166,7 +166,7 @@
         <div id="desc-container" class="w-full bg-secondary-50/95 dark:bg-secondary-100/95 rounded-lg p-8 lg:p-12">
             <div #detailsScrollAnchor id="details-scroll-anchor" class="pt-[88px] -mt-[88px]"></div>
             <div id="details-container">
-                <h2 #detailsContent class="text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-4">Description</h2>
+                <h2 #detailsContent class="text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-4">{{ 'PRODUCT_INVENTORY._description' | translate }}</h2>
                 <markdown class="dark:text-gray-200 text-wrap break-all" [data]="prodSpec.description"></markdown>
                 @if(serviceSpecs.length > 0){
                     <div class="pb-2">

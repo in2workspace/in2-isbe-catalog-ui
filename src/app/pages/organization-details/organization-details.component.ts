@@ -22,6 +22,12 @@ export class OrganizationDetailsComponent implements OnInit {
   description:any=undefined;
   website:any;
 
+  mediumTypeKey: Record<string,string> = {
+    Email: 'PROFILE._email',
+    PostalAddress: 'PROFILE._postalAddress',
+    TelephoneNumber: 'PROFILE._phone',
+  };
+
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -37,11 +43,8 @@ export class OrganizationDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
-    console.log('--- Details ID:')
-    console.log(this.id) 
     this.accService.getOrgInfo(this.id).then(org => {
       this.orgInfo=org;
-      console.log(this.orgInfo)
       for(let i=0; i<this.orgInfo.partyCharacteristic.length;i++){
         if(this.orgInfo.partyCharacteristic[i].name=='logo'){
           this.logo=this.orgInfo.partyCharacteristic[i].value

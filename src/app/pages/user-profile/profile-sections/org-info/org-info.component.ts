@@ -1,7 +1,5 @@
 import { Component, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
-import { LoginInfo } from 'src/app/models/interfaces';
 import { AccountServiceService } from 'src/app/services/account-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
 import { FormGroup, FormControl, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { phoneNumbers, countries } from 'src/app/models/country.const'
 import {EventMessageService} from "src/app/services/event-message.service";
@@ -21,6 +19,18 @@ import { combineLatest, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 
 type OrganizationUpdate = components["schemas"]["Organization_Update"];
+
+enum MediumType {
+  Email = 'Email',
+  PostalAddress = 'PostalAddress',
+  TelephoneNumber = 'TelephoneNumber',
+}
+
+enum PhoneContactType {
+  Mobile = 'Mobile',
+  Fixed = 'Fixed',
+}
+
 
 @Component({
     selector: 'org-info',
@@ -91,6 +101,11 @@ export class OrgInfoComponent {
     { code: 'ES' }, { code: 'SE' }
   ];
 
+  mediumTypeKey: Record<string,string> = {
+    Email: 'PROFILE._email',
+    PostalAddress: 'PROFILE._postalAddress',
+    TelephoneNumber: 'PROFILE._phone',
+  };
 
   @ViewChild('imgURL') imgURL!: ElementRef;
 
@@ -180,7 +195,7 @@ export class OrgInfoComponent {
     for(let i=0; i<this.contactmediums.length; i++){
       if(this.contactmediums[i].mediumType == 'Email'){
         mediums.push({
-          mediumType: 'Email',
+          mediumType: MediumType.Email,
           preferred: this.contactmediums[i].preferred,
           characteristic: {
             contactType: this.contactmediums[i].characteristic.contactType,
@@ -249,7 +264,7 @@ export class OrgInfoComponent {
         if(profile.contactMedium[i].mediumType == 'Email'){
           this.contactmediums.push({
             id: uuidv4(),
-            mediumType: 'Email',
+            mediumType: MediumType.Email,
             preferred: profile.contactMedium[i].preferred,
             characteristic: {
               contactType: profile.contactMedium[i].characteristic?.contactType,
@@ -337,7 +352,7 @@ export class OrgInfoComponent {
       if(this.emailSelected){
         this.contactmediums.push({
           id: uuidv4(),
-          mediumType: 'Email',
+          mediumType: MediumType.Email,
           preferred: false,
           characteristic: {
             contactType: 'Email',
@@ -347,7 +362,7 @@ export class OrgInfoComponent {
       } else if(this.addressSelected){
         this.contactmediums.push({
           id: uuidv4(),
-          mediumType: 'PostalAddress',
+          mediumType: MediumType.PostalAddress,
           preferred: false,
           characteristic: {
             contactType: 'PostalAddress',
@@ -361,10 +376,10 @@ export class OrgInfoComponent {
       } else {
         this.contactmediums.push({
           id: uuidv4(),
-          mediumType: 'TelephoneNumber',
+          mediumType: MediumType.TelephoneNumber,
           preferred: false,
           characteristic: {
-            contactType: this.mediumForm.value.telephoneType,
+            contactType: this.mediumForm.value.telephoneType || PhoneContactType.Mobile,
             phoneNumber: this.phonePrefix.code + this.mediumForm.value.telephoneNumber
           }
         })
@@ -394,7 +409,7 @@ export class OrgInfoComponent {
           }
           this.contactmediums[index]={
             id: this.contactmediums[index].id,
-            mediumType: 'Email',
+            mediumType: MediumType.Email,
             preferred: false,
             characteristic: {
               contactType: 'Email',
@@ -416,7 +431,7 @@ export class OrgInfoComponent {
           });
           this.contactmediums[index]={
             id: this.contactmediums[index].id,
-            mediumType: 'PostalAddress',
+            mediumType: MediumType.PostalAddress,
             preferred: false,
             characteristic: {
               contactType: 'PostalAddress',
@@ -454,7 +469,7 @@ export class OrgInfoComponent {
             }
           this.contactmediums[index]={
             id: this.contactmediums[index].id,
-            mediumType: 'TelephoneNumber',
+            mediumType: MediumType.TelephoneNumber,
             preferred: false,
             characteristic: {
               contactType: this.mediumForm.value.telephoneType,
