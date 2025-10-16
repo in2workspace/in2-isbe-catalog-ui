@@ -22,7 +22,7 @@ export class UserInfoComponent implements OnInit {
   loading: boolean = false;
   orders:any[]=[];
   profile:any;
-  seller:any='';
+  id:any;
   token:string='';
   email:string='';
   userProfileForm = new FormGroup({
@@ -68,17 +68,16 @@ export class UserInfoComponent implements OnInit {
 
   initPartyInfo(): void {
     combineLatest([
-      this.auth.sellerId$,
       this.auth.loginInfo$,
       this.auth.accessToken$,
     ])
     .pipe(take(1))
-    .subscribe(([sellerId, li, accessToken]) => {
+    .subscribe(([li, accessToken]) => {
       if (!li) { initFlowbite(); return; }
 
-      this.seller = sellerId || '';
       this.email  = li.email || '';
       this.token  = accessToken || li.token || '';
+      this.id = li.id;
 
       this.getProfile();
       initFlowbite();
@@ -86,7 +85,7 @@ export class UserInfoComponent implements OnInit {
   }
 
   getProfile(){
-    this.accountService.getUserInfo(this.seller).then(data=> { 
+    this.accountService.getUserInfo(this.id).then(data=> { 
       this.profile=data;
       this.loadProfileData(this.profile)
       this.loading=false;
@@ -99,8 +98,8 @@ export class UserInfoComponent implements OnInit {
 
   updateProfile(){
     let profile = {
-      "id": this.seller,
-      "href": this.seller,
+      "id": this.id,
+      "href": this.id, //Todo: revisar
       "countryOfBirth": this.userProfileForm.value.country,
       "familyName": this.userProfileForm.value.lastname,
       "gender": this.userProfileForm.value.gender,
@@ -111,7 +110,7 @@ export class UserInfoComponent implements OnInit {
       "title": this.userProfileForm.value.treatment,
       "birthDate": this.userProfileForm.value.birthdate
     }
-    this.accountService.updateUserInfo(this.seller,profile).subscribe({
+    this.accountService.updateUserInfo(this.id,profile).subscribe({
       next: data => {
         this.userProfileForm.reset();
         this.getProfile();

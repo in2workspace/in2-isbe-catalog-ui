@@ -9,7 +9,7 @@
 
     <!-- Footer Links -->
     <ul class="flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400">
-      @if(checkLogged){
+      @if(checkLogged && !IS_ISBE){
         <li>
           <button (click)="feedback=!feedback;$event.stopPropagation();" class="mr-4 hover:underline md:mr-6">Feedback</button>
         </li>

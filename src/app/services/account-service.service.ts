@@ -43,23 +43,23 @@ export class AccountServiceService {
     return this.http.delete<any>(url);
   }
 
-  getUserInfo(seller:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/${seller}`;
+  getUserInfo(id:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/urn:ngsi-ld:individual:${id}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getOrgInfo(seller:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;
+  getOrgInfo(id:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${id}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  updateUserInfo(seller:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/${seller}`;   
+  updateUserInfo(id:any,profile:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/urn:ngsi-ld:individual:${id}`;   
     return this.http.patch<any>(url, profile);
   }
 
-  updateOrgInfo(seller:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;   
+  updateOrgInfo(id:any,profile:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${id}`;   
     return this.http.patch<any>(url, profile);
   }
 }
