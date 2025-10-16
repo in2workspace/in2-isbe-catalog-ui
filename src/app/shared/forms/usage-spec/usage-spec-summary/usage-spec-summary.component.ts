@@ -1,16 +1,12 @@
 import {TranslateModule} from "@ngx-translate/core";
-import { Component, Input, OnInit, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { NgClass, NgIf } from "@angular/common";
 import { PickerComponent } from "@ctrl/ngx-emoji-mart";
 import {SharedModule} from "../../../shared.module";
 import { MarkdownComponent } from "ngx-markdown";
 import {
-  ControlValueAccessor, FormArray,
-  FormBuilder,
-  ReactiveFormsModule,
   FormGroup,
-  NG_VALUE_ACCESSOR,
-  Validators
+  NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
 @Component({
@@ -33,14 +29,8 @@ import {
   templateUrl: './usage-spec-summary.component.html',
   styleUrl: './usage-spec-summary.component.css'
 })
-export class UsageSpecSummaryComponent implements OnInit {
+export class UsageSpecSummaryComponent {
   @Input() usageSpecForm!: FormGroup;
 
-  async ngOnInit() {
-    console.log('--- INFO SUMMARY')
-    console.log(this.usageSpecForm)
-    console.log(this.usageSpecForm.get('generalInfo')?.get('name')?.value)
-    console.log(this.usageSpecForm.get('metrics')?.value)
-  }
 
 }

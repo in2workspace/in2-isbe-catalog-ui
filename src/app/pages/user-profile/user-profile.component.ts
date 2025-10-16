@@ -64,10 +64,6 @@ export class UserProfileComponent implements OnInit{
 
         this.seller = aux.id;
         this.loggedAsUser = aux.logged_as === aux.id;
-        console.log(aux);
-        console.log(aux.logged_as);
-        console.log(aux.id);
-        console.log('logged as user?', this.loggedAsUser);
         this.show_profile = this.loggedAsUser;
         this.show_org_profile = !this.loggedAsUser;
 
@@ -219,17 +215,13 @@ export class UserProfileComponent implements OnInit{
     if(elem != null){
       if(elem.className.match(cls)){
         this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
       }
     }
   }
 
   selectMenu(elem:HTMLElement| null,cls:string){
     if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
+      if(!elem.className.match(cls)){
         this.addClass(elem,cls)
       }
     }

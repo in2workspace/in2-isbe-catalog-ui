@@ -250,7 +250,7 @@ export class BillingAccountFormComponent implements OnInit {
         error: error => {
           console.error('There was an error while creating!', error);
           if(error.error.error){
-            console.log(error)
+            console.error(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
             this.errorMessage='¡Hubo un error al crear la cuenta de facturación!';
@@ -269,7 +269,6 @@ export class BillingAccountFormComponent implements OnInit {
         const phoneNumber = parsePhoneNumber(this.phonePrefix.code + this.billingForm.value.telephoneNumber);
         if (phoneNumber) {
           if (!phoneNumber.isValid()) {
-            console.log('NUMERO INVALIDO')
             this.billingForm.controls['telephoneNumber'].setErrors({'invalidPhoneNumber': true});
             this.toastVisibility = true;
             setTimeout(() => {
@@ -348,7 +347,7 @@ export class BillingAccountFormComponent implements OnInit {
           error: error => {
             console.error('There was an error while updating!', error);
             if(error.error.error){
-              console.log(error)
+              console.error(error)
               this.errorMessage='Error: '+error.error.error;
             } else {
               this.errorMessage='¡Hubo un error al actualizar la cuenta de facturación!';

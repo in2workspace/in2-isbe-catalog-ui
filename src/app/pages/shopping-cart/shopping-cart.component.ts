@@ -138,37 +138,28 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
     let insertCheck = false;
     let priceInfo:any  ={};
     for(let i=0; i<this.items.length; i++){
-      console.log('totalprice')
-      console.log(this.items[i])
       insertCheck = false;
       if(this.totalPrice.length == 0){
         priceInfo = this.getPrice(this.items[i]);
         this.totalPrice.push(priceInfo);
-        console.log('Añade primero')
       } else {
         for(let j=0; j<this.totalPrice.length; j++){
           priceInfo = this.getPrice(this.items[i]);
           if(priceInfo.priceType == this.totalPrice[j].priceType && priceInfo.unit == this.totalPrice[j].unit && priceInfo.text == this.totalPrice[j].text){
             this.totalPrice[j].price=this.totalPrice[j].price+priceInfo.price;
             insertCheck=true;
-            console.log('suma')
           }
-          console.log('precio segundo')
-          console.log(priceInfo)
         }
         if(insertCheck==false){
           this.totalPrice.push(priceInfo);
           insertCheck=true;
-          console.log('añade segundo')
         }
       }
     }
-    console.log(this.totalPrice)
   }
 
   async deleteProduct(product: cartProduct){
     await this.cartService.removeItemShoppingCart(product.id);
-    console.log('deleted');
     this.eventMessage.emitRemovedCartItem(product as cartProduct);
   }
 
@@ -203,93 +194,10 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
         this.cdr.detectChanges();
       }
     }
-    console.log('selecting bill')
-    console.log(this.billing_accounts)
     this.cdr.detectChanges();
   }
 
-  /* async orderProduct(){
-    console.log('buying')
-    console.log(moment().utc())
-    let products = []
-    for(let i = 0; i<this.items.length; i++){
-      let char = [];
-      let opChars = this.items[i].options.characteristics
-      if(opChars != undefined){
-        for(let j = 0; j< opChars.length; j++){
-          char.push({
-            "name": opChars[j].characteristic.name,
-            "value": opChars[j].value?.value,
-            "valueType": opChars[j].characteristic.valueType
-          })
-        }
-      }
-
-      products.push({
-          "id": this.items[i].id,
-          "action": "add",
-          "state": "acknowledged",
-          "itemTotalPrice":[
-            {
-               "productOfferingPrice": {
-                  "id": this.items[i].options.pricing?.id,
-                  "href": this.items[i].options.pricing?.href,
-              }
-            }
-         ],
-          "productOffering": {
-              "id": this.items[i].id,
-              "href": this.items[i].id
-          },
-          "product": {
-            "productCharacteristic": char
-        }
-      })
-    }
-
-    let productOrder = {
-      "state": "acknowledged",
-      "productOrderItem": products,
-      "seller": [
-        {
-            "id": this.seller,
-            "href": this.seller,
-            "role": "Customer"
-        }
-      ],
-      //priority??
-      "priority": '4',
-      "billingAccount": {
-        "id": this.selectedBilling.id,
-        "href": this.selectedBilling.id
-      },
-      "orderDate": moment().utc(),
-      "notificationContact": this.selectedBilling.email,
-    }
-    await this.orderService.postProductOrder(productOrder).subscribe({
-      next: data => {
-          console.log(data)
-          console.log('PROD ORDER DONE');
-          this.cartService.emptyShoppingCart().subscribe({
-            next: data => {
-                console.log(data)
-                console.log('EMPTY');
-            },
-            error: error => {
-                console.error('There was an error while updating!', error);
-            }
-          });
-          this.goToInventory();
-      },
-      error: error => {
-          console.error('There was an error while updating!', error);
-      }
-    });
-  } */
-
   async orderProduct() {
-    console.log('buying');
-    console.log(moment().utc());
 
     try {
       // Construir la lista de productos
@@ -298,13 +206,8 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
       // Crear el objeto del pedido
       const productOrder = this.buildProductOrder(products);
 
-      console.log('--- order ---');
-      console.log(productOrder);
-
       // Enviar el pedido
       const response = await firstValueFrom(this.orderService.postProductOrder(productOrder));
-      console.log(response);
-      console.log('PROD ORDER DONE');
 
       // Vaciar el carrito
       await this.emptyShoppingCart();
@@ -374,8 +277,6 @@ export class ShoppingCartComponent implements OnInit, AfterViewInit{
   private async emptyShoppingCart() {
     try {
       const response = await this.cartService.emptyShoppingCart();
-      console.log(response);
-      console.log('EMPTY');
     } catch (error) {
       console.error('There was an error while emptying the cart:', error);
     }

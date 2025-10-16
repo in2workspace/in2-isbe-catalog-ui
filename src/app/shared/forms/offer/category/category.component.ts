@@ -55,26 +55,22 @@ export class CategoryComponent implements ControlValueAccessor, OnInit, AfterVie
 
   constructor(private api: ApiServiceService,
               private cdr: ChangeDetectorRef) {
-    console.log('🔄 Initializing CategoryComponent');
   }
 
   onChange: (value: any) => void = () => {};
   onTouched: () => void = () => {};
 
   async ngOnInit() {
-    console.log('📝 Initializing form in', this.formType, 'mode');
     this.isEditMode = this.formType === 'update';
     // Si hay valores iniciales en el formulario, los cargamos
     await this.getCategories();
   }
 
   writeValue(categories: Category[]): void {
-    console.log('📝 Writing value to form:', categories);
     this.selectedCategories = categories || [];
     // Store original value only in edit mode
     if (this.isEditMode && categories) {
       this.originalValue = JSON.parse(JSON.stringify(categories));
-      console.log('📝 Original value stored:', this.originalValue);
     }
   }
 
@@ -91,7 +87,6 @@ export class CategoryComponent implements ControlValueAccessor, OnInit, AfterVie
   }
 
   async getCategories() {
-    console.log('Obteniendo categorías...');
     this.loadingCategory = true;
     this.categories = []; // Asegurar que siempre es un array
 
@@ -103,9 +98,6 @@ export class CategoryComponent implements ControlValueAccessor, OnInit, AfterVie
         this.loadingCategory = false;
         return;
       }
-
-      console.log('Datos recibidos:', data);
-
       // Filtrar solo las categorías raíz
       this.categories = data
         .filter(category => category.isRoot)
@@ -115,8 +107,6 @@ export class CategoryComponent implements ControlValueAccessor, OnInit, AfterVie
           childrenLoaded: false,
           children: []
         }));
-
-      console.log('Categorías raíz:', this.categories);
 
       this.loadingCategory = false;
       setTimeout(() => this.cdr.detectChanges(), 0); // Forzar actualización de la vista
@@ -136,7 +126,6 @@ export class CategoryComponent implements ControlValueAccessor, OnInit, AfterVie
     }
 
     try {
-      console.log(`Cargando hijos de ${category.name}...`);
       const children = await this.api.getCategoriesByParentId(category.id);
 
       category.children = children.map(child => ({
@@ -183,8 +172,6 @@ export class CategoryComponent implements ControlValueAccessor, OnInit, AfterVie
       originalValue: this.originalValue,
       currentValue
     };
-
-    console.log('🚀 Emitting final change state:', changeState);
     this.formChange.emit(changeState);
   }
 
@@ -241,7 +228,6 @@ export class CategoryComponent implements ControlValueAccessor, OnInit, AfterVie
   }
 
   ngOnDestroy() {
-    console.log('🗑️ Destroying CategoryComponent');
     
     // Solo emitir cambios si estamos en modo edición y hay cambios reales
     if (this.isEditMode && this.hasBeenModified) {
@@ -256,14 +242,8 @@ export class CategoryComponent implements ControlValueAccessor, OnInit, AfterVie
           originalValue: this.originalValue,
           currentValue
         };
-
-        console.log('🚀 Emitting final change state:', changeState);
         this.formChange.emit(changeState);
-      } else {
-        console.log('📝 No real changes detected, skipping emission');
       }
-    } else if (!this.isEditMode) {
-      console.log('📝 Not in edit mode, skipping change detection');
     }
   }
 

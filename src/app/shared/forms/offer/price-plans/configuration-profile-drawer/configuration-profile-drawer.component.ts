@@ -28,10 +28,6 @@ export class ConfigurationProfileDrawerComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    console.log('Profile Data:', this.profileData);
-
-    // Guard...
-    //const characteristicsData = this.profileData || [];
     let profileChars = [];
     for(let i=0;i<this.profileData.length;i++){
       if (!certifications.some(certification => certification.name === this.profileData[i].name)) {

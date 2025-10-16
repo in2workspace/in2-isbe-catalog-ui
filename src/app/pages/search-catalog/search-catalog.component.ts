@@ -87,8 +87,6 @@ export class SearchCatalogComponent implements OnInit{
         this.logo='assets/images/Dome-Marketplace.svg';
       } else {
         this.accService.getOrgInfo(owner.id).then(info  => {
-          console.log('info')
-          console.log(info)
           this.providerName=info.tradingName;
           if (Array.isArray(info?.partyCharacteristic) && info.partyCharacteristic.length > 0) {
             const provdesc = info.partyCharacteristic.find((item: { name: string; }) => item.name === 'description')

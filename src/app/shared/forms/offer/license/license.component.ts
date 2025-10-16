@@ -49,10 +49,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
               currentValue
             };
     
-            console.log('🚀 Emitting final change state:', changeState);
             this.formChange.emit(changeState);
-          } else {
-            console.log('📝 No real changes detected, skipping emission');
           }
         }
       }
@@ -79,12 +76,9 @@ export class LicenseComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('🔄 Initializing LicenseComponent');
-    console.log('📝 Initializing form in', this.formType, 'mode');
     this.isEditMode = this.formType === 'update';
 
     if (this.isEditMode && this.data) {
-      console.log('📝 Data received:', this.data);
       //LICENSE
       if (Array.isArray(this.data.productOfferingTerm)) {
         this.formGroup.addControl('treatment', new FormControl<string>(this.data.productOfferingTerm[0].name));
@@ -95,7 +89,6 @@ export class LicenseComponent implements OnInit, OnDestroy {
           treatment: this.data.productOfferingTerm[0].name,
           description: this.data.productOfferingTerm[0].description
         };
-        console.log('📝 Original value stored:', this.originalValue);
       } else {
         this.formGroup.addControl('treatment', new FormControl<string>(''));
         this.formGroup.addControl('description', new FormControl<string>(''));
@@ -113,9 +106,7 @@ export class LicenseComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    console.log('🗑️ Destroying LicenseComponent');
-    
+  ngOnDestroy() {    
     // Solo emitir cambios si estamos en modo edición y hay cambios reales
     if (this.isEditMode && this.hasBeenModified && this.originalValue) {
       const currentValue = {
@@ -133,14 +124,8 @@ export class LicenseComponent implements OnInit, OnDestroy {
           originalValue: this.originalValue,
           currentValue
         };
-
-        console.log('🚀 Emitting final change state:', changeState);
         this.formChange.emit(changeState);
-      } else {
-        console.log('📝 No real changes detected, skipping emission');
       }
-    } else if (!this.isEditMode) {
-      console.log('📝 Not in edit mode, skipping change detection');
     }
   }
 

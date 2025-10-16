@@ -54,6 +54,13 @@ export class ProductDetailsComponent implements OnInit {
   @ViewChild('attachScrollAnchor') attachScrollAnchor!: ElementRef;
   @ViewChild('charsScrollAnchor') charsScrollAnchor!: ElementRef;
   @ViewChild('detailsScrollAnchor') detailsScrollAnchor!: ElementRef; 
+
+  RelTypeKey: Record<string,string> = {
+    dependency: 'CREATE_OFFER._dependency',
+    migration: 'CREATE_OFFER._migration',
+    exclusivity: 'CREATE_OFFER._exclusivity',
+    substitution: 'CREATE_OFFER._substitution',
+  };
   
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
@@ -591,17 +598,13 @@ async deleteProduct(product: Product | undefined){
     if(elem != null){
       if(elem.className.match(cls)){
         this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
       }
     }
   }
 
   selectTag(elem:HTMLElement| null,cls:string){
     if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
+      if(!elem.className.match(cls)){
         this.addClass(elem,cls)
       }
     }

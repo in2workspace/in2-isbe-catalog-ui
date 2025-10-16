@@ -1,16 +1,12 @@
 import {TranslateModule} from "@ngx-translate/core";
-import { Component, Input, OnInit, forwardRef } from '@angular/core';
+import { Component, Input, forwardRef } from '@angular/core';
 import { NgClass, NgIf } from "@angular/common";
 import { PickerComponent } from "@ctrl/ngx-emoji-mart";
 import {SharedModule} from "../../../shared.module";
 import { MarkdownComponent } from "ngx-markdown";
 import {
-  ControlValueAccessor, FormArray,
-  FormBuilder,
-  ReactiveFormsModule,
   FormGroup,
-  NG_VALUE_ACCESSOR,
-  Validators
+  NG_VALUE_ACCESSOR
 } from '@angular/forms';
 
 @Component({
@@ -33,22 +29,12 @@ import {
     }
   ]
 })
-export class OfferSummaryComponent implements OnInit {
+export class OfferSummaryComponent{
 
   @Input() productOfferForm!: FormGroup;
 
-  async ngOnInit() {
-    console.log('--- INFO SUMMARY')
-    console.log(this.productOfferForm)
-    console.log(this.productOfferForm.get('generalInfo')?.get('status')?.value)
-    console.log(this.productOfferForm.get('catalogue')?.value)
-    console.log(this.productOfferForm.get('category')?.value)
-  }
-
   get isLicenseEmpty(): boolean {
     const licenseValue = this.productOfferForm.get('license')?.value;
-  
-    // Check if the value is null, undefined, or an empty object
     return !licenseValue || (typeof licenseValue === 'object' && Object.keys(licenseValue).length === 0);
   }
   

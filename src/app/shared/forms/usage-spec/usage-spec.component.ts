@@ -75,18 +75,14 @@ export class UsageSpecComponent implements OnInit {
     this.formSubscription = this.eventMessage.messages$.subscribe(message => {
       if (message.type === 'SubformChange') {
         const changeState = message.value as FormChangeState;
-        console.log('Received subform change:', changeState);
         this.handleSubformChange(changeState);
       }
     });
   }
 
   handleSubformChange(change: FormChangeState) {
-    console.log('📝 Subform change received:', change);
     this.formChanges[change.subformType] = change;
     this.hasChanges = Object.keys(this.formChanges).length > 0;
-    console.log('📝 Has changes:', this.hasChanges);
-    console.log(this.formChanges[change.subformType])
   }
 
   ngOnDestroy() {
@@ -139,9 +135,6 @@ export class UsageSpecComponent implements OnInit {
 
   submitForm() {
     if (this.formType === 'update') {
-      console.log('🔄 Starting offer update process...');
-      console.log('📝 Current form changes:', this.formChanges);
-      
       // Aquí irá la lógica de actualización
       // Por ahora solo mostramos los cambios
       this.updateUsageSpec();
@@ -192,18 +185,15 @@ export class UsageSpecComponent implements OnInit {
         }
       ],
     }
-    console.log(usageSpec)
 
     this.usageSpecService.postUsageSpec(usageSpec).subscribe({
       next: data => {
-        console.log('usageSpec created:')
-        console.log(data)
         this.goBack();
       },
       error: error => {
         console.error('There was an error while creating the usageSpec!', error);
         if(error.error.error){
-          console.log(error)
+          console.error(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
           this.errorMessage='There was an error while creating the usageSpec!';
@@ -218,8 +208,6 @@ export class UsageSpecComponent implements OnInit {
   }
 
   async updateUsageSpec(){
-    console.log('🔄 Starting offer update process...');
-    console.log('📝 Current form changes:', this.formChanges);
 
     // Preparar el payload base con los datos que no han cambiado
     const basePayload: any = {
@@ -230,7 +218,6 @@ export class UsageSpecComponent implements OnInit {
 
     // Procesar cada cambio emitido por los subformularios
     for (const [subformType, change] of Object.entries(this.formChanges)) {
-      console.log(`📝 Processing changes for ${subformType}:`, change);
 
       switch (subformType) {
         case 'generalInfo':
@@ -246,17 +233,13 @@ export class UsageSpecComponent implements OnInit {
             valueType: 'number'
           }));
           basePayload.specCharacteristic = metrics
-          console.log('------ here')
-          console.log(metrics)
           break;
       }
     }
-    console.log('📝 Final update payload:', basePayload);
 
     try {
       // Llamar a la API para actualizar la oferta
       await lastValueFrom(this.usageSpecService.updateUsageSpec(basePayload, this.usageSpec.id));
-      console.log('✅ Usage Spec updated successfully');
       this.goBack();
     } catch (error: any) {
       console.error('❌ Error updating Usage Spec:', error);

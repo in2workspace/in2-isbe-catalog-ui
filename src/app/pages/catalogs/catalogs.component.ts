@@ -54,8 +54,6 @@ export class CatalogsComponent implements OnInit{
     let input = document.querySelector('[type=search]')
     if(input!=undefined){
       input.addEventListener('input', e => {
-        // Easy way to get the value of the element who trigger the current `e` event
-        console.log(`Input updated`)
         if(this.searchField.value==''){
           this.filter=undefined;
           this.getCatalogs(false);

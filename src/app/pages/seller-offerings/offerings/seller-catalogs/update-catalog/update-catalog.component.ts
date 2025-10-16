@@ -122,8 +122,6 @@ export class UpdateCatalogComponent implements OnInit {
       if(this.cat.name != this.generalForm.value.name){
         this.catalogToUpdate.name=this.generalForm.value.name;
       }
-      console.log('CATALOG TO UPDATE:')
-      console.log(this.catalogToUpdate)
       this.showGeneral=false;
       this.showSummary=true;
       this.selectStep('summary','summary-circle');
@@ -139,7 +137,7 @@ export class UpdateCatalogComponent implements OnInit {
       error: error => {
         console.error('There was an error while updating!', error);
         if(error.error.error){
-          console.log(error)
+          console.error(error)
           this.errorMessage='Error: '+error.error.error;
         } else {
           this.errorMessage='¡Hubo un error al actualizar el catálogo!';
@@ -166,17 +164,13 @@ export class UpdateCatalogComponent implements OnInit {
     if(elem != null){
       if(elem.className.match(cls)){
         this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
       }
     }
   }
 
   selectMenu(elem:HTMLElement| null,cls:string){
     if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
+      if(!elem.className.match(cls)){
         this.addClass(elem,cls)
       }
     }
@@ -273,7 +267,6 @@ export class UpdateCatalogComponent implements OnInit {
   }
 
   addEmoji(event:any){
-    console.log(event)
     this.showEmoji=false;
     const currentText = this.generalForm.value.description;
     this.generalForm.patchValue({

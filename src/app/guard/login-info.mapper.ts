@@ -1,3 +1,5 @@
+import { environment } from "src/environments/environment";
+
 export interface LoginInfo {
   id: string;
   user: string;
@@ -46,9 +48,9 @@ function rolesFromPowers(vc: any): string[] {
     roleSet.add('individual');
   }
 
-  const orgName = (mandator?.organization || '').toLowerCase();
-  if (orgName.includes('in2')) {
-    //roleSet.add('admin'); //TODO: check
+  const orgiId = (mandator?.organizationIdentifier || '').toLowerCase();
+  if (orgiId.includes(environment.FUNDATION_ID)) { //ISBE FUNDATION ID
+    roleSet.add('admin');
   }
 
   return Array.from(roleSet);
@@ -95,6 +97,6 @@ export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
     username,
     roles: roleObjects,
     organizations,
-    logged_as: orgId,
+    logged_as: roleStrings.includes('orgAdmin') && orgId ? orgId : vc?.id,
   };
 }

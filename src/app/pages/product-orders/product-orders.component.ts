@@ -157,17 +157,14 @@ export class ProductOrdersComponent implements OnInit {
 
     this.paginationService.getItemsPaginated(this.page, this.ORDER_LIMIT, next, this.orders,this.nextOrders, options,
       this.paginationService.getOrders.bind(this.paginationService)).then(data => {
-        console.log('--pag')
-        console.log(data)
-        console.log(this.orders)
-      this.page_check=data.page_check;
-      this.orders=data.items;
-      this.nextOrders=data.nextItems;
-      this.page=data.page;
-      this.loading=false;
-      this.loading_more=false;
-    })
-  }
+        this.page_check=data.page_check;
+        this.orders=data.items;
+        this.nextOrders=data.nextItems;
+        this.page=data.page;
+        this.loading=false;
+        this.loading_more=false;
+      })
+    }
 
   async next(){
     await this.getOrders(true);
@@ -177,12 +174,8 @@ export class ProductOrdersComponent implements OnInit {
     const index = this.filters.findIndex(item => item === filter);
     if (index !== -1) {
       this.filters.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.filters)
     } else {
-      console.log('añade filtro')
       this.filters.push(filter)
-      console.log(this.filters)
     }
     this.getOrders(false);
   }
@@ -260,7 +253,6 @@ export class ProductOrdersComponent implements OnInit {
   }
 
   toggleShowDetails(order:any){
-    console.log(order)
     this.showOrderDetails=true;
     this.orderToShow=order;
   }
@@ -283,24 +275,19 @@ export class ProductOrdersComponent implements OnInit {
     if(elem != null){
       if(elem.className.match(cls)){
         this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
       }
     }
   }
 
   selectMenu(elem:HTMLElement| null,cls:string){
     if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
+      if(!elem.className.match(cls)){
         this.addClass(elem,cls)
       }
     }
   }
 
   goToOrders(){
-    console.log("--goToOrders--")
     //this.selectOrder();
     this.show_invoices=false;
     this.show_orders=true;
@@ -314,7 +301,6 @@ export class ProductOrdersComponent implements OnInit {
     this.cdr.detectChanges();
   }
   goToInvoices(){
-    console.log("--goToInvoices--")
     //this.selectBilling();
     this.show_invoices=true;
     this.show_orders=false;

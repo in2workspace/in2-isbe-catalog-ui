@@ -91,7 +91,6 @@ export class CategoriesComponent {
         })           
       }
     })*/
-    console.log('Getting categories...')
     this.api.getCategories(this.status).then(data => {      
       for(let i=0; i < data.length; i++){
         this.findChildren(data[i],data);
@@ -169,17 +168,12 @@ export class CategoriesComponent {
     const index = this.status.findIndex(item => item === filter);
     if (index !== -1) {
       this.status.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.status)
     } else {
-      console.log('añade filtro')
-      console.log(this.status)
       this.status.push(filter)
     }
     this.loading=true;
     this.categories=[];
     this.getCategories();
-    console.log('filter')
   }
 
 }

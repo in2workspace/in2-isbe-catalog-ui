@@ -90,12 +90,8 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
           currentValue: this.selectedProdSpecInternal
         };
         this.formChange.emit(changeState);
-      } else {
-        console.log('📝 No real changes detected, skipping emission');
       }
-    } else if (!this.isEditMode) {
-      console.log('📝 Not in edit mode, skipping change detection');
-    }
+    } 
   }
 
   async getSellerProdSpecs(next:boolean){

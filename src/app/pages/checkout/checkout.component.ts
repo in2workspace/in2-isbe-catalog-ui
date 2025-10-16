@@ -134,7 +134,6 @@ export class CheckoutComponent implements OnInit {
         priceInfo = this.getPrice(element);
         if (priceInfo != null) {
           this.totalPrice.push(priceInfo);
-          console.log('Añade primero')
         }
       } else {
         for (let j = 0; j < this.totalPrice.length; j++) {
@@ -170,9 +169,6 @@ export class CheckoutComponent implements OnInit {
     try {
       const response = await firstValueFrom(this.orderService.postProductOrder(productOrder));
       const redirectUrl = response.headers.get('X-redirect-url');
-
-      console.log(redirectUrl);
-      console.log('PROD ORDER DONE');
 
       if (redirectUrl) {
         // Going to the payment gateway
@@ -375,8 +371,6 @@ export class CheckoutComponent implements OnInit {
           this.selectedBillingAddress = baddr
         }
       }
-      console.log('billing account...')
-      console.log(this.billingAddresses)
       this.loading_baddrs = false;
       if (this.billingAddresses.length > 0) {
         this.preferred = false;
@@ -395,35 +389,15 @@ export class CheckoutComponent implements OnInit {
 
   onDeleted(baddr: billingAccountCart) {
     console.log('Deleting billing account')
-    /*this.account.deleteBillingAccount(baddr).subscribe({
-        next: result => {
-          console.log('--- DELETE BILLING ADDRESS ---')
-          console.log(baddr.id)
-          this.billingAddresses.filter(item => item.id != baddr.id)
-        },
-        error: error => {
-          console.log('--- ERROR WHILE DELETING BILLING ADDRESS ---')
-          this.errorMessage='There was an error while deleting the billing addresss!';
-          this.showError=true;
-          setTimeout(() => {
-            this.showError = false;
-          }, 3000);
-        }
-      }
-    )*/
   }
 
   async deleteProduct(product: cartProduct) {
     await this.cartService.removeItemShoppingCart(product.id)
-    console.log('deleted');
     this.eventMessage.emitRemovedCartItem(product as cartProduct);
     this.cartService.getShoppingCart().then(data => {
-      console.log('---CARRITO API---')
-      console.log(data)
       this.items = data;
       this.cdr.detectChanges();
       this.getTotalPrice();
-      console.log('------------------')
     })
   }
 

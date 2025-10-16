@@ -303,17 +303,13 @@ export class UpdateCategoryComponent implements OnInit {
     if(elem != null){
       if(elem.className.match(cls)){
         this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
       }
     }
   }
 
   selectMenu(elem:HTMLElement| null,cls:string){
     if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
+      if(!elem.className.match(cls)){
         this.addClass(elem,cls)
       }
     }
@@ -410,7 +406,6 @@ export class UpdateCategoryComponent implements OnInit {
   }
 
   addEmoji(event:any){
-    console.log(event)
     this.showEmoji=false;
     const currentText = this.generalForm.value.description;
     this.generalForm.patchValue({

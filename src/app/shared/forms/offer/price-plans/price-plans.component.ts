@@ -114,12 +114,10 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
   constructor(private fb: FormBuilder, private cdr: ChangeDetectorRef, private eventMessage: EventMessageService) {}
 
   ngOnInit() {
-    console.log('🔄 Initializing PricePlansComponent');
     this.pricePlanForm = this.createPricePlanForm();
 
     // ✅ Get existing price plans from parent form
     const existingPlans = this.form.get('pricePlans')?.value || [];
-    console.log('📋 Existing plans:', existingPlans);
     
     this.pricePlansForm = this.fb.array<FormGroup>(
       existingPlans.map((plan: PricePlan) => this.createPricePlanForm(plan))
@@ -127,7 +125,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
 
     // ✅ Sync the displayed list with the form array
     this.pricePlans = this.pricePlansForm.value;
-    console.log('💰 Initial price plans:', this.pricePlans);
     
     // Set initial payment online state based on existing plans
     if (this.pricePlans.length > 0) {
@@ -186,9 +183,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
     .map(p => p.name)
     .filter(name => !!name);
 
-    console.log('📝 Original state:', this.originalPricePlans);
-    console.log('🔍 Last known state:', this.lastKnownState);
-
     // Subscribe to form array changes
     this.formSubscription = this.pricePlansForm.valueChanges
       .pipe(
@@ -197,7 +191,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
         filter(() => this.pricePlansForm.dirty)
       )
       .subscribe((newValue) => {
-        console.log('📊 Form array value changed:', newValue);
         this.checkChanges();
       });
 
@@ -209,7 +202,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
           distinctUntilChanged()
         )
         .subscribe((newValue) => {
-          console.log(`📈 Price plan ${index} changed:`, newValue);
           this.checkChanges();
         });
     });
@@ -222,12 +214,9 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
   }
 
   private checkChanges() {
-    console.log('🔍 Checking for changes...');
     const currentValue = this.pricePlansForm.getRawValue() as PricePlan[];
-    console.log('📊 Current form value:', currentValue);
 
     const changes = this.getDetailedChanges(currentValue);
-    console.log('📝 Detailed changes:', changes);
 
     const changeState: PricePlanChangeState = {
       subformType: 'pricePlans',
@@ -245,7 +234,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
       modifiedPricePlans: changes
     };
 
-    console.log('🚀 Emitting price plans change state:', changeState);
     this.formChange.emit(changeState);
 
     // Actualizar el último estado conocido
@@ -456,7 +444,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
   }
 
   addPricePlan(plan?: any) {
-    console.log('add plan')
     // Determinar el valor correcto de paymentOnline
     const paymentOnlineValue = plan?.paymentOnline ?? this.paymentOnline;
 
@@ -476,7 +463,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
   removePricePlan(index: number) {
     if (index !== -1) {
       this.pricePlansForm.removeAt(index);
-      console.log(this.pricePlansForm)
       this.syncPricePlans();
       this.checkChanges();
       
@@ -521,11 +507,8 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
 
   openPricePlanDrawer(plan: any = null) {
     if (plan) {
-      console.log('📝 Editing existing price plan:', plan);
-
       // Buscar el FormGroup en pricePlansForm en base al ID del plan
       const index = this.pricePlansForm.controls.findIndex(p => p.value.id === plan.id);
-      console.log(index)
       if (index !== -1) {
         this.selectedPricePlan = this.pricePlansForm.at(index) as FormGroup;
       } else {
@@ -540,7 +523,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
 
       this.action = 'edit';
     } else {
-      console.log('➕ Creating a new price plan');
       this.action = 'create';
       // Crear el nuevo price plan con el valor actual de paymentOnline
       this.selectedPricePlan = this.createPricePlanForm({
@@ -564,7 +546,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
   }
 
   editPricePlan(plan: any) {
-    console.log('Editing Price Plan:', plan);
 
     if (plan) {
       this.action = 'edit';
@@ -589,8 +570,6 @@ export class PricePlansComponent implements OnInit, OnDestroy, ControlValueAcces
       .filter(name => !!name);
       this.form.updateValueAndValidity();
     }
-
-    console.log('📝 Form after patching:', this.selectedPricePlan.value);
     this.cdr.detectChanges();
     this.showDrawer = true;
   }

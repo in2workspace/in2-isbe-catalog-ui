@@ -1051,10 +1051,10 @@
                             <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}</label>
                             <select id="type" (change)="onRelChange($event)"
                             class="shadow bg-white border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
-                                <option selected value="migration">Migration</option>
-                                <option value="dependency">Dependency</option>
-                                <option value="exclusivity">Exclusivity</option>
-                                <option value="substitution">Substitution</option>
+                                <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
+                                <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
+                                <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>
+                                <option value="substitution">{{ 'UPDATE_OFFER._substitution' | translate }}</option>
                             </select>
                             @if(loadingprodSpecRel){
                                 <div role="status" class="w-full h-fit flex justify-center align-middle">

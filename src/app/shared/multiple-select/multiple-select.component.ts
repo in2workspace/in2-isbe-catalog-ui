@@ -38,9 +38,6 @@ export class MultipleSelectComponent {
       this.selectedItems.push(option);
     }
     this.selectedItemsChange.emit(this.selectedItems); 
-    console.log('toggling select multiple')
-    console.log('selected...')
-    console.log(this.selectedItems)
   }
 
   removeItem(option: string, event: MouseEvent) {

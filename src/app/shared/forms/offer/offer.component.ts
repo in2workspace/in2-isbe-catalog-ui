@@ -1013,7 +1013,6 @@ export class OfferComponent implements OnInit, OnDestroy{
             //Modificar el plan
             if (!element.id.startsWith('temp-id')) {
               let updatedPricePlan = await this.updatePricePlan(element,finalPriceComps,element.modifiedFields);
-              console.log(updatedPricePlan)
             } else {
               if (finalPriceComps.length > 1) {
                 let createdPricePlan = await this.createBundledPricePlan(element,finalPriceComps);

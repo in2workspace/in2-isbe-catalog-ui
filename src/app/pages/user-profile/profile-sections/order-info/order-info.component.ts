@@ -139,9 +139,6 @@ export class OrderInfoComponent implements OnInit {
 
     this.paginationService.getItemsPaginated(this.page, this.ORDER_LIMIT, next, this.orders,this.nextOrders, options,
       this.paginationService.getOrders.bind(this.paginationService)).then(data => {
-        console.log('--pag')
-        console.log(data)
-        console.log(this.orders)
       this.page_check=data.page_check;      
       this.orders=data.items;
       this.nextOrders=data.nextItems;
@@ -159,12 +156,8 @@ export class OrderInfoComponent implements OnInit {
     const index = this.filters.findIndex(item => item === filter);
     if (index !== -1) {
       this.filters.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.filters)
     } else {
-      console.log('añade filtro')
       this.filters.push(filter)
-      console.log(this.filters)
     }
     this.getOrders(false);
   }
@@ -242,7 +235,6 @@ export class OrderInfoComponent implements OnInit {
   }
 
   toggleShowDetails(order:any){
-    console.log(order)
     this.showOrderDetails=true;
     this.orderToShow=order;
   }

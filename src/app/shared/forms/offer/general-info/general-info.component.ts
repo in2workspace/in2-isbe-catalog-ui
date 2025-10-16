@@ -39,7 +39,6 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
   private isEditMode: boolean = false;
 
   constructor(private eventMessage: EventMessageService) {
-    console.log('🔄 Initializing GeneralInfoComponent');
   }
 
   get formGroup(): FormGroup {
@@ -67,11 +66,9 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('📝 Initializing form in', this.formType, 'mode');
     this.isEditMode = this.formType === 'update';
     
     if (this.isEditMode && this.data) {
-      console.log('Initializing form in update mode with data:', this.data);
       this.formGroup.addControl('name', new FormControl<string>(this.data.name, [Validators.required, Validators.maxLength(100), noWhitespaceValidator]));
       this.formGroup.addControl('status', new FormControl<string>(this.data.lifecycleStatus));
       this.formGroup.addControl('description', new FormControl<string>(this.data.description, Validators.maxLength(100000)));
@@ -84,9 +81,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
         description: this.data.description,
         version: this.data.version
       };
-      console.log('📝 Original value stored:', this.originalValue);
     } else {
-      console.log('Initializing form in create mode');
       this.formGroup.addControl('name', new FormControl<string>('', [Validators.required, Validators.maxLength(100), noWhitespaceValidator]));
       this.formGroup.addControl('status', new FormControl<string>('Active', [Validators.required]));
       this.formGroup.addControl('description', new FormControl<string>(''));
@@ -98,7 +93,6 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
       this.formGroup.valueChanges.pipe(
         debounceTime(500) // Esperar 500ms después del último cambio antes de emitir
       ).subscribe((newValue) => {
-        console.log('📝 Form value changed:', newValue);
         const dirtyFields = this.getDirtyFields(newValue);
         
         if (dirtyFields.length > 0) {
@@ -110,7 +104,6 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
             originalValue: this.originalValue,
             currentValue: newValue
           };
-          console.log('🚀 Emitting change state:', changeState);
           this.eventMessage.emitSubformChange(changeState);
         } else {
           this.hasBeenModified = false;
@@ -120,7 +113,6 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('🗑️ Destroying GeneralInfoComponent');
   }
 
   private getDirtyFields(currentValue: GeneralInfo): string[] {
