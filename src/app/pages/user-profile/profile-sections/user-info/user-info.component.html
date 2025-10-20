@@ -37,19 +37,19 @@
                 <label for="treatment" class="font-bold dark:text-white">{{ 'PROFILE._treatment' | translate }}</label>
                 <select id="treatment" formControlName="treatment"
                 class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
-                    <option value="">I'd rather not say</option>
-                    <option value="Miss">Miss</option>
-                    <option value="Mrs">Mrs</option>
-                    <option value="Mr">Mr</option>
-                    <option value="Ms">Ms</option>
+                    <option value="">{{ 'TREATMENT._NOT_SAY' | translate }}</option>
+                    <option value="Miss">{{ 'TREATMENT._MISS' | translate }}</option>
+                    <option value="Mrs">{{ 'TREATMENT._MRS' | translate }}</option>
+                    <option value="Mr">{{ 'TREATMENT._MR' | translate }}</option>
+                    <option value="Ms">{{ 'TREATMENT._MS' | translate }}</option>
                 </select>
                 <label for="gender" class="font-bold dark:text-white">{{ 'PROFILE._gender' | translate }}</label>
                 <select id="gender" formControlName="gender"
                 class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
-                    <option value="">I'd rather not say</option>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                    <option value="Other">Other</option>
+                    <option value="">{{ 'GENDER._NOT_SAY' | translate }}</option>
+                    <option value="Female">{{ 'GENDER._FEMALE' | translate }}</option>
+                    <option value="Male">{{ 'GENDER._MALE' | translate }}</option>
+                    <option value="Other">{{ 'GENDER._OTHER' | translate }}</option>
                 </select>
             </div>
             <div>
@@ -63,12 +63,12 @@
                 <label for="marital-status" class="font-bold dark:text-white">{{ 'PROFILE._marital_status' | translate }}</label>
                 <select id="marital-status" formControlName="maritalstatus"
                 class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
-                    <option value="">I'd rather not say</option>
-                    <option value="Divorced">Divorced</option>
-                    <option value="Married">Married</option>
-                    <option value="Separated">Separated</option>
-                    <option value="Single">Single</option>
-                    <option value="Widowed">Widowed</option>
+                    <option value="">{{ 'MATRIAL_STATUS._NOT_SAY' | translate }}</option>
+                    <option value="Divorced">{{ 'MATRIAL_STATUS._DIVORCED' | translate }}</option>
+                    <option value="Married">{{ 'MATRIAL_STATUS._MARRIED' | translate }}</option>
+                    <option value="Separated">{{ 'MATRIAL_STATUS._SEPARATED' | translate }}</option>
+                    <option value="Single">{{ 'MATRIAL_STATUS._SINGLE' | translate }}</option>
+                    <option value="Widowed">{{ 'MATRIAL_STATUS._WIDOWED' | translate }}</option>
                 </select>
                 <label for="nationality" class="font-bold dark:text-white">{{ 'PROFILE._nationality' | translate }}</label>
                 <input type="text" formControlName="nationality" id="nationality"
@@ -91,9 +91,9 @@
                 <label for="country" class="font-bold dark:text-white">{{ 'PROFILE._country' | translate }}</label>
                 <select id="country" formControlName="country"
                 class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
-                    <option value="">Select country</option>
+                    <option value="">{{ 'COUNTRY._select_country' | translate }}</option>
                     @for(country of countries; track country.code){
-                        <option value="{{country.code}}">{{country.name}}</option>
+                        <option value="{{country.code}}">{{ ('COUNTRY.' + country.code) | translate }}</option>
                     }
                 </select>
             </div>
@@ -115,7 +115,7 @@
               <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
               </svg>
-              <h3 class="text-lg font-medium">Update success</h3>
+              <h3 class="text-lg font-medium">{{ 'PROFILE._completed' | translate }}</h3>
             </div>
             <div class="mt-2 mb-4 text-sm pr-8 pl-8">
                 {{ 'PROFILE._success' | translate }}.
