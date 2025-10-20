@@ -477,32 +477,32 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
     return '';
   }
 
-  async getUsername(seller: string): Promise<string> {
-    if (this.userCache.has(seller)) {
-      return this.userCache.get(seller)!;
+  async getUsername(id: string): Promise<string> {
+    if (this.userCache.has(id)) {
+      return this.userCache.get(id)!;
     }
 
     try {
       let username: string;
 
-      if (seller.startsWith('urn:ngsi-ld:individual:')) {
+      if (id.startsWith('urn:ngsi-ld:individual:')) {
         // Get individual user info
-        const userInfo = await this.accountService.getUserInfo(seller);
-        username = `${userInfo?.givenName || ''} ${userInfo?.familyName || ''}`.trim() || `Unknown (${seller})`;
-      } else if (seller.startsWith('urn:ngsi-ld:organization:')) {
+        const userInfo = await this.accountService.getUserInfo( id);
+        username = `${userInfo?.givenName || ''} ${userInfo?.familyName || ''}`.trim() || `Unknown (${id})`;
+      } else if (id.startsWith('urn:ngsi-ld:organization:')) {
         // Get organization info
-        const orgInfo = await this.accountService.getOrgInfo(seller);
-        username = orgInfo?.tradingName || `Unknown Organization (${seller})`;
+        const orgInfo = await this.accountService.getOrgInfo(id);
+        username = orgInfo?.tradingName || `Unknown Organization (${id})`;
       } else {
-        username = `Unknown (${seller})`;
+        username = `Unknown (${id})`;
       }
 
       // Store in cache
-      this.userCache.set(seller, username);
+      this.userCache.set(id, username);
       return username;
     } catch (error) {
-      console.error('Error fetching name for', seller, error);
-      return `Unknown (${seller})`;
+      console.error('Error fetching name for', id, error);
+      return `Unknown (${id})`;
     }
   }
 

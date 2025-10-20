@@ -8,6 +8,7 @@ export interface LoginInfo {
   expire: number;
   seller: string;
   username: string;
+  userId: string;
   roles: Array<{ id: string; name: string }>;
   organizations: Array<{
     id: string;
@@ -89,6 +90,7 @@ export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
 
   return {
     id: vc?.id,
+    userId: mandatee?.id || '',
     user: userLocalPart,
     email,
     token,

@@ -22,7 +22,6 @@ export const environment = {
     PRODUCT_ORDER: '/ordering',
     CHARGING: '/charging',
     BILLING: '/billing',
-
     CUSTOMER_BILLING:'/appliedCustomerBillingRate',
     CONSUMER_BILLING_URL: '',
     PRODUCT_LIMIT: 6,

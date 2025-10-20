@@ -44,22 +44,22 @@ export class AccountServiceService {
   }
 
   getUserInfo(id:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/urn:ngsi-ld:individual:${id}`;
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}?individualIdentification[*].identificationId=${id}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getOrgInfo(id:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${id}`;
+  getOrgInfo(seller:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  updateUserInfo(id:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/urn:ngsi-ld:individual:${id}`;   
+  updateUserInfo(seller:any,id:any,profile:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/urn:ngsi-ld:individual:${seller}:${id}`;   
     return this.http.patch<any>(url, profile);
   }
 
-  updateOrgInfo(id:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${id}`;   
+  updateOrgInfo(seller:any,profile:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;   
     return this.http.patch<any>(url, profile);
   }
 }
