@@ -1,6 +1,6 @@
 export const environment = {
     BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/',
-    FUNDATION_ID: 'VATES-11111111K',
+    FOUNDATION_ID: 'VATES-11111111K',
     locale: 'es-ES',
     PRODUCT_CATALOG_MANAGEMENT_URL: 'productCatalogManagement/v4',
     PARTY_URL: 'party/v4',

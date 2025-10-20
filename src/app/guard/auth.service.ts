@@ -55,7 +55,6 @@ export class AuthService {
 
         try {
           const li = claimsToLoginInfo(claims, accessToken ?? '');
-          console.log('LoginInfo mapped:', li);
           this.loginInfoSubject.next(li);
         } catch {
           this.loginInfoSubject.next(null);

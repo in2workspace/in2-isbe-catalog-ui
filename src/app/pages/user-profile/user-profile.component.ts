@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
 import { initFlowbite } from 'flowbite';
@@ -22,6 +22,12 @@ import { AuthService } from 'src/app/guard/auth.service';
     imports: [ProviderRevenueSharingComponent, BillingInfoComponent, OrderInfoComponent, OrgInfoComponent, UserInfoComponent, TranslateModule, NgClass]
 })
 export class UserProfileComponent implements OnInit{
+  @ViewChild('billButton') billButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('accountButton') accountButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('orgButton') orgButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('orderButton') orderButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('revenueButton') revenueButton!: ElementRef<HTMLButtonElement>;
+  
   show_profile: boolean = true;
   show_org_profile:boolean=false;
   show_orders: boolean = false;
@@ -127,79 +133,43 @@ export class UserProfileComponent implements OnInit{
   }
 
   selectAccount(){
-    let bill_button = document.getElementById('bill-button')
-    
-    let account_button = document.getElementById('account-button')
-    let org_button = document.getElementById('org-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
-
-    this.selectMenu(account_button,'text-white bg-primary-100');
-    this.unselectMenu(org_button,'text-white bg-primary-100');
-    this.unselectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(order_button,'text-white bg-primary-100');
-    this.unselectMenu(revenue_button,'text-white bg-primary-100');
+    this.selectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.billButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   selectOrganization(){
-    let bill_button = document.getElementById('bill-button')
-    let account_button = document.getElementById('account-button')
-    let org_button = document.getElementById('org-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
-
-    this.selectMenu(org_button,'text-white bg-primary-100');
-    this.unselectMenu(account_button,'text-white bg-primary-100');
-    this.unselectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(order_button,'text-white bg-primary-100');
-    this.unselectMenu(revenue_button,'text-white bg-primary-100');
+    this.unselectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.selectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.billButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   selectBilling(){
-    let bill_button = document.getElementById('bill-button')
-    
-    let account_button = document.getElementById('account-button')
-    let org_button = document.getElementById('org-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
-
-    this.selectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(org_button,'text-white bg-primary-100');
-    this.unselectMenu(account_button,'text-white bg-primary-100');
-    this.unselectMenu(order_button,'text-white bg-primary-100');
-    this.unselectMenu(revenue_button,'text-white bg-primary-100');
+    this.unselectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.selectMenu(this.billButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   selectOrder(){
-    let bill_button = document.getElementById('bill-button')
-    
-    let account_button = document.getElementById('account-button')
-    let org_button = document.getElementById('org-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
-
-    this.selectMenu(order_button,'text-white bg-primary-100');
-    this.unselectMenu(bill_button,'text-white bg-primary-100');
-    
-    this.unselectMenu(org_button,'text-white bg-primary-100');
-    this.unselectMenu(account_button,'text-white bg-primary-100');
-    this.unselectMenu(revenue_button,'text-white bg-primary-100');
+    this.unselectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.billButton, 'text-white bg-primary-100');
+    this.selectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   selectRevenue(){
-    let bill_button = document.getElementById('bill-button')
-    
-    let account_button = document.getElementById('account-button')
-    let org_button = document.getElementById('org-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
-
-    this.selectMenu(revenue_button,'text-white bg-primary-100');
-    this.unselectMenu(bill_button,'text-white bg-primary-100');
-    
-    this.unselectMenu(org_button,'text-white bg-primary-100');
-    this.unselectMenu(account_button,'text-white bg-primary-100');
-    this.unselectMenu(order_button,'text-white bg-primary-100');
+    this.unselectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.billButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.selectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   removeClass(elem: HTMLElement, cls:string) {
@@ -211,19 +181,11 @@ export class UserProfileComponent implements OnInit{
       elem.className += (" " + cls);
   }
 
-  unselectMenu(elem:HTMLElement | null,cls:string){
-    if(elem != null){
-      if(elem.className.match(cls)){
-        this.removeClass(elem,cls)
-      }
-    }
+  selectMenu(button: ElementRef, classes: string) {
+    button.nativeElement.classList.add(...classes.split(' '));
   }
 
-  selectMenu(elem:HTMLElement| null,cls:string){
-    if(elem != null){
-      if(!elem.className.match(cls)){
-        this.addClass(elem,cls)
-      }
-    }
+  unselectMenu(button: ElementRef, classes: string) {
+    button.nativeElement.classList.remove(...classes.split(' '));
   }
 }
