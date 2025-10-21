@@ -11,8 +11,8 @@ import { UserInfoComponent } from './profile-sections/user-info/user-info.compon
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { NgClass } from '@angular/common';
-import { take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'app-user-profile',
@@ -189,3 +189,5 @@ export class UserProfileComponent implements OnInit{
     button.nativeElement.classList.remove(...classes.split(' '));
   }
 }
+
+
