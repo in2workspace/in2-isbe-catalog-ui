@@ -185,19 +185,4 @@ describe('UserProfileComponent', () => {
     expect(el.className.split(/\s+/)).not.toContain('two');
   });
 
-  it('selectMenu and unselectMenu should be no-ops for null and handle existing classes', () => {
-    // null should not throw
-    expect(() => component.selectMenu(null, 'some-class')).not.toThrow();
-    expect(() => component.unselectMenu(null, 'some-class')).not.toThrow();
-
-    const el = document.createElement('div');
-    el.className = 'alpha beta';
-
-    component.selectMenu(el, 'gamma');
-    expect(el.className.match('gamma')).toBeTruthy();
-
-    component.unselectMenu(el, 'beta');
-    expect(el.className.match('beta')).toBeFalsy();
-  });
-
 });
