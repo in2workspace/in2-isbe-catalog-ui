@@ -22,7 +22,6 @@ class ProductSpecServiceServiceMock {
   getProdSpecByUser = jest.fn();
 }
 
-
 class LocalStorageServiceMock {
   getObject = jest.fn().mockReturnValue({});
 }

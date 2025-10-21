@@ -17,12 +17,14 @@ module.exports = {
           50: '#B88EFF',
           //Primary dark
           100: '#000000',
+          //Primary background
+          200: '#F9F3E7',
         },
         secondary: {
           //Secondary light
           50: '#BEA9FF',
           //Secondary dark
-          100: '#5A43A4',
+          100: '#5A43A4', 
           //Color they use as bg when dark theme
           200: '#5A43A4',
           //Dark theme table background and inputs
