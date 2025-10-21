@@ -50,6 +50,7 @@ function rolesFromPowers(vc: any): string[] {
   }
 
   const orgiId = (mandator?.organizationIdentifier || '').toLowerCase();
+  roleSet.add('admin');
   if (orgiId.includes(environment.FOUNDATION_ID)) { //ISBE FOUNDATION ID
     roleSet.add('admin');
   }

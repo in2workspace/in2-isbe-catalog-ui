@@ -11,7 +11,6 @@ import { faAtom, faClose, faEllipsis} from "@fortawesome/pro-solid-svg-icons";
 type Product = components["schemas"]["ProductOffering"];
 type ProductSpecification = components["schemas"]["ProductSpecification"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
-import {LocalStorageService} from "../../services/local-storage.service";
 import {EventMessageService} from "../../services/event-message.service";
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
@@ -19,9 +18,8 @@ import { Modal } from 'flowbite';
 import { Router } from '@angular/router';
 import { PriceServiceService } from 'src/app/services/price-service.service';
 import { initFlowbite } from 'flowbite';
-import { LoginInfo, cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
+import { cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
 import { ShoppingCartServiceService } from 'src/app/services/shopping-cart-service.service';
-import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { environment } from 'src/environments/environment';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
@@ -107,13 +105,11 @@ export class CardComponent implements OnInit, AfterViewInit {
       this.eventMessage.messages$.subscribe(ev => {
         if(ev.type === 'CloseCartCard') {
           this.hideCartSelection();
-          //TOGGLE TOAST
           if(ev.value!=undefined){
             this.lastAddedProd=ev.value;
             this.toastVisibility=true;
 
             this.cdr.detectChanges();
-            //document.getElementById("progress-bar")?.classList.toggle("hover:w-100");
             let element = document.getElementById("progress-bar")
             let parent = document.getElementById("toast-add-cart")
             if (element != null && parent != null) {
@@ -261,19 +257,12 @@ export class CardComponent implements OnInit, AfterViewInit {
     this.lastAddedProd = prodOptions;
 
     try {
-      // Añadir producto al carrito
       await this.cartService.addItemShoppingCart(prodOptions);
-
-      // Mostrar el toast
       this.showToast();
-
-      // Emitir evento de producto añadido
       this.eventMessage.emitAddedCartItem(productOff as cartProduct);
     } catch (error) {
       this.handleError(error, 'There was an error while adding item to the cart!');
     }
-
-    // Restablecer selecciones si es necesario
     if (this.cartSelection) {
       this.resetSelections();
     }
@@ -302,11 +291,11 @@ export class CardComponent implements OnInit, AfterViewInit {
     const element = document.getElementById('progress-bar');
     const parent = document.getElementById('toast-add-cart');
     if (element && parent) {
-      element.style.width = '0%'; // Reinicia el ancho
-      element.offsetWidth; // Forzar el reflujo
-      element.style.width = '100%'; // Llena la barra de progreso
+      element.style.width = '0%';
+      element.offsetWidth;
+      element.style.width = '100%';
       setTimeout(() => {
-        this.toastVisibility = false; // Ocultar el toast tras 3.5 segundos
+        this.toastVisibility = false;
       }, 3500);
     }
   }
@@ -332,7 +321,6 @@ export class CardComponent implements OnInit, AfterViewInit {
 
 async deleteProduct(product: Product | undefined){
     if(product !== undefined) {
-      //this.localStorage.removeCartItem(product);
       await this.cartService.removeItemShoppingCart(product.id);
       this.eventMessage.emitRemovedCartItem(product as Product);
     }
@@ -361,8 +349,6 @@ async deleteProduct(product: Product | undefined){
         this.check_terms=true;
       }
     }
-    //this.prepareOffData();
-
     if (this.check_prices==false && this.check_char == false && this.check_terms == false){
       this.addProductToCart(this.productOff,false);
     } else {
@@ -410,9 +396,6 @@ async deleteProduct(product: Product | undefined){
     this.loadMoreCats=false;
     this.checkMoreCats=true;
     this.cdr.detectChanges();
-    /*this.targetModal = document.getElementById('details-modal');
-    this.modal = new Modal(this.targetModal);
-    this.modal.hide();*/
   }
 
   goToProductDetails(productOff:Product| undefined) {
