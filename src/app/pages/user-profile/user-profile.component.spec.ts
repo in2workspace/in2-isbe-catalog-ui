@@ -87,7 +87,7 @@ describe('UserProfileComponent', () => {
   });
 
   describe('DOM menu selection helpers', () => {
-    const ids = ['bill-button', 'account-button', 'org-button', 'order-button', 'revenue-button'];
+    const ids = ['billButton', 'accountButton', 'orgButton', 'orderButton', 'revenueButton'];
     const cls = 'text-white bg-primary-100';
 
     beforeEach(() => {
@@ -107,65 +107,65 @@ describe('UserProfileComponent', () => {
       });
     });
 
-    it('selectAccount should add class to account-button and remove from others', () => {
+    it('selectAccount should add class to accountButton and remove from others', () => {
       component.selectAccount();
 
-      const account = document.getElementById('account-button')!;
+      const account = document.getElementById('accountButton')!;
       expect(account.className.match(cls)).toBeTruthy();
 
-      const others = ['org-button', 'bill-button', 'order-button', 'revenue-button'];
+      const others = ['orgButton', 'billButton', 'orderButton', 'revenueButton'];
       others.forEach(id => {
         const el = document.getElementById(id)!;
         expect(el.className.match(cls)).toBeFalsy();
       });
     });
 
-    it('selectOrganization should add class to org-button and remove from others', () => {
+    it('selectOrganization should add class to orgButton and remove from others', () => {
       component.selectOrganization();
 
-      const org = document.getElementById('org-button')!;
+      const org = document.getElementById('orgButton')!;
       expect(org.className.match(cls)).toBeTruthy();
 
-      const others = ['account-button', 'bill-button', 'order-button', 'revenue-button'];
+      const others = ['accountButton', 'billButton', 'orderButton', 'revenueButton'];
       others.forEach(id => {
         const el = document.getElementById(id)!;
         expect(el.className.match(cls)).toBeFalsy();
       });
     });
 
-    it('selectBilling should add class to bill-button and remove from others', () => {
+    it('selectBilling should add class to billButton and remove from others', () => {
       component.selectBilling();
 
-      const bill = document.getElementById('bill-button')!;
+      const bill = document.getElementById('billButton')!;
       expect(bill.className.match(cls)).toBeTruthy();
 
-      const others = ['account-button', 'org-button', 'order-button', 'revenue-button'];
+      const others = ['accountButton', 'orgButton', 'orderButton', 'revenueButton'];
       others.forEach(id => {
         const el = document.getElementById(id)!;
         expect(el.className.match(cls)).toBeFalsy();
       });
     });
 
-    it('selectOrder should add class to order-button and remove from others', () => {
+    it('selectOrder should add class to orderButton and remove from others', () => {
       component.selectOrder();
 
-      const order = document.getElementById('order-button')!;
+      const order = document.getElementById('orderButton')!;
       expect(order.className.match(cls)).toBeTruthy();
 
-      const others = ['account-button', 'org-button', 'bill-button', 'revenue-button'];
+      const others = ['accountButton', 'orgButton', 'billButton', 'revenueButton'];
       others.forEach(id => {
         const el = document.getElementById(id)!;
         expect(el.className.match(cls)).toBeFalsy();
       });
     });
 
-    it('selectRevenue should add class to revenue-button and remove from others', () => {
+    it('selectRevenue should add class to revenueButton and remove from others', () => {
       component.selectRevenue();
 
-      const rev = document.getElementById('revenue-button')!;
+      const rev = document.getElementById('revenueButton')!;
       expect(rev.className.match(cls)).toBeTruthy();
 
-      const others = ['account-button', 'org-button', 'bill-button', 'order-button'];
+      const others = ['accountButton', 'orgButton', 'billButton', 'orderButton'];
       others.forEach(id => {
         const el = document.getElementById(id)!;
         expect(el.className.match(cls)).toBeFalsy();
