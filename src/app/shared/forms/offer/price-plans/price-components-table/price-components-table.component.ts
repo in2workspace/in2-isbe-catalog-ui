@@ -31,7 +31,6 @@ export class PriceComponentsTableComponent {
 
   deletePriceComponent() {
     if (this.componentToDelete) {
-      console.log('delete')
       this.delete.emit(this.componentToDelete.id);
       this.showDeleteModal = false;
       this.componentToDelete = null;

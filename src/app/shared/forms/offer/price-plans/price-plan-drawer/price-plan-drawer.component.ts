@@ -49,9 +49,6 @@ export class PricePlanDrawerComponent implements OnInit {
 
   ngOnInit() {
     this.initialized = false;
-    console.log('--- PROD PROF ----')
-    console.log(this.formGroup?.get('productProfile')?.value)
-    console.log(' --- --- ')
     setTimeout(() => {
       this.isOpen = true;
       this.initialized = true;
@@ -111,7 +108,6 @@ export class PricePlanDrawerComponent implements OnInit {
         components.push(updatedComponent);
       }
       this.formGroup.get('priceComponents')?.setValue(components);
-      console.log(this.formGroup.get('priceComponents')?.value)
     }
     this.showPriceComponentDrawer = false;
     this.editingComponent = null;

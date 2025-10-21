@@ -45,7 +45,6 @@ export class CategoriesPanelComponent implements OnInit {
   }
 
   notifyDismiss(cat: Category) {
-    console.log('Category dismissed: '+ JSON.stringify(cat));
     this.localStorage.removeCategoryFilter(cat);
     this.eventMessage.emitRemovedFilter(cat);
   }

@@ -1,6 +1,8 @@
 
 export const environment = {
     BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/',
+    FOUNDATION_ID: 'VATES-11111111K',
+    locale: 'es-ES',
     PRODUCT_CATALOG_MANAGEMENT_URL: 'productCatalogManagement/v4',
     PARTY_URL: 'party/v4',
     PAYMENT_URL: '',
@@ -20,7 +22,6 @@ export const environment = {
     PRODUCT_ORDER: '/ordering',
     CHARGING: '/charging',
     BILLING: '/billing',
-
     CUSTOMER_BILLING:'/appliedCustomerBillingRate',
     CONSUMER_BILLING_URL: '',
     PRODUCT_LIMIT: 6,
@@ -54,12 +55,12 @@ export const environment = {
     KNOWLEDGE_BASE_URL: "",
     KB_ONBOARDING_GUIDELINES_URL: "",
     KB_GUIDELNES_URL:"",
-    REGISTRATION_FORM_URL: "",
+    REGISTRATION_FORM_URL: "https://onboard.evidenceledger.eu/",
     SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
     ISBE_TRUST_LINK: "",
     ISBE_ABOUT_LINK: 'https://redisbe.com/',
-    ISBE_REGISTER_LINK: '',
+    ISBE_REGISTER_LINK: 'https://onboard.evidenceledger.eu/',
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',
     ISBE_YOUTUBE: 'https://www.youtube.com/@REDISBE',

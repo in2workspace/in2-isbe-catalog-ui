@@ -158,7 +158,6 @@ export class BillingInfoComponent implements OnInit{
             isBillSelected=true;
           }
         }
-        console.log(element)
         this.billing_accounts.push({
           "id": element.id,
           "href": element.href,
@@ -187,7 +186,6 @@ export class BillingInfoComponent implements OnInit{
       }else{
         this.preferred=true;
       }
-      console.log(this.billing_accounts)
       this.cdr.detectChanges();
     })
     
@@ -261,7 +259,7 @@ export class BillingInfoComponent implements OnInit{
         error: error => {
           console.error('There was an error while updating!', error);
           if(error.error.error){
-            console.log(error)
+            console.error(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
             this.errorMessage='¡Hubo un error al actualizar la cuenta de facturación!';
@@ -275,7 +273,6 @@ export class BillingInfoComponent implements OnInit{
   }
 
   onDeletedBill(baddr: billingAccountCart) {
-    console.log('--- DELETE BILLING ADDRESS ---')
     //this.accountService.deleteBillingAccount(baddr.id).subscribe(() => this.getBilling());
     this.deleteBill=false;
     this.cdr.detectChanges();

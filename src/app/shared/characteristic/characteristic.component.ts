@@ -45,8 +45,6 @@ export class CharacteristicComponent implements OnInit {
     )?.value || this.characteristic.productSpecCharacteristicValue?.find(
       (val) => val.isDefault
     )?.valueFrom;
-
-    console.log('defaultValue: ', defaultValue);
     if (defaultValue !== undefined) {
       this.control = new FormControl(
         { value: defaultValue, disabled: this.readOnly } // Configura el estado aquí

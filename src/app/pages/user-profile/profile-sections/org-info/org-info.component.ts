@@ -1,12 +1,9 @@
 import { Component, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
-import { LoginInfo } from 'src/app/models/interfaces';
 import { AccountServiceService } from 'src/app/services/account-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
 import { FormGroup, FormControl, Validators, AbstractControl, ReactiveFormsModule } from '@angular/forms';
 import { phoneNumbers, countries } from 'src/app/models/country.const'
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
-import * as moment from 'moment';
 import {components} from "../../../../models/party-catalog";
 import { v4 as uuidv4 } from 'uuid';
 import {parsePhoneNumber} from 'libphonenumber-js/max'
@@ -23,12 +20,24 @@ import { AuthService } from 'src/app/guard/auth.service';
 
 type OrganizationUpdate = components["schemas"]["Organization_Update"];
 
+enum MediumType {
+  Email = 'Email',
+  PostalAddress = 'PostalAddress',
+  TelephoneNumber = 'TelephoneNumber',
+}
+
+enum PhoneContactType {
+  Mobile = 'Mobile',
+  Fixed = 'Fixed',
+}
+
+
 @Component({
     selector: 'org-info',
     templateUrl: './org-info.component.html',
     styleUrl: './org-info.component.css',
     standalone: true,
-    imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent]
+    imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent, TranslateModule]
 })
 export class OrgInfoComponent {
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
@@ -84,34 +93,19 @@ export class OrgInfoComponent {
   selectedCountry: string = ''; // Stores the selected country code
 
   euCountries = [
-    { code: 'AT', name: 'Austria' },
-    { code: 'BE', name: 'Belgium' },
-    { code: 'BG', name: 'Bulgaria' },
-    { code: 'HR', name: 'Croatia' },
-    { code: 'CY', name: 'Cyprus' },
-    { code: 'CZ', name: 'Czech Republic' },
-    { code: 'DK', name: 'Denmark' },
-    { code: 'EE', name: 'Estonia' },
-    { code: 'FI', name: 'Finland' },
-    { code: 'FR', name: 'France' },
-    { code: 'DE', name: 'Germany' },
-    { code: 'GR', name: 'Greece' },
-    { code: 'HU', name: 'Hungary' },
-    { code: 'IE', name: 'Ireland' },
-    { code: 'IT', name: 'Italy' },
-    { code: 'LV', name: 'Latvia' },
-    { code: 'LT', name: 'Lithuania' },
-    { code: 'LU', name: 'Luxembourg' },
-    { code: 'MT', name: 'Malta' },
-    { code: 'NL', name: 'Netherlands' },
-    { code: 'PL', name: 'Poland' },
-    { code: 'PT', name: 'Portugal' },
-    { code: 'RO', name: 'Romania' },
-    { code: 'SK', name: 'Slovakia' },
-    { code: 'SI', name: 'Slovenia' },
-    { code: 'ES', name: 'Spain' },
-    { code: 'SE', name: 'Sweden' }
+    { code: 'AT' }, { code: 'BE' }, { code: 'BG' }, { code: 'HR' }, { code: 'CY' },
+    { code: 'CZ' }, { code: 'DK' }, { code: 'EE' }, { code: 'FI' }, { code: 'FR' },
+    { code: 'DE' }, { code: 'GR' }, { code: 'HU' }, { code: 'IE' }, { code: 'IT' },
+    { code: 'LV' }, { code: 'LT' }, { code: 'LU' }, { code: 'MT' }, { code: 'NL' },
+    { code: 'PL' }, { code: 'PT' }, { code: 'RO' }, { code: 'SK' }, { code: 'SI' },
+    { code: 'ES' }, { code: 'SE' }
   ];
+
+  mediumTypeKey: Record<string,string> = {
+    Email: 'PROFILE._email',
+    PostalAddress: 'PROFILE._postalAddress',
+    TelephoneNumber: 'PROFILE._phone',
+  };
 
   @ViewChild('imgURL') imgURL!: ElementRef;
 
@@ -201,7 +195,7 @@ export class OrgInfoComponent {
     for(let i=0; i<this.contactmediums.length; i++){
       if(this.contactmediums[i].mediumType == 'Email'){
         mediums.push({
-          mediumType: 'Email',
+          mediumType: MediumType.Email,
           preferred: this.contactmediums[i].preferred,
           characteristic: {
             contactType: this.contactmediums[i].characteristic.contactType,
@@ -270,7 +264,7 @@ export class OrgInfoComponent {
         if(profile.contactMedium[i].mediumType == 'Email'){
           this.contactmediums.push({
             id: uuidv4(),
-            mediumType: 'Email',
+            mediumType: MediumType.Email,
             preferred: profile.contactMedium[i].preferred,
             characteristic: {
               contactType: profile.contactMedium[i].characteristic?.contactType,
@@ -358,7 +352,7 @@ export class OrgInfoComponent {
       if(this.emailSelected){
         this.contactmediums.push({
           id: uuidv4(),
-          mediumType: 'Email',
+          mediumType: MediumType.Email,
           preferred: false,
           characteristic: {
             contactType: 'Email',
@@ -368,7 +362,7 @@ export class OrgInfoComponent {
       } else if(this.addressSelected){
         this.contactmediums.push({
           id: uuidv4(),
-          mediumType: 'PostalAddress',
+          mediumType: MediumType.PostalAddress,
           preferred: false,
           characteristic: {
             contactType: 'PostalAddress',
@@ -382,10 +376,10 @@ export class OrgInfoComponent {
       } else {
         this.contactmediums.push({
           id: uuidv4(),
-          mediumType: 'TelephoneNumber',
+          mediumType: MediumType.TelephoneNumber,
           preferred: false,
           characteristic: {
-            contactType: this.mediumForm.value.telephoneType,
+            contactType: this.mediumForm.value.telephoneType || PhoneContactType.Mobile,
             phoneNumber: this.phonePrefix.code + this.mediumForm.value.telephoneNumber
           }
         })
@@ -415,7 +409,7 @@ export class OrgInfoComponent {
           }
           this.contactmediums[index]={
             id: this.contactmediums[index].id,
-            mediumType: 'Email',
+            mediumType: MediumType.Email,
             preferred: false,
             characteristic: {
               contactType: 'Email',
@@ -437,7 +431,7 @@ export class OrgInfoComponent {
           });
           this.contactmediums[index]={
             id: this.contactmediums[index].id,
-            mediumType: 'PostalAddress',
+            mediumType: MediumType.PostalAddress,
             preferred: false,
             characteristic: {
               contactType: 'PostalAddress',
@@ -475,7 +469,7 @@ export class OrgInfoComponent {
             }
           this.contactmediums[index]={
             id: this.contactmediums[index].id,
-            mediumType: 'TelephoneNumber',
+            mediumType: MediumType.TelephoneNumber,
             preferred: false,
             characteristic: {
               contactType: this.mediumForm.value.telephoneType,

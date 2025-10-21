@@ -49,55 +49,29 @@ export class CartDrawerComponent implements OnInit{
   ngOnInit(): void {
     this.showBackDrop=true;
     this.cartService.getShoppingCart().then(data => {
-      console.log('---CARRITO API---')
-      console.log(data)
       this.items=data;
       this.cdr.detectChanges();
       this.getTotalPrice();
-      console.log('------------------')
     })
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'AddedCartItem') {
-        console.log('Elemento añadido')
         this.cartService.getShoppingCart().then(data => {
-          console.log('---CARRITO API---')
-          console.log(data)
           this.items=data;
           this.cdr.detectChanges();
           this.getTotalPrice();
-          console.log('------------------')
         })
       } else if(ev.type === 'RemovedCartItem') {
         this.cartService.getShoppingCart().then(data => {
-          console.log('---CARRITO API---')
-          console.log(data)
           this.items=data;
           this.cdr.detectChanges();
           this.getTotalPrice();
-          console.log('------------------')
         })
       }
     })
-    console.log('Elementos en el carrito....')
-    console.log(this.items)
   }
-
-  /*getProductImage(attachment:any[]) {
-    if(attachment.length > 0){
-      for(let i=0; i<attachment.length; i++){
-        if(attachment[i].attachmentType == 'Picture'){
-          return attachment[i].url
-        }
-      }
-    } else {
-      return 'https://placehold.co/600x400/svg'
-    }
-  }*/
 
   getPrice(item: any) {
     if(item.options.pricing != undefined){
-      console.log('PRECIO----')
-      console.log(item.options.pricing)
       if(item.options.pricing.priceType=='custom'){
         this.check_custom=true;
         return null
@@ -122,44 +96,6 @@ export class CartDrawerComponent implements OnInit{
     return pricing[key];
   }
 
-  /*getTotalPrice() {
-    this.totalPrice = [];
-    let insertCheck = false;
-    this.check_custom=false;
-    this.cdr.detectChanges();
-    let priceInfo: any = {};
-    for (let i = 0; i < this.items.length; i++) {
-      console.log('totalprice')
-      console.log(this.items[i])
-      insertCheck = false;
-      if (this.totalPrice.length == 0) {
-        priceInfo = this.getPrice(this.items[i]);
-        if(priceInfo!=null){
-          this.totalPrice.push(priceInfo);
-          console.log('Añade primero')
-        }
-      } else {
-        for (let j = 0; j < this.totalPrice.length; j++) {
-          priceInfo = this.getPrice(this.items[i]);
-          if(priceInfo!=null){
-            if (priceInfo.priceType == this.totalPrice[j].priceType && priceInfo.unit == this.totalPrice[j].unit && priceInfo.text == this.totalPrice[j].text) {
-              this.totalPrice[j].price = this.totalPrice[j].price + priceInfo.price;
-              insertCheck = true;
-              console.log('suma')
-            }
-            console.log('precio segundo')
-            console.log(priceInfo)
-          }
-        }
-        if (insertCheck == false && priceInfo!=null) {
-          this.totalPrice.push(priceInfo);
-          insertCheck = true;
-          console.log('añade segundo')
-        }
-      }
-    }
-    console.log(this.totalPrice)
-  }*/
 
   hasKey(obj: any, key: string): boolean {
     return key in obj;
@@ -172,19 +108,14 @@ export class CartDrawerComponent implements OnInit{
     this.cdr.detectChanges();
     for (let i = 0; i < this.items.length; i++) {
       let price = this.items[i].options.pricing
-      console.log(this.items[i].options.pricing)
       if(price != undefined){
         this.totalPrice=price;
-        //this.totalPrice.push(priceInfo);
       }
     }
-    //this.totalPrice.push(priceInfo);
-    console.log(this.totalPrice)
   }
 
   async deleteProduct(product: cartProduct){
     await this.cartService.removeItemShoppingCart(product.id);
-    console.log('deleted');
     this.eventMessage.emitRemovedCartItem(product as cartProduct);
   }
 

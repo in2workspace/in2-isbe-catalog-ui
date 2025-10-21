@@ -52,7 +52,6 @@ export class ProcurementModeComponent implements ControlValueAccessor, AfterView
   private isEditMode: boolean = false;
 
   constructor(private cdr: ChangeDetectorRef, private eventMessage: EventMessageService) {
-    console.log('🔄 Initializing ProcurementModeComponent');
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'UpdateOffer') {
         if (this.isEditMode && this.hasBeenModified && this.originalValue) {
@@ -63,7 +62,6 @@ export class ProcurementModeComponent implements ControlValueAccessor, AfterView
           
           // Solo emitir si el valor es diferente al original
           if (JSON.stringify(currentValue) !== JSON.stringify(this.originalValue)) {
-            console.log('📝 Emitting changes on destroy');
             this.formChange.emit({
               subformType: 'procurement',
               isDirty: true,
@@ -82,13 +80,10 @@ export class ProcurementModeComponent implements ControlValueAccessor, AfterView
   onTouched: () => void = () => {};
 
   writeValue(pmode: any): void {
-    console.log('📝 writeValue - Input value:', pmode);
     if (pmode) {
       // Si es un objeto, usar el id directamente
       const selectedMode = pmode.id || pmode;
-      console.log('📝 writeValue - Selected mode:', selectedMode);
       this.procurementMode = selectedMode;
-      console.log('📝 writeValue - Updated procurementMode:', this.procurementMode);
       
       // Actualizar el FormGroup si existe
       if (this.formGroup) {
@@ -132,10 +127,7 @@ export class ProcurementModeComponent implements ControlValueAccessor, AfterView
   }
 
   ngOnInit() {
-    console.log('📝 ngOnInit - Form type:', this.formType);
-    console.log('📝 ngOnInit - Form value:', this.data);
     const initialValue = this.getInitialProcurementMode();
-    console.log('📝 ngOnInit - Initial value:', initialValue);
     this.isEditMode = this.formType === 'update';
 
     // Inicializar el control del formulario
@@ -147,29 +139,22 @@ export class ProcurementModeComponent implements ControlValueAccessor, AfterView
         id: initialValue,
         name: this.procurementModes.find(m => m.id === initialValue)?.name || 'Manual'
       };
-      console.log('📝 Original value stored:', this.originalValue);
     }
 
     // Suscribirse a los cambios del formulario
     this.form.valueChanges.subscribe(value => {
-      console.log('📝 Form value changed in subscription:', value);
       if (value && value.mode) {
         const mode = this.procurementModes.find(m => m.id === value.mode) || this.procurementModes[0];
-        console.log('📝 Found mode:', mode);
         
         this.procurementMode = mode.id;
-        console.log('📝 Current procurementMode:', this.procurementMode);
         this.hasBeenModified = true;
       }
     });
   }
 
   changeProcurement(event: any) {
-    console.log('🔄 changeProcurement - Event value:', event.target.value);
     this.procurementMode = event.target.value;
-    console.log('🔄 changeProcurement - Updated procurementMode:', this.procurementMode);
     let pm = this.procurementModes.find(mode => mode.id === event.target.value);
-    console.log('🔄 changeProcurement - Found mode:', pm);
     
     if (pm) {
       // Actualizar el FormGroup
@@ -187,7 +172,6 @@ export class ProcurementModeComponent implements ControlValueAccessor, AfterView
   ngAfterViewInit() {
     // Forzar la detección de cambios después de que la vista esté lista
     setTimeout(() => {
-      console.log('📝 AfterViewInit - Current procurementMode:', this.procurementMode);
       this.cdr.detectChanges();
     }, 0);
   }
@@ -202,7 +186,6 @@ export class ProcurementModeComponent implements ControlValueAccessor, AfterView
       
       // Solo emitir si el valor es diferente al original
       if (JSON.stringify(currentValue) !== JSON.stringify(this.originalValue)) {
-        console.log('📝 Emitting changes on destroy');
         this.formChange.emit({
           subformType: 'procurement',
           isDirty: true,

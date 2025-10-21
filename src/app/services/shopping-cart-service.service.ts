@@ -45,7 +45,6 @@ export class ShoppingCartServiceService {
   }
 
   async emptyShoppingCart(){
-    console.log('removing cart')
     //POST - El item va en el body de la petición
     let url = `${ShoppingCartServiceService.BASE_URL}${ShoppingCartServiceService.API_CART}/empty/`;
     await lastValueFrom(this.http.post<any>(url, {}));

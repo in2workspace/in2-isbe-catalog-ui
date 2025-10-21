@@ -43,8 +43,8 @@ export class AccountServiceService {
     return this.http.delete<any>(url);
   }
 
-  getUserInfo(seller:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/${seller}`;
+  getUserInfo(id:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}?individualIdentification[*].identificationId=${id}`;
     return lastValueFrom(this.http.get<any>(url));
   }
 
@@ -53,8 +53,8 @@ export class AccountServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  updateUserInfo(seller:any,profile:any){
-    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/${seller}`;   
+  updateUserInfo(seller:any,id:any,profile:any){
+    let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.INDIVIDUAL}/urn:ngsi-ld:individual:${seller}:${id}`;   
     return this.http.patch<any>(url, profile);
   }
 

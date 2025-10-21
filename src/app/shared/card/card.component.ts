@@ -263,7 +263,6 @@ export class CardComponent implements OnInit, AfterViewInit {
     try {
       // Añadir producto al carrito
       await this.cartService.addItemShoppingCart(prodOptions);
-      console.log('Update successful');
 
       // Mostrar el toast
       this.showToast();
@@ -335,7 +334,6 @@ async deleteProduct(product: Product | undefined){
     if(product !== undefined) {
       //this.localStorage.removeCartItem(product);
       await this.cartService.removeItemShoppingCart(product.id);
-      console.log('removed');
       this.eventMessage.emitRemovedCartItem(product as Product);
     }
     this.toastVisibility=false;
@@ -344,17 +342,9 @@ async deleteProduct(product: Product | undefined){
   toggleDetailsModal(){
     this.showModal=true;
     this.cdr.detectChanges();
-    /*initFlowbite();
-    this.targetModal = document.getElementById('details-modal');
-    this.modal = new Modal(this.targetModal);
-    this.cdr.detectChanges();
-    this.modal.toggle();
-    this.cdr.detectChanges();
-    initFlowbite();*/
   }
 
   toggleCartSelection(){
-    console.log('Add to cart...')
     if (this.productOff?.productOfferingPrice != undefined){
       if(this.productOff?.productOfferingPrice.length > 1){
         this.check_prices=true;
@@ -400,8 +390,6 @@ async deleteProduct(product: Product | undefined){
           }
         }
       }
-      console.log('Calculando characteristics...')
-      console.log(this.selected_chars)
     }
   }
 
@@ -445,8 +433,6 @@ async deleteProduct(product: Product | undefined){
         if(parties[i].id.includes('organization')){
           this.accService.getOrgInfo(parties[i].id).then(org => {
             this.orgInfo=org;
-            console.log('orginfo')
-            console.log(this.orgInfo)
           })
         }
       }
@@ -454,7 +440,6 @@ async deleteProduct(product: Product | undefined){
   }
 
   onPricePlanSelected(pricePlan:any) {
-    console.log(pricePlan.id);
     this.selectedPricePlanId = pricePlan.id;
     this.selectedPricePlan = pricePlan;
   }

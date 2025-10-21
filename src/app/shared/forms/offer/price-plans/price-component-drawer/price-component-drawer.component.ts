@@ -173,7 +173,6 @@ export class PriceComponentDrawerComponent implements OnInit {
   }
 
   private mapChars(charValue: any): any {
-    console.log(this.selectedCharacteristic)
     const char: any = {
       id: this.selectedCharacteristic.id,
       name: this.selectedCharacteristic.name,
@@ -222,7 +221,6 @@ export class PriceComponentDrawerComponent implements OnInit {
   changePriceComponentMetric(event: any){
     //this.selectedMetric= this.selectedUsageSpec.specCharacteristic.find((element: { name: any; }) => element.name == event.target.value)
     this.selectedMetric = event.target.value
-    console.log(this.selectedMetric)
     this.priceComponentForm.patchValue({
       usageUnit: this.selectedMetric
     });

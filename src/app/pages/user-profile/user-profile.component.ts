@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild } from '@angular/core';
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
 import { initFlowbite } from 'flowbite';
@@ -11,8 +11,8 @@ import { UserInfoComponent } from './profile-sections/user-info/user-info.compon
 import { TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { NgClass } from '@angular/common';
-import { take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 @Component({
     selector: 'app-user-profile',
@@ -22,6 +22,12 @@ import { AuthService } from 'src/app/guard/auth.service';
     imports: [ProviderRevenueSharingComponent, BillingInfoComponent, OrderInfoComponent, OrgInfoComponent, UserInfoComponent, TranslateModule, NgClass]
 })
 export class UserProfileComponent implements OnInit{
+  @ViewChild('billButton',   { static: false }) billButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('accountButton',{ static: false }) accountButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('orgButton',    { static: false }) orgButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('orderButton',  { static: false }) orderButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('revenueButton',{ static: false }) revenueButton?: ElementRef<HTMLButtonElement>;
+  
   show_profile: boolean = true;
   show_org_profile:boolean=false;
   show_orders: boolean = false;
@@ -62,11 +68,8 @@ export class UserProfileComponent implements OnInit{
         this.token = aux.token;
         this.email = aux.email;
 
-        console.log(aux);
-
         this.seller = aux.id;
         this.loggedAsUser = aux.logged_as === aux.id;
-        console.log(this.loggedAsUser)
         this.show_profile = this.loggedAsUser;
         this.show_org_profile = !this.loggedAsUser;
 
@@ -85,7 +88,7 @@ export class UserProfileComponent implements OnInit{
     this.show_orders=false;
     this.show_org_profile=false;
     this.show_revenue=false;
-    this.selectGeneral();
+    this.selectAccount();
   }
 
   getOrgProfile(){
@@ -94,7 +97,7 @@ export class UserProfileComponent implements OnInit{
     this.show_orders=false;
     this.show_org_profile=true;
     this.show_revenue=false;
-    this.selectGeneral();
+    this.selectOrganization();
   }
 
   getBilling(){
@@ -129,52 +132,44 @@ export class UserProfileComponent implements OnInit{
     this.cdr.detectChanges();
   }
 
-  selectGeneral(){
-    let bill_button = document.getElementById('bill-button')
-    let general_button = document.getElementById('general-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
+  selectAccount(){
+    this.selectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.billButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.revenueButton, 'text-white bg-primary-100');
+  }
 
-    this.selectMenu(general_button,'text-white bg-primary-100');
-    this.unselectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(order_button,'text-white bg-primary-100');
-    this.unselectMenu(revenue_button,'text-white bg-primary-100');
+  selectOrganization(){
+    this.unselectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.selectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.billButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   selectBilling(){
-    let bill_button = document.getElementById('bill-button')
-    let general_button = document.getElementById('general-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
-
-    this.selectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(general_button,'text-white bg-primary-100');
-    this.unselectMenu(order_button,'text-white bg-primary-100');
-    this.unselectMenu(revenue_button,'text-white bg-primary-100');
+    this.unselectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.selectMenu(this.billButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   selectOrder(){
-    let bill_button = document.getElementById('bill-button')
-    let general_button = document.getElementById('general-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
-
-    this.selectMenu(order_button,'text-white bg-primary-100');
-    this.unselectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(general_button,'text-white bg-primary-100');
-    this.unselectMenu(revenue_button,'text-white bg-primary-100');
+    this.unselectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.billButton, 'text-white bg-primary-100');
+    this.selectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   selectRevenue(){
-    let bill_button = document.getElementById('bill-button')
-    let general_button = document.getElementById('general-button')
-    let order_button = document.getElementById('order-button')
-    let revenue_button = document.getElementById('revenue-button')
-
-    this.selectMenu(revenue_button,'text-white bg-primary-100');
-    this.unselectMenu(bill_button,'text-white bg-primary-100');
-    this.unselectMenu(general_button,'text-white bg-primary-100');
-    this.unselectMenu(order_button,'text-white bg-primary-100');
+    this.unselectMenu(this.accountButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orgButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.billButton, 'text-white bg-primary-100');
+    this.unselectMenu(this.orderButton, 'text-white bg-primary-100');
+    this.selectMenu(this.revenueButton, 'text-white bg-primary-100');
   }
 
   removeClass(elem: HTMLElement, cls:string) {
@@ -186,23 +181,13 @@ export class UserProfileComponent implements OnInit{
       elem.className += (" " + cls);
   }
 
-  unselectMenu(elem:HTMLElement | null,cls:string){
-    if(elem != null){
-      if(elem.className.match(cls)){
-        this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
-      }
-    }
+  selectMenu(button: ElementRef<HTMLButtonElement> | undefined, classes: string) {
+    button?.nativeElement?.classList.add(...classes.split(' '));
   }
 
-  selectMenu(elem:HTMLElement| null,cls:string){
-    if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
-        this.addClass(elem,cls)
-      }
-    }
+  unselectMenu(button: ElementRef<HTMLButtonElement> | undefined, classes: string) {
+    button?.nativeElement?.classList.remove(...classes.split(' '));
   }
 }
+
+

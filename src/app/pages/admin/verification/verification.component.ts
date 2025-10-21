@@ -47,7 +47,7 @@ export class VerificationComponent {
       error: error => {
         console.error('There was an error while updating!', error);
         if(error.error.error){
-          console.log(error)
+          console.error(error)
           this.errorMessage = 'Error: ' + error.error.error;
         } else {
           this.errorMessage = '¡Hubo un error al cargar el producto!';
