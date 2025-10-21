@@ -163,7 +163,6 @@ export class InvoicesInfoComponent implements OnInit {
   }
 
   async next(){
-    console.log("-invoice-info-NEXT--")
     await this.getInvoices(true);
   }
 

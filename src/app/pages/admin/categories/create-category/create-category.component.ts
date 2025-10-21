@@ -98,7 +98,6 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   getCategories(){
-    console.log('Getting categories...')
     this.api.getLaunchedCategories().then(data => {      
       for(let i=0; i < data.length; i++){
         this.findChildren(data[i],data);
@@ -257,17 +256,13 @@ export class CreateCategoryComponent implements OnInit {
     if(elem != null){
       if(elem.className.match(cls)){
         this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
       }
     }
   }
 
   selectMenu(elem:HTMLElement| null,cls:string){
     if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
+      if(!elem.className.match(cls)){
         this.addClass(elem,cls)
       }
     }
@@ -364,7 +359,6 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   addEmoji(event:any){
-    console.log(event)
     this.showEmoji=false;
     const currentText = this.generalForm.value.description;
     this.generalForm.patchValue({

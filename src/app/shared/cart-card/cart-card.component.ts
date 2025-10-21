@@ -63,8 +63,6 @@ export class CartCardComponent implements OnInit {
   }
 
   toggleCartSelection(){
-    console.log('Add to cart...')
-    console.log(this.productOff)
     if (this.productOff?.productOfferingPrice != undefined){
       if(this.productOff?.productOfferingPrice.length > 1){
         this.check_prices=true;
@@ -78,15 +76,8 @@ export class CartCardComponent implements OnInit {
     }
 
     if(this.productOff?.productOfferingTerm != undefined){
-      console.log('terms')
-      console.log(this.productOff?.productOfferingTerm)
       this.check_terms=true;
       this.cdr.detectChanges();
-      /*if(this.productOff.productOfferingTerm.length == 1 && this.productOff.productOfferingTerm[0].name == undefined){
-        this.check_terms=false;
-      } else {
-        this.check_terms=true;
-      }*/
     }
 
     if(this.prodSpec.productSpecCharacteristic != undefined){
@@ -107,99 +98,9 @@ export class CartCardComponent implements OnInit {
           }
         }
       }
-      console.log(this.selected_chars)
     }
   }
-
-  /*async addProductToCart(productOff:Product| undefined,options:boolean){
-    //this.localStorage.addCartItem(productOff as Product);
-    if(options==true){
-      console.log('termschecked:')
-      console.log(this.selected_terms)
-      if(productOff!= undefined && productOff?.productOfferingPrice != undefined){
-        let prodOptions = {
-          "id": productOff?.id,
-          "name": productOff?.name,
-          "image": this.getProductImage(),
-          "href": productOff.href,
-          "options": {
-            "characteristics": this.selected_chars,
-            "pricing": this.selected_price
-          },
-          "termsAccepted": this.selected_terms
-        }
-        this.lastAddedProd=prodOptions;
-      await this.cartService.addItemShoppingCart(prodOptions).subscribe({
-        next: data => {
-            console.log(data)
-            console.log('Update successful');
-        },
-        error: error => {
-            console.error('There was an error while updating!', error);
-            if(error.error.error){
-              console.log(error)
-              this.errorMessage='Error: '+error.error.error;
-            } else {
-              this.errorMessage='There was an error while adding item to the cart!';
-            }
-            this.showError=true;
-            setTimeout(() => {
-              this.showError = false;
-            }, 3000);
-        }
-      });
-    }
-    } else {
-      if(productOff!= undefined && productOff?.productOfferingPrice != undefined){
-        let prodOptions = {
-          "id": productOff?.id,
-          "name": productOff?.name,
-          "image": this.getProductImage(),
-          "href": productOff.href,
-          "options": {
-            "characteristics": this.selected_chars,
-            "pricing": this.selected_price
-          },
-          "termsAccepted": true
-        }
-        this.lastAddedProd=prodOptions;
-      await this.cartService.addItemShoppingCart(prodOptions).subscribe({
-        next: data => {
-            console.log(data)
-            console.log('Update successful');
-        },
-        error: error => {
-            console.error('There was an error while updating!', error);
-            if(error.error.error){
-              console.log(error)
-              this.errorMessage='Error: '+error.error.error;
-            } else {
-              this.errorMessage='There was an error while adding item to the cart!';
-            }
-            this.showError=true;
-            setTimeout(() => {
-              this.showError = false;
-            }, 3000);
-        }
-      });
-    }
-    }
-    if(productOff!== undefined){
-      this.eventMessage.emitAddedCartItem(productOff as cartProduct);
-      this.eventMessage.emitCloseCartCard(productOff as cartProduct);
-      this.check_char=false;
-      this.check_terms=false;
-      this.check_prices=false;
-      this.selected_chars=[];
-      this.selected_price={};
-      this.selected_terms=false;
-      this.cdr.detectChanges();
-    }
-
-    this.cdr.detectChanges();
-  }
-*/
-
+  
   async addProductToCart(productOff: Product | undefined, options: boolean) {
     if (!productOff || !productOff.productOfferingPrice) return;
 
@@ -210,7 +111,6 @@ export class CartCardComponent implements OnInit {
 
       // Añadir el producto al carrito
       await this.cartService.addItemShoppingCart(prodOptions);
-      console.log('Update successful');
 
       // Emitir eventos
       this.eventMessage.emitAddedCartItem(productOff as cartProduct);
@@ -276,8 +176,6 @@ export class CartCardComponent implements OnInit {
 
   onPriceChange(price:any){
     this.selected_price=price;
-    console.log('change price')
-    console.log(this.selected_price)
     this.cdr.detectChanges;
   }
 
@@ -294,9 +192,6 @@ export class CartCardComponent implements OnInit {
         }
       }
     }
-
-    console.log('change char')
-    console.log(this.selected_chars)
     this.cdr.detectChanges();
   }
 
@@ -313,17 +208,13 @@ export class CartCardComponent implements OnInit {
     if(elem != null){
       if(elem.className.match(cls)){
         this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
       }
     }
   }
 
   selectTag(elem:HTMLElement| null,cls:string){
     if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
+      if(!elem.className.match(cls)){
         this.addClass(elem,cls)
       }
     }

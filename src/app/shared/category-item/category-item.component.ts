@@ -59,14 +59,11 @@ export class CategoryItemComponent implements OnInit {
           this.checkedCategories.splice(index, 1);
           this.cdr.detectChanges();
         }
-        console.log(this.isCheckedCategory(cat))
       }
     })
   }
 
   ngOnInit() {
-    console.log(this.data)
-    console.log(this.isParent)
     if(this.data?.id){
       this.simplifiedId=this.data.id.split(':').pop()
     }

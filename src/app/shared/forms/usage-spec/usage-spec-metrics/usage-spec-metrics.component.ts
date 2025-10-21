@@ -52,9 +52,7 @@ export class UsageSpecMetricsComponent {
   }
 
   async ngOnInit() {
-    console.log('📝 Initializing form in', this.formType, 'mode');
     this.isEditMode = this.formType === 'update';
-    console.log(this.metrics)
   }
 
   deleteMetric(metric:any){
@@ -72,7 +70,6 @@ export class UsageSpecMetricsComponent {
       originalValue: this.originalValue,
       currentValue
     };
-    console.log('🚀 Emitting change state:', changeState);
     this.eventMessage.emitSubformChange(changeState);
   }
 
@@ -95,7 +92,6 @@ export class UsageSpecMetricsComponent {
       originalValue: this.originalValue,
       currentValue
     };
-    console.log('🚀 Emitting change state:', changeState);
     this.eventMessage.emitSubformChange(changeState);
     this.metricsForm.reset();
   }
@@ -108,9 +104,7 @@ export class UsageSpecMetricsComponent {
     this.onTouched = fn;
   }
 
-  ngOnDestroy() {
-    console.log('🗑️ Destroying Usage Spec Metrics Component');
-    
+  ngOnDestroy() {    
     // Solo emitir cambios si estamos en modo edición y hay cambios reales
     if (this.isEditMode && this.hasBeenModified) {
       const currentValue = [...this.metrics];
@@ -125,14 +119,9 @@ export class UsageSpecMetricsComponent {
           currentValue
         };
 
-        console.log('🚀 Emitting final change state:', changeState);
         this.formChange.emit(changeState);
-      } else {
-        console.log('📝 No real changes detected, skipping emission');
       }
-    } else if (!this.isEditMode) {
-      console.log('📝 Not in edit mode, skipping change detection');
-    }
+    } 
   }
 
   private getDirtyFields(currentValue: any[]): string[] {
@@ -147,12 +136,10 @@ export class UsageSpecMetricsComponent {
   }
 
   writeValue(metrics: any[]): void {
-    console.log('📝 Writing value to form:', metrics);
     this.metrics = metrics || [];
     // Store original value only in edit mode
     if (this.isEditMode && metrics) {
       this.originalValue = JSON.parse(JSON.stringify(metrics));
-      console.log('📝 Original value stored:', this.originalValue);
     }
   }
 

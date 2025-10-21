@@ -4,8 +4,6 @@ import {faIdCard, faSort, faSwatchbook, faSparkles} from "@fortawesome/pro-solid
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { PaginationService } from 'src/app/services/pagination.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
-import { LoginInfo } from 'src/app/models/interfaces';
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
 import { TranslateModule } from '@ngx-translate/core';

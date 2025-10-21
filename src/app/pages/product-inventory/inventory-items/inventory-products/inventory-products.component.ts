@@ -135,11 +135,7 @@ export class InventoryProductsComponent implements OnInit {
 
   goToProductDetails(productOff:ProductOffering| undefined) {
     document.querySelector("body > div[modal-backdrop]")?.remove()
-    //this.router.navigate(['/search', productOff?.id]);
-    console.log('info')
-    console.log(productOff)
     this.router.navigate(['product-inventory', productOff?.id]);
-    //this.router.navigate(['product-inventory', productOff?.id]);
   }
 
   async getInventory(next:boolean){
@@ -174,11 +170,7 @@ export class InventoryProductsComponent implements OnInit {
     const index = this.filters.findIndex(item => item === filter);
     if (index !== -1) {
       this.filters.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.filters)
     } else {
-      console.log('añade filtro')
-      console.log(this.filters)
       this.filters.push(filter)
     }
     this.getInventory(false);
@@ -202,7 +194,7 @@ export class InventoryProductsComponent implements OnInit {
       error: error => {
           console.error('There was an error while updating!', error);
           if(error.error.error){
-            console.log(error)
+            console.error(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
             this.errorMessage='¡Hubo un error al cancelar la suscripción!';
@@ -231,8 +223,6 @@ export class InventoryProductsComponent implements OnInit {
 
   selectProduct(prod:any){
     this.selectedProduct=prod;
-    console.log('selecting prod')
-    console.log(this.selectedProduct)
     this.selectedResources=[];
     this.selectedServices=[];
     for(let i=0; i<this.selectedProduct.productPrice?.length;i++){
@@ -240,14 +230,11 @@ export class InventoryProductsComponent implements OnInit {
         this.checkCustom=true;
       }
     }
-    console.log('is prod spec undefined?')
-    console.log(this.selectedProduct.product)
     this.api.getProductSpecification(this.selectedProduct.product.productSpecification.id).then(spec => {
       if(spec.serviceSpecification != undefined){
         for(let j=0; j < spec.serviceSpecification.length; j++){
           this.api.getServiceSpec(spec.serviceSpecification[j].id).then(serv => {
             this.selectedServices.push(serv);
-            console.log(serv)
           })
         }
       }
@@ -255,14 +242,12 @@ export class InventoryProductsComponent implements OnInit {
         for(let j=0; j < spec.resourceSpecification.length; j++){
           this.api.getResourceSpec(spec.resourceSpecification[j].id).then(res => {
             this.selectedResources.push(res);
-            console.log(res)
           })
         }
       }
     })
 
     this.showDetails=true;
-    console.log(this.selectedProduct)
   }
 
   back(){

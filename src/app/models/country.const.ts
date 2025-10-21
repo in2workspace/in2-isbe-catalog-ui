@@ -1,3 +1,8 @@
+export interface CountryDef {
+  code: string;
+  phone: string;
+}
+
 export const phoneNumbers = [
     { text: '🇺🇸 +1   United States', code: '+1', flag: '🇺🇸', country: 'US' },
     { text: '🇨🇦 +1   Canada', code: '+1', flag: '🇨🇦', country: 'CA' },

@@ -1,13 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, ChangeDetectorRef, LOCALE_ID } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {faIdCard, faSort, faSwatchbook} from "@fortawesome/pro-solid-svg-icons";
 import {components} from "src/app/models/product-catalog";
 type Category = components["schemas"]["Category"];
 import { environment } from 'src/environments/environment';
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
-import { LoginInfo } from 'src/app/models/interfaces';
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
+
 
 @Component({
     selector: 'admin-categories',
@@ -93,7 +91,6 @@ export class CategoriesComponent {
         })           
       }
     })*/
-    console.log('Getting categories...')
     this.api.getCategories(this.status).then(data => {      
       for(let i=0; i < data.length; i++){
         this.findChildren(data[i],data);
@@ -171,17 +168,12 @@ export class CategoriesComponent {
     const index = this.status.findIndex(item => item === filter);
     if (index !== -1) {
       this.status.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.status)
     } else {
-      console.log('añade filtro')
-      console.log(this.status)
       this.status.push(filter)
     }
     this.loading=true;
     this.categories=[];
     this.getCategories();
-    console.log('filter')
   }
 
 }

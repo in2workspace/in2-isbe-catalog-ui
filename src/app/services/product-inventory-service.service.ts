@@ -62,7 +62,6 @@ export class ProductInventoryServiceService {
         }    
       }
       url=url+'&resourceStatus='+status;
-      console.log(url)
     }
     return lastValueFrom(this.http.get<any[]>(url));
   }
@@ -79,7 +78,6 @@ export class ProductInventoryServiceService {
         }    
       }
       url=url+'&state='+status;
-      console.log(url)
     }
     return lastValueFrom(this.http.get<any[]>(url));
   }

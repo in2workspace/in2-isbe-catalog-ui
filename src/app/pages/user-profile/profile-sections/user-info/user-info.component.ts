@@ -1,6 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AccountServiceService } from 'src/app/services/account-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { countries } from 'src/app/models/country.const'
 import {EventMessageService} from "src/app/services/event-message.service";
@@ -22,7 +21,7 @@ export class UserInfoComponent implements OnInit {
   loading: boolean = false;
   orders:any[]=[];
   profile:any;
-  seller:any='';
+  id:any;
   token:string='';
   email:string='';
   userProfileForm = new FormGroup({
@@ -31,7 +30,7 @@ export class UserInfoComponent implements OnInit {
     treatment: new FormControl(''),
     maritalstatus: new FormControl(''),
     gender: new FormControl(''),
-    nacionality: new FormControl(''),
+    nationality: new FormControl(''),
     birthdate: new FormControl(''),
     city: new FormControl(''),
     country: new FormControl(''),
@@ -40,6 +39,7 @@ export class UserInfoComponent implements OnInit {
   selectedDate:any;
   countries: any[] = countries;
   preferred:boolean=false;
+  seller:string='';
 
   errorMessage:any='';
   showError:boolean=false;
@@ -76,9 +76,10 @@ export class UserInfoComponent implements OnInit {
     .subscribe(([sellerId, li, accessToken]) => {
       if (!li) { initFlowbite(); return; }
 
-      this.seller = sellerId || '';
+      this.seller = sellerId;
       this.email  = li.email || '';
       this.token  = accessToken || li.token || '';
+      this.id = li.userId;
 
       this.getProfile();
       initFlowbite();
@@ -86,8 +87,8 @@ export class UserInfoComponent implements OnInit {
   }
 
   getProfile(){
-    this.accountService.getUserInfo(this.seller).then(data=> { 
-      this.profile=data;
+    this.accountService.getUserInfo(this.id).then(data=> { 
+      this.profile=data[0];
       this.loadProfileData(this.profile)
       this.loading=false;
       this.cdr.detectChanges();
@@ -99,19 +100,19 @@ export class UserInfoComponent implements OnInit {
 
   updateProfile(){
     let profile = {
-      "id": this.seller,
-      "href": this.seller,
+      "id": this.id,
+      "href": this.id,
       "countryOfBirth": this.userProfileForm.value.country,
       "familyName": this.userProfileForm.value.lastname,
       "gender": this.userProfileForm.value.gender,
       "givenName": this.userProfileForm.value.name,
       "maritalStatus": this.userProfileForm.value.maritalstatus,
-      "nationality": this.userProfileForm.value.nacionality,
+      "nationality": this.userProfileForm.value.nationality,
       "placeOfBirth": this.userProfileForm.value.city,
       "title": this.userProfileForm.value.treatment,
       "birthDate": this.userProfileForm.value.birthdate
     }
-    this.accountService.updateUserInfo(this.seller,profile).subscribe({
+    this.accountService.updateUserInfo(this.seller, this.id,profile).subscribe({
       next: data => {
         this.userProfileForm.reset();
         this.getProfile();
@@ -124,7 +125,7 @@ export class UserInfoComponent implements OnInit {
       error: error => {
           console.error('There was an error while updating!', error);
           if(error.error.error){
-            console.log(error)
+            console.error(error)
             this.errorMessage='Error: '+error.error.error;
           } else {
             this.errorMessage='¡Hubo un error al actualizar el perfil!';
@@ -140,9 +141,14 @@ export class UserInfoComponent implements OnInit {
   loadProfileData(profile:any){
     this.userProfileForm.controls['name'].setValue(profile.givenName);
     this.userProfileForm.controls['lastname'].setValue(profile.familyName);
+
+    this.userProfileForm.controls['treatment'].setValue(profile.title);
     this.userProfileForm.controls['maritalstatus'].setValue(profile.maritalStatus);
+
     this.userProfileForm.controls['gender'].setValue(profile.gender);
-    this.userProfileForm.controls['nacionality'].setValue(profile.nacionality);
+    this.userProfileForm.controls['nationality'].setValue(profile.nationality);
+
+    this.userProfileForm.controls['birthdate'].setValue(profile.birthDate);
     this.userProfileForm.controls['city'].setValue(profile.placeOfBirth);
     this.userProfileForm.controls['country'].setValue(profile.countryOfBirth);
   }

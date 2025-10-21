@@ -307,35 +307,16 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
 
     this.paginationService.getItemsPaginated(this.page, this.ORDER_LIMIT, next, this.orders,this.nextOrders, options,
       this.paginationService.getOrders.bind(this.paginationService)).then(data => {
-        console.log('--pag')
-        console.log(data)
-        console.log(this.orders)
-      this.page_check=data.page_check;
-      this.orders=data.items;
-      /*this.orders=[{
-        id: '12345',
-        quantity: 1,
-        action: 'add',
-        //billingAccount?: components["schemas"]["BillingAccountRef"];
-        itemPrice: [],
-        itemTerm: [],
-        itemTotalPrice: [],
-        payment: [],
-        product: {},
-        productOffering: {},
-        productOrderItem: [],
-        productOrderItemRelationship: [],
-        state: 'acknowledged'
-    }]*/
-      this.nextOrders=data.nextItems;
-      this.page=data.page;
-      this.loading=false;
-      this.loading_more=false;
+        this.page_check=data.page_check;
+        this.orders=data.items;      
+        this.nextOrders=data.nextItems;
+        this.page=data.page;
+        this.loading=false;
+        this.loading_more=false;
     })
   }
 
   async next(){
-    console.log("-order-info-NEXT--")
     await this.getOrders(true);
   }
 
@@ -343,12 +324,8 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
     const index = this.filters.findIndex(item => item === filter);
     if (index !== -1) {
       this.filters.splice(index, 1);
-      console.log('elimina filtro')
-      console.log(this.filters)
     } else {
-      console.log('añade filtro')
       this.filters.push(filter)
-      console.log(this.filters)
     }
     this.getOrders(false);
   }
@@ -426,7 +403,6 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
   }
 
   toggleShowDetails(order:any){
-    //console.log(order)
     this.showOrderDetails=true;
     this.orderToShow=order;
     this.customerName$ = from(this.getCustomerName());
@@ -469,7 +445,6 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
       const patchData = { note: this.selectedOrder.note };
 
       await this.orderService.updateOrder(this.selectedOrder.id, patchData);
-      console.log('Order notes updated successfully');
     } catch (error) {
       this.handleError("Error updating order notes");
       console.error('Error updating order notes:', error);
@@ -502,32 +477,32 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
     return '';
   }
 
-  async getUsername(seller: string): Promise<string> {
-    if (this.userCache.has(seller)) {
-      return this.userCache.get(seller)!;
+  async getUsername(id: string): Promise<string> {
+    if (this.userCache.has(id)) {
+      return this.userCache.get(id)!;
     }
 
     try {
       let username: string;
 
-      if (seller.startsWith('urn:ngsi-ld:individual:')) {
+      if (id.startsWith('urn:ngsi-ld:individual:')) {
         // Get individual user info
-        const userInfo = await this.accountService.getUserInfo(seller);
-        username = `${userInfo?.givenName || ''} ${userInfo?.familyName || ''}`.trim() || `Unknown (${seller})`;
-      } else if (seller.startsWith('urn:ngsi-ld:organization:')) {
+        const userInfo = await this.accountService.getUserInfo( id);
+        username = `${userInfo?.givenName || ''} ${userInfo?.familyName || ''}`.trim() || `Unknown (${id})`;
+      } else if (id.startsWith('urn:ngsi-ld:organization:')) {
         // Get organization info
-        const orgInfo = await this.accountService.getOrgInfo(seller);
-        username = orgInfo?.tradingName || `Unknown Organization (${seller})`;
+        const orgInfo = await this.accountService.getOrgInfo(id);
+        username = orgInfo?.tradingName || `Unknown Organization (${id})`;
       } else {
-        username = `Unknown (${seller})`;
+        username = `Unknown (${id})`;
       }
 
       // Store in cache
-      this.userCache.set(seller, username);
+      this.userCache.set(id, username);
       return username;
     } catch (error) {
-      console.error('Error fetching name for', seller, error);
-      return `Unknown (${seller})`;
+      console.error('Error fetching name for', id, error);
+      return `Unknown (${id})`;
     }
   }
 

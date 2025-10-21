@@ -67,16 +67,10 @@ export class BillingAddressComponent {
   }
 
   deleteBAddr(){
-    console.log("deleting " + this.data.id)
     this.deletedEvent.emit(this.data)
   }
 
   onDeletedBill(baddr: billingAccountCart) {
-    console.log('--- DELETE BILLING ADDRESS ---')
-    /*this.accountService.deleteBillingAccount(baddr.id).subscribe(() => {
-      this.eventMessage.emitBillAccChange(true);
-      this.deleteBill=false;
-    });*/
     this.deleteBill=false;
   }
 }

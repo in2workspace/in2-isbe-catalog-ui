@@ -1,6 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { APP_INITIALIZER, importProvidersFrom } from '@angular/core';
+import { APP_INITIALIZER, importProvidersFrom, LOCALE_ID } from '@angular/core';
 import { provideHttpClient, withInterceptorsFromDi, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -14,6 +14,10 @@ import { appConfigFactory } from './app/app-config-factory';
 import { AuthModule, AuthInterceptor } from 'angular-auth-oidc-client';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './app/guard/auth.service';
+import localeEs from '@angular/common/locales/es';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeEs);
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -30,7 +34,6 @@ bootstrapApplication(AppComponent, {
       deps: [MatomoInitializerService],
       multi: true
     },
-
     importProvidersFrom(
       MarkdownModule.forRoot(),
       TranslateModule.forRoot({
@@ -68,6 +71,7 @@ bootstrapApplication(AppComponent, {
       multi: true,
       useFactory: (auth: AuthService) => () => auth.checkAuth().toPromise(),
       deps: [AuthService],
-    }
+    },
+    { provide: LOCALE_ID, useValue: environment.locale }
   ]
 });

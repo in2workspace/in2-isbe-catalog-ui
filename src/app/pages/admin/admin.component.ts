@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import {components} from "src/app/models/product-catalog";
 type Catalog = components["schemas"]["Catalog"];
 import {LocalStorageService} from "src/app/services/local-storage.service";
@@ -19,7 +19,7 @@ import { NgClass } from '@angular/common';
     standalone: true,
     imports: [OperatorRevenueSharingComponent, VerificationComponent, UpdateCategoryComponent, CreateCategoryComponent,CategoriesComponent,TranslateModule, NgClass]
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   show_categories:boolean = true;
   show_create_categories:boolean = false;
   show_update_categories:boolean = false;
@@ -46,10 +46,6 @@ export class AdminComponent implements OnInit {
         this.goToUpdateCategories();
       }
     })
-  }
-
-  ngOnInit() {
-    console.log('init')
   }
 
   goToCategories(){
@@ -143,17 +139,13 @@ export class AdminComponent implements OnInit {
     if(elem != null){
       if(elem.className.match(cls)){
         this.removeClass(elem,cls)
-      } else {
-        console.log('already unselected')
       }
     }
   }
 
   selectMenu(elem:HTMLElement| null,cls:string){
     if(elem != null){
-      if(elem.className.match(cls)){
-        console.log('already selected')
-      } else {
+      if(!elem.className.match(cls)){
         this.addClass(elem,cls)
       }
     }

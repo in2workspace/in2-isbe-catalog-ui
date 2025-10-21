@@ -60,7 +60,6 @@ export class CategoriesFilterComponent implements OnInit {
             this.checkedCategories.splice(index, 1);
             this.cdr.detectChanges();
           }
-          console.log(this.isCheckedCategory(cat))
         }
       })
     }
@@ -70,8 +69,6 @@ export class CategoriesFilterComponent implements OnInit {
     for(let i=0; i<this.selected.length;i++){
       this.checkedCategories.push(this.selected[i].id)
     }
-    console.log('selected categories')
-    console.log(this.selected)
     if(this.catalogId!=undefined){
       this.api.getCatalog(this.catalogId).then(data => {
         if(data.category){
@@ -192,7 +189,6 @@ export class CategoriesFilterComponent implements OnInit {
     let accordion = document.getElementById("accordion-collapse");
 
     if (children != undefined && children.length >0) {
-      console.log('Es padre')
       return children
     } else {
       return []

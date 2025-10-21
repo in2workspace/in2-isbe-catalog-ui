@@ -65,20 +65,15 @@ export class SearchComponent implements OnInit {
   async ngOnInit() {
     this.products=[];
     this.nextProducts=[];
-    /*await this.api.slaCheck().then(data => {  
-      console.log(data)
-    })*/
     this.checkPanel();
     if(this.route.snapshot.paramMap.get('keywords')){
       this.keywords = this.route.snapshot.paramMap.get('keywords');
       this.searchField.setValue(this.keywords);
     }
-    console.log('INIT')
     await this.getProducts(false);
 
     await this.eventMessage.messages$.subscribe(async ev => {
       if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
-        console.log('event filter')
         await this.getProducts(false);
       }
     })
@@ -140,12 +135,10 @@ export class SearchComponent implements OnInit {
   async filterSearch(event: any) {
     event.preventDefault()
     if(this.searchField.value!='' && this.searchField.value != null){
-      console.log('FILTER KEYWORDS')
       this.keywords=this.searchField.value;
       //let filters = this.localStorage.getObject('selected_categories') as Category[] || [] ;
       await this.getProducts(false);
     } else {
-      console.log('EMPTY  FILTER KEYWORDS')
       this.keywords=undefined;
       //let filters = this.localStorage.getObject('selected_categories') as Category[] || [] ;
       await this.getProducts(false);
