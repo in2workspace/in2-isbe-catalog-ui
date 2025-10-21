@@ -22,11 +22,11 @@ import { take } from 'rxjs';
     imports: [ProviderRevenueSharingComponent, BillingInfoComponent, OrderInfoComponent, OrgInfoComponent, UserInfoComponent, TranslateModule, NgClass]
 })
 export class UserProfileComponent implements OnInit{
-  @ViewChild('billButton') billButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('accountButton') accountButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('orgButton') orgButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('orderButton') orderButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('revenueButton') revenueButton!: ElementRef<HTMLButtonElement>;
+  @ViewChild('billButton',   { static: false }) billButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('accountButton',{ static: false }) accountButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('orgButton',    { static: false }) orgButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('orderButton',  { static: false }) orderButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('revenueButton',{ static: false }) revenueButton?: ElementRef<HTMLButtonElement>;
   
   show_profile: boolean = true;
   show_org_profile:boolean=false;
@@ -181,12 +181,12 @@ export class UserProfileComponent implements OnInit{
       elem.className += (" " + cls);
   }
 
-  selectMenu(button: ElementRef, classes: string) {
-    button.nativeElement.classList.add(...classes.split(' '));
+  selectMenu(button: ElementRef<HTMLButtonElement> | undefined, classes: string) {
+    button?.nativeElement?.classList.add(...classes.split(' '));
   }
 
-  unselectMenu(button: ElementRef, classes: string) {
-    button.nativeElement.classList.remove(...classes.split(' '));
+  unselectMenu(button: ElementRef<HTMLButtonElement> | undefined, classes: string) {
+    button?.nativeElement?.classList.remove(...classes.split(' '));
   }
 }
 

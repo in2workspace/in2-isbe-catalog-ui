@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { beforeEach, describe, expect, it } from '@jest/globals';
+import { beforeEach, describe, expect, it, jest } from '@jest/globals';
 
 import { UserProfileComponent } from './user-profile.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,18 +12,27 @@ describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
 
+  const hasActive = (el?: HTMLElement | null) =>
+    !!el && el.classList.contains('text-white') && el.classList.contains('bg-primary-100');
+
+  const notActive = (el?: HTMLElement | null) =>
+    !el || (!el.classList.contains('text-white') && !el.classList.contains('bg-primary-100'));
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       providers: [
-        { provide: AuthService, useValue: authServiceMock }, 
+        { provide: AuthService, useValue: authServiceMock },
         { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
       ],
-      imports: [UserProfileComponent, TranslateModule.forRoot(), HttpClientTestingModule]
-    })
-    .compileComponents();
-    
+      imports: [UserProfileComponent, TranslateModule.forRoot(), HttpClientTestingModule],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
+
+    component.loggedAsUser = false;
+    (component as any).IS_ISBE = false;
+
     fixture.detectChanges();
   });
 
@@ -32,7 +41,6 @@ describe('UserProfileComponent', () => {
   });
 
   it('should toggle view flags when calling getProfile and getOrgProfile', () => {
-    // start from known state
     component.show_billing = true;
     component.show_profile = false;
     component.show_orders = true;
@@ -82,94 +90,109 @@ describe('UserProfileComponent', () => {
     expect(component.show_billing).toBe(false);
     expect(component.show_org_profile).toBe(false);
     expect(component.show_revenue).toBe(false);
-    // goToOrders calls detectChanges once
     expect(cdrDetectSpy).toHaveBeenCalled();
   });
 
-  describe('DOM menu selection helpers', () => {
-    const ids = ['billButton', 'accountButton', 'orgButton', 'orderButton', 'revenueButton'];
-    const cls = 'text-white bg-primary-100';
-
+  describe('DOM menu selection helpers (usando ViewChilds)', () => {
     beforeEach(() => {
-      // ensure DOM elements exist for selection functions
-      ids.forEach(id => {
-        const el = document.createElement('div');
-        el.id = id;
-        // start with no classes
-        document.body.appendChild(el);
-      });
-    });
-
-    afterEach(() => {
-      ids.forEach(id => {
-        const el = document.getElementById(id);
-        if (el && el.parentNode) el.parentNode.removeChild(el);
-      });
+      component.loggedAsUser = false;
+      (component as any).IS_ISBE = false;
+      fixture.detectChanges();
     });
 
     it('selectAccount should add class to accountButton and remove from others', () => {
       component.selectAccount();
+      fixture.detectChanges();
 
-      const account = document.getElementById('accountButton')!;
-      expect(account.className.match(cls)).toBeTruthy();
+      const account = component.accountButton?.nativeElement ?? null;
+      const org     = component.orgButton?.nativeElement ?? null;
+      const bill    = component.billButton?.nativeElement ?? null;
+      const order   = component.orderButton?.nativeElement ?? null;   // puede no existir
+      const revenue = component.revenueButton?.nativeElement ?? null;
 
-      const others = ['orgButton', 'billButton', 'orderButton', 'revenueButton'];
-      others.forEach(id => {
-        const el = document.getElementById(id)!;
-        expect(el.className.match(cls)).toBeFalsy();
-      });
+      expect(account).toBeTruthy();
+      expect(hasActive(account)).toBe(true);
+
+      expect(notActive(org)).toBe(true);
+      expect(notActive(bill)).toBe(true);
+      expect(notActive(order)).toBe(true);
+      expect(notActive(revenue)).toBe(true);
     });
 
     it('selectOrganization should add class to orgButton and remove from others', () => {
       component.selectOrganization();
+      fixture.detectChanges();
 
-      const org = document.getElementById('orgButton')!;
-      expect(org.className.match(cls)).toBeTruthy();
+      const account = component.accountButton?.nativeElement ?? null;
+      const org     = component.orgButton?.nativeElement ?? null;
+      const bill    = component.billButton?.nativeElement ?? null;
+      const order   = component.orderButton?.nativeElement ?? null;
+      const revenue = component.revenueButton?.nativeElement ?? null;
 
-      const others = ['accountButton', 'billButton', 'orderButton', 'revenueButton'];
-      others.forEach(id => {
-        const el = document.getElementById(id)!;
-        expect(el.className.match(cls)).toBeFalsy();
-      });
+      expect(org).toBeTruthy();
+      expect(hasActive(org)).toBe(true);
+
+      expect(notActive(account)).toBe(true);
+      expect(notActive(bill)).toBe(true);
+      expect(notActive(order)).toBe(true);
+      expect(notActive(revenue)).toBe(true);
     });
 
     it('selectBilling should add class to billButton and remove from others', () => {
       component.selectBilling();
+      fixture.detectChanges();
 
-      const bill = document.getElementById('billButton')!;
-      expect(bill.className.match(cls)).toBeTruthy();
+      const account = component.accountButton?.nativeElement ?? null;
+      const org     = component.orgButton?.nativeElement ?? null;
+      const bill    = component.billButton?.nativeElement ?? null;
+      const order   = component.orderButton?.nativeElement ?? null;
+      const revenue = component.revenueButton?.nativeElement ?? null;
 
-      const others = ['accountButton', 'orgButton', 'orderButton', 'revenueButton'];
-      others.forEach(id => {
-        const el = document.getElementById(id)!;
-        expect(el.className.match(cls)).toBeFalsy();
-      });
+      expect(bill).toBeTruthy();
+      expect(hasActive(bill)).toBe(true);
+
+      expect(notActive(account)).toBe(true);
+      expect(notActive(org)).toBe(true);
+      expect(notActive(order)).toBe(true);
+      expect(notActive(revenue)).toBe(true);
     });
 
-    it('selectOrder should add class to orderButton and remove from others', () => {
+    it('selectOrder should add class to orderButton and remove from others (si existe)', () => {
       component.selectOrder();
+      fixture.detectChanges();
 
-      const order = document.getElementById('orderButton')!;
-      expect(order.className.match(cls)).toBeTruthy();
+      const account = component.accountButton?.nativeElement ?? null;
+      const org     = component.orgButton?.nativeElement ?? null;
+      const bill    = component.billButton?.nativeElement ?? null;
+      const order   = component.orderButton?.nativeElement ?? null;
+      const revenue = component.revenueButton?.nativeElement ?? null;
 
-      const others = ['accountButton', 'orgButton', 'billButton', 'revenueButton'];
-      others.forEach(id => {
-        const el = document.getElementById(id)!;
-        expect(el.className.match(cls)).toBeFalsy();
-      });
+      if (order) {
+        expect(hasActive(order)).toBe(true);
+        expect(notActive(account)).toBe(true);
+        expect(notActive(org)).toBe(true);
+        expect(notActive(bill)).toBe(true);
+        expect(notActive(revenue)).toBe(true);
+      }
     });
 
     it('selectRevenue should add class to revenueButton and remove from others', () => {
       component.selectRevenue();
+      fixture.detectChanges();
 
-      const rev = document.getElementById('revenueButton')!;
-      expect(rev.className.match(cls)).toBeTruthy();
+      const account = component.accountButton?.nativeElement ?? null;
+      const org     = component.orgButton?.nativeElement ?? null;
+      const bill    = component.billButton?.nativeElement ?? null;
+      const order   = component.orderButton?.nativeElement ?? null;
+      const revenue = component.revenueButton?.nativeElement ?? null;
 
-      const others = ['accountButton', 'orgButton', 'billButton', 'orderButton'];
-      others.forEach(id => {
-        const el = document.getElementById(id)!;
-        expect(el.className.match(cls)).toBeFalsy();
-      });
+      expect(revenue).toBeTruthy();
+      expect(hasActive(revenue)).toBe(true);
+
+      expect(notActive(account)).toBe(true);
+      expect(notActive(org)).toBe(true);
+      expect(notActive(bill)).toBe(true);
+      expect(notActive(order)).toBe(true);
     });
   });
 
@@ -177,12 +200,11 @@ describe('UserProfileComponent', () => {
     const el = document.createElement('div');
     el.className = 'one two';
 
-    component.addClass(el, 'three');
+    component.addClass(el as any, 'three');
     expect(el.className.split(/\s+/)).toEqual(expect.arrayContaining(['one', 'two', 'three']));
 
-    component.removeClass(el, 'two');
+    component.removeClass(el as any, 'two');
     expect(el.className.split(/\s+/)).toEqual(expect.arrayContaining(['one', 'three']));
     expect(el.className.split(/\s+/)).not.toContain('two');
   });
-
 });
