@@ -213,6 +213,7 @@ export class ProductDetailsComponent implements OnInit {
         if(prodPrices!== undefined){
           for(const element of prodPrices){
             this.api.getProductPrice(element.id).then(price => {
+              prices.push(price);
               if(price.priceType == 'custom'){
                 this.checkCustom=true;
               }
@@ -260,7 +261,8 @@ export class ProductDetailsComponent implements OnInit {
         }
         this.category = this.productOff?.category?.at(0)?.name ?? 'none';
         this.categories = this.productOff?.category;
-        this.price = this.productOff?.productOfferingPrice?.at(0)?.price?.value + ' ' + this.productOff?.productOfferingPrice?.at(0)?.price?.unit ?? 'n/a';
+        const firstPrice = this.productOff?.productOfferingPrice?.at(0)?.price;
+        this.price = firstPrice ? `${firstPrice.value} ${firstPrice.unit}` : 'n/a';
 
         let profile = this.productOff?.attachment?.filter(item => item.name === 'Profile Picture') ?? [];
         if(profile.length==0){
