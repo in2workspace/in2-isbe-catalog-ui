@@ -93,7 +93,7 @@
         <div class="hidden lg:block overflow-hidden rounded-r-lg">
             <div class="hidden lg:flex relative justify-center items-center w-full h-full">
                 <!-- Imagen de fondo difuminada -->
-                <div class="object-contain overflow-hidden absolute inset-0 bg-cover bg-center opacity-75" style="background-image: url({{getProductImage()}});filter: blur(20px);"></div>
+                <div class="object-contain overflow-hidden absolute inset-0 bg-cover bg-center opacity-75" [style.background-image]="'url(' + getProductImage() + ')'" [style.filter]="'blur(20px)'"></div>
                 <!-- Imagen superior -->
                 <img class="object-contain h-5/6 w-5/6 max-h-[350px] z-10 p-8 dark:text-white" src="{{getProductImage()}}" alt="Product image">
             </div>
