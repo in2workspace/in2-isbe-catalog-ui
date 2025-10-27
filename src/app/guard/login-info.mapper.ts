@@ -49,8 +49,8 @@ function rolesFromPowers(vc: any): string[] {
     roleSet.add('individual');
   }
 
-  const orgiId = (mandator?.organizationIdentifier || '').toLowerCase();
-  if (orgiId.includes(environment.FOUNDATION_ID)) { //ISBE FOUNDATION ID
+  const orgiId = (mandator?.organizationIdentifier || '').toUpperCase();
+  if (orgiId.includes(environment.FOUNDATION_ID)) {
     roleSet.add('admin');
   }
 
