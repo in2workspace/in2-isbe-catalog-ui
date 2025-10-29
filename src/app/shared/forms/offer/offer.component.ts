@@ -156,21 +156,21 @@ export class OfferComponent implements OnInit, OnDestroy{
   validateCurrentStep(): boolean {
     const stepName = this.steps[this.currentStep];
     switch (stepName) {
-      case 'General Info':
+      case "CREATE_OFFER._general":
         return this.productOfferForm.get('generalInfo')?.valid || false;
-      case 'Product Specification':
+      case 'CREATE_OFFER._prod_spec':
         return !!this.productOfferForm.get('prodSpec')?.value;
-      case 'Catalogue':
+      case 'CREATE_OFFER._catalog':
         return !!this.productOfferForm.get('catalogue')?.value;
-      case 'Category':
+      case 'CREATE_OFFER._category':
         return true;
-      case 'License':
+      case 'CREATE_OFFER._license':
         return this.productOfferForm.get('license')?.valid || false;
-      case 'Price Plans':
+      case 'CREATE_OFFER._price_plans':
         return true;
-      case 'Procurement Mode':
+      case 'CREATE_OFFER._procurement':
         return this.productOfferForm.get('procurementMode')?.valid || false;
-      case 'Summary':
+      case 'CREATE_OFFER._summary':
         return true;
       default:
         return true;
