@@ -379,7 +379,7 @@ export class UpdateProductSpecComponent implements OnInit {
     }
     
     let options = {
-      "filters": ['Active','Launched'],
+      "filters": ['Active','Launched','In design'],
       "seller": "did:elsi:"+this.seller
     }
 
@@ -810,7 +810,7 @@ export class UpdateProductSpecComponent implements OnInit {
     }
     
     let options = {
-      "filters": ['Active','Launched'],
+      "filters": ['Active','Launched','In design'],
       "seller": "did:elsi:"+this.seller
     }
 

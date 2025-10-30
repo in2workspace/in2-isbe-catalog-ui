@@ -83,7 +83,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
       };
     } else {
       this.formGroup.addControl('name', new FormControl<string>('', [Validators.required, Validators.maxLength(100), noWhitespaceValidator]));
-      this.formGroup.addControl('status', new FormControl<string>('Active', [Validators.required]));
+      this.formGroup.addControl('status', new FormControl<string>('In design', [Validators.required]));
       this.formGroup.addControl('description', new FormControl<string>(''));
       this.formGroup.addControl('version', new FormControl<string>('0.1', [Validators.required,Validators.pattern('^-?[0-9]\\d*(\\.\\d*)?$'), noWhitespaceValidator]));
     }

@@ -2,7 +2,7 @@ import { Component, forwardRef, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { SharedModule } from "../../shared.module";
 import { TranslateModule } from '@ngx-translate/core';
-import { StatusCode, LIFECYCLE_STATES, normalizeToInternal, filterDisplayedStatuses, canTransition, normalizeToExternal } from '../../lifecycle-status/lifecycle-status';
+import { StatusCode, LIFECYCLE_STATES, normalizeToInternal, filterDisplayedStatuses, canTransition, normalizeToExternal, ModelType } from '../../lifecycle-status';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 
@@ -26,6 +26,7 @@ export class StatusSelectorComponent implements ControlValueAccessor {
   allowLaunched: boolean = false;
 
   selectedStatus: StatusCode | '' = '';
+  modelType: ModelType = 'offering';
 
   onChange = (_: string) => {};
   onTouched = () => {};
@@ -48,7 +49,7 @@ export class StatusSelectorComponent implements ControlValueAccessor {
   registerOnTouched(fn: any): void { this.onTouched = fn; }
 
   get displayedStatuses(): StatusCode[] {
-    return filterDisplayedStatuses(this.statuses, this.selectedStatus, this.allowLaunched);
+    return filterDisplayedStatuses(this.statuses, this.selectedStatus, this.modelType, this.allowLaunched);
   }
 
   selectStatus(next: string): void {
@@ -56,8 +57,9 @@ export class StatusSelectorComponent implements ControlValueAccessor {
     if (!nextInternal) return;
 
     if (!this.displayedStatuses.includes(nextInternal)) return;
+
     const from = (this.selectedStatus || 'in_design') as StatusCode;
-    if (!canTransition(from, nextInternal)) return;
+    if (!canTransition(this.modelType, from, nextInternal, this.allowLaunched)) return;
 
     this.selectedStatus = nextInternal;
     this.onChange(normalizeToExternal(nextInternal));

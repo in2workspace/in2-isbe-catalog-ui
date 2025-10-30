@@ -259,7 +259,7 @@ export class CreateProductSpecComponent implements OnInit {
     }
     
     let options = {
-      "filters": ['Active','Launched'],
+      "filters": ['Active','Launched','In design'],
       "seller": "did:elsi:"+this.seller
     }
 
@@ -630,7 +630,7 @@ export class CreateProductSpecComponent implements OnInit {
     }
     
     let options = {
-      "filters": ['Active','Launched'],
+      "filters": ['Active','Launched','In design'],
       "seller": "did:elsi:"+this.seller
     }
 
