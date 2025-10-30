@@ -203,7 +203,9 @@
         "_about": "About",
         "_verify": "Publish your offering",
         "_info": "Info",
-        "_orders": "Product Orders"
+        "_orders": "Product Orders",
+        "_banner_message": "Remember that you will not be able to publish your use case until it is deployed and validated in ISBE. More information ",
+        "_here": " here."
     },
     "PRODUCT_DETAILS": {
         "_back": "Back",

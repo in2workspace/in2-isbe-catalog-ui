@@ -1,6 +1,6 @@
 <div class="relative">
   <nav class="text-white border-gray-200 h-[75px] bg-primary-100 dark:border-gray-700">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 pb-0">
       <a (click)="goTo('/dashboard')" class="flex items-center align-items-middle cursor-pointer">
         <img src="assets/logos/ISBE_logo_black_name.svg" class="h-10 lg:h-14" alt="ISBE Catalog Logo" />
       </a>
@@ -225,7 +225,12 @@
         }
       </ul>
     </div>
-
+    <div class="w-full bg-[#63E86A] text-black text-center py-3 p-4">
+      <div class="max-w-screen-2xl mx-auto px-4 font-medium">
+        {{ 'HEADER._banner_message' | translate }}
+        <a class="underline hover:opacity-80" href="#">{{ 'HEADER._here'| translate }}</a>.
+      </div>
+    </div>
   </nav>
   @if (showCart) {
     <div class="flex h-screen w-full backdrop-blur-sm absolute top-0 right-0 z-40">

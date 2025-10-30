@@ -203,7 +203,9 @@
     "_about": "Acerca de",
     "_verify": "Publica tu oferta",
     "_info": "Información",
-    "_orders": "Pedidos de producto"
+    "_orders": "Pedidos de producto",
+    "_banner_message": "Recuerda que no podrás publicar tu caso de uso hasta que no esté desplegado y validado en ISBE. Más información ",
+    "_here": " aquí."
   },
   "PRODUCT_DETAILS": {
     "_back": "Atrás",
