@@ -3,7 +3,7 @@ export type StatusExternal = 'In design' | 'Active' | 'Launched' | 'Retired' | '
 export type ModelType = 'offering' | 'spec' | 'category';
 
 export const LIFECYCLE_STATES: readonly StatusCode[] = [
-  'in_design', 'active', 'launched', 'retired', 'obsolete'
+  'in_design','active','launched','retired','obsolete'
 ] as const;
 
 export const toExternal: Record<StatusCode, StatusExternal> = {
@@ -44,32 +44,40 @@ export function normalizeToInternal(status: string | null | undefined): StatusCo
   if ((LIFECYCLE_STATES as readonly string[]).includes(lowered)) return lowered;
   return toInternal[status as StatusExternal] ?? '';
 }
-
 export function normalizeToExternal(status: StatusCode | ''): string {
   return status ? toExternal[status] : '';
 }
 
-function transitionsFor(model: ModelType) {
+function mapFor(model: ModelType) {
   return model === 'offering' ? OFFERING_TRANSITIONS : GENERIC_TRANSITIONS;
 }
 
-export function filterDisplayedStatuses(base: readonly StatusCode[], current: StatusCode | '', model: ModelType, allowLaunched: boolean): StatusCode[] {
-  if (model !== 'offering') return [...base];
-  return base.filter(s => {
+export function allowedTargets(
+  model: ModelType,
+  from: StatusCode,
+  allowLaunched: boolean
+): StatusCode[] {
+  const base = mapFor(model)[from] ?? [];
+  if (model === 'offering' && !allowLaunched) {
+    return base.filter(s => s !== 'launched');
+  }
+  return base;
+}
+
+export function displayedFromAnchor( base: readonly StatusCode[], anchor: StatusCode, model: ModelType, allowLaunched: boolean): StatusCode[] {
+  const oneHop = allowedTargets(model, anchor, allowLaunched);
+  const candidates = Array.from(new Set<StatusCode>([anchor, ...oneHop]))
+    .filter(s => base.includes(s));
+
+  if (model !== 'offering') return candidates;
+
+  return candidates.filter(s => {
     if (s !== 'launched') return true;
-    return current === 'launched' || allowLaunched;
+    return anchor === 'launched' || allowLaunched;
   });
 }
 
-export function canTransition(model: ModelType, from: StatusCode, to: StatusCode, allowLaunched: boolean): boolean {
-  if (from === to) return true;
-
-  const map = transitionsFor(model);
-  const allowed = map[from]?.includes(to) ?? false;
-  if (!allowed) return false;
-
-  if (model === 'offering' && to === 'launched' && from !== 'launched') {
-    return !!allowLaunched;
-  }
-  return true;
+export function canTransitionFromAnchor( model: ModelType, anchor: StatusCode, to: StatusCode, allowLaunched: boolean): boolean {
+  if (to === anchor) return true;
+  return allowedTargets(model, anchor, allowLaunched).includes(to);
 }

@@ -23,6 +23,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
+import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
@@ -37,7 +38,7 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
     templateUrl: './update-product-spec.component.html',
     styleUrl: './update-product-spec.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
+    imports: [StatusSelectorComponent, ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
 })
 export class UpdateProductSpecComponent implements OnInit {
   @Input() prod: any;
@@ -186,6 +187,10 @@ export class UpdateProductSpecComponent implements OnInit {
   @ViewChild('imgURL') imgURL!: ElementRef;  
 
   public files: NgxFileDropEntry[] = [];
+
+  get statusControl(): FormControl {
+    return this.prodStatus;
+  }
 
   ngOnInit() {
     this.initPartyInfo();

@@ -2,7 +2,7 @@ import {Component, Input, OnInit, OnDestroy, Output, EventEmitter} from '@angula
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SharedModule} from "../../../shared.module";
 import {MarkdownTextareaComponent} from "../../markdown-textarea/markdown-textarea.component";
-import {StatusSelectorComponent} from "../../status-selector/status-selector.component";
+import {StatusSelectorComponent} from "../../../lifecycle-status/status-selector/status-selector.component";
 import {EventMessageService} from "../../../../services/event-message.service";
 import {FormChangeState} from "../../../../models/interfaces";
 import {Subscription} from "rxjs";

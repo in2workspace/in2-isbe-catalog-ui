@@ -116,14 +116,16 @@
                             <b>{{cat.name}}</b>
                         </td>
                         <td class="hidden md:flex px-6 py-4 w-fit">
-                            @if(cat.lifecycleStatus == 'Active'){
-                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{cat.lifecycleStatus}}</span>
+                            @if(cat.lifecycleStatus == 'In design'){
+                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-grey-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-grey-800">{{ 'ADMIN._in_design' | translate }}</span>
+                            } @else if(cat.lifecycleStatus == 'Active'){
+                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                             } @else if(cat.lifecycleStatus == 'Launched') {
-                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{cat.lifecycleStatus}}</span>
+                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
                             } @else if(cat.lifecycleStatus == 'Retired') {
-                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{cat.lifecycleStatus}}</span>
+                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
                             } @else if(cat.lifecycleStatus == 'Obsolete') {
-                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{cat.lifecycleStatus}}</span>
+                                <span class="bg-purple-100 max-h-6 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
                             }
                         </td>
                         <td class="hidden md:table-cell px-6 py-4 w-fit">

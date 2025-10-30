@@ -13,6 +13,7 @@ import { CategoriesRecursionComponent } from 'src/app/shared/categories-recursio
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
+import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 type Category_Update = components["schemas"]["Category_Update"];
 
 @Component({
@@ -20,7 +21,7 @@ type Category_Update = components["schemas"]["Category_Update"];
     templateUrl: './update-category.component.html',
     styleUrl: './update-category.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
+    imports: [StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
 })
 export class UpdateCategoryComponent implements OnInit {
   @Input() category: any;
@@ -84,6 +85,10 @@ export class UpdateCategoryComponent implements OnInit {
       this.showEmoji=false;
       this.cdr.detectChanges();
     }
+  }
+
+  get statusControl(): FormControl {
+    return this.catStatus;
   }
 
   ngOnInit() {
