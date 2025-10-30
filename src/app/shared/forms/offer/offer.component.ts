@@ -822,8 +822,8 @@ export class OfferComponent implements OnInit, OnDestroy{
     const generalInfo = v?.generalInfo ?? {};
     const lifecycleStatus =
       this.formType === 'update'
-        ? generalInfo?.status ?? this.offer?.lifecycleStatus ?? 'Active'
-        : 'Active';
+        ? generalInfo?.status ?? this.offer?.lifecycleStatus ?? 'In design'
+        : 'In design';
 
     const terms: any[] = [];
 

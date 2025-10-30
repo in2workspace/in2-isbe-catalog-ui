@@ -1,13 +1,16 @@
-import {Component, forwardRef, Input} from '@angular/core';
+import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {SharedModule} from "../../shared.module";
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
-type StatusCode = 'active' | 'launched' | 'retired' | 'obsolete';
+type StatusCode = 'in_design' | 'active' | 'launched' | 'retired' | 'obsolete';
 
-type StatusExternal = 'Active' | 'Launched' | 'Retired' | 'Obsolete';
+type StatusExternal = 'In design' | 'Active' | 'Launched' | 'Retired' | 'Obsolete';
 
 const toExternal: Record<StatusCode, StatusExternal> = {
+  in_design: 'In design',
   active: 'Active',
   launched: 'Launched',
   retired: 'Retired',
@@ -15,11 +18,13 @@ const toExternal: Record<StatusCode, StatusExternal> = {
 };
 
 const toInternal: Record<StatusExternal, StatusCode> = {
+  'In design': 'in_design',
   Active: 'active',
   Launched: 'launched',
   Retired: 'retired',
   Obsolete: 'obsolete'
 };
+
 
 @Component({
   selector: 'app-status-selector',
@@ -39,17 +44,28 @@ const toInternal: Record<StatusExternal, StatusCode> = {
 })
 
 export class StatusSelectorComponent implements ControlValueAccessor {
-  @Input() statuses: string[] = ['active', 'launched', 'retired', 'obsolete'];  // Estados disponibles
+  @Input() statuses: string[] = ['in_design', 'active', 'launched', 'retired', 'obsolete'];  // Estados disponibles
   selectedStatus: string = '';
+  disableLaunched: boolean;
 
   onChange = (status: string) => {};
   onTouched = () => {};
+
+  constructor(private auth: AuthService) {
+    this.auth.loginInfo$
+      .pipe(take(1))
+      .subscribe(li => {
+        const roles = li?.roles ?? [];
+        const names = (roles as any[]).map(r => (r?.name ?? r?.id ?? r));
+        this.disableLaunched = !names.includes('admin');
+      });
+  }
 
   writeValue(status: string): void {
     if (!status) { this.selectedStatus = ''; return; }
 
     const lowered = status.toLowerCase() as StatusCode;
-    const isInternal = (['active','launched','retired','obsolete'] as const).includes(lowered);
+    const isInternal = (['in_design', 'active','launched','retired','obsolete'] as const).includes(lowered);
 
     this.selectedStatus = isInternal
       ? lowered
@@ -65,6 +81,7 @@ export class StatusSelectorComponent implements ControlValueAccessor {
   }
 
   selectStatus(status: string): void {
+    if (this.disableLaunched && status === 'launched') return;
     this.selectedStatus = status;
     this.onChange(toExternal[status as StatusCode]); // Notifica al formulario padre
     this.onTouched();
@@ -72,6 +89,7 @@ export class StatusSelectorComponent implements ControlValueAccessor {
 
   getStatusClasses(status: string): string {
     const statusColors: Record<string, string> = {
+      "in_design": 'text-[#808080]',
       "active": 'text-[#269c43]',
       "launched": 'text-[#269c43]',
       "retired": 'text-[#b40404]',
@@ -87,6 +105,7 @@ export class StatusSelectorComponent implements ControlValueAccessor {
 
   getFillColor(status: string): string {
     const statusColors: Record<string, string> = {
+      "in_design": "#a8a8a8", // Gris
       "active": "#0f9d58",   // Verde
       "launched": "#269c43", // Verde oscuro
       "retired": "#b40404",  // Rojo oscuro
