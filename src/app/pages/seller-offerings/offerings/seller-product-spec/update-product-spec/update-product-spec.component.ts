@@ -2,16 +2,13 @@ import { Component, OnInit, ChangeDetectorRef, HostListener, ElementRef, ViewChi
 import {components} from "src/app/models/product-catalog";
 import { environment } from 'src/environments/environment';
 import { ProductSpecServiceService } from 'src/app/services/product-spec-service.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
 import {EventMessageService} from "src/app/services/event-message.service";
 import {AttachmentServiceService} from "src/app/services/attachment-service.service";
 import { PaginationService } from 'src/app/services/pagination.service';
-import { LoginInfo } from 'src/app/models/interfaces';
 import { initFlowbite } from 'flowbite';
 import { FormGroup, FormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry, NgxFileDropModule } from 'ngx-file-drop';
 import { certifications } from 'src/app/models/certification-standards.const'
-import * as moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import { QrVerifierService } from 'src/app/services/qr-verifier.service';
 import { jwtDecode } from "jwt-decode";
@@ -24,6 +21,7 @@ import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textare
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
+import { normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
 
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
@@ -75,8 +73,9 @@ export class UpdateProductSpecComponent implements OnInit {
     number: new FormControl(''),
     description: new FormControl('', Validators.maxLength(100000)),
   });
-  prodStatus:any;
 
+  prodStatusAnchor: StatusCode;
+  prodStatusDraft: string;
   //CHARS INFO
   charsForm = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.maxLength(100), noWhitespaceValidator]),
@@ -188,10 +187,6 @@ export class UpdateProductSpecComponent implements OnInit {
 
   public files: NgxFileDropEntry[] = [];
 
-  get statusControl(): FormControl {
-    return this.prodStatus;
-  }
-
   ngOnInit() {
     this.initPartyInfo();
     this.populateProductInfo();
@@ -217,7 +212,8 @@ export class UpdateProductSpecComponent implements OnInit {
     this.generalForm.controls['brand'].setValue(this.prod.brand ? this.prod.brand : '');
     this.generalForm.controls['version'].setValue(this.prod.version ? this.prod.version : '');
     this.generalForm.controls['number'].setValue(this.prod.productNumber ? this.prod.productNumber : '');
-    this.prodStatus=this.prod.lifecycleStatus;
+    this.prodStatusAnchor = normalizeToInternal(this.prod.lifecycleStatus) as StatusCode;
+    this.prodStatusDraft  = this.prod.lifecycleStatus;   
 
     //BUNDLE
     if(this.prod.isBundle==true){
@@ -321,8 +317,8 @@ export class UpdateProductSpecComponent implements OnInit {
 
   }
 
-  setProdStatus(status:any){
-    this.prodStatus=status;
+  setProdStatus(status: any) {
+    this.prodStatusDraft = status;
     this.cdr.detectChanges();
   }
 
@@ -1090,7 +1086,7 @@ export class UpdateProductSpecComponent implements OnInit {
         version: this.generalForm.value.version,
         brand: this.generalForm.value.brand,
         productNumber: this.generalForm.value.number ?? '',
-        lifecycleStatus: this.prodStatus,
+        lifecycleStatus: this.prodStatusDraft,
         //isBundle: this.bundleChecked,
         //bundledProductSpecification: this.prodSpecsBundle,
         productSpecCharacteristic: this.finishChars,
@@ -1130,6 +1126,8 @@ export class UpdateProductSpecComponent implements OnInit {
   updateProduct(){
     this.prodSpecService.updateProdSpec(this.productSpecToUpdate, this.prod.id).subscribe({
       next: data => {
+        this.prodStatusAnchor = normalizeToInternal(this.productSpecToUpdate!.lifecycleStatus!) as StatusCode;
+        this.prodStatusDraft  = this.productSpecToUpdate!.lifecycleStatus!;
         this.goBack();
       },
       error: error => {

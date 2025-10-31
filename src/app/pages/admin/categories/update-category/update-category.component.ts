@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, HostListener, Input } from '@angu
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import {components} from "src/app/models/product-catalog";
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
@@ -14,6 +14,7 @@ import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textare
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
+import { normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
 type Category_Update = components["schemas"]["Category_Update"];
 
 @Component({
@@ -21,7 +22,7 @@ type Category_Update = components["schemas"]["Category_Update"];
     templateUrl: './update-category.component.html',
     styleUrl: './update-category.component.css',
     standalone: true,
-    imports: [StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
+    imports: [FormsModule, StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
 })
 export class UpdateCategoryComponent implements OnInit {
   @Input() category: any;
@@ -31,6 +32,9 @@ export class UpdateCategoryComponent implements OnInit {
 
   categories:any[]=[];
   unformattedCategories:any[]=[];
+
+  catStatusAnchor: StatusCode;
+  catStatusDraft: string;
 
   stepsElements:string[]=['general-info','summary'];
   stepsCircles:string[]=['general-circle','summary-circle'];
@@ -57,8 +61,6 @@ export class UpdateCategoryComponent implements OnInit {
   selectedCategory:any=undefined;
   selected:any[];
   loading: boolean = false;
-
-  catStatus:any='Active';
 
   errorMessage:any='';
   showError:boolean=false;
@@ -87,10 +89,6 @@ export class UpdateCategoryComponent implements OnInit {
     }
   }
 
-  get statusControl(): FormControl {
-    return this.catStatus;
-  }
-
   ngOnInit() {
     this.initPartyInfo();
   }
@@ -110,7 +108,8 @@ export class UpdateCategoryComponent implements OnInit {
     //GENERAL INFORMATION
     this.generalForm.controls['name'].setValue(this.category.name);
     this.generalForm.controls['description'].setValue(this.category.description);
-    this.catStatus=this.category.lifecycleStatus;
+    this.catStatusAnchor = normalizeToInternal(this.category.lifecycleStatus) as StatusCode;
+    this.catStatusDraft  = this.category.lifecycleStatus;
     if(this.category.isRoot==false){
       this.isParent=false;
       this.parentSelectionCheck=true;
@@ -246,7 +245,7 @@ export class UpdateCategoryComponent implements OnInit {
       this.categoryToUpdate={
         name: this.generalForm.value.name,
         description: this.generalForm.value.description != null ? this.generalForm.value.description : '',
-        lifecycleStatus: this.catStatus,
+        lifecycleStatus: this.catStatusDraft,
         version: this.incrementVersion(this.category.version),
         isRoot: this.isParent
       }
@@ -271,6 +270,8 @@ export class UpdateCategoryComponent implements OnInit {
   updateCategory(){
     this.api.updateCategory(this.categoryToUpdate,this.category.id).subscribe({
       next: data => {
+        this.catStatusAnchor = normalizeToInternal(this.categoryToUpdate!.lifecycleStatus!) as StatusCode;
+        this.catStatusDraft  = this.categoryToUpdate!.lifecycleStatus!;
         this.goBack();
       },
       error: error => {
@@ -290,7 +291,7 @@ export class UpdateCategoryComponent implements OnInit {
   }
 
   setCatStatus(status:any){
-    this.catStatus=status;
+    this.catStatusDraft = status;
     this.cdr.detectChanges();
   }
 

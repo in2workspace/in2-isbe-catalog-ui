@@ -1,10 +1,11 @@
-import { Component, forwardRef, Input } from '@angular/core';
+import { Component, forwardRef, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
 import { SharedModule } from "../../shared.module";
 import { TranslateModule } from '@ngx-translate/core';
-import { StatusCode, LIFECYCLE_STATES, normalizeToInternal, normalizeToExternal, ModelType, canTransitionFromAnchor, displayedFromAnchor } from '../lifecycle-status';
-import { take } from 'rxjs';
-import { AuthService } from 'src/app/guard/auth.service';
+import {
+  StatusCode, LIFECYCLE_STATES, normalizeToInternal, normalizeToExternal,
+  ModelType, canTransitionFromAnchor, displayedFromAnchor
+} from '../lifecycle-status';
 
 @Component({
   selector: 'app-status-selector',
@@ -20,53 +21,61 @@ import { AuthService } from 'src/app/guard/auth.service';
   templateUrl: './status-selector.component.html',
   styleUrl: './status-selector.component.css'
 })
-export class StatusSelectorComponent implements ControlValueAccessor {
+export class StatusSelectorComponent implements ControlValueAccessor, OnChanges {
 
   @Input() statuses: StatusCode[] = [...LIFECYCLE_STATES];
-  allowLaunched: boolean = false;
-  private anchorStatus!: StatusCode;
+  @Input() allowLaunched = false;
+  @Input() modelType: ModelType = 'offering';
+
+  /** ANCLA: estado persistido (interno) */
+  @Input() anchor!: StatusCode;
+
+  /** Selección temporal que se resalta en UI */
   selectedStatus: StatusCode | '' = '';
-  modelType: ModelType = 'offering';
 
-  onChange = (_: string) => {};
-  onTouched = () => {};
+  /** CVA hooks */
+  onChange: (v: string) => void = () => {};
+  onTouched: () => void = () => {};
+  disabled = false;
 
-  constructor(private auth: AuthService) {
-    this.auth.loginInfo$
-      .pipe(take(1))
-      .subscribe(li => {
-        const roles = li?.roles ?? [];
-        const names = (roles as any[]).map(r => (r?.name ?? r?.id ?? r));
-        this.allowLaunched = names.includes('admin');
-      });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['anchor'] && this.anchor) {
+      // cuando cambia el ancla desde el padre, reflejamos en la UI
+      this.selectedStatus = this.anchor;
+    }
   }
 
-  registerOnChange(fn: any): void { this.onChange = fn; }
-  registerOnTouched(fn: any): void { this.onTouched = fn; }
-
+  /** CVA: valor que viene de ngModel (externo) */
   writeValue(status: string): void {
     const internal = normalizeToInternal(status);
     if (!internal) { this.selectedStatus = ''; return; }
-    this.anchorStatus = internal as StatusCode;
+    // si el padre no pasó anchor, usamos este como ancla inicial
+    if (!this.anchor) this.anchor = internal as StatusCode;
     this.selectedStatus = internal;
   }
 
+  /** CVA: registra callbacks */
+  registerOnChange(fn: any): void { this.onChange = fn; }
+  registerOnTouched(fn: any): void { this.onTouched = fn; }
+  setDisabledState(isDisabled: boolean): void { this.disabled = isDisabled; }
+
+  /** Opciones visibles calculadas desde el ANCLA (sin multi-hop) */
   get displayedStatuses(): StatusCode[] {
-    if (!this.anchorStatus) return [];
-    return displayedFromAnchor(this.statuses, this.anchorStatus, this.modelType, this.allowLaunched);
+    if (!this.anchor) return [];
+    return displayedFromAnchor(this.statuses, this.anchor, this.modelType, this.allowLaunched);
   }
 
   selectStatus(next: string): void {
+    if (this.disabled) return;
+
     const nextInternal = normalizeToInternal(next) as StatusCode;
-    if (!nextInternal || !this.anchorStatus) return;
-
+    if (!nextInternal || !this.anchor) return;
     if (!this.displayedStatuses.includes(nextInternal)) return;
-
-    if (!canTransitionFromAnchor(this.modelType, this.anchorStatus, nextInternal, this.allowLaunched)) return;
+    if (!canTransitionFromAnchor(this.modelType, this.anchor, nextInternal, this.allowLaunched)) return;
 
     this.selectedStatus = nextInternal;
-
-    this.onChange(normalizeToExternal(nextInternal)); 
+    // Emite EXTERNO (“Active”, “Launched”…) para ngModel
+    this.onChange(normalizeToExternal(nextInternal));
     this.onTouched();
   }
 
@@ -83,7 +92,7 @@ export class StatusSelectorComponent implements ControlValueAccessor {
     const active = this.selectedStatus === status;
     const color = statusColors[status] || 'text-gray-500';
 
-    const disabled = !this.displayedStatuses.includes(status as StatusCode);
+    const disabled = this.disabled || !this.displayedStatuses.includes(status as StatusCode);
 
     if (active) {
       return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} bg-[#d2e0f0] dark:bg-primary-100 font-semibold ${color}`;
