@@ -8,6 +8,7 @@ import {FormChangeState} from "../../../../models/interfaces";
 import {Subscription} from "rxjs";
 import {debounceTime} from "rxjs/operators";
 import { noWhitespaceValidator } from 'src/app/validators/validators';
+import { normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
 
 interface GeneralInfo {
   name: string;
@@ -33,6 +34,8 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
   @Input() formType!: string;
   @Input() data: any;
   @Output() formChange = new EventEmitter<FormChangeState>();
+
+  statusAnchor!: StatusCode;
 
   private originalValue: GeneralInfo;
   private hasBeenModified: boolean = false;
@@ -73,7 +76,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
       this.formGroup.addControl('status', new FormControl<string>(this.data.lifecycleStatus));
       this.formGroup.addControl('description', new FormControl<string>(this.data.description, Validators.maxLength(100000)));
       this.formGroup.addControl('version', new FormControl<string>(this.data.version, [Validators.required,Validators.pattern('^-?[0-9]\\d*(\\.\\d*)?$'), noWhitespaceValidator]));
-      
+      this.statusAnchor = normalizeToInternal(this.data.lifecycleStatus) as StatusCode;
       // Store original value only in edit mode
       this.originalValue = {
         name: this.data.name,
@@ -86,6 +89,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
       this.formGroup.addControl('status', new FormControl<string>('In design', [Validators.required]));
       this.formGroup.addControl('description', new FormControl<string>(''));
       this.formGroup.addControl('version', new FormControl<string>('0.1', [Validators.required,Validators.pattern('^-?[0-9]\\d*(\\.\\d*)?$'), noWhitespaceValidator]));
+      this.statusAnchor = 'in_design';
     }
 
     // Subscribe to form changes only in edit mode

@@ -138,7 +138,7 @@
                         
                         </div>
                         <label class="font-bold text-lg col-span-2 dark:text-white">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
-                        <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft"></app-status-selector>
+                        <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
 
                         <label for="prod-name" class="font-bold text-lg col-span-2 dark:text-white">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                         <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>

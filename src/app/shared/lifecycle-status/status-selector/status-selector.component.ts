@@ -24,42 +24,34 @@ import {
 export class StatusSelectorComponent implements ControlValueAccessor, OnChanges {
 
   @Input() statuses: StatusCode[] = [...LIFECYCLE_STATES];
-  @Input() allowLaunched = false;
+  @Input() allowLaunched = true;
   @Input() modelType: ModelType = 'offering';
 
-  /** ANCLA: estado persistido (interno) */
   @Input() anchor!: StatusCode;
 
-  /** Selección temporal que se resalta en UI */
   selectedStatus: StatusCode | '' = '';
 
-  /** CVA hooks */
   onChange: (v: string) => void = () => {};
   onTouched: () => void = () => {};
   disabled = false;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['anchor'] && this.anchor) {
-      // cuando cambia el ancla desde el padre, reflejamos en la UI
       this.selectedStatus = this.anchor;
     }
   }
 
-  /** CVA: valor que viene de ngModel (externo) */
   writeValue(status: string): void {
     const internal = normalizeToInternal(status);
     if (!internal) { this.selectedStatus = ''; return; }
-    // si el padre no pasó anchor, usamos este como ancla inicial
     if (!this.anchor) this.anchor = internal as StatusCode;
     this.selectedStatus = internal;
   }
 
-  /** CVA: registra callbacks */
   registerOnChange(fn: any): void { this.onChange = fn; }
   registerOnTouched(fn: any): void { this.onTouched = fn; }
   setDisabledState(isDisabled: boolean): void { this.disabled = isDisabled; }
 
-  /** Opciones visibles calculadas desde el ANCLA (sin multi-hop) */
   get displayedStatuses(): StatusCode[] {
     if (!this.anchor) return [];
     return displayedFromAnchor(this.statuses, this.anchor, this.modelType, this.allowLaunched);
@@ -74,7 +66,6 @@ export class StatusSelectorComponent implements ControlValueAccessor, OnChanges 
     if (!canTransitionFromAnchor(this.modelType, this.anchor, nextInternal, this.allowLaunched)) return;
 
     this.selectedStatus = nextInternal;
-    // Emite EXTERNO (“Active”, “Launched”…) para ngModel
     this.onChange(normalizeToExternal(nextInternal));
     this.onTouched();
   }

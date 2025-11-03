@@ -52,11 +52,7 @@ function mapFor(model: ModelType) {
   return model === 'offering' ? OFFERING_TRANSITIONS : GENERIC_TRANSITIONS;
 }
 
-export function allowedTargets(
-  model: ModelType,
-  from: StatusCode,
-  allowLaunched: boolean
-): StatusCode[] {
+export function allowedTargets(model: ModelType, from: StatusCode, allowLaunched: boolean): StatusCode[] {
   const base = mapFor(model)[from] ?? [];
   if (model === 'offering' && !allowLaunched) {
     return base.filter(s => s !== 'launched');
@@ -68,6 +64,7 @@ export function displayedFromAnchor( base: readonly StatusCode[], anchor: Status
   const oneHop = allowedTargets(model, anchor, allowLaunched);
   const candidates = Array.from(new Set<StatusCode>([anchor, ...oneHop]))
     .filter(s => base.includes(s));
+  console.log("ei");
 
   if (model !== 'offering') return candidates;
 
