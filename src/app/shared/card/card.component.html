@@ -1,19 +1,19 @@
-<div class="flex flex-col w-full h-full bg-secondary-50 dark:bg-secondary-100 rounded-lg dark:border-secondary-100 border-secondary-50 border">
+<div class="flex flex-col w-full h-full bg-secondary-50 dark:bg-secondary-100 rounded-lg dark:border-secondary-100 border-secondary-50 border p-6">
 
 
   <div (click)="goToProductDetails(productOff)" class="rounded overflow-hidden cursor-pointer">
-    <div class="relative h-48 flex justify-center items-center">
+    <div class="relative flex">
       <!-- Imagen de fondo difuminada -->
       <!--<div class="absolute inset-0 bg-cover bg-center opacity-75" style="background-color: {{bgColor}};"></div>-->
-      <div class="absolute inset-0 bg-cover bg-center opacity-75" style="background-image: url({{getProductImage()}});filter: blur(20px);"></div>
+      <!--<div class="absolute inset-0 bg-cover bg-center opacity-75" style="background-image: url({{getProductImage()}});filter: blur(20px);"></div>-->
       <!-- Imagen superior -->
       <!-- <img crossorigin="anonymous" #myProdImage class="h-5/6 w-5/6 object-contain z-10" src="{{getProductImage()}}" alt="Descripción de la imagen">-->
-      <img class="h-5/6 w-5/6 object-contain z-10 dark:text-white" src="{{getProductImage()}}" alt="Product image">
+      <img class="w-20 aspect-square object-cover rounded-lg z-10 dark:text-white" src="{{getProductImage()}}" alt="Product image">
     </div>
   </div>
 
   <div class="flex-1 h-full bg-cover bg-right-bottom bg-opacity-25 rounded-lg" style="background-image: url(assets/logos/bg_2.png)">
-    <div class="flex-1 h-full px-5 py-5 bg-secondary-50/95 dark:bg-secondary-100/95 rounded-lg">
+    <div class="flex-1 h-full bg-secondary-50/95 dark:bg-secondary-100/95 rounded-lg">
       <div class="overflow-y-hidden overflow-x-hidden">
       @if(!IS_ISBE){
         <a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2 mr-2"
@@ -185,7 +185,7 @@
         <!-- END HEADER CARD -->
 
 
-            <div class="p-4 lg:p-5 grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div class="p-4 lg:p-5 flex flex-col gap-4">
               <div class="justify-start">
                   <h5 class="font-semibold tracking-tight text-lg text-primary-100 dark:text-primary-50">{{ 'CARD._prod_details' | translate }}:</h5>
                   <markdown class="min-h-19 h-19 dark:text-secondary-50 line-clamp-6 text-wrap break-all" [data]="productOff?.description"></markdown>
