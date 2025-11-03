@@ -12,6 +12,7 @@ module.exports = {
     },
     extend: {
       colors: {
+        'beige': '#F9F3E7',
         primary: {
           //Primary light
           50: '#B88EFF',
