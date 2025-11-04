@@ -21,7 +21,8 @@ import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textare
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
-import { normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
+import { hasNonStatusChanges, normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
+import { ReminderMessageComponent } from 'src/app/shared/reminder-message/reminder-message.component';
 
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
@@ -36,7 +37,7 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
     templateUrl: './update-product-spec.component.html',
     styleUrl: './update-product-spec.component.css',
     standalone: true,
-    imports: [StatusSelectorComponent, ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
+    imports: [StatusSelectorComponent, ErrorMessageComponent, ReminderMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
 })
 export class UpdateProductSpecComponent implements OnInit {
   @Input() prod: any;
@@ -140,6 +141,9 @@ export class UpdateProductSpecComponent implements OnInit {
 
   errorMessage:any='';
   showError:boolean=false;
+  
+  showReminder:boolean=false;
+  edited:boolean=false;
 
   //CHARS
   stringValue: string = '';
@@ -1094,6 +1098,36 @@ export class UpdateProductSpecComponent implements OnInit {
         attachment: this.prodAttachments
       }
     }
+    const original = {
+      name: this.prod.name,
+      brand: this.prod.brand,
+      version: this.prod.version,
+      productNumber: this.prod.productNumber,
+      description: this.prod.description,
+      characteristics: this.prod.productSpecCharacteristic,
+      attachments: this.prod.attachment
+    };
+
+    const current = {
+      name: this.generalForm.value.name,
+      brand: this.generalForm.value.brand,
+      version: this.generalForm.value.version,
+      productNumber: this.generalForm.value.number,
+      description: this.generalForm.value.description,
+      characteristics: this.finishChars,
+      attachments: this.prodAttachments
+    };
+
+    this.edited = hasNonStatusChanges(original, current);
+
+    if (this.edited && this.prodStatusDraft === 'Launched') {
+      this.showReminder=true;
+      setTimeout(() => {
+        this.showReminder = false;
+        this.cdr.detectChanges();
+      }, 3000);
+    }
+
     this.selectStep('summary','summary-circle');
     this.showBundle=false;
     this.showGeneral=false;
@@ -1108,6 +1142,9 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   isProdValid(){
+    if(this.edited && this.prodStatusDraft !== 'Active'){
+      return true;
+    }
     if(this.generalForm.valid){
       if(this.bundleChecked){
         if(this.prodSpecsBundle.length<2){

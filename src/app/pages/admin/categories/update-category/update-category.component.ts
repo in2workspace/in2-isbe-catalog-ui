@@ -14,7 +14,8 @@ import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textare
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
-import { normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
+import { hasNonStatusChanges, normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
+import { ReminderMessageComponent } from 'src/app/shared/reminder-message/reminder-message.component';
 type Category_Update = components["schemas"]["Category_Update"];
 
 @Component({
@@ -22,7 +23,7 @@ type Category_Update = components["schemas"]["Category_Update"];
     templateUrl: './update-category.component.html',
     styleUrl: './update-category.component.css',
     standalone: true,
-    imports: [FormsModule, StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
+    imports: [ReminderMessageComponent, FormsModule, StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
 })
 export class UpdateCategoryComponent implements OnInit {
   @Input() category: any;
@@ -64,6 +65,9 @@ export class UpdateCategoryComponent implements OnInit {
 
   errorMessage:any='';
   showError:boolean=false;
+
+  showReminder:boolean=false;
+  edited:boolean=false;
 
   constructor(
     private readonly cdr: ChangeDetectorRef,
@@ -257,6 +261,33 @@ export class UpdateCategoryComponent implements OnInit {
       this.selectStep('summary','summary-circle');
     }
     this.showPreview=false;
+
+    const original = {
+      name: this.category.name,
+      description: this.category.description,
+      lifecycleStatus: this.category.lifecycleStatus,
+      isRoot: this.category.isRoot,
+      parentId: this.category.parentId
+    };
+
+    const current = {
+      name: this.generalForm.value.name,
+      description: this.generalForm.value.description,
+      lifecycleStatus: this.catStatusDraft,
+      isRoot: this.isParent,
+      parentId: this.isParent ? null : this.selectedCategory?.id
+    };
+
+    this.edited = hasNonStatusChanges(original, current);
+    
+    if (this.edited && this.catStatusDraft === 'Launched') {
+      this.showReminder=true;
+      setTimeout(() => {
+        this.showReminder = false;
+        this.cdr.detectChanges();
+      }, 3000);
+    }
+
   }
 
   incrementVersion(version: string): string {
@@ -425,5 +456,12 @@ export class UpdateCategoryComponent implements OnInit {
     } else {
       this.description=''
     }  
+  }
+
+  isCatValid(){
+    if((this.edited && this.catStatusDraft !== 'Active')|| !this.generalForm.valid){
+      return true;
+    }
+    return false;
   }
 }

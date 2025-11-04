@@ -4,7 +4,7 @@ import {EventMessageService} from "src/app/services/event-message.service";
 import { OfferComponent } from 'src/app/shared/forms/offer/offer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from 'src/app/guard/auth.service';
-import { take } from 'rxjs';
+import { combineLatest, take } from 'rxjs';
 
 @Component({
     selector: 'update-offer',
@@ -17,6 +17,7 @@ export class UpdateOfferComponent implements OnInit{
   @Input() offer: any;
 
   seller:any='';
+  isAdmin:boolean=false;
 
   constructor(
     private readonly auth: AuthService,
@@ -33,11 +34,15 @@ export class UpdateOfferComponent implements OnInit{
     this.initPartyInfo();
   }
 
-  initPartyInfo(){
-   this.auth.sellerId$
+  initPartyInfo(): void {
+    combineLatest([
+      this.auth.sellerId$,
+      this.auth.loginInfo$
+    ])
     .pipe(take(1))
-    .subscribe(id => {
-      this.seller = id || '';
+    .subscribe(([sellerId, li]) => {      
+      this.seller = sellerId || '';
+      this.isAdmin = (li?.roles || []).map(r => r.name ?? r.id ?? r).includes('admin');
     });
   }
 

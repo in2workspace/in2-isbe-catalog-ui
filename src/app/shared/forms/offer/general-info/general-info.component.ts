@@ -33,6 +33,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
   @Input() form!: AbstractControl;
   @Input() formType!: string;
   @Input() data: any;
+  @Input() isAdmin: boolean;
   @Output() formChange = new EventEmitter<FormChangeState>();
 
   statusAnchor!: StatusCode;
@@ -76,6 +77,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
       this.formGroup.addControl('status', new FormControl<string>(this.data.lifecycleStatus));
       this.formGroup.addControl('description', new FormControl<string>(this.data.description, Validators.maxLength(100000)));
       this.formGroup.addControl('version', new FormControl<string>(this.data.version, [Validators.required,Validators.pattern('^-?[0-9]\\d*(\\.\\d*)?$'), noWhitespaceValidator]));
+      
       this.statusAnchor = normalizeToInternal(this.data.lifecycleStatus) as StatusCode;
       // Store original value only in edit mode
       this.originalValue = {

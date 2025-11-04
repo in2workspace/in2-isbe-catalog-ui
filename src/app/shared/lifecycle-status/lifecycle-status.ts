@@ -25,7 +25,7 @@ export const toInternal: Record<StatusExternal, StatusCode> = {
 const GENERIC_TRANSITIONS: Record<StatusCode, StatusCode[]> = {
   in_design: ['active', 'launched'],
   active:    ['launched', 'retired'],
-  launched:  ['retired'],
+  launched:  ['active', 'retired'],
   retired:   ['obsolete'],
   obsolete:  []
 };
@@ -33,7 +33,7 @@ const GENERIC_TRANSITIONS: Record<StatusCode, StatusCode[]> = {
 const OFFERING_TRANSITIONS: Record<StatusCode, StatusCode[]> = {
   in_design: ['active'],
   active:    ['launched', 'retired'],
-  launched:  ['retired'],
+  launched:  ['active', 'retired'],
   retired:   ['obsolete'],
   obsolete:  []
 };
@@ -64,7 +64,6 @@ export function displayedFromAnchor( base: readonly StatusCode[], anchor: Status
   const oneHop = allowedTargets(model, anchor, allowLaunched);
   const candidates = Array.from(new Set<StatusCode>([anchor, ...oneHop]))
     .filter(s => base.includes(s));
-  console.log("ei");
 
   if (model !== 'offering') return candidates;
 
@@ -78,3 +77,10 @@ export function canTransitionFromAnchor( model: ModelType, anchor: StatusCode, t
   if (to === anchor) return true;
   return allowedTargets(model, anchor, allowLaunched).includes(to);
 }
+
+export function hasNonStatusChanges(original: any, current: any): boolean {
+  if (!original || !current) return false;
+  const normalize = (obj: any) => JSON.stringify(obj, Object.keys(obj).sort());
+  return normalize(original) !== normalize(current);
+}
+
