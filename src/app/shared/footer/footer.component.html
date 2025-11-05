@@ -1,41 +1,70 @@
-<footer class="fixed bottom-0 left-0 z-10 h-[25px] w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-end md:p-6 dark:bg-black dark:border-gray-600">
-  <div class="flex justify-between items-center w-full">
+<footer
+  class="fixed bottom-0 left-0 z-10 w-full pb-4 px-4 md:px-7 md:pb-7 bg-black md:flex md:items-center md:justify-end  dark:bg-black dark:border-gray-600">
+  <div class="flex flex-col w-full">
     <!-- Social Links -->
-    <div class="flex justify-start text-gray-500 dark:text-gray-400">
+    <!-- TODO: Removed this a per design -->
+    <!-- <div class="flex justify-start text-gray-500 dark:text-gray-400">
       <fa-icon (click)="open(ISBE_LINKEDIN)" (keydown.enter)="open(ISBE_LINKEDIN)" tabindex="0" class="mr-4 cursor-pointer" [icon]="faLinkedin"></fa-icon>
       <fa-icon (click)="open(ISBE_X)" (keydown.enter)="open(ISBE_X)" tabindex="0" class="mr-4 cursor-pointer" [icon]="faXTwitter"></fa-icon>
       <fa-icon (click)="open(ISBE_YOUTUBE)" (keydown.enter)="open(ISBE_YOUTUBE)" tabindex="0" class="cursor-pointer" [icon]="faYoutube"></fa-icon>
-    </div>
+    </div> -->
 
-    <!-- Footer Links -->
-    <ul class="flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400">
-      @if(checkLogged && !IS_ISBE){
-        <li>
-          <button (click)="feedback=!feedback;$event.stopPropagation();" type="button" class="mr-4 hover:underline md:mr-6">Feedback</button>
-        </li>
-      }
-      <li>
-        <a target="_blank" class="mr-4 hover:underline md:mr-6">{{ 'FOOTER._privacy' | translate }}</a>
-      </li>
-      <li>
-        <a target="_blank" class="mr-4 hover:underline md:mr-6">{{ 'FOOTER._cookies' | translate }}</a>
-      </li>
-      <li>
-        <a target="_blank" class="mr-4 hover:underline md:mr-6">{{ 'FOOTER._licensing' | translate }}</a>
-      </li>
-      @if(!IS_ISBE){
-        <li>
-          <a (click)="goTo('/contact-us')" target="_blank" class="hover:underline cursor-pointer">{{ 'FOOTER._contact' | translate }}</a>
-        </li>
-      }
-    </ul>
+    <!-- Pre Footer -->
+    <div class="flex flex-wrap gap-4 py-8 md:py-16 border-b border-white">
+      <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" />
+      <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" />
+      <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" />
+    </div>
+    ç
+    <!-- Footer -->
+    <div class="flex justify-between text-white">
+
+      <div class="credits  text-base leading-tight max-w-3xl">
+        Proyecto ‘INFRAESTRUCTURA DE SERVICIOS BLOCKCHAIN DE ESPAÑA (ISBE)’, en el marco del Convenio
+        de Colaboración firmado
+        entre la Comunidad de Madrid y Consorcio Red Alastria, dentro del Programa de Redes Territoriales de
+        Especialización
+        Tecnológica en el Marco del Plan de Recuperación, Transformación y Resiliencia – financiado por la Unión Europea
+        – Next
+        Generation EU.
+      </div>
+
+      <div class="flex gap-20 items-baseline">
+        <!-- Footer Links -->
+        <ul class="flex flex-col font-mediu">
+          @if(checkLogged && !IS_ISBE){
+          <li>
+            <button (click)="feedback=!feedback;$event.stopPropagation();" type="button"
+              class="mr-4 underline md:mr-6">Feedback</button>
+          </li>
+          }
+          <li>
+            <a target="_blank" class="mr-4 underline underline-offset-2 md:mr-6">{{ 'FOOTER._privacy' | translate }}</a>
+          </li>
+          <li>
+            <a target="_blank" class="mr-4 underline underline-offset-2 md:mr-6">{{ 'FOOTER._cookies' | translate }}</a>
+          </li>
+          <li>
+            <a target="_blank" class="mr-4 underline underline-offset-2 md:mr-6">{{ 'FOOTER._licensing' | translate
+              }}</a>
+          </li>
+          @if(!IS_ISBE){
+          <li>
+            <a (click)="goTo('/contact-us')" target="_blank" class="underline cursor-pointer">{{ 'FOOTER._contact'
+              |
+              translate }}</a>
+          </li>
+          }
+        </ul>
+
+        <span class="credits">©Alastria, 2025</span>
+      </div>
+    </div>
   </div>
 
 </footer>
 @if(feedback && !IS_ISBE){
-  <feedback-modal 
-  rateMessage="How would you rate your overall experience with DOME?"
-  writeMessage="How can we improve DOME?"
-  type="experience"
+<feedback-modal rateMessage="How would you rate your overall experience with DOME?"
+  writeMessage="How can we improve DOME?" type="experience"
   class="fixed inset-0 flex items-center justify-center z-40"></feedback-modal>
 }
