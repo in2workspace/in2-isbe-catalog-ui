@@ -81,7 +81,8 @@ export function canTransitionFromAnchor( model: ModelType, anchor: StatusCode, t
 export function hasNonStatusChanges(original: any, current: any): boolean {
   if (!original || !current) return false;
   if (original.status !== 'Launched') return false;
-  const normalize = (obj: any) => JSON.stringify(obj, Object.keys(obj).sort());
+  const normalize = (obj: any) =>JSON.stringify(obj,Object.keys(obj).sort((a, b) => a.localeCompare(b))    );
   return normalize(original) !== normalize(current);
 }
+
 
