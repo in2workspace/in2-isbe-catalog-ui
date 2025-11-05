@@ -28,8 +28,14 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
   },
-  { path: 'search', component: SearchComponent },
-  { path: 'search/:id', component: ProductDetailsComponent },
+  { path: 'search', component: SearchComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
+   },
+  { path: 'search/:id', component: ProductDetailsComponent,
+    canActivate: [AuthGuard],
+    data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
+   },
   { path: 'org-details/:id', component: OrganizationDetailsComponent },
 
   { path: 'search/catalogue/:id', component: SearchCatalogComponent ,
