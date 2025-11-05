@@ -301,7 +301,7 @@ export class UpdateCategoryComponent implements OnInit {
   updateCategory(){
     this.api.updateCategory(this.categoryToUpdate,this.category.id).subscribe({
       next: data => {
-        this.catStatusAnchor = normalizeToInternal(this.categoryToUpdate!.lifecycleStatus!) as StatusCode;
+        this.catStatusAnchor = normalizeToInternal(this.categoryToUpdate!.lifecycleStatus) as StatusCode;
         this.catStatusDraft  = this.categoryToUpdate!.lifecycleStatus!;
         this.goBack();
       },

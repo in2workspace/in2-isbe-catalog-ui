@@ -118,8 +118,8 @@
                     <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2>
                     <form class="m-4 md:grid md:grid-cols-2 gap-4" [formGroup]="generalForm">
                         <div>
-                            <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
-                            <input formControlName="name" type="text" id="prod-name" maxLength="100"
+                            <label for="prod-sepec-name" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
+                            <input formControlName="name" type="text" id="prod-sepec-name" maxLength="100"
                             [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
                             class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                             <label for="prod-version" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
@@ -140,7 +140,7 @@
                         <label class="font-bold text-lg col-span-2 dark:text-white">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
                         <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
 
-                        <label for="prod-name" class="font-bold text-lg col-span-2 dark:text-white">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
+                        <label for="prod-description" class="font-bold text-lg col-span-2 dark:text-white">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                         <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>
 
                     </form>
@@ -601,12 +601,12 @@
                                         @for (char of creatingChars; track char; let idx = $index) {
                                             <div class="flex w-full justify-between">
                                                 <div class="align-items-middle align-middle">
-                                                    <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" id="disabled-checked-checkbox" type="checkbox" value=""
+                                                    <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" id="disabled-checked" type="checkbox" value=""
                                                     class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
                                                     @if(numberCharSelected){
-                                                        <label for="disabled-checked-checkbox" class="ms-2 text-sm font-medium text-gray-700 dark:text-white text-wrap break-all">{{char.value}} (<i>{{char?.unitOfMeasure}}</i>)</label>
+                                                        <label for="disabled-checked" class="ms-2 text-sm font-medium text-gray-700 dark:text-white text-wrap break-all">{{char.value}} (<i>{{char?.unitOfMeasure}}</i>)</label>
                                                     } @else {
-                                                        <label for="disabled-checked-checkbox" class="ms-2 text-sm font-medium text-gray-700 dark:text-white text-wrap break-all">{{char.value}}</label>
+                                                        <label for="disabled-checked" class="ms-2 text-sm font-medium text-gray-700 dark:text-white text-wrap break-all">{{char.value}}</label>
                                                     }    
                                                 </div>
                                                 <button (click)="removeCharValue(char,idx)" class="m-2 text-white bg-red-500 rounded-3xl">
