@@ -893,7 +893,7 @@ export class CreateProductSpecComponent implements OnInit {
         version: this.generalForm.value.version,
         brand: this.generalForm.value.brand,
         productNumber: this.generalForm.value.number ?? '',
-        lifecycleStatus: "Active",
+        lifecycleStatus: "In design",
         isBundle: this.bundleChecked,
         bundledProductSpecification: this.prodSpecsBundle,
         productSpecCharacteristic: this.finishChars,

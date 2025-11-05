@@ -1520,5 +1520,8 @@
     "_SEPARATED": "Separated",
     "_SINGLE": "Single",
     "_WIDOWED": "Widowed"
+  },
+  "REMINDER": {
+    "_message": "You have modified object information. You must reset the status to Active before saving"
   }
 }

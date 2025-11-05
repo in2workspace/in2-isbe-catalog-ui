@@ -1522,6 +1522,9 @@
     "_SEPARATED": "Separado/a", 
     "_SINGLE": "Soltero/a",
     "_WIDOWED": "Viudo/a"
+  },
+  "REMINDER": {
+    "_message": "Has modificado información del objeto. Debes volver a establecer el estado en Activo antes de guardar"
   }
   
 
