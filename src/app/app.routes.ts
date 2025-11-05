@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { SearchComponent } from './pages/search/search.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { SearchCatalogComponent } from './pages/search-catalog/search-catalog.component';
 import { CatalogsComponent } from './pages/catalogs/catalogs.component';
@@ -28,10 +27,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
   },
-  { path: 'search', component: SearchComponent,
-    canActivate: [AuthGuard],
-    data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
-   },
   { path: 'search/:id', component: ProductDetailsComponent,
     canActivate: [AuthGuard],
     data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
