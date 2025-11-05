@@ -137,8 +137,18 @@ export class OfferComponent implements OnInit, OnDestroy{
   }
 
   private normalizeIdArray(arr: any[], key: string = 'id'): string[] {
-    return Array.isArray(arr) ? arr.map(x => x?.[key]).filter(Boolean).sort() : [];
+    return Array.isArray(arr) ? arr
+          .map(x => x?.[key])
+          .filter(Boolean)
+          .sort((a, b) => {
+            const numA = Number(a);
+            const numB = Number(b);
+            if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+            return String(a).localeCompare(String(b));
+          })
+      : [];
   }
+
 
   private normalizeTerms(terms: any[]): Array<{name: string; description: string}> {
     const list = Array.isArray(terms) ? terms : [];

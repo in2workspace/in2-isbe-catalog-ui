@@ -601,7 +601,7 @@
                                         @for (char of creatingChars; track char; let idx = $index) {
                                             <div class="flex w-full justify-between">
                                                 <div class="align-items-middle align-middle">
-                                                    <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" id="disabled-checked" type="checkbox" value=""
+                                                    <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" (keydown)="selectDefaultChar(char,idx)" id="disabled-checked" type="checkbox" value=""
                                                     class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
                                                     @if(numberCharSelected){
                                                         <label for="disabled-checked" class="ms-2 text-sm font-medium text-gray-700 dark:text-white text-wrap break-all">{{char.value}} (<i>{{char?.unitOfMeasure}}</i>)</label>
@@ -975,7 +975,7 @@
                             </div>
                         } @else {
                             <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}</label>
-                            <select id="type" (change)="onRelChange($event)"
+                            <select id="rel-type" (change)="onRelChange($event)"
                             class="shadow bg-white border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
