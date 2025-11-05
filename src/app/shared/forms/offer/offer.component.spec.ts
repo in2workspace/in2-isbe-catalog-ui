@@ -187,4 +187,42 @@ describe('OfferComponent', () => {
     component.saveOfferInfo();
     expect(apiService.updateProductOffering).toHaveBeenCalled();
   });
+  
+  it('normalizeIdArray should return sorted ids and filter falsy values (default key)', () => {
+      const input = [
+        { id: 'b' },
+        { id: 'a' },
+        { name: 'noid' },
+        { id: '' },
+        { id: null },
+        { id: 'c' }
+      ];
+      const result = (component as any).normalizeIdArray(input);
+      expect(result).toEqual(['a', 'b', 'c']);
+    });
+
+    it('normalizeIdArray should use custom key when provided', () => {
+      const input = [{ href: 'z' }, { href: 'y' }, { href: '' }];
+      const result = (component as any).normalizeIdArray(input, 'href');
+      expect(result).toEqual(['y', 'z']);
+    });
+
+    it('normalizeTerms should trim fields, remove empty entries and sort deterministically', () => {
+      const input = [
+        { name: '  beta ', description: '  two ' },
+        { name: 'alpha', description: 'one' },
+        { name: ' ', description: 'onlydesc' },
+        { name: '', description: '' },
+        { name: null, description: 'desconly' },
+        { name: 'alpha', description: '  aa ' }
+      ];
+      const result = (component as any).normalizeTerms(input);
+      expect(result).toEqual([
+        { name: 'alpha', description: 'aa' },
+        { name: 'alpha', description: 'one' },
+        { name: 'beta', description: 'two' },
+        { name: '', description: 'desconly' },
+        { name: '', description: 'onlydesc' }
+      ]);
+    });
 });
