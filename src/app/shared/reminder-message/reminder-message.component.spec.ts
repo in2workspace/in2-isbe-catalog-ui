@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { ReminderMessageComponent } from './reminder-message.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('ReminderMessageComponent', () => {
   let component: ReminderMessageComponent;
@@ -9,7 +10,7 @@ describe('ReminderMessageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [ReminderMessageComponent]
+    imports: [ReminderMessageComponent, TranslateModule.forRoot()],
 })
     .compileComponents();
     
