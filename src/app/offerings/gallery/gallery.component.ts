@@ -1,12 +1,11 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener, inject } from '@angular/core';
 import {CardComponent} from "../../shared/card/card.component";
 import {components} from "../../models/product-catalog";
 type ProductOffering = components["schemas"]["ProductOffering"];
-import { ApiServiceService } from 'src/app/services/product-service.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs';
+import { async, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 import { Category } from 'src/app/models/interfaces';
 import { EventMessageService } from 'src/app/services/event-message.service';
@@ -44,47 +43,49 @@ export class GalleryComponent implements OnInit {
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
-  constructor(
-    private auth: AuthService,
-    private cdr: ChangeDetectorRef,
-    private route: ActivatedRoute,
-    private localStorage: LocalStorageService,
-    private eventMessage: EventMessageService,
-    private paginationService: PaginationService) {
+  private readonly auth = inject(AuthService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly route = inject(ActivatedRoute);
+  private readonly localStorage = inject(LocalStorageService);
+  private readonly eventMessage = inject(EventMessageService);
+  private readonly paginationService = inject(PaginationService);
+  
+  constructor() {   
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
         this.checkPanel();
       }
-    })
+    });
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'CloseFeedback') {
         this.feedback = false;
       }
-    })
-  } 
+    });
+  }
 
-  async ngOnInit() {
+  ngOnInit() {
     this.products=[];
     this.nextProducts=[];
     this.checkPanel();
-    if(this.route.snapshot.paramMap.get('keywords')){
-      this.keywords = this.route.snapshot.paramMap.get('keywords');
+    let keywords = this.route.snapshot.paramMap.get('keywords');
+    if(keywords){
+      this.keywords = keywords;
       this.searchField.setValue(this.keywords);
     }
-    await this.getProducts(false);
+    this.getProducts(false);
 
-    await this.eventMessage.messages$.subscribe(async ev => {
+    this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
-        await this.getProducts(false);
+        this.getProducts(false);
       }
     })
 
     let input = document.querySelector('[type=search]')
     if(input!=undefined){
-      input.addEventListener('input', async e => {
+      input.addEventListener('input', e => {
         if(this.searchField.value==''){
           this.keywords=undefined;
-          await this.getProducts(false);
+          this.getProducts(false);
         }
       });
     }
