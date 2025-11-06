@@ -9,7 +9,7 @@ import { initFlowbite } from 'flowbite';
 import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { take } from 'rxjs';
+import { combineLatest, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 
 @Component({
@@ -37,6 +37,7 @@ export class SellerOfferComponent implements OnInit{
   filter:any=undefined;
   status:any[]=[];
   seller:any;
+  isAdmin:boolean;
   sort:any=undefined;
   isBundle:any=undefined;
 
@@ -62,25 +63,28 @@ export class SellerOfferComponent implements OnInit{
     this.offers = [];
     this.nextOffers = [];
 
-    this.auth.sellerId$
-      .pipe(take(1))
-      .subscribe(id => {
-        this.seller = id || '';
-
-        this.getOffers(false);
-
-        const input = document.querySelector<HTMLInputElement>('[type=search]');
-        if (input) {
-          input.oninput = () => {
-            if (this.searchField.value === '') {
-              this.filter = undefined;
-              this.getOffers(false);
-            }
-          };
-        }
-
-        initFlowbite();
-      });
+    combineLatest([
+      this.auth.sellerId$,
+      this.auth.loginInfo$
+    ])
+    .pipe(take(1))
+    .subscribe(([sellerId, li]) => {   
+      this.seller = sellerId || '';
+      console.log((li?.roles || []).map(r => r.name ?? r.id ?? r))
+      this.isAdmin = (li?.roles || []).map(r => r.name ?? r.id ?? r).includes('admin');
+    console.log(this.isAdmin)
+      this.getOffers(false);
+      const input = document.querySelector<HTMLInputElement>('[type=search]');
+      if (input) {
+        input.oninput = () => {
+          if (this.searchField.value === '') {
+            this.filter = undefined;
+            this.getOffers(false);
+          }
+        };
+      }
+      initFlowbite();        
+    });
   }
 
   ngAfterViewInit(){
@@ -95,7 +99,7 @@ export class SellerOfferComponent implements OnInit{
     this.eventMessage.emitSellerUpdateOffer(offer);
   }
 
-  async getOffers(next:boolean){
+  getOffers(next:boolean){
     if(next==false){
       this.loading=true;
     }
@@ -104,7 +108,8 @@ export class SellerOfferComponent implements OnInit{
       "filters": this.status,
       "seller": "did:elsi:"+this.seller,
       "sort": this.sort,
-      "isBundle": this.isBundle
+      "isBundle": this.isBundle,
+      "isAdmin": this.isAdmin
     }
     
     this.paginationService.getItemsPaginated(this.page, this.PROD_SPEC_LIMIT, next, this.offers,this.nextOffers, options,
@@ -118,8 +123,8 @@ export class SellerOfferComponent implements OnInit{
     })
   }
 
-  async next(){
-    await this.getOffers(true);
+  next(){
+    this.getOffers(true);
   }
 
   onStateFilterChange(filter:string){

@@ -82,9 +82,12 @@ export class ApiServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getProductOfferByOwner(page:any,status:any[],seller:any,sort:any,isBundle:any) {
-    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&seller=${seller}`;
+  getProductOfferByOwner(page:any,status:any[],seller:any,sort:any,isBundle:any,isAdmin:boolean) {
+    let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}`;
 
+    if(!isAdmin){
+      url += `&seller=${seller}`;
+    }    
     if(sort!=undefined){
       url=url+'&sort='+sort
     }
