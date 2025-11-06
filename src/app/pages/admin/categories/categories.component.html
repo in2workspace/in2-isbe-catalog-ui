@@ -38,6 +38,14 @@
                 {{ 'ADMIN._status' | translate }}
             </h6>
             <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                <li class="flex items-center">
+                <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
+    
+                <label for="in-design" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                    {{ 'OFFERINGS._in_design' | translate }}
+                </label>
+                </li>
   
                 <li class="flex items-center">
                 <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"

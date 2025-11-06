@@ -1100,7 +1100,6 @@ export class UpdateProductSpecComponent implements OnInit {
     }
     const original = {
       name: this.prod.name,
-      status: this.prod.lifecycleStatus,
       brand: this.prod.brand,
       version: this.prod.version,
       productNumber: this.prod.productNumber,
