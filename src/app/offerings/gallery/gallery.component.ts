@@ -63,7 +63,7 @@ export class GalleryComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.products=[];
     this.nextProducts=[];
     this.checkPanel();
@@ -72,7 +72,7 @@ export class GalleryComponent implements OnInit {
       this.keywords = keywords;
       this.searchField.setValue(this.keywords);
     }
-    this.getProducts(false);
+    await this.getProducts(false);
 
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
