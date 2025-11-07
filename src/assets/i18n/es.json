@@ -203,7 +203,9 @@
     "_about": "Acerca de",
     "_verify": "Publica tu oferta",
     "_info": "Información",
-    "_orders": "Pedidos de producto"
+    "_orders": "Pedidos de producto",
+    "_banner_message": "Recuerda que no podrás publicar tu caso de uso hasta que no esté desplegado y validado en ISBE. Más información ",
+    "_here": " aquí."
   },
   "PRODUCT_DETAILS": {
     "_back": "Atrás",
@@ -356,7 +358,7 @@
     "_bill": "Dirección de facturación",
     "_inventory": "Inventario",
     "_feasibility": "Viabilidad comprobada",
-    "_designed": "Diseñado",
+    "_in_designed": "Diseñado",
     "_reserved": "Reservado",
     "_inactive": "Inactivo",
     "_active": "Activo",
@@ -957,6 +959,7 @@
     "_order_by": "Ordenar por...",
     "_last_update": "Última actualización",
     "_name": "Nombre",
+    "_in_design": "En diseño",
     "_active": "Activo",
     "_launched": "Lanzado",
     "_retired": "Retirado",
@@ -990,7 +993,8 @@
     "_state": "Estado",
     "_order_by": "Ordenar por...",
     "_last_update": "Última actualización",
-    "_name": "Nombre",
+    "_name": "Nombre",    
+    "_in_design": "En diseño",
     "_active": "Activo",
     "_launched": "Lanzado",
     "_retired": "Retirado",
@@ -1518,6 +1522,9 @@
     "_SEPARATED": "Separado/a", 
     "_SINGLE": "Soltero/a",
     "_WIDOWED": "Viudo/a"
+  },
+  "REMINDER": {
+    "_message": "Has modificado información del objeto. Debes volver a establecer el estado en Activo antes de guardar"
   }
   
 
