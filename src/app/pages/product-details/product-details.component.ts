@@ -22,7 +22,7 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 })
 export class ProductDetailsComponent implements OnInit {
   @Input() productOff: Product | undefined;
-  @Output() close = new EventEmitter<void>();
+  @Output() closeModal = new EventEmitter<void>();
 
   protected readonly faClose = faClose;
   protected readonly faEllipsis = faEllipsis;
@@ -57,16 +57,14 @@ export class ProductDetailsComponent implements OnInit {
     } else {
       this.images = profile;
     }
-    let specId:any|undefined=this.productOff?.productSpecification?.id;
+    let specId = this.productOff?.productSpecification?.id;
     if(specId != undefined){
       this.api.getProductSpecification(specId).then(spec => {
         this.prodSpec = spec;
         let prodPrices: any[] | undefined= this.productOff?.productOfferingPrice;
-        let prices: any[]=[];
         if(prodPrices!== undefined){
           for(const element of prodPrices){
             this.api.getProductPrice(element.id).then(price => {
-              prices.push(price);
               if(price.priceType == 'custom'){
                 this.checkCustom=true;
               }
@@ -104,7 +102,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   hideModal() {
-    this.close.emit();
+    this.closeModal.emit();
     this.loadMoreCats=false;
     this.checkMoreCats=true;
   }

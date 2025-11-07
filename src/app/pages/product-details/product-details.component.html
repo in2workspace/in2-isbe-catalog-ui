@@ -1,5 +1,5 @@
 <div id="details-modal" tabindex="-1" aria-hidden="true" class="flex justify-center overflow-x-hidden fixed top-0 right-0 left-0 z-40 justify-center items-center w-full md:inset-0 h-full max-h-full rounded-lg shadow-2xl">
-    <div class="relative w-full max-w-7xl max-h-full rounded-t-lg" (click)="$event.stopPropagation();">
+    <div class="relative w-full max-w-7xl max-h-full rounded-t-lg" (click)="$event.stopPropagation();" (keydown)="$event.stopPropagation();">
         <!-- Modal content -->
         <div class="relative sm:m-8 bg-white rounded-lg shadow dark:border-gray-600 dark:bg-secondary-100 bg-cover bg-right-bottom rounded-lg overflow-y-auto max-h-[calc(100vh-10rem)]">
           <button (click)="hideModal();" type="button" class="absolute top-4 right-4 z-50 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="details-modal">
@@ -40,7 +40,7 @@
 
               <div class="relative h-[200px] overflow-hidden flex justify-center items-center border border-1 border-gray-200 dark:border-gray-700 rounded-tr-lg">
                 <div class="absolute inset-0 bg-cover bg-center opacity-75" [style.background-image]="'url(' + getProductImage() + ')'" [style.filter]="'blur(20px)'"></div>
-                <img class="rounded-r-lg h-5/6 w-5/6 object-contain z-10 dark:text-white" src="{{getProductImage()}}" alt="Product image" />
+                <img class="rounded-r-lg h-5/6 w-5/6 object-contain z-10 dark:text-white" src="{{getProductImage()}}" alt="Product" />
               </div>
 
               <hr class="h-px border-gray-200 border-1 dark:border-gray-700">

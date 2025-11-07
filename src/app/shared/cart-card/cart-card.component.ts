@@ -1,13 +1,8 @@
-import { Component, Input, OnInit, ElementRef, ViewChild,ChangeDetectorRef, HostListener, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApiServiceService } from 'src/app/services/product-service.service';
+import { Component, Input, OnInit, ChangeDetectorRef, HostListener, inject } from '@angular/core';
 import {components} from "../../models/product-catalog";
-import { PriceServiceService } from 'src/app/services/price-service.service';
 type Product = components["schemas"]["ProductOffering"];
-type ProductSpecification = components["schemas"]["ProductSpecification"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { LoginInfo, cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
+import { cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
 import { ShoppingCartServiceService } from 'src/app/services/shopping-cart-service.service';
 import {EventMessageService} from "../../services/event-message.service";
 import { ErrorMessageComponent } from '../error-message/error-message.component';
