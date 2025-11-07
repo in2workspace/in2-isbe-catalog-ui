@@ -83,7 +83,6 @@ export class CardComponent implements OnInit, AfterViewInit {
 
   errorMessage:any='';
   showError:boolean=false;
-  orgInfo:any=undefined;
 
   selectedPricePlanId: string | null = null;
   selectedPricePlan:any = null;
@@ -97,9 +96,7 @@ export class CardComponent implements OnInit, AfterViewInit {
     private readonly eventMessage: EventMessageService,
     private readonly api: ApiServiceService,
     private readonly priceService: PriceServiceService,
-    private readonly cartService: ShoppingCartServiceService,
-    private readonly accService: AccountServiceService,
-    private readonly router: Router
+    private readonly cartService: ShoppingCartServiceService
     ) {
       this.targetModal = document.getElementById('details-modal');
       this.modal = new Modal(this.targetModal);
@@ -198,7 +195,6 @@ export class CardComponent implements OnInit, AfterViewInit {
     if(specId != undefined){
       this.api.getProductSpecification(specId).then(spec => {
         this.prodSpec = spec;
-        this.getOwner();
       })
     }
 
@@ -384,30 +380,6 @@ async deleteProduct(product: Product | undefined){
     this.selected_price={};
     this.selected_terms=false;
     this.cdr.detectChanges();
-  }
-
-  goToProductDetails(productOff:Product| undefined) {
-    document.querySelector("body > div[modal-backdrop]")?.remove()
-    this.router.navigate(['/search', productOff?.id]);
-  }
-
-  goToOrgDetails(id:any) {
-    document.querySelector("body > div[modal-backdrop]")?.remove()
-    this.router.navigate(['/org-details', id]);
-  }
-
-  getOwner(){
-    let parties = this.prodSpec?.relatedParty;
-    if(parties)
-    for(let i=0; i<parties.length;i++){
-      if(parties[i].role=='Owner'){
-        if(parties[i].id.includes('organization')){
-          this.accService.getOrgInfo(parties[i].id).then(org => {
-            this.orgInfo=org;
-          })
-        }
-      }
-    }
   }
 
   onPricePlanSelected(pricePlan:any) {

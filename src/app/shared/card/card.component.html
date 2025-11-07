@@ -1,7 +1,7 @@
 <div class="flex flex-col w-full h-full bg-secondary-50 dark:bg-secondary-100 rounded-lg dark:border-secondary-100 border-secondary-50 border">
 
 
-  <div (click)="goToProductDetails(productOff)" class="rounded overflow-hidden cursor-pointer">
+  <div (click)="toggleDetailsModal();$event.stopPropagation();" class="rounded overflow-hidden cursor-pointer">
     <div class="relative h-48 flex justify-center items-center">
       <!-- Imagen de fondo difuminada -->
       <!--<div class="absolute inset-0 bg-cover bg-center opacity-75" style="background-color: {{bgColor}};"></div>-->
@@ -39,7 +39,7 @@
         </a>
       }
       </div>
-      <a (click)="goToProductDetails(productOff)" class="cursor-pointer">
+      <a (click)="toggleDetailsModal();$event.stopPropagation();" class="cursor-pointer">
         <h5 class="text-xl font-semibold line-clamp-2 tracking-tight text-primary-100 dark:text-white text-wrap break-all">{{productOff?.name}}</h5>
       </a>
       <markdown class="min-h-19 h-19 line-clamp-2 text-gray-600 dark:text-gray-400" [data]="productOff?.description"></markdown>
