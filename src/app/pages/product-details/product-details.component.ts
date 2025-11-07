@@ -8,6 +8,7 @@ import { components } from 'src/app/models/product-catalog';
 import { faClose, faEllipsis} from "@fortawesome/pro-solid-svg-icons";
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { BadgeComponent } from 'src/app/shared/badge/badge.component';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 type Product = components["schemas"]["ProductOffering"];
 type ProductSpecification = components["schemas"]["ProductSpecification"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
@@ -21,12 +22,13 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 })
 export class ProductDetailsComponent implements OnInit {
   @Input() productOff: Product | undefined;
-   @Output() close = new EventEmitter<void>();
+  @Output() close = new EventEmitter<void>();
 
   protected readonly faClose = faClose;
   protected readonly faEllipsis = faEllipsis;
 
   private readonly api = inject(ApiServiceService);
+  private readonly attachmentService= inject(AttachmentServiceService);
  
   prodChars:any[]=[];
   prodSpec:ProductSpecification = {};
@@ -87,10 +89,6 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  getProductImage() {
-    return this.images.length > 0 ? this.images?.at(0)?.url : 'https://placehold.co/600x400/svg';
-  }
-
   closeCategories(){
     this.closeCats=false;
     this.checkMoreCats=true;
@@ -109,6 +107,10 @@ export class ProductDetailsComponent implements OnInit {
     this.close.emit();
     this.loadMoreCats=false;
     this.checkMoreCats=true;
+  }
+
+  getProductImage() {
+    return this.attachmentService.getProductImage(this.images);
   }
 
 }

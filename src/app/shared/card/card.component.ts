@@ -4,7 +4,8 @@ import {
   OnInit,
   ChangeDetectorRef,
   HostListener,
-  ElementRef, ViewChild, AfterViewInit
+  ElementRef, ViewChild, AfterViewInit,
+  inject
 } from '@angular/core';
 import {components} from "../../models/product-catalog";
 import { faAtom, faClose, faEllipsis} from "@fortawesome/pro-solid-svg-icons";
@@ -34,6 +35,7 @@ import { BadgeComponent } from '../badge/badge.component';
 import { PricePlanDrawerComponent } from '../price-plan-drawer/price-plan-drawer.component';
 import { AuthService } from 'src/app/guard/auth.service';
 import { ProductDetailsComponent } from 'src/app/pages/product-details/product-details.component';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 
 @Component({
     selector: 'bae-off-card',
@@ -88,16 +90,16 @@ export class CardComponent implements OnInit, AfterViewInit {
   selectedPricePlan:any = null;
   productAlreadyInCart:boolean=false;
 
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly auth= inject(AuthService);
+  private readonly eventMessage= inject(EventMessageService);
+  private readonly api= inject(ApiServiceService);
+  private readonly priceService= inject(PriceServiceService);
+  private readonly cartService= inject(ShoppingCartServiceService);
+  private readonly attachmentService= inject(AttachmentServiceService);
 
 
-  constructor(
-    private readonly cdr: ChangeDetectorRef,
-    private readonly auth: AuthService,
-    private readonly eventMessage: EventMessageService,
-    private readonly api: ApiServiceService,
-    private readonly priceService: PriceServiceService,
-    private readonly cartService: ShoppingCartServiceService
-    ) {
+  constructor() {
       this.targetModal = document.getElementById('details-modal');
       this.modal = new Modal(this.targetModal);
 
@@ -222,10 +224,6 @@ export class CardComponent implements OnInit, AfterViewInit {
     this.cdr.detectChanges();
   }
 
-  getProductImage() {
-    return this.images.length > 0 ? this.images?.at(0)?.url : 'https://placehold.co/600x400/svg';
-  }
-
   ngAfterViewInit() {
     initFlowbite();
   }
@@ -346,6 +344,10 @@ async deleteProduct(product: Product | undefined){
       this.cartSelection=true;
       this.cdr.detectChanges();
     }
+  }
+
+  getProductImage() {
+    return this.attachmentService.getProductImage(this.images);
   }
 
   prepareOffData() {

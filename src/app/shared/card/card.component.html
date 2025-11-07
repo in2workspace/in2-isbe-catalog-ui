@@ -3,11 +3,7 @@
 
   <div (click)="toggleDetailsModal();$event.stopPropagation();" class="rounded overflow-hidden cursor-pointer">
     <div class="relative h-48 flex justify-center items-center">
-      <!-- Imagen de fondo difuminada -->
-      <!--<div class="absolute inset-0 bg-cover bg-center opacity-75" style="background-color: {{bgColor}};"></div>-->
-      <div class="absolute inset-0 bg-cover bg-center opacity-75" style="background-image: url({{getProductImage()}});filter: blur(20px);"></div>
-      <!-- Imagen superior -->
-      <!-- <img crossorigin="anonymous" #myProdImage class="h-5/6 w-5/6 object-contain z-10" src="{{getProductImage()}}" alt="Descripción de la imagen">-->
+      <div class="absolute inset-0 bg-cover bg-center opacity-75" [style.background-image]="'url(' + getProductImage() + ')'" style="filter: blur(20px);"></div>
       <img class="h-5/6 w-5/6 object-contain z-10 dark:text-white" src="{{getProductImage()}}" alt="Product image">
     </div>
   </div>
