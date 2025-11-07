@@ -1,5 +1,5 @@
 <div>
-  <div class="w-full h-fit mb-4 bg-white rounded-lg flex flex-col ">
+  <div class="w-full h-fit mb-4 bg-white/60 rounded-lg flex flex-col ">
     <div class="flex w-full flex-cols items-center md:flex-row justify-between">
       <div class="mb-4 md:mb-0 md:w-1/4 p-8">
         <h2 class="text-2xl font-bold mb-4 ">{{ 'CATEGORIES._categories' | translate }}</h2>
@@ -16,11 +16,10 @@
     </div>
     <div class="flex w-full flex-col items-center md:flex-row justify-between">
       <div class="p-8 w-full">
-        <div class="flex flex-row mb-1"> <fa-icon [icon]="faSwatchbook"
-            class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
+        <div class="flex flex-row mb-1">
           <h2 class="text-base font-bold ">{{ 'ADMIN._filter_state' | translate }}</h2>
         </div> <button id="dropdownDefault" data-dropdown-toggle="dropdown"
-          class="border-gray-300 text-gray-900 w-full justify-between bg-white focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
+          class="w-1/2 border border-gray-300 text-gray-900 justify-between bg-white focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
           type="button"> {{ 'ADMIN._filter_state' | translate }} <svg class="w-4 h-4 ml-2" aria-hidden="true"
             fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -63,8 +62,8 @@
         fill="currentFill" />
     </svg> <span class="sr-only">Loading...</span> </div> } @else { <div class="bg-white border mt-8 p-4 rounded-lg">
     <div class="bg-white relative overflow-x-auto sm:rounded-lg w-full">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+      <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+        <thead class="text-primary-100 bg-green">
           <tr class="flex w-full justify-between">
             <th scope="col" class="flex px-6 py-3 w-2/4"> {{ 'ADMIN._name' | translate }} </th>
             <th scope="col" class="hidden md:flex px-6 py-3 w-fit"> {{ 'ADMIN._status' | translate }} </th>
@@ -78,9 +77,9 @@
             <td class="hidden md:flex px-6 py-4 w-fit"> @if(cat.lifecycleStatus == 'Active'){ <span
                 class="bg-purple-100 max-h-6 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{cat.lifecycleStatus}}</span>
               } @else if(cat.lifecycleStatus == 'Launched') { <span
-                class="bg-purple-100 max-h-6 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{cat.lifecycleStatus}}</span>
+                class="bg-green max-h-6 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{cat.lifecycleStatus}}</span>
               } @else if(cat.lifecycleStatus == 'Retired') { <span
-                class="bg-purple-100 max-h-6 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{cat.lifecycleStatus}}</span>
+                class="bg-yellow-500  max-h-6 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{cat.lifecycleStatus}}</span>
               } @else if(cat.lifecycleStatus == 'Obsolete') { <span
                 class="bg-purple-100 max-h-6 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{cat.lifecycleStatus}}</span>
               } </td>

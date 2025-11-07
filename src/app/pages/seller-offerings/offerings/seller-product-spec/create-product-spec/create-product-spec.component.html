@@ -164,9 +164,9 @@
             </svg>
             <div> {{ 'OFFERINGS._no_prod' | translate }} </div>
           </div>
-        </div> }@else{ <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        </div> }@else{ <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+          <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+            <thead class="text-primary-100 bg-green">
               <tr>
                 <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
                 <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_PROD_SPEC._status' | translate }}
@@ -180,18 +180,18 @@
             <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b hover:bg-gray-200">
                 <td class="px-6 py-4 text-wrap break-all"> {{prod.name}} </td>
                 <td class="hidden md:table-cell px-6 py-4"> @if(prod.lifecycleStatus == 'Active'){ <span
-                    class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{
+                    class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._active' | translate }}</span> } @else if(prod.lifecycleStatus == 'Launched') { <span
-                    class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+                    class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._launched' | translate }}</span> } @else if(prod.lifecycleStatus == 'Retired') { <span
-                    class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{
+                    class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._retired' | translate }}</span> } @else if(prod.lifecycleStatus == 'Obsolete') { <span
-                    class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{
+                    class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._obsolete' | translate }}</span> } </td>
                 <td class="hidden md:table-cell px-6 py-4"> @if(prod.isBundle == false){ <span
-                    class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{
+                    class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'CREATE_PROD_SPEC._simple' | translate }}</span> } @else { <span
-                    class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+                    class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'CREATE_PROD_SPEC._bundle' | translate }}</span> } </td>
                 <td class="hidden lg:table-cell px-6 py-4"> {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} </td>
                 <td class="px-6 py-4"> <input id="select-checkbox" [checked]="isProdInBundle(prod)" type="checkbox"
@@ -268,9 +268,9 @@
                       d="M5 12h14m-7 7V5" />
                   </svg> </button> </div>
             </li> } </ul>
-        </div> } } <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        </div> } } <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+          <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+            <thead class="text-primary-100 bg-green">
               <tr>
                 <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
                 <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._value' | translate }} </th>
@@ -337,9 +337,9 @@
             </svg> <span class="sr-only">Info</span>
             <div> {{ 'CREATE_PROD_SPEC._no_chars' | translate }} </div>
           </div>
-        </div> } @else { <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        </div> } @else { <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+          <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+            <thead class="text-primary-100 bg-green">
               <tr>
                 <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
                 <th scope="col" class="hidden lg:table-cell px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_description' |
@@ -583,9 +583,10 @@
               </svg> <span class="sr-only">Info</span>
               <div> {{ 'CREATE_PROD_SPEC._no_relatioships' | translate }} </div>
             </div>
-          </div> } @else { <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          </div> } @else { <div
+            class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._relationship_type' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
@@ -600,13 +601,13 @@
                   <td class="px-6 py-4"> {{rel.relationshipType}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.productSpec.name}} </td>
                   <td class="hidden md:table-cell px-6 py-4"> @if(rel.productSpec.lifecycleStatus == 'Active'){ <span
-                      class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{rel.productSpec.lifecycleStatus}}</span>
+                      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{rel.productSpec.lifecycleStatus}}</span>
                     } @else if(rel.productSpec.lifecycleStatus == 'Launched') { <span
-                      class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{rel.productSpec.lifecycleStatus}}</span>
+                      class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{rel.productSpec.lifecycleStatus}}</span>
                     } @else if(rel.productSpec.lifecycleStatus == 'Retired') { <span
-                      class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{rel.productSpec.lifecycleStatus}}</span>
+                      class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{rel.productSpec.lifecycleStatus}}</span>
                     } @else if(rel.productSpec.lifecycleStatus == 'Obsolete') { <span
-                      class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{rel.productSpec.lifecycleStatus}}</span>
+                      class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{rel.productSpec.lifecycleStatus}}</span>
                     } </td>
                   <td class="hidden lg:table-cell px-6 py-4"> {{rel.productSpec.lastUpdate | date:'EEEE, dd/MM/yy,
                     HH:mm'}} </td>
@@ -652,9 +653,9 @@
               </svg>
               <div> {{ 'OFFERINGS._no_prod_rel' | translate }} </div>
             </div>
-          </div> }@else{ <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mt-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          </div> }@else{ <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mt-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._type' | translate }} </th>
@@ -667,9 +668,9 @@
                   [ngClass]="rel.id == selectedProdSpec.id ? 'bg-gray-300' : 'bg-white'">
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.name}} </td>
                   <td class="px-6 py-4"> @if(rel.isBundle == false){ <span
-                      class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">Simple</span>
+                      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Simple</span>
                     } @else { <span
-                      class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">Bundle</span>
+                      class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Bundle</span>
                     } </td>
                   <td class="px-6 py-4 hidden md:table-cell"> {{rel.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} </td>
                 </tr> } </tbody>
@@ -727,13 +728,13 @@
           </div>
           <div class="mb-4"> <label class="font-bold text-lg mr-4">{{ 'CREATE_PROD_SPEC._status' | translate }}</label>
             @if(productSpecToCreate?.lifecycleStatus == 'Active'){ <span
-              class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{productSpecToCreate?.lifecycleStatus}}</span>
+              class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{productSpecToCreate?.lifecycleStatus}}</span>
             } @else if(productSpecToCreate?.lifecycleStatus == 'Launched') { <span
-              class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{productSpecToCreate?.lifecycleStatus}}</span>
+              class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{productSpecToCreate?.lifecycleStatus}}</span>
             } @else if(productSpecToCreate?.lifecycleStatus == 'Retired') { <span
-              class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{productSpecToCreate?.lifecycleStatus}}</span>
+              class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{productSpecToCreate?.lifecycleStatus}}</span>
             } @else if(productSpecToCreate?.lifecycleStatus == 'Obsolete') { <span
-              class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{productSpecToCreate?.lifecycleStatus}}</span>
+              class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{productSpecToCreate?.lifecycleStatus}}</span>
             } </div> @if(productSpecToCreate?.description !=''){ <label class="font-bold text-lg">{{
             'UPDATE_PROD_SPEC._product_description' | translate }}</label>
           <div class="px-4 py-2 bg-white rounded-lg p-4 border">
@@ -747,9 +748,9 @@
           </div> }
           @if(prodSpecsBundle.length>0){ <label class="font-bold text-lg">{{ 'CREATE_PROD_SPEC._bundle' | translate
             }}</label>
-          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._status' | translate }} </th>
@@ -758,21 +759,21 @@
               <tbody> @for (bun of prodSpecsBundle; track bun) { <tr class="border-b hover:bg-gray-200">
                   <td class="px-6 py-4 text-wrap break-all"> {{bun.name}} </td>
                   <td class="px-6 py-4"> @if(bun.lifecycleStatus == 'Active'){ <span
-                      class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{bun.lifecycleStatus}}</span>
+                      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{bun.lifecycleStatus}}</span>
                     } @else if(bun.lifecycleStatus == 'Launched') { <span
-                      class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{bun.lifecycleStatus}}</span>
+                      class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{bun.lifecycleStatus}}</span>
                     } @else if(bun.lifecycleStatus == 'Retired') { <span
-                      class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{bun.lifecycleStatus}}</span>
+                      class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{bun.lifecycleStatus}}</span>
                     } @else if(bun.lifecycleStatus == 'Obsolete') { <span
-                      class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{bun.lifecycleStatus}}</span>
+                      class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{bun.lifecycleStatus}}</span>
                     } </td>
                 </tr> } </tbody>
             </table>
           </div> } @if(prodChars.length>0){ <label class="font-bold text-lg">{{ 'CREATE_PROD_SPEC._chars' | translate
             }}</label>
-          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
                   <th scope="col" class="hidden lg:table-cell px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_description' |
@@ -794,9 +795,9 @@
             </table>
           </div> } @if(prodAttachments.length>0){ <label class="font-bold text-lg">{{ 'CREATE_PROD_SPEC._attachments' |
             translate }}</label>
-          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._value' | translate }} </th>
@@ -809,9 +810,9 @@
             </table>
           </div> } @if(prodRelationships.length>0){ <label class="font-bold text-lg">{{
             'CREATE_PROD_SPEC._relationships' | translate }}</label>
-          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._relationship_type' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._product_name' | translate }} </th>
@@ -825,13 +826,13 @@
                   <td class="px-6 py-4"> {{rel.relationshipType}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.productSpec.name}} </td>
                   <td class="hidden md:table-cell px-6 py-4"> @if(rel.productSpec.lifecycleStatus == 'Active'){ <span
-                      class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{rel.productSpec.lifecycleStatus}}</span>
+                      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{rel.productSpec.lifecycleStatus}}</span>
                     } @else if(rel.productSpec.lifecycleStatus == 'Launched') { <span
-                      class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{rel.productSpec.lifecycleStatus}}</span>
+                      class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{rel.productSpec.lifecycleStatus}}</span>
                     } @else if(rel.productSpec.lifecycleStatus == 'Retired') { <span
-                      class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{rel.productSpec.lifecycleStatus}}</span>
+                      class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{rel.productSpec.lifecycleStatus}}</span>
                     } @else if(rel.productSpec.lifecycleStatus == 'Obsolete') { <span
-                      class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{rel.productSpec.lifecycleStatus}}</span>
+                      class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{rel.productSpec.lifecycleStatus}}</span>
                     } </td>
                   <td class="hidden lg:table-cell px-6 py-4"> {{rel.productSpec.lastUpdate | date:'EEEE, dd/MM/yy,
                     HH:mm'}} </td>

@@ -34,7 +34,7 @@
 } @else { <div class="">
   <!-- <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 m-4">{{ 'PROFILE._order_list' | translate }}</h2> <hr class="h-px mr-4 ml-4 bg-primary-100 border-0">-->
   <div class="m-4 relative overflow-x-auto border border-primary-100 sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+    <table class="w-full text-sm text-left rtl:text-right text-primary-100">
       <thead class="text-xs text-gray-700 uppercase bg-white">
         <tr>
           <th scope="col" class="px-6 py-3 text-center align-middle"> {{ 'INVOICES._date' | translate }} </th>
@@ -60,9 +60,9 @@
           <td class="md:table-cell px-6 py-4 text-center align-middle">
             {{invoice?.taxIncludedAmount.value}}{{invoice?.taxIncludedAmount.unit}} </td>
           <td class="md:table-cell px-6 py-4 text-center align-middle"> @if(invoice?.isBilled){ <span
-              class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+              class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'INVOICES._billed' | translate }}</span> } @else { <span
-              class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{
+              class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'INVOICES._pending' | translate }}</span> } </td>
           <td class="px-6 py-4 text-center align-middle flex flex-row"> <button
               (click)="toggleShowDetails(invoice);$event.stopPropagation();" type="button"

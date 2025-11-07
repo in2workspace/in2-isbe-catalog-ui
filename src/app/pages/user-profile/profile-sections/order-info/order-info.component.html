@@ -1,5 +1,5 @@
 <!-- FILTERS -->
-<div class="w-full h-fit mb-4 bg-white rounded-lg flex flex-col ">
+<div class="w-full h-fit mb-4 bg-white/60 rounded-lg flex flex-col ">
   <div class="flex w-full flex-cols items-center justify-between">
     <div class="mb-4 lg:mb-0 p-8 justify-start">
       <h2 class="text-xl font-bold">{{ 'PRODUCT_INVENTORY._search_criteria' | translate }}</h2>
@@ -82,8 +82,8 @@
 } @else { <div class="bg-white p-8 rounded-lg">
   <!-- <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 m-4">{{ 'PROFILE._order_list' | translate }}</h2> <hr class="h-px mr-4 ml-4 bg-primary-100 border-0">-->
   <div class="m-4 relative overflow-x-auto sm:rounded-lg">
-    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-      <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+    <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+      <thead class="text-primary-100 bg-green">
         <tr>
           <th scope="col" class="hidden md:table-cell px-6 py-3 text-center align-middle"> {{
             'PRODUCT_INVENTORY._order_id' | translate }} </th>
@@ -101,17 +101,17 @@
           class="border-b bg-gray-100 hover:bg-gray-200">
           <td class="hidden md:table-cell px-6 py-4 text-center align-middle"> {{order.id}} </td>
           <td class="px-6 py-4 text-center align-middle"> @if(order.state == 'inProgress'){ <span
-              class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{order.state}}</span>
+              class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{order.state}}</span>
             } @else if(order.state == 'completed') { <span
-              class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{order.state}}</span>
+              class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{order.state}}</span>
             } @else if(order.state == 'failed') { <span
-              class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{order.state}}</span>
+              class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{order.state}}</span>
             } @else if(order.state == 'pending') { <span
-              class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{order.state}}</span>
+              class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{order.state}}</span>
             }@else if(order.state == 'acknowledged'){ <span
-              class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{order.state}}</span>
+              class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{order.state}}</span>
             }@else if(order.state == 'cancelled') { <span
-              class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{order.state}}</span>
+              class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{order.state}}</span>
             } </td>
           <td class="hidden md:table-cell px-6 py-4 text-center align-middle"> {{order.priority}} </td>
           <td class="hidden md:table-cell px-6 py-4 text-center align-middle"> {{order.billingAccount.name}} </td>
@@ -174,17 +174,17 @@
         <div class="flex flex-row gap-2 pb-2 text-gray-600">
           <p class="w-fit text-base font-bold shrink-0"> {{ 'PRODUCT_INVENTORY._state' | translate }} </p>
           @if(orderToShow.state == 'inProgress'){ <span
-            class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400 w-fit">{{orderToShow.state}}</span>
+            class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded w-fit">{{orderToShow.state}}</span>
           } @else if(orderToShow.state == 'completed') { <span
-            class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500 w-fit">{{orderToShow.state}}</span>
+            class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded w-fit">{{orderToShow.state}}</span>
           } @else if(orderToShow.state == 'failed') { <span
-            class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{orderToShow.state}}</span>
+            class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{orderToShow.state}}</span>
           } @else if(orderToShow.state == 'pending') { <span
-            class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{orderToShow.state}}</span>
+            class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{orderToShow.state}}</span>
           }@else if(orderToShow.state == 'acknowledged'){ <span
-            class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{orderToShow.state}}</span>
+            class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{orderToShow.state}}</span>
           }@else if(orderToShow.state == 'cancelled') { <span
-            class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{orderToShow.state}}</span>
+            class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{orderToShow.state}}</span>
           }
         </div>
         <div class="flex flex-row gap-2 pb-2 text-gray-600">
@@ -208,8 +208,8 @@
           <h3 class="text-base"> {{orderToShow?.orderDate | date:'EEEE, dd/MM/yy, HH:mm'}} </h3>
         </div>
         <table
-          class="w-full text-sm text-left rtl:text-right text-gray-500 rounded-lg border border-1 border-secondary-50">
-          <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          class="w-full text-sm text-left rtl:text-right text-primary-100 rounded-lg border border-1 border-secondary-50">
+          <thead class="text-primary-100 bg-green">
             <tr>
               <th scope="col" class="px-6 py-3 text-center align-middle"> {{ 'PROFILE._img' | translate }} </th>
               <th scope="col" class="px-6 py-3 text-center align-middle"> {{ 'PROFILE._name' | translate }} </th>

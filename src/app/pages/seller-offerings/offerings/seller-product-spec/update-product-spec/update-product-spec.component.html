@@ -199,9 +199,9 @@
               d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
               fill="currentFill" />
           </svg> <span class="sr-only">Loading...</span> </div> } @else { <div
-          class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+          <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+            <thead class="text-primary-100 bg-green">
               <tr>
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                 <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'UPDATE_PROD_SPEC._status' | translate }}
@@ -215,18 +215,18 @@
             <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b hover:bg-gray-200">
                 <td class="px-6 py-4 text-wrap break-all"> {{prod.name}} </td>
                 <td class="hidden md:table-cell px-6 py-4"> @if(prod.lifecycleStatus == 'Active'){ <span
-                    class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{
+                    class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._active' | translate }}</span> } @else if(prod.lifecycleStatus == 'Launched') { <span
-                    class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+                    class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._launched' | translate }}</span> } @else if(prod.lifecycleStatus == 'Retired') { <span
-                    class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{
+                    class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._retired' | translate }}</span> } @else if(prod.lifecycleStatus == 'Obsolete') { <span
-                    class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{
+                    class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._obsolete' | translate }}</span> } </td>
                 <td class="hidden md:table-cell px-6 py-4"> @if(prod.isBundle == false){ <span
-                    class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{
+                    class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'UPDATE_PROD_SPEC._simple' | translate }}</span> } @else { <span
-                    class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+                    class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'UPDATE_PROD_SPEC._bundle' | translate }}</span> } </td>
                 <td class="hidden lg:table-cell px-6 py-4"> {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} </td>
                 <td class="px-6 py-4"> <input id="select-checkbox" [checked]="isProdInBundle(prod)" type="checkbox"
@@ -324,9 +324,9 @@
           </div>
           <div data-popper-arrow></div>
         </div>
-        <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+          <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+            <thead class="text-primary-100 bg-green">
               <tr>
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._value' | translate }} </th>
@@ -402,9 +402,9 @@
             </svg> <span class="sr-only">Info</span>
             <div> {{ 'UPDATE_PROD_SPEC._no_chars' | translate }} </div>
           </div>
-        </div> } @else { <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        </div> } @else { <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+          <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+            <thead class="text-primary-100 bg-green">
               <tr>
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                 <th scope="col" class="hidden lg:table-cell px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_description' |
@@ -640,9 +640,9 @@
             </svg> <span class="sr-only">Info</span>
             <div> {{ 'UPDATE_PROD_SPEC._no_att' | translate }} </div>
           </div>
-        </div> } @else { <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-          <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+        </div> } @else { <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+          <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+            <thead class="text-primary-100 bg-green">
               <tr>
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._value' | translate }} </th>
@@ -729,9 +729,10 @@
               </svg> <span class="sr-only">Info</span>
               <div> {{ 'UPDATE_PROD_SPEC._no_relatioships' | translate }} </div>
             </div>
-          </div> } @else { <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white m-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          </div> } @else { <div
+            class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 m-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._relationship_type' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
@@ -783,9 +784,9 @@
               </svg>
               <div> {{ 'OFFERINGS._no_prod_rel' | translate }} </div>
             </div>
-          </div> }@else{ <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mt-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          </div> }@else{ <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mt-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                   <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'UPDATE_PROD_SPEC._type' | translate }}
@@ -799,9 +800,9 @@
                   [ngClass]="rel.id == selectedProdSpec.id ? 'bg-gray-300' : 'bg-white'">
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.name}} </td>
                   <td class="hidden md:table-cell px-6 py-4"> @if(rel.isBundle == false){ <span
-                      class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">Simple</span>
+                      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Simple</span>
                     } @else { <span
-                      class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">Bundle</span>
+                      class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">Bundle</span>
                     } </td>
                   <td class="hidden lg:table-cell px-6 py-4"> {{rel.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} </td>
                 </tr> } </tbody>
@@ -858,16 +859,13 @@
           </div>
           <div class="mb-4"> <label class="font-bold text-lg mr-4">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
             @if(productSpecToUpdate?.lifecycleStatus == 'Active'){ <span
-              class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{
+              class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._active' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Launched') {
-            <span
-              class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+            <span class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._launched' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Retired') {
-            <span
-              class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{
+            <span class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._retired' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Obsolete') {
-            <span
-              class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{
+            <span class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._obsolete' | translate }}</span> }
           </div> @if(productSpecToUpdate?.description !=''){ <label class="font-bold text-lg">{{
             'UPDATE_PROD_SPEC._product_description' | translate }}</label>
@@ -882,9 +880,9 @@
           </div> }
           @if(prodSpecsBundle.length>0){ <label class="font-bold text-lg">{{ 'UPDATE_PROD_SPEC._bundle' | translate
             }}</label>
-          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._status' | translate }} </th>
@@ -893,21 +891,21 @@
               <tbody> @for (bun of prodSpecsBundle; track bun) { <tr class="border-b hover:bg-gray-200">
                   <td class="px-6 py-4 text-wrap break-all"> {{bun.name}} </td>
                   <td class="px-6 py-4"> @if(bun.lifecycleStatus == 'Active'){ <span
-                      class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{
+                      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                       'ADMIN._active' | translate }}</span> } @else if(bun.lifecycleStatus == 'Launched') { <span
-                      class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+                      class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                       'ADMIN._launched' | translate }}</span> } @else if(bun.lifecycleStatus == 'Retired') { <span
-                      class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{
+                      class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                       'ADMIN._retired' | translate }}</span> } @else if(bun.lifecycleStatus == 'Obsolete') { <span
-                      class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{
+                      class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                       'ADMIN._obsolete' | translate }}</span> } </td>
                 </tr> } </tbody>
             </table>
           </div> } @if(prodChars.length>0){ <label class="font-bold text-lg">{{ 'UPDATE_PROD_SPEC._chars' | translate
             }}</label>
-          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                   <th scope="col" class="hidden lg:table-cell px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_description' |
@@ -929,9 +927,9 @@
             </table>
           </div> } @if(prodAttachments.length>0){ <label class="font-bold text-lg">{{ 'UPDATE_PROD_SPEC._attachments' |
             translate }}</label>
-          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._value' | translate }} </th>
@@ -944,9 +942,9 @@
             </table>
           </div> } @if(prodRelationships.length>0){ <label class="font-bold text-lg">{{
             'UPDATE_PROD_SPEC._relationships' | translate }}</label>
-          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white mb-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+          <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._relationship_type' | translate }} </th>
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>

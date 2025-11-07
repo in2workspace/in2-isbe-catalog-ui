@@ -107,19 +107,16 @@
                         <label class="font-bold text-lg mr-4">{{ 'CREATE_CATALOG._status' | translate }}</label>
                         @if(catalogToCreate?.lifecycleStatus == 'Active'){
                         <span
-                            class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{
+                            class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                             'ADMIN._active' | translate }}</span>
                         } @else if(catalogToCreate?.lifecycleStatus == 'Launched') {
-                        <span
-                            class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+                        <span class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                             'ADMIN._launched' | translate }}</span>
                         } @else if(catalogToCreate?.lifecycleStatus == 'Retired') {
-                        <span
-                            class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{
+                        <span class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                             'ADMIN._retired' | translate }}</span>
                         } @else if(catalogToCreate?.lifecycleStatus == 'Obsolete') {
-                        <span
-                            class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{
+                        <span class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                             'ADMIN._obsolete' | translate }}</span>
                         }
                     </div>

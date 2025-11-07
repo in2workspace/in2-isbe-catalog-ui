@@ -70,8 +70,8 @@
               <div> {{ 'OFFERINGS._no_categories' | translate }} </div>
             </div>
           </div> }@else{ <div class="bg-white relative overflow-x-auto sm:rounded-lg w-full mt-4">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-              <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+            <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+              <thead class="text-primary-100 bg-green">
                 <tr class="flex w-full justify-between">
                   <th scope="col" class="flex px-6 py-3 w-3/5"> {{ 'CREATE_OFFER._name' | translate }} </th>
                   <th scope="col" class="hidden md:flex px-6 py-3 w-fit"> {{ 'CREATE_OFFER._last_update' | translate }}
@@ -111,13 +111,13 @@
               {{categoryToCreate?.name}} </label> </div>
           <div class="mb-4"> <label class="font-bold text-lg mr-4">{{ 'CREATE_CATEGORIES._status' | translate }}</label>
             @if(categoryToCreate?.lifecycleStatus == 'Active'){ <span
-              class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{
+              class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._active' | translate }}</span> } @else if(categoryToCreate?.lifecycleStatus == 'Launched') { <span
-              class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{
+              class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._launched' | translate }}</span> } @else if(categoryToCreate?.lifecycleStatus == 'Retired') { <span
-              class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{
+              class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._retired' | translate }}</span> } @else if(categoryToCreate?.lifecycleStatus == 'Obsolete') { <span
-              class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{
+              class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._obsolete' | translate }}</span> } </div> @if(categoryToCreate?.description !=''){ <label
             class="font-bold text-lg">{{ 'CREATE_CATEGORIES._description' | translate }}</label>
           <div class="px-4 py-2 bg-white border rounded-lg p-4 mb-4">

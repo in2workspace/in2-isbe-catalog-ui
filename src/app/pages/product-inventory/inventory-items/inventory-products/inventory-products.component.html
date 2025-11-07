@@ -9,11 +9,10 @@
     </div>
     <div class="flex w-full flex-col items-center lg:flex-row justify-between">
       <div class="p-8 w-full">
-        <div class="flex flex-row mb-1"> <fa-icon [icon]="faSwatchbook"
-            class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
+        <div class="flex flex-row mb-1">
           <h2 class="text-base font-bold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
         </div> <button id="dropdownDefault" data-dropdown-toggle="dropdown"
-          class="border-gray-300 text-gray-900 w-full justify-between bg-white focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
+          class="w-1/2 border border-gray-300 text-gray-900 justify-between bg-white focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
           type="button"> {{ 'OFFERINGS._filter_state' | translate }} <svg class="w-4 h-4 ml-2" aria-hidden="true"
             fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -97,13 +96,13 @@
           <div class="flex w-full justify-between mt-2.5 mb-5 text-gray-500 font-mono">
             <div>V: {{inv.product?.version || 'latest'}}</div>
             <div class="flex items-center justify-center rounded-lg"> @if(inv.status == 'active'){ <span
-                class="bg-purple-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{inv.status}}</span>
+                class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{inv.status}}</span>
               } @else if(inv.status == 'created') { <span
-                class="bg-purple-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{inv.status}}</span>
+                class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{inv.status}}</span>
               } @else if(inv.status == 'suspended') { <span
-                class="bg-purple-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{inv.status}}</span>
+                class="bg-yellow-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{inv.status}}</span>
               } @else if(inv.status == 'terminated') { <span
-                class="bg-purple-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{inv.status}}</span>
+                class="bg-red-500 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{inv.status}}</span>
               } </div>
           </div>
           <!--@if(inv.price){ @if(inv.price.priceType=='custom'){ <div class="flex flex-col place-content-center items-baseline mb-5 w-full"> <div class="flex place-content-center items-baseline w-full"> <span class="text-2xl font-bold text-gray-900 mr-1">Custom</span> </div> </div> } @else { <div class="flex flex-col place-content-center items-baseline mb-5 w-full"> <div class="flex place-content-center items-baseline w-full"> <span class="text-2xl font-bold text-gray-900 mr-1">{{inv.price?.price}} {{inv.price?.unit}}</span> <span class="text-xs font-bold text-gray-900">{{inv.price?.text}}</span> </div> </div> } } @else { <div class="flex flex-col place-content-center items-baseline mb-5 w-full"> <div class="flex place-content-center items-baseline w-full"> <span class="text-2xl font-bold text-gray-900 mr-1">{{ 'SHOPPING_CART._free' | translate }}</span> </div> </div> }-->
@@ -244,9 +243,9 @@
           <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary-100 text-center pb-8 pt-12"> {{
             'PRODUCT_INVENTORY._services' | translate }}</h2>
           <div class="bg-white p-4 rounded-lg">
-            <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white">
-              <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+            <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50">
+              <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+                <thead class="text-primary-100 bg-green">
                   <tr>
                     <th scope="col" class="px-6 py-3"> {{ 'PRODUCT_INVENTORY._id' | translate }} </th>
                     <th scope="col" class="px-6 py-3"> {{ 'OFFERINGS._name' | translate }} </th>
@@ -276,9 +275,9 @@
           <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary-100 text-center pb-8 pt-12"> {{
             'PRODUCT_INVENTORY._resources' | translate }}</h2>
           <div class="bg-white p-4 rounded-lg">
-            <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white">
-              <table class="w-full text-sm text-left rtl:text-right text-gray-500">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+            <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50">
+              <table class="w-full text-sm text-left rtl:text-right text-primary-100">
+                <thead class="text-primary-100 bg-green">
                   <tr>
                     <th scope="col" class="px-6 py-3"> {{ 'PRODUCT_INVENTORY._id' | translate }} </th>
                     <th scope="col" class="px-6 py-3"> {{ 'OFFERINGS._name' | translate }} </th>
