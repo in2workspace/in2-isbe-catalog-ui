@@ -1,13 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {catchError, lastValueFrom, map, of} from 'rxjs';
-import { Category, LoginInfo } from '../models/interfaces';
+import {catchError, lastValueFrom,of} from 'rxjs';
+import { Category } from '../models/interfaces';
 import { environment } from 'src/environments/environment';
-import {components} from "../models/product-catalog";
-type ProductOffering = components["schemas"]["ProductOffering"];
-import {LocalStorageService} from "./local-storage.service";
-import * as moment from 'moment';
-import { jwtDecode } from "jwt-decode";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +14,7 @@ export class ApiServiceService {
   public static CATALOG_LIMIT: number= environment.CATALOG_LIMIT;
   public static CATEGORY_LIMIT: number = environment.CATEGORY_LIMIT;
 
-  constructor(private http: HttpClient,private localStorage: LocalStorageService) { }
+  constructor(private http: HttpClient) { }
 
   getProducts(page:any,keywords:any) {
     let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/productOffering?limit=${ApiServiceService.PRODUCT_LIMIT}&offset=${page}&lifecycleStatus=Launched`;
@@ -302,35 +297,4 @@ export class ApiServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getComplianceLevel(prodSpec: any) {
-    let level = 'NL';
-
-    if(prodSpec.productSpecCharacteristic != undefined) {
-      let vcProf = prodSpec.productSpecCharacteristic.find(((p:any) => {
-        return p.name === `Compliance:VC`
-      }));
-
-      if (vcProf) {
-        const vcToken: any = vcProf.productSpecCharacteristicValue?.at(0)?.value
-        const decoded = jwtDecode(vcToken)
-        let credential: any = null
-
-        if ('verifiableCredential' in decoded) {
-          credential = decoded.verifiableCredential;
-        } else if('vc' in decoded) {
-          credential = decoded.vc;
-        }
-
-        if (credential != null) {
-          const subject = credential.credentialSubject;
-
-          if ('gx:labelLevel' in subject) {
-            level = subject['gx:labelLevel'];
-          }
-        }
-      }
-    }
-
-    return level;
-  }
 }

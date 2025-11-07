@@ -4,24 +4,21 @@ import {
   OnInit,
   ChangeDetectorRef,
   HostListener,
-  ElementRef, ViewChild, AfterViewInit
+  ElementRef, ViewChild, AfterViewInit,
+  inject
 } from '@angular/core';
 import {components} from "../../models/product-catalog";
 import { faAtom, faClose, faEllipsis} from "@fortawesome/pro-solid-svg-icons";
 type Product = components["schemas"]["ProductOffering"];
 type ProductSpecification = components["schemas"]["ProductSpecification"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
-import {LocalStorageService} from "../../services/local-storage.service";
 import {EventMessageService} from "../../services/event-message.service";
 import { ApiServiceService } from 'src/app/services/product-service.service';
-import { AccountServiceService } from 'src/app/services/account-service.service';
 import { Modal } from 'flowbite';
-import { Router } from '@angular/router';
 import { PriceServiceService } from 'src/app/services/price-service.service';
 import { initFlowbite } from 'flowbite';
-import { LoginInfo, cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
+import { cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
 import { ShoppingCartServiceService } from 'src/app/services/shopping-cart-service.service';
-import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { environment } from 'src/environments/environment';
 import { ErrorMessageComponent } from '../error-message/error-message.component';
@@ -33,13 +30,15 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { BadgeComponent } from '../badge/badge.component';
 import { PricePlanDrawerComponent } from '../price-plan-drawer/price-plan-drawer.component';
 import { AuthService } from 'src/app/guard/auth.service';
+import { ProductDetailsComponent } from 'src/app/pages/product-details/product-details.component';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 
 @Component({
     selector: 'bae-off-card',
     templateUrl: './card.component.html',
     styleUrl: './card.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, CartCardComponent, TranslateModule, NgClass, DatePipe, MarkdownComponent, FaIconComponent, BadgeComponent, PricePlanDrawerComponent]
+    imports: [ProductDetailsComponent, ErrorMessageComponent, CartCardComponent, TranslateModule, NgClass, DatePipe, MarkdownComponent, FaIconComponent, BadgeComponent, PricePlanDrawerComponent]
 })
 export class CardComponent implements OnInit, AfterViewInit {
 
@@ -78,29 +77,25 @@ export class CardComponent implements OnInit, AfterViewInit {
   protected readonly faEllipsis = faEllipsis;
   PURCHASE_ENABLED: boolean = environment.PURCHASE_ENABLED;
   checkMoreCats:boolean=false;
-  closeCats:boolean=false;
   loadMoreCats:boolean=false;
 
   errorMessage:any='';
   showError:boolean=false;
-  orgInfo:any=undefined;
 
   selectedPricePlanId: string | null = null;
   selectedPricePlan:any = null;
   productAlreadyInCart:boolean=false;
 
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly auth= inject(AuthService);
+  private readonly eventMessage= inject(EventMessageService);
+  private readonly api= inject(ApiServiceService);
+  private readonly priceService= inject(PriceServiceService);
+  private readonly cartService= inject(ShoppingCartServiceService);
+  private readonly attachmentService= inject(AttachmentServiceService);
 
 
-  constructor(
-    private readonly cdr: ChangeDetectorRef,
-    private readonly auth: AuthService,
-    private readonly eventMessage: EventMessageService,
-    private readonly api: ApiServiceService,
-    private readonly priceService: PriceServiceService,
-    private readonly cartService: ShoppingCartServiceService,
-    private readonly accService: AccountServiceService,
-    private readonly router: Router
-    ) {
+  constructor() {
       this.targetModal = document.getElementById('details-modal');
       this.modal = new Modal(this.targetModal);
 
@@ -157,7 +152,6 @@ export class CardComponent implements OnInit, AfterViewInit {
       if(this.productOff?.category.length>5){
         this.loadMoreCats=false;
         this.checkMoreCats=true;
-        this.closeCats=false;
       }
       this.cdr.detectChanges();
     }
@@ -199,11 +193,6 @@ export class CardComponent implements OnInit, AfterViewInit {
     if(specId != undefined){
       this.api.getProductSpecification(specId).then(spec => {
         this.prodSpec = spec;
-        this.getOwner();
-
-        if(this.prodSpec.productSpecCharacteristic != undefined) {
-          this.complianceLevel = this.api.getComplianceLevel(this.prodSpec);
-        }
       })
     }
 
@@ -229,24 +218,6 @@ export class CardComponent implements OnInit, AfterViewInit {
     }
     
     this.cdr.detectChanges();
-  }
-
-  getProductImage() {
-    return this.images.length > 0 ? this.images?.at(0)?.url : 'https://placehold.co/600x400/svg';
-  }
-
-  loadMoreCategories(){
-    this.loadMoreCats=!this.loadMoreCats;
-    this.checkMoreCats=false;
-    this.closeCats=true;
-  }
-
-  closeCategories(){
-    this.closeCats=false;
-    this.checkMoreCats=true;
-    if(this.productOff?.category)
-    this.categories = this.productOff?.category.slice(0, 4);
-    this.loadMoreCats=!this.loadMoreCats;
   }
 
   ngAfterViewInit() {
@@ -371,6 +342,10 @@ async deleteProduct(product: Product | undefined){
     }
   }
 
+  getProductImage() {
+    return this.attachmentService.getProductImage(this.images);
+  }
+
   prepareOffData() {
     if(this.prodSpec.productSpecCharacteristic != undefined){
       for(let i=0; i<this.prodSpec.productSpecCharacteristic.length; i++){
@@ -403,40 +378,6 @@ async deleteProduct(product: Product | undefined){
     this.selected_price={};
     this.selected_terms=false;
     this.cdr.detectChanges();
-  }
-
-  hideModal() {
-    this.showModal=false;
-    this.loadMoreCats=false;
-    this.checkMoreCats=true;
-    this.cdr.detectChanges();
-    /*this.targetModal = document.getElementById('details-modal');
-    this.modal = new Modal(this.targetModal);
-    this.modal.hide();*/
-  }
-
-  goToProductDetails(productOff:Product| undefined) {
-    document.querySelector("body > div[modal-backdrop]")?.remove()
-    this.router.navigate(['/search', productOff?.id]);
-  }
-
-  goToOrgDetails(id:any) {
-    document.querySelector("body > div[modal-backdrop]")?.remove()
-    this.router.navigate(['/org-details', id]);
-  }
-
-  getOwner(){
-    let parties = this.prodSpec?.relatedParty;
-    if(parties)
-    for(let i=0; i<parties.length;i++){
-      if(parties[i].role=='Owner'){
-        if(parties[i].id.includes('organization')){
-          this.accService.getOrgInfo(parties[i].id).then(org => {
-            this.orgInfo=org;
-          })
-        }
-      }
-    }
   }
 
   onPricePlanSelected(pricePlan:any) {
