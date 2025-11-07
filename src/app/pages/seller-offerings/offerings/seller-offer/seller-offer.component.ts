@@ -70,9 +70,7 @@ export class SellerOfferComponent implements OnInit{
     .pipe(take(1))
     .subscribe(([sellerId, li]) => {   
       this.seller = sellerId || '';
-      console.log((li?.roles || []).map(r => r.name ?? r.id ?? r))
       this.isAdmin = (li?.roles || []).map(r => r.name ?? r.id ?? r).includes('admin');
-    console.log(this.isAdmin)
       this.getOffers(false);
       const input = document.querySelector<HTMLInputElement>('[type=search]');
       if (input) {
@@ -123,8 +121,8 @@ export class SellerOfferComponent implements OnInit{
     })
   }
 
-  next(){
-    this.getOffers(true);
+  async next(){
+    await this.getOffers(true);
   }
 
   onStateFilterChange(filter:string){
