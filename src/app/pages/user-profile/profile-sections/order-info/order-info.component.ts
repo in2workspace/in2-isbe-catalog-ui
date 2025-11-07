@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener, inject } from '@angular/core';
 import { LoginInfo, billingAccountCart } from 'src/app/models/interfaces';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
@@ -22,6 +22,7 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { combineLatest, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 import { OrgContextService } from 'src/app/services/org-context.service';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 
 @Component({
     selector: 'order-info',
@@ -56,13 +57,15 @@ export class OrderInfoComponent implements OnInit {
   protected readonly faSort = faSort;
   protected readonly faSwatchbook = faSwatchbook;
 
-  constructor(
-    private readonly auth: AuthService,
-    private readonly cdr: ChangeDetectorRef,
-    private readonly eventMessage: EventMessageService,
-    private readonly paginationService: PaginationService,
-    private readonly orgCtx: OrgContextService
-  ) {
+  
+  private readonly attachmentService= inject(AttachmentServiceService);
+  private readonly auth= inject(AuthService);
+  private readonly cdr= inject(ChangeDetectorRef);
+  private readonly eventMessage= inject(EventMessageService);
+  private readonly paginationService= inject(PaginationService);
+  private readonly orgCtx= inject(OrgContextService);
+
+  constructor() {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
         this.initPartyInfo();
@@ -121,7 +124,7 @@ export class OrderInfoComponent implements OnInit {
     if(profile.length!=0){
       images = profile;
     } 
-    return images.length > 0 ? images?.at(0)?.url : 'https://placehold.co/600x400/svg';
+    return this.attachmentService.getProductImage(images);
   }
 
   async getOrders(next:boolean){

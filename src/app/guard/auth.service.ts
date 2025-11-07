@@ -1,7 +1,7 @@
 import { Injectable, signal, WritableSignal, inject } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { take, switchMap, map, catchError } from 'rxjs/operators';
+import { take, map, catchError, switchMap } from 'rxjs/operators';
 import { claimsToLoginInfo, LoginInfo } from './login-info.mapper';
 import { OrgContextService } from '../services/org-context.service';
 

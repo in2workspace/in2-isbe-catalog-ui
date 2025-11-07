@@ -1,4 +1,4 @@
-import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ChangeDetectorRef, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, Output, ChangeDetectorRef, SimpleChanges, inject} from '@angular/core';
 import {CharacteristicComponent} from "../characteristic/characteristic.component";
 import {MarkdownComponent} from "ngx-markdown";
 import {components} from "../../models/product-catalog";
@@ -18,6 +18,7 @@ type ProductOfferingTerm = components["schemas"]["ProductOfferingTerm"];
 type ProductSpecificationCharacteristic = components["schemas"]["ProductSpecificationCharacteristic"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
 import { FormsModule } from '@angular/forms';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 
 
 @Component({
@@ -63,6 +64,9 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
 
   characteristics: ProductSpecificationCharacteristic[] = []; // Características dinámicas
   filteredCharacteristics: ProductSpecificationCharacteristic[] = [];
+
+  
+  private readonly attachmentService= inject(AttachmentServiceService);
 
   @HostListener('document:keydown.escape', ['$event'])
   handleEscape(event: KeyboardEvent): void {
@@ -360,10 +364,6 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
     });
   }
 
-  getProductImage() {
-    return this.images.length > 0 ? this.images?.at(0)?.url : 'https://placehold.co/600x400/svg';
-  }
-
   async createOrder() {
     if (this.form.invalid) {
       console.error('Form is invalid');
@@ -407,7 +407,7 @@ export class PricePlanDrawerComponent implements OnInit, OnDestroy {
     return {
       id: this.productOff?.id,
       name: this.productOff?.name,
-      image: this.getProductImage(),
+      image: this.attachmentService.getProductImage(this.images),
       href: this.productOff?.href,
       options: {
         characteristics: this.orderChars,

@@ -209,7 +209,7 @@ export class CreateCategoryComponent implements OnInit {
       this.categoryToCreate={
         name: this.generalForm.value.name,
         description: this.generalForm.value.description != null ? this.generalForm.value.description : '',
-        lifecycleStatus: "Active",
+        lifecycleStatus: "In design",
         isRoot: this.isParent
       }
       if(this.isParent==false){

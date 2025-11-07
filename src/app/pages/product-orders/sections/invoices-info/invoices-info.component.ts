@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener, NgModule } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, AfterViewInit, HostListener, NgModule, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, DatePipe } from '@angular/common';
 import { LoginInfo, billingAccountCart } from 'src/app/models/interfaces';
@@ -23,6 +23,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { combineLatest, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 import { OrgContextService } from 'src/app/services/org-context.service';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 
 @Component({
   selector: 'app-invoices-info',
@@ -64,16 +65,18 @@ export class InvoicesInfoComponent implements OnInit {
   protected readonly faSwatchbook = faSwatchbook;
   protected readonly faEdit = faEdit;
   protected readonly faSave = faSave;
+ 
+    
+  private readonly attachmentService= inject(AttachmentServiceService);
+  private readonly auth= inject(AuthService);
+  private readonly cdr= inject(ChangeDetectorRef);
+  private readonly eventMessage= inject(EventMessageService);
+  private readonly paginationService= inject(PaginationService);
+  private readonly orgCtx= inject(OrgContextService);  
+  private readonly invoicesService = inject(InvoicesService);
+  private readonly router = inject(Router);
 
-  constructor(
-    private readonly auth: AuthService,
-    private readonly orgCtx: OrgContextService,
-    private readonly cdr: ChangeDetectorRef,
-    private readonly invoicesService: InvoicesService,
-    private readonly eventMessage: EventMessageService,
-    private readonly paginationService: PaginationService,
-    private readonly router: Router
-  ) {
+  constructor() {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
         this.initPartyInfo();
@@ -133,7 +136,7 @@ export class InvoicesInfoComponent implements OnInit {
     if(profile.length!=0){
       images = profile;
     }
-    return images.length > 0 ? images?.at(0)?.url : 'https://placehold.co/600x400/svg';
+    return this.attachmentService.getProductImage(images);
   }
 
   async getInvoices(next:boolean){

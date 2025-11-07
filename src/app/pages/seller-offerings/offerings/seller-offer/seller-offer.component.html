@@ -38,6 +38,15 @@
                 {{ 'OFFERINGS._status' | translate }}
             </h6>
             <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+
+                <li class="flex items-center">
+                <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
+                    class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
+    
+                <label for="in-design" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                    {{ 'OFFERINGS._in_design' | translate }}
+                </label>
+                </li>
   
                 <li class="flex items-center">
                 <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
@@ -146,7 +155,10 @@
                                 {{offer.name}}
                             </td>
                             <td class="px-6 py-4">
-                                @if(offer.lifecycleStatus == 'Active'){
+                                @if(offer.lifecycleStatus == 'In design'){
+                                    <span class="bg-purple-100 dark:bg-secondary-300 text-grey-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-grey-800">{{ 'ADMIN._in_design' | translate }}</span>
+                                }
+                                @else if(offer.lifecycleStatus == 'Active'){
                                     <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                                 } @else if(offer.lifecycleStatus == 'Launched') {
                                     <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>

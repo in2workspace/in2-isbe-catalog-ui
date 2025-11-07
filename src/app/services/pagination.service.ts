@@ -48,6 +48,9 @@ export class PaginationService {
       if("isBundle" in options){
         params.push(options.isBundle)
       }
+      if("isAdmin" in options){
+        params.push(options.isAdmin)
+      }
       if("selectedDate" in options){
         params.push(options.selectedDate)
       }

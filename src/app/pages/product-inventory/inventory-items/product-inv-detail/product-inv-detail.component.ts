@@ -1,4 +1,4 @@
-import { Component, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit,ChangeDetectorRef, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import {components} from "src/app/models/product-catalog";
@@ -17,6 +17,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 
 @Component({
     selector: 'app-product-inv-detail',
@@ -48,14 +49,16 @@ export class ProductInvDetailComponent implements OnInit {
   protected readonly faShieldHalved = faShieldHalved;
   protected readonly faAtom = faAtom;
   protected readonly faDownload = faDownload;
+  
+  private readonly attachmentService = inject(AttachmentServiceService);
+  private readonly auth = inject(AuthService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly route = inject( ActivatedRoute);
+  private readonly api = inject( ApiServiceService);
+  private readonly inventoryServ = inject( ProductInventoryServiceService);
+  private readonly location = inject( Location);
 
   constructor(
-    private readonly cdr: ChangeDetectorRef,
-    private readonly route: ActivatedRoute,
-    private readonly api: ApiServiceService,
-    private readonly auth: AuthService,
-    private readonly inventoryServ: ProductInventoryServiceService,
-    private readonly location: Location
   ) {
   }
 
@@ -143,7 +146,7 @@ export class ProductInvDetailComponent implements OnInit {
   }
 
   getProductImage() {
-    return this.images.length > 0 ? this.images?.at(0)?.url : 'https://placehold.co/600x400/svg';
+    return this.attachmentService.getProductImage(this.images);
   }
 
 }
