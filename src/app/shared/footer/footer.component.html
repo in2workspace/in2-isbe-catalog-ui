@@ -1,22 +1,24 @@
-<footer class="w-full pb-4 px-4 md:px-7 md:pb-7 bg-black md:flex md:items-center md:justify-end">
-  <div class="flex flex-col w-full">
+<footer class="w-full py-6 px-4 md:p-7 bg-black md:flex md:items-center md:justify-end">
+  <div class="flex flex-col gap-6 md:gap-12 w-full">
     <!-- Social Links -->
     <!-- TODO: Removed this a per design -->
-    <!-- <div class="flex justify-start text-gray-500 dark:text-gray-400">
+    <!-- <div class="flex justify-start text-gray-500">
       <fa-icon (click)="open(ISBE_LINKEDIN)" (keydown.enter)="open(ISBE_LINKEDIN)" tabindex="0" class="mr-4 cursor-pointer" [icon]="faLinkedin"></fa-icon>
       <fa-icon (click)="open(ISBE_X)" (keydown.enter)="open(ISBE_X)" tabindex="0" class="mr-4 cursor-pointer" [icon]="faXTwitter"></fa-icon>
       <fa-icon (click)="open(ISBE_YOUTUBE)" (keydown.enter)="open(ISBE_YOUTUBE)" tabindex="0" class="cursor-pointer" [icon]="faYoutube"></fa-icon>
     </div> -->
 
     <!-- Pre Footer -->
-    <div class="flex flex-wrap gap-4 py-8 md:py-16 border-b border-white">
+    <div class="flex flex-wrap gap-4 pt-8 pb-5 md:pt-14 md:pb-10">
       <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" />
       <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" />
       <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" />
     </div>
-    ç
+
+    <hr class="h-px bg-white border-0">
+
     <!-- Footer -->
-    <div class="flex justify-between text-white">
+    <div class="flex flex-col md:flex-row justify-between gap-6 text-white">
 
       <div class="credits  text-base leading-tight max-w-3xl">
         Proyecto ‘INFRAESTRUCTURA DE SERVICIOS BLOCKCHAIN DE ESPAÑA (ISBE)’, en el marco del Convenio
@@ -28,7 +30,7 @@
         Generation EU.
       </div>
 
-      <div class="flex gap-20 items-baseline">
+      <div class="flex flex-col md:flex-row gap-10 md:gap-20 items-baseline">
         <!-- Footer Links -->
         <ul class="flex flex-col font-mediu">
           @if(checkLogged && !IS_ISBE){

@@ -31,6 +31,11 @@ module.exports = {
           300: "#FF7E56",
         },
       },
+      fontSize: {
+        xl: ["1.25rem", { lineHeight: "1.33rem" }],
+        "2xl": ["1.5rem", { lineHeight: "1.75rem" }],
+        "7xl": ["4.25rem", { lineHeight: "4.625rem" }],
+      },
       transitionProperty: {
         width: "width",
       },

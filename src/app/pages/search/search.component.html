@@ -2,6 +2,11 @@
   [ngClass]="showPanel ? 'opacity-100' : 'hidden'"></bae-categories-panel>
 
 <section class="flex flex-col p-8" [ngClass]="showPanel ? 'pt-[75px]' : ''">
+
+  <div class="max-w-4xl flex flex-col gap-3">
+    <h1 class="text-7xl font-semibold">Catálogo de servicios comerciales ISBE</h1>
+    <p>Encuentra los servicios que necesitas para tu caso de uso aquí</p>
+  </div>
   <!--TODO: Re-enable Drawer when ready v1.0
   @if(showDrawer){
     <div (click)="$event.stopPropagation();" [ngClass]="showDrawer ? 'backdrop-blur-sm': ''" class="fixed h-screen w-3/4 top-0 left-0 z-50 p-4 overflow-y-auto bg-white dark:bg-gray-800" tabindex="-1" aria-labelledby="drawer-label">
@@ -104,9 +109,10 @@
 
 <!-- BANNER COMPONENT -->
 <section class="px-8">
-  <div class="rounded-3xl px-16 py-14 bg-green flex justify-between gap-8">
+  <div class="rounded-3xl p-8 md:px-16 md:py-14 bg-green flex flex-col md:flex-row justify-between gap-8">
     <div class="flex flex-col gap-8">
-      <h3 class="text-3xl font-semibold max-w-sm">Conecta estos servicios con la infraestructura que los hace posibles
+      <h3 class="text-2xl md:text-3xl font-semibold max-w-sm">Conecta estos servicios con la infraestructura que los
+        hace posibles
       </h3>
       <p class="max-w-md">Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal.</p>
       <button type="button"
