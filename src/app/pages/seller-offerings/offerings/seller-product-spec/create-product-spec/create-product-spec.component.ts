@@ -719,10 +719,10 @@ export class CreateProductSpecComponent implements OnInit {
     const index = this.stepsElements.findIndex(item => item === step);
     if (index !== -1) {
       this.stepsElements.splice(index, 1);
-      this.selectMenu(document.getElementById(step),'text-primary-100 dark:text-primary-50')
+      this.selectMenu(document.getElementById(step),'text-primary-100')
       this.unselectMenu(document.getElementById(step),'text-gray-500') 
       for(const element of this.stepsElements){
-        this.unselectMenu(document.getElementById(element),'text-primary-100 dark:text-primary-50')
+        this.unselectMenu(document.getElementById(element),'text-primary-100')
         this.selectMenu(document.getElementById(element),'text-gray-500') 
       }
       this.stepsElements.push(step);
@@ -730,10 +730,10 @@ export class CreateProductSpecComponent implements OnInit {
     const circleIndex = this.stepsCircles.findIndex(item => item === stepCircle);
     if (index !== -1) {
       this.stepsCircles.splice(circleIndex, 1);
-      this.selectMenu(document.getElementById(stepCircle),'border-primary-100 dark:border-primary-50')
+      this.selectMenu(document.getElementById(stepCircle),'border-primary-100')
       this.unselectMenu(document.getElementById(stepCircle),'border-gray-400');
       for(const element of this.stepsCircles){
-        this.unselectMenu(document.getElementById(element),'border-primary-100 dark:border-primary-50')
+        this.unselectMenu(document.getElementById(element),'border-primary-100')
         this.selectMenu(document.getElementById(element),'border-gray-400');
       }
       this.stepsCircles.push(stepCircle);

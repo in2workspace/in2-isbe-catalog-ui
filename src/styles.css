@@ -45,18 +45,9 @@
   --blockquote-text-color: black;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark mode colors */
-    --blockquote-border-color: #171717;
-    --blockquote-bg-color: #0c1c38;
-    --blockquote-text-color: #eee;
-  }
-}
-
 /* Default styles for Markdown elements */
 markdown {
-  font-family: "Blinker", system-ui, sans-serif;
+  font-family: "GT Standard", system-ui, sans-serif;
   line-height: 1.6;
   font-style: var(--blockquote-text-color);
 }
@@ -227,10 +218,10 @@ markdown a:hover {
   --autofill-text-light: #000000;
 }
 
-[data-theme="dark"] {
+/* [data-theme="dark"] {
   --autofill-bg-dark: #182740;
   --autofill-text-dark: #ffffff;
-}
+} */
 
 input:-webkit-autofill {
   background-color: var(--autofill-bg-light) !important;
@@ -238,10 +229,10 @@ input:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
 }
 
-[data-theme="dark"] input:-webkit-autofill {
+/* [data-theme="dark"] input:-webkit-autofill {
   background-color: var(--autofill-bg-dark) !important;
   color: var(--autofill-text-dark) !important;
-}
+} */
 
 input:-webkit-autofill::first-line {
   color: inherit;

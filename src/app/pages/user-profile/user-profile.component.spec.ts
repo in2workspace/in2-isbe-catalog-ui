@@ -6,17 +6,20 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AuthService } from 'src/app/guard/auth.service';
-import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
+import {
+  authServiceMock,
+  oidcSecurityServiceMock,
+} from 'src/testing/mocks/oidc-security.service.mock';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
 
   const hasActive = (el?: HTMLElement | null) =>
-    !!el && el.classList.contains('text-white') && el.classList.contains('bg-primary-100');
+    !!el && el.classList.contains('text-green');
 
   const notActive = (el?: HTMLElement | null) =>
-    !el || (!el.classList.contains('text-white') && !el.classList.contains('bg-primary-100'));
+    !el || !el.classList.contains('text-green');
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,7 +27,11 @@ describe('UserProfileComponent', () => {
         { provide: AuthService, useValue: authServiceMock },
         { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
       ],
-      imports: [UserProfileComponent, TranslateModule.forRoot(), HttpClientTestingModule],
+      imports: [
+        UserProfileComponent,
+        TranslateModule.forRoot(),
+        HttpClientTestingModule,
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(UserProfileComponent);
@@ -105,9 +112,9 @@ describe('UserProfileComponent', () => {
       fixture.detectChanges();
 
       const account = component.accountButton?.nativeElement ?? null;
-      const org     = component.orgButton?.nativeElement ?? null;
-      const bill    = component.billButton?.nativeElement ?? null;
-      const order   = component.orderButton?.nativeElement ?? null;   // puede no existir
+      const org = component.orgButton?.nativeElement ?? null;
+      const bill = component.billButton?.nativeElement ?? null;
+      const order = component.orderButton?.nativeElement ?? null; // puede no existir
       const revenue = component.revenueButton?.nativeElement ?? null;
 
       expect(account).toBeTruthy();
@@ -124,9 +131,9 @@ describe('UserProfileComponent', () => {
       fixture.detectChanges();
 
       const account = component.accountButton?.nativeElement ?? null;
-      const org     = component.orgButton?.nativeElement ?? null;
-      const bill    = component.billButton?.nativeElement ?? null;
-      const order   = component.orderButton?.nativeElement ?? null;
+      const org = component.orgButton?.nativeElement ?? null;
+      const bill = component.billButton?.nativeElement ?? null;
+      const order = component.orderButton?.nativeElement ?? null;
       const revenue = component.revenueButton?.nativeElement ?? null;
 
       expect(org).toBeTruthy();
@@ -143,9 +150,9 @@ describe('UserProfileComponent', () => {
       fixture.detectChanges();
 
       const account = component.accountButton?.nativeElement ?? null;
-      const org     = component.orgButton?.nativeElement ?? null;
-      const bill    = component.billButton?.nativeElement ?? null;
-      const order   = component.orderButton?.nativeElement ?? null;
+      const org = component.orgButton?.nativeElement ?? null;
+      const bill = component.billButton?.nativeElement ?? null;
+      const order = component.orderButton?.nativeElement ?? null;
       const revenue = component.revenueButton?.nativeElement ?? null;
 
       expect(bill).toBeTruthy();
@@ -162,9 +169,9 @@ describe('UserProfileComponent', () => {
       fixture.detectChanges();
 
       const account = component.accountButton?.nativeElement ?? null;
-      const org     = component.orgButton?.nativeElement ?? null;
-      const bill    = component.billButton?.nativeElement ?? null;
-      const order   = component.orderButton?.nativeElement ?? null;
+      const org = component.orgButton?.nativeElement ?? null;
+      const bill = component.billButton?.nativeElement ?? null;
+      const order = component.orderButton?.nativeElement ?? null;
       const revenue = component.revenueButton?.nativeElement ?? null;
 
       if (order) {
@@ -181,9 +188,9 @@ describe('UserProfileComponent', () => {
       fixture.detectChanges();
 
       const account = component.accountButton?.nativeElement ?? null;
-      const org     = component.orgButton?.nativeElement ?? null;
-      const bill    = component.billButton?.nativeElement ?? null;
-      const order   = component.orderButton?.nativeElement ?? null;
+      const org = component.orgButton?.nativeElement ?? null;
+      const bill = component.billButton?.nativeElement ?? null;
+      const order = component.orderButton?.nativeElement ?? null;
       const revenue = component.revenueButton?.nativeElement ?? null;
 
       expect(revenue).toBeTruthy();
@@ -201,10 +208,14 @@ describe('UserProfileComponent', () => {
     el.className = 'one two';
 
     component.addClass(el as any, 'three');
-    expect(el.className.split(/\s+/)).toEqual(expect.arrayContaining(['one', 'two', 'three']));
+    expect(el.className.split(/\s+/)).toEqual(
+      expect.arrayContaining(['one', 'two', 'three'])
+    );
 
     component.removeClass(el as any, 'two');
-    expect(el.className.split(/\s+/)).toEqual(expect.arrayContaining(['one', 'three']));
+    expect(el.className.split(/\s+/)).toEqual(
+      expect.arrayContaining(['one', 'three'])
+    );
     expect(el.className.split(/\s+/)).not.toContain('two');
   });
 });

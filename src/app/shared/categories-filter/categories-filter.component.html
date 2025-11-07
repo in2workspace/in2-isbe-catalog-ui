@@ -1,4 +1,4 @@
-<h2 class="text-2xl dark:text-secondary-50 p-2">{{ 'CATEGORIES._categories' | translate }}</h2>
+<h2 class="text-2xl p-2">{{ 'CATEGORIES._categories' | translate }}</h2>
   <div id="accordion-collapse"  data-accordion="open" >
     @for(category of categories; track category.id; let idx = $index) {
     
@@ -27,7 +27,7 @@
       @if (category.children) {
         @if (category.children.length != 0) {
           <div [id]="'accordion-body-'+idx" class="hidden" [attr.aria-labelledby]="'accordion-heading-'+idx">
-            <div class="p-2 border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+            <div class="p-2 border border-gray-200">
                 <ul class="grid w-full gap-2">
                   @for(child of category.children; track child.id) {
                     <li>

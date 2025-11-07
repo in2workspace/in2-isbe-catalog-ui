@@ -170,8 +170,8 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
   getRowClass(prodId: string): string {
     return prodId === this.selectedProdSpecInternal?.id
-      ? "bg-white dark:bg-secondary-100"
-      : "bg-white dark:bg-secondary-300";
+      ? "bg-white"
+      : "bg-white";
   }
 
   private getDirtyFields(): string[] {

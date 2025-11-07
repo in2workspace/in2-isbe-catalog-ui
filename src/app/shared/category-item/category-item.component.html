@@ -27,7 +27,7 @@
       </h2>
 
       <div [id]="'accordion-body-'+simplifiedId" class="hidden" [attr.aria-labelledby]="'accordion-heading-'+simplifiedId">
-        <div class="p-2 border border-gray-200 dark:border-gray-700 dark:bg-gray-900">
+        <div class="p-2 border border-gray-200">
             <ul class="grid w-full gap-2">
               @for(child of data.children; track child.id) {
                 <li>

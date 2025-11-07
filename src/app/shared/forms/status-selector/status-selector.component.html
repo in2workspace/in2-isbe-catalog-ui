@@ -1,5 +1,5 @@
 <div class="mb-2 col-span-2">
-  <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-200 sm:text-base">
+  <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 sm:text-base">
     @for (status of statuses; track $index) {
       <li (click)="selectStatus(status)" [ngClass]="getStatusClasses(status)">
         <span class="flex items-center">

@@ -1,10 +1,10 @@
 @if (treatmentControl) {
-  <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'CREATE_OFFER._treatment' | translate }}</label>
+  <label for="prod-name" class="font-bold text-lg">{{ 'CREATE_OFFER._treatment' | translate }}</label>
   <input data-cy="treatment" id="prod-name" type="text" [formControl]="treatmentControl" maxLength="100"
-         class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"/>
+         class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"/>
 }
 
 @if (descControl) {
-  <label class="font-bold text-lg col-span-2 dark:text-white">{{ 'CREATE_OFFER._description' | translate }}</label>
+  <label class="font-bold text-lg col-span-2">{{ 'CREATE_OFFER._description' | translate }}</label>
   <app-markdown-textarea [formControl]="descControl"></app-markdown-textarea>
 }

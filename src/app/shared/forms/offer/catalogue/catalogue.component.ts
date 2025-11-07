@@ -117,8 +117,8 @@ export class CatalogueComponent implements ControlValueAccessor, OnInit, AfterVi
 
   getRowClass(catId: string): string {
     return catId === this.selectedCatalogInternal?.id
-      ? "bg-white dark:bg-secondary-100"
-      : "bg-white dark:bg-secondary-300";
+      ? "bg-white"
+      : "bg-white";
   }
 
 }
