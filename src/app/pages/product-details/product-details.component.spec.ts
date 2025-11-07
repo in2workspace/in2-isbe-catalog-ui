@@ -111,7 +111,7 @@ describe('ProductDetailsComponent', () => {
 
   it('hideModal should emit close and reset flags', () => {
     let emitted = false;
-    component.close.subscribe(() => emitted = true);
+    component.closeModal.subscribe(() => emitted = true);
     component.loadMoreCats = true;
     component.checkMoreCats = false;
     component.hideModal();
