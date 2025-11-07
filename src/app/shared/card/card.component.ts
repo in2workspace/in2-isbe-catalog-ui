@@ -33,13 +33,14 @@ import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { BadgeComponent } from '../badge/badge.component';
 import { PricePlanDrawerComponent } from '../price-plan-drawer/price-plan-drawer.component';
 import { AuthService } from 'src/app/guard/auth.service';
+import { ProductDetailsComponent } from 'src/app/pages/product-details/product-details.component';
 
 @Component({
     selector: 'bae-off-card',
     templateUrl: './card.component.html',
     styleUrl: './card.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, CartCardComponent, TranslateModule, NgClass, DatePipe, MarkdownComponent, FaIconComponent, BadgeComponent, PricePlanDrawerComponent]
+    imports: [ProductDetailsComponent, ErrorMessageComponent, CartCardComponent, TranslateModule, NgClass, DatePipe, MarkdownComponent, FaIconComponent, BadgeComponent, PricePlanDrawerComponent]
 })
 export class CardComponent implements OnInit, AfterViewInit {
 
@@ -78,7 +79,6 @@ export class CardComponent implements OnInit, AfterViewInit {
   protected readonly faEllipsis = faEllipsis;
   PURCHASE_ENABLED: boolean = environment.PURCHASE_ENABLED;
   checkMoreCats:boolean=false;
-  closeCats:boolean=false;
   loadMoreCats:boolean=false;
 
   errorMessage:any='';
@@ -157,7 +157,6 @@ export class CardComponent implements OnInit, AfterViewInit {
       if(this.productOff?.category.length>5){
         this.loadMoreCats=false;
         this.checkMoreCats=true;
-        this.closeCats=false;
       }
       this.cdr.detectChanges();
     }
@@ -200,10 +199,6 @@ export class CardComponent implements OnInit, AfterViewInit {
       this.api.getProductSpecification(specId).then(spec => {
         this.prodSpec = spec;
         this.getOwner();
-
-        if(this.prodSpec.productSpecCharacteristic != undefined) {
-          this.complianceLevel = this.api.getComplianceLevel(this.prodSpec);
-        }
       })
     }
 
@@ -233,20 +228,6 @@ export class CardComponent implements OnInit, AfterViewInit {
 
   getProductImage() {
     return this.images.length > 0 ? this.images?.at(0)?.url : 'https://placehold.co/600x400/svg';
-  }
-
-  loadMoreCategories(){
-    this.loadMoreCats=!this.loadMoreCats;
-    this.checkMoreCats=false;
-    this.closeCats=true;
-  }
-
-  closeCategories(){
-    this.closeCats=false;
-    this.checkMoreCats=true;
-    if(this.productOff?.category)
-    this.categories = this.productOff?.category.slice(0, 4);
-    this.loadMoreCats=!this.loadMoreCats;
   }
 
   ngAfterViewInit() {
@@ -403,16 +384,6 @@ async deleteProduct(product: Product | undefined){
     this.selected_price={};
     this.selected_terms=false;
     this.cdr.detectChanges();
-  }
-
-  hideModal() {
-    this.showModal=false;
-    this.loadMoreCats=false;
-    this.checkMoreCats=true;
-    this.cdr.detectChanges();
-    /*this.targetModal = document.getElementById('details-modal');
-    this.modal = new Modal(this.targetModal);
-    this.modal.hide();*/
   }
 
   goToProductDetails(productOff:Product| undefined) {

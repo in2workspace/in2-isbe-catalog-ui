@@ -299,35 +299,4 @@ export class ApiServiceService {
     return lastValueFrom(this.http.get<any>(url));
   }
 
-  getComplianceLevel(prodSpec: any) {
-    let level = 'NL';
-
-    if(prodSpec.productSpecCharacteristic != undefined) {
-      let vcProf = prodSpec.productSpecCharacteristic.find(((p:any) => {
-        return p.name === `Compliance:VC`
-      }));
-
-      if (vcProf) {
-        const vcToken: any = vcProf.productSpecCharacteristicValue?.at(0)?.value
-        const decoded = jwtDecode(vcToken)
-        let credential: any = null
-
-        if ('verifiableCredential' in decoded) {
-          credential = decoded.verifiableCredential;
-        } else if('vc' in decoded) {
-          credential = decoded.vc;
-        }
-
-        if (credential != null) {
-          const subject = credential.credentialSubject;
-
-          if ('gx:labelLevel' in subject) {
-            level = subject['gx:labelLevel'];
-          }
-        }
-      }
-    }
-
-    return level;
-  }
 }
