@@ -3,13 +3,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "GT Standard";
+  src: url("assets/fonts/GT-Standard-L-Standard-Regular-Trial.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "GT Standard";
+  src: url("assets/fonts/GT-Standard-L-Standard-Semibold-Trial.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "GT Standard";
+  src: url("assets/fonts/GT-Standard-L-Standard-Bold-Trial.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
 @layer base {
   html {
-    font-family: "Blinker", system-ui, sans-serif;
+    font-family: "GT Standard", system-ui, sans-serif;
   }
 }
 
-@import '@ctrl/ngx-emoji-mart/picker';
+@import "@ctrl/ngx-emoji-mart/picker";
 
 :root {
   /* Default light mode colors */
@@ -91,7 +118,6 @@ markdown h6 {
   font-size: 0.5em;
   margin-bottom: 0.5em;
 }
-
 
 markdown p {
   margin-bottom: 1em;
@@ -182,28 +208,28 @@ markdown a:hover {
   text-decoration: underline;
 }
 
-   :root {
-     fa-layers {
-       /*font-size: 1.5em;*/
+:root {
+  fa-layers {
+    /*font-size: 1.5em;*/
 
-       fa-layers-counter {
-         font-size: 2em;
-         position: absolute;
-         top: -0.1em;
-         right: -0.1em;
-       }
-     }
-   }
+    fa-layers-counter {
+      font-size: 2em;
+      position: absolute;
+      top: -0.1em;
+      right: -0.1em;
+    }
+  }
+}
 
 /* Autofill background configuration */
 :root {
-  --autofill-bg-light: #f0f0f0;  
-  --autofill-text-light: #000000; 
+  --autofill-bg-light: #f0f0f0;
+  --autofill-text-light: #000000;
 }
 
-[data-theme='dark'] {
-  --autofill-bg-dark: #182740;  
-  --autofill-text-dark: #ffffff; 
+[data-theme="dark"] {
+  --autofill-bg-dark: #182740;
+  --autofill-text-dark: #ffffff;
 }
 
 input:-webkit-autofill {
@@ -212,7 +238,7 @@ input:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
 }
 
-[data-theme='dark'] input:-webkit-autofill {
+[data-theme="dark"] input:-webkit-autofill {
   background-color: var(--autofill-bg-dark) !important;
   color: var(--autofill-text-dark) !important;
 }
@@ -227,7 +253,7 @@ textarea:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
 }
 
-[data-theme='dark'] textarea:-webkit-autofill {
+[data-theme="dark"] textarea:-webkit-autofill {
   background-color: var(--autofill-bg-dark) !important;
   color: var(--autofill-text-dark) !important;
 }
