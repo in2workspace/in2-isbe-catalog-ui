@@ -191,6 +191,16 @@ export class OfferComponent implements OnInit, OnDestroy{
       this.goToStep(index);
     }
   }
+
+  isStepActive(index: number): boolean {
+    return index <= this.currentStep;
+  }
+
+  getDividerClass(index: number): string {
+    return this.isStepActive(index)
+      ? 'border-solid opacity-100'
+      : 'border-dotted opacity-50';
+  }
   
 
   submitForm() {

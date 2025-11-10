@@ -1,18 +1,24 @@
-@if (nameControl) {
-  <label for="prod-name" class="font-bold text-lg">{{ 'CREATE_OFFER._name' | translate }}</label>
-  <input data-cy="offerName" id="prod-name" type="text" [formControl]="nameControl" maxLength="100"
-         class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"/>
-}
-@if (versionControl) {
-  <label for="prod-version" class="font-bold text-lg">{{ 'CREATE_OFFER._version' | translate }}</label>
-  <input data-cy="offerVersion" id="prod-version" type="text" [formControl]="versionControl"
-         class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5"/>
-}
+<div class="grid grid-cols-2 gap-4">
+  @if (nameControl) {
+  <div class="col">
+    <label for="prod-name" class=" text-sm">{{ 'CREATE_OFFER._name' | translate }}</label>
+    <input data-cy="offerName" id="prod-name" type="text" [formControl]="nameControl" maxLength="100"
+      class="mb-2  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5" />
+  </div>
+  }
+  @if (versionControl) {
+  <div class="col">
+    <label for="prod-version" class=" text-sm">{{ 'CREATE_OFFER._version' | translate }}</label>
+    <input data-cy="offerVersion" id="prod-version" type="text" [formControl]="versionControl"
+      class="mb-2  border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5" />
+  </div>
+  }
+</div>
 @if (statusControl && formType === 'update') {
-  <label class="font-bold text-lg col-span-2">{{ 'CREATE_OFFER._status' | translate }}</label>
-  <app-status-selector [formControl]="statusControl"></app-status-selector>
+<label class=" text-sm col-span-2">{{ 'CREATE_OFFER._status' | translate }}</label>
+<app-status-selector [formControl]="statusControl"></app-status-selector>
 }
 @if (descControl) {
-  <label class="font-bold text-lg col-span-2">{{ 'CREATE_OFFER._description' | translate }}</label>
-  <app-markdown-textarea [formControl]="descControl"></app-markdown-textarea>
+<label class=" text-sm col-span-2">{{ 'CREATE_OFFER._description' | translate }}</label>
+<app-markdown-textarea [formControl]="descControl"></app-markdown-textarea>
 }
