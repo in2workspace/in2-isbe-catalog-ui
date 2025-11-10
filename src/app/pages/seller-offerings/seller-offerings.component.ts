@@ -15,6 +15,7 @@ import { ErrorMessageComponent } from 'src/app/shared/error-message/error-messag
 import { take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 import { environment } from 'src/environments/environment';
+import { HeaderBannerComponent } from 'src/app/shared/header/header-banner/header-banner.component';
 
 @Component({
   selector: 'app-seller-offerings',
@@ -22,7 +23,7 @@ import { environment } from 'src/environments/environment';
   styleUrl: './seller-offerings.component.css',
   standalone: true,
   imports: [
-    FeedbackModalComponent,
+    HeaderBannerComponent ,FeedbackModalComponent,
     UpdateCatalogComponent,
     UpdateOfferComponent,
     UpdateProductSpecComponent,

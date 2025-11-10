@@ -16,7 +16,8 @@
 </div>
 @if (statusControl && formType === 'update') {
 <label class=" text-sm col-span-2">{{ 'CREATE_OFFER._status' | translate }}</label>
-<app-status-selector [formControl]="statusControl"></app-status-selector>
+<app-status-selector [modelType]="'offering'" [allowLaunched]="isAdmin" [anchor]="statusAnchor" [formControl]="statusControl"></app-status-selector>
+
 }
 @if (descControl) {
 <label class=" text-sm col-span-2">{{ 'CREATE_OFFER._description' | translate }}</label>

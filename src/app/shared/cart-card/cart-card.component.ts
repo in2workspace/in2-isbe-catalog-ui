@@ -1,19 +1,15 @@
-import { Component, Input, OnInit, ElementRef, ViewChild,ChangeDetectorRef, HostListener } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ApiServiceService } from 'src/app/services/product-service.service';
+import { Component, Input, OnInit, ChangeDetectorRef, HostListener, inject } from '@angular/core';
 import {components} from "../../models/product-catalog";
-import { PriceServiceService } from 'src/app/services/price-service.service';
 type Product = components["schemas"]["ProductOffering"];
-type ProductSpecification = components["schemas"]["ProductSpecification"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { LoginInfo, cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
+import { cartProduct,productSpecCharacteristicValueCart } from '../../models/interfaces';
 import { ShoppingCartServiceService } from 'src/app/services/shopping-cart-service.service';
 import {EventMessageService} from "../../services/event-message.service";
 import { ErrorMessageComponent } from '../error-message/error-message.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 
 @Component({
     selector: 'cart-card',
@@ -36,22 +32,17 @@ export class CartCardComponent implements OnInit {
   selected_chars:productSpecCharacteristicValueCart[]=[];
   formattedPrices:any[]=[];
   lastAddedProd:cartProduct | undefined;
+  
 
   errorMessage:any='';
   showError:boolean=false;
 
-  constructor(
-    private cdr: ChangeDetectorRef,
-    private route: ActivatedRoute,
-    private api: ApiServiceService,
-    private priceService: PriceServiceService,
-    private router: Router,
-    private elementRef: ElementRef,
-    private localStorage: LocalStorageService,
-    private cartService: ShoppingCartServiceService,
-    private eventMessage: EventMessageService,
-  ) {
-  }
+  
+  private readonly attachmentService= inject(AttachmentServiceService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly cartService = inject( ShoppingCartServiceService);
+  private readonly eventMessage= inject(EventMessageService);
+
 
   @HostListener('document:click')
   onClick() {
@@ -129,7 +120,7 @@ export class CartCardComponent implements OnInit {
     return {
       id: productOff.id,
       name: productOff.name,
-      image: this.getProductImage(),
+      image: this.attachmentService.getProductImage(this.images),
       href: productOff.href,
       options: {
         characteristics: this.selected_chars,
@@ -168,10 +159,6 @@ export class CartCardComponent implements OnInit {
     this.selected_price={};
     this.selected_terms=false;
     this.cdr.detectChanges();
-  }
-
-  getProductImage() {
-    return this.images.length > 0 ? this.images?.at(0)?.url : 'https://placehold.co/600x400/svg';
   }
 
   onPriceChange(price:any){

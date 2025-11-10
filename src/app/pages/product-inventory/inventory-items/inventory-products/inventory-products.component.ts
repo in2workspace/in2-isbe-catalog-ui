@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, HostListener, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, HostListener, Input, inject } from '@angular/core';
 import { LoginInfo } from 'src/app/models/interfaces';
 import { ProductInventoryServiceService } from 'src/app/services/product-inventory-service.service';
 import { ApiServiceService } from 'src/app/services/product-service.service';
@@ -21,6 +21,7 @@ import { BadgeComponent } from 'src/app/shared/badge/badge.component';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
+import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
 @Component({
     selector: 'inventory-products',
     templateUrl: './inventory-products.component.html',
@@ -63,17 +64,18 @@ export class InventoryProductsComponent implements OnInit {
   showError:boolean=false;
   showDetails:boolean=false;
   checkCustom:boolean=false;
-  checkFrom:boolean=true;
+  checkFrom:boolean=true;  
+  
+  private readonly attachmentService = inject(AttachmentServiceService);
+  private readonly auth = inject(AuthService);
+  private readonly cdr = inject(ChangeDetectorRef);
+  private readonly api = inject( ApiServiceService);
+  private readonly inventoryService = inject(ProductInventoryServiceService);
+  private readonly router= inject(Router);
+  private readonly eventMessage= inject(EventMessageService);
+  private readonly paginationService= inject(PaginationService);
 
-  constructor(
-    private readonly inventoryService: ProductInventoryServiceService,
-    private readonly auth: AuthService,
-    private readonly api: ApiServiceService,
-    private readonly cdr: ChangeDetectorRef,
-    private readonly router: Router,
-    private readonly eventMessage: EventMessageService,
-    private readonly paginationService: PaginationService
-  ) {
+  constructor() {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
         this.initInventory();
@@ -130,7 +132,7 @@ export class InventoryProductsComponent implements OnInit {
         images = profile;
       } 
     }
-    return images.length > 0 ? images?.at(0)?.url : 'https://placehold.co/600x400/svg';
+    return this.attachmentService.getProductImage(images);
   }
 
   goToProductDetails(productOff:ProductOffering| undefined) {

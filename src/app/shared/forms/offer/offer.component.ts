@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, OnDestroy} from '@angular/core';
+import {Component, Input, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {GeneralInfoComponent} from "./general-info/general-info.component";
 import {TranslateModule} from "@ngx-translate/core";
@@ -19,6 +19,9 @@ import {FormChangeState, PricePlanChangeState} from "../../../models/interfaces"
 import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { environment } from 'src/environments/environment';
+import { ErrorMessageComponent } from '../../error-message/error-message.component';
+import { ReminderMessageComponent } from '../../reminder-message/reminder-message.component';
+import { hasNonStatusChanges } from '../../lifecycle-status/lifecycle-status';
 
 type ProductOffering_Create = components["schemas"]["ProductOffering_Create"];
 type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
@@ -38,7 +41,9 @@ type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
     ProcurementModeComponent,
     ReplicationVisibilityComponent,
     OfferSummaryComponent,
-    NgClass
+    NgClass,
+    ErrorMessageComponent,
+    ReminderMessageComponent
   ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css'
@@ -48,6 +53,7 @@ export class OfferComponent implements OnInit, OnDestroy{
   @Input() formType: 'create' | 'update' = 'create';
   @Input() offer: any = {};
   @Input() seller: any;
+  @Input() isAdmin: boolean;
 
   productOfferForm: FormGroup;
   currentStep = 0;
@@ -59,6 +65,9 @@ export class OfferComponent implements OnInit, OnDestroy{
   pricePlans:any = [];
   errorMessage:any='';
   showError:boolean=false;
+  showReminder:boolean=false;
+  edited:boolean=false;
+  reminderTimer: any = null;
   bundleChecked:boolean=false;
   offersBundle:any[]=[];
   loadingData:boolean=false;
@@ -73,7 +82,8 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   constructor(private readonly api: ApiServiceService,
               private readonly eventMessage: EventMessageService,
-              private readonly fb: FormBuilder) {
+              private readonly fb: FormBuilder,
+              private readonly cdr: ChangeDetectorRef,) {
 
     if (this.IS_ISBE) {
       this.steps = [
@@ -126,6 +136,65 @@ export class OfferComponent implements OnInit, OnDestroy{
     });
   }
 
+  private normalizeIdArray(arr: any[], key: string = 'id'): string[] {
+    return Array.isArray(arr) ? arr
+          .map(x => x?.[key])
+          .filter(Boolean)
+          .sort((a, b) => {
+            const numA = Number(a);
+            const numB = Number(b);
+            if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+            return String(a).localeCompare(String(b));
+          })
+      : [];
+  }
+
+
+  private normalizeTerms(terms: any[]): Array<{name: string; description: string}> {
+    const list = Array.isArray(terms) ? terms : [];
+    return list
+      .map(t => ({ name: (t?.name ?? '').trim(), description: (t?.description ?? '').trim() }))
+      .filter(t => t.name || t.description)
+      .sort((a, b) => (a.name + a.description).localeCompare(b.name + b.description));
+  }
+
+  private buildFormTerms(v: any): Array<{name: string; description: string}> {
+    const out: any[] = [];
+    const ln = v?.license?.treatment ?? '';
+    const ld = v?.license?.description ?? '';
+    out.push({ name: ln, description: ld });
+
+    const procurement = v?.procurementMode?.mode ?? v?.procurementMode?.id ?? '';
+    if (procurement) out.push({ name: 'procurement', description: procurement });
+
+    return this.normalizeTerms(out);
+  }
+
+  private buildSnapshot(source: 'offer' | 'form') {
+    if (source === 'offer') {
+      const o = this.offer ?? {};
+      return {
+        name: o.name ?? '',
+        description: o.description ?? '',
+        version: o.version ?? '',
+        productSpecification: o.productSpecification?.id ?? null,
+        category: this.normalizeIdArray(o.category),
+        prices: this.normalizeIdArray(o.productOfferingPrice),
+        terms: this.normalizeTerms(o.productOfferingTerm)
+      };
+    }
+    const v = this.productOfferForm.getRawValue?.() ?? this.productOfferForm.value;
+    return {
+      name: v?.generalInfo?.name ?? '',
+      description: v?.generalInfo?.description ?? '',
+      version: v?.generalInfo?.version ?? '',
+      productSpecification: v?.prodSpec?.id ?? null,
+      category: this.normalizeIdArray(v?.category ?? []),
+      prices: this.normalizeIdArray(v?.pricePlans ?? []),
+      terms: this.buildFormTerms(v)
+    };
+  }
+
   handleSubformChange(change: FormChangeState) {
     this.formChanges[change.subformType] = change;
     this.hasChanges = Object.keys(this.formChanges).length > 0;
@@ -138,58 +207,63 @@ export class OfferComponent implements OnInit, OnDestroy{
   }
 
   goToStep(index: number) {
-    // Solo validar en modo creación
+    // Validación de navegación en creación
     if (this.formType === 'create' && index > this.currentStep) {
-      // Validar el paso actual
-      const currentStepValid = this.validateCurrentStep();
-      if (!currentStepValid) {
-        return; // No permitir avanzar si el paso actual no es válido
-      }
+      if (!this.validateCurrentStep()) return;
     }
-    
+
     this.currentStep = index;
-    if(this.currentStep>this.highestStep){
-      this.highestStep=this.currentStep
+    if (this.currentStep > this.highestStep) this.highestStep = this.currentStep;
+
+    // Mostrar reminder en Summary si procede
+    const isSummary = this.steps[this.currentStep] === 'CREATE_OFFER._summary';
+    if (isSummary && this.formType === 'update' && this.offer?.lifecycleStatus === 'Launched') {
+      this.edited = hasNonStatusChanges(this.buildSnapshot('offer'),this.buildSnapshot('form'));
+      if (this.edited && this.productOfferForm.get('generalInfo')?.value?.status === 'Launched') {
+        this.showReminder = true;
+        setTimeout(() => {
+          this.showReminder = false;
+          this.cdr.detectChanges();
+        }, 3000);
+      }
     }
   }
 
   validateCurrentStep(): boolean {
     const stepName = this.steps[this.currentStep];
     switch (stepName) {
-      case 'General Info':
+      case "CREATE_OFFER._general":
         return this.productOfferForm.get('generalInfo')?.valid || false;
-      case 'Product Specification':
+      case 'CREATE_OFFER._prod_spec':
         return !!this.productOfferForm.get('prodSpec')?.value;
-      case 'Catalogue':
+      case 'CREATE_OFFER._catalog':
         return !!this.productOfferForm.get('catalogue')?.value;
-      case 'Category':
+      case 'CREATE_OFFER._category':
         return true;
-      case 'License':
+      case 'CREATE_OFFER._license':
         return this.productOfferForm.get('license')?.valid || false;
-      case 'Price Plans':
+      case 'CREATE_OFFER._price_plans':
         return true;
-      case 'Procurement Mode':
+      case 'CREATE_OFFER._procurement':
         return this.productOfferForm.get('procurementMode')?.valid || false;
-      case 'Summary':
+      case 'CREATE_OFFER._summary':
         return true;
       default:
         return true;
     }
   }
 
-
   canNavigate(index: number) {
-    if(this.formType == 'create'){
-      return (this.productOfferForm.get('generalInfo')?.valid &&  (index <= this.currentStep)) || (this.productOfferForm.get('generalInfo')?.valid &&  (index <= this.highestStep));
+    if (this.formType == 'create') {
+      return (this.productOfferForm.get('generalInfo')?.valid &&  (index <= this.currentStep)) ||
+             (this.productOfferForm.get('generalInfo')?.valid &&  (index <= this.highestStep));
     } else {
       return this.productOfferForm.get('generalInfo')?.valid
     }
-  }  
+  }
 
   handleStepClick(index: number): void {
-    if (this.canNavigate(index)) {
-      this.goToStep(index);
-    }
+    if (this.canNavigate(index)) this.goToStep(index);
   }
 
   isStepActive(index: number): boolean {
@@ -205,19 +279,16 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   submitForm() {
     if (this.formType === 'update') {
-      this.eventMessage.emitUpdateOffer(true);      
-      // Aquí irá la lógica de actualización
-      // Por ahora solo mostramos los cambios
+      this.eventMessage.emitUpdateOffer(true);
       this.updateOffer();
     } else {
-      // Lógica de creación existente
       this.createOffer();
     }
   }
 
   async ngOnInit() {
     if (this.formType === 'update' && this.offer) {
-      this.loadingData=true;
+      this.loadingData = true;
       if (this.IS_ISBE) {
         this.steps = [
           'CREATE_OFFER._general',
@@ -226,7 +297,6 @@ export class OfferComponent implements OnInit, OnDestroy{
           'CREATE_OFFER._price_plans',
           'CREATE_OFFER._summary'
         ];
-        
       } else {
         this.steps = [
           'CREATE_OFFER._general',
@@ -236,14 +306,12 @@ export class OfferComponent implements OnInit, OnDestroy{
           'CREATE_OFFER._price_plans',
           'CREATE_OFFER._summary'
         ];
-        
       }
-      
       await this.loadOfferData();
-      this.loadingData=false;
+      this.loadingData = false;
     }
-
   }
+
   async loadOfferData() {
     // Product Specification
     if (this.offer.productSpecification) {
@@ -832,8 +900,8 @@ export class OfferComponent implements OnInit, OnDestroy{
     const generalInfo = v?.generalInfo ?? {};
     const lifecycleStatus =
       this.formType === 'update'
-        ? generalInfo?.status ?? this.offer?.lifecycleStatus ?? 'Active'
-        : 'Active';
+        ? generalInfo?.status ?? this.offer?.lifecycleStatus ?? 'In design'
+        : 'In design';
 
     const terms: any[] = [];
 
@@ -1087,7 +1155,6 @@ export class OfferComponent implements OnInit, OnDestroy{
     }
 
     try {
-      // Llamar a la API para actualizar la oferta
       await lastValueFrom(this.api.updateProductOffering(basePayload, this.offer.id));
       this.goBack();
     } catch (error: any) {
@@ -1107,6 +1174,28 @@ export class OfferComponent implements OnInit, OnDestroy{
       'CREATE_OFFER._summary': 'Summary'
     };
     return mapping[step];
+  }
+
+  isOfferValid(): boolean {
+    if (!this.productOfferForm.controls['generalInfo']?.valid) {
+      return false;
+    }
+
+    if (this.formType === 'create') {
+      return true;
+    }
+
+    const currentStatus = this.productOfferForm.get('generalInfo')?.value?.status;
+    const originalStatus = this.offer?.lifecycleStatus;
+    const edited = hasNonStatusChanges(
+      this.buildSnapshot('offer'),
+      this.buildSnapshot('form')
+    );
+    if (originalStatus === 'Launched' && edited && currentStatus !== 'Active') {
+      return false;
+    }
+
+    return true;
   }
 
 }

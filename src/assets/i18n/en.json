@@ -203,7 +203,9 @@
         "_about": "About",
         "_verify": "Publish your offering",
         "_info": "Info",
-        "_orders": "Product Orders"
+        "_orders": "Product Orders",
+        "_banner_message": "Remember that you will not be able to publish your use case until it is deployed and validated in ISBE. More information ",
+        "_here": " here."
     },
     "PRODUCT_DETAILS": {
         "_back": "Back",
@@ -354,7 +356,7 @@
         "_bill": "Billing address",
         "_inventory": "Inventory",
         "_feasibility": "Feasibility Checked",
-        "_designed": "Designed",
+        "_in_designed": "Designed",
         "_reserved": "Reserved",
         "_inactive": "Inactive",
         "_active": "Active",
@@ -955,6 +957,7 @@
         "_order_by": "Order by...",
         "_last_update": "Last update",
         "_name": "Name",
+        "_in_design": "In design",
         "_active": "Active",
         "_launched": "Launched",
         "_retired": "Retired",
@@ -989,6 +992,7 @@
         "_order_by": "Order by...",
         "_last_update": "Last update",
         "_name": "Name",
+        "_in_design": "In design",
         "_active": "Active",
         "_launched": "Launched",
         "_retired": "Retired",
@@ -1516,5 +1520,8 @@
     "_SEPARATED": "Separated",
     "_SINGLE": "Single",
     "_WIDOWED": "Widowed"
+  },
+  "REMINDER": {
+    "_message": "You have modified object information. You must reset the status to Active before saving"
   }
 }
