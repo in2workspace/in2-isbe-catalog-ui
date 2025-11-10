@@ -40,6 +40,7 @@ export class GalleryComponent implements OnInit {
   searchField = new FormControl();
   showPanel = false;
   feedback:boolean=false;
+  isFilterPanelShown = false;
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
@@ -55,10 +56,11 @@ export class GalleryComponent implements OnInit {
       if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
         this.checkPanel();
       }
-    });
-    this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'CloseFeedback') {
         this.feedback = false;
+      }
+      if(ev.type === 'FilterShown') {
+        this.isFilterPanelShown = ev.value as boolean;
       }
     });
   }

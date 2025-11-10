@@ -42,9 +42,7 @@ export class DashboardComponent implements OnInit {
               private readonly api: ApiServiceService,
               private readonly cdr: ChangeDetectorRef) {
     this.eventMessage.messages$.subscribe(ev => {
-      if(ev.type === 'FilterShown') {
-        this.isFilterPanelShown = ev.value as boolean;
-      }
+      
       if(ev.type == 'CloseContact'){
         this.showContact=false;
         this.cdr.detectChanges();
