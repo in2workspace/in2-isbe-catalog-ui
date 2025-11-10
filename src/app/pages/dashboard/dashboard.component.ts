@@ -1,3 +1,4 @@
+
 import {Component, HostListener, OnInit, ChangeDetectorRef} from '@angular/core';
 import {EventMessageService} from "../../services/event-message.service";
 import {LocalStorageService} from "../../services/local-storage.service";
@@ -111,10 +112,6 @@ export class DashboardComponent implements OnInit {
     } else {
       this.router.navigate(['/search']);
     }  
-  }
-
-  goTo(path:string) {
-    this.router.navigate([path]);
   }
   
 }
