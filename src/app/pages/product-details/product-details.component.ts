@@ -107,8 +107,12 @@ export class ProductDetailsComponent implements OnInit {
     this.checkMoreCats=true;
   }
 
-  getProductImage() {
+  /*getProductImage() {
     return this.attachmentService.getProductImage(this.images);
+  }*/
+
+  getProductImage() {
+    return this.images.length > 0 ? this.images?.at(0)?.url : 'https://placehold.co/600x400/svg';
   }
 
 }

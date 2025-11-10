@@ -45,7 +45,7 @@
 <app-price-plan-drawer [drawerId]="'drawer-product'" [productOff]="productOff" [prodSpec]="prodSpec"
   [isOpen]="isDrawerOpen" [width]="'w-2/3'" (closeDrawer)="closeDrawer()"></app-price-plan-drawer> <!-- Main modal -->
 @if (showModal){
-<app-product-details></app-product-details>
+  <app-product-details [productOff]="productOff" (closeModal)="showModal = false"></app-product-details>
 } <!-- ADD TO CART TOAST -->
 @if (toastVisibility) {
 <div id="toast-add-cart"
