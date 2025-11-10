@@ -121,10 +121,11 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
   getStatusClass(status: string): string {
     const statusClasses: Record<string, string> = {
+      "{{ 'ADMIN._in_design' | translate }}": "text-purple-600 border-purple-400",
       "{{ 'ADMIN._active' | translate }}": "text-purple-600 border-purple-400",
-      "Launched": "text-green-500 border-green-500",
-      "Retired": "text-yellow-500 border-yellow-500",
-      "Obsolete": "text-red-500 border-red-500"
+      "{{ 'ADMIN._launched' | translate }}": "text-green-500 border-green-500",
+      "{{ 'ADMIN._retired' | translate }}": "text-yellow-500 border-yellow-500",
+      "{{ 'ADMIN._obsolete' | translate }}": "text-red-500 border-red-500"
     };
     return statusClasses[status] || "text-gray-500 border-gray-400";
   }

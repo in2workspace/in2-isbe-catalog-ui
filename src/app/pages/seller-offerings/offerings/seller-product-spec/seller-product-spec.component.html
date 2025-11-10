@@ -32,6 +32,11 @@
         <div id="dropdown" class="z-20 hidden w-fit md:w-1/5 p-3 bg-white rounded-lg ">
           <h6 class="mb-3 text-sm font-medium text-gray-900"> {{ 'OFFERINGS._status' | translate }} </h6>
           <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+            <li class="flex items-center"> <input id="in-design" type="checkbox" value=""
+                (change)="onStateFilterChange('In design')"
+                class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" /> <label
+                for="in-design" class="ml-2 text-sm font-medium text-gray-900"> {{ 'OFFERINGS._in_design' | translate }}
+              </label> </li>
             <li class="flex items-center"> <input id="active" type="checkbox" value=""
                 (change)="onStateFilterChange('Active')"
                 class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" /> <label
@@ -80,7 +85,9 @@
               </thead>
               <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b hover:bg-gray-200">
                   <td class="px-6 py-4 text-wrap break-all"> {{prod.name}} </td>
-                  <td class="px-6 py-4"> @if(prod.lifecycleStatus == 'Active'){ <span
+                  <td class="px-6 py-4"> @if(prod.lifecycleStatus == 'In design'){ <span
+                      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+                      'ADMIN._in_design' | translate }}</span> } @else if(prod.lifecycleStatus == 'Active'){ <span
                       class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                       'ADMIN._active' | translate }}</span> } @else if(prod.lifecycleStatus == 'Launched') { <span
                       class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{

@@ -176,7 +176,9 @@
             </thead>
             <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b hover:bg-gray-200">
                 <td class="px-6 py-4 text-wrap break-all"> {{prod.name}} </td>
-                <td class="hidden md:table-cell px-6 py-4"> @if(prod.lifecycleStatus == 'Active'){ <span
+                <td class="hidden md:table-cell px-6 py-4"> @if(prod.lifecycleStatus == 'In design'){ <span
+                    class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+                    'ADMIN._in_design' | translate }}</span> } @else if(prod.lifecycleStatus == 'Active'){ <span
                     class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._active' | translate }}</span> } @else if(prod.lifecycleStatus == 'Launched') { <span
                     class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
@@ -820,7 +822,9 @@
                 {{productSpecToUpdate?.productNumber}} </label> } </div>
           </div>
           <div class="mb-4"> <label class="font-bold text-lg mr-4">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
-            @if(productSpecToUpdate?.lifecycleStatus == 'Active'){ <span
+            @if(productSpecToUpdate?.lifecycleStatus == 'In design'){ <span
+              class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+              'ADMIN._in_design' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Active'){ <span
               class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._active' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Launched') {
             <span class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
@@ -852,7 +856,9 @@
               </thead>
               <tbody> @for (bun of prodSpecsBundle; track bun) { <tr class="border-b hover:bg-gray-200">
                   <td class="px-6 py-4 text-wrap break-all"> {{bun.name}} </td>
-                  <td class="px-6 py-4"> @if(bun.lifecycleStatus == 'Active'){ <span
+                  <td class="px-6 py-4"> @if(bun.lifecycleStatus == 'In design'){ <span
+                      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+                      'ADMIN._in_design' | translate }}</span> }@if(bun.lifecycleStatus == 'Active'){ <span
                       class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                       'ADMIN._active' | translate }}</span> } @else if(bun.lifecycleStatus == 'Launched') { <span
                       class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{

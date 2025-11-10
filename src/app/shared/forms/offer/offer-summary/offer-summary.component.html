@@ -8,7 +8,9 @@
         {{ productOfferForm.get('generalInfo.version')?.value }} </label> </div>
   </div>
   <div class="mb-4"> <label class="font-bold text-lg mr-4">{{ 'CREATE_OFFER._status' | translate }}</label>
-    @if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Active'){ <span
+    @if(productOfferForm.get('generalInfo')?.get('status')?.value == 'In design'){ <span
+      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+      'ADMIN._in_design' | translate }}</span> }@else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Active'){ <span
       class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
       'ADMIN._active' | translate }}</span> } @else if(productOfferForm.get('generalInfo')?.get('status')?.value ==
     'Launched') { <span class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{

@@ -48,8 +48,23 @@
         <td class="px-6 py-4"> <span class="text-xs font-medium px-2.5 py-0.5 rounded border"
             [ngClass]="getBundleClass(prod.isBundle)"> {{ prod.isBundle ? ('OFFERINGS._bundle' | translate) :
             ('OFFERINGS._simple' | translate) }} </span></td>
-        <td class="px-6 py-4"> <span class="text-xs font-medium px-2.5 py-0.5 rounded border"
-            [ngClass]="getStatusClass(prod.lifecycleStatus)"> {{ prod.lifecycleStatus }} </span> </td>
+        <td class="px-6 py-4"> 
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded border" [ngClass]="getStatusClass(prod.lifecycleStatus)">
+            @if(prod.lifecycleStatus == 'In design'){
+                {{ 'ADMIN._in_design' | translate }}
+            }
+            @else if(prod.lifecycleStatus == 'Active'){
+                {{ 'ADMIN._active' | translate }}
+            } @else if(prod.lifecycleStatus == 'Launched') {
+                {{ 'ADMIN._launched' | translate }}
+            } @else if(prod.lifecycleStatus == 'Retired') {
+                {{ 'ADMIN._retired' | translate }}
+            } @else if(prod.lifecycleStatus == 'Obsolete') {
+                {{ 'ADMIN._obsolete' | translate }}
+            }
+        
+          </span> 
+        </td>
         <td class="hidden md:table-cell px-6 py-4"> {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} </td>
       </tr> } </tbody>
   </table>

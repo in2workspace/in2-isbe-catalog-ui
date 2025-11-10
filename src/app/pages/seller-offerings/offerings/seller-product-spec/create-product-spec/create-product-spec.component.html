@@ -181,7 +181,9 @@
             </thead>
             <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b hover:bg-gray-200">
                 <td class="px-6 py-4 text-wrap break-all"> {{prod.name}} </td>
-                <td class="hidden md:table-cell px-6 py-4"> @if(prod.lifecycleStatus == 'Active'){ <span
+                <td class="hidden md:table-cell px-6 py-4"> @if(prod.lifecycleStatus == 'In design'){ <span
+                    class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+                    'ADMIN._in_design' | translate }}</span> }@else if(prod.lifecycleStatus == 'Active'){ <span
                     class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
                     'ADMIN._active' | translate }}</span> } @else if(prod.lifecycleStatus == 'Launched') { <span
                     class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{

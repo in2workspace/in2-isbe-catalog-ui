@@ -112,7 +112,9 @@
               class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5">
               {{categoryToCreate?.name}} </label> </div>
           <div class="mb-4"> <label class="font-bold text-lg mr-4">{{ 'CREATE_CATEGORIES._status' | translate }}</label>
-            @if(categoryToCreate?.lifecycleStatus == 'Active'){ <span
+              @if(categoryToCreate?.lifecycleStatus == 'In design'){ <span
+              class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+              'ADMIN._in_design' | translate }}</span> }@else if(categoryToCreate?.lifecycleStatus == 'Active'){ <span
               class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._active' | translate }}</span> } @else if(categoryToCreate?.lifecycleStatus == 'Launched') { <span
               class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
