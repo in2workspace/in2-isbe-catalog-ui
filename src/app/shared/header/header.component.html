@@ -1,1 +1,211 @@
-<div class="relative"> <div id="pre-header" class="flex flex-wrap items-center justify-start gap-5 mx-auto py-4 px-8 bg-primary-100 "> <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" /> <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" /> <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" /> </div> <nav class="text-white border-gray-200 bg-primary-100 "> <div class="flex flex-wrap items-center justify-between mx-auto py-4 px-8"> <a (click)="goTo('/dashboard')" class="flex items-center align-items-middle cursor-pointer"> <img src="assets/logos/ISBE_logo_black_name.svg" class="h-10 lg:h-12" alt="ISBE Catalog Logo" /> </a> <div class="hidden w-full lg:block lg:w-auto lg:ml-auto bg-primary-100 rounded-lg align-items-middle"> <ul class="flex flex-col font-medium p-4 lg:p-0 rounded-lg lg:text-white lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0"> <li> <a data-cy="publishOffering" (click)="openDropdown('verifyDropdownMenu')" id="verifyDropdown" data-dropdown-toggle="verifyDropdownMenu" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0" aria-current="page">{{ 'HEADER._verify' | translate }}</a> </li> <!-- Dropdown menu --> <div id="verifyDropdownMenu" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg w-44"> <ul class="py-2 text-sm text-gray-700 " aria-labelledby="verifyDropdown"> <li> <a id="guidelines" href="{{knowledge_onboarding}}" (click)="closeDropdown('verifyDropdownMenu')" target="_blank" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> {{ 'HEADER._guidelines' | translate }} </a> </li> <li> <a id="registrationForm" href="{{registration}}" target="_blank" (click)="closeDropdown('verifyDropdownMenu')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> {{ 'HEADER._registration' | translate }} </a> </li> <li> <a id="guidelinesToPublish" href="{{knowledge_guidelines}}" target="_blank" (click)="closeDropdown('verifyDropdownMenu')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> {{ 'HEADER._guideline_publish' | translate }} </a> </li> </ul> </div> <li data-cy="browse"> <a id="searchDropdown" (click)="openDropdown('searchDropdownMenu')" data-dropdown-toggle="searchDropdownMenu" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._browse' | translate }}</a> </li> <!-- Dropdown menu --> <div id="searchDropdownMenu" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg w-44"> <ul class="py-2 text-sm text-gray-700 " aria-labelledby="searchDropdown"> <li> <button id="searchServices" (click)="goTo('/search'); closeDropdown('searchDropdownMenu')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> {{ 'HEADER._services' | translate }} </button> </li> @if(!IS_ISBE){ <li> <button id="searchCatalogues" (click)="goTo('/catalogues'); closeDropdown('searchDropdownMenu')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> {{ 'HEADER._catalogs' | translate }} </button> </li> } </ul> </div> <li data-cy="about" id="aboutDome"> <a href="{{isbeAbout}}" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._about' | translate }}</a> </li> <li> <a href="{{isbeRegister}}" class="sm:block lg:hidden cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._register' | translate }}</a> </li> <li> <a (click)="onLoginClick()" class="sm:block lg:hidden cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">Login</a> </li> </ul> </div> <div class="flex flex-cols"> <div class="flex flex-cols"> <a data-cy="knowledge" id="knowledgeBase" href="{{ knowledge }}" target="_blank" class="w-10 mr-2 hidden lg:block text-white hover:bg-white hover:text-primary-100 rounded-lg text-xl p-2.5"> <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /> </svg> </a> @if(!IS_ISBE){ <button data-cy="darkMode" id="theme-toggle" (click)="toggleDarkMode()" type="button" class="w-10 mr-2 text-white hover:bg-white hover:text-primary-100 rounded-lg text-xl p-2.5"> <svg data-cy="sunSVG" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" #theme_toggle_dark_icon> <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> </svg> <svg data-cy="moonSVG" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" #theme_toggle_light_icon> <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path> </svg> </button> } </div> @if (is_logged) { <div data-cy="loggedAcc" id="loggedAcc" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end" class="relative mr-2 inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full cursor-pointer"> <span class="font-medium text-gray-600 ">{{ usercharacters }}</span> </div> } @else { <a data-cy="registerAcc" id="register" [href]="isbeRegister" target="_blank" class="hidden lg:block w-full mr-2 text-white hover:bg-white hover:text-primary-100 rounded-lg text-sm p-2.5 text-center"> {{ 'HEADER._register' | translate }} </a> <button data-cy="login" id="login" (click)="onLoginClick()" type="button" class="w-full mr-2 text-white hover:bg-white hover:text-primary-100 rounded-lg text-sm p-2.5"> Login </button> } <button #navbarbutton type="button" (click)="toggleNavBar();$event.stopPropagation();" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-dropdown" aria-expanded="false"> <span class="sr-only">{{ 'HEADER._open_menu' | translate }}</span> <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" /> </svg> </button> </div> @if(isNavBarOpen){ <div class="w-full bg-primary-100 rounded-lg" id="navbar-dropdown"> <ul class="flex flex-col font-medium p-4 lg:p-0 rounded-lg lg:text-white lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0"> <li> <a (click)="goTo('/search')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._services' | translate }}</a> </li> <li> <a (click)="goTo('/catalogues')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._catalogs' | translate }}</a> </li> <li> <a (click)="goTo('/about')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._about' | translate }}</a> </li> <li> <a href="{{domePublish}}" target="_blank" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 ">{{ 'HEADER._publish' | translate }}</a> </li> <li> <a href="{{ knowledge }}" target="_blank" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 ">{{ 'HEADER._info' | translate }}</a> </li> @if (!is_logged) { <li> <a href="{{isbeRegister}}" target="_blank" type="button" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._register' | translate }}</a> </li> } <!--<li> <button data-dropdown-toggle="support-dropdown" data-dropdown-placement="bottom-end" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._support' | translate }}</button> </li>--> </ul> </div> } @if (is_logged) { <div id="userDropdown" class="z-50 hidden bg-white divide-y divide-primary-100/50 rounded-lg w-44"> <div class="px-4 py-3 text-sm text-gray-900 "> <div>{{ username }}</div> <div class="font-medium truncate line-clamp-2">{{ email }}</div> </div> <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton"> @if (!loggedAsOrg || roles.includes('orgAdmin')) { <li> <button id="userProfile" (click)="goTo('/profile')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> <fa-icon [icon]="faAddressCard" class="mr-2"></fa-icon>{{ 'HEADER._profile' | translate }} </button> </li> } @if (roles.includes('seller')) { <li> <button id="myOfferings" (click)="goTo('/my-offerings')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> <fa-icon [icon]="faHandHoldingBox" class="mr-2"></fa-icon>{{ 'HEADER._offerings' | translate }} </button> </li> } @if (isAdmin) { <li> <button id="administration" (click)="goTo('/admin')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> <fa-icon [icon]="faCogs" class="mr-2"></fa-icon>{{ 'HEADER._admin' | translate }} </button> </li> } @if (!IS_ISBE) { <li> <button id="usageSpecs" (click)="goTo('/usage-spec')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> <fa-icon [icon]="faRuler" class="mr-2"></fa-icon>Usage Spec </button> </li> <li> <button id="myInventory" (click)="goTo('/product-inventory')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> <fa-icon [icon]="faBoxesStacked" class="mr-2"></fa-icon>{{ 'HEADER._inventory' | translate }} </button> </li> } </ul> <div class="py-1"> @if (orgs.length > 0 && isAdmin && !IS_ISBE) { <button data-dropdown-toggle="orgs-dropdown" data-dropdown-placement="left-start" class="flex w-full justify-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"> <fa-icon [icon]="faAnglesLeft" class="mr-2"></fa-icon>{{ 'HEADER._change_session' | translate }} </button> } <button id="signOut" (click)="logout()" class="flex w-full justify-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"> <fa-icon [icon]="faArrowRightFromBracket" class="mr-2"></fa-icon>{{ 'HEADER._sign_out' | translate }} </button> </div> </div> } </div> <div id="support-dropdown" class="z-50 hidden bg-white divide-y divide-primary-100/50 rounded-lg w-44"> <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton"> <li> <a href="{{ knowledge }}" target="_blank" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "><fa-icon [icon]="faBrain" class="mr-2"></fa-icon>{{ 'HEADER._knowledge' | translate }}</a> </li> <li> <a href="{{ ticketing }}" target="_blank" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "><fa-icon [icon]="faClipboardCheck" class="mr-2"></fa-icon>{{ 'HEADER._ticketing' | translate }}</a> </li> </ul> </div> <div id="orgs-dropdown" class="z-50 hidden bg-white divide-y divide-primary-100/50 rounded-lg w-44"> <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton"> @for (org of orgs; track org.id; let idx = $index) { @if (org.id !== currentOrgId) { <li> <button (click)="changeSession(idx, false); hideDropdown('orgs-dropdown');" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> <fa-icon [icon]="faUsers" class="mr-2"></fa-icon>{{ org.name }} </button> </li> } } @if (loggedAsOrg) { <li> <button (click)="changeSession(0, true); hideDropdown('orgs-dropdown');" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> <fa-icon [icon]="faUser" class="mr-2"></fa-icon>{{ username }} </button> </li> } </ul> </div> </nav> @if (showCart) { <div class="flex h-screen w-full backdrop-blur-sm absolute top-0 right-0 z-40"> <app-cart-drawer (click)="$event.stopPropagation();" class="absolute top-0 right-0 z-40 h-screen p-4 overflow-y-auto transition-transform bg-white w-1/3 "></app-cart-drawer> </div> }
+<div class="relative"> 
+    <div id="pre-header" class="flex flex-wrap items-center justify-start gap-5 mx-auto py-4 px-8 bg-primary-100 "> 
+        <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" /> 
+        <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" /> 
+        <img src="assets/logos/Partner_logo.svg" class="w-auto h-5 lg:h-6" alt="Logo" /> 
+    </div> 
+    <nav class="text-white border-gray-200 bg-primary-100 "> 
+        <div class="flex flex-wrap items-center justify-between mx-auto py-4 px-8"> 
+            <a (click)="goTo('/dashboard')" class="flex items-center align-items-middle cursor-pointer"> 
+                <img src="assets/logos/ISBE_logo_black_name.svg" class="h-10 lg:h-12" alt="ISBE Catalog Logo" /> 
+            </a> 
+            <div class="hidden w-full lg:block lg:w-auto lg:ml-auto bg-primary-100 rounded-lg align-items-middle"> 
+                <ul class="flex flex-col font-medium p-4 lg:p-0 rounded-lg lg:text-white lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0"> 
+                    <li> 
+                        <a data-cy="publishOffering" (click)="goTo('/publish')" id="verifyDropdown"
+                        class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0" 
+                        aria-current="page">{{ 'HEADER._verify' | translate }}</a> 
+                    </li>                     
+                    <li data-cy="browse"> 
+                        <a id="searchDropdown" (click)="goTo('/about');"
+                        class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " 
+                        aria-current="page">{{ 'HEADER._about_isbe' | translate }}</a> 
+                    </li>                  
+                    <li data-cy="about" id="aboutIsbe"> <a href="{{isbeAbout}}" 
+                        class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " 
+                        aria-current="page">{{ 'HEADER._about' | translate }}</a> 
+                    </li> 
+                    <li> 
+                        <a href="{{isbeRegister}}" class="sm:block lg:hidden cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent 
+                        lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._register' | translate }}</a> 
+                    </li> 
+                    <li> 
+                        <a (click)="onLoginClick()" class="sm:block lg:hidden cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent 
+                        lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">Login</a> 
+                    </li> 
+                </ul> 
+            </div> 
+            <div class="flex flex-cols"> 
+                <div class="flex flex-cols"> 
+                    <a data-cy="knowledge" id="knowledgeBase" href="{{ knowledge }}" target="_blank" class="w-10 mr-2 hidden lg:block text-white hover:bg-white 
+                    hover:text-primary-100 rounded-lg text-xl p-2.5"> 
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"> 
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.529 9.988a2.502 2.502 0 1 1 5 .191A2.441 2.441 0 0 1 
+                        12 12.582V14m-.01 3.008H12M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /> 
+                    </svg> 
+                    </a> 
+                    
+                    @if(!IS_ISBE){ <button data-cy="darkMode" id="theme-toggle" (click)="toggleDarkMode()" type="button" 
+                    class="w-10 mr-2 text-white hover:bg-white hover:text-primary-100 rounded-lg text-xl p-2.5"> 
+                    <svg data-cy="sunSVG" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" #theme_toggle_dark_icon> 
+                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path> 
+                    </svg> 
+                    <svg data-cy="moonSVG" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" #theme_toggle_light_icon> 
+                        <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 
+                        1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 
+                        0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 
+                        1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path> 
+                    </svg> 
+                </button> } 
+            </div> 
+            @if (is_logged) { 
+                <div data-cy="loggedAcc" id="loggedAcc" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end" 
+                    class="relative mr-2 inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full cursor-pointer"> 
+                    <span class="font-medium text-gray-600 ">{{ usercharacters }}</span> 
+                </div> 
+            } 
+            @else { 
+                <a data-cy="registerAcc" id="register" [href]="isbeRegister" target="_blank" class="hidden lg:block w-full mr-2 text-white hover:bg-white hover:text-primary-100 
+                    rounded-lg text-sm p-2.5 text-center"> {{ 'HEADER._register' | translate }} 
+                </a> 
+                <button data-cy="login" id="login" (click)="onLoginClick()" type="button" class="w-full mr-2 text-white hover:bg-white hover:text-primary-100 rounded-lg text-sm p-2.5"> 
+                    Login 
+                </button> 
+            } 
+            <button #navbarbutton type="button" (click)="toggleNavBar();$event.stopPropagation();" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500
+                 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-dropdown" aria-expanded="false"> 
+                 
+                <span class="sr-only">{{ 'HEADER._open_menu' | translate }}</span> 
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> 
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" /> 
+                </svg> 
+            </button> 
+        </div> 
+        @if(isNavBarOpen){ 
+            <div class="w-full bg-primary-100 rounded-lg" id="navbar-dropdown"> 
+                <ul class="flex flex-col font-medium p-4 lg:p-0 rounded-lg lg:text-white lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0"> 
+                    <li> 
+                        <a (click)="goTo('/search')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
+                        lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._services' | translate }}</a> 
+                    </li> 
+                    <li> 
+                        <a (click)="goTo('/catalogues')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
+                        lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._catalogs' | translate }}</a> 
+                    </li> 
+                    <li> 
+                        <a (click)="goTo('/about')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
+                        lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._about' | translate }}</a> 
+                    </li> 
+                    <li> 
+                        <a href="{{domePublish}}" target="_blank" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
+                        lg:hover:text-secondary-50 lg:p-0 ">{{ 'HEADER._publish' | translate }}</a> 
+                    </li> 
+                    <li> <a href="{{ knowledge }}" target="_blank" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
+                        lg:hover:text-secondary-50 lg:p-0 ">{{ 'HEADER._info' | translate }}</a> 
+                    </li> 
+                    @if (!is_logged) { 
+                        <li> 
+                            <a href="{{isbeRegister}}" target="_blank" type="button" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent 
+                            lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._register' | translate }}</a> 
+                        </li> 
+                    } 
+                    <!--<li> <button data-dropdown-toggle="support-dropdown" data-dropdown-placement="bottom-end" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._support' | translate }}</button> </li>--> 
+                </ul> 
+            </div> 
+        } 
+        @if (is_logged) { 
+            <div id="userDropdown" class="z-50 hidden bg-white divide-y divide-primary-100/50 rounded-lg w-44"> 
+                <div class="px-4 py-3 text-sm text-gray-900 "> 
+                    <div>{{ username }}</div> <div class="font-medium truncate line-clamp-2">{{ email }}</div> 
+                </div> 
+                <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton"> 
+                    @if (!loggedAsOrg || roles.includes('orgAdmin')) { 
+                        <li> 
+                            <button id="userProfile" (click)="goTo('/profile')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> 
+                                <fa-icon [icon]="faAddressCard" class="mr-2"></fa-icon>{{ 'HEADER._profile' | translate }} 
+                            </button> 
+                        </li> } 
+                        @if (roles.includes('seller')) { 
+                            <li> 
+                                <button id="myOfferings" (click)="goTo('/my-offerings')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> 
+                                    <fa-icon [icon]="faHandHoldingBox" class="mr-2"></fa-icon>{{ 'HEADER._offerings' | translate }} 
+                                </button> 
+                            </li> 
+                        } 
+                        @if (isAdmin) { 
+                            <li> 
+                                <button id="administration" (click)="goTo('/admin')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> 
+                                    <fa-icon [icon]="faCogs" class="mr-2"></fa-icon>{{ 'HEADER._admin' | translate }} 
+                                </button> 
+                            </li> 
+                        } 
+                        @if (!IS_ISBE) { 
+                            <li> 
+                                <button id="usageSpecs" (click)="goTo('/usage-spec')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> 
+                                    <fa-icon [icon]="faRuler" class="mr-2">
+                                    </fa-icon>Usage Spec 
+                                </button> 
+                            </li> 
+                            <li> 
+                                <button id="myInventory" (click)="goTo('/product-inventory')" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> 
+                                    <fa-icon [icon]="faBoxesStacked" class="mr-2">
+
+                                    </fa-icon>{{ 'HEADER._inventory' | translate }} 
+                                </button> 
+                            </li> 
+                        } 
+                </ul> 
+                <div class="py-1"> 
+                    @if (orgs.length > 0 && isAdmin && !IS_ISBE) { 
+                        <button data-dropdown-toggle="orgs-dropdown" data-dropdown-placement="left-start" class="flex w-full justify-left px-4 py-2 
+                        text-sm text-gray-700 hover:bg-gray-100"> 
+                            <fa-icon [icon]="faAnglesLeft" class="mr-2"></fa-icon>{{ 'HEADER._change_session' | translate }} 
+                        </button> 
+                    } 
+                    <button id="signOut" (click)="logout()" class="flex w-full justify-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"> 
+                        <fa-icon [icon]="faArrowRightFromBracket" class="mr-2"></fa-icon>{{ 'HEADER._sign_out' | translate }} 
+                    </button> 
+                </div>
+            </div> 
+        } 
+    </div> 
+        <div id="support-dropdown" class="z-50 hidden bg-white divide-y divide-primary-100/50 rounded-lg w-44"> 
+            <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton"> 
+                <li> 
+                    <a href="{{ knowledge }}" target="_blank" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 ">
+                        <fa-icon [icon]="faBrain" class="mr-2"></fa-icon>{{ 'HEADER._knowledge' | translate }}</a> 
+                    </li> 
+                    <li> <a href="{{ ticketing }}" target="_blank" class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 ">
+                        <fa-icon [icon]="faClipboardCheck" class="mr-2"></fa-icon>{{ 'HEADER._ticketing' | translate }}
+                    </a> 
+                </li> 
+            </ul> 
+        </div> 
+        <div id="orgs-dropdown" class="z-50 hidden bg-white divide-y divide-primary-100/50 rounded-lg w-44"> 
+            <ul class="py-2 text-sm text-gray-700" aria-labelledby="avatarButton"> 
+                @for (org of orgs; track org.id; let idx = $index) { 
+                    @if (org.id !== currentOrgId) { 
+                    <li> 
+                        <button (click)="changeSession(idx, false); hideDropdown('orgs-dropdown');" class="flex w-full justify-left px-4 py-2 
+                            hover:bg-gray-100 "> <fa-icon [icon]="faUsers" class="mr-2"></fa-icon>{{ org.name }} 
+                        </button> 
+                    </li> 
+                    } 
+                } 
+                @if (loggedAsOrg) { 
+                <li> 
+                    <button (click)="changeSession(0, true); hideDropdown('orgs-dropdown');" 
+                    class="flex w-full justify-left px-4 py-2 hover:bg-gray-100 "> 
+                    <fa-icon [icon]="faUser" class="mr-2"></fa-icon>{{ username }} 
+                    </button> 
+                </li> } 
+            </ul> 
+        </div> 
+    </nav> 
+</div> 
+@if (showCart) { 
+    <div class="flex h-screen w-full backdrop-blur-sm absolute top-0 right-0 z-40"> 
+        <app-cart-drawer (click)="$event.stopPropagation();" class="absolute top-0 right-0 z-40 h-screen p-4 overflow-y-auto 
+        transition-transform bg-white w-1/3 "></app-cart-drawer> 
+    </div> 
+}

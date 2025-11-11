@@ -19,14 +19,17 @@ import { UsageSpecsComponent } from './pages/usage-specs/usage-specs.component';
 
 import { environment } from 'src/environments/environment';
 import { AuthGuard } from './guard/auth.guard';
+import { AboutPageIsbeComponent } from './pages/about-page-isbe/about-page-isbe.component';
+import { PublishServiceComponent } from './pages/publish-service/publish-service.component';
 
 export const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'about', component: AboutDomeComponent ,
+  { path: 'aboutDome', component: AboutDomeComponent ,
     canActivate: [AuthGuard],
     data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
   },
-
+  { path: 'about', component: AboutPageIsbeComponent},
+  { path: 'publish', component: PublishServiceComponent},
   { path: 'org-details/:id', component: OrganizationDetailsComponent },
 
   { path: 'search/catalogue/:id', component: SearchCatalogComponent ,
