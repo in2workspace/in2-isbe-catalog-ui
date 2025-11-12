@@ -362,7 +362,7 @@
     "_in_designed": "Diseñado",
     "_reserved": "Reservado",
     "_inactive": "Inactivo",
-    "_active": "Activo",
+    "_active": "En revisión",
     "_terminated": "Terminado",
     "_id": "ID",
     "_standby": "En espera",
@@ -460,9 +460,9 @@
     "_next": "Siguiente",
     "_summary": "Resumen del catálogo",
     "_finish": "Finalizar",
-    "_active": "Activo",
-    "_launched": "Lanzado",
-    "_retired": "Retirado",
+    "_active": "En revisión",
+    "_launched": "Publicado",
+    "_retired": "Eliminado",
     "_obsolete": "Obsoleto"
   },
   "CREATE_PROD_SPEC": {
@@ -613,9 +613,9 @@
     "_file_res": "Restricciones de archivo",
     "_restrictions": "El tamaño debe ser menor de 3 MB. Los nombres de archivo pueden incluir letras (a-z, A-Z), números (0-9) y símbolos limitados como guiones bajos (_), guiones (-) y puntos (.).",
     "_file_name": "La URL de la imagen debe terminar en formato png, jpg, jpeg, gif, bmp o webp.",
-    "_active": "Activo",
-    "_launched": "Lanzado",
-    "_retired": "Retirado",
+    "_active": "En revisión",
+    "_launched": "Publicado",
+    "_retired": "Eliminado",
     "_obsolete": "Obsoleto",
     "_self_attestation": "Auto-declaración:",
     "_close_modal": "Cerrar modal",
@@ -960,10 +960,10 @@
     "_order_by": "Ordenar por...",
     "_last_update": "Última actualización",
     "_name": "Nombre",
-    "_in_design": "En diseño",
-    "_active": "Activo",
-    "_launched": "Lanzado",
-    "_retired": "Retirado",
+    "_in_design": "Borrador",
+    "_active": "En revisión",
+    "_launched": "Publicado",
+    "_retired": "Eliminado",
     "_obsolete": "Obsoleto",
     "_status": "Estado",
     "_actions": "Acciones",
@@ -976,7 +976,7 @@
     "_simple": "Simple",
     "_bundle": "Paquete",
     "_type": "Tipo",
-    "_prod_offer": "Oferta de producto",
+    "_prod_offer": "Producto ofertado",
     "_add_new_offer": "Añadir nueva oferta de producto",
     "_add_new_catalog": "Añadir nuevo catálogo",
     "_filter_role": "Filtrar por rol",
@@ -986,7 +986,7 @@
     "_role": "Rol",
     "_choose": "Elige entre nuestros catálogos",
     "_offerings": "Ofertas",
-    "_my_offerings": "Mis ofertas"
+    "_my_offerings": "Mis servicios"
   },
   "ADMIN": {
     "_admin": "Administración",
@@ -995,10 +995,10 @@
     "_order_by": "Ordenar por...",
     "_last_update": "Última actualización",
     "_name": "Nombre",    
-    "_in_design": "En diseño",
-    "_active": "Activo",
-    "_launched": "Lanzado",
-    "_retired": "Retirado",
+    "_in_design": "Borrador",
+    "_active": "En revisión",
+    "_launched": "Publicado",
+    "_retired": "Eliminado",
     "_obsolete": "Obsoleto",
     "_status": "Estado",
     "_actions": "Acciones",
@@ -1525,7 +1525,7 @@
     "_WIDOWED": "Viudo/a"
   },
   "REMINDER": {
-    "_message": "Has modificado información del objeto. Debes volver a establecer el estado en Activo antes de guardar"
+    "_message": "Has modificado información del objeto. Debes volver a establecer el estado En revisión antes de guardar"
   }
   
 

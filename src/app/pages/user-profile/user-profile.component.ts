@@ -2,9 +2,8 @@ import {
   Component,
   OnInit,
   ChangeDetectorRef,
-  ElementRef,
-  ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { components } from '../../models/product-catalog';
 type ProductOffering = components['schemas']['ProductOffering'];
 import { initFlowbite } from 'flowbite';
@@ -19,6 +18,7 @@ import { environment } from 'src/environments/environment';
 import { NgClass } from '@angular/common';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
+import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-menu/private-area-menu.component';
 
 @Component({
   selector: 'app-user-profile',
@@ -33,37 +33,32 @@ import { take } from 'rxjs';
     UserInfoComponent,
     TranslateModule,
     NgClass,
+    PrivateAreaMenuComponent
   ],
 })
 export class UserProfileComponent implements OnInit {
-  @ViewChild('billButton', { static: false })
-  billButton?: ElementRef<HTMLButtonElement>;
-  @ViewChild('accountButton', { static: false })
-  accountButton?: ElementRef<HTMLButtonElement>;
-  @ViewChild('orgButton', { static: false })
-  orgButton?: ElementRef<HTMLButtonElement>;
-  @ViewChild('orderButton', { static: false })
-  orderButton?: ElementRef<HTMLButtonElement>;
-  @ViewChild('revenueButton', { static: false })
-  revenueButton?: ElementRef<HTMLButtonElement>;
 
-  show_profile: boolean = true;
-  show_org_profile: boolean = false;
-  show_orders: boolean = false;
-  show_billing: boolean = false;
-  show_revenue: boolean = false;
-  loggedAsUser: boolean = true;
+  show_profile = true;
+  show_org_profile = false;
+  show_orders = false;
+  show_billing = false;
+  show_revenue = false;
+
+  loggedAsUser = true;
   profile: any;
   seller: any = '';
-  token: string = '';
-  email: string = '';
+  token = '';
+  email = '';
+
+  activeTab: MenuTab = 'account';
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   constructor(
     private readonly auth: AuthService,
     private readonly cdr: ChangeDetectorRef,
-    private readonly eventMessage: EventMessageService
+    private readonly eventMessage: EventMessageService,
+    private readonly router: Router
   ) {
     this.eventMessage.messages$.subscribe((ev) => {
       if (ev.type === 'ChangedSession') {
@@ -73,8 +68,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    let today = new Date();
-    today.setMonth(today.getMonth() - 1);
     this.initPartyInfo();
   }
 
@@ -87,130 +80,43 @@ export class UserProfileComponent implements OnInit {
 
       this.seller = aux.id;
       this.loggedAsUser = aux.logged_as === aux.id;
-      this.show_profile = this.loggedAsUser;
-      this.show_org_profile = !this.loggedAsUser;
 
-      if (this.loggedAsUser) {
-        this.getProfile();
-      } else {
-        this.getOrgProfile();
-      }
+      this.activeTab = this.loggedAsUser ? 'general' : 'org';
+      this.applySelection(this.activeTab);
       initFlowbite();
     });
   }
 
-  getProfile() {
-    this.show_billing = false;
-    this.show_profile = true;
-    this.show_orders = false;
-    this.show_org_profile = false;
-    this.show_revenue = false;
-    this.selectAccount();
+  onMenuSelect(tab: MenuTab) {
+    this.activeTab = tab;
+    if (tab === 'account' || tab === 'org' || tab === 'billing' || tab === 'orders' || tab === 'revenue' || tab === 'general') {
+      this.applySelection(tab);
+      this.cdr.detectChanges();
+      return;
+    }
+
+    switch (tab) {
+      case 'offers':
+        this.router.navigate(['/my-offerings']);
+        break;
+      case 'productspec':
+        this.router.navigate(['/my-offerings']);
+        break;
+      case 'categories':
+        this.router.navigate(['/admin']);
+        break;
+    }
   }
 
-  getOrgProfile() {
-    this.show_billing = false;
-    this.show_profile = false;
-    this.show_orders = false;
-    this.show_org_profile = true;
-    this.show_revenue = false;
-    this.selectOrganization();
+  private applySelection(tab: MenuTab) {
+    this.show_profile = tab === 'account';
+    this.show_org_profile = tab === 'org';
+    this.show_billing = tab === 'billing';
+    this.show_orders = tab === 'orders';
+    this.show_revenue = tab === 'revenue';
   }
 
-  getBilling() {
-    this.selectBilling();
-    this.show_billing = true;
-    this.show_profile = false;
-    this.show_orders = false;
-    this.show_org_profile = false;
-    this.show_revenue = false;
-    this.cdr.detectChanges();
-    initFlowbite();
-  }
-
-  getRevenue() {
-    this.selectRevenue();
-    this.show_billing = false;
-    this.show_profile = false;
-    this.show_orders = false;
-    this.show_org_profile = false;
-    this.show_revenue = true;
-    this.cdr.detectChanges();
-    initFlowbite();
-  }
-
-  goToOrders() {
-    this.selectOrder();
-    this.show_billing = false;
-    this.show_profile = false;
-    this.show_orders = true;
-    this.show_org_profile = false;
-    this.show_revenue = false;
-    this.cdr.detectChanges();
-  }
-
-  selectAccount() {
-    this.selectMenu(this.accountButton, 'text-green');
-    this.unselectMenu(this.orgButton, 'text-green');
-    this.unselectMenu(this.billButton, 'text-green');
-    this.unselectMenu(this.orderButton, 'text-green');
-    this.unselectMenu(this.revenueButton, 'text-green');
-  }
-
-  selectOrganization() {
-    this.unselectMenu(this.accountButton, 'text-green');
-    this.selectMenu(this.orgButton, 'text-green');
-    this.unselectMenu(this.billButton, 'text-green');
-    this.unselectMenu(this.orderButton, 'text-green');
-    this.unselectMenu(this.revenueButton, 'text-green');
-  }
-
-  selectBilling() {
-    this.unselectMenu(this.accountButton, 'text-green');
-    this.unselectMenu(this.orgButton, 'text-green');
-    this.selectMenu(this.billButton, 'text-green');
-    this.unselectMenu(this.orderButton, 'text-green');
-    this.unselectMenu(this.revenueButton, 'text-green');
-  }
-
-  selectOrder() {
-    this.unselectMenu(this.accountButton, 'text-green');
-    this.unselectMenu(this.orgButton, 'text-green');
-    this.unselectMenu(this.billButton, 'text-green');
-    this.selectMenu(this.orderButton, 'text-green');
-    this.unselectMenu(this.revenueButton, 'text-green');
-  }
-
-  selectRevenue() {
-    this.unselectMenu(this.accountButton, 'text-green');
-    this.unselectMenu(this.orgButton, 'text-green');
-    this.unselectMenu(this.billButton, 'text-green');
-    this.unselectMenu(this.orderButton, 'text-green');
-    this.selectMenu(this.revenueButton, 'text-green');
-  }
-
-  removeClass(elem: HTMLElement, cls: string) {
-    var str = ' ' + elem.className + ' ';
-    elem.className = str
-      .replace(' ' + cls + ' ', ' ')
-      .replace(/^\s+|\s+$/g, '');
-  }
-
-  addClass(elem: HTMLElement, cls: string) {
-    elem.className += ' ' + cls;
-  }
-
-  selectMenu(
-    button: ElementRef<HTMLButtonElement> | undefined,
-    classes: string
-  ) {
-    button?.nativeElement?.classList.add(...classes.split(' '));
-  }
-
-  unselectMenu(
-    button: ElementRef<HTMLButtonElement> | undefined,
-    classes: string
-  ) {
-    button?.nativeElement?.classList.remove(...classes.split(' '));
-  }
+  getProfile() { this.onMenuSelect('account'); }
+  getOrgProfile() { this.onMenuSelect('org'); }
+  getBilling() { this.onMenuSelect('billing'); }
 }

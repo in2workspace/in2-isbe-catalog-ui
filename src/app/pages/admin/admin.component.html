@@ -26,19 +26,24 @@
 
   <div class="w-full grid lg:grid-cols-20/80 gap-8">
     <div class="hidden lg:block">
-      <div class="sticky top-[340px] w-full h-fit text-sm font-medium text-gray-900 rounded-lg bg-black p-2.5"> <button
-          (click)="goToCategories()" id="categories-button" aria-current="true"
-          [ngClass]="IS_ISBE ? 'rounded-lg' : 'rounded-t-lg'"
-          class="block w-full px-4 py-2 text-white bg-white/20 cursor-pointer ">
-          {{ 'ADMIN._categories' | translate }} </button> @if(!IS_ISBE){ <button (click)="goToVerification()"
-          id="verify-button"
-          class="block w-full px-4 py-2  cursor-pointer "> {{
-          'ADMIN._verification' | translate }} </button> <button (click)="goToRevenue()" id="revenue-button"
-          class="block w-full px-4 py-2  cursor-pointer "> {{
-          'ADMIN._revenue' | translate }} </button> } </div>
-    </div> @if(show_categories){ <admin-categories></admin-categories> } @if(show_create_categories){
-    <create-category></create-category> } @if(show_update_categories){ <update-category
-      [category]="category_to_update"></update-category> } @if(show_verification){ <verification></verification> }
-    @if(show_revenue){ <operator-revenue-sharing></operator-revenue-sharing> }
+      <private-area-menu
+        [loggedAsUser]="loggedAsUser"
+        [active]="activeTab"
+        (select)="onMenuSelect($event)">
+      </private-area-menu>
+    </div> 
+    @if(show_categories){ 
+      <admin-categories></admin-categories> 
+    } @if(show_create_categories){
+      <create-category></create-category> 
+    } @if(show_update_categories){ 
+      <update-category [category]="category_to_update"></update-category> 
+    } 
+    @if(show_verification){ 
+      <verification></verification> 
+    }
+    @if(show_revenue){ 
+      <operator-revenue-sharing></operator-revenue-sharing> 
+    }
   </div>
 </div>

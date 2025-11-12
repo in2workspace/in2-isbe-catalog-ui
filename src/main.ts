@@ -16,6 +16,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from './app/guard/auth.service';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { FakeAuthInterceptor } from './app/interceptors/fake-auth.interceptor';
 
 registerLocaleData(localeEs);
 
@@ -65,6 +66,7 @@ bootstrapApplication(AppComponent, {
         },
       })
     ), 
+    { provide: HTTP_INTERCEPTORS, useClass: FakeAuthInterceptor, multi: true }, //Just for testing purposes
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     {
       provide: APP_INITIALIZER,
