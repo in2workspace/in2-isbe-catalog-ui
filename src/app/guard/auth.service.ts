@@ -1,7 +1,7 @@
 import { Injectable, signal, WritableSignal, inject } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { take, map, catchError, switchMap } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { claimsToLoginInfo, LoginInfo } from './login-info.mapper';
 import { OrgContextService } from '../services/org-context.service';
 
@@ -33,7 +33,7 @@ export class AuthService {
   role: WritableSignal<string | null> = signal(null);
 
   checkAuth(): Observable<boolean> {
-    return this.oidc.checkAuth().pipe(
+    /*return this.oidc.checkAuth().pipe(
       take(1),
       catchError(() => of({ isAuthenticated: false, accessToken: '', userData: {} } as any)),
       switchMap(async ({ isAuthenticated, accessToken, userData }) => {
@@ -62,7 +62,16 @@ export class AuthService {
 
         return true;
       })
-    );
+    );*/
+
+    // FAKE AUTH FOR DEV PURPOSES ONLY
+    const fakeAccessToken = "eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJodHRwczovL2NhdGFsb2cuaXNiZW9uYm9hcmQuY29tIiwiZXhwIjoxNzYyNTI0NTMxLCJpYXQiOjE3NjI1MjA5MzEsImlzcyI6Imh0dHBzOi8vY2VydGF1dGguZXZpZGVuY2VsZWRnZXIuZXUiLCJqdGkiOiJIVlFYV1dOV1ZHS1M3NE1YWEpDRjZKVUtKNSIsIm5vbmNlIjoiMzllYzViYzdhN2VhM2YzMDg2YTUzNDMyNWU1ODRjNTE1MGhPUmg3UWciLCJzY29wZSI6Im9wZW5pZCBlaWRhcyIsInN1YiI6Imh0dHBzOi8vY2F0YWxvZy5pc2Jlb25ib2FyZC5jb20iLCJ2YyI6eyJAY29udGV4dCI6WyJodHRwczovL3d3dy53My5vcmcvbnMvY3JlZGVudGlhbHMvIiwiaHR0cHM6Ly9jcmVkZW50aWFscy5ldWRpc3RhY2suZXUvLndlbGwta25vd24vY3JlZGVudGlhbHMvbGVhcl9jcmVkZW50aWFsX2VtcGxveWVlL3czYy92MyJdLCJjcmVkZW50aWFsU3RhdHVzIjp7ImlkIjoiaHR0cHM6Ly9pc3N1ZXIuZG9tZS1tYXJrZXRwbGFjZS1zYngub3JnL2JhY2tvZmZpY2UvdjEvY3JlZGVudGlhbHMvc3RhdHVzLzEjU1lDOTA4UklRUXFlVVhSMTluaDNFUSIsInN0YXR1c0xpc3RDcmVkZW50aWFsIjoiaHR0cHM6Ly9pc3N1ZXIuZG9tZS1tYXJrZXRwbGFjZS1zYngub3JnL2JhY2tvZmZpY2UvdjEvY3JlZGVudGlhbHMvc3RhdHVzLzEiLCJzdGF0dXNMaXN0SW5kZXgiOiJTWUM5MDhSSVFRcWVVWFIxOW5oM0VRIiwic3RhdHVzUHVycG9zZSI6InJldm9jYXRpb24iLCJ0eXBlIjoiUGxhaW5MaXN0RW50aXR5In0sImNyZWRlbnRpYWxTdWJqZWN0Ijp7Im1hbmRhdGUiOnsibWFuZGF0ZWUiOnsiZW1haWwiOiJhbGJhLmxvcGV6QGluMi5lcyIsImVtcGxveWVlSWQiOiIxMjM0NTY3OEEiLCJmaXJzdE5hbWUiOiJKb2huIiwiaWQiOiIxMjM0NTY3OEEiLCJsYXN0TmFtZSI6IkRvZSJ9LCJtYW5kYXRvciI6eyJjb21tb25OYW1lIjoiSm9obiBEb2UiLCJjb3VudHJ5IjoiRVMiLCJlbWFpbCI6ImFsYmEubG9wZXpAaW4yLmVzIiwiaWQiOiJkaWQ6ZWxzaTpWQVRFUy1HODc5MzYxNTkiLCJvcmdhbml6YXRpb24iOiJBTEFTVFJJQSIsIm9yZ2FuaXphdGlvbklkZW50aWZpZXIiOiJWQVRFUy1HODc5MzYxNTkiLCJzZXJpYWxOdW1iZXIiOiIxMjM0NTY3OEEifSwicG93ZXIiOlt7ImFjdGlvbiI6WyJFeGVjdXRlIl0sImRvbWFpbiI6IkRPTUUiLCJmdW5jdGlvbiI6Ik9uYm9hcmRpbmciLCJ0eXBlIjoiZG9tYWluIn0seyJhY3Rpb24iOlsiQ3JlYXRlIiwiVXBkYXRlIiwiRGVsZXRlIl0sImRvbWFpbiI6IkRPTUUiLCJmdW5jdGlvbiI6IlByb2R1Y3RPZmZlcmluZyIsInR5cGUiOiJkb21haW4ifV19fSwiZGVzY3JpcHRpb24iOiJWZXJpZmlhYmxlIENyZWRlbnRpYWwgZm9yIGVtcGxveWVlcyBvZiBhbiBvcmdhbml6YXRpb24iLCJpZCI6InVybjp1dWlkM09NTFdFUVFKTjI2WlJQUkJGWTJBQVg2RFIiLCJpc3N1ZXIiOnsiY29tbW9uTmFtZSI6IkNlcnRBdXRoIElkZW50aXR5IFByb3ZpZGVyIGZvciBJU0JFIiwiY291bnRyeSI6IkVTIiwiaWQiOiJkaWQ6ZWxzaTpWQVRFUy1CNjA2NDU5MDAiLCJvcmdhbml6YXRpb24iOiJJTjIiLCJvcmdhbml6YXRpb25JZGVudGlmaWVyIjoiVkFURVMtQjYwNjQ1OTAwIiwic2VyaWFsTnVtYmVyIjoiQjQ3NDQ3NTYwIn0sInR5cGUiOlsiTEVBUkNyZWRlbnRpYWxFbXBsb3llZSIsIlZlcmlmaWFibGVDcmVkZW50aWFsIl0sInZhbGlkRnJvbSI6IjIwMjUtMTEtMDRUMTg6MzY6NTBaIiwidmFsaWRVbnRpbCI6IjIwMjYtMTItMDZUMTg6MzY6NTBaIn19.K7OaHIWw1Z1TCUxWjm0n7WZJAlxQVO2e9ZvEtf8FTiNJ0K4rx1gdg_Do6SXqRnHTlx9aRdZQ1muD7wGNbcaseg";
+    let claims: any = this.decodeJwtPayload(fakeAccessToken);
+    const u = this.mapUserFromClaims(claims);
+    this.setState(true, u, fakeAccessToken ?? '', this.pickPrimaryRole(u));
+    const li = claimsToLoginInfo(claims, fakeAccessToken ?? '');
+    this.loginInfoSubject.next(li);
+    return of(true);
   }
 
   sellerId$ = combineLatest([this.loginInfo$, this.orgCtx.getOrganization()]).pipe(
