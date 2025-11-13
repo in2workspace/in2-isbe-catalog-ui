@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 import { ErrorMessageComponent } from '../../error-message/error-message.component';
 import { ReminderMessageComponent } from '../../reminder-message/reminder-message.component';
 import { hasNonStatusChanges } from '../../lifecycle-status/lifecycle-status';
+import { IsbeMessageComponent } from '../../isbe-message/isbe-message.component';
 
 type ProductOffering_Create = components["schemas"]["ProductOffering_Create"];
 type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
@@ -43,7 +44,8 @@ type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
     OfferSummaryComponent,
     NgClass,
     ErrorMessageComponent,
-    ReminderMessageComponent
+    ReminderMessageComponent,
+    IsbeMessageComponent
   ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css'
@@ -66,6 +68,7 @@ export class OfferComponent implements OnInit, OnDestroy{
   errorMessage:any='';
   showError:boolean=false;
   showReminder:boolean=false;
+  showIsbeMessage:boolean=false;
   edited:boolean=false;
   reminderTimer: any = null;
   bundleChecked:boolean=false;
@@ -226,7 +229,13 @@ export class OfferComponent implements OnInit, OnDestroy{
           this.cdr.detectChanges();
         }, 3000);
       }
+    }else if (isSummary && this.formType === 'create') {
+      this.showIsbeMessage = true;
     }
+  }
+
+  onCloseSelect(){
+    this.showIsbeMessage = false;
   }
 
   validateCurrentStep(): boolean {

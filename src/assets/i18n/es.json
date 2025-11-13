@@ -1525,7 +1525,9 @@
     "_WIDOWED": "Viudo/a"
   },
   "REMINDER": {
-    "_message": "Has modificado información del objeto. Debes volver a establecer el estado En revisión antes de guardar"
+    "_message": "Has modificado información del objeto. Debes volver a establecer el estado En revisión antes de guardar",
+    "_isbe": "Gracias por compartir tu servicio, en breve lo revisaremos para validarlo.",
+    "_isbe_publish": "Recuerda que hasta que tu caso de uso no esté desplegado en ISBE, no podremos publicarlo."
   }
   
 
