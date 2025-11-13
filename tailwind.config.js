@@ -7,8 +7,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ["Blinker", "IBM\\ Plex\\ Mono", "Menlo", "monospace"],
-      body: ["Blinker", "IBM\\ Plex\\ Mono", "Menlo", "monospace"],
+      heading: ["GT StandardL", "sans-serif"],
+      body: ["GT StandardM", "sans-serif"],
     },
     extend: {
       colors: {

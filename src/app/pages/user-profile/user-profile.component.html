@@ -18,27 +18,24 @@
 
   <div class="w-full grid lg:grid-cols-20/80 gap-6">
     <div class="hidden lg:block">
-      <private-area-menu
-        [loggedAsUser]="loggedAsUser"
-        [active]="activeTab"
-        (select)="onMenuSelect($event)">
+      <private-area-menu [loggedAsUser]="loggedAsUser" [active]="activeTab" (select)="onMenuSelect($event)">
       </private-area-menu>
     </div>
 
     <div class="flex flex-col">
       <div class="py-16">
-        <h1 class="text-7xl font-semibold">{{ 'PROFILE._profile' | translate }}</h1>
+        <h1 class="text-7xl font-semibold font-heading">{{ 'PROFILE._profile' | translate }}</h1>
       </div>
 
       <!-- Título + botón de menú móvil -->
       <div class="flex flex-cols mr-2 ml-2 lg:hidden">
-        <h1 class="mb-8 mt-4 text-7xl font-semibold ">{{ 'PROFILE._profile' | translate }}</h1>
+        <h1 class="mb-8 mt-4 text-7xl font-semibold font-heading ">{{ 'PROFILE._profile' | translate }}</h1>
         <div class="flex align-middle content-center items-center">
-          <button id="dropdown-nav"
-            data-dropdown-toggle="dropdown-nav-content"
+          <button id="dropdown-nav" data-dropdown-toggle="dropdown-nav-content"
             class="text-black h-fit w-fit justify-between bg-white hover:bg-gray-100 focus:ring-1 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
             type="button">
-            <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+            <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 17 14">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M1 1h15M1 7h15M1 13h15" />
             </svg>

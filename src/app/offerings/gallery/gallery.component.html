@@ -4,7 +4,7 @@
 <section class="flex flex-col p-8" [ngClass]="showPanel ? 'pt-[75px]' : ''">
 
   <div class="max-w-4xl flex flex-col gap-3">
-    <h1 class="text-7xl font-semibold">Catálogo de servicios comerciales ISBE</h1>
+    <h1 class="text-7xl font-semibold font-heading">Catálogo de servicios comerciales ISBE</h1>
     <p>Encuentra los servicios que necesitas para tu caso de uso aquí</p>
   </div>
   <!--TODO: Re-enable Drawer when ready v1.0
@@ -22,9 +22,8 @@
     <bae-categories-filter [catalogId]="DFT_CATALOG" class="hidden md:block w-1/5 md:w-2/4 lg:w-1/4"></bae-categories-filter>
   }-->
 
-  @if(searchEnabled){ 
-    <section
-    class="content mx-auto pt-8 pb-5 px-4 lg:pb-5 lg:pt-16 w-full flex items-center"
+  @if(searchEnabled){
+  <section class="content mx-auto pt-8 pb-5 px-4 lg:pb-5 lg:pt-16 w-full flex items-center"
     [ngClass]="isFilterPanelShown ? 'sticky top-[118px] backdrop-blur-sm z-20': 'sticky top-[72px] backdrop-blur-sm z-20'">
     <form class="mx-5 w-full">
       <div class="flex">
@@ -40,7 +39,7 @@
             </svg> <span class="sr-only">{{ 'DASHBOARD._search' | translate }}</span> </button> </div>
       </div>
     </form>
-  </section> } 
+  </section> }
 
   <div class="flex flex-col w-full">
     <section class="md:pl-5 content pb-5 px-4 flex items-center">
