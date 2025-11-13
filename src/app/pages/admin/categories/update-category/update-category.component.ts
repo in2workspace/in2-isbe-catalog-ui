@@ -266,14 +266,16 @@ export class UpdateCategoryComponent implements OnInit {
       name: this.category.name,
       description: this.category.description,
       isRoot: this.category.isRoot,
-      parentId: this.category.parentId
+      parentId: this.category.parentId,
+      status: this.category.lifecycleStatus
     };
 
     const current = {
       name: this.generalForm.value.name,
       description: this.generalForm.value.description,
       isRoot: this.isParent,
-      parentId: this.isParent ? undefined : this.selectedCategory?.id
+      parentId: this.isParent ? undefined : this.selectedCategory?.id,
+      status: this.catStatusDraft
     };
 
     this.edited = hasNonStatusChanges(original, current);

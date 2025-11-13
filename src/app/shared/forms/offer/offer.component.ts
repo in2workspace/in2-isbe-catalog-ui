@@ -180,7 +180,8 @@ export class OfferComponent implements OnInit, OnDestroy{
         productSpecification: o.productSpecification?.id ?? null,
         category: this.normalizeIdArray(o.category),
         prices: this.normalizeIdArray(o.productOfferingPrice),
-        terms: this.normalizeTerms(o.productOfferingTerm)
+        terms: this.normalizeTerms(o.productOfferingTerm),
+        status: o.lifecycleStatus
       };
     }
     const v = this.productOfferForm.getRawValue?.() ?? this.productOfferForm.value;
@@ -191,7 +192,8 @@ export class OfferComponent implements OnInit, OnDestroy{
       productSpecification: v?.prodSpec?.id ?? null,
       category: this.normalizeIdArray(v?.category ?? []),
       prices: this.normalizeIdArray(v?.pricePlans ?? []),
-      terms: this.buildFormTerms(v)
+      terms: this.buildFormTerms(v),
+      status: v?.generalInfo?.status,
     };
   }
 

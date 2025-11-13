@@ -1105,7 +1105,8 @@ export class UpdateProductSpecComponent implements OnInit {
       productNumber: this.prod.productNumber,
       description: this.prod.description,
       characteristics: this.prod.productSpecCharacteristic,
-      attachments: this.prod.attachment
+      attachments: this.prod.attachment,
+      status: this.prod.lifecycleStatus
     };
 
     const current = {
@@ -1115,7 +1116,8 @@ export class UpdateProductSpecComponent implements OnInit {
       productNumber: this.generalForm.value.number,
       description: this.generalForm.value.description,
       characteristics: this.finishChars,
-      attachments: this.prodAttachments
+      attachments: this.prodAttachments,
+      status: this.prodStatusDraft
     };
 
     this.edited = hasNonStatusChanges(original, current);
