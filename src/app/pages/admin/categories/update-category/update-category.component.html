@@ -55,7 +55,8 @@
             [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
             class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5" />
           <label class="font-bold text-lg">{{ 'UPDATE_CATALOG._status' | translate }}</label>
-          <app-status-selector [modelType]="'category'" [anchor]="catStatusAnchor" [(ngModel)]="catStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
+          <app-status-selector [modelType]="'category'" [anchor]="catStatusAnchor" [(ngModel)]="catStatusDraft"
+            [ngModelOptions]="{ standalone: true }"></app-status-selector>
 
           <label for="prod-name" class="font-bold text-lg">{{ 'UPDATE_CATEGORIES._description' | translate
             }}</label> <app-markdown-textarea formControlName="description"></app-markdown-textarea> <label
@@ -85,7 +86,7 @@
                 </tr>
               </thead>
               <tbody> @for (cat of categories; track cat.id;let idx = $index) { <tr
-                  class="flex border-b hover:bg-gray-200 w-full justify-between">
+                  class="flex border-b w-full justify-between">
                   <td class="flex px-6 py-4 w-3/5 text-wrap break-all"> <b>{{cat.name}}</b> </td>
                   <td class="hidden md:flex px-6 py-4 w-fit"> {{cat.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} </td>
                   <td class="flex px-6 py-4 w-fit justify-end"> <input id="select-checkbox"
@@ -150,5 +151,6 @@
   [message]="errorMessage"></error-message>
 }
 @if(showReminder){
-    <reminder-message class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></reminder-message>
+<reminder-message
+  class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></reminder-message>
 }

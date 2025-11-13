@@ -8,10 +8,11 @@
         <!--<form class="max-w-lg w-1/2 pr-4 z-10"> <div class="relative"> <input type="search" id="search" [formControl]="searchField" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-black focus:border-black" placeholder="Filter catalogs..." /> <button type="submit" (click)="filterInventoryByKeywords()" class="absolute top-0 end-0 inline-flex items-center p-2.5 text-sm font-medium h-full text-white bg-primary-100 rounded-e-lg hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300"> <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/> </svg> <span class="ml-2">{{ 'OFFERINGS._search' | translate }}</span> </button> </div> </form>-->
         <button data-cy="newCatalog" type="button" (click)="goToCreate()"
           class="ml-2 mr-8 mb-4 text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center align-middle me-2">
-          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
+          <svg _ngcontent-ng-c1671805716="" width="19" height="19" viewBox="0 0 19 19" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path _ngcontent-ng-c1671805716=""
               d="M8.75 10.25V13.5C8.75 13.7125 8.82192 13.8906 8.96575 14.0343C9.10958 14.1781 9.28775 14.25 9.50025 14.25C9.71292 14.25 9.891 14.1781 10.0345 14.0343C10.1782 13.8906 10.25 13.7125 10.25 13.5V10.25H13.5C13.7125 10.25 13.8906 10.1781 14.0343 10.0343C14.1781 9.89042 14.25 9.71225 14.25 9.49975C14.25 9.28708 14.1781 9.109 14.0343 8.9655C13.8906 8.82183 13.7125 8.75 13.5 8.75H10.25V5.5C10.25 5.2875 10.1781 5.10942 10.0343 4.96575C9.89042 4.82192 9.71225 4.75 9.49975 4.75C9.28708 4.75 9.109 4.82192 8.9655 4.96575C8.82183 5.10942 8.75 5.2875 8.75 5.5V8.75H5.5C5.2875 8.75 5.10942 8.82192 4.96575 8.96575C4.82192 9.10958 4.75 9.28775 4.75 9.50025C4.75 9.71292 4.82192 9.891 4.96575 10.0345C5.10942 10.1782 5.2875 10.25 5.5 10.25H8.75ZM9.50175 19C8.18775 19 6.95267 18.7507 5.7965 18.252C4.64033 17.7533 3.63467 17.0766 2.7795 16.2218C1.92433 15.3669 1.24725 14.3617 0.74825 13.206C0.249417 12.0503 0 10.8156 0 9.50175C0 8.18775 0.249333 6.95267 0.748 5.7965C1.24667 4.64033 1.92342 3.63467 2.77825 2.7795C3.63308 1.92433 4.63833 1.24725 5.794 0.74825C6.94967 0.249417 8.18442 0 9.49825 0C10.8123 0 12.0473 0.249333 13.2035 0.748C14.3597 1.24667 15.3653 1.92342 16.2205 2.77825C17.0757 3.63308 17.7528 4.63833 18.2518 5.794C18.7506 6.94967 19 8.18442 19 9.49825C19 10.8123 18.7507 12.0473 18.252 13.2035C17.7533 14.3597 17.0766 15.3653 16.2218 16.2205C15.3669 17.0757 14.3617 17.7528 13.206 18.2518C12.0503 18.7506 10.8156 19 9.50175 19ZM9.5 17.5C11.7333 17.5 13.625 16.725 15.175 15.175C16.725 13.625 17.5 11.7333 17.5 9.5C17.5 7.26667 16.725 5.375 15.175 3.825C13.625 2.275 11.7333 1.5 9.5 1.5C7.26667 1.5 5.375 2.275 3.825 3.825C2.275 5.375 1.5 7.26667 1.5 9.5C1.5 11.7333 2.275 13.625 3.825 15.175C5.375 16.725 7.26667 17.5 9.5 17.5Z"
-              fill="white" />
+              fill="white"></path>
           </svg>
           <p class="pl-2 pr-2">{{ 'OFFERINGS._add_new_catalog' | translate }}</p>
         </button>
@@ -76,7 +77,7 @@
             <th scope="col" class="px-6 py-3"> {{ 'OFFERINGS._actions' | translate }} </th>
           </tr>
         </thead>
-        <tbody> @for (cat of catalogs; track cat.id) { <tr class="border-b hover:bg-gray-200">
+        <tbody> @for (cat of catalogs; track cat.id) { <tr class="border-b">
             <td class="px-6 py-4 text-wrap break-all"> {{cat.name}} </td>
             <td class="px-6 py-4"> @if(cat.lifecycleStatus == 'Active'){ <span
                 class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
@@ -89,14 +90,14 @@
                 'ADMIN._obsolete' | translate }}</span> } </td>
             <td class="px-6 py-4 hidden md:table-cell"> {{cat.relatedParty?.at(0)?.role}} </td>
             <td class="px-6 py-4"> <button type="button" (click)="goToUpdate(cat)"
-                class="text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2">
-                <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                  width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                  <path fill-rule="evenodd"
-                    d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z"
-                    clip-rule="evenodd" />
-                </svg> </button>
-              <!--<button type="button" class="text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2"> <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"> <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/> <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/> </svg> </button>-->
+                class=" focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm text-center inline-flex items-center me-2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M5 19H6.2615L16.498 8.7635L15.2365 7.502L5 17.7385V19ZM4.404 20.5C4.14783 20.5 3.93317 20.4133 3.76 20.24C3.58667 20.0668 3.5 19.8522 3.5 19.596V17.8635C3.5 17.6197 3.54683 17.3873 3.6405 17.1663C3.734 16.9453 3.86283 16.7527 4.027 16.5885L16.6905 3.93075C16.8417 3.79342 17.0086 3.68733 17.1913 3.6125C17.3741 3.5375 17.5658 3.5 17.7663 3.5C17.9668 3.5 18.1609 3.53558 18.3488 3.60675C18.5368 3.67792 18.7032 3.79108 18.848 3.94625L20.0693 5.18275C20.2244 5.32758 20.335 5.49425 20.401 5.68275C20.467 5.87125 20.5 6.05975 20.5 6.24825C20.5 6.44942 20.4657 6.64133 20.397 6.824C20.3283 7.00683 20.2191 7.17383 20.0693 7.325L7.4115 19.973C7.24733 20.1372 7.05475 20.266 6.83375 20.3595C6.61275 20.4532 6.38033 20.5 6.1365 20.5H4.404ZM15.8562 8.14375L15.2365 7.502L16.498 8.7635L15.8562 8.14375Z"
+                    fill="#666666" fill-opacity="0.6" />
+                </svg>
+              </button>
+              <!--<button type="button" class=" focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium text-sm text-center inline-flex items-center me-2"> <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"> <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/> <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/> </svg> </button>-->
             </td>
           </tr> } @empty { <div class="flex justify-center w-full m-4">
             <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50" role="alert">
@@ -111,7 +112,7 @@
       </table>
     </div> @if (!loading_more) { @if (page_check) { <div class="flex pt-6 pb-2 justify-center align-middle"> <button
         (click)="next()"
-        class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-200">
+        class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-white bg-primary-100 rounded-full">
         {{ 'OFFERINGS._load_more' | translate }} <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

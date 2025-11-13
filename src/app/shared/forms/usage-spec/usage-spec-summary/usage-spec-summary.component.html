@@ -16,8 +16,7 @@
           <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'USAGE_SPECS._description' | translate }} </th>
         </tr>
       </thead>
-      <tbody> @for (metric of usageSpecForm.get('metrics')?.value; track metric) { <tr
-          class="border-b hover:bg-gray-200">
+      <tbody> @for (metric of usageSpecForm.get('metrics')?.value; track metric) { <tr class="border-b">
           <td class="px-6 py-4 text-wrap break-all"> {{metric.name}} </td>
           <td class="hidden md:table-cell px-6 py-4"> {{metric.description}} </td>
         </tr> } </tbody>

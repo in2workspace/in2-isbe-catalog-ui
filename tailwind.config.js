@@ -7,8 +7,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      heading: ["GT StandardL", "sans-serif"],
-      body: ["GT StandardM", "sans-serif"],
+      heading: ["GTStandardL", "sans-serif"],
+      body: ["GTStandardM", "sans-serif"],
     },
     extend: {
       colors: {

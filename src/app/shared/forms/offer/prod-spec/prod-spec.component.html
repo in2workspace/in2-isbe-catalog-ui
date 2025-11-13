@@ -38,7 +38,7 @@
         <th scope="col" class="hidden md:table-cell px-6 py-3">{{ 'OFFERINGS._last_update' | translate }} </th>
       </tr>
     </thead>
-    <tbody data-cy="prodSpecs"> @for (prod of prodSpecs; track $index) { <tr class="border-b hover:bg-gray-200"
+    <tbody data-cy="prodSpecs"> @for (prod of prodSpecs; track $index) { <tr class="border-b"
         (click)="!isEditMode && toggleSelection(prod)" [ngClass]="getRowClass(prod.id)"> <!-- Checkbox -->
         <td class="px-4 py-3 w-12"> <input type="radio" name="prodSpecSelection"
             class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-black"
@@ -48,22 +48,23 @@
         <td class="px-6 py-4"> <span class="text-xs font-medium px-2.5 py-0.5 rounded border"
             [ngClass]="getBundleClass(prod.isBundle)"> {{ prod.isBundle ? ('OFFERINGS._bundle' | translate) :
             ('OFFERINGS._simple' | translate) }} </span></td>
-        <td class="px-6 py-4"> 
-          <span class="text-xs font-medium px-2.5 py-0.5 rounded border" [ngClass]="getStatusClass(prod.lifecycleStatus)">
+        <td class="px-6 py-4">
+          <span class="text-xs font-medium px-2.5 py-0.5 rounded border"
+            [ngClass]="getStatusClass(prod.lifecycleStatus)">
             @if(prod.lifecycleStatus == 'In design'){
-                {{ 'ADMIN._in_design' | translate }}
+            {{ 'ADMIN._in_design' | translate }}
             }
             @else if(prod.lifecycleStatus == 'Active'){
-                {{ 'ADMIN._active' | translate }}
+            {{ 'ADMIN._active' | translate }}
             } @else if(prod.lifecycleStatus == 'Launched') {
-                {{ 'ADMIN._launched' | translate }}
+            {{ 'ADMIN._launched' | translate }}
             } @else if(prod.lifecycleStatus == 'Retired') {
-                {{ 'ADMIN._retired' | translate }}
+            {{ 'ADMIN._retired' | translate }}
             } @else if(prod.lifecycleStatus == 'Obsolete') {
-                {{ 'ADMIN._obsolete' | translate }}
+            {{ 'ADMIN._obsolete' | translate }}
             }
-        
-          </span> 
+
+          </span>
         </td>
         <td class="hidden md:table-cell px-6 py-4"> {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} </td>
       </tr> } </tbody>

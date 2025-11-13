@@ -179,7 +179,7 @@
                 <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._select' | translate }} </th>
               </tr>
             </thead>
-            <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b hover:bg-gray-200">
+            <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b">
                 <td class="px-6 py-4 text-wrap break-all"> {{prod.name}} </td>
                 <td class="hidden md:table-cell px-6 py-4"> @if(prod.lifecycleStatus == 'In design'){ <span
                     class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
@@ -206,7 +206,7 @@
           </table>
         </div> } } @if (!loadingBundle_more) { @if (bundlePageCheck) { <div
           class="flex pt-6 pb-2 justify-center align-middle"> <button (click)="nextBundle()"
-            class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-200">
+            class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-white bg-primary-100 rounded-full">
             {{ 'CREATE_PROD_SPEC._load_more' | translate }} <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -281,8 +281,7 @@
                 <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._actions' | translate }} </th>
               </tr>
             </thead>
-            <tbody> @for (sel of selectedISOS; track sel.name; let idx = $index) { <tr
-                class="border-b hover:bg-gray-200">
+            <tbody> @for (sel of selectedISOS; track sel.name; let idx = $index) { <tr class="border-b">
                 <td class="px-6 py-4 text-wrap break-all"> {{sel.name}} </td>
                 <td class="px-6 py-4 text-wrap break-all"> {{sel.url}}
                   <!--<input readonly type="text" [(ngModel)]="selectedISOS[idx].url" value="{{sel.url}}" [id]="'iso-'+sel.name" class="mb-2 bg-gray-50 border border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5" /> -->
@@ -352,7 +351,7 @@
                 <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._actions' | translate }} </th>
               </tr>
             </thead>
-            <tbody> @for (prod of prodChars; track prod;) { <tr class="border-b hover:bg-gray-200">
+            <tbody> @for (prod of prodChars; track prod;) { <tr class="border-b">
                 <td class="px-6 py-4 max-w-1/6 text-wrap break-all"> {{prod.name}} </td>
                 <td class="hidden lg:table-cell px-6 py-4 text-wrap break-all"> {{prod.description}} </td>
                 <td class="px-6 py-4 text-wrap break-all"> @for (char of prod.productSpecCharacteristicValue; track
@@ -601,7 +600,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._actions' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (rel of prodRelationships; track rel) { <tr class="border-b hover:bg-gray-200">
+              <tbody> @for (rel of prodRelationships; track rel) { <tr class="border-b">
                   <td class="px-6 py-4"> {{rel.relationshipType}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.productSpec.name}} </td>
                   <td class="hidden md:table-cell px-6 py-4"> @if(rel.productSpec.lifecycleStatus == 'Active'){ <span
@@ -667,8 +666,7 @@
                     }} </th>
                 </tr>
               </thead>
-              <tbody> @for (rel of prodSpecRels; track rel) { <tr class="border-b hover:bg-gray-200"
-                  (click)="selectRelationship(rel)"
+              <tbody> @for (rel of prodSpecRels; track rel) { <tr class="border-b" (click)="selectRelationship(rel)"
                   [ngClass]="rel.id == selectedProdSpec.id ? 'bg-gray-300' : 'bg-white'">
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.name}} </td>
                   <td class="px-6 py-4"> @if(rel.isBundle == false){ <span
@@ -681,7 +679,7 @@
             </table>
           </div> } @if (!loadingprodSpecRel_more) { @if (prodSpecRelPageCheck) { <div
             class="flex pt-6 pb-2 justify-center align-middle"> <button (click)="nextProdSpecsRel()"
-              class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-200">
+              class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-white bg-primary-100 rounded-full">
               {{ 'CREATE_PROD_SPEC._load_more' | translate }} <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -760,7 +758,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._status' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (bun of prodSpecsBundle; track bun) { <tr class="border-b hover:bg-gray-200">
+              <tbody> @for (bun of prodSpecsBundle; track bun) { <tr class="border-b">
                   <td class="px-6 py-4 text-wrap break-all"> {{bun.name}} </td>
                   <td class="px-6 py-4"> @if(bun.lifecycleStatus == 'Active'){ <span
                       class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{bun.lifecycleStatus}}</span>
@@ -785,8 +783,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._values' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (prod of productSpecToCreate?.productSpecCharacteristic; track prod;) { <tr
-                  class="border-b hover:bg-gray-200">
+              <tbody> @for (prod of productSpecToCreate?.productSpecCharacteristic; track prod;) { <tr class="border-b">
                   <td class="px-6 py-4 text-wrap break-all"> {{prod.name}} </td>
                   <td class="hidden lg:table-cell px-6 py-4 text-wrap break-all"> {{prod.description}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> @for (char of prod.productSpecCharacteristicValue; track
@@ -807,7 +804,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'CREATE_PROD_SPEC._value' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (att of productSpecToCreate?.attachment; track att) { <tr class="border-b hover:bg-gray-200">
+              <tbody> @for (att of productSpecToCreate?.attachment; track att) { <tr class="border-b">
                   <td class="px-6 py-4 text-wrap break-all"> {{att.name}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> {{att.url}} </td>
                 </tr> } </tbody>
@@ -826,7 +823,7 @@
                     }} </th>
                 </tr>
               </thead>
-              <tbody> @for (rel of prodRelationships; track rel) { <tr class="border-b hover:bg-gray-200">
+              <tbody> @for (rel of prodRelationships; track rel) { <tr class="border-b">
                   <td class="px-6 py-4"> {{rel.relationshipType}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.productSpec.name}} </td>
                   <td class="hidden md:table-cell px-6 py-4"> @if(rel.productSpec.lifecycleStatus == 'Active'){ <span

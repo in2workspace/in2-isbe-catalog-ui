@@ -27,7 +27,7 @@
         <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'OFFERINGS._role' | translate }} </th>
       </tr>
     </thead>
-    <tbody data-cy="catalogList"> @for (cat of catalogs; track cat) { <tr class="border-b hover:bg-gray-200"
+    <tbody data-cy="catalogList"> @for (cat of catalogs; track cat) { <tr class="border-b"
         (click)="toggleSelection(cat)" [ngClass]="cat.id == selectedCatalog.id ? 'bg-gray-300' : 'bg-white'">
         <!-- Checkbox -->
         <td class="px-4 py-3 w-12"> <input type="radio" name="catSelection"
@@ -48,7 +48,7 @@
   </table>
 </div> } @if (!loadingCatalog_more) { @if (catalogPageCheck) { <div class="flex pt-6 pb-2 justify-center align-middle">
   <button (click)="nextCatalog()"
-    class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-200">
+    class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-white bg-primary-100 rounded-full">
     {{ 'CREATE_PROD_SPEC._load_more' | translate }} <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5" />

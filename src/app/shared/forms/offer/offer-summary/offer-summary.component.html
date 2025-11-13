@@ -10,8 +10,8 @@
   <div class="mb-4"> <label class="font-bold text-lg mr-4">{{ 'CREATE_OFFER._status' | translate }}</label>
     @if(productOfferForm.get('generalInfo')?.get('status')?.value == 'In design'){ <span
       class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
-      'ADMIN._in_design' | translate }}</span> }@else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Active'){ <span
-      class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+      'ADMIN._in_design' | translate }}</span> }@else if(productOfferForm.get('generalInfo')?.get('status')?.value ==
+    'Active'){ <span class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
       'ADMIN._active' | translate }}</span> } @else if(productOfferForm.get('generalInfo')?.get('status')?.value ==
     'Launched') { <span class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
       'ADMIN._launched' | translate }}</span> } @else if(productOfferForm.get('generalInfo')?.get('status')?.value ==
@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="border-b hover:bg-gray-200">
+        <tr class="border-b">
           <td class="px-6 py-4 text-wrap break-all"> {{productOfferForm.get('catalogue')?.value.name}} </td>
           <td class="px-6 py-4"> @if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'active'){ <span
               class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
@@ -61,8 +61,7 @@
           <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_OFFER._last_update' | translate }} </th>
         </tr>
       </thead>
-      <tbody> @for (cat of productOfferForm.get('category')?.value; track cat.id) { <tr
-          class="border-b hover:bg-gray-200">
+      <tbody> @for (cat of productOfferForm.get('category')?.value; track cat.id) { <tr class="border-b">
           <td class="px-6 py-4 text-wrap break-all"> {{cat.name}} </td>
           <td class="hidden md:table-cell px-6 py-4"> {{cat.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} </td>
         </tr> } </tbody>
@@ -78,8 +77,7 @@
           <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_OFFER._description' | translate }} </th>
         </tr>
       </thead>
-      <tbody> @for (price of productOfferForm.get('pricePlans')?.value; track price.id) { <tr
-          class="border-b hover:bg-gray-200">
+      <tbody> @for (price of productOfferForm.get('pricePlans')?.value; track price.id) { <tr class="border-b">
           <td class="px-6 py-4 max-w-1/6 text-wrap break-all"> {{price.name}} </td>
           <td class="hidden md:table-cell px-6 py-4 text-wrap break-all"> {{price.description}} </td>
         </tr> } </tbody>
@@ -87,7 +85,7 @@
   </div>
   }
   <!--
-@if(createdSLAs.length>0){ <h2 class="font-bold text-lg">{{ 'CREATE_OFFER._sla' | translate }}</h2> <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4"> <table class="w-full text-sm text-left rtl:text-right text-primary-100"> <thead class="text-primary-100 bg-green"> <tr> <th scope="col" class="px-6 py-3"> {{ 'CREATE_OFFER._name' | translate }} </th> <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_OFFER._description' | translate }} </th> <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_OFFER._threshold' | translate }} </th> <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_OFFER._unit' | translate }} </th> </tr> </thead> <tbody> @for (sla of createdSLAs; track sla) { <tr class="border-b hover:bg-gray-200"> <td class="px-6 py-4"> {{sla.type}} </td> <td class="hidden md:table-cell px-6 py-4 text-wrap break-all"> {{sla.description}} </td> <td class="hidden md:table-cell px-6 py-4"> {{sla.threshold}} </td> <td class="hidden md:table-cell px-6 py-4"> {{sla.unitMeasure}} </td> </tr> } </tbody> </table> </div>
+@if(createdSLAs.length>0){ <h2 class="font-bold text-lg">{{ 'CREATE_OFFER._sla' | translate }}</h2> <div class="relative overflow-x-auto sm:rounded-lg w-full bg-white border border-gray-50 mb-4"> <table class="w-full text-sm text-left rtl:text-right text-primary-100"> <thead class="text-primary-100 bg-green"> <tr> <th scope="col" class="px-6 py-3"> {{ 'CREATE_OFFER._name' | translate }} </th> <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_OFFER._description' | translate }} </th> <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_OFFER._threshold' | translate }} </th> <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'CREATE_OFFER._unit' | translate }} </th> </tr> </thead> <tbody> @for (sla of createdSLAs; track sla) { <tr class="border-b"> <td class="px-6 py-4"> {{sla.type}} </td> <td class="hidden md:table-cell px-6 py-4 text-wrap break-all"> {{sla.description}} </td> <td class="hidden md:table-cell px-6 py-4"> {{sla.threshold}} </td> <td class="hidden md:table-cell px-6 py-4"> {{sla.unitMeasure}} </td> </tr> } </tbody> </table> </div>
 }
 -->
   @if(!isLicenseEmpty) { <h2 class="font-bold text-lg">{{ 'CREATE_OFFER._license' | translate }}</h2>

@@ -112,8 +112,8 @@
   @if (!loading_more) { @if (page_check) { <div class="flex pt-6 pb-6 justify-center align-middle"> <button
       (click)="next()"
       class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
-      {{ 'CREATE_PROD_SPEC._load_more' | translate }}<svg class="w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24">
+      {{ 'CREATE_PROD_SPEC._load_more' | translate }}<svg class="w-3.5 h-3.5 ms-2" aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M5 12h14m-7 7V5" />
       </svg> </button> </div> } } @else { <div role="status"
@@ -252,7 +252,7 @@
                     <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'OFFERINGS._status' | translate }} </th>
                   </tr>
                 </thead>
-                <tbody> @for (serv of selectedServices; track serv.id) { <tr class="border-b hover:bg-gray-200">
+                <tbody> @for (serv of selectedServices; track serv.id) { <tr class="border-b">
                     <td class="px-6 py-4 text-wrap break-all w-1/2 md:w-1/4"> <a (click)="selectService(serv.id)"
                         class="cursor-pointer font-medium text-primary-100 hover:underline">{{serv.id}}</a> </td>
                     <td class="px-6 py-4 text-wrap break-all w-1/2 md:w-1/4"> {{serv.name}} </td>
@@ -284,7 +284,7 @@
                     <th scope="col" class="hidden md:table-cell px-6 py-3"> {{ 'OFFERINGS._status' | translate }} </th>
                   </tr>
                 </thead>
-                <tbody> @for (res of selectedResources; track res.id) { <tr class="border-b hover:bg-gray-200">
+                <tbody> @for (res of selectedResources; track res.id) { <tr class="border-b">
                     <td class="px-6 py-4 text-wrap break-all w-1/2 md:w-1/4"> <a (click)="selectResource(res.id)"
                         class="cursor-pointer font-medium text-primary-100 hover:underline">{{res.id}}</a> </td>
                     <td class="px-6 py-4 text-wrap break-all w-1/2 md:w-1/4"> {{res.name}} </td>

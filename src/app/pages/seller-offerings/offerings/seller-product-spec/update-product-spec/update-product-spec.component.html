@@ -91,9 +91,9 @@
             <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._summary' | translate }}</p>
           </span> </button>
       </div>
-      <div> 
-        @if(showGeneral){ 
-          <h2 class="text-3xl font-bold text-primary-100 ml-4">{{ 'UPDATE_PROD_SPEC._general'|translate }}</h2>
+      <div>
+        @if(showGeneral){
+        <h2 class="text-3xl font-bold text-primary-100 ml-4">{{ 'UPDATE_PROD_SPEC._general'|translate }}</h2>
         <form class="m-4 md:grid md:grid-cols-2 gap-4" [formGroup]="generalForm">
           <div> <label for="prod-name" class="font-bold text-lg">{{ 'UPDATE_PROD_SPEC._product_name' | translate
               }}</label> <input formControlName="name" type="text" id="prod-name" maxLength="100"
@@ -111,10 +111,11 @@
             <label for="prod-number" class="font-bold text-lg">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
             <input formControlName="number" type="text" id="prod-number"
               class="mb-2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full p-2.5" />
-          </div> 
+          </div>
           <label class="font-bold text-lg col-span-2">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
-          <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
-          
+          <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft"
+            [ngModelOptions]="{ standalone: true }"></app-status-selector>
+
           <label for="prod-name" class="font-bold text-lg col-span-2">{{ 'UPDATE_PROD_SPEC._product_description'
             | translate }}</label> <app-markdown-textarea class="col-span-2"
             formControlName="description"></app-markdown-textarea>
@@ -174,7 +175,7 @@
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._select' | translate }} </th>
               </tr>
             </thead>
-            <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b hover:bg-gray-200">
+            <tbody> @for (prod of prodSpecs; track prod.id) { <tr class="border-b">
                 <td class="px-6 py-4 text-wrap break-all"> {{prod.name}} </td>
                 <td class="hidden md:table-cell px-6 py-4"> @if(prod.lifecycleStatus == 'In design'){ <span
                     class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
@@ -201,7 +202,7 @@
           </table>
         </div> } @if (!loadingBundle_more) { @if (bundlePageCheck) { <div
           class="flex pt-6 pb-2 justify-center align-middle"> <button (click)="nextBundle()"
-            class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-200">
+            class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-white bg-primary-100 rounded-full">
             {{ 'UPDATE_PROD_SPEC._load_more' | translate }} <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -297,8 +298,7 @@
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._actions' | translate }} </th>
               </tr>
             </thead>
-            <tbody> @for (sel of selectedISOS; track sel.name; let idx = $index) { <tr
-                class="border-b hover:bg-gray-200">
+            <tbody> @for (sel of selectedISOS; track sel.name; let idx = $index) { <tr class="border-b">
                 <td class="px-6 py-4 text-wrap break-all"> {{sel.name}} </td>
                 <td class="px-6 py-4 text-wrap break-all"> {{sel.url}} </td>
                 <td class="px-6 py-4 inline-flex"> <button (click)="toggleUploadFile(sel);$event.stopPropagation();"
@@ -377,7 +377,7 @@
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._actions' | translate }} </th>
               </tr>
             </thead>
-            <tbody> @for (prod of prodChars; track prod;) { <tr class="border-b hover:bg-gray-200">
+            <tbody> @for (prod of prodChars; track prod;) { <tr class="border-b">
                 <td class="px-6 py-4 max-w-1/6 text-wrap break-all"> {{prod.name}} </td>
                 <td class="hidden lg:table-cell px-6 py-4 text-wrap break-all"> {{prod.description}} </td>
                 <td class="px-6 py-4 text-wrap break-all"> @for (char of prod.productSpecCharacteristicValue; track
@@ -613,7 +613,7 @@
                 <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._actions' | translate }} </th>
               </tr>
             </thead>
-            <tbody> @for (att of prodAttachments; track att) { <tr class="border-b hover:bg-gray-200">
+            <tbody> @for (att of prodAttachments; track att) { <tr class="border-b">
                 <td class="px-6 py-4 max-w-1/6 text-wrap break-all"> {{att.name}} </td>
                 <td class="px-6 py-4 text-wrap break-all"> {{att.url}} </td>
                 <td class="px-6 py-4"> <button (click)="removeAtt(att)"
@@ -703,7 +703,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._actions' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (rel of prodRelationships; track rel) { <tr class="border-b hover:bg-gray-200">
+              <tbody> @for (rel of prodRelationships; track rel) { <tr class="border-b">
                   <td class="px-6 py-4"> {{rel.relationshipType}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.name}} </td>
                   <td class="px-6 py-4"> <button (click)="deleteRel(rel)"
@@ -759,8 +759,7 @@
                     }} </th>
                 </tr>
               </thead>
-              <tbody> @for (rel of prodSpecRels; track rel) { <tr class="border-b hover:bg-gray-200"
-                  (click)="selectRelationship(rel)"
+              <tbody> @for (rel of prodSpecRels; track rel) { <tr class="border-b" (click)="selectRelationship(rel)"
                   [ngClass]="rel.id == selectedProdSpec.id ? 'bg-gray-300' : 'bg-white'">
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.name}} </td>
                   <td class="hidden md:table-cell px-6 py-4"> @if(rel.isBundle == false){ <span
@@ -773,7 +772,7 @@
             </table>
           </div> } @if (!loadingprodSpecRel_more) { @if (prodSpecRelPageCheck) { <div
             class="flex pt-6 pb-2 justify-center align-middle"> <button (click)="nextProdSpecsRel()"
-              class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-200">
+              class="flex cursor-pointer items-center justify-center px-3 h-8 text-sm font-medium text-white bg-primary-100 rounded-full">
               {{ 'UPDATE_PROD_SPEC._load_more' | translate }} <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -824,8 +823,8 @@
           <div class="mb-4"> <label class="font-bold text-lg mr-4">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
             @if(productSpecToUpdate?.lifecycleStatus == 'In design'){ <span
               class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
-              'ADMIN._in_design' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Active'){ <span
-              class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
+              'ADMIN._in_design' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Active'){
+            <span class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._active' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Launched') {
             <span class="bg-green text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
               'ADMIN._launched' | translate }}</span> } @else if(productSpecToUpdate?.lifecycleStatus == 'Retired') {
@@ -854,7 +853,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._status' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (bun of prodSpecsBundle; track bun) { <tr class="border-b hover:bg-gray-200">
+              <tbody> @for (bun of prodSpecsBundle; track bun) { <tr class="border-b">
                   <td class="px-6 py-4 text-wrap break-all"> {{bun.name}} </td>
                   <td class="px-6 py-4"> @if(bun.lifecycleStatus == 'In design'){ <span
                       class="bg-primary-50/30 text-primary-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded">{{
@@ -881,8 +880,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._values' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (prod of productSpecToUpdate?.productSpecCharacteristic; track prod;) { <tr
-                  class="border-b hover:bg-gray-200">
+              <tbody> @for (prod of productSpecToUpdate?.productSpecCharacteristic; track prod;) { <tr class="border-b">
                   <td class="px-6 py-4 max-w-1/6 text-wrap break-all"> {{prod.name}} </td>
                   <td class="hidden lg:table-cell px-6 py-4 text-wrap break-all"> {{prod.description}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> @for (char of prod.productSpecCharacteristicValue; track
@@ -903,7 +901,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._value' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (att of productSpecToUpdate?.attachment; track att) { <tr class="border-b hover:bg-gray-200">
+              <tbody> @for (att of productSpecToUpdate?.attachment; track att) { <tr class="border-b">
                   <td class="px-6 py-4 max-w-1/6 text-wrap break-all"> {{att.name}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> {{att.url}} </td>
                 </tr> } </tbody>
@@ -918,7 +916,7 @@
                   <th scope="col" class="px-6 py-3"> {{ 'UPDATE_PROD_SPEC._product_name' | translate }} </th>
                 </tr>
               </thead>
-              <tbody> @for (rel of prodRelationships; track rel) { <tr class="border-b hover:bg-gray-200">
+              <tbody> @for (rel of prodRelationships; track rel) { <tr class="border-b">
                   <td class="px-6 py-4"> {{rel.relationshipType}} </td>
                   <td class="px-6 py-4 text-wrap break-all"> {{rel.name}} </td>
                 </tr> } </tbody>
@@ -976,5 +974,6 @@
 }
 
 @if(showReminder){
-    <reminder-message class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></reminder-message>
+<reminder-message
+  class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></reminder-message>
 }
