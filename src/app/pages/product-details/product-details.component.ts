@@ -41,7 +41,7 @@ export class ProductDetailsComponent implements OnInit {
   categoriesMore: any[] | undefined  = [];
   category: string = 'none';
 
-  ngOnInit() {
+  async ngOnInit() {
     this.category = this.productOff?.category?.at(0)?.name ?? 'none';
     if(this.productOff?.category!=undefined&&this.productOff?.category.length>5){
       this.categories = this.productOff?.category.slice(0, 4);
@@ -59,7 +59,7 @@ export class ProductDetailsComponent implements OnInit {
     }
     let specId = this.productOff?.productSpecification?.id;
     if(specId != undefined){
-      this.api.getProductSpecification(specId).then(spec => {
+      await this.api.getProductSpecification(specId).then(spec => {
         this.prodSpec = spec;
         let prodPrices: any[] | undefined= this.productOff?.productOfferingPrice;
         if(prodPrices!== undefined){
