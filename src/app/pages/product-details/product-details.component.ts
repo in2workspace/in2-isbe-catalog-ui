@@ -41,9 +41,13 @@ export class ProductDetailsComponent implements OnInit {
   categoriesMore: any[] | undefined  = [];
   category: string = 'none';
 
-  async ngOnInit(): Promise<void> {
+  ngOnInit(): void {
     this.initCategories();
     this.initImages();
+    void this.initAsync();
+  }
+
+  private async initAsync(): Promise<void> {
     await this.loadProductSpecificationAndPrices();
     this.filterCharacteristics();
   }
@@ -113,6 +117,7 @@ export class ProductDetailsComponent implements OnInit {
       }
     }
   }
+
 
 
   closeCategories(){
