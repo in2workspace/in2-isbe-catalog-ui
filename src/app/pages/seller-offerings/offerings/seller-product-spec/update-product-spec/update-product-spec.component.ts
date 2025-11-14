@@ -1144,21 +1144,21 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   isProdValid(){
-    if(this.edited && this.prodStatusDraft !== 'Active'){
-      return true;
+    if (this.edited && this.prodStatusDraft === 'Launched') {
+      return false;
     }
     if(this.generalForm.valid){
       if(this.bundleChecked){
         if(this.prodSpecsBundle.length<2){
-          return true;
-        } else {
           return false;
+        } else {
+          return true;
         }
       } else {
-        return false;
+        return true;
       }
     } else {
-      return true;
+      return false;
     }
   }
 

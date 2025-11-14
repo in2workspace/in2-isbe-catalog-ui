@@ -1175,17 +1175,9 @@ export class OfferComponent implements OnInit, OnDestroy{
     if (this.formType === 'create') {
       return true;
     }
-
-    const currentStatus = this.productOfferForm.get('generalInfo')?.value?.status;
-    const originalStatus = this.offer?.lifecycleStatus;
-    const edited = hasNonStatusChanges(
-      this.buildSnapshot('offer'),
-      this.buildSnapshot('form')
-    );
-    if (originalStatus === 'Launched' && edited && currentStatus !== 'Active') {
-      return false;
+    if (this.edited && this.productOfferForm.get('generalInfo')?.value?.status === 'Launched') {
+        return false;
     }
-
     return true;
   }
 

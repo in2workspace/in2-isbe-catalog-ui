@@ -459,9 +459,9 @@ export class UpdateCategoryComponent implements OnInit {
   }
 
   isCatValid(){
-    if((this.edited && this.catStatusDraft !== 'Active')|| !this.generalForm.valid){
-      return true;
+    if((this.edited && this.catStatusDraft === 'Launched')|| !this.generalForm.valid){
+      return false;
     }
-    return false;
+    return true;
   }
 }
