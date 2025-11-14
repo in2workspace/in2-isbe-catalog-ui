@@ -24,9 +24,9 @@ module.exports = {
           //Secondary light
           50: "#BEA9FF",
           //Secondary dark
-          100: "#5A43A4",
+          100: "#7E5DF2",
           //Color they use as bg when dark theme
-          200: "#5A43A4",
+          200: "#7E5DF2",
           //Dark theme table background and inputs
           300: "#FF7E56",
         },

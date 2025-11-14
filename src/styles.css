@@ -263,4 +263,5 @@ textarea:-webkit-autofill::first-line {
 
 .green-footer-gradient {
   background: url("/assets/images/green-footer-gradient.png");
+  background-size: cover;
 }
