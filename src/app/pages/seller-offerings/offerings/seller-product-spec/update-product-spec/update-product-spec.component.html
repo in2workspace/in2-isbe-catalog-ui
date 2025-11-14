@@ -221,7 +221,7 @@
           class="flex w-full justify-items-end justify-end ml-4"> <button type="button" (click)="toggleCompliance();"
             [disabled]="prodSpecsBundle.length<2 && bundleChecked"
             [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'"
-            class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+            class="flex text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center">
             {{ 'UPDATE_PROD_SPEC._next' | translate }} <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -269,7 +269,7 @@
                   </svg> </button> </div>
             </li> } </ul>
         </div> } } <div class="flex w-full justify-items-end justify-end align-items-middle ml-4 h-fit">
-          <!-- <button type="button" (click)="verifyCredential();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center"> {{ 'UPDATE_PROD_SPEC._verify' | translate }} <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/> </svg> </button> -->
+          <!-- <button type="button" (click)="verifyCredential();" class="flex text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center"> {{ 'UPDATE_PROD_SPEC._verify' | translate }} <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/> </svg> </button> -->
           <div class="ml-4 flex"> <svg data-popover-target="popover-default"
               class="flex self-center w-6 h-6 text-primary-100" clip-rule="evenodd" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -526,7 +526,7 @@
               </svg> </button> </div>
         </div> } <div class="flex w-full justify-items-end justify-end ml-4 mt-4"> <button type="button"
             (click)="toggleAttach();"
-            class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+            class="flex text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center">
             {{ 'UPDATE_PROD_SPEC._next' | translate }} <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -677,7 +677,7 @@
               </svg> </button> </div>
         </div> } } <div class="flex w-full justify-items-end justify-end ml-4 mt-4"> <button type="button"
             (click)="toggleRelationship();"
-            class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+            class="flex text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center">
             {{ 'UPDATE_PROD_SPEC._next' | translate }} <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -798,7 +798,7 @@
                   d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z" />
               </svg> </button> </div> } </div>
         <div class="flex w-full justify-items-end justify-end ml-4"> <button type="button" (click)="showFinish();"
-            class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+            class="flex text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center">
             {{ 'UPDATE_PROD_SPEC._finish' | translate }} <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -924,7 +924,7 @@
           </div> } <div class="flex w-full justify-items-end justify-end ml-4"> <button type="button"
               (click)="updateProduct();" [disabled]="isProdValid()"
               [ngClass]="isProdValid() ? 'opacity-50' : 'hover:bg-primary-50'"
-              class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+              class="flex text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center inline-flex items-center">
               {{ 'UPDATE_PROD_SPEC._update_prod' | translate }} <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
                 aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
