@@ -1,19 +1,5 @@
 <div class="w-full px-8 pt-2 pb-8">
-  <div class="py-16">
-    <h1 class="text-7xl font-semibold font-heading"> {{ 'ADMIN._admin' | translate }} </h1>
-  </div>
 
-  <div class="flex flex-cols mr-2 ml-2 lg:hidden">
-    <h1 class="mb-8 mt-4 text-7xl font-semibold font-heading w-full">My offerings</h1>
-    <div class="flex align-middle content-center items-center"> <button id="dropdown-nav"
-        data-dropdown-toggle="dropdown-nav-content"
-        class="text-black h-fit w-fit justify-between bg-white focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center "
-        type="button"> <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-          viewBox="0 0 17 14">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M1 1h15M1 7h15M1 13h15" />
-        </svg> Administration </button> </div>
-  </div>
 
   <!-- Dropdown menu -->
   <div id="dropdown-nav-content" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg w-44">
@@ -29,18 +15,38 @@
       <private-area-menu [loggedAsUser]="loggedAsUser" [active]="activeTab" (select)="onMenuSelect($event)">
       </private-area-menu>
     </div>
-    @if(show_categories){
-    <admin-categories></admin-categories>
-    } @if(show_create_categories){
-    <create-category></create-category>
-    } @if(show_update_categories){
-    <update-category [category]="category_to_update"></update-category>
-    }
-    @if(show_verification){
-    <verification></verification>
-    }
-    @if(show_revenue){
-    <operator-revenue-sharing></operator-revenue-sharing>
-    }
+
+    <div class="w-full">
+      <div class="py-16">
+        <h1 class="text-7xl font-semibold font-heading"> {{ 'ADMIN._admin' | translate }} </h1>
+      </div>
+
+      <div class="flex flex-cols mr-2 ml-2 lg:hidden">
+        <h1 class="mb-8 mt-4 text-7xl font-semibold font-heading w-full">My offerings</h1>
+        <div class="flex align-middle content-center items-center"> <button id="dropdown-nav"
+            data-dropdown-toggle="dropdown-nav-content"
+            class="text-black h-fit w-fit justify-between bg-white focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center "
+            type="button"> <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 17 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M1 1h15M1 7h15M1 13h15" />
+            </svg> Administration </button> </div>
+      </div>
+
+
+      @if(show_categories){
+      <admin-categories></admin-categories>
+      } @if(show_create_categories){
+      <create-category></create-category>
+      } @if(show_update_categories){
+      <update-category [category]="category_to_update"></update-category>
+      }
+      @if(show_verification){
+      <verification></verification>
+      }
+      @if(show_revenue){
+      <operator-revenue-sharing></operator-revenue-sharing>
+      }
+    </div>
   </div>
 </div>

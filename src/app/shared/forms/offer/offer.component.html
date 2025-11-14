@@ -29,17 +29,18 @@
         @for (step of steps; track i; let i = $index) {
         <li (click)="handleStepClick(i)" [class.cursor-not-allowed]="!canNavigate(i)"
           [class.opacity-50]="!isStepActive(i)" [class.text-primary-100]="isStepActive(i)"
-          class="flex flex-col items-center flex-1 cursor-pointer">
+          class="relative flex flex-col items-center flex-1 cursor-pointer">
           <div class="flex items-center justify-center">
-            <span
-              class="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 border border-primary-100 shrink-0 rounded-full"
-              [class.opacity-100]="isStepActive(i)" [class.text-black]="isStepActive(i)">
-              {{ i + 1 }}
-            </span>
-            @if (i < steps.length - 1) {
-            <span class="block w-[50px] h-px translate-x-full border-t border-primary-100"
+            @if (i < steps.length - 1) { <span
+              class="block w-[50px] h-px absolute right-0 translate-x-1/2 border-t border-primary-100"
               [ngClass]="getDividerClass(i)"></span>
-            }
+              }
+              <span
+                class="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 border border-primary-100 shrink-0 rounded-full"
+                [class.opacity-100]="isStepActive(i)" [class.text-black]="isStepActive(i)">
+                {{ i + 1 }}
+              </span>
+
           </div>
           <span class="md:block mt-2 hidden text-xxs">{{ step | translate }}</span>
         </li>
@@ -54,15 +55,11 @@
 
       <div class="">
         @switch (getStepKey(steps[currentStep])) {
-          @case ('General Info') {
-            <app-general-info-form 
-              [data]="offer" 
-              [formType]="formType" 
-              [form]="productOfferForm.controls['generalInfo']"
-              [isAdmin]="isAdmin"
-              (formChange)="handleSubformChange($event)">
-            </app-general-info-form>
-          }
+        @case ('General Info') {
+        <app-general-info-form [data]="offer" [formType]="formType" [form]="productOfferForm.controls['generalInfo']"
+          [isAdmin]="isAdmin" (formChange)="handleSubformChange($event)">
+        </app-general-info-form>
+        }
 
         @case ('Product Specification') {
         <app-prod-spec-form formControlName="prodSpec" [data]="offer" [seller]="seller" [formType]="formType"
@@ -109,7 +106,7 @@
                   'text-gray-500 hover:bg-gray-100 hover:text-gray-700': currentStep !== 0,
                   'text-gray-300 cursor-not-allowed': currentStep === 0
                 }"
-          class="px-4 py-2 flex items-center justify-center text-base font-medium rounded-full  bg-white border border-gray-300 ">
+          class="px-4 py-2 flex items-center justify-center text-base font-medium rounded-full bg-primary-100 border border-primary-100 ">
           <svg class="min-w-4 w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
             <path fill="currentColor" d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3
                     256 246.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z" />
@@ -132,12 +129,11 @@
         </button>
 
         @if( (formType === 'create' && currentStep === steps.length - 1) || formType === 'update' ){
-          <button data-cy="offerFinish" (click)="submitForm()"
-                  [disabled]="!isOfferValid()"
-                  [ngClass]="!isOfferValid() ? 'opacity-50' : 'hover:bg-primary-50'"
-                  class="px-4 py-2 text-base font-medium text-white rounded-lg bg-primary-100">
-            {{ formType === 'create' ? 'Crear Oferta' : 'Actualizar Oferta' }}
-          </button>
+        <button data-cy="offerFinish" (click)="submitForm()" [disabled]="!isOfferValid()"
+          [ngClass]="!isOfferValid() ? 'opacity-50' : 'hover:bg-primary-50'"
+          class="px-4 py-2 text-base font-medium text-white rounded-lg bg-primary-100">
+          {{ formType === 'create' ? 'Crear Oferta' : 'Actualizar Oferta' }}
+        </button>
         }
       </div>
     </form>
@@ -147,13 +143,17 @@
 </div>
 
 @if(showError){
-  <error-message class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50" [message]="errorMessage"></error-message>
+<error-message
+  class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
+  [message]="errorMessage"></error-message>
 }
 
 @if(showReminder){
-    <reminder-message class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></reminder-message>
+<reminder-message
+  class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></reminder-message>
 }
 
 @if(showIsbeMessage){
-    <isbe-message (close)="onCloseSelect()" class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></isbe-message>
+<isbe-message (close)="onCloseSelect()"
+  class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></isbe-message>
 }
