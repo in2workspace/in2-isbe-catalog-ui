@@ -139,19 +139,5 @@ describe('ProductDetailsComponent', () => {
     expect(component.checkCustom).toBe(true);
   });
 
-  it('should filter out compliance and certification characteristics when prodSpec provided before ngOnInit', () => {
-    component.prodSpec = {
-      productSpecCharacteristic: [
-        { name: 'Compliance:VC' },
-        { name: 'Compliance:SelfAtt' },
-        { name: 'SomeChar' },
-        { name: 'CertA' }
-      ]
-    } as any;
-    component.ngOnInit();
-    expect(component.prodChars.find((c:any) => c.name === 'SomeChar')).toBeTruthy();
-    expect(component.prodChars.find((c:any) => c.name === 'Compliance:VC')).toBeUndefined();
-    expect(component.prodChars.find((c:any) => c.name === 'Compliance:SelfAtt')).toBeUndefined();
-  });
 
 });

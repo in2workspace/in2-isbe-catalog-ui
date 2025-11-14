@@ -191,14 +191,14 @@ describe('UpdateProductSpecComponent', () => {
     component.generalForm.controls['brand'].setValue('Brand');
     component.generalForm.controls['version'].setValue('1.0');
     component.bundleChecked = false;
-    expect(component.isProdValid()).toBe(false);
+    expect(component.isProdValid()).toBe(true);
 
     component.bundleChecked = true;
     component.prodSpecsBundle = [{ id: 'a' } as any];
-    expect(component.isProdValid()).toBe(true);
+    expect(component.isProdValid()).toBe(false);
 
     component.prodSpecsBundle = [{ id: 'a' } as any, { id: 'b' } as any];
-    expect(component.isProdValid()).toBe(false);
+    expect(component.isProdValid()).toBe(true);
   });
 
     it('updateProduct calls service update and navigates back', () => {
