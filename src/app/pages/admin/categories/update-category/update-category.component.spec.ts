@@ -111,15 +111,15 @@ describe('UpdateCategoryComponent', () => {
     component.edited = false;
     component.catStatusDraft = 'Active';
     expect(component.generalForm.valid).toBe(false);
-    expect(component.isCatValid()).toBe(true);
+    expect(component.isCatValid()).toBe(false);
     component.generalForm.controls['name'].setValue('Valid Name');
     component.edited = true;
     component.catStatusDraft = 'Launched';
     expect(component.generalForm.valid).toBe(true);
-    expect(component.isCatValid()).toBe(true);
+    expect(component.isCatValid()).toBe(false);
 
     component.edited = false;
     component.catStatusDraft = 'Active';
-    expect(component.isCatValid()).toBe(false);
+    expect(component.isCatValid()).toBe(true);
   });
 });

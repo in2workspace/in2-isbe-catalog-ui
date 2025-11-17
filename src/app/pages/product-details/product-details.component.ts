@@ -41,51 +41,84 @@ export class ProductDetailsComponent implements OnInit {
   categoriesMore: any[] | undefined  = [];
   category: string = 'none';
 
-  ngOnInit() {
-    this.category = this.productOff?.category?.at(0)?.name ?? 'none';
-    if(this.productOff?.category!=undefined&&this.productOff?.category.length>5){
-      this.categories = this.productOff?.category.slice(0, 4);
-      this.categoriesMore = this.productOff?.category.slice(4);
-      this.checkMoreCats=true;
-    } else {
-      this.categories = this.productOff?.category;
-      this.checkMoreCats=false;
-    }
-    let profile = this.productOff?.attachment?.filter(item => item.name === 'Profile Picture') ?? [];
-    if(profile.length==0){
-      this.images = this.productOff?.attachment?.filter(item => item.attachmentType === 'Picture') ?? [];
-    } else {
-      this.images = profile;
-    }
-    let specId = this.productOff?.productSpecification?.id;
-    if(specId != undefined){
-      this.api.getProductSpecification(specId).then(spec => {
-        this.prodSpec = spec;
-        let prodPrices: any[] | undefined= this.productOff?.productOfferingPrice;
-        if(prodPrices!== undefined){
-          for(const element of prodPrices){
-            this.api.getProductPrice(element.id).then(price => {
-              if(price.priceType == 'custom'){
-                this.checkCustom=true;
-              }
-            })
-          }
-        }
-      })
-    }
-    if(this.prodSpec.productSpecCharacteristic != undefined) {
-      this.prodChars = this.prodSpec.productSpecCharacteristic.filter((char: any) => {
-        return char.name != 'Compliance:VC' && char.name != 'Compliance:SelfAtt'
-      })
+  ngOnInit(): void {
+    this.initCategories();
+    this.initImages();
+    void this.initAsync();
+  }
 
-      for(const element of certifications){
-        const index = this.prodChars.findIndex(item => item.name === element.name);
-        if(index!==-1){
-          this.prodChars.splice(index, 1);
-        }
+  private async initAsync(): Promise<void> {
+    await this.loadProductSpecificationAndPrices();
+    this.filterCharacteristics();
+  }
+
+  private initCategories(): void {
+    const categories = this.productOff?.category ?? [];
+
+    this.category = categories[0]?.name ?? 'none';
+
+    if (categories.length > 5) {
+      this.categories = categories.slice(0, 4);
+      this.categoriesMore = categories.slice(4);
+      this.checkMoreCats = true;
+    } else {
+      this.categories = categories;
+      this.categoriesMore = [];
+      this.checkMoreCats = false;
+    }
+  }
+
+  private initImages(): void {
+    const attachments = this.productOff?.attachment ?? [];
+    const profile = attachments.filter(item => item.name === 'Profile Picture');
+
+    this.images = profile.length > 0
+      ? profile
+      : attachments.filter(item => item.attachmentType === 'Picture');
+  }
+
+  private async loadProductSpecificationAndPrices(): Promise<void> {
+    const specId = this.productOff?.productSpecification?.id;
+    if (!specId) return;
+
+    try {
+      this.prodSpec = await this.api.getProductSpecification(specId);
+
+      const prodPrices = this.productOff?.productOfferingPrice ?? [];
+      if (prodPrices.length === 0) return;
+
+      const prices = await Promise.all(
+        prodPrices.map(p => this.api.getProductPrice(p.id))
+      );
+
+      this.checkCustom = prices.some(price => price.priceType === 'custom');
+    } catch (error) {
+      console.error('Error loading product specification or prices', error);
+    }
+  }
+
+  private filterCharacteristics(): void {
+    const characteristics = this.prodSpec?.productSpecCharacteristic;
+    if (!characteristics) {
+      this.prodChars = [];
+      return;
+    }
+
+    this.prodChars = characteristics.filter((char: any) =>
+      char.name !== 'Compliance:VC' && char.name !== 'Compliance:SelfAtt'
+    );
+
+    for (const cert of certifications) {
+      const index = this.prodChars.findIndex(
+        (item: any) => item.name === cert.name
+      );
+      if (index !== -1) {
+        this.prodChars.splice(index, 1);
       }
     }
   }
+
+
 
   closeCategories(){
     this.closeCats=false;
