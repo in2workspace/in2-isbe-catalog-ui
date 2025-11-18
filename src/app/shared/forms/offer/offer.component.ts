@@ -20,7 +20,7 @@ import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { environment } from 'src/environments/environment';
 import { ErrorMessageComponent } from '../../error-message/error-message.component';
-import { ReminderMessageComponent } from '../../reminder-message/reminder-message.component';
+import { AlertMessageComponent } from '../../alert-message/alert-message.component';
 import { hasNonStatusChanges } from '../../lifecycle-status/lifecycle-status';
 
 type ProductOffering_Create = components["schemas"]["ProductOffering_Create"];
@@ -43,7 +43,7 @@ type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
     OfferSummaryComponent,
     NgClass,
     ErrorMessageComponent,
-    ReminderMessageComponent
+    AlertMessageComponent
   ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css'
@@ -947,6 +947,8 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     request$.subscribe({
       next: (data) => {
+        this.hasChanges = false;
+        this.productOfferForm.markAsPristine();
         this.goBack();          
       },
       error: (error) => {
@@ -1147,6 +1149,8 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     try {
       await lastValueFrom(this.api.updateProductOffering(basePayload, this.offer.id));
+      this.hasChanges = false;
+      this.productOfferForm.markAsPristine();
       this.goBack();
     } catch (error: any) {
       console.error('❌ Error updating offer:', error);
@@ -1179,6 +1183,10 @@ export class OfferComponent implements OnInit, OnDestroy{
         return false;
     }
     return true;
+  }
+
+  hasPendingChanges(): boolean {
+    return this.hasChanges || this.productOfferForm?.dirty;
   }
 
 }

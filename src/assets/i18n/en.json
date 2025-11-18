@@ -534,7 +534,8 @@
         "_file_check": "You need to upload a file before proceeding.",
         "_self_attestation": "Self Attestation:",
         "_close_modal": "Close modal",
-        "_cancel": "Cancel",
+        "_cancel": "Cancel",       
+        "_aceptar": "Accept",
         "_upload": "Upload"
     },
     "UPDATE_PROD_SPEC":{
