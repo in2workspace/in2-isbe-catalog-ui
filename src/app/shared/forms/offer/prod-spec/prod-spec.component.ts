@@ -94,6 +94,10 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
     } 
   }
 
+  //TODO: Implement navigation to create new product specification when ISBE menu is DONE
+  goTo(path:string) {
+  }
+
   async getSellerProdSpecs(next:boolean){
     if(!next){
       this.loadingProdSpec=true;
