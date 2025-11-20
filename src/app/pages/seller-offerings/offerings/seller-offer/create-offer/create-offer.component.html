@@ -25,3 +25,7 @@
   <!-- End Breadcrumb -->
 
   <app-offer-form [seller]="seller" [formType]="'create'"></app-offer-form>
+
+@if(showReminder){
+    <alert-message translationKey="WARNING._message" [showActions]="true" (accept)="confirmLeave()" (cancel)="cancelLeave()" class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></alert-message>
+}

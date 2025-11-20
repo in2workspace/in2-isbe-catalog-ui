@@ -22,7 +22,7 @@ import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 import { hasNonStatusChanges, normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
-import { ReminderMessageComponent } from 'src/app/shared/reminder-message/reminder-message.component';
+import { AlertMessageComponent } from 'src/app/shared/alert-message/alert-message.component';
 
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
@@ -37,7 +37,7 @@ type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
     templateUrl: './update-product-spec.component.html',
     styleUrl: './update-product-spec.component.css',
     standalone: true,
-    imports: [StatusSelectorComponent, ErrorMessageComponent, ReminderMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
+    imports: [StatusSelectorComponent, ErrorMessageComponent, AlertMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
 })
 export class UpdateProductSpecComponent implements OnInit {
   @Input() prod: any;

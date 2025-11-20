@@ -15,7 +15,7 @@ import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 import { hasNonStatusChanges, normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
-import { ReminderMessageComponent } from 'src/app/shared/reminder-message/reminder-message.component';
+import { AlertMessageComponent } from 'src/app/shared/alert-message/alert-message.component';
 type Category_Update = components["schemas"]["Category_Update"];
 
 @Component({
@@ -23,7 +23,7 @@ type Category_Update = components["schemas"]["Category_Update"];
     templateUrl: './update-category.component.html',
     styleUrl: './update-category.component.css',
     standalone: true,
-    imports: [ReminderMessageComponent, FormsModule, StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
+    imports: [AlertMessageComponent, FormsModule, StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
 })
 export class UpdateCategoryComponent implements OnInit {
   @Input() category: any;
