@@ -1,9 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { EventMessageService } from 'src/app/services/event-message.service';
 import { OfferComponent } from 'src/app/shared/forms/offer/offer.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { AuthService } from 'src/app/guard/auth.service';
-import { take } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { AlertMessageComponent } from 'src/app/shared/alert-message/alert-message.component';
 
 @Component({
@@ -15,16 +15,18 @@ import { AlertMessageComponent } from 'src/app/shared/alert-message/alert-messag
 })
 export class CreateOfferComponent implements OnInit, OnDestroy {
 
-  seller: any = '';
+  seller: string = '';
   showReminder: boolean = false;
 
   @ViewChild(OfferComponent) offerFormComponent!: OfferComponent;
+  private readonly auth = inject(AuthService);
+  private readonly eventMessage = inject(EventMessageService);
+  
+  private subscription: Subscription;
 
   constructor(
-    private readonly auth: AuthService,
-    private readonly eventMessage: EventMessageService
   ) {
-    this.eventMessage.messages$.subscribe(ev => {
+    this.subscription = this.eventMessage.messages$.subscribe(ev => {
       if (ev.type === 'ChangedSession') {
         this.initPartyInfo();
       }
@@ -37,6 +39,7 @@ export class CreateOfferComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription.unsubscribe();
     window.removeEventListener('beforeunload', this.beforeUnloadHandler);
   }
 
