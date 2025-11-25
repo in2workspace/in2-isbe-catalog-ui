@@ -50,7 +50,8 @@
 /* Default styles for Markdown elements */
 markdown {
   font-family: "GTStandardM", system-ui, sans-serif;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 22px;
   font-style: var(--blockquote-text-color);
 }
 
