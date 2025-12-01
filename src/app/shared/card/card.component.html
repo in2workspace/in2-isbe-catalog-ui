@@ -79,7 +79,7 @@
     </div>
   </div>
 
-  <hr class="border-b border-black">
+  <hr class="h-px border-black border-1">
 
   <!-- TAGS -->
    <ul class="flex gap-2.5 flex-wrap">
@@ -106,7 +106,9 @@
 
 <!-- Main modal -->
 @if (showModal){
-  <app-product-details [productOff]="productOff" (closeModal)="showModal = false"></app-product-details>
+  <div class="overflow-x-hidden fixed inset-0 w-full h-screen z-[999]" [ngClass]="showModal ? 'backdrop-blur-sm bg-black/25': ''" >
+    <app-product-details [productOff]="productOff" (closeModal)="showModal = false" ></app-product-details>
+  </div>
 }
 
 
