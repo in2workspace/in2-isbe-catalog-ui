@@ -3,9 +3,38 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "GTStandardL";
+  src: url("/assets/fonts/GT-Standard-L-Standard-Semibold.woff2")
+      format("woff2"),
+    url("/assets/fonts/GT-Standard-L-Standard-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GTStandardM";
+  src: url("/assets/fonts/GT-Standard-M-Standard-Regular.woff2") format("woff2"),
+    url("/assets/fonts/GT-Standard-M-Standard-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GTStandardM";
+  src: url("/assets/fonts/GT-Standard-M-Standard-Semibold.woff2")
+      format("woff2"),
+    url("/assets/fonts/GT-Standard-M-Standard-Semibold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   html {
-    font-family: "Blinker", system-ui, sans-serif;
+    font-family: "GTStandardM", system-ui, sans-serif;
   }
 }
 
@@ -29,7 +58,7 @@
 
 /* Default styles for Markdown elements */
 markdown {
-  font-family: "Blinker", system-ui, sans-serif;
+  font-family: "GTStandardM", system-ui, sans-serif;
   line-height: 1.6;
   font-style: var(--blockquote-text-color);
 }
@@ -234,4 +263,15 @@ textarea:-webkit-autofill {
 
 textarea:-webkit-autofill::first-line {
   color: inherit;
+}
+
+.banner__background_gradient {
+  background: url("/assets/images/banner-background-gradient.png");
+  background-size: cover;
+  background-color: #f9f3e7;
+}
+
+.green-footer-gradient {
+  background: url("/assets/images/green-footer-gradient.png");
+  background-size: cover;
 }
