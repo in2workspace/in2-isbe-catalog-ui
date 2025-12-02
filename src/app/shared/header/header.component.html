@@ -1,5 +1,5 @@
 <div class="relative"> 
-    <div id="pre-header" class="flex flex-wrap items-center justify-start gap-5 mx-auto py-4 px-8 bg-beige text-black">
+    <div id="pre-header" class="flex flex-wrap items-center justify-start gap-x-5 gap-y-4 md:gap-5 mx-auto py-4 px-8 bg-beige text-black">
         <img src="assets/logos/partner_logo_black.svg" class="w-auto h-6" alt="Logo" />
         <img src="assets/logos/gobierno_black.svg" class="w-auto h-6" alt="Logo" />
         <img src="assets/logos/plan_black.svg" class="w-auto h-6" alt="Logo" />
@@ -9,7 +9,7 @@
     <nav class="text-white border-gray-200 bg-primary-100 "> 
         <div class="flex flex-wrap items-center justify-between mx-auto py-4 px-8"> 
             <a (click)="goTo('/dashboard')" class="flex items-center align-items-middle cursor-pointer"> 
-                <img src="assets/logos/ISBE_logo_black_name.svg" class="h-10 lg:h-12" alt="ISBE Catalog Logo" /> 
+                <img src="assets/logos/ISBE_logo_black_name.svg" class="max-w-64 h-10 lg:h-12" alt="ISBE Catalog Logo" /> 
             </a> 
             <div class="hidden w-full lg:block lg:w-auto lg:ml-auto bg-primary-100 rounded-lg align-items-middle"> 
                 <ul class="flex flex-col font-medium p-4 lg:p-0 rounded-lg lg:text-white lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0"> 
@@ -62,7 +62,7 @@
                 </div>
             @if (is_logged) { 
                 <div data-cy="loggedAcc" id="loggedAcc" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end" 
-                    class="relative px-4 py-1 flex items-center gap-3 justify-center overflow-hidden rounded-full border border-white cursor-pointer"> 
+                    class="relative px-4 py-1 hidden md:flex items-center gap-3 justify-center overflow-hidden rounded-full border border-white cursor-pointer"> 
                     <span class="text-xxs text-primary-100 bg-purple-500 rounded-full p-1">{{ usercharacters }}</span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11.9995 15.0388L6.3457 9.38481L7.39945 8.33105L11.9995 12.9158L16.5995 8.33105L17.6532 9.38481L11.9995 15.0388Z" fill="white"/>
@@ -77,45 +77,58 @@
                     Login 
                 </button> 
             } 
-            <button #navbarbutton type="button" (click)="toggleNavBar();$event.stopPropagation();" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500
-                 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 " aria-controls="navbar-dropdown" aria-expanded="false"> 
-                 
-                <span class="sr-only">{{ 'HEADER._open_menu' | translate }}</span> 
-                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14"> 
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15" /> 
-                </svg> 
+            <button #navbarbutton type="button" (click)="toggleNavBar();$event.stopPropagation();" class="inline-flex items-center w-10 h-10 justify-center text-sm text-white
+                 rounded-lg lg:hidden" aria-controls="navbar-dropdown" aria-expanded="false">
+                <span class="sr-only">{{ 'HEADER._open_menu' | translate }}</span>
+                @if(isNavBarOpen){ 
+                  <svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.707031 0.707031L29.457 29.457" stroke="currentColor" stroke-width="2"/>
+                    <path d="M29.457 0.707031L0.707033 29.457" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                }
+                @else {
+                  <svg width="29" height="27" viewBox="0 0 29 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 6H29" stroke="currentColor" stroke-width="2"/>
+                    <path d="M0 16H29" stroke="currentColor" stroke-width="2"/>
+                    <path d="M0 26H29" stroke="currentColor" stroke-width="2"/>
+                  </svg>
+                }
             </button> 
         </div> 
         @if(isNavBarOpen){ 
-            <div class="w-full bg-primary-100 rounded-lg" id="navbar-dropdown"> 
-                <ul class="flex flex-col font-medium p-4 lg:p-0 rounded-lg lg:text-white lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0">
+            <div class="w-full flex flex-col gap-10 bg-primary-100 mt-12" id="navbar-dropdown"> 
+                <ul class="flex flex-col rounded-2xl text-white bg-white/20 gap-3 px-4 py-5">
                     <li> 
-                        <a (click)="goTo('/search')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
-                        lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._services' | translate }}</a> 
-                    </li> 
-                    <li> 
-                        <a (click)="goTo('/catalogues')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
-                        lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._catalogs' | translate }}</a> 
-                    </li> 
-                    <li> 
-                        <a (click)="goTo('/about')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
-                        lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._about' | translate }}</a> 
-                    </li> 
-                    <li> 
-                        <a href="{{domePublish}}" target="_blank" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
-                        lg:hover:text-secondary-50 lg:p-0 ">{{ 'HEADER._publish' | translate }}</a> 
-                    </li> 
-                    <li> <a href="{{ knowledge }}" target="_blank" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 
-                        lg:hover:text-secondary-50 lg:p-0 ">{{ 'HEADER._info' | translate }}</a> 
+                      <a data-cy="publishOffering" (click)="goTo('/publish')" id="verifyDropdown"
+                        class="block text-white" 
+                        aria-current="page">{{ 'HEADER._verify' | translate }}</a> 
+                    </li>                     
+                    <li data-cy="browse"> 
+                      <a id="searchDropdown" (click)="goTo('/about');"
+                        class="block text-white" 
+                        aria-current="page">{{ 'HEADER._about_isbe' | translate }}</a> 
+                    </li>                  
+                    <li data-cy="about" id="aboutIsbe">
+                      <a href="{{isbeAbout}}" 
+                        class="block text-white" 
+                        aria-current="page">{{ 'HEADER._about' | translate }}</a>
                     </li> 
                     @if (!is_logged) { 
                         <li> 
-                            <a href="{{isbeRegister}}" target="_blank" type="button" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent 
-                            lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._register' | translate }}</a> 
+                            <a href="{{isbeRegister}}" target="_blank" type="button" 
+                            class="block text-white" aria-current="page">{{ 'HEADER._register' | translate }}</a>
                         </li> 
-                    } 
+                    }
                     <!--<li> <button data-dropdown-toggle="support-dropdown" data-dropdown-placement="bottom-end" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._support' | translate }}</button> </li>--> 
-                </ul> 
+                </ul>
+
+                @if (is_logged) {
+                  <div class="flex flex-col rounded-2xl text-white bg-white/20 gap-3 px-4 py-5">
+                    <button id="signOut" (click)="logout()" class="flex w-full justify-end text-base font-bold text-green"> 
+                        {{ 'HEADER._sign_out' | translate }} <fa-icon [icon]="faArrowRightFromBracket" class="ml-4"></fa-icon>
+                    </button> 
+                  </div>
+                }
             </div> 
         } 
         @if (is_logged) { 
