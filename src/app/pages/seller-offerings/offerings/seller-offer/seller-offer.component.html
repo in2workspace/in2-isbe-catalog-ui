@@ -3,7 +3,7 @@
     <div class="w-full h-fit mb-4 bg-secondary-50 rounded-lg dark:bg-secondary-100 dark:border-gray-800 border-gray-300 border-secondary-50 border flex flex-col shadow-lg">
       <div class="flex w-full flex-cols items-center justify-between">
         <div class="mb-4 lg:mb-0 lg:w-1/4 p-8">
-            <h2 class="text-2xl font-bold mb-4 dark:text-white">{{ 'OFFERINGS._prod_offer' | translate }}</h2>              
+            <h2 class="text-2xl font-bold mb-4 dark:text-white">{{ 'OFFERINGS._prod_offer' | translate }}</h2>
         </div>
 
         <div class="flex flex-row w-full justify-end">
@@ -12,7 +12,7 @@
                 <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                 </svg>
-            </button>  
+            </button>
         </div>
 
       </div>
@@ -21,7 +21,7 @@
         <div class="p-8 w-full">
           <div class="flex flex-row mb-1">
             <fa-icon [icon]="faSwatchbook" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
-            <h2 class="text-base font-bold dark:text-white">{{ 'OFFERINGS._filter_state' | translate }}</h2>
+            <h2 class="text-base font-bold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
             </div>
             <button id="dropdownDefault" data-dropdown-toggle="dropdown"
             class="text-black dark:text-white w-full justify-between shadow bg-white dark:bg-secondary-200 hover:bg-gray-100 dark:hover:bg-secondary-300 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center shadow-lg"
@@ -32,7 +32,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
             </button>
-            
+
             <div id="dropdown" class="z-20 hidden w-fit md:w-1/5 p-3 bg-white rounded-lg shadow dark:bg-secondary-200">
             <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
                 {{ 'OFFERINGS._status' | translate }}
@@ -42,34 +42,34 @@
                 <li class="flex items-center">
                 <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
                     class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
-    
+
                 <label for="in-design" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                     {{ 'OFFERINGS._in_design' | translate }}
                 </label>
                 </li>
-  
+
                 <li class="flex items-center">
                 <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
                     class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
-    
+
                 <label for="active" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                     {{ 'OFFERINGS._active' | translate }}
                 </label>
                 </li>
-    
+
                 <li class="flex items-center">
                 <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
                     class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
-    
+
                 <label for="launched" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                     {{ 'OFFERINGS._launched' | translate }}
                 </label>
                 </li>
-    
+
                 <li class="flex items-center">
                 <input id="retired" type="checkbox" value="" (change)="onStateFilterChange('Retired')"
                     class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
-    
+
                 <label for="retired" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                     {{ 'OFFERINGS._retired' | translate }}
                 </label>
@@ -78,14 +78,14 @@
                 <li class="flex items-center">
                   <input id="obsolete" type="checkbox" value="" (change)="onStateFilterChange('Obsolete')"
                       class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
-      
+
                   <label for="obsolete" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
                     {{ 'OFFERINGS._obsolete' | translate }}
                   </label>
                 </li>
             </ul>
           </div>
-      </div> 
+      </div>
 
 
       <!--<div class="p-8 w-full">
@@ -176,7 +176,7 @@
                                 }
                             </td>
                             <td class="px-6 py-4 hidden md:table-cell">
-                                {{offer.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} 
+                                {{offer.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                             </td>
                             <td class="px-6 py-4">
                                 <button type="button" (click)="goToUpdate(offer)" class="text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2">
@@ -188,7 +188,7 @@
                                     <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
                                         <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                      </svg>                                  
+                                      </svg>
                                 </button>-->
                             </td>
                         </tr>
@@ -202,7 +202,7 @@
                                 {{ 'OFFERINGS._no_offerings' | translate }}
                               </div>
                             </div>
-                        </div>                          
+                        </div>
                     }
                 </tbody>
             </table>

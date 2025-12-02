@@ -1,4 +1,4 @@
-<div class="bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 mt-4 p-4 md:p-8 rounded-lg w-full">
+<div class="bg-white/60 mt-4 p-4 md:p-8 rounded-lg w-full">
   @if(formType === 'update'){
     <h2 class="text-3xl font-bold text-primary-100 dark:text-white pb-4">
       {{ 'UPDATE_OFFER._update' | translate }}
@@ -21,10 +21,10 @@
     <form [formGroup]="productOfferForm">
       <ol class="flex items-start w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400">
         @for (step of steps; track i; let i = $index) {
-          <li 
+          <li
             (click)="handleStepClick(i)"
             [class.cursor-not-allowed]="!canNavigate(i)"
-            [class.opacity-50]="!canNavigate(i)"          
+            [class.opacity-50]="!canNavigate(i)"
             [class.text-primary-100]="currentStep === i"
             class="flex-1 cursor-pointer">
             <span class="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 mx-auto border-2 border-primary-100 dark:border-primary-50 shrink-0 rounded-full"
@@ -44,9 +44,9 @@
       <div class="md:p-8">
         @switch (getStepKey(steps[currentStep])) {
           @case ('General Info') {
-            <app-general-info-form 
-              [data]="offer" 
-              [formType]="formType" 
+            <app-general-info-form
+              [data]="offer"
+              [formType]="formType"
               [form]="productOfferForm.controls['generalInfo']"
               [isAdmin]="isAdmin"
               (formChange)="handleSubformChange($event)">
@@ -67,31 +67,31 @@
           }
 
           @case ('Category') {
-            <app-category-form formControlName="category" 
-                              [data]="offer" 
+            <app-category-form formControlName="category"
+                              [data]="offer"
                               [formType]="formType"
                               (formChange)="handleSubformChange($event)">
             </app-category-form>
           }
 
           @case ('License') {
-            <app-license-form [data]="offer" 
-                              [formType]="formType" 
+            <app-license-form [data]="offer"
+                              [formType]="formType"
                               [form]="productOfferForm.controls['license']"
                               (formChange)="handleSubformChange($event)">
             </app-license-form>
           }
 
           @case ('Price Plans') {
-            <app-price-plans-form 
-              [form]="productOfferForm" 
+            <app-price-plans-form
+              [form]="productOfferForm"
               [prodSpec]="productOfferForm.get('prodSpec')?.value"
               (formChange)="handleSubformChange($event)">
             </app-price-plans-form>
           }
 
           @case ('Procurement Mode') {
-            <app-procurement-mode [data]="offer" 
+            <app-procurement-mode [data]="offer"
                                   [form]="productOfferForm.controls['procurementMode']"
                                   [formType]="formType"
                                   (formChange)="handleSubformChange($event)">

@@ -1,4 +1,4 @@
-<div class="bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 p-8 rounded-lg">
+<div class="bg-white/60 p-4 md:p-8 rounded-2xl">
 @if (loading) {
     <div role="status" class="w-3/4 md:w-4/5 h-full flex justify-center align-middle">
       <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,19 +8,19 @@
       <span class="sr-only">Loading...</span>
     </div>
 } @else {
-        <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 dark:text-white m-4">Provider revenue sharing</h2>
-        
+        <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">Provider revenue sharing</h2>
+
         @if(subscription){
             <div class="border border-primary-100 dark:border-primary-50 rounded-lg p-4 md:p-8">
 
                 <h3 class="md:text-xl lg:text-2xl font-bold text-primary-100 dark:text-white mb-4">My Subscription Plan</h3>
-                
+
                 <div class="text-lg font-normal text-gray-500 dark:text-gray-400">
                     <p>
                         {{ subscription?.text }}
                     </p>
                 </div>
-    
+
             </div>
         }
 
@@ -28,11 +28,11 @@
         <div class="border border-primary-100 dark:border-primary-50 rounded-lg p-4 md:p-8 mt-4">
 
             <h3 class="md:text-xl lg:text-2xl font-bold text-primary-100 dark:text-white mb-4">Billing History</h3>
-            
+
             <div class="text-lg font-normal text-gray-500 dark:text-gray-400">
                 @for(child of billing?.items; track child){
                     <div class="mt-4">
-                        <b>{{ child?.label }}</b>: 
+                        <b>{{ child?.label }}</b>:
                         @for(state of child?.items; track state){
                             <div class="ml-4">
                               <span>
@@ -47,7 +47,7 @@
                               </span>
                             </div>
                           }
-                          
+
                     </div>
                 }
             </div>
@@ -99,7 +99,7 @@
                 <div class="text-lg font-normal text-gray-500 dark:text-gray-400">
                     @for(child of support?.items; track child){
                         <div class="mt-4">
-                            <b>{{ child?.label }}</b>:                                
+                            <b>{{ child?.label }}</b>:
                             @if(child?.link != null){
                                 <a href="{{child?.link}}" target="_blank" class="cursor-pointer font-medium text-primary-100 dark:text-primary-50 hover:underline break-words">
                                   {{child?.text}}
@@ -112,6 +112,6 @@
                 </div>
             </div>
         }
-        
+
 }
 </div>

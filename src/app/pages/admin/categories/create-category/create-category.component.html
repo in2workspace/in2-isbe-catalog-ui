@@ -25,7 +25,7 @@
     </div>
   <!-- End Breadcrumb -->
 
-  <div class="bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 mt-4 p-8 rounded-lg">
+  <div class="bg-white/60 mt-4 p-8 rounded-lg">
     <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'CREATE_CATEGORIES._new' | translate }}</h2>
     <hr class="h-px m-4 bg-gray-300 dark:bg-gray-200 border-0">
     <div class="md:grid md:grid-cols-20/80">
@@ -61,7 +61,7 @@
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
                         class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
-                        
+
                         <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'CREATE_CATEGORIES._description' | translate }}</label>
                         <app-markdown-textarea formControlName="description"></app-markdown-textarea>
                         <label class="font-bold text-lg dark:text-white">{{ 'CREATE_CATEGORIES._choose_parent' | translate }}</label>
@@ -80,9 +80,9 @@
                                             {{ 'OFFERINGS._no_categories' | translate }}
                                         </div>
                                     </div>
-                                </div>                    
+                                </div>
                             }@else{
-                            <div class="bg-white relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-4">               
+                            <div class="bg-white relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-4">
                             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
                                     <tr class="flex w-full justify-between">
@@ -104,7 +104,7 @@
                                                 <b>{{cat.name}}</b>
                                             </td>
                                             <td class="hidden md:flex px-6 py-4 w-fit">
-                                                {{cat.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} 
+                                                {{cat.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                             </td>
                                             <td class="flex px-6 py-4 w-fit justify-end">
                                                 <input id="select-checkbox" [checked]="isCategorySelected(cat)" type="checkbox" value="" (click)="addCategory(cat)" class="flex w-4 h-4 justify-end text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -136,7 +136,7 @@
                         </button>
                     </div>
             }
-            
+
             @if(showSummary){
                 <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'CREATE_CATEGORIES._finish' | translate }}</h2>
                 <div class="m-8">
@@ -146,7 +146,7 @@
                             {{categoryToCreate?.name}}
                         </label>
                     </div>
-                    
+
                     <div class="mb-4">
                         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'CREATE_CATEGORIES._status' | translate }}</label>
                         @if(categoryToCreate?.lifecycleStatus == 'In design'){
@@ -173,10 +173,10 @@
                         <label class="font-bold text-lg dark:text-white">{{ 'CREATE_CATEGORIES._parent' | translate }}</label>
                         <div class="px-4 py-2 bg-white border border-1 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white rounded-lg p-4 mb-4">
                             <label class="text-base dark:text-white text-wrap break-all">{{selectedCategory.name}}</label>
-                        </div>                        
+                        </div>
                     }
-                    
-                    
+
+
                     <div class="flex w-full justify-items-end justify-end ml-4">
                         <button type="button" (click)="createCategory();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'CREATE_CATEGORIES._create' | translate }}
@@ -185,7 +185,7 @@
                             </svg>
                         </button>
                     </div>
-                    
+
                 </div>
             }
         </div>

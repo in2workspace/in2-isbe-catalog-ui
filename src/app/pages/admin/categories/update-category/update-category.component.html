@@ -25,7 +25,7 @@
     </div>
   <!-- End Breadcrumb -->
 
-  <div class="bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 mt-4 p-8 rounded-lg">
+  <div class="bg-white/60 mt-4 p-8 rounded-lg">
     <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_CATEGORIES._update' | translate }}</h2>
     <hr class="h-px m-4 bg-gray-300 dark:bg-gray-200 border-0">
     <div class="md:grid md:grid-cols-20/80">
@@ -83,9 +83,9 @@
                                             {{ 'OFFERINGS._no_categories' | translate }}
                                         </div>
                                     </div>
-                                </div>                    
+                                </div>
                             }@else{
-                            <div class="bg-white relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-4">               
+                            <div class="bg-white relative overflow-x-auto shadow-md sm:rounded-lg w-full mt-4">
                                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
                                     <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
                                     <tr class="flex w-full justify-between">
@@ -107,7 +107,7 @@
                                                 <b>{{cat.name}}</b>
                                             </td>
                                             <td class="hidden md:flex px-6 py-4 w-fit">
-                                                {{cat.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} 
+                                                {{cat.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                             </td>
                                             <td class="flex px-6 py-4 w-fit justify-end">
                                                 <input id="select-checkbox" [checked]="isCategorySelected(cat)" type="checkbox" value="" (click)="addCategory(cat)" class="flex w-4 h-4 justify-end text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
@@ -139,7 +139,7 @@
                         </button>
                     </div>
             }
-            
+
             @if(showSummary){
                 <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_CATEGORIES._finish' | translate }}</h2>
                 <div class="m-8">
@@ -149,7 +149,7 @@
                             {{categoryToUpdate?.name}}
                         </label>
                     </div>
-                    
+
                     <div class="mb-4">
                         <label class="font-bold text-lg mr-4 dark:text-white">{{ 'UPDATE_CATEGORIES._status' | translate }}</label>
                         @if(categoryToUpdate?.lifecycleStatus == 'In design'){
@@ -176,10 +176,10 @@
                         <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_CATEGORIES._parent' | translate }}</label>
                         <div class="px-4 py-2 bg-white border dark:bg-secondary-300 dark:border-secondary-200 rounded-lg p-4 mb-4">
                             <label class="text-base dark:text-white text-wrap break-all">{{selectedCategory.name}}</label>
-                        </div>                        
+                        </div>
                     }
-                    
-                    
+
+
                     <div class="flex w-full justify-items-end justify-end ml-4">
                         <button type="button" (click)="updateCategory();" [disabled]="!isCatValid()" [ngClass]="!isCatValid() ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
                             {{ 'UPDATE_CATEGORIES._update' | translate }}
@@ -188,7 +188,7 @@
                             </svg>
                         </button>
                     </div>
-                    
+
                 </div>
             }
         </div>

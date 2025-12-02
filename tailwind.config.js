@@ -14,6 +14,11 @@ module.exports = {
       colors: {
         beige: "#F9F3E7",
         green: "#76F276",
+        gray: {
+          0: '#ECECEC',
+          50: '#BDBDBD',
+          100: '#787878'
+        },
         primary: {
           //Primary light
           50: '#B88EFF',

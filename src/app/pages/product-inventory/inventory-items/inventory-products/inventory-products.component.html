@@ -8,7 +8,7 @@
                 <button type="submit" (click)="filterInventoryByKeywords()" class="absolute top-0 end-0 inline-flex items-center p-2.5 text-sm font-medium h-full text-white bg-primary-100 rounded-e-lg border border-purple-700 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                    </svg>                  
+                    </svg>
                     <span class="ml-2">Search</span>
                 </button>
             </div>
@@ -17,11 +17,11 @@
         <div class="w-full h-fit mb-4 bg-secondary-50 rounded-lg dark:bg-secondary-100 dark:border-gray-800 border-secondary-50 border flex flex-col shadow-lg">
             <div class="flex w-full flex-cols items-center justify-between">
             <div class="mb-4 lg:mb-0 lg:w-1/4 p-8 justify-start">
-                <h2 class="text-xl font-bold dark:text-white">{{ 'PRODUCT_INVENTORY._search_criteria' | translate }}</h2>  
-            </div>  
+                <h2 class="text-xl font-bold">{{ 'PRODUCT_INVENTORY._search_criteria' | translate }}</h2>
+            </div>
             </div>
             <div class="flex w-full flex-col items-center lg:flex-row justify-between">
-    
+
                 <div class="p-8 w-full">
                     <div class="flex flex-row mb-1">
                     <fa-icon [icon]="faSwatchbook" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
@@ -36,55 +36,55 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                     </svg>
                     </button>
-                    
+
                     <div id="dropdown" class="z-20 hidden w-fit md:w-1/5 p-3 bg-white rounded-lg shadow dark:bg-secondary-200">
                     <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
                         {{ 'OFFERINGS._status' | translate }}
                     </h6>
                     <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
-            
+
                         <li class="flex items-center">
                         <input id="created" type="checkbox" value="" checked (change)="onStateFilterChange('created')"
                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-        
+
                         <label for="created" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                             {{ 'PRODUCT_INVENTORY._created' | translate }}
                         </label>
                         </li>
-        
+
                         <li class="flex items-center">
                         <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-        
+
                         <label for="active" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                             {{ 'PRODUCT_INVENTORY._active' | translate }}
                         </label>
                         </li>
-        
+
                         <li class="flex items-center">
                         <input id="suspended" type="checkbox" value="" (change)="onStateFilterChange('suspended')"
                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-        
+
                         <label for="suspended" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                             {{ 'PRODUCT_INVENTORY._suspended' | translate }}
                         </label>
                         </li>
-        
+
                         <li class="flex items-center">
                         <input id="terminated" type="checkbox" value="" (change)="onStateFilterChange('terminated')"
                             class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-        
+
                         <label for="terminated" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                             {{ 'PRODUCT_INVENTORY._terminated' | translate }}
                         </label>
                         </li>
-                        
+
                     </ul>
                     </div>
                 </div>
             </div>
         </div>
-                
+
         <!-- END FILTERS -->
         @if(loading){
             <div role="status" class="w-full h-full flex justify-center align-middle">
@@ -107,7 +107,7 @@
                             <img [id]="'img-'+idx" class="h-5/6 w-5/6 object-contain z-10 dark:text-white" src="{{getProductImage(inv.product)}}" alt="Product image">
                             </div>
                         </div>
-                        
+
                         <div class="bg-cover bg-right-bottom bg-opacity-25 rounded-lg" style="background-image: url(assets/logos/bg_2.png)">
                             <div class="px-5 py-5 bg-secondary-50/95 dark:bg-secondary-100/95 rounded-lg">
                             <div class="h-[30px] overflow-y-hidden overflow-x-hidden">
@@ -123,7 +123,7 @@
                                 <button type="button" data-tooltip-target="unsubscribe-default" (click)="showUnsubscribeModal(inv);$event.stopPropagation();" class="flex text-red-600 border border-red-600 hover:bg-red-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-400 font-medium rounded-full text-sm p-2 text-center inline-flex items-center">
                                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                    </svg>                                    
+                                    </svg>
                                     <span class="sr-only">Unsubscribe</span>
                                 </button>
                                 <div id="unsubscribe-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-primary-100">
@@ -135,7 +135,7 @@
                                 <button type="button" data-tooltip-target="renew-default" (click)="showRenewModal(inv);$event.stopPropagation();" class="flex text-purple-600 border border-purple-600 hover:bg-purple-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-purple-400 font-medium rounded-full text-sm p-2 text-center inline-flex items-center">
                                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
-                                    </svg>                                                                        
+                                    </svg>
                                     <span class="sr-only">Renew</span>
                                 </button>
                                 <div id="renew-default" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 rounded-lg shadow-sm opacity-0 tooltip bg-primary-100">
@@ -253,10 +253,10 @@
             <div class="p-4">
                 <div id="desc-container" class="w-full bg-secondary-50/95 dark:bg-secondary-100/95 rounded-lg p-8 lg:p-12">
 
-                    <div id="details-container">            
+                    <div id="details-container">
                         <h2 #detailsContent class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-4">{{ 'PRODUCT_INVENTORY._description' | translate }}</h2>
                         <markdown class="dark:text-gray-200 text-wrap break-all" [data]="selectedProduct.product?.description"></markdown>
-        
+
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-8 pt-12">{{ 'PRODUCT_INVENTORY._pricing' | translate }}</h2>
                     @if(selectedProduct?.productPrice != undefined){
                         @if(checkCustom){
@@ -281,7 +281,7 @@
                                         </div>
                                     </div>
                                 }
-                            </div>   
+                            </div>
                         } @else {
                             <div class="grid grid-flow-row gap-4 lg:grid-cols-3 lg:auto-cols-auto justify-items-center p-2">
                                 @for (price of selectedProduct?.productPrice; track price) {
@@ -319,13 +319,13 @@
                                             <h5 class="flex justify-center mb-2 p-6 text-2xl font-bold tracking-tight text-gray-900">{{ 'SHOPPING_CART._free' | translate }}</h5>
                                         </div>
                                         <p class="flex justify-center mb-2 font-normal text-gray-700 dark:text-white">{{ 'SHOPPING_CART._free_desc' | translate }}</p>
-                                    </div> 
+                                    </div>
                                 }
                             </div>
                         }
                     }
                 </div>
-                
+
                 <div>
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary-100 dark:text-primary-50 text-center pb-8 pt-12">{{ 'PRODUCT_INVENTORY._services' | translate }}</h2>
                     <div class="bg-secondary-50 dark:bg-secondary-100 p-4 rounded-lg">
@@ -348,7 +348,7 @@
                                     @for (serv of selectedServices; track serv.id) {
                                         <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
                                             <td class="px-6 py-4 text-wrap break-all w-1/2 md:w-1/4">
-                                                <a (click)="selectService(serv.id)" class="cursor-pointer font-medium text-primary-100 dark:text-primary-50 hover:underline">{{serv.id}}</a>                                  
+                                                <a (click)="selectService(serv.id)" class="cursor-pointer font-medium text-primary-100 dark:text-primary-50 hover:underline">{{serv.id}}</a>
                                             </td>
                                             <td class="px-6 py-4 text-wrap break-all w-1/2 md:w-1/4">
                                                 {{serv.name}}
@@ -367,7 +367,7 @@
                                                 {{ 'PRODUCT_INVENTORY._no_services' | translate }}
                                               </div>
                                             </div>
-                                        </div>                          
+                                        </div>
                                     }
                                 </tbody>
                             </table>
@@ -397,7 +397,7 @@
                                     @for (res of selectedResources; track res.id) {
                                         <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
                                             <td class="px-6 py-4 text-wrap break-all w-1/2 md:w-1/4">
-                                                <a (click)="selectResource(res.id)" class="cursor-pointer font-medium text-primary-100 dark:text-primary-50 hover:underline">{{res.id}}</a>                               
+                                                <a (click)="selectResource(res.id)" class="cursor-pointer font-medium text-primary-100 dark:text-primary-50 hover:underline">{{res.id}}</a>
                                             </td>
                                             <td class="px-6 py-4 text-wrap break-all w-1/2 md:w-1/4">
                                                 {{res.name}}
@@ -416,21 +416,21 @@
                                                   {{ 'PRODUCT_INVENTORY._no_resources' | translate }}
                                               </div>
                                             </div>
-                                        </div>                          
+                                        </div>
                                     }
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                
+
                 @if(selectedProduct.productCharacteristic != undefined && selectedProduct.productCharacteristic.length>0) {
                     <div #charsContent id="chars-container">
                         <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary-100 text-center pb-8 pt-12 dark:text-primary-50">{{ 'PRODUCT_INVENTORY._chars' | translate }}</h2>
                         <div class="container mx-auto px-4">
                             <div class="flex flex-wrap -mx-4">
                                 @for (char of selectedProduct.productCharacteristic; track char.id; let idx = $index) {
-                                    <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">                
+                                    <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
                                         <div class="border border-gray-200 rounded-lg shadow bg-white dark:bg-secondary-200 dark:border-gray-800 shadow-md p-8 h-full">
                                             <h3 class="text-2xl font-bold mb-4 dark:text-white">{{char.name}}</h3>
                                             <div class="flex items-center pl-4">
@@ -459,9 +459,9 @@
                             </div>
                         </div>
                     </div>
-                    
-                }        
-        
+
+                }
+
             </div>
             </div>
         </div>
@@ -469,7 +469,7 @@
 
 @if(unsubscribeModal){
     <!-- UNSUBSCRIBE modal -->
-    <div [ngClass]="unsubscribeModal ? 'backdrop-blur-sm': ''" tabindex="-1" aria-hidden="true" 
+    <div [ngClass]="unsubscribeModal ? 'backdrop-blur-sm': ''" tabindex="-1" aria-hidden="true"
     class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full shadow-2xl">
       <div class="relative p-4 w-full max-w-md h-full md:h-auto" (click)="$event.stopPropagation();">
           <!-- Modal content -->
@@ -483,8 +483,8 @@
 
               <svg class="text-gray-400 dark:text-gray-500 w-12 h-12 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z" clip-rule="evenodd"/>
-              </svg>                
-              
+              </svg>
+
               <p class="mb-4 text-gray-500 dark:text-gray-300">{{ 'PRODUCT_INVENTORY._cancel_sub' | translate }} ({{prodToUnsubscribe.product.name}})</p>
               <div class="flex justify-center items-center space-x-4">
                   <button (click)="unsubscribeModal=false;$event.stopPropagation();" type="button" class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
@@ -501,7 +501,7 @@
 
   @if(renewModal){
     <!-- RENEW modal -->
-    <div [ngClass]="renewModal ? 'backdrop-blur-sm': ''" tabindex="-1" aria-hidden="true" 
+    <div [ngClass]="renewModal ? 'backdrop-blur-sm': ''" tabindex="-1" aria-hidden="true"
     class="flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full shadow-2xl">
       <div class="relative p-4 w-full max-w-md h-full md:h-auto" (click)="$event.stopPropagation();">
           <!-- Modal content -->
@@ -511,9 +511,9 @@
                   <span class="sr-only">{{ 'PRODUCT_INVENTORY._close_modal' | translate }}</span>
               </button>
               <svg class="text-gray-400 dark:text-gray-500 w-12 h-12 mb-3.5 mx-auto" aria-hidden="true" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>                    
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m16 10 3-3m0 0-3-3m3 3H5v3m3 4-3 3m0 0 3 3m-3-3h14v-3"/>
               </svg>
-              
+
               <p class="mb-4 text-gray-500 dark:text-gray-300">{{ 'PRODUCT_INVENTORY._renew_sub' | translate }} ({{prodToRenew.product.name}})</p>
               <div class="flex justify-center items-center space-x-4">
                   <button (click)="renewModal=false;$event.stopPropagation();" type="button" class="py-2 px-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-primary-300 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">

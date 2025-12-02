@@ -1,4 +1,4 @@
-<div class="bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 mt-4 p-4 md:p-8 rounded-lg w-full">
+<div class="bg-white/60 mt-4 p-4 md:p-8 rounded-lg w-full">
     @if(formType === 'update'){
       <h2 class="text-3xl font-bold text-primary-100 dark:text-white pb-4">
         {{ 'USAGE_SPECS._update' | translate }}
@@ -8,7 +8,7 @@
         {{ 'USAGE_SPECS._create' | translate }}
       </h2>
     }
-  
+
   @if(loadingData){
       <div role="status" class="w-full h-full flex justify-center align-middle">
           <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,10 +22,10 @@
     <form [formGroup]="usageSpecForm">
       <ol class="flex items-start w-full text-sm font-medium text-center text-gray-500 dark:text-gray-400">
         @for (step of steps; track i; let i = $index) {
-          <li 
+          <li
               (click)="handleStepClick(i)"
               [class.cursor-not-allowed]="!canNavigate(i)"
-              [class.opacity-50]="!canNavigate(i)"          
+              [class.opacity-50]="!canNavigate(i)"
               [class.text-primary-100]="currentStep === i"
               class="flex-1 cursor-pointer">
             <span class="flex items-center justify-center w-8 h-8 md:w-10 md:h-10 mx-auto border-2 border-primary-100 dark:border-primary-50 shrink-0 rounded-full"
@@ -37,22 +37,22 @@
           </li>
         }
       </ol>
-  
+
       <h3 class="block md:hidden mt-2 text-center text-2xl text-primary-100 dark:text-white pb-4">{{ this.steps[currentStep] }}</h3>
-  
-  
+
+
       <div class="md:p-8">
         <!-- Step Forms -->
         @if (currentStep === 0) {
             <usage-spec-general-info
-            [data]="usageSpec" 
-            [formType]="formType" 
+            [data]="usageSpec"
+            [formType]="formType"
             [form]="usageSpecForm.controls['generalInfo']"
             (formChange)="handleSubformChange($event)">
             </usage-spec-general-info>
         } @else if (currentStep === 1) {
             <usage-spec-metrics
-            [data]="usageSpec" 
+            [data]="usageSpec"
             [formType]="formType"
             formControlName="metrics"
             (formChange)="handleSubformChange($event)">
@@ -61,7 +61,7 @@
             <usage-spec-summary [usageSpecForm]="usageSpecForm"></usage-spec-summary>
         }
       </div>
-  
+
       <!-- Navigation Buttons -->
       <div class="flex justify-end mt-6 space-x-4">
         <button (click)="goToStep(currentStep - 1)"
@@ -78,7 +78,7 @@
             </svg>
           {{ 'USAGE_SPECS._previous' | translate }}
         </button>
-  
+
         <button (click)="goToStep(currentStep + 1)"
                 [disabled]="currentStep === steps.length - 1 || (formType === 'create' && !validateCurrentStep()) || !canNavigate(currentStep)"
                 [ngClass]="{
@@ -97,7 +97,7 @@
           <button (click)="submitForm()"
           [disabled]="!usageSpecForm.controls['generalInfo'].valid"
           [ngClass]="formType === 'update' && !usageSpecForm.controls['generalInfo'].valid ? 'opacity-50' : 'hover:bg-primary-50'"
-  
+
           class="px-4 py-2 text-base font-medium text-white rounded-lg bg-primary-100">
             {{ formType === 'create' ? 'Create Usage Spec' : 'Update Usage Spec' }}
           </button>
@@ -106,7 +106,7 @@
     </form>
   }
   </div>
-  
+
   @if(showError){
     <div class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
       <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-red-900 dark:border-red-900 dark:text-white" role="alert">

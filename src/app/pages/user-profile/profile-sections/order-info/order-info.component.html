@@ -2,8 +2,8 @@
     <div class="w-full h-fit mb-4 bg-secondary-50 rounded-lg dark:bg-secondary-100 dark:border-gray-800 border-secondary-50 border flex flex-col shadow-lg">
         <div class="flex w-full flex-cols items-center justify-between">
         <div class="mb-4 lg:mb-0 lg:w-1/4 p-8 justify-start">
-            <h2 class="text-xl font-bold dark:text-white">{{ 'PRODUCT_INVENTORY._search_criteria' | translate }}</h2>  
-        </div>  
+            <h2 class="text-xl font-bold">{{ 'PRODUCT_INVENTORY._search_criteria' | translate }}</h2>
+        </div>
         </div>
         <div class="flex w-full flex-col items-center lg:flex-row justify-between">
 
@@ -21,7 +21,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
                 </button>
-                
+
                 <div id="dropdown" class="z-20 hidden w-fit md:w-1/5 p-3 bg-white rounded-lg shadow dark:bg-secondary-200">
                 <h6 class="mb-3 text-sm font-medium text-gray-900 dark:text-white">
                     {{ 'OFFERINGS._status' | translate }}
@@ -30,59 +30,59 @@
                     <li class="flex items-center">
                         <input id="acknowledged" type="checkbox" value="" (change)="onStateFilterChange('acknowledged')"
                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                
+
                         <label for="acknowledged" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                         {{ 'PROFILE._acknowledged' | translate }}
                         </label>
                     </li>
-                
+
                     <li class="flex items-center">
                         <input id="inProgress" type="checkbox" value="" (change)="onStateFilterChange('inProgress')"
                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                
+
                         <label for="inProgress" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                         {{ 'PROFILE._in_progress' | translate }}
                         </label>
                     </li>
-                
+
                     <li class="flex items-center">
                         <input id="completed" type="checkbox" value=""  (change)="onStateFilterChange('completed')"
                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                
+
                         <label for="completed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                         {{ 'PROFILE._completed' | translate }}
                         </label>
                     </li>
-                
+
                     <li class="flex items-center">
                         <input id="failed" type="checkbox" value="" (change)="onStateFilterChange('failed')"
                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                
+
                         <label for="failed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                         {{ 'PROFILE._failed' | translate }}
                         </label>
                     </li>
-            
+
                     <li class="flex items-center">
                         <input id="pending" type="checkbox" value=""  (change)="onStateFilterChange('pending')"
                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                
+
                         <label for="pending" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                         {{ 'PROFILE._pending' | translate }}
                         </label>
                     </li>
-            
+
                     <li class="flex items-center">
                         <input id="cancelled" type="checkbox" value="" (change)="onStateFilterChange('cancelled')"
                         class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
-                
+
                         <label for="cancelled" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
                         {{ 'PROFILE._cancelled' | translate }}
                         </label>
                     </li>
                 </ul>
                 </div>
-                
+
             </div>
             @if(isSeller){
                 <div class="p-8 w-full">
@@ -90,7 +90,7 @@
                         <fa-icon [icon]="faIdCard" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
                         <h2 class="text-base dark:text-white font-bold">{{ 'OFFERINGS._filter_role' | translate }}</h2>
                       </div>
-                      <select id="roles" (change)="onRoleChange($event)" 
+                      <select id="roles" (change)="onRoleChange($event)"
                       class="text-black border-0 dark:text-white w-full justify-between shadow bg-white dark:bg-secondary-200 hover:bg-gray-100 dark:hover:bg-secondary-300 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center shadow-lg">
                         <option class="text-left" value="Customer">{{ 'OFFERINGS._customer' | translate }}</option>
                         <option class="text-left" value="Seller">{{ 'OFFERINGS._seller' | translate }}</option>
@@ -99,7 +99,7 @@
             }
         </div>
     </div>
-            
+
 <!-- END FILTERS -->
 
 
@@ -112,9 +112,9 @@
       <span class="sr-only">Loading...</span>
     </div>
 } @else {
-        <div class="bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 p-8 rounded-lg">
-            <!-- <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 dark:text-white m-4">{{ 'PROFILE._order_list' | translate }}</h2>
-            <hr class="h-px mr-4 ml-4 bg-primary-100 dark:bg-white border-0">-->
+        <div class="bg-white/60 p-4 md:p-8 rounded-2xl">
+            <!-- <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._order_list' | translate }}</h2>
+            <hr class="h-px mr-4 ml-4 bg-primary-100/70 border-0">-->
                 <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
@@ -135,7 +135,7 @@
                                     {{ 'PROFILE._date' | translate }}
                                 </th>
                                 <th scope="col" class="text-center align-middle">
-                                    {{ 'PROFILE._actions' | translate }} 
+                                    {{ 'PROFILE._actions' | translate }}
                                 </th>
                             </tr>
                         </thead>
@@ -145,7 +145,7 @@
                                     <td class="hidden md:table-cell px-6 py-4 text-center align-middle">
                                         {{order.id}}
                                     </td>
-                                    <td class="px-6 py-4 text-center align-middle">                                                
+                                    <td class="px-6 py-4 text-center align-middle">
                                         @if(order.state == 'inProgress'){
                                             <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{order.state}}</span>
                                         } @else if(order.state ==  'completed') {
@@ -217,10 +217,10 @@
 <!-- ORDER DETAILS modal -->
 @if (showOrderDetails){
     <div id="order-details-modal" [ngClass]="showOrderDetails ? 'backdrop-blur-sm': ''" tabindex="-1" aria-hidden="true" class="flex justify-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full shadow-2xl">
-        <div class="w-full md:w-3/4 lg:w-1/2 relative bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 rounded-lg shadow bg-cover bg-right-bottom" (click)="$event.stopPropagation();">
+        <div class="w-full md:w-3/4 lg:w-1/2 relative bg-white/60 rounded-lg shadow bg-cover bg-right-bottom" (click)="$event.stopPropagation();">
             <!-- Modal header -->
             <div class="flex items-center justify-between p-2 rounded-t dark:border-gray-600 shadow-lg">
-                <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 dark:text-white m-4">{{ 'PROFILE._order_details' | translate }}</h2>                
+                <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._order_details' | translate }}</h2>
                 <button (click)="showOrderDetails=false;" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="delete-bill-modal">
                     <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -325,7 +325,7 @@
                                     } @else {
                                         <td class="px-6 py-4 text-center align-middle">
                                             {{ 'SHOPPING_CART._free' | translate }}
-                                        </td>                                        
+                                        </td>
                                     }
                                 </tr>
                             }
@@ -343,7 +343,7 @@
                                     <p class="flex flex-right text-gray-700 justify-end text-gray-500 dark:text-gray-200">{{ 'PROFILE._custom' | translate }}</p>
                                 } @else {
                                     <p class="flex flex-right text-gray-700 justify-end text-gray-500 dark:text-gray-200">{{ 'PROFILE._free' | translate }}</p>
-                                }                                
+                                }
                              }
                           </div>
                     </div>

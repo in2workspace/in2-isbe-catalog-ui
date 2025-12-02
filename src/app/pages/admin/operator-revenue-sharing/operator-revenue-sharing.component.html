@@ -1,4 +1,4 @@
-<div class="bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 p-8 rounded-lg">
+<div class="bg-white/60 p-4 md:p-8 rounded-2xl">
     @if (loading) {
         <div role="status" class="w-3/4 md:w-4/5 h-full flex justify-center align-middle">
           <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,19 +9,19 @@
         </div>
     } @else {
             <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 dark:text-white m-4">Operator revenue sharing</h2>
-           
+
                 @for(item of items; track item){
                     <div class="border border-primary-100 dark:border-primary-50 rounded-lg p-4 md:p-8">
                         <h2 class="text-gray-900 dark:text-white text-xl font-normal mb-2">{{item.title}}</h2>
-                        
+
                         <div class="text-lg font-normal text-gray-500 dark:text-gray-400">
                             <p>
                                 {{ item.description }}
                             </p>
                         </div>
-            
+
                     </div>
                 }
-            
+
     }
     </div>
