@@ -28,7 +28,7 @@
 
       <div>
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._base_price' | translate }}</label>
-      
+
         <input
           data-cy="price"
           formControlName="price"
@@ -39,7 +39,7 @@
           class="mb-2 bg-gray-50  border text-sm rounded-lg block w-full p-2.5
             text-gray-900  focus:ring-purple-500 focus:border-purple-500"
         />
-      
+
         <!-- Validation Messages -->
          @if(priceComponentForm.get('price')?.invalid && (priceComponentForm.get('price')?.touched || priceComponentForm.get('price')?.dirty)){
           <div class="text-red-500 text-sm mt-1">
@@ -59,8 +59,8 @@
           </div>
          }
       </div>
-      
-      
+
+
       @if(profileData){
       <div class="relative w-full">
         <div class="flex items-center space-x-2">
@@ -68,7 +68,7 @@
           <label class="font-bold text-lg ">
             {{ 'FORMS.PRICE_PLAN_COMPONENT._apply_to_char' | translate }}
           </label>
-      
+
           <!-- Info Icon + Popover -->
           <div class="relative"
               (mouseenter)="showPopover = true"
@@ -86,7 +86,7 @@
               <line x1="12" y1="16" x2="12" y2="12"/>
               <line x1="12" y1="8" x2="12.01" y2="8"/>
             </svg>
-      
+
             <!-- Popover -->
             @if(showPopover) {
               <div
@@ -121,7 +121,7 @@
           </select>
           @if(showValueSelect){
               <select id="type" (change)="changePriceComponentCharValue($event)"
-              class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"> 
+              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                   @for(val of selectedCharacteristic.productSpecCharacteristicValue; track val){
                       @if(hasKey(val, 'unitOfMeasure')){
                           <option value="{{val.value}}">{{val.value}} ({{val.unitOfMeasure}})</option>
@@ -158,7 +158,7 @@
         </div>
       } @else if (priceComponentForm.get('priceType')?.value === 'usage') {
       <div class="flex flex-row">
-        <select id="type" (change)="changePriceComponentUsageSpec($event)" 
+        <select id="type" (change)="changePriceComponentUsageSpec($event)"
           class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
             @if(!selectedUsageSpec){
               <option value="">Select a usage specification</option>
@@ -176,7 +176,7 @@
           </select>
           @if(showMetricSelect){
               <select id="type" (change)="changePriceComponentMetric($event)"
-              class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"> 
+              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                   @if(!selectedMetric){
                     @for(metric of selectedUsageSpec.specCharacteristic; track metric){
                       <option value="{{metric.name}}">{{metric.name}}</option>
@@ -186,15 +186,15 @@
                     @for(metric of selectedUsageSpec.specCharacteristic; track metric){
                       @if(metric.name != selectedMetric){
                         <option value="{{metric.name}}">{{metric.name}}</option>
-                      }                      
+                      }
                     }
                   }
               </select>
           }
       </div>
-      
 
-      
+
+
       }
 
       <!-- Descuento -->
@@ -204,14 +204,14 @@
           [(ngModel)]="showDiscount"
           [ngModelOptions]="{ standalone: true }"
           class="w-4 h-4 text-purple-600 border-gray-300 rounded cursor-pointer
-                 focus:ring-purple-500  
+                 focus:ring-purple-500
                  checked:bg-purple-600 checked:border-purple-600"
         />
         <label for="showDiscount" class="ml-2 font-medium text-base text-gray-900 ">
           {{ 'FORMS.PRICE_PLAN_COMPONENT._includes_discount' | translate }}
         </label>
       </div>
-      
+
       @if(showDiscount){
         <div>
           <label class="block text-sm font-medium text-gray-700 ">
@@ -233,7 +233,7 @@
               <option value="fixed">{{ 'FORMS.PRICE_PLAN_COMPONENT._fixed' | translate }}</option>
             </select>
           </div>
-        
+
           <!-- Validation Error -->
            @if(priceComponentForm.get('discountValue')?.invalid && priceComponentForm.get('discountValue')?.touched){
             <div  class="text-red-500 text-sm mt-1">
@@ -250,8 +250,8 @@
            }
 
         </div>
-        
-  
+
+
         <!-- Duración del Descuento -->
         <div>
           <label class="block text-sm font-medium text-gray-700 ">
@@ -275,7 +275,7 @@
               <option value="years">{{ 'FORMS.PRICE_PLAN_COMPONENT._years' | translate }}</option>
             </select>
           </div>
-        
+
           <!-- Validation Error -->
           @if(priceComponentForm.get('discountDuration')?.invalid && priceComponentForm.get('discountDuration')?.touched){
             <div class="text-red-500 text-sm mt-1">
@@ -287,7 +287,7 @@
             </div>
           }
         </div>
-        
+
       }
 
 

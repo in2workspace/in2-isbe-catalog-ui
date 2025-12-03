@@ -35,7 +35,7 @@
                         <label for="prod-name" class="font-bold text-lg ">{{ 'CREATE_CATALOG._name' | translate }}</label>
                         <input data-cy="catalogName" formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                        class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
 
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_CATALOG._description' | translate }}</label>
@@ -43,7 +43,7 @@
 
                     </form>
                     <div class="flex w-full justify-items-end justify-end">
-                        <button data-cy="catalogNext" type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button data-cy="catalogNext" type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_CATALOG._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -54,7 +54,7 @@
 
             @if(showSummary){
                 <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'CREATE_CATALOG._finish' | translate }}</h2>
-                <div class="m-8">
+                <div class="">
                     <div>
                         <label class="font-bold text-lg ">{{ 'CREATE_CATALOG._name' | translate }}</label>
                         <label class="mb-2 bg-white text-wrap break-all  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
@@ -77,14 +77,14 @@
 
                     @if(catalogToCreate?.description !=''){
                         <label class="font-bold text-lg ">{{ 'CREATE_CATALOG._description' | translate }}</label>
-                        <div class="px-4 py-2 bg-white rounded-lg p-4 mb-2 bg-gray-50  border border-gray-300   text-gray-900">
+                        <div class="px-4 py-2 bg-white rounded-lg p-4 mb-2 bg-white  border border-gray-0   text-gray-100">
                             <markdown class="bg-gray-50 text-wrap break-all   text-gray-900" [data]="catalogToCreate?.description"></markdown>
                         </div>
                     }
 
 
                     <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button data-cy="catalogFinish" type="button" (click)="createCatalog();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <button data-cy="catalogFinish" type="button" (click)="createCatalog();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_CATALOG._create' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

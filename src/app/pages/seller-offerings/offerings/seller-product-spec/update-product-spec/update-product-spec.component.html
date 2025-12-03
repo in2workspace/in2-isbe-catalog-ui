@@ -1,5 +1,5 @@
 
-<div>
+<div class="mt-8">
   <h2 class="text-3xl md:text-2xl font-normal text-primary-100">{{ 'UPDATE_PROD_SPEC._update_prod' | translate }}</h2>
     <div class="flex flex-col bg-white mt-4 p-4 rounded-lg">
         <div class="overflow-x-auto">
@@ -21,11 +21,11 @@
                                 {{ i + 1 }}
                             </span>
                             @if(i < stepNavigation.length - 1){
-                                <span class="absolute -right-7 md:right-[-25px] w-5 md:w-[50px] h-px md:ml-4 bg-black"></span>
+                                <span class="absolute -right-7 md:right-[-25px] w-5 md:w-[50px] h-px bg-black"></span>
                             }
                         </div>
-                        <span 
-                          class="text-sm whitespace-nowrap cursor-pointer" 
+                        <span
+                          class="text-sm whitespace-nowrap cursor-pointer"
                           [class.cursor-not-allowed]="isStepDisabled(step)"
                           [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)">
                             {{ step.labelKey | translate }}
@@ -35,32 +35,32 @@
             </ol>
         </div>
         <hr class="h-px bg-gray-0 border-0">
-        <div>
+        <div class="mt-8">
                 @if(showGeneral){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2>
-                    <form class="m-4 md:grid md:grid-cols-2 gap-4" [formGroup]="generalForm">
+                    <!-- <h2 class="text-3xl font-bold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2> -->
+                    <form class="md:grid md:grid-cols-2 gap-4" [formGroup]="generalForm">
                         <div>
                             <label for="prod-sepec-name" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                             <input formControlName="name" type="text" id="prod-sepec-name" maxLength="100"
                             [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                             <label for="prod-version" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
                             <input formControlName="version" type="text" id="prod-version"
                             [ngClass]="generalForm.get('version')?.invalid == true ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
                         </div>
                         <div>
                             <label for="prod-brand" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
                             <input formControlName="brand" type="text" id="prod-brand"
                             [ngClass]="generalForm.get('brand')?.invalid == true && generalForm.value.brand!='' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                             <label for="prod-number" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
-                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
                         </div>
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
-                        <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
+                        <app-status-selector class="col-span-2" [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
 
                         <label for="prod-description" class="font-semibold text-base col-span-2 text-primary-100">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                         <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>
@@ -68,7 +68,7 @@
                     </form>
                     @if(BUNDLE_ENABLED){
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleBundle();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                            <button type="button" (click)="toggleBundle();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'UPDATE_PROD_SPEC._next' | translate }}
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -77,7 +77,7 @@
                         </div>
                     }@else if(IS_ISBE){
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleChars()" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                            <button type="button" (click)="toggleChars()" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'CREATE_PROD_SPEC._next' | translate }}
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -87,7 +87,7 @@
 
                     }@else{
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleCompliance();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                            <button type="button" (click)="toggleCompliance();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'CREATE_PROD_SPEC._next' | translate }}
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -97,10 +97,10 @@
                     }
                 }
                 @if(showBundle){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</h2>
+                    <!-- <h2 class="text-3xl font-bold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</h2> -->
                     <div class="col-span-2 flex align-items-middle h-fit m-4">
                         <label for="prod-brand" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._is_bundled' | translate }}</label>
-                        <label class="inline-flex items-center me-5 ml-4">
+                        <label class="inline-flex items-center me-5 ">
                             <input type="checkbox" disabled [checked]="bundleChecked" value="" class="sr-only peer">
                             <div class="relative w-11 h-6 bg-gray-400  rounded-full peer peer-focus:ring-4 peer-focus:ring-primary-100 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-100"></div>
                         </label>
@@ -115,9 +115,9 @@
                                 <span class="sr-only">Loading...</span>
                             </div>
                         } @else {
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
+                            <div class="relative overflow-x-auto rounded-lg w-full bg-white">
                                 <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
-                                    <thead class="text-base text-primary-100 bg-gray-0  ">
+                                    <thead class="text-base text-primary-100 bg-gray-0">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -193,8 +193,8 @@
                             </div>
                         }
                     }
-                    <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button type="button" (click)="toggleCompliance();" [disabled]="prodSpecsBundle.length<2 && bundleChecked" [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <div class="flex w-full justify-items-end justify-end ">
+                        <button type="button" (click)="toggleCompliance();" [disabled]="prodSpecsBundle.length<2 && bundleChecked" [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -203,11 +203,11 @@
                     </div>
                 }
                 @if(showCompliance){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._comp_profile' | translate }}</h2>
-                    <h3 class="font-bold text-primary-100  text-left ml-4">
+                    <!-- <h2 class="text-3xl font-bold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._comp_profile' | translate }}</h2> -->
+                    <h3 class="font-bold text-primary-100  text-left ">
                         {{ 'UPDATE_PROD_SPEC._self_attestation' | translate }}
                     </h3>
-                    <div class="flex items-center justify-between ml-4 border border-1 p-2 rounded-lg shadow bg-white  shadow-md">
+                    <div class="flex items-center justify-between  border border-1 p-2 rounded-lg shadow bg-white  shadow-md">
 
                         <p class="mb-2 text-gray-800 ">
                             {{ selfAtt ? selfAtt.productSpecCharacteristicValue[0].value : 'Upload your self attestation document' }}
@@ -238,7 +238,7 @@
                         </button>
                         @if(buttonISOClicked){
                             <!-- Dropdown menu -->
-                            <div id="dropdownISO" class="z-10 w-full ml-4 mr-4 bg-secondary-50  divide-y divide-gray-100 rounded-lg shadow">
+                            <div id="dropdownISO" class="z-10 w-full  mr-4 bg-secondary-50  divide-y divide-gray-100 rounded-lg shadow">
                                 <ul class="p-3 space-y-3 text-sm text-gray-700" aria-labelledby="dropdownButtonISO">
                                     @for (iso of availableISOS; track iso;) {
                                         <li>
@@ -258,16 +258,16 @@
                             </div>
                         }
                     }
-                    <div class="flex w-full justify-items-end justify-end align-items-middle ml-4 h-fit">
+                    <div class="flex w-full justify-items-end justify-end align-items-middle  h-fit">
                         <!-- <button type="button" (click)="verifyCredential();"
-                        class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._verify' | translate }}
                             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
                             </svg>
                         </button> -->
 
-                        <div class="ml-4 flex">
+                        <div class=" flex">
                             <svg data-popover-target="popover-default" class="flex self-center w-6 h-6 text-primary-100" clip-rule="evenodd" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                             </svg>
@@ -356,7 +356,7 @@
                     </div>
 
                     <!-- Wrapper for button & tooltip -->
-                    <div class="relative flex w-full justify-end ml-4">
+                    <div class="relative flex w-full justify-end ">
                         <!-- Group container to enable hover effects -->
                         <div class="relative inline-block group">
                             <!-- Tooltip (Only exists if checkValidISOS() is true and only appears on hover) -->
@@ -389,7 +389,7 @@
 
                 }
                 @if(showChars){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._chars' | translate }}</h2>
+                    <!-- <h2 class="text-3xl font-bold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._chars' | translate }}</h2> -->
                     @if (prodChars.length === 0){
                         <div class="flex justify-center w-full m-4">
                           <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
@@ -403,7 +403,7 @@
                           </div>
                         </div>
                     } @else {
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
+                        <div class="relative overflow-x-auto rounded-lg w-full bg-white">
                             <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
                                 <thead class="text-base text-primary-100 bg-gray-0  ">
                                     <tr>
@@ -482,13 +482,13 @@
                             <div>
                                 <label for="prod-name" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                                class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
                             </div>
                             <div>
                                 <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._type' | translate }}</label>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                     <option selected value="string">String</option>
                                     <option value="number">Number</option>
                                     <option value="range">Number range</option>
@@ -616,8 +616,8 @@
 
                         </div>
                     }
-                    <div class="flex w-full justify-items-end justify-end ml-4 mt-4">
-                        <button type="button" (click)="toggleAttach();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <div class="flex w-full justify-items-end justify-end  mt-4">
+                        <button type="button" (click)="toggleAttach();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -628,8 +628,8 @@
 
                 @if(showAttach){
                     <div class="inline-flex">
-                        <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._attachments' | translate }}</h2>
-                        <div class="ml-4 flex">
+                        <!-- <h2 class="text-3xl font-bold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._attachments' | translate }}</h2> -->
+                        <div class=" flex">
                             <svg data-popover-target="data-popover-default" class="flex self-center w-6 h-6 text-primary-100" clip-rule="evenodd" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                             </svg>
@@ -646,9 +646,9 @@
                         </div>
                     </div>
                     @if(!IS_ISBE){
-                        <h4 class="text-lg font-bold ml-4 ">{{ 'UPDATE_PROD_SPEC._add_prod_img' | translate }}</h4>
+                        <h4 class="text-lg font-bold  ">{{ 'UPDATE_PROD_SPEC._add_prod_img' | translate }}</h4>
                     }@else{
-                        <h4 class="text-lg font-bold ml-4 ">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</h4>
+                        <h4 class="text-lg font-bold  ">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</h4>
                     }
                     @if(showImgPreview){
                         <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto m-4 shadow-lg">
@@ -710,7 +710,7 @@
                             </div>
                         </div>
                     }
-                    <h4 class="text-lg font-bold ml-4 ">{{ 'UPDATE_PROD_SPEC._add_att' | translate }}</h4>
+                    <h4 class="text-lg font-bold  ">{{ 'UPDATE_PROD_SPEC._add_att' | translate }}</h4>
                     @if(prodAttachments.length == 0){
                         <div class="flex justify-center w-full ml-6 mt-2 mb-2 mr-4">
                             <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
@@ -724,7 +724,7 @@
                             </div>
                         </div>
                     } @else {
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
+                        <div class="relative overflow-x-auto rounded-lg w-full bg-white">
                             <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
                                 <thead class="text-base text-primary-100 bg-gray-0  ">
                                     <tr>
@@ -824,8 +824,8 @@
 
                     }
 
-                    <div class="flex w-full justify-items-end justify-end ml-4 mt-4">
-                        <button type="button" (click)="toggleRelationship();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <div class="flex w-full justify-items-end justify-end  mt-4">
+                        <button type="button" (click)="toggleRelationship();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._next' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -834,7 +834,7 @@
                     </div>
                 }
                 @if(showRelationships){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</h2>
+                    <!-- <h2 class="text-3xl font-bold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</h2> -->
                     <div class="m-4">
                         @if (prodRelationships.length === 0){
                             <div class="flex justify-center w-full mb-4">
@@ -849,7 +849,7 @@
                               </div>
                             </div>
                         } @else {
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
+                            <div class="relative overflow-x-auto rounded-lg w-full bg-white">
                                 <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
                                     <thead class="text-base text-primary-100 bg-gray-0  ">
                                         <tr>
@@ -994,8 +994,8 @@
                             </div>
                         }
                     </div>
-                    <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button type="button" (click)="showFinish();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                    <div class="flex w-full justify-items-end justify-end ">
+                        <button type="button" (click)="showFinish();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._finish' | translate }}
                             <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
@@ -1004,8 +1004,8 @@
                     </div>
                 }
                 @if(showSummary){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._finish' | translate }}</h2>
-                    <div class="m-8">
+                    <!-- <h2 class="text-3xl font-bold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._finish' | translate }}</h2> -->
+                    <div class="">
                         <div class="mb-4 md:grid md:grid-cols-2 gap-4">
                             <div>
                                 <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
@@ -1031,18 +1031,18 @@
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <label class="font-bold text-lg mr-4 ">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
+                        <div class="mb-4 flex flex-row gap-2">
+                            <label class="font-bold text-lg">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
                             @if(productSpecToUpdate?.lifecycleStatus == 'In design'){
-                                <span class="bg-purple-100  text-grey-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-grey-400">{{ 'ADMIN._in_design' | translate }}</span>
-                            }@else if(productSpecToUpdate?.lifecycleStatus == 'Active'){
-                                <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
+                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                            } @else if(productSpecToUpdate?.lifecycleStatus == 'Active'){
+                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Launched') {
-                                <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
+                                <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Retired') {
-                                <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
+                                <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._retired' | translate }}</div>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Obsolete') {
-                                <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
+                                <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
                             }
                         </div>
 
@@ -1217,8 +1217,8 @@
                                 </table>
                             </div>
                         }
-                        <div class="flex w-full justify-items-end justify-end ml-4">
-                            <button type="button" (click)="updateProduct();" [disabled]="!isProdValid()" [ngClass]="!isProdValid() ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center">
+                        <div class="flex w-full justify-items-end justify-end ">
+                            <button type="button" (click)="updateProduct();" [disabled]="!isProdValid()" [ngClass]="!isProdValid() ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'UPDATE_PROD_SPEC._update_prod' | translate }}
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>

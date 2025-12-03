@@ -17,7 +17,7 @@
 
 @if (statusControl && formType === 'update') {
   <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_OFFER._status' | translate }}</label>
-  <app-status-selector [modelType]="'offering'" [allowLaunched]="isAdmin" [anchor]="statusAnchor" [formControl]="statusControl"></app-status-selector>
+  <app-status-selector class="col-span-2" [modelType]="'offering'" [allowLaunched]="isAdmin" [anchor]="statusAnchor" [formControl]="statusControl"></app-status-selector>
 
 }
 @if (descControl) {
