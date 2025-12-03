@@ -100,7 +100,7 @@
     </div>
 
     <div class="flex flex-row w-full md:justify-end">
-        <button data-cy="newOffering" type="button" (click)="goToCreate()" 
+        <button data-cy="newOffering" type="button" (click)="goToCreate()"
         class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center align-middle">
             <p class="pl-2 pr-2">{{ 'OFFERINGS._add_new_offer' | translate }}</p>
             <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -120,9 +120,9 @@
         <span class="sr-only">Loading...</span>
       </div>
 } @else {
-    <div class="bg-white p-4 rounded-lg">
-        <div class="relative overflow-x-auto-md sm:rounded-lg w-full bg-white">
-            <table class="w-full text-sm text-left rtl:text-right text-black rounded-lg overflow-hidden">
+    <div class="bg-white py-4 pl-4 md:p-4 rounded-lg">
+        <div class="rounded-lg bg-white w-full overflow-x-auto">
+            <table class="min-w-[640px] w-max md:w-full text-sm text-left rtl:text-right text-black rounded-lg">
                 <thead class="text-base  bg-gray-0">
                     <tr>
                         <th scope="col" class="px-6 py-3">
