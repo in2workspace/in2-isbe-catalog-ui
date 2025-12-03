@@ -31,6 +31,14 @@ type BundledProductSpecification = components["schemas"]["BundledProductSpecific
 type ProductSpecificationCharacteristic = components["schemas"]["ProductSpecificationCharacteristic"];
 type ProductSpecificationRelationship = components["schemas"]["ProductSpecificationRelationship"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
+type StepId = 'general-info' | 'bundle' | 'compliance' | 'chars' | 'attach' | 'relationships' | 'summary';
+
+interface StepNavItem {
+  id: StepId;
+  labelKey: string;
+  onClick: () => void;
+  isDisabled: () => boolean;
+}
 
 @Component({
     selector: 'update-product-spec',
@@ -58,8 +66,8 @@ export class UpdateProductSpecComponent implements OnInit {
   showRelationships:boolean=false;
   showSummary:boolean=false;
 
-  stepsElements:string[]=['general-info','bundle','compliance','chars','attach','relationships','summary'];
-  stepsCircles:string[]=['general-circle','bundle-circle','compliance-circle','chars-circle','attach-circle','relationships-circle','summary-circle'];
+  currentStep: StepId = 'general-info';
+  stepNavigation: StepNavItem[] = [];
 
   showPreview:boolean=false;
   showEmoji:boolean=false;
@@ -194,10 +202,7 @@ export class UpdateProductSpecComponent implements OnInit {
   ngOnInit() {
     this.initPartyInfo();
     this.populateProductInfo();
-    if (this.IS_ISBE) {
-      this.stepsElements = this.stepsElements.filter(s => s !== 'compliance');
-      this.stepsCircles = this.stepsCircles.filter(c => c !== 'compliance-circle');
-    }
+    this.initNavigationSteps();
     initFlowbite();
   }
 
@@ -319,6 +324,67 @@ export class UpdateProductSpecComponent implements OnInit {
       }
     }
 
+  }
+
+  initNavigationSteps() {
+    const steps: StepNavItem[] = [
+      {
+        id: 'general-info',
+        labelKey: 'UPDATE_PROD_SPEC._general',
+        onClick: () => this.toggleGeneral(),
+        isDisabled: () => false
+      },
+      {
+        id: 'bundle',
+        labelKey: 'UPDATE_PROD_SPEC._bundle',
+        onClick: () => this.toggleBundle(),
+        isDisabled: () => this.generalForm.invalid
+      },
+      {
+        id: 'compliance',
+        labelKey: 'UPDATE_PROD_SPEC._comp_profile',
+        onClick: () => this.toggleCompliance(),
+        isDisabled: () => this.generalForm.invalid
+      },
+      {
+        id: 'chars',
+        labelKey: 'UPDATE_PROD_SPEC._chars',
+        onClick: () => this.toggleChars(),
+        isDisabled: () => this.generalForm.invalid || this.checkValidISOS()
+      },
+      {
+        id: 'attach',
+        labelKey: 'UPDATE_PROD_SPEC._attachments',
+        onClick: () => this.toggleAttach(),
+        isDisabled: () => this.generalForm.invalid || this.checkValidISOS()
+      },
+      {
+        id: 'relationships',
+        labelKey: 'UPDATE_PROD_SPEC._relationships',
+        onClick: () => this.toggleRelationship(),
+        isDisabled: () => this.generalForm.invalid || this.checkValidISOS()
+      },
+      {
+        id: 'summary',
+        labelKey: 'UPDATE_PROD_SPEC._finish',
+        onClick: () => this.showFinish(),
+        isDisabled: () => this.generalForm.invalid || this.checkValidISOS()
+      }
+    ];
+
+    this.stepNavigation = steps.filter(step => {
+      if (step.id === 'bundle') {
+        return this.BUNDLE_ENABLED;
+      }
+      if (step.id === 'compliance') {
+        return !this.IS_ISBE;
+      }
+      return true;
+    });
+
+    if (this.stepNavigation.length) {
+      this.currentStep = this.stepNavigation[0].id;
+    }
   }
 
   setProdStatus(status: any) {
@@ -875,55 +941,34 @@ export class UpdateProductSpecComponent implements OnInit {
     this.creatingChars=[];
   }
 
-  removeClass(elem: HTMLElement, cls:string) {
-    var str = " " + elem.className + " ";
-    elem.className = str.replace(" " + cls + " ", " ").replace(/^\s+|\s+$/g, "");
+  get currentStepIndex(): number {
+    return this.stepNavigation.findIndex(step => step.id === this.currentStep);
   }
 
-  addClass(elem: HTMLElement, cls:string) {
-      elem.className += (" " + cls);
+  isStepComplete(index: number): boolean {
+    const activeIndex = this.currentStepIndex;
+    return activeIndex !== -1 && index < activeIndex;
   }
 
-  unselectMenu(elem:HTMLElement | null,cls:string){
-    if(elem != null){
-      if(elem.className.match(cls)){
-        this.removeClass(elem,cls)
-      }
+  isCurrentStep(stepId: StepId): boolean {
+    return this.currentStep === stepId;
+  }
+
+  isStepDisabled(step: StepNavItem): boolean {
+    return step.isDisabled();
+  }
+
+  handleStepClick(step: StepNavItem) {
+    if (this.isStepDisabled(step)) {
+      return;
     }
-  }
-
-  selectMenu(elem:HTMLElement| null,cls:string){
-    if(elem != null){
-      if(!elem.className.match(cls)){
-        this.addClass(elem,cls)
-      }
-    }
+    this.selectStep(step.id);
+    step.onClick();
   }
   
   //STEPS CSS EFFECTS:
-  selectStep(step:string,stepCircle:string){
-    const index = this.stepsElements.findIndex(item => item === step);
-    if (index !== -1) {
-      this.stepsElements.splice(index, 1);
-      this.selectMenu(document.getElementById(step),'text-primary-100 ')
-      this.unselectMenu(document.getElementById(step),'text-gray-500') 
-      for(const element of this.stepsElements){
-        this.unselectMenu(document.getElementById(element),'text-primary-100 ')
-        this.selectMenu(document.getElementById(element),'text-gray-500') 
-      }
-      this.stepsElements.push(step);
-    }
-    const circleIndex = this.stepsCircles.findIndex(item => item === stepCircle);
-    if (index !== -1) {
-      this.stepsCircles.splice(circleIndex, 1);
-      this.selectMenu(document.getElementById(stepCircle),'border-primary-100 ')
-      this.unselectMenu(document.getElementById(stepCircle),'border-gray-400');
-      for(const element of this.stepsCircles){
-        this.unselectMenu(document.getElementById(element),'border-primary-100 ')
-        this.selectMenu(document.getElementById(element),'border-gray-400');
-      }
-      this.stepsCircles.push(stepCircle);
-    }
+  selectStep(step: StepId, _stepCircle?: string){
+    this.currentStep = step;
   }
 
   onTypeChange(event: any) {
@@ -1041,6 +1086,7 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   showFinish() {
+    this.selectStep('summary');
     for(const element of this.prodChars){
       const index = this.finishChars.findIndex(item => item.name === element.name);
       if (index == -1) {

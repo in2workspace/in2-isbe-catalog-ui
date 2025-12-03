@@ -1,93 +1,41 @@
 
 <div>
-    <div class="bg-secondary-50  mt-4 p-8 rounded-lg">
-        <h2 class="text-3xl font-bold text-primary-100 ml-4 . ">{{ 'UPDATE_PROD_SPEC._update_prod' | translate }}</h2>
-        <hr class="h-px m-4 bg-gray-300  border-0">
-        <div class="md:grid md:grid-cols-25/75 xl:grid-cols-20/80">
-            <div class="flex sm:flex-row md:flex-col md:mr-4 overflow-x-auto max-w-[calc(100vw-5rem)]">
-                <h2 class="hidden md:block text-xl font-bold text-black mb-4 ">{{ 'UPDATE_PROD_SPEC._steps' | translate }}</h2>
-                <button id="general-info" (click)="toggleGeneral()"
-                class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-primary-100  justify-items-center md:justify-items-start">
-                    <span id="general-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-primary-100  rounded-full shrink-0">
-                        1
-                    </span>
-                    <span>
-                        <h3 class="flex leading-tight justify-start">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h3>
-                        <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._general_info' | translate }}</p>
-                    </span>
-                </button>
-                @if(BUNDLE_ENABLED){
-                    <hr class="h-px mb-2 bg-gray-300  border-0">
-                    <button id="bundle" (click)="toggleBundle()" [disabled]="generalForm.invalid"
-                    class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
-                        <span id="bundle-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
-                            2
+  <h2 class="text-3xl md:text-2xl font-normal text-primary-100">{{ 'UPDATE_PROD_SPEC._update_prod' | translate }}</h2>
+    <div class="flex flex-col bg-white mt-4 p-4 rounded-lg">
+        <div class="overflow-x-auto">
+            <ol class="flex items-start w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
+                @for (step of stepNavigation; track step.id; let i = $index) {
+                    <li
+                      (click)="handleStepClick(step)"
+                      class="relative flex-1 flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[140px]"
+                      [class.text-primary-100]="isCurrentStep(step.id)"
+                      [class.cursor-not-allowed]="isStepDisabled(step)"
+                      [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)">
+                        <div class="md:relative flex items-center justify-center w-full">
+                            <span class="flex items-center justify-center cursor-pointer w-4 h-4 md:w-10 md:h-10 border text-[10px] md:text-base text-white shrink-0 rounded-full"
+                                  [class.bg-primary-100]="isCurrentStep(step.id)"
+                                  [class.text-white]="isCurrentStep(step.id)"
+                                  [class.cursor-not-allowed]="isStepDisabled(step)"
+                                  [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)"
+                                  [ngClass]="{ 'bg-green border-green': isStepComplete(i), 'border-primary-100 bg-primary-100': !isStepComplete(i) }">
+                                {{ i + 1 }}
+                            </span>
+                            @if(i < stepNavigation.length - 1){
+                                <span class="absolute -right-7 md:right-[-25px] w-5 md:w-[50px] h-px md:ml-4 bg-black"></span>
+                            }
+                        </div>
+                        <span 
+                          class="text-sm whitespace-nowrap cursor-pointer" 
+                          [class.cursor-not-allowed]="isStepDisabled(step)"
+                          [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)">
+                            {{ step.labelKey | translate }}
                         </span>
-                        <span>
-                            <h3 class="flex leading-tight justify-start">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</h3>
-                            <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._bundle_info' | translate }}</p>
-                        </span>
-                    </button>
+                    </li>
                 }
-                @if(!IS_ISBE){
-                    <hr class="h-px mb-2 bg-gray-300  border-0">
-                    <button id="compliance" (click)="toggleCompliance()" [disabled]="generalForm.invalid"
-                    class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
-                        <span id="compliance-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
-                            {{ BUNDLE_ENABLED ? 3 : 2 }}
-                        </span>
-                        <span>
-                            <h3 class="flex leading-tight justify-start">{{ 'UPDATE_PROD_SPEC._comp_profile' | translate }}</h3>
-                            <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._comp_profile_info' | translate }}</p>
-                        </span>
-                    </button>
-                }
-                <hr class="h-px mb-2 bg-gray-300  border-0">
-                <button id="chars" (click)="toggleChars()" [disabled]="generalForm.invalid || checkValidISOS()"
-                class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
-                    <span id="chars-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
-                        {{ BUNDLE_ENABLED ? (IS_ISBE ? 3 : 4) : (IS_ISBE ? 2 : 3) }}
-                    </span>
-                    <span>
-                        <h3 class="flex leading-tight justify-start">{{ 'UPDATE_PROD_SPEC._chars' | translate }}</h3>
-                        <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._chars_info' | translate }}</p>
-                    </span>
-                </button>
-                <hr class="h-px mb-2 bg-gray-300  border-0">
-                <button id="attach" (click)="toggleAttach()" [disabled]="generalForm.invalid || checkValidISOS()"
-                class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
-                    <span id="attach-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
-                        {{ BUNDLE_ENABLED ? (IS_ISBE ? 4 : 5) : (IS_ISBE ? 3 : 4) }}
-                    </span>
-                    <span>
-                        <h3 class="flex leading-tight justify-start">{{ 'UPDATE_PROD_SPEC._attachments' | translate }}</h3>
-                        <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._attachments_info' | translate }}</p>
-                    </span>
-                </button>
-                <hr class="h-px mb-2 bg-gray-300  border-0">
-                <button id="relationships" (click)="toggleRelationship()" [disabled]="generalForm.invalid || checkValidISOS()"
-                class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
-                    <span id="relationships-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
-                        {{ BUNDLE_ENABLED ? (IS_ISBE ? 5 : 6) : (IS_ISBE ? 4 : 5) }}
-                    </span>
-                    <span>
-                        <h3 class="flex leading-tight justify-start">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</h3>
-                        <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._relationships_info' | translate }}</p>
-                    </span>
-                </button>
-                <hr class="h-px mb-2 bg-gray-300  border-0">
-                <button id="summary" (click)="showFinish()" [disabled]="generalForm.invalid || checkValidISOS()"
-                class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
-                    <span id="summary-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
-                        {{ BUNDLE_ENABLED ? (IS_ISBE ? 6 : 7) : (IS_ISBE ? 5 : 6) }}
-                    </span>
-                    <span>
-                        <h3 class="flex leading-tight justify-start">{{ 'UPDATE_PROD_SPEC._finish' | translate }}</h3>
-                        <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._summary' | translate }}</p>
-                    </span>
-                </button>
-            </div>
-            <div>
+            </ol>
+        </div>
+        <hr class="h-px bg-gray-0 border-0">
+        <div>
                 @if(showGeneral){
                     <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2>
                     <form class="m-4 md:grid md:grid-cols-2 gap-4" [formGroup]="generalForm">
@@ -1280,7 +1228,6 @@
                     </div>
                 }
 
-            </div>
         </div>
     </div>
 
