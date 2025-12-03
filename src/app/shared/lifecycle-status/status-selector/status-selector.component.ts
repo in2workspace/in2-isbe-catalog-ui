@@ -86,9 +86,9 @@ export class StatusSelectorComponent implements ControlValueAccessor, OnChanges 
     const disabled = this.disabled || !this.displayedStatuses.includes(status as StatusCode);
 
     if (active) {
-      return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} bg-[#d2e0f0] dark:bg-primary-100 font-semibold ${color}`;
+      return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} bg-[#d2e0f0] font-semibold ${color}`;
     }
-    return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} text-gray-500 dark:text-gray-200 hover:bg-[#d2e0f0] dark:hover:bg-gray-700`;
+    return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} text-gray-500  hover:bg-[#d2e0f0]`; 
   }
 
   getFillColor(status: string): string {

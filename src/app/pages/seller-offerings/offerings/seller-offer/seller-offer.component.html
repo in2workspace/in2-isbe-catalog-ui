@@ -27,7 +27,7 @@
               <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
                   class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
 
-              <label for="in-design" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label for="in-design" class="ml-2 text-sm font-medium text-gray-900 ">
                   {{ 'OFFERINGS._in_design' | translate }}
               </label>
               </li>
@@ -36,7 +36,7 @@
               <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
                   class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
 
-              <label for="active" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label for="active" class="ml-2 text-sm font-medium text-gray-900 ">
                   {{ 'OFFERINGS._active' | translate }}
               </label>
               </li>
@@ -45,7 +45,7 @@
               <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
                   class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
 
-              <label for="launched" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label for="launched" class="ml-2 text-sm font-medium text-gray-900 ">
                   {{ 'OFFERINGS._launched' | translate }}
               </label>
               </li>
@@ -54,7 +54,7 @@
               <input id="retired" type="checkbox" value="" (change)="onStateFilterChange('Retired')"
                   class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
 
-              <label for="retired" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+              <label for="retired" class="ml-2 text-sm font-medium text-gray-900 ">
                   {{ 'OFFERINGS._retired' | translate }}
               </label>
               </li>
@@ -63,7 +63,7 @@
                 <input id="obsolete" type="checkbox" value="" (change)="onStateFilterChange('Obsolete')"
                     class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500" />
 
-                <label for="obsolete" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-200">
+                <label for="obsolete" class="ml-2 text-sm font-medium text-gray-900 ">
                   {{ 'OFFERINGS._obsolete' | translate }}
                 </label>
               </li>
@@ -113,7 +113,7 @@
 
 @if(loading){
     <div role="status" class="w-full h-full flex justify-center align-middle">
-        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin  fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
             <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
         </svg>
@@ -122,22 +122,22 @@
 } @else {
     <div class="bg-white py-4 pl-4 md:p-4 rounded-lg">
         <div class="rounded-lg bg-white w-full overflow-x-auto">
-            <table class="min-w-[640px] w-max md:w-full text-sm text-left rtl:text-right text-black rounded-lg">
-                <thead class="text-base  bg-gray-0">
+            <table class="min-w-[640px] w-max md:w-full text-sm text-left rtl:text-right text-black rounded-lg border border-gray-0">
+                <thead class="text-base bg-gray-0">
                     <tr>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="p-3">
                             {{ 'OFFERINGS._name' | translate }}
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="p-3">
                             {{ 'OFFERINGS._status' | translate }}
                         </th>
-                        <th scope="col" class="hidden md:table-cell px-6 py-3">
+                        <th scope="col" class="hidden md:table-cell p-3">
                             {{ 'OFFERINGS._type' | translate }}
                         </th>
-                        <th scope="col" class="hidden md:table-cell px-6 py-3">
+                        <th scope="col" class="hidden md:table-cell p-3">
                             {{ 'OFFERINGS._last_update' | translate }}
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        <th scope="col" class="p-3">
                             {{ 'OFFERINGS._actions' | translate }}
                         </th>
                     </tr>
@@ -145,10 +145,10 @@
                 <tbody data-cy="offers">
                     @for (offer of offers; track offer.id) {
                         <tr class="border-b">
-                            <td class="px-6 py-4 text-wrap break-all">
+                            <td class="p-3 text-wrap break-all">
                                 {{offer.name}}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="p-3">
                                 @if(offer.lifecycleStatus == 'In design'){
                                     <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                 } @else if(offer.lifecycleStatus == 'Active'){
@@ -161,17 +161,17 @@
                                     <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
                                 }
                             </td>
-                            <td class="px-6 py-4 hidden md:table-cell">
+                            <td class="p-3 hidden md:table-cell">
                                 @if(offer.isBundle == false){
                                     <div class="bg-primary-50/30 text-xs text-center font-medium px-2 py-0.5 rounded-md">{{ 'OFFERINGS._simple' | translate }}</div>
                                 } @else {
                                     <div class="bg-purple-100 text-green-500 text-center text-xs font-medium px-2 py-0.5 rounded-md">{{ 'OFFERINGS._bundle' | translate }}</div>
                                 }
                             </td>
-                            <td class="px-6 py-4 hidden md:table-cell">
+                            <td class="p-3 hidden md:table-cell">
                                 {{offer.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="p-3">
                                 <button type="button" (click)="goToUpdate(offer)" class="bg-gray-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-1 text-center inline-flex items-center me-2">
                                     <svg class="text-gray-50" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M2.91602 11.0827H3.65189L9.62318 5.11139L8.88731 4.37552L2.91602 10.3468V11.0827ZM2.56835 11.9577C2.41892 11.9577 2.2937 11.9071 2.19268 11.806C2.09157 11.705 2.04102 11.5798 2.04102 11.4303V10.4197C2.04102 10.2775 2.06833 10.1419 2.12297 10.013C2.17752 9.88408 2.25267 9.77174 2.34843 9.67597L9.73547 2.29229C9.82365 2.21218 9.92102 2.15029 10.0276 2.10664C10.1342 2.06289 10.246 2.04102 10.363 2.04102C10.48 2.04102 10.5932 2.06177 10.7028 2.10329C10.8125 2.1448 10.9095 2.21081 10.994 2.30133L11.7064 3.02262C11.7969 3.10711 11.8614 3.20433 11.8999 3.31429C11.9384 3.42424 11.9577 3.5342 11.9577 3.64416C11.9577 3.76151 11.9377 3.87346 11.8976 3.98002C11.8575 4.08667 11.7938 4.18409 11.7064 4.27227L4.32272 11.6503C4.22696 11.746 4.11462 11.8212 3.9857 11.8757C3.85679 11.9304 3.72121 11.9577 3.57897 11.9577H2.56835ZM9.24883 4.74987L8.88731 4.37552L9.62318 5.11139L9.24883 4.74987Z" fill="currentColor"/>
@@ -189,7 +189,7 @@
                         </tr>
                     } @empty {
                         <div class="flex justify-center w-full m-4">
-                            <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  dark:text-primary-50" role="alert">
+                            <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
                               <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                               </svg>
@@ -205,7 +205,7 @@
         @if (!loading_more) {
             @if (page_check) {
             <div class="flex pt-6 pb-2 justify-center align-middle">
-                <button (click)="next()" class="flex cursor-pointer-lg items-center justify-center px-3 h-8 text-sm font-medium text-gray-500  bg-white dark:bg-primary-100 dark:hover:bg-secondary-100 border border-gray-300 dark:border-secondary-200 rounded-lg hover:bg-gray-200">
+                <button (click)="next()" class="flex cursor-pointer-lg items-center justify-center px-3 h-8 text-sm font-medium text-gray-500  bg-white   border border-gray-300  rounded-lg hover:bg-gray-200">
                 {{ 'OFFERINGS._load_more' | translate }}
                 <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -215,7 +215,7 @@
             }
         } @else {
             <div role="status" class="w-full h-full flex justify-center align-middle mt-2">
-            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin  fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
             </svg>

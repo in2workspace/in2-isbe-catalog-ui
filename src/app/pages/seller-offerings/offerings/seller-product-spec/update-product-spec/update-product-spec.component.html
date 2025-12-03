@@ -1,14 +1,14 @@
 
 <div>
-    <div class="bg-secondary-50 dark:bg-secondary-100 mt-4 p-8 rounded-lg">
-        <h2 class="text-3xl font-bold text-primary-100 ml-4 . dark:text-white">{{ 'UPDATE_PROD_SPEC._update_prod' | translate }}</h2>
-        <hr class="h-px m-4 bg-gray-300 dark:bg-gray-200 border-0">
+    <div class="bg-secondary-50  mt-4 p-8 rounded-lg">
+        <h2 class="text-3xl font-bold text-primary-100 ml-4 . ">{{ 'UPDATE_PROD_SPEC._update_prod' | translate }}</h2>
+        <hr class="h-px m-4 bg-gray-300  border-0">
         <div class="md:grid md:grid-cols-25/75 xl:grid-cols-20/80">
             <div class="flex sm:flex-row md:flex-col md:mr-4 overflow-x-auto max-w-[calc(100vw-5rem)]">
-                <h2 class="hidden md:block text-xl font-bold text-black mb-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._steps' | translate }}</h2>
+                <h2 class="hidden md:block text-xl font-bold text-black mb-4 ">{{ 'UPDATE_PROD_SPEC._steps' | translate }}</h2>
                 <button id="general-info" (click)="toggleGeneral()"
-                class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-primary-100 dark:text-primary-50 justify-items-center md:justify-items-start">
-                    <span id="general-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-primary-100 dark:border-primary-50 rounded-full shrink-0">
+                class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-primary-100  justify-items-center md:justify-items-start">
+                    <span id="general-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-primary-100  rounded-full shrink-0">
                         1
                     </span>
                     <span>
@@ -17,7 +17,7 @@
                     </span>
                 </button>
                 @if(BUNDLE_ENABLED){
-                    <hr class="h-px mb-2 bg-gray-300 dark:bg-gray-200 border-0">
+                    <hr class="h-px mb-2 bg-gray-300  border-0">
                     <button id="bundle" (click)="toggleBundle()" [disabled]="generalForm.invalid"
                     class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
                         <span id="bundle-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
@@ -30,7 +30,7 @@
                     </button>
                 }
                 @if(!IS_ISBE){
-                    <hr class="h-px mb-2 bg-gray-300 dark:bg-gray-200 border-0">
+                    <hr class="h-px mb-2 bg-gray-300  border-0">
                     <button id="compliance" (click)="toggleCompliance()" [disabled]="generalForm.invalid"
                     class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
                         <span id="compliance-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
@@ -42,7 +42,7 @@
                         </span>
                     </button>
                 }
-                <hr class="h-px mb-2 bg-gray-300 dark:bg-gray-200 border-0">
+                <hr class="h-px mb-2 bg-gray-300  border-0">
                 <button id="chars" (click)="toggleChars()" [disabled]="generalForm.invalid || checkValidISOS()"
                 class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
                     <span id="chars-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
@@ -53,7 +53,7 @@
                         <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._chars_info' | translate }}</p>
                     </span>
                 </button>
-                <hr class="h-px mb-2 bg-gray-300 dark:bg-gray-200 border-0">
+                <hr class="h-px mb-2 bg-gray-300  border-0">
                 <button id="attach" (click)="toggleAttach()" [disabled]="generalForm.invalid || checkValidISOS()"
                 class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
                     <span id="attach-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
@@ -64,7 +64,7 @@
                         <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._attachments_info' | translate }}</p>
                     </span>
                 </button>
-                <hr class="h-px mb-2 bg-gray-300 dark:bg-gray-200 border-0">
+                <hr class="h-px mb-2 bg-gray-300  border-0">
                 <button id="relationships" (click)="toggleRelationship()" [disabled]="generalForm.invalid || checkValidISOS()"
                 class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
                     <span id="relationships-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
@@ -75,7 +75,7 @@
                         <p class="hidden xl:flex text-xs justify-start">{{ 'UPDATE_PROD_SPEC._relationships_info' | translate }}</p>
                     </span>
                 </button>
-                <hr class="h-px mb-2 bg-gray-300 dark:bg-gray-200 border-0">
+                <hr class="h-px mb-2 bg-gray-300  border-0">
                 <button id="summary" (click)="showFinish()" [disabled]="generalForm.invalid || checkValidISOS()"
                 class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
                     <span id="summary-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
@@ -89,26 +89,26 @@
             </div>
             <div>
                 @if(showGeneral){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2>
+                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2>
                     <form class="m-4 md:grid md:grid-cols-2 gap-4" [formGroup]="generalForm">
                         <div>
-                            <label for="prod-sepec-name" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
+                            <label for="prod-sepec-name" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                             <input formControlName="name" type="text" id="prod-sepec-name" maxLength="100"
                             [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
-                            <label for="prod-version" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
+                            class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            <label for="prod-version" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
                             <input formControlName="version" type="text" id="prod-version"
                             [ngClass]="generalForm.get('version')?.invalid == true ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
                         </div>
                         <div>
-                            <label for="prod-brand" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
+                            <label for="prod-brand" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
                             <input formControlName="brand" type="text" id="prod-brand"
                             [ngClass]="generalForm.get('brand')?.invalid == true && generalForm.value.brand!='' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
-                            <label for="prod-number" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
-                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            <label for="prod-number" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
+                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
                         </div>
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
@@ -149,18 +149,18 @@
                     }
                 }
                 @if(showBundle){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</h2>
+                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</h2>
                     <div class="col-span-2 flex align-items-middle h-fit m-4">
-                        <label for="prod-brand" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._is_bundled' | translate }}</label>
+                        <label for="prod-brand" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._is_bundled' | translate }}</label>
                         <label class="inline-flex items-center me-5 ml-4">
                             <input type="checkbox" disabled [checked]="bundleChecked" value="" class="sr-only peer">
-                            <div class="relative w-11 h-6 bg-gray-400 dark:bg-gray-700 rounded-full peer peer-focus:ring-4 peer-focus:ring-primary-100 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-100"></div>
+                            <div class="relative w-11 h-6 bg-gray-400  rounded-full peer peer-focus:ring-4 peer-focus:ring-primary-100 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-100"></div>
                         </label>
                     </div>
                     @if(bundleChecked){
                         @if(loadingBundle){
                             <div role="status" class="w-full h-fit flex justify-center align-middle">
-                                <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin  fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                 </svg>
@@ -168,8 +168,8 @@
                             </div>
                         } @else {
                             <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                    <thead class="text-base text-primary-100 bg-gray-0  ">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -190,33 +190,33 @@
                                 </thead>
                                 <tbody>
                                     @for (prod of prodSpecs; track prod.id) {
-                                        <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                        <tr class="border-b hover:bg-gray-200   ">
                                             <td class="px-6 py-4 text-wrap break-all">
                                                 {{prod.name}}
                                             </td>
                                             <td class="hidden md:table-cell px-6 py-4">
                                                 @if(prod.lifecycleStatus == 'Active'){
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
+                                                    <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                                                 } @else if(prod.lifecycleStatus == 'Launched') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
+                                                    <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
                                                 } @else if(prod.lifecycleStatus == 'Retired') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
+                                                    <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
                                                 } @else if(prod.lifecycleStatus == 'Obsolete') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
+                                                    <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
                                                 }
                                             </td>
                                             <td class="hidden md:table-cell px-6 py-4">
                                                 @if(prod.isBundle == false){
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'UPDATE_PROD_SPEC._simple' | translate }}</span>
+                                                    <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'UPDATE_PROD_SPEC._simple' | translate }}</span>
                                                 } @else {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</span>
+                                                    <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</span>
                                                 }
                                             </td>
                                             <td class="hidden lg:table-cell px-6 py-4">
                                                 {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                             </td>
                                             <td class="px-6 py-4">
-                                                <input id="select-checkbox" [checked]="isProdInBundle(prod)" type="checkbox" value="" disabled class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 dark:focus:ring-purple-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                                <input id="select-checkbox" [checked]="isProdInBundle(prod)" type="checkbox" value="" disabled class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500   focus:ring-2  ">
                                             </td>
                                         </tr>
                                     }
@@ -227,7 +227,7 @@
                         @if (!loadingBundle_more) {
                             @if (bundlePageCheck) {
                             <div class="flex pt-6 pb-2 justify-center align-middle">
-                                <button (click)="nextBundle()" class="flex cursor-pointer shadow-lg items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-primary-100 dark:hover:bg-secondary-100 border border-gray-300 dark:border-secondary-200 rounded-lg hover:bg-gray-200">
+                                <button (click)="nextBundle()" class="flex cursor-pointer shadow-lg items-center justify-center px-3 h-8 text-sm font-medium text-gray-500  bg-white   border border-gray-300  rounded-lg hover:bg-gray-200">
                                     {{ 'UPDATE_PROD_SPEC._load_more' | translate }}
                                 <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -237,7 +237,7 @@
                             }
                         } @else {
                             <div role="status" class="w-full h-full flex justify-center align-middle mt-2">
-                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin  fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                 <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                             </svg>
@@ -255,13 +255,13 @@
                     </div>
                 }
                 @if(showCompliance){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._comp_profile' | translate }}</h2>
-                    <h3 class="font-bold text-primary-100 dark:text-primary-50 text-left ml-4">
+                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._comp_profile' | translate }}</h2>
+                    <h3 class="font-bold text-primary-100  text-left ml-4">
                         {{ 'UPDATE_PROD_SPEC._self_attestation' | translate }}
                     </h3>
-                    <div class="flex items-center justify-between ml-4 border border-1 p-2 rounded-lg shadow bg-white dark:bg-secondary-200 shadow-md">
+                    <div class="flex items-center justify-between ml-4 border border-1 p-2 rounded-lg shadow bg-white  shadow-md">
 
-                        <p class="mb-2 text-gray-800 dark:text-gray-200">
+                        <p class="mb-2 text-gray-800 ">
                             {{ selfAtt ? selfAtt.productSpecCharacteristicValue[0].value : 'Upload your self attestation document' }}
                         </p>
 
@@ -290,7 +290,7 @@
                         </button>
                         @if(buttonISOClicked){
                             <!-- Dropdown menu -->
-                            <div id="dropdownISO" class="z-10 w-full ml-4 mr-4 bg-secondary-50 dark:bg-secondary-300 divide-y divide-gray-100 rounded-lg shadow">
+                            <div id="dropdownISO" class="z-10 w-full ml-4 mr-4 bg-secondary-50  divide-y divide-gray-100 rounded-lg shadow">
                                 <ul class="p-3 space-y-3 text-sm text-gray-700" aria-labelledby="dropdownButtonISO">
                                     @for (iso of availableISOS; track iso;) {
                                         <li>
@@ -325,22 +325,22 @@
                             </svg>
                         </div>
                     </div>
-                    <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-                        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-                            <h3 class="font-semibold text-gray-900 dark:text-white">{{ 'UPDATE_PROD_SPEC._how_to_verify' | translate }}</h3>
+                    <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0   ">
+                        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg  ">
+                            <h3 class="font-semibold text-gray-900 ">{{ 'UPDATE_PROD_SPEC._how_to_verify' | translate }}</h3>
                         </div>
                         <div class="px-3 py-2 inline-block">
                             <p class="inline-block">{{ 'UPDATE_PROD_SPEC._verify_text' | translate }}
-                                <a target="_blank" class="font-medium text-purple-600 dark:text-purple-500 hover:underline">
+                                <a target="_blank" class="font-medium text-purple-600  hover:underline">
                                     {{ 'UPDATE_PROD_SPEC._dome_trust' | translate }}.</a>
                             </p>
                         </div>
                         <div data-popper-arrow></div>
                     </div>
 
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white dark:bg-secondary-300 m-4">
-                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white  m-4">
+                        <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                            <thead class="text-base text-primary-100 bg-gray-0  ">
                                 <tr>
                                     <th scope="col" class="px-6 py-3">
                                         {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -355,7 +355,7 @@
                             </thead>
                             <tbody>
                                 @for (sel of selectedISOS; track sel.name; let idx = $index) {
-                                    <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                    <tr class="border-b hover:bg-gray-200   ">
                                         <td class="px-6 py-4 text-wrap break-all">
                                             {{sel.name}}
                                         </td>
@@ -391,8 +391,8 @@
                                         </td>
                                     </tr>
                                 } @empty {
-                                    <div class="flex justify-center w-full m-4 dark:bg-secondary-300">
-                                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                                    <div class="flex justify-center w-full m-4 ">
+                                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
                                           <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                           </svg>
@@ -441,10 +441,10 @@
 
                 }
                 @if(showChars){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._chars' | translate }}</h2>
+                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._chars' | translate }}</h2>
                     @if (prodChars.length === 0){
                         <div class="flex justify-center w-full m-4">
-                          <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                          <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
                             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                             </svg>
@@ -456,8 +456,8 @@
                         </div>
                     } @else {
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                            <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                <thead class="text-base text-primary-100 bg-gray-0  ">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -475,7 +475,7 @@
                                 </thead>
                                 <tbody>
                                     @for (prod of prodChars; track prod;) {
-                                        <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                        <tr class="border-b hover:bg-gray-200   ">
                                             <td class="px-6 py-4 max-w-1/6 text-wrap break-all">
                                                 {{prod.name}}
                                             </td>
@@ -532,37 +532,37 @@
                     } @else {
                         <form class="m-4 grid grid-cols-2 gap-4" [formGroup]="charsForm">
                             <div>
-                                <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
+                                <label for="prod-name" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                                class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
                             </div>
                             <div>
-                                <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._type' | translate }}</label>
+                                <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._type' | translate }}</label>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                     <option selected value="string">String</option>
                                     <option value="number">Number</option>
                                     <option value="range">Number range</option>
                                 </select>
                             </div>
                             <div class="col-span-2">
-                                <label for="description" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
+                                <label for="description" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                                 <textarea id="description" formControlName="description" rows="4"
-                                class="mb-2 min-h-fit bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"></textarea>
+                                class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"></textarea>
                             </div>
                         </form>
                         <div class="m-4">
                             @if(creatingChars.length>0){
-                                <label for="values" class="font-bold text-lg dark:text-white">Values</label>
-                                <div class="flex flex-col items-start pl-4  shadow-md sm:rounded-lg w-full bg-white dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border border-gray-300 mb-2">
+                                <label for="values" class="font-bold text-lg ">Values</label>
+                                <div class="flex flex-col items-start pl-4  shadow-md sm:rounded-lg w-full bg-white    border border-gray-300 mb-2">
                                     @if(rangeCharSelected){
                                         @for (char of creatingChars; track char; let idx = $index) {
                                             <div class="flex w-full justify-between">
                                                 <div class="align-items-middle align-middle">
                                                     <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" (keydown)="selectDefaultChar(char,idx)" id="disabled-checked-checkbox" type="checkbox" value=""
                                                     class="align-middle w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
-                                                    <label for="disabled-checked-checkbox" class="ms-2 align-middle text-sm font-medium text-gray-700 dark:text-white text-wrap break-all">{{char.valueFrom}} - {{char.valueTo}} (<i>{{char?.unitOfMeasure}}</i>)</label>
+                                                    <label for="disabled-checked-checkbox" class="ms-2 align-middle text-sm font-medium text-gray-700  text-wrap break-all">{{char.valueFrom}} - {{char.valueTo}} (<i>{{char?.unitOfMeasure}}</i>)</label>
                                                 </div>
                                                 <button (click)="removeCharValue(char,idx)" class="m-2 text-white bg-red-500 rounded-3xl">
                                                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -578,9 +578,9 @@
                                                     <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" (keydown)="selectDefaultChar(char,idx)" id="disabled-checked" type="checkbox" value=""
                                                     class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
                                                     @if(numberCharSelected){
-                                                        <label for="disabled-checked" class="ms-2 text-sm font-medium text-gray-700 dark:text-white text-wrap break-all">{{char.value}} (<i>{{char?.unitOfMeasure}}</i>)</label>
+                                                        <label for="disabled-checked" class="ms-2 text-sm font-medium text-gray-700  text-wrap break-all">{{char.value}} (<i>{{char?.unitOfMeasure}}</i>)</label>
                                                     } @else {
-                                                        <label for="disabled-checked" class="ms-2 text-sm font-medium text-gray-700 dark:text-white text-wrap break-all">{{char.value}}</label>
+                                                        <label for="disabled-checked" class="ms-2 text-sm font-medium text-gray-700  text-wrap break-all">{{char.value}}</label>
                                                     }
                                                 </div>
                                                 <button (click)="removeCharValue(char,idx)" class="m-2 text-white bg-red-500 rounded-3xl">
@@ -593,11 +593,11 @@
                                     }
                                 </div>
                             }
-                            <label for="values" [ngClass]="rangeCharSelected && creatingChars.length==1 ? 'hidden' : ''" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._add_values' | translate }}</label>
+                            <label for="values" [ngClass]="rangeCharSelected && creatingChars.length==1 ? 'hidden' : ''" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._add_values' | translate }}</label>
                             @if(stringCharSelected){
                                 <div class="flex flex-row items-center align-items-middle">
                                     <input type="text" id="string-value" [(ngModel)]="stringValue"
-                                    class="mr-4 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"/>
+                                    class="mr-4 bg-gray-50 border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"/>
                                     <button (click)="addCharValue()" [disabled]="!stringValue" [ngClass]="!stringValue ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -607,18 +607,18 @@
                             } @else if (numberCharSelected){
                                 <div class="flex flex-col md:flex-row items-center align-items-middle">
                                     <div class="flex w-full mb-2 md:mb-0">
-                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
+                                        <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._value' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="number-value" [(ngModel)]="numberValue"
-                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
-                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
+                                        <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="unit-value" [(ngModel)]="numberUnit"
-                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                                     </div>
 
                                     <button (click)="addCharValue()" [disabled]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit" [ngClass]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
@@ -630,25 +630,25 @@
                             } @else if (rangeCharSelected && creatingChars.length==0){
                                 <div class="flex flex-col md:flex-row items-center align-items-middle">
                                     <div class="flex w-full mb-2 md:mb-0">
-                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
+                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._from' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="from-value" [(ngModel)]="fromValue"
-                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
-                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
+                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._to' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="to-value" [(ngModel)]="toValue"
-                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
-                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
+                                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="range-value" [(ngModel)]="rangeUnit"
-                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-gray-50 border border-gray-300 text-gray-900    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
                                     </div>
                                     <button (click)="addCharValue()" [disabled]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit" [ngClass]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -680,15 +680,15 @@
 
                 @if(showAttach){
                     <div class="inline-flex">
-                        <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._attachments' | translate }}</h2>
+                        <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._attachments' | translate }}</h2>
                         <div class="ml-4 flex">
                             <svg data-popover-target="data-popover-default" class="flex self-center w-6 h-6 text-primary-100" clip-rule="evenodd" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                             </svg>
                         </div>
-                        <div data-popover id="data-popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-                                <h3 class="font-semibold text-gray-900 dark:text-white">{{ 'UPDATE_PROD_SPEC._file_res' | translate }}</h3>
+                        <div data-popover id="data-popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0   ">
+                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg  ">
+                                <h3 class="font-semibold text-gray-900 ">{{ 'UPDATE_PROD_SPEC._file_res' | translate }}</h3>
                             </div>
                             <div class="px-3 py-2 inline-block">
                                 <p class="inline-block">{{ 'UPDATE_PROD_SPEC._restrictions' | translate }}
@@ -698,9 +698,9 @@
                         </div>
                     </div>
                     @if(!IS_ISBE){
-                        <h4 class="text-lg font-bold ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_prod_img' | translate }}</h4>
+                        <h4 class="text-lg font-bold ml-4 ">{{ 'UPDATE_PROD_SPEC._add_prod_img' | translate }}</h4>
                     }@else{
-                        <h4 class="text-lg font-bold ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</h4>
+                        <h4 class="text-lg font-bold ml-4 ">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</h4>
                     }
                     @if(showImgPreview){
                         <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto m-4 shadow-lg">
@@ -722,14 +722,14 @@
                                             </svg>
                                             <div class="flex w-full justify-center">
                                                 <p class="text-gray-500 mr-2 w-fit">{{ 'UPDATE_PROD_SPEC._drop_files' | translate }}
-                                                    <button (click)="openFileSelector()" class="font-medium text-purple-600 dark:text-purple-500 hover:underline">{{ 'UPDATE_PROD_SPEC._select_files' | translate }}</button>
+                                                    <button (click)="openFileSelector()" class="font-medium text-purple-600  hover:underline">{{ 'UPDATE_PROD_SPEC._select_files' | translate }}</button>
                                                 </p>
                                             </div>
                                         </div>
                                     </ng-template>
                                 </ngx-file-drop>
                             </div>
-                            <label class="font-bold ml-6 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</label>
+                            <label class="font-bold ml-6 ">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</label>
                         }
                         <div class="relative w-full ml-6 mt-2 mb-2">
                             <!-- Tooltip (Above the Input, Positioned Up) -->
@@ -746,8 +746,8 @@
                                 <input #imgURL type="text" id="att-name"
                                     [formControl]="attImageName"
                                     (blur)="attImageName.markAsTouched()"
-                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5"
-                                    [ngClass]="attImageName.invalid && attImageName.touched ? 'border-red-500' : 'dark:border-secondary-200'"
+                                    class="w-full bg-gray-50 border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5"
+                                    [ngClass]="attImageName.invalid && attImageName.touched ? 'border-red-500' : ''"
                                 />
 
                                 <!-- Submit Button -->
@@ -762,10 +762,10 @@
                             </div>
                         </div>
                     }
-                    <h4 class="text-lg font-bold ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._add_att' | translate }}</h4>
+                    <h4 class="text-lg font-bold ml-4 ">{{ 'UPDATE_PROD_SPEC._add_att' | translate }}</h4>
                     @if(prodAttachments.length == 0){
                         <div class="flex justify-center w-full ml-6 mt-2 mb-2 mr-4">
-                            <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                            <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
                               <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                               </svg>
@@ -777,8 +777,8 @@
                         </div>
                     } @else {
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                            <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                <thead class="text-base text-primary-100 bg-gray-0  ">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">
                                             {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -793,7 +793,7 @@
                                 </thead>
                                 <tbody>
                                     @for (att of prodAttachments; track att) {
-                                        <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                        <tr class="border-b hover:bg-gray-200   ">
                                             <td class="px-6 py-4 max-w-1/6 text-wrap break-all">
                                                 {{att.name}}
                                             </td>
@@ -826,7 +826,7 @@
                             <div class="m-4 w-full">
                                 <div class="lg:flex lg:grid lg:grid-cols-2 w-full gap-4 align-items-middle align-middle border border-gray-200 rounded-lg p-4">
                                     <div class="h-fit">
-                                        <label for="att-file--name" class="font-bold text-lg dark:text-white">{{ 'PROFILE._name' | translate }}</label>
+                                        <label for="att-file--name" class="font-bold text-lg ">{{ 'PROFILE._name' | translate }}</label>
                                         <input #attachName type="text" id="att-file-name" [formControl]="attFileName"
                                         [ngClass]="attFileName.invalid == true ? 'border-red-600' : 'border-gray-300'"
                                         class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
@@ -840,14 +840,14 @@
                                                     </svg>
                                                     <div class="flex w-full justify-center">
                                                         <p class="text-gray-500 mr-2 w-fit">{{ 'UPDATE_PROD_SPEC._drop_files' | translate }}
-                                                            <button (click)="openFileSelector()" class="font-medium text-purple-600 dark:text-purple-500 hover:underline">{{ 'UPDATE_PROD_SPEC._select_files' | translate }}</button>
+                                                            <button (click)="openFileSelector()" class="font-medium text-purple-600  hover:underline">{{ 'UPDATE_PROD_SPEC._select_files' | translate }}</button>
                                                         </p>
                                                     </div>
                                                 </div>
                                             </ng-template>
                                         </ngx-file-drop>
                                     } @else {
-                                        <div class="relative w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                                        <div class="relative w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
                                             <span class="sr-only">Info</span>
                                             <label class="text-wrap break-all">
                                                 {{attachToCreate.url}}
@@ -886,11 +886,11 @@
                     </div>
                 }
                 @if(showRelationships){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</h2>
+                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</h2>
                     <div class="m-4">
                         @if (prodRelationships.length === 0){
                             <div class="flex justify-center w-full mb-4">
-                              <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                              <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
                                 <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                   <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                 </svg>
@@ -902,8 +902,8 @@
                             </div>
                         } @else {
                             <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                    <thead class="text-base text-primary-100 bg-gray-0  ">
                                         <tr>
                                             <th scope="col" class="px-6 py-3">
                                                 {{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}
@@ -918,7 +918,7 @@
                                     </thead>
                                     <tbody>
                                         @for (rel of prodRelationships; track rel) {
-                                            <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                            <tr class="border-b hover:bg-gray-200   ">
                                                 <td class="px-6 py-4">
                                                     {{rel.relationshipType}}
                                                 </td>
@@ -948,9 +948,9 @@
                                 </button>
                             </div>
                         } @else {
-                            <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}</label>
+                            <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}</label>
                             <select id="rel-type" (change)="onRelChange($event)"
-                            class="shadow bg-white border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                            class="shadow bg-white border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
                                 <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>
@@ -958,7 +958,7 @@
                             </select>
                             @if(loadingprodSpecRel){
                                 <div role="status" class="w-full h-fit flex justify-center align-middle">
-                                    <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin  fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                         <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                     </svg>
@@ -967,7 +967,7 @@
                             } @else {
                                 @if(prodSpecRels.length==0){
                                     <div class="flex justify-center w-full m-4">
-                                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 dark:bg-secondary-200 dark:text-primary-50" role="alert">
+                                        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
                                             <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                                             </svg>
@@ -977,9 +977,9 @@
                                         </div>
                                     </div>
                                 }@else{
-                                <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white mt-4">
-                                    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                                <div class="relative overflow-x-auto rounded-lg w-full bg-white mt-4 border border-gray-0">
+                                    <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                        <thead class="text-base text-primary-100 bg-gray-0  ">
                                             <tr>
                                                 <th scope="col" class="px-6 py-3">
                                                     {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -994,16 +994,16 @@
                                         </thead>
                                         <tbody>
                                             @for (rel of prodSpecRels; track rel) {
-                                                <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200" (click)="selectRelationship(rel)"
-                                                    [ngClass]="rel.id == selectedProdSpec.id ? 'bg-gray-300 dark:bg-secondary-200' : 'bg-white dark:bg-secondary-300'">
+                                                <tr class="border-b hover:bg-gray-200   " (click)="selectRelationship(rel)"
+                                                    [ngClass]="rel.id == selectedProdSpec.id ? 'bg-gray-300 ' : 'bg-white '">
                                                     <td class="px-6 py-4 text-wrap break-all">
                                                         {{rel.name}}
                                                     </td>
                                                     <td class="hidden md:table-cell px-6 py-4">
                                                         @if(rel.isBundle == false){
-                                                            <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">Simple</span>
+                                                            <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">Simple</span>
                                                         } @else {
-                                                            <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">Bundle</span>
+                                                            <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">Bundle</span>
                                                         }
                                                     </td>
                                                     <td class="hidden lg:table-cell px-6 py-4">
@@ -1018,7 +1018,7 @@
                                 @if (!loadingprodSpecRel_more) {
                                     @if (prodSpecRelPageCheck) {
                                     <div class="flex pt-6 pb-2 justify-center align-middle">
-                                        <button (click)="nextProdSpecsRel()" class="flex cursor-pointer shadow-lg items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-primary-100 dark:hover:bg-secondary-100 border border-gray-300 dark:border-secondary-200 rounded-lg hover:bg-gray-200">
+                                        <button (click)="nextProdSpecsRel()" class="flex cursor-pointer shadow-lg items-center justify-center px-3 h-8 text-sm font-medium text-gray-500  bg-white   border border-gray-300  rounded-lg hover:bg-gray-200">
                                             {{ 'UPDATE_PROD_SPEC._load_more' | translate }}
                                         <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -1028,7 +1028,7 @@
                                     }
                                 } @else {
                                     <div role="status" class="w-full h-full flex justify-center align-middle mt-2">
-                                    <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin  fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                                         <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                                     </svg>
@@ -1056,27 +1056,27 @@
                     </div>
                 }
                 @if(showSummary){
-                    <h2 class="text-3xl font-bold text-primary-100 ml-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._finish' | translate }}</h2>
+                    <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'UPDATE_PROD_SPEC._finish' | translate }}</h2>
                     <div class="m-8">
                         <div class="mb-4 md:grid md:grid-cols-2 gap-4">
                             <div>
-                                <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
-                                <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
+                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                     {{productSpecToUpdate?.name}}
                                 </label>
-                                <label for="prod-version" class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
-                                <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <label for="prod-version" class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
+                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                     {{productSpecToUpdate?.version}}
                                 </label>
                             </div>
                             <div>
-                                <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
-                                <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" >
+                                <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
+                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" >
                                     {{productSpecToUpdate?.brand}}
                                 </label>
                                 @if(productSpecToUpdate?.productNumber!=''){
-                                <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
-                                <label class="mb-2 bg-gray-50 text-wrap break-all border border-gray-300 text-gray-900 dark:bg-secondary-300 dark:border-secondary-200 dark:text-white text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
+                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                                     {{productSpecToUpdate?.productNumber}}
                                 </label>
                                 }
@@ -1084,39 +1084,39 @@
                         </div>
 
                         <div class="mb-4">
-                            <label class="font-bold text-lg mr-4 dark:text-white">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
+                            <label class="font-bold text-lg mr-4 ">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
                             @if(productSpecToUpdate?.lifecycleStatus == 'In design'){
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-grey-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-grey-400">{{ 'ADMIN._in_design' | translate }}</span>
+                                <span class="bg-purple-100  text-grey-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-grey-400">{{ 'ADMIN._in_design' | translate }}</span>
                             }@else if(productSpecToUpdate?.lifecycleStatus == 'Active'){
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
+                                <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Launched') {
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
+                                <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Retired') {
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
+                                <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Obsolete') {
-                                <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
+                                <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
                             }
                         </div>
 
                         @if(productSpecToUpdate?.description !=''){
-                            <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
-                            <div class="px-4 py-2 bg-white dark:bg-secondary-300 border dark:border-secondary-200 rounded-lg p-4 mb-4">
-                                <markdown class="bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:text-white text-gray-900" [data]="productSpecToUpdate?.description"></markdown>
+                            <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
+                            <div class="px-4 py-2 bg-white  border  rounded-lg p-4 mb-4">
+                                <markdown class="bg-gray-50 text-wrap break-all   text-gray-900" [data]="productSpecToUpdate?.description"></markdown>
                             </div>
                         }
 
                         @if(imgPreview!=''){
-                            <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._profile_pic' | translate }}</label>
+                            <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._profile_pic' | translate }}</label>
                             <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto m-4 shadow-lg">
                                 <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             </div>
                         }
 
                         @if(prodSpecsBundle.length>0){
-                            <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</label>
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white mb-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                            <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</label>
+                            <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
+                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                    <thead class="text-base text-primary-100 bg-gray-0  ">
                                         <tr>
                                             <th scope="col" class="px-6 py-3">
                                                 {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -1128,21 +1128,21 @@
                                     </thead>
                                     <tbody>
                                         @for (bun of prodSpecsBundle; track bun) {
-                                            <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                            <tr class="border-b hover:bg-gray-200   ">
                                                 <td class="px-6 py-4 text-wrap break-all">
                                                     {{bun.name}}
                                                 </td>
                                                 <td class="px-6 py-4">
                                                     @if(bun.lifecycleStatus == 'In design'){
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-grey-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-grey-400">{{ 'ADMIN._in_design' | translate }}</span>
+                                                        <span class="bg-purple-100  text-grey-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-grey-400">{{ 'ADMIN._in_design' | translate }}</span>
                                                     }@else if(bun.lifecycleStatus == 'Active'){
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
+                                                        <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
                                                     } @else if(bun.lifecycleStatus == 'Launched') {
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
+                                                        <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
                                                     } @else if(bun.lifecycleStatus == 'Retired') {
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
+                                                        <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
                                                     } @else if(bun.lifecycleStatus == 'Obsolete') {
-                                                        <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
+                                                        <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
                                                     }
                                                 </td>
                                             </tr>
@@ -1153,10 +1153,10 @@
                         }
 
                         @if(prodChars.length>0){
-                            <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._chars' | translate }}</label>
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white mb-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                            <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._chars' | translate }}</label>
+                            <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
+                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                    <thead class="text-base text-primary-100 bg-gray-0  ">
                                         <tr>
                                             <th scope="col" class="px-6 py-3">
                                                 {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -1171,7 +1171,7 @@
                                     </thead>
                                     <tbody>
                                         @for (prod of productSpecToUpdate?.productSpecCharacteristic; track prod;) {
-                                            <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                            <tr class="border-b hover:bg-gray-200   ">
                                                 <td class="px-6 py-4 max-w-1/6 text-wrap break-all">
                                                     {{prod.name}}
                                                 </td>
@@ -1211,10 +1211,10 @@
                         }
 
                         @if(prodAttachments.length>0){
-                            <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._attachments' | translate }}</label>
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white mb-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                            <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._attachments' | translate }}</label>
+                            <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
+                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                    <thead class="text-base text-primary-100 bg-gray-0  ">
                                         <tr>
                                             <th scope="col" class="px-6 py-3">
                                                 {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
@@ -1226,7 +1226,7 @@
                                     </thead>
                                     <tbody>
                                         @for (att of productSpecToUpdate?.attachment; track att) {
-                                            <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                            <tr class="border-b hover:bg-gray-200   ">
                                                 <td class="px-6 py-4 max-w-1/6 text-wrap break-all">
                                                     {{att.name}}
                                                 </td>
@@ -1241,10 +1241,10 @@
                         }
 
                         @if(prodRelationships.length>0){
-                            <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</label>
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white mb-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                    <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                            <label class="font-bold text-lg ">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</label>
+                            <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
+                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
+                                    <thead class="text-base text-primary-100 bg-gray-0  ">
                                         <tr>
                                             <th scope="col" class="px-6 py-3">
                                                 {{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}
@@ -1256,7 +1256,7 @@
                                     </thead>
                                     <tbody>
                                         @for (rel of prodRelationships; track rel) {
-                                            <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
+                                            <tr class="border-b hover:bg-gray-200   ">
                                                 <td class="px-6 py-4">
                                                     {{rel.relationshipType}}
                                                 </td>
@@ -1305,7 +1305,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"/>
                         </svg>
                         <p class="text-gray-500 mr-4">{{ 'UPDATE_PROD_SPEC._drop_files' | translate }}
-                            <button (click)="openFileSelector()" class="font-medium text-purple-600 dark:text-purple-500 hover:underline">{{ 'UPDATE_PROD_SPEC._select_files' | translate }}</button>
+                            <button (click)="openFileSelector()" class="font-medium text-purple-600  hover:underline">{{ 'UPDATE_PROD_SPEC._select_files' | translate }}</button>
                         </p>
                     </ng-template>
                 </ngx-file-drop>

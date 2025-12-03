@@ -213,7 +213,7 @@ export class CartCardComponent implements OnInit {
     this.unselectTag(document.getElementById(step),'text-gray-400 after:border-gray-400');
     this.selectTag(document.getElementById(step),'text-white after:border-primary-100');
 
-    this.unselectTag(document.getElementById(stepCircle),'bg-white dark:bg-secondary-100 border-2 border-gray-400');
+    this.unselectTag(document.getElementById(stepCircle),'bg-white  border-2 border-gray-400');
     this.selectTag(document.getElementById(stepCircle),'bg-primary-100');
 
     this.unselectTag(document.getElementById(stepText),'text-gray-400');
@@ -225,7 +225,7 @@ export class CartCardComponent implements OnInit {
     this.selectTag(document.getElementById(step),'text-gray-400 after:border-gray-400');
     this.unselectTag(document.getElementById(step),'text-white after:border-primary-100');
 
-    this.selectTag(document.getElementById(stepCircle),'bg-white dark:bg-secondary-100 border-2 border-gray-400');
+    this.selectTag(document.getElementById(stepCircle),'bg-white  border-2 border-gray-400');
     this.unselectTag(document.getElementById(stepCircle),'bg-primary-100');
 
     this.selectTag(document.getElementById(stepText),'text-gray-400');

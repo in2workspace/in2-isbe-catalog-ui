@@ -250,6 +250,22 @@ input:-webkit-autofill::first-line {
   color: inherit;
 }
 
+.dark input[type='radio']:checked {
+  background-size: 9px 6px;
+  background-image: url("data:image/svg+xml,%3Csvg width='9' height='7' viewBox='0 0 9 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.0875 6.51354L0 3.42604L0.771875 2.65417L3.0875 4.96979L8.05729 0L8.82917 0.771875L3.0875 6.51354Z' fill='black'/%3E%3C/svg%3E");
+}
+
+input[type='checkbox']:not(.hidden):not(.sr-only),
+input[type='radio']:not(.hidden):not(.sr-only) {
+  @apply w-4 h-4 text-primary-50 bg-gray-0 border-gray-0 rounded focus:ring-purple-500;
+  accent-color: theme('colors.primary.50');
+}
+
+input[type='checkbox']:not(.hidden):not(.sr-only):checked,
+input[type='radio']:not(.hidden):not(.sr-only):checked {
+  @apply bg-primary-50 border-primary-50 text-primary-100;
+}
+
 textarea:-webkit-autofill {
   background-color: var(--autofill-bg-light) !important;
   color: var(--autofill-text-light) !important;

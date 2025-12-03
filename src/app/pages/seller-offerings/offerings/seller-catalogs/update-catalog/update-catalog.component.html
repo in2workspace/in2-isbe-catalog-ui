@@ -1,14 +1,14 @@
 
 <div>
   <div class="bg-white/60 mt-4 p-8 rounded-lg">
-    <h2 class="text-3xl font-bold text-primary-100 dark:text-white ml-4">{{ 'UPDATE_CATALOG._update' | translate }}</h2>
-    <hr class="h-px m-4 bg-gray-300 dark:bg-gray-200 border-0">
+    <h2 class="text-3xl font-bold text-primary-100  ml-4">{{ 'UPDATE_CATALOG._update' | translate }}</h2>
+    <hr class="h-px m-4 bg-gray-300  border-0">
     <div class="md:grid md:grid-cols-25/75 xl:grid-cols-20/80">
         <div class="flex sm:flex-row md:flex-col md:mr-4 overflow-x-auto max-w-[calc(100vw-5rem)]">
-            <h2 class="text-xl hidden md:block font-bold text-black mb-4 dark:text-white">{{ 'UPDATE_CATALOG._steps' | translate }}</h2>
+            <h2 class="text-xl hidden md:block font-bold text-black mb-4 ">{{ 'UPDATE_CATALOG._steps' | translate }}</h2>
             <button id="general-info" (click)="toggleGeneral()"
-            class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-primary-100 dark:text-primary-50 justify-items-center md:justify-items-start">
-                <span id="general-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-primary-100 dark:border-primary-50 rounded-full shrink-0">
+            class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-primary-100  justify-items-center md:justify-items-start">
+                <span id="general-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-primary-100  rounded-full shrink-0">
                     1
                 </span>
                 <span>
@@ -16,7 +16,7 @@
                     <p class="hidden xl:flex text-xs sm:text-center md:text-start">{{ 'UPDATE_CATALOG._general_info' | translate }}</p>
                 </span>
             </button>
-            <hr class="h-px mb-2 bg-gray-300 dark:bg-gray-200 border-0">
+            <hr class="h-px mb-2 bg-gray-300  border-0">
             <button id="summary" (click)="showFinish()" [disabled]="generalForm.invalid"
             class="grid sm:grid-rows-2 md:grid-rows-1 md:grid-cols-25/75 xl:grid-cols-20/80 mb-2 mr-2 md:mr-0 text-gray-500 justify-items-center md:justify-items-start">
                 <span id="summary-circle" class="flex items-center justify-center w-6 h-6 md:w-8 md:h-8 border border-2 border-gray-400 rounded-full shrink-0">
@@ -30,20 +30,20 @@
         </div>
         <div>
             @if(showGeneral){
-                <h2 class="text-3xl font-bold text-primary-100 dark:text-white ml-4">{{ 'UPDATE_CATALOG._general' | translate }}</h2>
+                <h2 class="text-3xl font-bold text-primary-100  ml-4">{{ 'UPDATE_CATALOG._general' | translate }}</h2>
                     <form class="m-4 gap-4" [formGroup]="generalForm">
-                        <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'UPDATE_CATALOG._name' | translate }}</label>
+                        <label for="prod-name" class="font-bold text-lg ">{{ 'UPDATE_CATALOG._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                        class="mb-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
-                        <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_CATALOG._status' | translate }}</label>
+                        <label class="font-bold text-lg ">{{ 'UPDATE_CATALOG._status' | translate }}</label>
                         <div class="mb-2 w-full">
 
-                            <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500 dark:text-gray-200 sm:text-base">
+                            <ol class="flex items-center w-full text-sm font-medium text-center text-gray-500  sm:text-base">
                                 @if(catStatus=='Active'){
                                     <li (click)="setCatStatus('Active')"
-                                    class="cursor-pointer flex w-fit md:w-full items-center text-purple-500 after:w-full after:h-1 after:border-b after:border-gray-700 dark:after:border-gray-400 after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
+                                    class="cursor-pointer flex w-fit md:w-full items-center text-purple-500 after:w-full after:h-1 after:border-b after:border-gray-700  after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
                                         <span class="flex items-center">
                                             <svg class="w-6 h-6 text-purple-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.737 8.737a21.49 21.49 0 0 1 3.308-2.724m0 0c3.063-2.026 5.99-2.641 7.331-1.3 1.827 1.828.026 6.591-4.023 10.64-4.049 4.049-8.812 5.85-10.64 4.023-1.33-1.33-.736-4.218 1.249-7.253m6.083-6.11c-3.063-2.026-5.99-2.641-7.331-1.3-1.827 1.828-.026 6.591 4.023 10.64m3.308-9.34a21.497 21.497 0 0 1 3.308 2.724m2.775 3.386c1.985 3.035 2.579 5.923 1.248 7.253-1.336 1.337-4.245.732-7.295-1.275M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
@@ -53,7 +53,7 @@
                                     </li>
                                 }@else{
                                     <li (click)="setCatStatus('Active')"
-                                    class="cursor-pointer flex w-fit md:w-full items-center after:w-full after:h-1 after:border-b after:border-gray-700 dark:after:border-gray-400 after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
+                                    class="cursor-pointer flex w-fit md:w-full items-center after:w-full after:h-1 after:border-b after:border-gray-700  after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
                                         <span class="flex items-center">
                                             {{ 'UPDATE_CATALOG._active' | translate }}
                                         </span>
@@ -61,7 +61,7 @@
                                 }
                                 @if(catStatus=='Launched'){
                                     <li (click)="setCatStatus('Launched')"
-                                    class="cursor-pointer flex w-fit md:w-full items-center text-green-700 after:w-full after:h-1 after:border-b after:border-gray-700 dark:after:border-gray-400 after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
+                                    class="cursor-pointer flex w-fit md:w-full items-center text-green-700 after:w-full after:h-1 after:border-b after:border-gray-700  after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
                                         <span class="flex items-center">
                                             <svg class="w-6 h-6 text-green-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.737 8.737a21.49 21.49 0 0 1 3.308-2.724m0 0c3.063-2.026 5.99-2.641 7.331-1.3 1.827 1.828.026 6.591-4.023 10.64-4.049 4.049-8.812 5.85-10.64 4.023-1.33-1.33-.736-4.218 1.249-7.253m6.083-6.11c-3.063-2.026-5.99-2.641-7.331-1.3-1.827 1.828-.026 6.591 4.023 10.64m3.308-9.34a21.497 21.497 0 0 1 3.308 2.724m2.775 3.386c1.985 3.035 2.579 5.923 1.248 7.253-1.336 1.337-4.245.732-7.295-1.275M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
@@ -71,7 +71,7 @@
                                     </li>
                                 }@else{
                                     <li (click)="setCatStatus('Launched')"
-                                    class="cursor-pointer flex w-fit md:w-full items-center after:w-full after:h-1 after:border-b after:border-gray-700 dark:after:border-gray-400 after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
+                                    class="cursor-pointer flex w-fit md:w-full items-center after:w-full after:h-1 after:border-b after:border-gray-700  after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
                                         <span class="flex items-center">
                                             {{ 'UPDATE_CATALOG._launched' | translate }}
                                         </span>
@@ -79,7 +79,7 @@
                                 }
                                 @if(catStatus=='Retired'){
                                     <li (click)="setCatStatus('Retired')"
-                                    class="cursor-pointer flex w-fit md:w-full items-center text-yellow-500 after:w-full after:h-1 after:border-b after:border-gray-700 dark:after:border-gray-400 after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
+                                    class="cursor-pointer flex w-fit md:w-full items-center text-yellow-500 after:w-full after:h-1 after:border-b after:border-gray-700  after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
                                         <span class="flex items-center">
                                             <svg class="w-6 h-6 text-yellow-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                 <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8.737 8.737a21.49 21.49 0 0 1 3.308-2.724m0 0c3.063-2.026 5.99-2.641 7.331-1.3 1.827 1.828.026 6.591-4.023 10.64-4.049 4.049-8.812 5.85-10.64 4.023-1.33-1.33-.736-4.218 1.249-7.253m6.083-6.11c-3.063-2.026-5.99-2.641-7.331-1.3-1.827 1.828-.026 6.591 4.023 10.64m3.308-9.34a21.497 21.497 0 0 1 3.308 2.724m2.775 3.386c1.985 3.035 2.579 5.923 1.248 7.253-1.336 1.337-4.245.732-7.295-1.275M14 12a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
@@ -89,7 +89,7 @@
                                     </li>
                                 }@else{
                                     <li (click)="setCatStatus('Retired')"
-                                    class="cursor-pointer flex w-fit md:w-full items-center after:w-full after:h-1 after:border-b after:border-gray-700 dark:after:border-gray-400 after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
+                                    class="cursor-pointer flex w-fit md:w-full items-center after:w-full after:h-1 after:border-b after:border-gray-700  after:border-1 after:mx-2 md:after:mx-6 xl:after:mx-10">
                                         <span class="flex items-center">
                                             {{ 'UPDATE_CATALOG._retired' | translate }}
                                         </span>
@@ -115,7 +115,7 @@
 
                         </div>
 
-                        <label for="prod-name" class="font-bold text-lg dark:text-white">{{ 'UPDATE_CATALOG._description' | translate }}</label>
+                        <label for="prod-name" class="font-bold text-lg ">{{ 'UPDATE_CATALOG._description' | translate }}</label>
                         <app-markdown-textarea formControlName="description"></app-markdown-textarea>
 
                     </form>
@@ -130,32 +130,32 @@
             }
 
             @if(showSummary){
-                <h2 class="text-3xl font-bold text-primary-100 dark:text-white ml-4">{{ 'UPDATE_CATALOG._finish' | translate }}</h2>
+                <h2 class="text-3xl font-bold text-primary-100  ml-4">{{ 'UPDATE_CATALOG._finish' | translate }}</h2>
                 <div class="m-8">
                     <div>
-                        <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_CATALOG._name' | translate }}</label>
-                        <label class="mb-2 bg-gray-50 text-wrap break-all dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                        <label class="font-bold text-lg ">{{ 'UPDATE_CATALOG._name' | translate }}</label>
+                        <label class="mb-2 bg-white text-wrap break-all  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                             {{generalForm.value.name}}
                         </label>
                     </div>
 
                     <div class="mb-4">
-                        <label class="font-bold text-lg mr-4 dark:text-white">{{ 'UPDATE_CATALOG._status' | translate }}</label>
+                        <label class="font-bold text-lg mr-4 ">{{ 'UPDATE_CATALOG._status' | translate }}</label>
                         @if(catalogToUpdate?.lifecycleStatus == 'Active'){
-                            <span class="bg-purple-100 dark:bg-secondary-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{catalogToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{catalogToUpdate?.lifecycleStatus}}</span>
                         } @else if(catalogToUpdate?.lifecycleStatus == 'Launched') {
-                            <span class="bg-purple-100 dark:bg-secondary-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{catalogToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{catalogToUpdate?.lifecycleStatus}}</span>
                         } @else if(catalogToUpdate?.lifecycleStatus == 'Retired') {
-                            <span class="bg-purple-100 dark:bg-secondary-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{catalogToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{catalogToUpdate?.lifecycleStatus}}</span>
                         } @else if(catalogToUpdate?.lifecycleStatus == 'Obsolete') {
-                            <span class="bg-purple-100 dark:bg-secondary-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{catalogToUpdate?.lifecycleStatus}}</span>
+                            <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{catalogToUpdate?.lifecycleStatus}}</span>
                         }
                     </div>
 
                     @if(catalogToUpdate?.description !=''){
-                        <label class="font-bold text-lg dark:text-white">{{ 'UPDATE_CATALOG._description' | translate }}</label>
-                        <div class="px-4 py-2 bg-white rounded-lg p-4 mb-4 bg-gray-50 dark:bg-secondary-300 border border-gray-300 dark:border-secondary-200 dark:text-white text-gray-900">
-                            <markdown class="bg-gray-50 text-wrap break-all dark:bg-secondary-300 dark:text-white text-gray-900" [data]="catalogToUpdate?.description"></markdown>
+                        <label class="font-bold text-lg ">{{ 'UPDATE_CATALOG._description' | translate }}</label>
+                        <div class="px-4 py-2 bg-white rounded-lg p-4 mb-4 bg-gray-50  border border-gray-300   text-gray-900">
+                            <markdown class="bg-gray-50 text-wrap break-all   text-gray-900" [data]="catalogToUpdate?.description"></markdown>
                         </div>
                     }
 
