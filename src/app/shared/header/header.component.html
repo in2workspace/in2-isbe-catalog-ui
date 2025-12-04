@@ -7,7 +7,7 @@
         <img src="assets/logos/alastria_black.svg" class="w-auto h-5 sm:h-6" alt="Logo" />
     </div>
     <nav class="text-white border-gray-200 bg-primary-100 ">
-        <div class="flex flex-wrap items-center justify-between mx-auto py-4 px-8">
+        <div class="flex flex-wrap items-center justify-between mx-auto py-4 px-8 gap-8">
             <a (click)="goTo('/dashboard')" class="flex items-center align-items-middle cursor-pointer">
                 <img src="assets/logos/ISBE_logo_black_name.svg" class="max-w-64 h-10 lg:h-12" alt="ISBE Catalog Logo" />
             </a>
@@ -27,18 +27,19 @@
                         class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 "
                         aria-current="page">{{ 'HEADER._about' | translate }}</a>
                     </li>
-                    <li>
-                        <a href="{{isbeRegister}}" class="sm:block lg:hidden cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent
+                    <li class="sm:block lg:hidden">
+                        <a href="{{isbeRegister}}" class="cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent
                         lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._register' | translate }}</a>
                     </li>
-                    <li>
-                        <a (click)="onLoginClick()" class="sm:block lg:hidden cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent
+                    <li class="sm:block lg:hidden">
+                        <a (click)="onLoginClick()" class="cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent
                         lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">Login</a>
                     </li>
                 </ul>
             </div>
-            <div class="flex flex-cols">
-                <div class="flex flex-cols">
+            <div class="flex flex-cols gap-2">
+                <!-- TODO: Removed Knowledge link
+                  <div class="flex flex-cols">
                     <a data-cy="knowledge" id="knowledgeBase" href="{{ knowledge }}" target="_blank" class="w-10 hidden lg:block text-white hover:bg-white
                     hover:text-primary-100 rounded-lg text-xl p-2.5">
                     <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -59,23 +60,27 @@
                           1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
                       </svg>
                     </button> }
-                </div>
+                </div> -->
             @if (is_logged) {
                 <div data-cy="loggedAcc" id="loggedAcc" data-dropdown-toggle="userDropdown" data-dropdown-placement="bottom-end"
-                    class="relative px-4 py-1 hidden md:flex items-center gap-3 justify-center overflow-hidden rounded-full border border-white cursor-pointer">
-                    <span class="text-xxs text-primary-100 bg-purple-500 rounded-full p-1">{{ usercharacters }}</span>
+                    class="relative px-5 py-3 hidden md:flex items-center gap-3 justify-center overflow-hidden rounded-full border border-white cursor-pointer">
+                    <span class="text-xxs text-primary-100 bg-primary-50 rounded-full p-1">{{ usercharacters }}</span>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11.9995 15.0388L6.3457 9.38481L7.39945 8.33105L11.9995 12.9158L16.5995 8.33105L17.6532 9.38481L11.9995 15.0388Z" fill="white"/>
                     </svg>
                 </div>
             }
             @else {
-                <a data-cy="registerAcc" id="register" [href]="isbeRegister" target="_blank" class="hidden lg:block w-full text-white hover:bg-white hover:text-primary-100
-                    rounded-lg text-sm p-2.5 text-center"> {{ 'HEADER._register' | translate }}
-                </a>
-                <button data-cy="login" id="login" (click)="onLoginClick()" type="button" class="w-full text-white hover:bg-white hover:text-primary-100 rounded-lg text-sm p-2.5">
+                <button data-cy="login" id="login" (click)="onLoginClick()" type="button" class="w-full text-white border border-white uppercase hover:bg-white hover:text-primary-100 font-semibold rounded-full text-base px-5 py-3">
                     Login
                 </button>
+                <a data-cy="registerAcc" id="register" [href]="isbeRegister" target="_blank" class="hidden lg:flex items-center gap-2 w-full text-primary-100 bg-primary-50 hover:bg-white hover:text-primary-100
+                    rounded-full text-base font-semibold px-5 py-3 uppercase text-center"> {{ 'HEADER._register' | translate }}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M6.29425 17.6443L5.25 16.6L15.0905 6.75H6.14425V5.25H17.6443V16.75H16.1443V7.80375L6.29425 17.6443Z" fill="currentColor"/>
+                    </svg>
+                </a>
+                
             }
             <button #navbarbutton type="button" (click)="toggleNavBar();$event.stopPropagation();" class="inline-flex items-center w-10 h-10 justify-center text-sm text-white
                  rounded-lg lg:hidden" aria-controls="navbar-dropdown" aria-expanded="false">
