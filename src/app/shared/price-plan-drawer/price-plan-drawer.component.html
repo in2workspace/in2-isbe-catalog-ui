@@ -1,14 +1,14 @@
 <!-- Backdrop -->
 @if (isOpen){
   <div
-    class="fixed inset-0 bg-black bg-opacity-50 z-30"
+    class="fixed inset-0 bg-black/90 z-30"
     (click)="onClose()">
   </div>
 }
 
 <!-- drawer component -->
 <div [id]="drawerId"
-     class="fixed top-0 right-0 z-40 h-screen pt-24 overflow-y-auto transition-transform translate-x-full bg-secondary-50  flex flex-col"
+     class="fixed top-0 right-0 z-40 h-screen pt-24 overflow-y-auto transition-transform translate-x-full bg-white flex flex-col"
      [class.translate-x-0]="isOpen"
      [class.translate-x-full]="!isOpen"
      [ngClass]="width"
@@ -16,7 +16,7 @@
      aria-labelledby="drawer-add-to-cart-label">
 
   <!-- Scrollable content -->
-  <form [formGroup]="form" class="flex-1 p-4 overflow-y-auto">
+  <form [formGroup]="form" class="flex-1 overflow-y-auto">
     <h5 id="drawer-right-label" class="inline-flex items-center text-wrap break-all mb-4 text-base font-semibold text-primary-100 "><svg class="w-4 h-4 me-2.5 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
     </svg>Adding {{productOff?.name}} to cart</h5>

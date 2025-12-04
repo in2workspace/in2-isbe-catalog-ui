@@ -469,7 +469,7 @@
 
 <!-- Confirm Modal -->
 <div #confirmModal id="confirmModal" tabindex="-1" aria-hidden="true"
-     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50">
+     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black/90">
   <div class="relative w-full max-w-md max-h-full">
     <!-- Contenedor del modal -->
     <div class="relative bg-white rounded-lg shadow ">
@@ -479,7 +479,7 @@
           Confirm Action
         </h3>
         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900
-          rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center 
+          rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center
           " (click)="closeModal()">
           ✖
         </button>
@@ -499,7 +499,7 @@
         </button>
         <button type="button" (click)="closeModal()"
                 class="text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100
-          focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 
+          focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5
              ">
           Cancel
         </button>
@@ -511,7 +511,7 @@
 
 <!-- Backdrop (se muestra cuando el menú está abierto) -->
 @if (isDrawerOpen) {
-  <div class="fixed inset-0 top-0 left-0 right-0 h-screen bg-black bg-opacity-50 z-40" (click)="closeDrawer()"></div>
+  <div class="fixed inset-0 top-0 left-0 right-0 h-screen bg-black/90 z-40" (click)="closeDrawer()"></div>
 
 <!-- Drawer for Notes -->
 <div id="drawer-notes"
