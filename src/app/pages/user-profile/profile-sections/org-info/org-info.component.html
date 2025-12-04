@@ -14,7 +14,7 @@
         <div class="flex flex-col gap-10 p-4 lg:py-8 lg:px-4 rounded-xl bg-white">
           <form class="flex flex-col lg:grid lg:grid-cols-2 gap-4" [formGroup]="profileForm">
               <div>
-                  <span class="font-bold">{{ 'PROFILE._name' | translate }}</span>
+                  <span class="font-semibold">{{ 'PROFILE._name' | translate }}</span>
                   <input type="text" formControlName="name" id="name"
                   class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"
                   [ngClass]="(profileForm.get('name')?.invalid == true && profileForm.value.name!='') || (profileForm.get('name')?.touched && profileForm.value.name=='') ? 'border-red-600' : 'border-gray-300'" />
@@ -23,12 +23,12 @@
                   }
               </div>
               <div>
-                  <span class="font-bold">{{ 'PROFILE._website' | translate }}</span>
+                  <span class="font-semibold">{{ 'PROFILE._website' | translate }}</span>
                   <input type="text" formControlName="website" id="website"
                   class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
               </div>
               <div>
-                  <span class="font-bold">{{ 'PROFILE._countries' | translate }}</span>
+                  <span class="font-semibold">{{ 'PROFILE._countries' | translate }}</span>
                   <select id="country" formControlName="country"
                       class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
                       <option value="">Selecciona un país…</option>
@@ -152,7 +152,7 @@
             @if(showImgPreview){
                 <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm">
                     <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover" alt="Upload preview">
-                    <button (click)="removeImg()" class="z-10 absolute top-2 right-2 p-1 font-bold text-white bg-red-500 rounded-3xl">
+                    <button (click)="removeImg()" class="z-10 absolute top-2 right-2 p-1 font-semibold text-white bg-red-500 rounded-3xl">
                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
                         </svg>
@@ -176,7 +176,7 @@
                         </ng-template>
                     </ngx-file-drop>
                 </div>
-                <label for="att-name" class="font-bold ml-6 ">{{ 'PROFILE._add_logo_url' | translate }}</label>
+                <label for="att-name" class="font-semibold ml-6 ">{{ 'PROFILE._add_logo_url' | translate }}</label>
                 }
 
                 <div class="relative w-full">
@@ -292,7 +292,7 @@
               <form class="grid h-full md:grid-cols-2 gap-5" [formGroup]="mediumForm">
                   @if(emailSelected){
                       <div class="">
-                          <label class="font-bold text-base">{{ 'PROFILE._email' | translate }}</label>
+                          <label class="font-semibold text-base">{{ 'PROFILE._email' | translate }}</label>
                           <input formControlName="email" type="text" id="prod-name"
                           class=" bg-white  text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full "
                           [ngClass]="(mediumForm.get('email')?.invalid == true && mediumForm.value.email!='') || (mediumForm.get('email')?.touched == true && mediumForm.value.email=='') ? 'border-red-600' : 'border-gray-300 '"/>
@@ -413,7 +413,7 @@
             <form class="grid h-full md:grid-cols-2 gap-5" [formGroup]="mediumForm">
                 @if(selectedMedium.mediumType=='Email'){
                     <div class="col-span-2">
-                        <label class="font-bold text-lg ">{{ 'PROFILE._email' | translate }}</label>
+                        <label class="font-semibold text-lg ">{{ 'PROFILE._email' | translate }}</label>
                         <input formControlName="email" type="text" id="prod-name"
                         [ngClass]="mediumForm.get('email')?.invalid == true && mediumForm.value.email!='' ? 'border-red-600' : 'border-gray-300'"
                         class="mb-2 bg-white  border border-gray-300  text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full " />

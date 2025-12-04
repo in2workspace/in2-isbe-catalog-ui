@@ -37,14 +37,14 @@
                 </div> -->
 
                 <hr class="h-px border-black border-1">
-            
+
                 <div class="flex flex-col">
                   <div class="flex flex-col gap-4 justify-start py-8">
                     <div class="justify-start">
                         <h5 class="font-semibold tracking-tight text-xl md:text-lg mb-4 text-primary-100 ">{{ 'CARD._prod_details' | translate }}:</h5>
                         <markdown class="min-h-19 h-19  line-clamp-6 text-wrap break-all" [data]="productOff?.description"></markdown>
                     </div>
-                  
+
                     <div class="justify-start">
                       <h5 class="font-semibold tracking-tight text-xl md:text-lg mb-4 text-primary-100 ">{{ 'CARD._extra_info' | translate }}:</h5>
                       <ul class="max-w-md space-y-1 list-disc list-inside  text-wrap break-all line-clamp-8">
@@ -55,7 +55,7 @@
                         <li class="text-wrap break-all line-clamp-1">{{ 'CARD._product_version' | translate }}: v{{prodSpec.version}}</li>
                         @if(prodSpec.productNumber != ''){
                           <li class="text-wrap break-all line-clamp-1">{{ 'CARD._id_number' | translate }}: {{prodSpec.productNumber}}</li>
-                        }  
+                        }
                       </ul>
                     </div>
                   </div>
@@ -79,7 +79,7 @@
                                   <div class="inline-flex items-center justify-center w-full bg-purple-500">
                                       <div class="mx-auto rounded-lg w-full">
                                           <div class="rounded-t-lg w-full">
-                                              <h5 class="flex justify-center mb-2 p-6 text-2xl font-bold tracking-tight text-white">{{ 'SHOPPING_CART._no_price' | translate }}</h5>
+                                              <h5 class="flex justify-center mb-2 p-6 text-2xl font-semibold tracking-tight text-white">{{ 'SHOPPING_CART._no_price' | translate }}</h5>
                                           </div>
                                           <p class="flex justify-center mb-2 p-4 font-normal text-white">{{ 'SHOPPING_CART._no_price_desc' | translate }}</p>
                                       </div>
@@ -128,7 +128,7 @@
                               }
                           </div>
                       }
-                  }          
+                  }
                   </div>
 
                   <hr class="h-px border-black border-1">
@@ -180,12 +180,12 @@
                           </div>
                       </div>
                   </div>
-                  
+
                   <hr class="h-px border-black border-1">
                   <div class="flex">
                   </div>
                 </div>
-              </div>  
+              </div>
           </div>
         </div>
     </div>

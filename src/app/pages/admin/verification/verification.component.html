@@ -1,17 +1,17 @@
-<div>
-    <div class="bg-white/60 mt-4 p-8 rounded-lg">
-        <h2 class="text-3xl font-bold text-primary-100 ml-4 ">{{ 'ADMIN._verification' | translate }}</h2>
+<div class="flex flex-col gap-6">
+    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'ADMIN._verification' | translate }}</h2>
+    <div class="bg-white/60 p-4 rounded-lg">
         <hr class="h-px m-4 bg-gray-300  border-0">
 
         <div class="md:grid">
             <div>
-                <form class="m-4 gap-4" [formGroup]="verificationForm">
-                    <label for="verif-id" class="font-bold text-lg ">{{ 'ADMIN._productId' | translate }}</label>
+                <form class=" gap-4" [formGroup]="verificationForm">
+                    <label for="verif-id" class="font-semibold text-lg ">{{ 'ADMIN._productId' | translate }}</label>
                     <input formControlName="productId" type="text" id="verif-id"
                             [ngClass]="verificationForm.get('productId')?.invalid == true && verificationForm.value.productId != '' ? 'border-red-600' : 'border-gray-300'"
                             class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
 
-                    <label for="vc" class="font-bold text-lg ">{{ 'ADMIN._vc' | translate }}</label>
+                    <label for="vc" class="font-semibold text-lg ">{{ 'ADMIN._vc' | translate }}</label>
                     <textarea formControlName="vc" rows="8" class="block w-full min-h-fit px-0 text-sm text-gray-800  bg-white  border-0" placeholder="Add credential..." ></textarea>
                 </form>
 

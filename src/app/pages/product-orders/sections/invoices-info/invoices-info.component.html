@@ -176,7 +176,7 @@
       <div class="w-full h-full">
         <div class="p-4 relative overflow-x-auto rounded-lg">
           <div class="flex flex-row gap-2 pb-2 text-gray-600">
-            <p class="w-fit text-base font-bold shrink-0 ">
+            <p class="w-fit text-base font-semibold shrink-0 ">
               {{ 'INVOICES._invoice_id' | translate }}
             </p>
             <h3 class="text-base ">
@@ -184,13 +184,13 @@
             </h3>
           </div>
           <div class="flex flex-row gap-2 pb-2 text-gray-600">
-            <p class="w-fit text-base font-bold shrink-0 ">
+            <p class="w-fit text-base font-semibold shrink-0 ">
               {{ 'INVOICES._date' | translate }}
             </p>
             {{invoiceToShow?.date | date:'EEEE, dd/MM/yy, HH:mm'}}
           </div>
           <div class="flex flex-row gap-2 pb-2 text-gray-600">
-            <p class="w-fit text-base font-bold shrink-0 ">
+            <p class="w-fit text-base font-semibold shrink-0 ">
               {{ 'INVOICES._name' | translate }}
             </p>
             <h3 class="text-base ">
@@ -198,7 +198,7 @@
             </h3>
           </div>
           <div class="flex flex-row gap-2 pb-2 text-gray-600">
-            <p class="w-fit text-base font-bold shrink-0 ">
+            <p class="w-fit text-base font-semibold shrink-0 ">
               {{ 'INVOICES._description' | translate }}
             </p>
             <h3 class="text-base ">
@@ -206,7 +206,7 @@
             </h3>
           </div>
           <div class="flex flex-row gap-2 pb-2 text-gray-600">
-            <p class="w-fit text-base font-bold shrink-0 ">
+            <p class="w-fit text-base font-semibold shrink-0 ">
               {{ 'INVOICES._tax_excluded_amount' | translate }}
             </p>
             <h3 class="text-base ">
@@ -214,7 +214,7 @@
             </h3>
           </div>
           <div class="flex flex-row gap-2 pb-2 text-gray-600">
-            <p class="w-fit text-base font-bold shrink-0 ">
+            <p class="w-fit text-base font-semibold shrink-0 ">
               {{ 'INVOICES._tax_included_amount' | translate }}
             </p>
             <h3 class="text-base ">
@@ -222,7 +222,7 @@
             </h3>
           </div>
           <div class="flex flex-row gap-2 pb-2 text-gray-600">
-            <p class="w-fit text-base font-bold shrink-0 ">
+            <p class="w-fit text-base font-semibold shrink-0 ">
               {{ 'INVOICES._tax' | translate }}
             </p>
             <h3 class="text-base ">
@@ -231,7 +231,7 @@
           </div>
           @if (invoiceToShow?.isBilled){
             <div class="flex flex-row gap-2 pb-2 text-gray-600">
-              <p class="w-fit text-base font-bold shrink-0 ">
+              <p class="w-fit text-base font-semibold shrink-0 ">
                 {{ 'INVOICES._product' | translate }}
               </p>
               <h3 class="text-base ">

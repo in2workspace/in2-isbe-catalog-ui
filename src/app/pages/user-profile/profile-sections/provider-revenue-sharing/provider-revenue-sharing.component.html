@@ -13,7 +13,7 @@
         @if(subscription){
             <div class="border border-primary-100  rounded-lg p-4 md:p-8">
 
-                <h3 class="md:text-xl lg:text-2xl font-bold text-primary-100  mb-4">My Subscription Plan</h3>
+                <h3 class="md:text-xl lg:text-2xl font-semibold text-primary-100  mb-4">My Subscription Plan</h3>
 
                 <div class="text-lg font-normal text-gray-500 ">
                     <p>
@@ -27,7 +27,7 @@
         @if(billing){
         <div class="border border-primary-100  rounded-lg p-4 md:p-8 mt-4">
 
-            <h3 class="md:text-xl lg:text-2xl font-bold text-primary-100  mb-4">Billing History</h3>
+            <h3 class="md:text-xl lg:text-2xl font-semibold text-primary-100  mb-4">Billing History</h3>
 
             <div class="text-lg font-normal text-gray-500 ">
                 @for(child of billing?.items; track child){
@@ -57,7 +57,7 @@
 
         @if(revenue){
             <div class="border border-primary-100  rounded-lg p-4 md:p-8 mt-4">
-                <h3 class="md:text-xl lg:text-2xl font-bold text-primary-100  mb-4">Revenue Volume Monitoring</h3>
+                <h3 class="md:text-xl lg:text-2xl font-semibold text-primary-100  mb-4">Revenue Volume Monitoring</h3>
                 <div class="text-lg font-normal text-gray-500 ">
                     @for(child of revenue?.items; track child){
                         <div class="mt-4">
@@ -70,7 +70,7 @@
 
         @if(revenueSummary){
             <div class="border border-primary-100  rounded-lg p-4 md:p-8 mt-4">
-                <h3 class="md:text-xl lg:text-2xl font-bold text-primary-100  mb-4">Revenue Summary</h3>
+                <h3 class="md:text-xl lg:text-2xl font-semibold text-primary-100  mb-4">Revenue Summary</h3>
                 <div class="text-lg font-normal text-gray-500 ">
                     <p>
                         {{ revenueSummary?.text }}
@@ -82,7 +82,7 @@
 
         @if(referral){
             <div class="border border-primary-100  rounded-lg p-4 md:p-8 mt-4">
-                <h3 class="md:text-xl lg:text-2xl font-bold text-primary-100  mb-4">Referral Program Area</h3>
+                <h3 class="md:text-xl lg:text-2xl font-semibold text-primary-100  mb-4">Referral Program Area</h3>
                 <div class="text-lg font-normal text-gray-500 ">
                     @for(child of referral?.items; track child){
                         <div class="mt-4">
@@ -95,7 +95,7 @@
 
         @if(support){
             <div class="border border-primary-100  rounded-lg p-4 md:p-8 mt-4">
-                <h3 class="md:text-xl lg:text-2xl font-bold text-primary-100  mb-4">Support Contact</h3>
+                <h3 class="md:text-xl lg:text-2xl font-semibold text-primary-100  mb-4">Support Contact</h3>
                 <div class="text-lg font-normal text-gray-500 ">
                     @for(child of support?.items; track child){
                         <div class="mt-4">

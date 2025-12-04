@@ -33,7 +33,7 @@
         <div class="p-8 w-full">
             <div class="flex flex-row mb-1">
                 <fa-icon [icon]="faSwatchbook" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
-                <h2 class="text-base  font-bold">{{ 'PRODUCT_ORDERS._filter_state' | translate }}</h2>
+                <h2 class="text-base  font-semibold">{{ 'PRODUCT_ORDERS._filter_state' | translate }}</h2>
             </div>
             <button id="dropdownStateButton" data-dropdown-toggle="dropdown"
                     class="text-black border border-primary-100sa  w-full justify-between bg-white  hover:bg-gray-100  focus:ring-2 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
@@ -46,7 +46,7 @@
             </button>
 
             <div id="dropdown" class="z-20 hidden w-fit md:w-1/5 p-3 bg-white rounded-lg border ">
-                <h6 class="mb-3 text-sm font-bold text-gray-900 ">
+                <h6 class="mb-3 text-sm font-semibold text-gray-900 ">
                     {{ 'PRODUCT_ORDERS._status' | translate }}
                 </h6>
                 <ul class="space-y-2 text-sm" aria-labelledby="dropdownStateButton">
@@ -257,7 +257,7 @@
                     <div class="w-full h-full">
                         <div class="p-4 relative overflow-x-auto rounded-lg">
                             <div class="flex flex-row gap-2 pb-2 text-gray-600">
-                                <p class="w-fit text-base font-bold shrink-0 ">
+                                <p class="w-fit text-base font-semibold shrink-0 ">
                                     {{ 'PRODUCT_INVENTORY._order_id' | translate }}
                                 </p>
                                 <h3 class="text-base ">
@@ -265,7 +265,7 @@
                                 </h3>
                             </div>
                             <div class="flex flex-row gap-2 pb-2 text-gray-600">
-                                <p class="w-fit text-base font-bold shrink-0 ">
+                                <p class="w-fit text-base font-semibold shrink-0 ">
                                     {{ 'PRODUCT_INVENTORY._state' | translate }}
                                 </p>
                                 @if(orderToShow.state === 'inProgress'){
@@ -285,7 +285,7 @@
                                 }
                             </div>
                             <div class="flex flex-row gap-2 pb-2 text-gray-600">
-                              <p class="w-fit text-base font-bold shrink-0 ">
+                              <p class="w-fit text-base font-semibold shrink-0 ">
                                   Date
                               </p>
                               <h3 class="text-base ">
@@ -293,12 +293,12 @@
                               </h3>
                             </div>
                             <div class="flex flex-row gap-2 text-gray-600">
-                              <p class="w-fit text-base font-bold shrink-0 ">
+                              <p class="w-fit text-base font-semibold shrink-0 ">
                                   {{ 'PRODUCT_ORDERS._customer_info' | translate }}
                               </p>
                             </div>
                             <div class="flex flex-row gap-2 pb-2 pt-2 ml-2 text-gray-600">
-                              <p class="w-fit text-base font-bold shrink-0 ">
+                              <p class="w-fit text-base font-semibold shrink-0 ">
                                   {{ 'PRODUCT_ORDERS._name' | translate }}
                               </p>
                               <h3 class="text-base ">
@@ -306,7 +306,7 @@
                               </h3>
                           </div>
                             <div class="flex flex-row gap-2 pb-2 ml-2 text-gray-600">
-                                <p class="w-fit text-base font-bold shrink-0 ">
+                                <p class="w-fit text-base font-semibold shrink-0 ">
                                     {{ 'PRODUCT_ORDERS._billing_address' | translate }}
                                 </p>
                                 <h3 class="text-base ">
@@ -314,7 +314,7 @@
                                 </h3>
                             </div>
                             <div class="flex flex-row gap-2 pb-2 ml-2 text-gray-600">
-                                <p class="w-fit text-base font-bold shrink-0 ">
+                                <p class="w-fit text-base font-semibold shrink-0 ">
                                     {{ 'PRODUCT_ORDERS._email' | translate }}
                                 </p>
                                 <h3 class="text-base ">

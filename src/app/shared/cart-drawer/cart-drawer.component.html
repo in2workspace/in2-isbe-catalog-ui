@@ -29,13 +29,13 @@
                      <div class="p-2 flex items-center w-2/3">
                         <p class="text-lg text-gray-700  line-clamp-4 text-wrap break-all">{{item.name}}</p>
                      </div>
-                  </div> 
+                  </div>
                   <div class="p-2 flex items-center flex-row">
                      @if (item.options.pricing) {
                         <div class="items-center text-sm text-white">
                            @for (price of item.options.pricing; track price) {
                               <div class="flex place-content-center flex-col">
-                                 <span class="font-bold text-gray-900  mr-3">{{ price['priceType'] }}:</span>
+                                 <span class="font-semibold text-gray-900  mr-3">{{ price['priceType'] }}:</span>
                                  <span class="text-xs text-gray-900 ">{{ price['price']['dutyFreeAmount']['value'] }} {{ price['price']['dutyFreeAmount']['unit'] }}
                                     @if(hasKey(price, 'recurringChargePeriod')){
                                        / {{ price['recurringChargePeriod'] }}
@@ -47,7 +47,7 @@
                      }
                      </div>
                </div>
-               
+
                <div class="p-2 flex items-center">
                   <button type="button" (click)="deleteProduct(item)" class="h-fit text-purple-700 hover:bg-gray-300 hover:text-white focus:ring-4 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center   ">
                      <svg class="w-[12px] h-[12px] text-gray-700 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -58,7 +58,7 @@
             </div>
       } @empty {
          <p class="text-gray-700 ">{{ 'CART_DRAWER._empty' | translate }}.</p>
-      } 
+      }
       } @else {
          <p class="text-gray-700 ">{{ 'CART_DRAWER._empty' | translate }}.</p>
       }

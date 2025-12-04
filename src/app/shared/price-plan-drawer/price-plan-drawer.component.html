@@ -86,7 +86,7 @@
 
         }
         <!--}-->
-      </div> 
+      </div>
     }
     @if (form.get('selectedPricePlan')?.value && form.get('characteristics')?.valid && tsAndCs.description!='') {
       <div class="mb-6 text-sm text-gray-500 ">
@@ -137,7 +137,7 @@
         @for (item of price; track item) {
           <div class="flex justify-between mb-2">
             <span class="font-medium capitalize">{{ item['priceType'] }}:</span>
-            <span class="font-bold">{{ item['price']['dutyFreeAmount']['value'] }} {{ item['price']['dutyFreeAmount']['unit'] }}
+            <span class="font-semibold">{{ item['price']['dutyFreeAmount']['value'] }} {{ item['price']['dutyFreeAmount']['unit'] }}
               @if(hasKey(item, 'recurringChargePeriod')){
                 / {{ item['recurringChargePeriod'] }}
               }

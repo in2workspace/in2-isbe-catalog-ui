@@ -1,14 +1,14 @@
 <div class="flex flex-col gap-4">
     <div class="mb-4 flex flex-col md:grid md:grid-cols-2 gap-4">
         <div>
-            <label class="font-bold text-lg ">{{ 'CREATE_OFFER._name' | translate }}</label>
+            <label class="font-semibold text-lg ">{{ 'CREATE_OFFER._name' | translate }}</label>
             <label class="mb-2 bg-white text-wrap break-all    border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                 {{ productOfferForm.get('generalInfo.name')?.value }}
             </label>
 
         </div>
        <div>
-            <label for="prod-version" class="font-bold text-lg ">{{ 'CREATE_OFFER._version' | translate }}</label>
+            <label for="prod-version" class="font-semibold text-lg ">{{ 'CREATE_OFFER._version' | translate }}</label>
             <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                 {{ productOfferForm.get('generalInfo.version')?.value }}
             </label>
@@ -16,30 +16,30 @@
     </div>
 
   <div class="mb-4">
-        <label class="font-bold text-lg mr-4 ">{{ 'CREATE_OFFER._status' | translate }}</label>
+        <label class="font-semibold text-lg mr-4 ">{{ 'CREATE_OFFER._status' | translate }}</label>
         @if(productOfferForm.get('generalInfo')?.get('status')?.value == 'In design'){
-            <span class="bg-purple-100  text-grey-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-grey-400">{{ 'ADMIN._in_design' | translate }}</span>
+            <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
         }
         @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Active'){
-            <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'ADMIN._active' | translate }}</span>
+            <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Launched') {
-            <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'ADMIN._launched' | translate }}</span>
+            <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Retired') {
-            <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'ADMIN._retired' | translate }}</span>
+            <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._retired' | translate }}</div>
         } @else if(productOfferForm.get('generalInfo')?.get('status')?.value == 'Obsolete') {
-            <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{ 'ADMIN._obsolete' | translate }}</span>
+            <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
         }
     </div>
 
    @if(productOfferForm.get('generalInfo.description')?.value !=''){
-        <label class="font-bold text-lg ">{{ 'CREATE_OFFER._description' | translate }}</label>
+        <label class="font-semibold text-lg ">{{ 'CREATE_OFFER._description' | translate }}</label>
         <div class="px-4 py-2 bg-white rounded-lg p-4 mb-4   border ">
             <markdown class="bg-gray-50   text-gray-900 text-wrap break-all" [data]="productOfferForm.get('generalInfo.description')?.value"></markdown>
         </div>
     }
 
     @if(productOfferForm.get('catalogue')?.value){
-        <label class="font-bold text-lg ">{{ 'CREATE_OFFER._catalog' | translate }}</label>
+        <label class="font-semibold text-lg ">{{ 'CREATE_OFFER._catalog' | translate }}</label>
         <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
         <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
             <thead class="text-base text-primary-100 bg-gray-0  ">
@@ -61,14 +61,16 @@
                         {{productOfferForm.get('catalogue')?.value.name}}
                     </td>
                     <td class="px-6 py-4">
-                        @if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'active'){
-                            <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
+                        @if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'In design' || productOfferForm.get('catalogue')?.value.lifecycleStatus == 'in design'){
+                            <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                        } @else if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'Active' || productOfferForm.get('catalogue')?.value.lifecycleStatus == 'active') {
+                            <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
                         } @else if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'Launched') {
-                            <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
+                            <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                         } @else if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'suspended') {
-                            <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
+                            <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._suspended' | translate }}</div>
                         } @else if(productOfferForm.get('catalogue')?.value.lifecycleStatus == 'terminated') {
-                            <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{productOfferForm.get('catalogue')?.value.lifecycleStatus}}</span>
+                            <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._terminated' | translate }}</div>
                         }
                     </td>
                     <td class="hidden md:table-cell px-6 py-4">
@@ -81,7 +83,7 @@
     }
 
 @if(productOfferForm.get('category')?.value){
-    <h2 class="font-bold text-lg ">{{ 'CREATE_OFFER._category' | translate }}</h2>
+    <h2 class="font-semibold text-lg ">{{ 'CREATE_OFFER._category' | translate }}</h2>
     <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
         <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
             <thead class="text-base text-primary-100 bg-gray-0  ">
@@ -111,7 +113,7 @@
 }
 
 @if(productOfferForm.get('pricePlans')?.value){
-    <h2 class="font-bold text-lg ">{{ 'CREATE_OFFER._price_plans' | translate }}</h2>
+    <h2 class="font-semibold text-lg ">{{ 'CREATE_OFFER._price_plans' | translate }}</h2>
     <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
         <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
             <thead class="text-base text-primary-100 bg-gray-0  ">
@@ -141,7 +143,7 @@
 }
 <!--
 @if(createdSLAs.length>0){
-    <h2 class="font-bold text-lg">{{ 'CREATE_OFFER._sla' | translate }}</h2>
+    <h2 class="font-semibold text-lg">{{ 'CREATE_OFFER._sla' | translate }}</h2>
     <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
         <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
             <thead class="text-base text-primary-100 bg-gray-0  ">
@@ -183,14 +185,14 @@
 }
 -->
 @if(!isLicenseEmpty) {
-    <h2 class="font-bold text-lg ">{{ 'CREATE_OFFER._license' | translate }}</h2>
+    <h2 class="font-semibold text-lg ">{{ 'CREATE_OFFER._license' | translate }}</h2>
     <div>
-        <label for="treatment" class="font-bold text-base ">{{ 'CREATE_OFFER._treatment' | translate }}</label>
+        <label for="treatment" class="font-semibold text-base ">{{ 'CREATE_OFFER._treatment' | translate }}</label>
         <label class="mb-2 bg-white text-wrap break-all    border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
             {{productOfferForm.get('license')?.get('treatment')?.value}}
         </label>
         @if(productOfferForm.get('license')?.get('description')?.value!==''){
-            <label class="font-bold text-base ">{{ 'CREATE_OFFER._description' | translate }}</label>
+            <label class="font-semibold text-base ">{{ 'CREATE_OFFER._description' | translate }}</label>
             <div class="px-4 py-2 bg-gray-50  border border-gray-300   rounded-lg p-4">
                 <markdown class="bg-gray-50   text-gray-900 text-wrap break-all" [data]="productOfferForm.get('license')?.get('description')?.value"></markdown>
             </div>

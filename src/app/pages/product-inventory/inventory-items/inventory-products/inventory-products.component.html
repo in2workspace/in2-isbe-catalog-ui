@@ -17,7 +17,7 @@
         <div class="w-full h-fit mb-4 bg-secondary-50 rounded-lg   border-secondary-50 border flex flex-col shadow-lg">
             <div class="flex w-full flex-cols items-center justify-between">
             <div class="mb-4 lg:mb-0 lg:w-1/4 p-8 justify-start">
-                <h2 class="text-xl font-bold">{{ 'PRODUCT_INVENTORY._search_criteria' | translate }}</h2>
+                <h2 class="text-xl font-semibold">{{ 'PRODUCT_INVENTORY._search_criteria' | translate }}</h2>
             </div>
             </div>
             <div class="flex w-full flex-col items-center lg:flex-row justify-between">
@@ -25,7 +25,7 @@
                 <div class="p-8 w-full">
                     <div class="flex flex-row mb-1">
                     <fa-icon [icon]="faSwatchbook" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
-                    <h2 class="text-base  font-bold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
+                    <h2 class="text-base  font-semibold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
                     </div>
                     <button id="dropdownDefault" data-dropdown-toggle="dropdown"
                     class="text-black  w-full justify-between shadow bg-white  hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center shadow-lg"
@@ -164,21 +164,21 @@
                                 @if(inv.price.priceType=='custom'){
                                     <div class="flex flex-col place-content-center items-baseline mb-5 w-full">
                                         <div class="flex place-content-center items-baseline w-full">
-                                        <span class="text-2xl font-bold text-gray-900 mr-1 ">Custom</span>
+                                        <span class="text-2xl font-semibold text-gray-900 mr-1 ">Custom</span>
                                         </div>
                                     </div>
                                 } @else {
                                     <div class="flex flex-col place-content-center items-baseline mb-5 w-full">
                                         <div class="flex place-content-center items-baseline w-full">
-                                        <span class="text-2xl font-bold text-gray-900 mr-1 ">{{inv.price?.price}} {{inv.price?.unit}}</span>
-                                        <span class="text-xs font-bold text-gray-900 ">{{inv.price?.text}}</span>
+                                        <span class="text-2xl font-semibold text-gray-900 mr-1 ">{{inv.price?.price}} {{inv.price?.unit}}</span>
+                                        <span class="text-xs font-semibold text-gray-900 ">{{inv.price?.text}}</span>
                                         </div>
                                     </div>
                                 }
                             } @else {
                                 <div class="flex flex-col place-content-center items-baseline mb-5 w-full">
                                     <div class="flex place-content-center items-baseline w-full">
-                                    <span class="text-2xl font-bold text-gray-900 mr-1 ">{{ 'SHOPPING_CART._free' | translate }}</span>
+                                    <span class="text-2xl font-semibold text-gray-900 mr-1 ">{{ 'SHOPPING_CART._free' | translate }}</span>
                                     </div>
                                 </div>
                             }-->
@@ -275,7 +275,7 @@
                                     <div class="inline-flex items-center justify-center w-full">
                                         <div class="max-w-sm bg-white border border-gray-200  rounded-lg shadow w-full">
                                             <div class="bg-purple-500 rounded-t-lg w-full">
-                                                <h5 class="flex justify-center mb-2 p-6 text-2xl font-bold tracking-tight text-gray-900">{{ 'SHOPPING_CART._free' | translate }}</h5>
+                                                <h5 class="flex justify-center mb-2 p-6 text-2xl font-semibold tracking-tight text-gray-900">{{ 'SHOPPING_CART._free' | translate }}</h5>
                                             </div>
                                             <p class="flex justify-center mb-2 p-4 font-normal text-gray-700">{{ 'SHOPPING_CART._free_desc' | translate }}</p>
                                         </div>
@@ -288,7 +288,7 @@
                                     @if (price.priceType == 'recurring') {
                                         <div class="max-w-sm bg-white   border border-gray-200 rounded-lg shadow w-full">
                                             <div class="bg-green-500 rounded-t-lg w-full text-wrap break-all">
-                                                <h5 class="flex justify-center mb-2 p-6 text-2xl font-bold tracking-tight text-gray-900 w-full">{{price.name}}</h5>
+                                                <h5 class="flex justify-center mb-2 p-6 text-2xl font-semibold tracking-tight text-gray-900 w-full">{{price.name}}</h5>
                                             </div>
                                             <p class="flex justify-center font-normal text-gray-700 "> <b class="text-xl mr-2">{{price.price?.taxIncludedAmount?.value}}</b> {{price.price?.taxIncludedAmount?.unit}}</p>
                                             <p class="flex justify-center font-normal text-gray-700 ">/{{price.recurringChargePeriodType}}</p>
@@ -297,7 +297,7 @@
                                     } @else if (price.priceType == 'usage') {
                                         <div class="max-w-sm bg-white border border-gray-200   rounded-lg shadow w-full">
                                             <div class="bg-yellow-300 rounded-t-lg w-full">
-                                                <h5 class="flex justify-center mb-2 p-6 text-2xl font-bold tracking-tight text-gray-900 text-wrap break-all">{{price.name}}</h5>
+                                                <h5 class="flex justify-center mb-2 p-6 text-2xl font-semibold tracking-tight text-gray-900 text-wrap break-all">{{price.name}}</h5>
                                             </div>
                                             <p class="flex justify-center font-normal text-gray-700 "> <b class="text-xl mr-2">{{price.price?.taxIncludedAmount?.value}}</b> {{price.price?.taxIncludedAmount?.unit}}</p>
                                             <p class="flex justify-center font-normal text-gray-700 ">/{{price.unitOfMeasure}}</p>
@@ -306,7 +306,7 @@
                                     } @else {
                                         <div class="max-w-sm bg-white border border-gray-200   rounded-lg shadow w-full">
                                             <div class="bg-purple-500 rounded-t-lg w-full">
-                                                <h5 class="flex justify-center mb-4 p-6 text-2xl font-bold tracking-tight text-gray-900 text-wrap break-all">{{price.name}}</h5>
+                                                <h5 class="flex justify-center mb-4 p-6 text-2xl font-semibold tracking-tight text-gray-900 text-wrap break-all">{{price.name}}</h5>
                                             </div>
                                             <p class="flex justify-center font-normal text-gray-700 "> <b class="text-xl mr-2">{{price.price?.taxIncludedAmount?.value}}</b> {{price.price?.taxIncludedAmount?.unit}}</p>
                                             <p class="flex justify-center mb-2 p-4 font-normal text-gray-700  text-wrap break-all">{{price?.description}}</p>
@@ -316,7 +316,7 @@
                                 @if(selectedProduct?.productPrice?.length==0){
                                     <div class="max-w-sm bg-white border border-gray-200   rounded-lg shadow w-full">
                                         <div class="bg-purple-500 rounded-t-lg w-full">
-                                            <h5 class="flex justify-center mb-2 p-6 text-2xl font-bold tracking-tight text-gray-900">{{ 'SHOPPING_CART._free' | translate }}</h5>
+                                            <h5 class="flex justify-center mb-2 p-6 text-2xl font-semibold tracking-tight text-gray-900">{{ 'SHOPPING_CART._free' | translate }}</h5>
                                         </div>
                                         <p class="flex justify-center mb-2 font-normal text-gray-700 ">{{ 'SHOPPING_CART._free_desc' | translate }}</p>
                                     </div>
@@ -432,7 +432,7 @@
                                 @for (char of selectedProduct.productCharacteristic; track char.id; let idx = $index) {
                                     <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8">
                                         <div class="border border-gray-200 rounded-lg shadow bg-white   shadow-md p-8 h-full">
-                                            <h3 class="text-2xl font-bold mb-4 ">{{char.name}}</h3>
+                                            <h3 class="text-2xl font-semibold mb-4 ">{{char.name}}</h3>
                                             <div class="flex items-center pl-4">
                                                 <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300   rounded-full focus:ring-purple-500 focus:ring-2">
                                                 @if(char.value){
