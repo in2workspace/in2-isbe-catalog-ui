@@ -70,17 +70,17 @@
           @if(!checkPriceCompChars()){
           @if ((formGroup.get('prodSpecCharValueUse')?.value?.length > 0) || (formGroup.get('productProfile')?.value?.selectedValues.length > 0)){
             <div class="overflow-x-auto">
-              <table class="w-full text-sm text-left text-gray-500">
-                <thead class="text-base text-primary-100 bg-gray-0">
+              <table class="px-5 py-3 w-full text-sm text-left text-gray-500">
+                <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                 <tr>
-                  <th class="px-4 py-2">{{ 'FORMS.PRICE_PLANS._char_name' | translate }}</th>
-                  <th class="px-4 py-2">{{ 'FORMS.PRICE_PLANS._char_value' | translate }}</th>
+                  <th class="px-5 py-3">{{ 'FORMS.PRICE_PLANS._char_name' | translate }}</th>
+                  <th class="px-5 py-3">{{ 'FORMS.PRICE_PLANS._char_value' | translate }}</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let char of getProcessedProfileData()" class="bg-white  border-b">
-                  <td class="px-4 py-1">{{ char.name }}</td>
-                  <td class="px-4 py-1">
+                <tr *ngFor="let char of getProcessedProfileData()" class="px-5 py-3 bg-white border-b">
+                  <td class="px-5 py-3">{{ char.name }}</td>
+                  <td class="px-5 py-3">
                     @if (char.selectedValue) {
                       @if(char.selectedValue.value){
                         {{ char.selectedValue.value }}

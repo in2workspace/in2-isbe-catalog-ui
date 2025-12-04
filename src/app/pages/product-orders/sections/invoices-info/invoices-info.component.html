@@ -40,36 +40,36 @@
     <!-- <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._order_list' | translate }}</h2>
     <hr class="h-px mr-4 ml-4 bg-primary-100/70 border-0">-->
     <div class="m-4 relative overflow-x-auto border border-primary-100  sm:rounded-lg">
-      <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
-        <thead class="text-xs text-gray-700 uppercase bg-secondary-50  ">
+      <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0">
+        <thead class="px-5 py-3 text-xs text-gray-700 uppercase bg-secondary-50">
         <tr>
-          <th scope="col" class="px-6 py-3 text-center align-middle">
+          <th scope="col" class="px-5 py-3 text-center align-middle">
             {{ 'INVOICES._date' | translate }}
           </th>
-          <th scope="col" class="hidden md:table-cell px-6 py-3 text-center align-middle">
+          <th scope="col" class="px-5 py-3 hidden md:table-cell text-center align-middle">
             {{ 'INVOICES._name' | translate }}
           </th>
-          <th scope="col" class="hidden md:table-cell px-6 py-3 text-center align-middle">
+          <th scope="col" class="px-5 py-3 hidden md:table-cell text-center align-middle">
             {{ 'INVOICES._type' | translate }}
           </th>
-          <th scope="col" class="hidden md:table-cell px-6 py-3 text-center align-middle">
+          <th scope="col" class="px-5 py-3 hidden md:table-cell text-center align-middle">
             {{ 'INVOICES._tax_included_amount' | translate }}
           </th>
-          <th scope="col" class="hidden md:table-cell px-6 py-3 text-center align-middle">
+          <th scope="col" class="px-5 py-3 hidden md:table-cell text-center align-middle">
             {{ 'INVOICES._status' | translate }}
           </th>
-          <th scope="col" class="text-center align-middle">
+          <th scope="col" class="px-5 py-3 text-center align-middle">
             {{ 'INVOICES._actions' | translate }}
           </th>
         </tr>
         </thead>
         <tbody>
           @for (invoice of invoices; track invoice.id; let idx = $index) {
-            <tr class="border-b bg-gray-100 hover:bg-gray-200   ">
-              <td class="px-6 py-4 text-center align-middle">
+            <tr class="px-5 py-3 border-b bg-gray-100 hover:bg-gray-200">
+              <td class="px-5 py-3 text-center align-middle">
                 {{invoice?.date | date:'EEEE, dd/MM/yy, HH:mm'}}
               </td>
-              <td class="md:table-cell px-6 py-4 text-center align-middle">
+              <td class="px-5 py-3 md:table-cell text-center align-middle">
                 @if(role=='Seller'){
                   @if (editingIndex === idx) {
                     <input [(ngModel)]="editableInvoiceName" type="text" id="invoicename"
@@ -83,20 +83,20 @@
                   {{invoice?.name}}
                 }
               </td>
-              <td class="md:table-cell px-6 py-4 text-center align-middle">
+              <td class="px-5 py-3 md:table-cell text-center align-middle">
                 {{invoice?.type}}
               </td>
-              <td class="md:table-cell px-6 py-4 text-center align-middle">
+              <td class="px-5 py-3 md:table-cell text-center align-middle">
                 {{invoice?.taxIncludedAmount.value}}{{invoice?.taxIncludedAmount.unit}}
               </td>
-              <td class="md:table-cell px-6 py-4 text-center align-middle">
+              <td class="px-5 py-3 md:table-cell text-center align-middle">
                 @if(invoice?.isBilled){
                   <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'INVOICES._billed' | translate }}</span>
                 } @else {
                     <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{ 'INVOICES._pending' | translate }}</span>
                 }
               </td>
-              <td class="px-6 py-4 text-center align-middle flex flex-row">
+              <td class="px-5 py-3 text-center align-middle flex flex-row">
                 <button (click)="toggleShowDetails(invoice);$event.stopPropagation();" type="button" class="text-white bg-primary-100 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2">
                   <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
                     <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">

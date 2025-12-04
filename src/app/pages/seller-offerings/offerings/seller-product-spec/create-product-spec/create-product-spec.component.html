@@ -125,33 +125,33 @@
                                 </div>
                             }@else{
                             <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                                    <thead class="text-base text-primary-100 bg-gray-0  ">
+                                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3">
+                                        <th scope="col" class="px-5 py-3">
                                             {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                         </th>
-                                        <th scope="col" class="hidden md:table-cell px-6 py-3">
+                                        <th scope="col" class="px-5 py-3 hidden md:table-cell">
                                             {{ 'CREATE_PROD_SPEC._status' | translate }}
                                         </th>
-                                        <th scope="col" class="hidden md:table-cell px-6 py-3">
+                                        <th scope="col" class="px-5 py-3 hidden md:table-cell">
                                             {{ 'CREATE_PROD_SPEC._type' | translate }}
                                         </th>
-                                        <th scope="col" class="hidden lg:table-cell px-6 py-3">
+                                        <th scope="col" class="px-5 py-3 hidden lg:table-cell">
                                             {{ 'CREATE_PROD_SPEC._last_update' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
+                                        <th scope="col" class="px-5 py-3">
                                             {{ 'CREATE_PROD_SPEC._select' | translate }}
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @for (prod of prodSpecs; track prod.id) {
-                                        <tr class="border-b hover:bg-gray-200   ">
-                                            <td class="px-6 py-4 text-wrap break-all">
+                                        <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                            <td class="px-5 py-3 text-wrap break-all">
                                                 {{prod.name}}
                                             </td>
-                                            <td class="hidden md:table-cell px-6 py-4">
+                                            <td class="px-5 py-3 hidden md:table-cell">
                                                 @if(prod.lifecycleStatus == 'In design'){
                                                     <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                 } @else if(prod.lifecycleStatus == 'Active'){
@@ -164,17 +164,17 @@
                                                     <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
                                                 }
                                             </td>
-                                            <td class="hidden md:table-cell px-6 py-4">
+                                            <td class="px-5 py-3 hidden md:table-cell">
                                                 @if(prod.isBundle == false){
                                                     <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{ 'CREATE_PROD_SPEC._simple' | translate }}</span>
                                                 } @else {
                                                     <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{ 'CREATE_PROD_SPEC._bundle' | translate }}</span>
                                                 }
                                             </td>
-                                            <td class="hidden lg:table-cell px-6 py-4">
+                                            <td class="px-5 py-3 hidden lg:table-cell">
                                                 {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                             </td>
-                                            <td class="px-6 py-4">
+                                            <td class="px-5 py-3">
                                                 <input id="select-checkbox" [checked]="isProdInBundle(prod)" type="checkbox" value="" (click)="addProdToBundle(prod)" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500   focus:ring-2  ">
                                             </td>
                                         </tr>
@@ -272,32 +272,32 @@
                     }
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white  m-4">
-                        <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                            <thead class="text-base text-primary-100 bg-gray-0  ">
+                        <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                            <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                 <tr>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-5 py-3">
                                         {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-5 py-3">
                                         {{ 'CREATE_PROD_SPEC._value' | translate }}
                                     </th>
-                                    <th scope="col" class="px-6 py-3">
+                                    <th scope="col" class="px-5 py-3">
                                         {{ 'CREATE_PROD_SPEC._actions' | translate }}
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @for (sel of selectedISOS; track sel.name; let idx = $index) {
-                                    <tr class="border-b hover:bg-gray-200   ">
-                                        <td class="px-6 py-4 text-wrap break-all">
+                                    <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                        <td class="px-5 py-3 text-wrap break-all">
                                             {{sel.name}}
                                         </td>
-                                        <td class="px-6 py-4 text-wrap break-all">
+                                        <td class="px-5 py-3 text-wrap break-all">
                                             {{sel.url}}
                                             <!--<input readonly type="text" [(ngModel)]="selectedISOS[idx].url" value="{{sel.url}}" [id]="'iso-'+sel.name"
                                             class="mb-2 bg-gray-50  border border-2 border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" /> -->
                                         </td>
-                                        <td class="px-6 py-4 inline-flex">
+                                        <td class="px-5 py-3 inline-flex">
                                             <button (click)="toggleUploadFile(sel);$event.stopPropagation();" type="button" class="text-white file-select-button mr-4 bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
                                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v9m-5 0H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1h-2M8 9l4-5 4 5m1 8h.01"/>
@@ -376,33 +376,33 @@
                         </div>
                     } @else {
                         <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
-                            <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                                <thead class="text-base text-primary-100 bg-gray-0  ">
+                            <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                                <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3">
+                                        <th scope="col" class="px-5 py-3">
                                             {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                         </th>
-                                        <th scope="col" class="hidden lg:table-cell px-6 py-3">
+                                        <th scope="col" class="px-5 py-3 hidden lg:table-cell">
                                             {{ 'CREATE_PROD_SPEC._product_description' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
+                                        <th scope="col" class="px-5 py-3">
                                             {{ 'CREATE_PROD_SPEC._values' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3">
+                                        <th scope="col" class="px-5 py-3">
                                             {{ 'CREATE_PROD_SPEC._actions' | translate }}
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @for (prod of prodChars; track prod;) {
-                                        <tr class="border-b hover:bg-gray-200   ">
-                                            <td class="px-6 py-4 max-w-1/6 text-wrap break-all">
+                                        <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                            <td class="px-5 py-3 max-w-1/6 text-wrap break-all">
                                                 {{prod.name}}
                                             </td>
-                                            <td class="hidden lg:table-cell px-6 py-4 text-wrap break-all">
+                                            <td class="px-5 py-3 hidden lg:table-cell text-wrap break-all">
                                                 {{prod.description}}
                                             </td>
-                                            <td class="px-6 py-4 text-wrap break-all">
+                                            <td class="px-5 py-3 text-wrap break-all">
                                                 @for (char of prod.productSpecCharacteristicValue; track char; let last=$last) {
                                                     @if(char.value || char.value == 0){
                                                         @if(char.unitOfMeasure){
@@ -427,7 +427,7 @@
                                                     }
                                                 }
                                             </td>
-                                            <td class="px-6 py-4">
+                                            <td class="px-5 py-3">
                                                 <button (click)="deleteChar(prod)" class="font-semibold text-white bg-red-500 rounded-3xl">
                                                     <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
@@ -713,36 +713,36 @@
                             </div>
                         } @else {
                             <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                                    <thead class="text-base text-primary-100 bg-gray-0  ">
+                                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                         <tr>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._relationship_type' | translate }}
                                             </th>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                             </th>
-                                            <th scope="col" class="hidden md:table-cell px-6 py-3">
+                                            <th scope="col" class="px-5 py-3 hidden md:table-cell">
                                                 {{ 'CREATE_PROD_SPEC._type' | translate }}
                                             </th>
-                                            <th scope="col" class="hidden lg:table-cell px-6 py-3">
+                                            <th scope="col" class="px-5 py-3 hidden lg:table-cell">
                                                 {{ 'CREATE_PROD_SPEC._last_update' | translate }}
                                             </th>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._actions' | translate }}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @for (rel of prodRelationships; track rel) {
-                                            <tr class="border-b hover:bg-gray-200   ">
-                                                <td class="px-6 py-4">
+                                            <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                                <td class="px-5 py-3">
                                                     {{rel.relationshipType}}
                                                 </td>
-                                                <td class="px-6 py-4 text-wrap break-all">
+                                                <td class="px-5 py-3 text-wrap break-all">
                                                     {{rel.productSpec.name}}
                                                 </td>
-                                                <td class="hidden md:table-cell px-6 py-4">
+                                                <td class="px-5 py-3 hidden md:table-cell">
                                                     @if(rel.productSpec.lifecycleStatus == 'In design'){
                                                         <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                     } @else if(rel.productSpec.lifecycleStatus == 'Active'){
@@ -755,10 +755,10 @@
                                                         <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
                                                     }
                                                 </td>
-                                                <td class="hidden lg:table-cell px-6 py-4">
+                                                <td class="px-5 py-3 hidden lg:table-cell">
                                                     {{rel.productSpec.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                                 </td>
-                                                <td class="px-6 py-4">
+                                                <td class="px-5 py-3">
                                                     <button (click)="deleteRel(rel)" class="font-semibold text-white bg-red-500 rounded-3xl">
                                                         <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
@@ -811,35 +811,35 @@
                                     </div>
                                 }@else{
                                 <div class="relative overflow-x-auto rounded-lg w-full bg-white mt-4 border border-gray-300">
-                                    <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                                        <thead class="text-base text-primary-100 bg-gray-0  ">
+                                    <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                                        <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                             <tr>
-                                                <th scope="col" class="px-6 py-3">
+                                                <th scope="col" class="px-5 py-3">
                                                     {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                                 </th>
-                                                <th scope="col" class="px-6 py-3">
+                                                <th scope="col" class="px-5 py-3">
                                                     {{ 'CREATE_PROD_SPEC._type' | translate }}
                                                 </th>
-                                                <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                                                <th scope="col" class="px-5 py-3 hidden md:table-cell">
                                                     {{ 'CREATE_PROD_SPEC._last_update' | translate }}
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @for (rel of prodSpecRels; track rel) {
-                                                <tr class="border-b hover:bg-gray-200  " (click)="selectRelationship(rel)"
+                                                <tr class="px-5 py-3 border-b hover:bg-gray-200" (click)="selectRelationship(rel)"
                                                     [ngClass]="rel.id == selectedProdSpec.id ? 'bg-gray-300 ' : 'bg-white '">
-                                                    <td class="px-6 py-4 text-wrap break-all">
+                                                    <td class="px-5 py-3 text-wrap break-all">
                                                         {{rel.name}}
                                                     </td>
-                                                    <td class="px-6 py-4">
+                                                    <td class="px-5 py-3">
                                                         @if(rel.isBundle == false){
                                                             <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">Simple</span>
                                                         } @else {
                                                             <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">Bundle</span>
                                                         }
                                                     </td>
-                                                    <td class="px-6 py-4 hidden md:table-cell">
+                                                    <td class="px-5 py-3 hidden md:table-cell">
                                                         {{rel.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                                     </td>
                                                 </tr>
@@ -948,24 +948,24 @@
                         @if(prodSpecsBundle.length>0){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._bundle' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                                    <thead class="text-base text-primary-100 bg-gray-0  ">
+                                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                         <tr>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                             </th>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._status' | translate }}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @for (bun of prodSpecsBundle; track bun) {
-                                            <tr class="border-b hover:bg-gray-200   ">
-                                                <td class="px-6 py-4 text-wrap break-all">
+                                            <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                                <td class="px-5 py-3 text-wrap break-all">
                                                     {{bun.name}}
                                                 </td>
-                                                <td class="px-6 py-4">
+                                                <td class="px-5 py-3">
                                                     @if(bun.lifecycleStatus == 'In design'){
                                                         <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                     } @else if(bun.lifecycleStatus == 'Active'){
@@ -988,30 +988,30 @@
                         @if(prodChars.length>0){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._chars' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                                    <thead class="text-base text-primary-100 bg-gray-0  ">
+                                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                         <tr>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                             </th>
-                                            <th scope="col" class="hidden lg:table-cell px-6 py-3">
+                                            <th scope="col" class="px-5 py-3 hidden lg:table-cell">
                                                 {{ 'CREATE_PROD_SPEC._product_description' | translate }}
                                             </th>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._values' | translate }}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @for (prod of productSpecToCreate?.productSpecCharacteristic; track prod;) {
-                                            <tr class="border-b hover:bg-gray-200   ">
-                                                <td class="px-6 py-4 text-wrap break-all">
+                                            <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                                <td class="px-5 py-3 text-wrap break-all">
                                                     {{prod.name}}
                                                 </td>
-                                                <td class="hidden lg:table-cell px-6 py-4 text-wrap break-all">
+                                                <td class="px-5 py-3 hidden lg:table-cell text-wrap break-all">
                                                     {{prod.description}}
                                                 </td>
-                                                <td class="px-6 py-4 text-wrap break-all">
+                                                <td class="px-5 py-3 text-wrap break-all">
                                                     @for (char of prod.productSpecCharacteristicValue; track char; let last = $last) {
                                                         @if(char.value || char.value == 0){
                                                             @if(char.unitOfMeasure){
@@ -1046,24 +1046,24 @@
                         @if(prodAttachments.length>0){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._attachments' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                                    <thead class="text-base text-primary-100 bg-gray-0  ">
+                                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                         <tr>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                             </th>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._value' | translate }}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @for (att of productSpecToCreate?.attachment; track att) {
-                                            <tr class="border-b hover:bg-gray-200   ">
-                                                <td class="px-6 py-4 text-wrap break-all">
+                                            <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                                <td class="px-5 py-3 text-wrap break-all">
                                                     {{att.name}}
                                                 </td>
-                                                <td class="px-6 py-4 text-wrap break-all">
+                                                <td class="px-5 py-3 text-wrap break-all">
                                                     {{att.url}}
                                                 </td>
                                             </tr>
@@ -1076,33 +1076,33 @@
                         @if(prodRelationships.length>0){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
-                                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300 ">
-                                    <thead class="text-base text-primary-100 bg-gray-0  ">
+                                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
+                                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                         <tr>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._relationship_type' | translate }}
                                             </th>
-                                            <th scope="col" class="px-6 py-3">
+                                            <th scope="col" class="px-5 py-3">
                                                 {{ 'CREATE_PROD_SPEC._product_name' | translate }}
                                             </th>
-                                            <th scope="col" class="hidden md:table-cell px-6 py-3">
+                                            <th scope="col" class="px-5 py-3 hidden md:table-cell">
                                                 {{ 'CREATE_PROD_SPEC._type' | translate }}
                                             </th>
-                                            <th scope="col" class="hidden lg:table-cell px-6 py-3">
+                                            <th scope="col" class="px-5 py-3 hidden lg:table-cell">
                                                 {{ 'CREATE_PROD_SPEC._last_update' | translate }}
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @for (rel of prodRelationships; track rel) {
-                                            <tr class="border-b hover:bg-gray-200   ">
-                                                <td class="px-6 py-4">
+                                            <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                                <td class="px-5 py-3">
                                                     {{rel.relationshipType}}
                                                 </td>
-                                                <td class="px-6 py-4 text-wrap break-all">
+                                                <td class="px-5 py-3 text-wrap break-all">
                                                     {{rel.productSpec.name}}
                                                 </td>
-                                                <td class="hidden md:table-cell px-6 py-4">
+                                                <td class="px-5 py-3 hidden md:table-cell">
                                                     @if(rel.productSpec.lifecycleStatus == 'In design'){
                                                         <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                     } @else if(rel.productSpec.lifecycleStatus == 'Active'){
@@ -1115,7 +1115,7 @@
                                                         <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
                                                     }
                                                 </td>
-                                                <td class="hidden lg:table-cell px-6 py-4">
+                                                <td class="px-5 py-3 hidden lg:table-cell">
                                                     {{rel.productSpec.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                                 </td>
                                             </tr>

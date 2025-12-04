@@ -29,24 +29,24 @@
             <markdown class=" text-wrap break-all" [data]="description"></markdown>
             <h2 class="text-2xl lg:text-4xl font-extrabold text-primary-100  text-center pb-4">{{ 'PROFILE._contact_info' | translate }}</h2>
             <div class="m-4 relative overflow-x-auto shadow-md sm:rounded-lg bg-gray-200 ">
-                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0  border  border-gray-300">
-                    <thead class="text-base text-primary-100 bg-gray-0   border-b border-gray-300 ">
+                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 border border-gray-300">
+                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0 border-b border-gray-300">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-5 py-3">
                                 {{ 'PROFILE._medium_type' | translate }}
                             </th>
-                            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                            <th scope="col" class="px-5 py-3 hidden md:table-cell">
                                 {{ 'PROFILE._info' | translate }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @for(medium of orgInfo?.contactMedium; track medium) {
-                            <tr class="border-b border-gray-300 ">
-                                <td class="px-6 py-4">
+                            <tr class="px-5 py-3 border-b border-gray-300">
+                                <td class="px-5 py-3">
                                     {{ mediumTypeKey[medium.mediumType] | translate }}
                                 </td>
-                                <td class="px-6 py-4 hidden md:table-cell">
+                                <td class="px-5 py-3 hidden md:table-cell">
                                     @if(medium.mediumType == 'Email'){
                                         <a class="cursor-pointer font-medium text-primary-100  hover:underline" href= "mailto: {{medium.characteristic.emailAddress}}"> {{medium.characteristic.emailAddress}} </a>
 

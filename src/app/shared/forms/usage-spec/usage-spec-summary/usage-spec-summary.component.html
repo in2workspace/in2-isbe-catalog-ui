@@ -18,24 +18,24 @@
     @if(usageSpecForm.get('metrics')?.value){
         <label class="font-semibold text-lg ">Metrics</label>
         <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
-        <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
-            <thead class="text-base text-primary-100 bg-gray-0  ">
+        <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0">
+            <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-5 py-3">
                         {{ 'USAGE_SPECS._name' | translate }}
                     </th>
-                    <th scope="col" class="hidden md:table-cell px-6 py-3">
+                    <th scope="col" class="px-5 py-3 hidden md:table-cell">
                         {{ 'USAGE_SPECS._description' | translate }}
                     </th>
                 </tr>
             </thead>
             <tbody>
                 @for (metric of usageSpecForm.get('metrics')?.value; track metric) {
-                    <tr class="border-b hover:bg-gray-200   ">
-                        <td class="px-6 py-4 text-wrap break-all">
+                    <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                        <td class="px-5 py-3 text-wrap break-all">
                             {{metric.name}}
                         </td>
-                        <td class="hidden md:table-cell px-6 py-4">
+                        <td class="px-5 py-3 hidden md:table-cell">
                             {{metric.description}}
                         </td>
                     </tr>

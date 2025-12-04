@@ -33,26 +33,26 @@
       </div>
     }@else{
       <div class="relative overflow-x-auto rounded-lg w-full bg-white mt-8 border border-gray-0">
-        <table class="w-full text-sm text-left text-black">
-          <thead class="text-base bg-gray-0">
+        <table class="px-5 py-3 w-full text-sm text-left text-black">
+          <thead class="px-5 py-3 text-base bg-gray-0">
           <tr>
-            <th scope="col" class="px-4 py-3" colspan="2">
+            <th scope="col" class="px-5 py-3" colspan="2">
               {{ 'OFFERINGS._name' | translate }}
             </th>
-            <th scope="col" class="p-3">{{ 'OFFERINGS._type' | translate }}</th>
-            <th scope="col" class="p-3">{{ 'OFFERINGS._status' | translate }}</th>
-            <th scope="col" class="hidden md:table-cell p-3">{{ 'OFFERINGS._last_update' | translate }}
+            <th scope="col" class="px-5 py-3">{{ 'OFFERINGS._type' | translate }}</th>
+            <th scope="col" class="px-5 py-3">{{ 'OFFERINGS._status' | translate }}</th>
+            <th scope="col" class="px-5 py-3 hidden md:table-cell">{{ 'OFFERINGS._last_update' | translate }}
             </th>
           </tr>
           </thead>
           <tbody data-cy="prodSpecs">
             @for (prod of prodSpecs; track $index) {
-              <tr class="border-b hover:bg-gray-0/20 "
+              <tr class="px-5 py-3 border-b hover:bg-gray-0/20"
                   (click)="!isEditMode && toggleSelection(prod)"
                   [ngClass]="getRowClass(prod.id)">
 
                 <!-- Checkbox -->
-                <td class="py-3 pl-3 w-6">
+                <td class="px-5 py-3 w-6">
                   <input type="radio"
                          name="prodSpecSelection"
                          class="w-4 h-4 text-primary-50 bg-gray-0 border-gray-0 rounded focus:ring-purple-500"
@@ -60,12 +60,12 @@
                          [disabled]="isEditMode"
                          (click)="$event.stopPropagation(); !isEditMode && toggleSelection(prod)">
                 </td>
-                <td class="p-3">{{ prod.name }}</td>
-                <td class="p-3">
+                <td class="px-5 py-3">{{ prod.name }}</td>
+                <td class="px-5 py-3">
                   <span class="bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md">
                     {{ prod.isBundle ? ('OFFERINGS._bundle' | translate) : ('OFFERINGS._simple' | translate) }}
                   </span></td>
-                <td class="p-3">
+                <td class="px-5 py-3">
                   @if(prod.lifecycleStatus == 'In design'){
                       <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
                   } @else if(prod.lifecycleStatus == 'Active'){
@@ -78,7 +78,7 @@
                       <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
                   }
                 </td>
-                <td class="hidden md:table-cell p-3">
+                <td class="px-5 py-3 hidden md:table-cell">
                   {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                 </td>
               </tr>

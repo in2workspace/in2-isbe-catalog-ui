@@ -20,30 +20,30 @@
         </div>
     }@else{
     <div class="relative overflow-x-auto rounded-lg w-full bg-white mt-4 border border-gray-0">
-        <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
-            <thead class="text-base text-primary-100 bg-gray-0  ">
+        <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0">
+            <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                 <tr>
-                    <th scope="col" class="px-4 py-3 w-12">
+                    <th scope="col" class="px-5 py-3 w-12">
                         <!-- Columna del Checkbox -->
                       </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-5 py-3">
                         {{ 'OFFERINGS._name' | translate }}
                     </th>
-                    <th scope="col" class="hidden md:table-cell px-6 py-3">
+                    <th scope="col" class="px-5 py-3 hidden md:table-cell">
                         {{ 'OFFERINGS._status' | translate }}
                     </th>
-                    <th scope="col" class="hidden md:table-cell px-6 py-3">
+                    <th scope="col" class="px-5 py-3 hidden md:table-cell">
                         {{ 'OFFERINGS._role' | translate }}
                     </th>
                 </tr>
             </thead>
             <tbody data-cy="catalogList">
                 @for (cat of catalogs; track cat) {
-                    <tr class="border-b hover:bg-gray-200  " (click)="toggleSelection(cat)"
+                    <tr class="px-5 py-3 border-b hover:bg-gray-200" (click)="toggleSelection(cat)"
                         [ngClass]="cat.id == selectedCatalog.id ? 'bg-gray-300 ' : 'bg-white '">
 
                         <!-- Checkbox -->
-                        <td class="px-4 py-3 w-12">
+                        <td class="px-5 py-3 w-12">
                             <input type="radio"
                                 name="catSelection"
                                 class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500"
@@ -51,10 +51,10 @@
                                 (click)="$event.stopPropagation(); toggleSelection(cat)">
                         </td>
 
-                        <td class="px-6 py-4 text-wrap break-all">
+                        <td class="px-5 py-3 text-wrap break-all">
                             {{cat.name}}
                         </td>
-                        <td class="hidden md:table-cell px-6 py-4">
+                        <td class="px-5 py-3 hidden md:table-cell">
                             @if(cat.lifecycleStatus == 'In design'){
                                 <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
                             } @else if(cat.lifecycleStatus == 'Active'){
@@ -67,7 +67,7 @@
                                 <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._terminated' | translate }}</div>
                             }
                         </td>
-                        <td class="hidden md:table-cell px-6 py-4">
+                        <td class="px-5 py-3 hidden md:table-cell">
                             {{cat.relatedParty?.at(0)?.role}}
                         </td>
                     </tr>

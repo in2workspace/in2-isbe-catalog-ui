@@ -135,7 +135,7 @@
                                 <markdown class="text-gray-800 text-wrap break-all" [data]="description"></markdown>
 
                         }@else{
-                            <textarea id="editor" formControlName="description" rows="8" class="block w-full min-h-fit px-0 text-sm text-gray-800 bg-white  border-0" placeholder="Añadir descripción del producto..." ></textarea>
+                            <textarea id="editor" formControlName="description" rows="8" class="px-5 py-3 block w-full min-h-fit text-sm text-gray-800 bg-white border-0" placeholder="Añadir descripción del producto..." ></textarea>
                         }
                         @if(showEmoji){
                             <emoji-mart (click)="$event.stopPropagation();" [darkMode]="false" [style]="{ position: 'relative', left: '200px', top: '-500px' }" (emojiClick)="addEmoji($event)"></emoji-mart>
@@ -216,27 +216,27 @@
             <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._contact_info' | translate }}</h2>
             <hr class="h-px bg-primary-100/70 border-0">
             <div class="bg-white relative overflow-x-auto rounded-lg">
-                <table class="w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0 ">
-                    <thead class="text-base text-black bg-gray-0">
+                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0">
+                    <thead class="px-5 py-3 text-base text-black bg-gray-0">
                         <tr>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-5 py-3">
                                 {{ 'PROFILE._medium_type' | translate }}
                             </th>
-                            <th scope="col" class="px-6 py-3 hidden md:table-cell">
+                            <th scope="col" class="px-5 py-3 hidden md:table-cell">
                                 {{ 'PROFILE._info' | translate }}
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            <th scope="col" class="px-5 py-3">
                                 {{ 'PROFILE._actions' | translate }}
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @for(medium of contactmediums; track medium) {
-                            <tr class="border-b hover:bg-gray-0/20 ">
-                                <td class="px-6 py-4">
+                            <tr class="px-5 py-3 border-b hover:bg-gray-0/20">
+                                <td class="px-5 py-3">
                                     {{ mediumTypeKey[medium.mediumType] | translate }}
                                 </td>
-                                <td class="px-6 py-4 hidden md:table-cell">
+                                <td class="px-5 py-3 hidden md:table-cell">
                                     @if(medium.mediumType == 'Email'){
                                         {{medium.characteristic.emailAddress}}
                                     } @else if(medium.mediumType == 'PostalAddress') {
@@ -245,7 +245,7 @@
                                         ({{medium.characteristic.contactType}}) {{medium.characteristic.phoneNumber}}
                                     }
                                 </td>
-                                <td class="px-6 py-4 inline-flex">
+                                <td class="px-5 py-3 inline-flex">
                                     <button type="button" (click)="showEdit(medium)" class="text-white bg-primary-100 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 lg: text-center inline-flex items-center me-2">
                                         <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                             <path fill-rule="evenodd" d="M14 4.182A4.136 4.136 0 0 1 16.9 3c1.087 0 2.13.425 2.899 1.182A4.01 4.01 0 0 1 21 7.037c0 1.068-.43 2.092-1.194 2.849L18.5 11.214l-5.8-5.71 1.287-1.31.012-.012Zm-2.717 2.763L6.186 12.13l2.175 2.141 5.063-5.218-2.141-2.108Zm-6.25 6.886-1.98 5.849a.992.992 0 0 0 .245 1.026 1.03 1.03 0 0 0 1.043.242L10.282 19l-5.25-5.168Zm6.954 4.01 5.096-5.186-2.218-2.183-5.063 5.218 2.185 2.15Z" clip-rule="evenodd"/>
