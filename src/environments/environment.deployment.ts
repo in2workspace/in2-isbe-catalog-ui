@@ -1,5 +1,7 @@
+// this file is the used when deploying (see Dockerfile);
+// its values will be overwriten by env variables (see env.js & env.template.js)
 export const environment = {
-    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/',
+    BASE_URL: (window as any)["env"]["BASE_URL"] || "",
     FOUNDATION_ID: 'VATES-G87936159',
     locale: 'es-ES',
     PRODUCT_CATALOG_MANAGEMENT_URL: 'productCatalogManagement/v4',
@@ -56,12 +58,12 @@ export const environment = {
     KNOWLEDGE_BASE_URL: "",
     KB_ONBOARDING_GUIDELINES_URL: "",
     KB_GUIDELNES_URL:"",
-    REGISTRATION_FORM_URL: "https://onboard.evidenceledger.eu/",
+    REGISTRATION_FORM_URL: (window as any)["env"]["REGISTRATION_FORM_URL"] || "",
     SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
     ISBE_TRUST_LINK: "",
     ISBE_ABOUT_LINK: 'https://redisbe.com/',
-    ISBE_REGISTER_LINK: 'https://onboard.evidenceledger.eu/',
+    ISBE_REGISTER_LINK: (window as any)["env"]["ISBE_REGISTER_LINK"] || "",
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',
     ISBE_YOUTUBE: 'https://www.youtube.com/@REDISBE',
@@ -71,8 +73,8 @@ export const environment = {
     MAX_FILE_SIZE:3145728,
     SCOPE: "openid eidas",
     RESPONSE_TYPE: 'code',
-    AUTHORITY: "https://certauth.evidenceledger.eu",
-    REDIRECT_URL: "https://isbecatalog.netlify.app/",
+    AUTHORITY: (window as any)["env"]["AUTHORITY"] || "",
+    REDIRECT_URL: (window as any)["env"]["REDIRECT_URL"] || "",
     POST_LOGIN_ROUTE: '/dashboard'
 
 };
