@@ -100,13 +100,15 @@
     </div>
 
     <div class="flex flex-row w-full md:justify-end">
-        <button data-cy="newOffering" type="button" (click)="goToCreate()"
-        class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center align-middle">
-            <p class="pl-2 pr-2">{{ 'OFFERINGS._add_new_offer' | translate }}</p>
-            <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-            </svg>
-        </button>
+        @if(offers.length > 0) {
+            <button data-cy="newOffering" type="button" (click)="goToCreate()"
+            class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center align-middle">
+                <p class="pl-2 pr-2">{{ 'OFFERINGS._add_new_offer' | translate }}</p>
+                <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                </svg>
+            </button>
+        }
     </div>
 
   </div>
@@ -196,8 +198,15 @@
                               <div>
                                 {{ 'OFFERINGS._no_offerings' | translate }}
                               </div>
-                            </div>
+                            </div>                            
                         </div>
+                        <button data-cy="newOffering" type="button" (click)="goToCreate()"
+                        class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center align-middle">
+                            <p class="pl-2 pr-2">{{ 'OFFERINGS._add_new_offer' | translate }}</p>
+                            <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                            </svg>
+                        </button>
                     }
                 </tbody>
             </table>

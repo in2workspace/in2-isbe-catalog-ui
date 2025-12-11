@@ -31,6 +31,9 @@
           </div>
         </div>
       </div>
+      <button data-cy="newOffering" type="button" (click)="onCreateProductSpecClick()" class=" mt-5 text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full py-1 px-4 inline-flex items-center align-middle">
+        <p class="text-sm">{{ 'OFFERINGS._add_new_prod_short' | translate }}</p>
+      </button> 
     }@else{
       <div class="relative overflow-x-auto rounded-lg w-full bg-white mt-8 border border-gray-0">
         <table class="px-5 py-3 w-full text-sm text-left text-black">
@@ -104,12 +107,11 @@
         }
       </div>
     }    
-    <button data-cy="newOffering" type="button" class=" mt-5 text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full py-1 px-4 inline-flex items-center align-middle">
-      <p class="text-sm">{{ 'OFFERINGS._add_new_offer' | translate }}</p>
-      <!-- <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-      </svg> -->
-    </button> 
+    @if(prodSpecs.length > 0) {  
+      <button data-cy="newOffering" type="button" (click)="onCreateProductSpecClick()" class=" mt-5 text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full py-1 px-4 inline-flex items-center align-middle">
+        <p class="text-sm">{{ 'OFFERINGS._add_new_prod' | translate }}</p>
+      </button> 
+    }
 
   }
 }

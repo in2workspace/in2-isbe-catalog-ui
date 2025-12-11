@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
+import {Component, forwardRef, Input, OnInit, OnDestroy, Output, EventEmitter, inject} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -11,6 +11,7 @@ import {PaginationService} from "../../../../services/pagination.service";
 import {environment} from "../../../../../environments/environment";
 import { FormChangeState } from "src/app/models/interfaces";
 import { Subscription } from "rxjs";
+import { EventMessageService } from 'src/app/services/event-message.service';
 
 interface ProductSpec {
   id: string;
@@ -45,6 +46,10 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
   @Input() seller: any;
   @Input() bundleChecked: boolean = false;
   @Output() formChange = new EventEmitter<FormChangeState>();
+  
+  private readonly eventMessage = inject(EventMessageService);  
+  private readonly prodSpecService = inject(ProductSpecServiceService);
+  private readonly paginationService = inject(PaginationService);
 
   selectedProdSpecInternal: ProductSpec | null = null;
   private originalValue: ProductSpec | null = null;
@@ -63,10 +68,6 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
   nextProdSpecs:any[]=[];
 
   protected readonly FormControl = FormControl;
-
-  constructor(private readonly prodSpecService: ProductSpecServiceService,
-              private readonly paginationService: PaginationService) {
-  }
 
   async ngOnInit() {
     this.isEditMode = this.formType === 'update';
@@ -94,8 +95,8 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
     } 
   }
 
-  //TODO: Implement navigation to create new product specification when ISBE menu is DONE
-  goTo(path:string) {
+  onCreateProductSpecClick() {
+    this.eventMessage.emitSellerCreateProductSpec(true);
   }
 
   async getSellerProdSpecs(next:boolean){
