@@ -1524,5 +1524,8 @@
   },
   "REMINDER": {
     "_message": "You have modified object information. You must reset the status to Active before saving"
+  },
+  "ABOUT": {
+    "_visit_isbe":"VISIT ISBE"
   }
 }

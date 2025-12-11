@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   searchEnabled = environment.SEARCH_ENABLED;
   domePublish: string = environment.ISBE_PUBLISH_LINK
   isbeRegister: string = environment.ISBE_REGISTER_LINK
+  isbeAbout: string = environment.ISBE_ABOUT_LINK;
   services: string[] = []
   publishers: string[] = []
   categories:any[]=[];
@@ -115,6 +116,10 @@ export class DashboardComponent implements OnInit {
 
   goTo(path:string) {
     this.router.navigate([path]);
+  }
+
+  openWindow(path:string) {
+    window.open(path);
   }
   
 }
