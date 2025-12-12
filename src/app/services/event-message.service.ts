@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
+import {BehaviorSubject, Subject} from "rxjs";
 import {Category, cartProduct, FormChangeState, PricePlanChangeState} from "../models/interfaces";
 import { LoginInfo } from 'src/app/models/interfaces';
+import { MenuTab } from '../shared/private-area-menu/private-area-menu.component';
 
 export interface EventMessage {
   type: 'AddedFilter' | 'RemovedFilter' | 'AddedCartItem' | 'RemovedCartItem' | 'FilterShown' | 'ToggleCartDrawer' | 'LoginProcess' | 'BillAccChanged' |
@@ -23,6 +24,7 @@ export class EventMessageService {
 
   // Tip: never expose the Subject itself.
   private eventMessageSubject = new Subject<EventMessage>();
+  private menuTabSubject = new BehaviorSubject<MenuTab | null>(null);
 
   /** Observable of all messages */
   messages$ = this.eventMessageSubject.asObservable();
@@ -209,6 +211,16 @@ export class EventMessageService {
 
   emitCreateUsageSpec(show:boolean){
     this.eventMessageSubject.next({type: 'CreateUsageSpec', value: show})
+  }
+
+  setMenuTab(tab: MenuTab) {
+    this.menuTabSubject.next(tab);
+  }
+
+  get currentMenuTab(): MenuTab | null {
+    const tab = this.menuTabSubject.getValue();
+    this.menuTabSubject.next(null);
+    return tab;
   }
   
 }

@@ -67,26 +67,28 @@ export class AdminComponent implements OnInit{
     this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
       if (!li) return;
       this.loggedAsUser = li.logged_as === li.id;
+      const tabFromService = this.eventMessage.currentMenuTab;
+      if (tabFromService) {
+        this.activeTab = tabFromService;
+      } else {
+        this.activeTab = 'categories';
+      }
     });
   }
 
   onMenuSelect(tab: MenuTab) {
+    this.activeTab = tab;
+    this.eventMessage.setMenuTab(tab);
     switch (tab) {
       case 'categories':
         this.goToCategories();
         break;
       case 'offers':
-        this.router.navigate(['/my-offerings']);
-        break;
       case 'productspec':
         this.router.navigate(['/my-offerings']);
         break;
       case 'general':
-        this.router.navigate(['/profile']);
-        break;
       case 'account':
-        this.router.navigate(['/profile']);
-        break;
       case 'org':
         this.router.navigate(['/profile']);
         break;
@@ -96,7 +98,6 @@ export class AdminComponent implements OnInit{
   }
 
   goToCategories() {
-    this.activeTab = 'categories';
     this.show_categories = true;
     this.show_create_categories = false;
     this.show_update_categories = false;
@@ -106,7 +107,6 @@ export class AdminComponent implements OnInit{
   }
 
   goToCreateCategories() {
-    this.activeTab = 'categories';
     this.show_categories = false;
     this.show_create_categories = true;
     this.show_update_categories = false;
@@ -116,7 +116,6 @@ export class AdminComponent implements OnInit{
   }
 
   goToUpdateCategories() {
-    this.activeTab = 'categories';
     this.show_categories = false;
     this.show_create_categories = false;
     this.show_update_categories = true;
@@ -126,7 +125,6 @@ export class AdminComponent implements OnInit{
   }
 
   goToVerification() {
-    this.activeTab = 'categories';
     this.show_categories = false;
     this.show_create_categories = false;
     this.show_update_categories = false;
@@ -136,7 +134,6 @@ export class AdminComponent implements OnInit{
   }
 
   goToRevenue() {
-    this.activeTab = 'categories';
     this.show_categories = false;
     this.show_create_categories = false;
     this.show_update_categories = false;

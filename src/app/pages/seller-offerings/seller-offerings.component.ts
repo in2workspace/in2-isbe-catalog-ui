@@ -53,10 +53,7 @@ export class SellerOfferingsComponent implements OnInit {
   feedback = false;
   userInfo: any;
   loggedAsUser = true;
-
-  activeSection: 'catalogs' | 'offers' | 'productspec' = 'catalogs';
-
-  activeTab: MenuTab = 'offers';
+  activeTab: MenuTab = 'productspec';
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
@@ -112,29 +109,33 @@ export class SellerOfferingsComponent implements OnInit {
       this.userInfo = li;
       this.loggedAsUser = li.logged_as === li.id;
     });
-
-    const saved = localStorage.getItem('activeSection') as 'catalogs' | 'offers' | 'productspec' | null;
-
-    if (this.IS_ISBE) {
-      this.show_catalogs = false;
-      if (saved === 'catalogs' || !saved) {
-        this.applySection('offers');
-        return;
-      }
-    }
-
-    this.applySection(saved ?? 'catalogs');
+    this.initSelection();    
   }
 
-  private applySection(section: 'catalogs' | 'offers' | 'productspec') {
-    this.activeSection = section;
-    localStorage.setItem('activeSection', section);
+  private initSelection(){
+    const tabFromService = this.eventMessage.currentMenuTab;
+    if (tabFromService) {
+      this.activeTab = tabFromService;
+    } else if (this.IS_ISBE) {
+      this.show_catalogs = false;
+      if (this.activeTab === 'catalogs' || !this.activeTab) {
+        this.applySection('productspec');
+        return;
+      }
+    } 
 
-    this.show_catalogs = section === 'catalogs' && !this.IS_ISBE;
-    this.show_offers = section === 'offers';
-    this.show_prod_specs = section === 'productspec';
+    this.applySection(this.activeTab);
 
-    this.activeTab = section === 'productspec' ? 'productspec' : 'offers';
+  }
+
+  private applySection(tab: MenuTab) {
+    localStorage.setItem('activeSection', tab);
+
+    this.show_catalogs = tab === 'catalogs' && !this.IS_ISBE;
+    this.show_offers = tab === 'offers';
+    this.show_prod_specs = tab === 'productspec';
+
+    this.activeTab = tab === 'productspec' ? 'productspec' : 'offers';
 
     this.show_create_prod_spec = false;
     this.show_create_offer = false;
@@ -147,22 +148,18 @@ export class SellerOfferingsComponent implements OnInit {
   }
 
   onMenuSelect(tab: MenuTab) {
+    this.activeTab = tab;
+    this.eventMessage.setMenuTab(tab);  
     switch (tab) {
       case 'offers':
-        this.goToOffers();
-        break;
       case 'productspec':
-        this.goToProdSpec();
+        this.initSelection();
         break;
       case 'categories':
         this.router.navigate(['/admin']);
         break;
       case 'general':
-        this.router.navigate(['/profile']);
-        break;
       case 'account':
-        this.router.navigate(['/profile']);
-        break;
       case 'org':
         this.router.navigate(['/profile']);
         break;

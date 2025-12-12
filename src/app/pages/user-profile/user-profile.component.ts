@@ -3,7 +3,7 @@ import {
   OnInit,
   ChangeDetectorRef,
 } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { components } from '../../models/product-catalog';
 type ProductOffering = components['schemas']['ProductOffering'];
 import { initFlowbite } from 'flowbite';
@@ -80,15 +80,25 @@ export class UserProfileComponent implements OnInit {
 
       this.seller = aux.id;
       this.loggedAsUser = aux.logged_as === aux.id;
-
-      this.activeTab = this.loggedAsUser ? 'general' : 'org';
-      this.applySelection(this.activeTab);
+      this.initSelection()
       initFlowbite();
     });
   }
 
+  private initSelection() {
+    const tabFromService = this.eventMessage.currentMenuTab;
+
+      if (tabFromService) {
+        this.activeTab = tabFromService;
+      } else {
+        this.activeTab = this.loggedAsUser ? 'account' : 'org';
+      }
+      this.applySelection(this.activeTab);
+  }
+
   onMenuSelect(tab: MenuTab) {
     this.activeTab = tab;
+    this.eventMessage.setMenuTab(tab);
     if (tab === 'account' || tab === 'org' || tab === 'billing' || tab === 'orders' || tab === 'revenue' || tab === 'general') {
       this.applySelection(tab);
       this.cdr.detectChanges();
@@ -97,8 +107,6 @@ export class UserProfileComponent implements OnInit {
 
     switch (tab) {
       case 'offers':
-        this.router.navigate(['/my-offerings']);
-        break;
       case 'productspec':
         this.router.navigate(['/my-offerings']);
         break;
@@ -109,7 +117,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   private applySelection(tab: MenuTab) {
-    this.show_profile = tab === 'account';
+    this.show_profile = tab === 'account' || tab === 'general';
     this.show_org_profile = tab === 'org';
     this.show_billing = tab === 'billing';
     this.show_orders = tab === 'orders';

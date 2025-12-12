@@ -5,7 +5,7 @@ import { Router, RouterModule } from '@angular/router';
 
 export type MenuTab =
   | 'account' | 'org' | 'billing' | 'orders' | 'revenue' | 'general'
-  | 'offers' | 'productspec' | 'categories';
+  | 'offers' | 'productspec' | 'categories' | 'catalogs';
 
 type Item = { id: MenuTab; labelKey: string; link?: string | any[]; exact?: boolean };
 
@@ -39,7 +39,7 @@ export class PrivateAreaMenuComponent {
   ];
 
   @Output() select = new EventEmitter<MenuTab>();
-  onSelect(tab: MenuTab) { this.select.emit(tab); }
+  onSelect(tab: MenuTab) { console.log(tab);this.select.emit(tab); }
 
   private readonly router = inject(Router);
   
