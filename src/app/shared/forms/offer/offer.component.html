@@ -160,7 +160,7 @@
     <button data-cy="offerFinish" (click)="submitForm()"
             [disabled]="!isOfferValid()"
             [ngClass]="!isOfferValid() ? 'opacity-50' : 'hover:bg-primary-50'"
-            class="px-3 md:px-4 py-2 flex items-center text-sm md:text-base font-medium text-white rounded-full bg-primary-100 leading-none">
+            class="px-3 md:px-4 py-2 flex items-center gap-3 text-sm md:text-base font-medium text-white rounded-full bg-primary-100 leading-none">
       {{ formType === 'create' ? 'Crear Oferta' : 'Actualizar Oferta' }}
       <svg width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4.13282 6.22384L10.6019 0.228354C10.7648 0.0783536 10.9552 0.00225145 11.1733 4.72682e-05C11.3912 -0.00215691 11.5835 0.0727267 11.7501 0.224699C11.9167 0.376555 12 0.552774 12 0.753354C12 0.953934 11.9167 1.13143 11.7501 1.28584L4.77703 7.74176C4.5934 7.91392 4.37923 8 4.13451 8C3.8898 8 3.6745 7.91392 3.48862 7.74176L0.240355 4.73132C0.07863 4.58445 -0.00148135 4.41009 2.07343e-05 4.20823C0.00139765 4.00637 0.0840751 3.82824 0.248053 3.67383C0.411905 3.51942 0.602044 3.44222 0.81847 3.44222C1.0349 3.44222 1.22641 3.51942 1.39302 3.67383L4.13282 6.22384Z" fill="white"/>

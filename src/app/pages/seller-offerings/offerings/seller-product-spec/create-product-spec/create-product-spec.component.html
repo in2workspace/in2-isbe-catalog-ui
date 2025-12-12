@@ -625,7 +625,7 @@
                         <h4 class="text-base font-semibold ">{{ 'CREATE_PROD_SPEC._add_prod_img_url' | translate }}</h4>
                     }
                     @if(showImgPreview){
-                        <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto m-4 shadow-lg">
+                        <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full mx-auto m-4 shadow-lg">
                             <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             <button (click)="removeImg()" class="z-10 absolute top-2 right-2 p-1 font-semibold text-white bg-red-500 rounded-3xl">
                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -940,7 +940,7 @@
 
                         @if(imgPreview!=''){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._profile_pic' | translate }}</label>
-                            <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm mx-auto m-4 shadow-lg">
+                            <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full mx-auto m-4 shadow-lg">
                                 <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             </div>
                         }
