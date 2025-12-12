@@ -151,11 +151,39 @@
                         </tr>
                         @if(cat.children.length>0){
                             @for(child of cat.children; track child){
-                                <tr>
-                                    <td colspan="4">
-                                    <categories-recursion-list class="w-full" [child]="child" [parent]="cat" [path]="cat.name"></categories-recursion-list>
-                                    </td>
-                                </tr>
+                                <tr class="px-5 py-3 border-b">
+                                  <td class="px-5 py-3 text-wrap break-all">
+                                      {{cat.name}} / <b>{{child.name}}</b>
+                                  </td>
+                                  <td class="px-5 py-3 hidden md:table-cell">
+                                      @if(child.lifecycleStatus == 'In design'){
+                                          <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                      } @else if(child.lifecycleStatus == 'Active'){
+                                          <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                      } @else if(child.lifecycleStatus == 'Launched') {
+                                          <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
+                                      } @else if(child.lifecycleStatus == 'Retired') {
+                                          <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._retired' | translate }}</div>
+                                      } @else if(child.lifecycleStatus == 'Obsolete') {
+                                          <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
+                                      }
+                                  </td>
+                                  <td class="px-5 py-3 hidden md:table-cell">
+                                      {{child.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}} 
+                                  </td> 
+                                  <td class="px-5 py-3">
+                                      <button type="button" (click)="goToUpdate(child)" class="bg-gray-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-1 text-center inline-flex items-center me-2">
+                                          <svg class="text-gray-50" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.91602 11.0827H3.65189L9.62318 5.11139L8.88731 4.37552L2.91602 10.3468V11.0827ZM2.56835 11.9577C2.41892 11.9577 2.2937 11.9071 2.19268 11.806C2.09157 11.705 2.04102 11.5798 2.04102 11.4303V10.4197C2.04102 10.2775 2.06833 10.1419 2.12297 10.013C2.17752 9.88408 2.25267 9.77174 2.34843 9.67597L9.73547 2.29229C9.82365 2.21218 9.92102 2.15029 10.0276 2.10664C10.1342 2.06289 10.246 2.04102 10.363 2.04102C10.48 2.04102 10.5932 2.06177 10.7028 2.10329C10.8125 2.1448 10.9095 2.21081 10.994 2.30133L11.7064 3.02262C11.7969 3.10711 11.8614 3.20433 11.8999 3.31429C11.9384 3.42424 11.9577 3.5342 11.9577 3.64416C11.9577 3.76151 11.9377 3.87346 11.8976 3.98002C11.8575 4.08667 11.7938 4.18409 11.7064 4.27227L4.32272 11.6503C4.22696 11.746 4.11462 11.8212 3.9857 11.8757C3.85679 11.9304 3.72121 11.9577 3.57897 11.9577H2.56835ZM9.24883 4.74987L8.88731 4.37552L9.62318 5.11139L9.24883 4.74987Z" fill="currentColor"/>
+                                          </svg>
+                                      </button>
+                                  </td>
+                              </tr>
+                              @if(child.children && child.children.length>0){
+                                  @for(innerchild of child.children; track innerchild){
+                                      <categories-recursion-list class="w-full" [child]="innerchild" [parent]="child" [path]="cat.name+' / '+child.name"></categories-recursion-list>
+                                  }
+                              }
                             }
                         }
                     } @empty {
