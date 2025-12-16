@@ -55,12 +55,12 @@ export const environment = {
     KNOWLEDGE_BASE_URL: "",
     KB_ONBOARDING_GUIDELINES_URL: "",
     KB_GUIDELNES_URL:"",
-    REGISTRATION_FORM_URL: "https://onboard.evidenceledger.eu/",
+    REGISTRATION_FORM_URL: "https://onboard-dev.redisbe.com/",
     SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
     ISBE_TRUST_LINK: "",
     ISBE_ABOUT_LINK: 'https://redisbe.com/',
-    ISBE_REGISTER_LINK: 'https://onboard.evidenceledger.eu/',
+    ISBE_REGISTER_LINK: 'https://onboard-dev.redisbe.com/',
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',
     ISBE_YOUTUBE: 'https://www.youtube.com/@REDISBE',
@@ -70,7 +70,7 @@ export const environment = {
     MAX_FILE_SIZE:3145728,
     SCOPE: "openid eidas",
     RESPONSE_TYPE: 'code',
-    AUTHORITY: "https://certauth.evidenceledger.eu",
+    AUTHORITY: "https://certauth-dev.redisbe.com",
     REDIRECT_URL: "https://isbecatalog.netlify.app/",
     POST_LOGIN_ROUTE: '/dashboard'
 };
