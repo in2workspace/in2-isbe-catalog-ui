@@ -10,7 +10,7 @@ export type MenuTab =
   | 'offers' | 'productspec' | 'categories' | 'catalogs';
 
 type Item = { id: MenuTab; labelKey: string; link?: string | any[]; exact?: boolean };
-
+export type MenuVariant = 'sidebar' | 'header';
 @Component({
   selector: 'private-area-menu',
   standalone: true,
@@ -20,6 +20,7 @@ type Item = { id: MenuTab; labelKey: string; link?: string | any[]; exact?: bool
 })
 export class PrivateAreaMenuComponent implements OnInit {
   
+  @Input() variant: MenuVariant = 'sidebar';
   @Input() active: MenuTab | null = null;
   @Output() select = new EventEmitter<MenuTab>();
   private readonly auth = inject(AuthService);

@@ -16,8 +16,12 @@
                                   [class.bg-primary-100]="isCurrentStep(step.id)"
                                   [class.text-white]="isCurrentStep(step.id)"
                                   [class.cursor-not-allowed]="isStepDisabled(step)"
-                                  [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)"
-                                  [ngClass]="{ 'bg-green border-green': isStepComplete(i), 'border-primary-100 bg-primary-100': !isStepComplete(i) }">
+                                  [class.opacity-50]="!isStepComplete(i) && !isCurrentStep(step.id)"
+                                  [ngClass]="{
+                                        'bg-green border-green text-white': isStepComplete(i),
+                                        'bg-primary-100 border-primary-100 text-white': isCurrentStep(step.id),
+                                        'bg-white border-primary-100 text-primary-100': !isStepComplete(i) && !isCurrentStep(step.id)
+                                    }">
                                 {{ i + 1 }}
                             </span>
                             @if(i < stepNavigation.length - 1){

@@ -32,9 +32,11 @@
                       [class.text-white]="currentStep === i"
                       [class.cursor-not-allowed]="!canNavigate(i)"
                       [class.opacity-50]="!canNavigate(i) && i > currentStep"
-                      [ngClass]="{ 'bg-green border-green': i < currentStep, 'border-primary-100 bg-primary-100': i >= currentStep }"
-                      >
-                      
+                      [ngClass]="{
+                        'bg-green border-green text-white': i < currentStep,
+                        'bg-primary-100 border-primary-100 text-white': i === currentStep,
+                        'bg-white border-gray-300 text-gray-500': i > currentStep
+                      }">                      
                   {{ i + 1 }}
                 </span>
                 @if(i < steps.length - 1){
@@ -46,6 +48,11 @@
               </div>
               <span 
                 class="text-sm whitespace-nowrap cursor-pointer" 
+                [ngClass]="{
+                  'text-primary-100': i === currentStep,
+                  'text-black': i < currentStep,
+                  'text-gray-400': i > currentStep
+                }"
                 [class.cursor-not-allowed]="!canNavigate(i)"
                 [class.opacity-50]="!canNavigate(i) && i > currentStep">
                 {{ step | translate }}</span>

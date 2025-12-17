@@ -108,7 +108,7 @@
                 </ul>
 
                 @if (is_logged) {
-                    <private-area-menu [active]="activeTab" (select)="onMenuSelect($event)"></private-area-menu>
+                    <private-area-menu [variant]="'header'" [active]="activeTab" (select)="onMenuSelect($event)"></private-area-menu>
                     <div class="flex flex-col rounded-2xl text-white bg-white/20 gap-3 px-4 py-5">
                         <button id="signOut" (click)="logout()" class="flex w-full justify-end text-base font-semibold text-green">
                             {{ 'HEADER._sign_out' | translate }} <fa-icon [icon]="faArrowRightFromBracket" class="ml-4"></fa-icon>
