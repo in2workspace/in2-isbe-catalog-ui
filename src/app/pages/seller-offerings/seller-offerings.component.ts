@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { EventMessageService } from '../../services/event-message.service';
 import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-modal.component';
 import { UpdateCatalogComponent } from './offerings/seller-catalogs/update-catalog/update-catalog.component';
@@ -12,12 +12,13 @@ import { SellerProductSpecComponent } from './offerings/seller-product-spec/sell
 import { SellerCatalogsComponent } from './offerings/seller-catalogs/seller-catalogs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
-import { take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 import { environment } from 'src/environments/environment';
 import { HeaderBannerComponent } from 'src/app/shared/header/header-banner/header-banner.component';
 import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-menu/private-area-menu.component';
 import { Router } from '@angular/router';
+import { MenuStateService } from 'src/app/services/menu-state.service';
 
 @Component({
   selector: 'app-seller-offerings',
@@ -32,7 +33,7 @@ import { Router } from '@angular/router';
     TranslateModule, ErrorMessageComponent, PrivateAreaMenuComponent
   ],
 })
-export class SellerOfferingsComponent implements OnInit {
+export class SellerOfferingsComponent implements OnInit, OnDestroy {
   // vistas
   show_catalogs = true;
   show_prod_specs = false;
@@ -52,16 +53,17 @@ export class SellerOfferingsComponent implements OnInit {
 
   feedback = false;
   userInfo: any;
-  loggedAsUser = true;
-  activeTab: MenuTab = 'productspec';
+  activeTab: MenuTab | null = null;
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
+  private readonly destroy$ = new Subject<void>();
 
   constructor(
     private readonly auth: AuthService,
     private readonly cdr: ChangeDetectorRef,
     private readonly eventMessage: EventMessageService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly menuStateService: MenuStateService
   ) {
     this.eventMessage.messages$.subscribe((ev) => {
       switch (ev.type) {
@@ -107,35 +109,34 @@ export class SellerOfferingsComponent implements OnInit {
     this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
       if (!li) return;
       this.userInfo = li;
-      this.loggedAsUser = li.logged_as === li.id;
     });
-    this.initSelection();    
+    this.menuStateService.tab$('offerings')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(tab => {
+        if (!tab) return;
+
+        if (tab === 'offers' || tab === 'productspec' || tab === 'catalogs') {
+          const effective = (this.IS_ISBE && tab === 'catalogs') ? 'productspec' : tab;
+          this.applySelection(effective);
+        }
+      });
+
+    const initial = this.menuStateService.getActiveTab('offerings') ?? 'productspec';
+    const effective = (this.IS_ISBE && initial === 'catalogs') ? 'productspec' : initial;
+    this.applySelection(effective); 
   }
 
-  private initSelection(){
-    const tabFromService = this.eventMessage.currentMenuTab;
-    if (tabFromService) {
-      this.activeTab = tabFromService;
-    } else if (this.IS_ISBE) {
-      this.show_catalogs = false;
-      if (this.activeTab === 'catalogs' || !this.activeTab) {
-        this.applySection('productspec');
-        return;
-      }
-    } 
-
-    this.applySection(this.activeTab);
-
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
-  private applySection(tab: MenuTab) {
-    localStorage.setItem('activeSection', tab);
+  private applySelection(tab: MenuTab) {
+    this.activeTab = tab;
 
     this.show_catalogs = tab === 'catalogs' && !this.IS_ISBE;
     this.show_offers = tab === 'offers';
     this.show_prod_specs = tab === 'productspec';
-
-    this.activeTab = tab === 'productspec' ? 'productspec' : 'offers';
 
     this.show_create_prod_spec = false;
     this.show_create_offer = false;
@@ -148,68 +149,68 @@ export class SellerOfferingsComponent implements OnInit {
   }
 
   onMenuSelect(tab: MenuTab) {
-    this.activeTab = tab;
-    this.eventMessage.setMenuTab(tab);  
-    switch (tab) {
-      case 'offers':
-      case 'productspec':
-        this.initSelection();
-        break;
-      case 'categories':
-        this.router.navigate(['/admin']);
-        break;
-      case 'general':
-      case 'account':
-      case 'org':
-        this.router.navigate(['/profile']);
-        break;
-      default:
-        break;
+    if (tab === 'offers' || tab === 'productspec' || tab === 'catalogs') {
+      const effective = (this.IS_ISBE && tab === 'catalogs') ? 'productspec' : tab;
+      this.menuStateService.setActiveTab('offerings', effective);
+      return;
+    }
+
+    if (tab === 'categories') {
+      this.menuStateService.setActiveTab('admin', 'categories');
+      this.router.navigate(['/admin']);
+      return;
+    }
+
+    if (tab === 'general' || tab === 'account' || tab === 'org') {
+      this.menuStateService.setActiveTab('profile', tab === 'general' ? 'account' : tab);
+      this.router.navigate(['/profile']);
+      return;
     }
   }
 
+
   goToCatalogs() {
-    this.applySection('catalogs');
+    this.applySelection('catalogs');
   }
   goToProdSpec() {
-    this.applySection('productspec');
+    this.applySelection('productspec');
   }
   goToOffers() {
-    this.applySection('offers');
+    this.applySelection('offers');
   }
 
   goToCreateProdSpec() {
-  this.applySection('productspec');
+  this.applySelection('productspec');
   this.show_prod_specs = false;
   this.show_create_prod_spec = true;
 }
 
 goToUpdateProdSpec() {
-  this.applySection('productspec');
+  this.applySelection('productspec');
   this.show_prod_specs = false;
   this.show_update_prod_spec = true;
 }
 
 goToCreateOffer() {
-  this.applySection('offers');
+  this.applySelection('offers');
   this.show_offers = false;  
   this.show_create_offer = true;
 }
 
 goToUpdateOffer() {
-  this.applySection('offers');
+  this.applySelection('offers');
   this.show_offers = false;  
   this.show_update_offer = true;
 }
 
 goToCreateCatalog() {
-  this.applySection('catalogs');
+  this.applySelection('catalogs');
   this.show_catalogs = false;
   this.show_create_catalog = true;
 }
 
 goToUpdateCatalog() {
-  this.applySection('catalogs');
+  this.applySelection('catalogs');
   this.show_catalogs = false;
   this.show_update_catalog = true;
 }

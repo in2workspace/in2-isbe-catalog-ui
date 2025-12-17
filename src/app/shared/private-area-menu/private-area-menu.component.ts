@@ -1,7 +1,9 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { AuthService } from 'src/app/guard/auth.service';
+import { take } from 'rxjs';
 
 export type MenuTab =
   | 'account' | 'org' | 'billing' | 'orders' | 'revenue' | 'general'
@@ -16,18 +18,31 @@ type Item = { id: MenuTab; labelKey: string; link?: string | any[]; exact?: bool
   templateUrl: './private-area-menu.component.html',
   styleUrls: ['./private-area-menu.component.css']
 })
-export class PrivateAreaMenuComponent {
-  @Input() loggedAsUser = true;
-
-  @Input() active: MenuTab;
+export class PrivateAreaMenuComponent implements OnInit {
   
-  profileItems: Item[] = this.loggedAsUser ? 
-    [
-      { id: 'account', labelKey: 'PROFILE._general' },
-      { id: 'org',     labelKey: 'PROFILE._organization' },
-    ]:[
-      { id: 'account', labelKey: 'PROFILE._general' },
-    ];
+  @Input() active: MenuTab | null = null;
+  @Output() select = new EventEmitter<MenuTab>();
+  private readonly auth = inject(AuthService);
+  loggedAsUser = true;
+
+  ngOnInit(): void {
+    this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
+      if (!li) return;
+      this.loggedAsUser = li.logged_as === li.id;
+    });
+  }
+  
+  get profileItems(): Item[] {
+    return !this.loggedAsUser
+      ? [
+          { id: 'account', labelKey: 'PROFILE._general' },
+          { id: 'org',     labelKey: 'PROFILE._organization' },
+        ]
+      : [
+          { id: 'account', labelKey: 'PROFILE._general' },
+        ];
+  }
+
 
   servicesItems: Item[] = [
     { id: 'offers',      labelKey: 'OFFERINGS._offers' },
@@ -38,10 +53,9 @@ export class PrivateAreaMenuComponent {
     { id: 'categories', labelKey: 'ADMIN._categories' },
   ];
 
-  @Output() select = new EventEmitter<MenuTab>();
-  onSelect(tab: MenuTab) { console.log(tab);this.select.emit(tab); }
-
-  private readonly router = inject(Router);
+  onSelect(tab: MenuTab) {
+    this.select.emit(tab);
+  }
   
   isGroupActive(group: 'profile' | 'services' | 'admin'): boolean {
     const check = (arr: Item[]) => arr.some(i => i.id === this.active);
@@ -53,7 +67,4 @@ export class PrivateAreaMenuComponent {
     return false;
   }
 
-  goTo(path: string) {
-    this.router.navigate([path]);
-  }
 }

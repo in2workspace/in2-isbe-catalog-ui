@@ -1,11 +1,5 @@
-import {
-  Component,
-  OnInit,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { components } from '../../models/product-catalog';
-type ProductOffering = components['schemas']['ProductOffering'];
+import { Component, OnInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { EventMessageService } from '../../services/event-message.service';
 import { ProviderRevenueSharingComponent } from './profile-sections/provider-revenue-sharing/provider-revenue-sharing.component';
@@ -17,8 +11,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { NgClass } from '@angular/common';
 import { AuthService } from 'src/app/guard/auth.service';
-import { take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-menu/private-area-menu.component';
+import { MenuStateService } from 'src/app/services/menu-state.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -36,7 +31,7 @@ import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-m
     PrivateAreaMenuComponent
   ],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
 
   show_profile = true;
   show_org_profile = false;
@@ -45,30 +40,44 @@ export class UserProfileComponent implements OnInit {
   show_revenue = false;
 
   loggedAsUser = true;
-  profile: any;
   seller: any = '';
   token = '';
   email = '';
 
-  activeTab: MenuTab = 'account';
+  activeTab: MenuTab | null = null;
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
+  private destroy$ = new Subject<void>();
 
   constructor(
     private readonly auth: AuthService,
     private readonly cdr: ChangeDetectorRef,
     private readonly eventMessage: EventMessageService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly menuStateService: MenuStateService
   ) {
-    this.eventMessage.messages$.subscribe((ev) => {
-      if (ev.type === 'ChangedSession') {
-        this.initPartyInfo();
-      }
+    this.eventMessage.messages$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
+      if (ev.type === 'ChangedSession') this.initPartyInfo();
     });
   }
 
   ngOnInit() {
+    this.menuStateService.tab$('profile')
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(tab => {
+        if (!tab) return;
+
+        if (tab === 'account' || tab === 'org' || tab === 'billing' || tab === 'orders' || tab === 'revenue' || tab === 'general') {
+          const effective: MenuTab = tab === 'general' ? 'account' : tab; 
+          this.applySelection(effective);
+        }
+      });
     this.initPartyInfo();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   initPartyInfo() {
@@ -77,47 +86,43 @@ export class UserProfileComponent implements OnInit {
 
       this.token = aux.token;
       this.email = aux.email;
-
       this.seller = aux.id;
+
       this.loggedAsUser = aux.logged_as === aux.id;
-      this.initSelection()
+      const fallbackTab: MenuTab = this.loggedAsUser ? 'account' : 'org';
+      const initial = this.menuStateService.getActiveTab('profile') ?? fallbackTab;
+    
+      this.applySelection(initial);
+
       initFlowbite();
+      this.cdr.detectChanges();
     });
   }
 
-  private initSelection() {
-    const tabFromService = this.eventMessage.currentMenuTab;
-
-      if (tabFromService) {
-        this.activeTab = tabFromService;
-      } else {
-        this.activeTab = this.loggedAsUser ? 'account' : 'org';
-      }
-      this.applySelection(this.activeTab);
-  }
-
   onMenuSelect(tab: MenuTab) {
-    this.activeTab = tab;
-    this.eventMessage.setMenuTab(tab);
     if (tab === 'account' || tab === 'org' || tab === 'billing' || tab === 'orders' || tab === 'revenue' || tab === 'general') {
-      this.applySelection(tab);
-      this.cdr.detectChanges();
+      const effective = tab === 'general' ? 'account' : tab;
+      this.menuStateService.setActiveTab('profile', effective);
       return;
     }
 
-    switch (tab) {
-      case 'offers':
-      case 'productspec':
-        this.router.navigate(['/my-offerings']);
-        break;
-      case 'categories':
-        this.router.navigate(['/admin']);
-        break;
+    if (tab === 'offers' || tab === 'productspec' || tab === 'catalogs') {
+      const effective = (this.IS_ISBE && tab === 'catalogs') ? 'productspec' : tab;
+      this.menuStateService.setActiveTab('offerings', effective);
+      this.router.navigate(['/my-offerings']);
+      return;
+    }
+
+    if (tab === 'categories') {
+      this.menuStateService.setActiveTab('admin', 'categories');
+      this.router.navigate(['/admin']);
+      return;
     }
   }
 
   private applySelection(tab: MenuTab) {
-    this.show_profile = tab === 'account' || tab === 'general';
+    this.activeTab = tab;
+    this.show_profile = tab === 'account';
     this.show_org_profile = tab === 'org';
     this.show_billing = tab === 'billing';
     this.show_orders = tab === 'orders';
