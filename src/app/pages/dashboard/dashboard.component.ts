@@ -91,7 +91,7 @@ export class DashboardComponent implements OnInit {
       })      
       this.router.navigate(['/dashboard'])
     }*/ 
-    this.api.getLaunchedCategories().then(data => {
+    this.api.getLaunchedCategories().then((data: any[]) => {
       for(const element of data){
         if(element.isRoot){
           this.categories.push(element)
