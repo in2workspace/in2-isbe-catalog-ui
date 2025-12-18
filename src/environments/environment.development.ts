@@ -69,7 +69,7 @@ export const environment = {
     MAX_FILE_SIZE:3145728,
     SCOPE: "openid eidas",
     RESPONSE_TYPE: 'code',
-    AUTHORITY: "https://certauth-dev.redisbe.com",
+    AUTHORITY: "https://idp.dev.cloud-w.envs.redisbe.com/auth/realms/dev-isbe",
     REDIRECT_URL: "https://isbecatalog.netlify.app/",
     POST_LOGIN_ROUTE: '/dashboard'
 };
