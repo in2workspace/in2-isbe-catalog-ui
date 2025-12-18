@@ -10,6 +10,7 @@ import {
   OnDestroy,
   inject,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   faCartShopping,
   faHandHoldingBox,
@@ -51,7 +52,7 @@ import { MenuStateService } from 'src/app/services/menu-state.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   standalone: true,
-  imports: [PrivateAreaMenuComponent, FaLayersComponent, FaIconComponent, FaLayersCounterComponent, CartDrawerComponent, TranslateModule]
+  imports: [CommonModule, PrivateAreaMenuComponent, FaLayersComponent, FaIconComponent, FaLayersCounterComponent, CartDrawerComponent, TranslateModule]
 })
 export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
