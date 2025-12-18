@@ -13,6 +13,7 @@ COPY angular.json /app/angular.json
 COPY tsconfig.json /app/tsconfig.json
 COPY tailwind.config.js /app/tailwind.config.js
 COPY tsconfig.app.json /app/tsconfig.app.json
+COPY tsconfig.spec.json /app/tsconfig.spec.json
 ARG configuration=production
 RUN npm run build -- --output-path=./dist/out --configuration "$configuration"
 
@@ -22,12 +23,11 @@ FROM nginxinc/nginx-unprivileged:stable-alpine
 COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
 #Use the root user
 USER root
-#TODO
-#RUN chmod -R 754 /usr/share/nginx/html/assets/env.js &&  \
-#    chown nginx:nginx /usr/share/nginx/html/assets/env.js
+RUN chmod -R 754 /usr/share/nginx/html/assets/env.js &&  \
+    chown nginx:nginx /usr/share/nginx/html/assets/env.js
 #Use the nginx user
 USER nginx
 #Copy default nginx configuration
 COPY /nginx-custom.conf /etc/nginx/conf.d/default.conf
 # When the container starts, replace the env.js with values from environment variables
-CMD ["/bin/sh",  "-c",  "exec nginx -g 'daemon off;'"]
+CMD ["/bin/sh",  "-c",  "envsubst < /usr/share/nginx/html/assets/env.template.js > /usr/share/nginx/html/assets/env.js && exec nginx -g 'daemon off;'"]
