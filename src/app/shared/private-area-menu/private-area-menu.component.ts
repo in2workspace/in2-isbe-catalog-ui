@@ -24,12 +24,16 @@ export class PrivateAreaMenuComponent implements OnInit {
   @Input() active: MenuTab | null = null;
   @Output() select = new EventEmitter<MenuTab>();
   private readonly auth = inject(AuthService);
+  roles: string[] = [];
+  isAdmin = false;
   loggedAsUser = true;
 
   ngOnInit(): void {
     this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
       if (!li) return;
       this.loggedAsUser = li.logged_as === li.id;
+      this.roles = (li.roles || []).map(r => r.name ?? r.id ?? r);
+      this.isAdmin = this.roles.includes('admin');
     });
   }
   
