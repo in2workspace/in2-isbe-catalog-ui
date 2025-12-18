@@ -282,12 +282,11 @@ textarea:-webkit-autofill::first-line {
 }
 
 .banner__background_gradient {
-  background: url("/assets/images/banner-background-gradient.png");
-  background-size: cover;
+  background-image: url("/assets/images/banner-background-gradient.png");
   background-color: #f9f3e7;
 }
 
 .green-footer-gradient {
-  background: url("/assets/images/green-footer-gradient.png");
+  background-image: url("/assets/images/green-footer-gradient.png");
   background-size: cover;
 }
