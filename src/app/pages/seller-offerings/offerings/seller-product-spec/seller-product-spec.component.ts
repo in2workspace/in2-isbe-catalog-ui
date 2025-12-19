@@ -7,7 +7,7 @@ import { PaginationService } from 'src/app/services/pagination.service';
 import { EventMessageService } from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
 import { TranslateModule } from '@ngx-translate/core';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { take } from 'rxjs';
@@ -18,7 +18,7 @@ import { AuthService } from 'src/app/guard/auth.service';
     templateUrl: './seller-product-spec.component.html',
     styleUrl: './seller-product-spec.component.css',
     standalone: true,
-    imports: [TranslateModule, DatePipe, FaIconComponent, ErrorMessageComponent]
+    imports: [CommonModule, TranslateModule, DatePipe, FaIconComponent, ErrorMessageComponent]
 })
 export class SellerProductSpecComponent implements OnInit{
   protected readonly faIdCard = faIdCard;

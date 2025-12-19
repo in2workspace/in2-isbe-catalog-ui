@@ -21,19 +21,18 @@
     </div>
   } @else {
     @if(prodSpecs.length==0){
-      <div class="flex justify-center w-full m-4">
-        <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50 " role="alert">
-          <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-            <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-          </svg>
-          <div>
-            {{ 'OFFERINGS._no_prod' | translate }}
+      <div class="flex flex-col items-center justify-center w-full px-4 py-16">
+          <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
+          <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
+            <div class="text-center">
+              {{ 'OFFERINGS._no_prod' | translate }}
+            </div>
           </div>
-        </div>
+          <button data-cy="newOffering" type="button" (click)="onCreateProductSpecClick()"
+          class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm px-2.5 py-1.5 text-center inline-flex items-center align-middle">
+              <p class="pl-2 pr-2">{{ 'OFFERINGS._add_new_prod_short' | translate }}</p>
+          </button>
       </div>
-      <button data-cy="newOffering" type="button" (click)="onCreateProductSpecClick()" class=" mt-5 text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full py-1 px-4 inline-flex items-center align-middle">
-        <p class="text-sm">{{ 'OFFERINGS._add_new_prod_short' | translate }}</p>
-      </button> 
     }@else{
       <div class="relative overflow-x-auto rounded-lg w-full bg-white mt-8 border border-gray-0">
         <table class="px-5 py-3 w-full text-sm text-left text-black">

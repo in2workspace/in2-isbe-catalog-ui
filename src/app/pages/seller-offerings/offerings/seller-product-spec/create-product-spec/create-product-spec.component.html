@@ -117,14 +117,12 @@
                             </div>
                         } @else {
                             @if(prodSpecs.length==0){
-                                <div class="flex justify-center w-full my-4">
-                                    <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
-                                        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                        </svg>
-                                        <div>
-                                            {{ 'OFFERINGS._no_prod' | translate }}
-                                        </div>
+                                <div class="flex flex-col items-center justify-center w-full px-4 py-16">
+                                    <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
+                                    <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
+                                      <div class="text-center">
+                                        {{ 'OFFERINGS._no_prod' | translate }}
+                                      </div>
                                     </div>
                                 </div>
                             }@else{
@@ -367,11 +365,12 @@
                 @if(showChars){
                     <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._chars' | translate }}</h2>
                     @if (prodChars.length === 0){
-                        <div class="flex justify-center w-full my-4">
-                          <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
-                            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <div class="flex flex-col items-center justify-center w-full px-4">
+                          <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
+                          <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100 " role="alert">
+                            <!-- <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                            </svg>
+                            </svg> -->
                             <span class="sr-only">Info</span>
                             <div>
                                 {{ 'CREATE_PROD_SPEC._no_chars' | translate }}
@@ -445,12 +444,12 @@
                         </div>
                     }
                     @if(showCreateChar==false){
-                        <div class="flex w-full justify-items-center justify-center">
+                        <div class="flex w-full items-center justify-center">
                             <button type="button" (click)="showCreateChar=!showCreateChar" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
                                 {{ 'CREATE_PROD_SPEC._new_char' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <!-- <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                </svg>
+                                </svg> -->
                             </button>
                         </div>
                     } @else {
@@ -476,7 +475,7 @@
                                 class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"></textarea>
                             </div>
                         </form>
-                        <div class="m-4">
+                        <div class="">
                             @if(creatingChars.length>0){
                                 <label for="values" class="font-semibold text-base ">Values</label>
                                 <div class="flex flex-col items-start pl-4  shadow-md sm:rounded-lg w-full bg-white    border border-gray-300 mb-2">
@@ -595,9 +594,9 @@
                     <div class="flex w-full justify-items-end justify-end ml-4 mt-4">
                         <button type="button" (click)="toggleAttach();charsDone=true;" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_PROD_SPEC._next' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                            <!-- <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg>
+                            </svg> -->
                         </button>
                     </div>
                 }
@@ -702,16 +701,13 @@
                 }
                 @if(showRelationships){
                     <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</h2>
-                    <div class="m-4">
+                    <div class="">
                         @if (prodRelationships.length === 0){
-                            <div class="flex justify-center w-full mb-4">
-                              <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
-                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                                </svg>
-                                <span class="sr-only">Info</span>
-                                <div>
-                                    {{ 'CREATE_PROD_SPEC._no_relatioships' | translate }}
+                            <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
+                              <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
+                              <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
+                                <div class="text-center">
+                                  {{ 'CREATE_PROD_SPEC._no_relatioships' | translate }}
                                 </div>
                               </div>
                             </div>
@@ -779,9 +775,9 @@
                             <div class="flex w-full justify-items-center justify-center">
                                 <button type="button" (click)="showCreateRel=!showCreateRel" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
                                     {{ 'CREATE_PROD_SPEC._add_relationship' | translate }}
-                                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <!-- <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                    </svg>
+                                    </svg> -->
                                 </button>
                             </div>
                         } @else {

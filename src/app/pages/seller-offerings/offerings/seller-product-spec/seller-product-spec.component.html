@@ -100,14 +100,14 @@
 
       <div class="flex flex-row w-full md:justify-end">
         @if (prodSpecs.length > 0) {
-            <button (click)="goToCreate()" type="button" class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center align-middle">
+            <button (click)="goToCreate()" type="button" class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm px-2.5 py-1.5 text-center inline-flex items-center align-middle">
                 <p class="hidden lg:block pl-2 pr-2">{{ 'OFFERINGS._add_new_prod' | translate }}</p>
                 <p class="block lg:hidden pl-2 pr-2">{{ 'OFFERINGS._add_new_prod_short' | translate }}</p>
                 <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                 </svg>
             </button>
-        }        
+        }
       </div>
     </div>
 
@@ -122,7 +122,7 @@
 } @else {
     <div class="bg-white overflow-x-auto py-4 pl-4 md:p-4 rounded-lg">
         <div class="relative overflow-hidden rounded-lg w-full bg-white border border-gray-0">
-            <table class="px-5 py-3 w-max md:w-full text-sm text-left rtl:text-right text-black rounded-lg">
+            <table class="px-5 py-3 text-sm text-left rtl:text-right text-black rounded-lg" [ngClass]="prodSpecs?.length ? 'w-max md:w-full' : 'w-full'">
                 <thead class="px-5 py-3 text-base bg-gray-0">
                     <tr>
                         <th scope="col" class="px-5 py-3">
@@ -188,22 +188,22 @@
                             </td>
                         </tr>
                     } @empty {
-                        <div class="flex justify-center w-full m-4">
-                            <div class="flex w-full items-center p-4 text-sm text-primary-100 rounded-lg bg-purple-50  " role="alert">
-                              <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-                              </svg>
-                              <div>
-                                {{ 'OFFERINGS._no_prod' | translate }}
+                      <tr class="w-full">
+                        <td colspan="5">
+                          <div class="flex flex-col items-center justify-center w-full px-4 py-16">
+                              <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
+                              <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
+                                <div class="text-center">
+                                  {{ 'OFFERINGS._no_prod' | translate }}
+                                </div>
                               </div>
-                            </div>
-                            <button (click)="goToCreate()" type="button" class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center align-middle">
-                                <p class="pl-2 pr-2">{{ 'OFFERINGS._add_first_prod' | translate }}</p>
-                                <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                </svg>
-                            </button>
-                        </div>
+                              <button data-cy="newOffering" type="button" (click)="goToCreate()"
+                              class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm px-2.5 py-1.5 text-center inline-flex items-center align-middle">
+                                  <p class="pl-2 pr-2">{{ 'OFFERINGS._add_first_prod' | translate }}</p>
+                              </button>
+                          </div>
+                        </td>
+                      </tr>
                     }
                 </tbody>
             </table>
