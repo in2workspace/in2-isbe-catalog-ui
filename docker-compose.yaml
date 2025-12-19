@@ -2,6 +2,6 @@ name: isbe-catalog-ui
 
 services:
   catalog-ui:
-    image: in2workspace/bae-frontend:v0.0.8
+    image: in2workspace/bae-frontend:v0.0.9
     container_name: isbe-catalog-ui
     restart: always
