@@ -69,10 +69,10 @@ export const environment = {
     BUNDLE_ENABLED: false,
     DFT_CATALOG_ID: '',
     MAX_FILE_SIZE:3145728,
-    SCOPE: "openid eidas",
+    SCOPE: "openid profile email",
     RESPONSE_TYPE: 'code',
-    AUTHORITY: "https://idp.dev.cloud-w.envs.redisbe.com/auth/realms/dev-isbe",
-    REDIRECT_URL: "https://isbecatalog.netlify.app/",
+    AUTHORITY: "https://idp.pre.cloud-w.envs.redisbe.com/auth/realms/pre-isbe",
+    REDIRECT_URL: "https://catalog.pre.cloud-w.envs.redisbe.com/",
     POST_LOGIN_ROUTE: '/dashboard'
 
 };

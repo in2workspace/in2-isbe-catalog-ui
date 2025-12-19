@@ -114,9 +114,9 @@ export class BillingAccountFormComponent implements OnInit {
       if (!li) return;
       this.seller = sellerId || '';
 
-      const activeId = orgId ?? li.logged_as ?? li.id;
+      const activeId = orgId ?? li.logged_as;
 
-      if (activeId && activeId !== li.id) {
+      if (activeId) {
         const org = (li.organizations || []).find(o => o.id === activeId);
         this.partyInfo = {
           id: this.seller,
