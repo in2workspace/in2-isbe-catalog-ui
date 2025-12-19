@@ -86,9 +86,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
       this.token = aux.token;
       this.email = aux.email;
-      this.seller = aux.id;
+      this.seller = aux.userId;
 
-      this.loggedAsUser = aux.logged_as === aux.id;
+      this.loggedAsUser = aux.logged_as === aux.userId;
       const fallbackTab: MenuTab = this.loggedAsUser ? 'account' : 'org';
       const initial = this.menuStateService.getActiveTab('profile') ?? fallbackTab;
     

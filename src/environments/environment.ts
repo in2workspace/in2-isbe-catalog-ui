@@ -56,7 +56,6 @@ export const environment = {
     KB_ONBOARDING_GUIDELINES_URL: "",
     KB_GUIDELNES_URL:"",
     REGISTRATION_FORM_URL: "https://onboard-dev.redisbe.com/",
-    REGISTRATION_FORM_URL: "https://onboard-dev.redisbe.com/",
     SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
     ISBE_TRUST_LINK: "",

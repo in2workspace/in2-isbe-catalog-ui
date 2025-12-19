@@ -31,7 +31,7 @@ export class PrivateAreaMenuComponent implements OnInit {
   ngOnInit(): void {
     this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
       if (!li) return;
-      this.loggedAsUser = li.logged_as === li.id;
+      this.loggedAsUser = li.logged_as === li.userId;
       this.roles = (li.roles || []).map(r => r.name ?? r.id ?? r);
       this.isAdmin = this.roles.includes('admin');
     });
