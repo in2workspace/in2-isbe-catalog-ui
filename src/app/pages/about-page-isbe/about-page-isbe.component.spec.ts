@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it } from '@jest/globals';
 
-import { ReminderMessageComponent } from './reminder-message.component';
+import { AboutPageIsbeComponent } from './about-page-isbe.component';
 import { TranslateModule } from '@ngx-translate/core';
 
-describe('ReminderMessageComponent', () => {
-  let component: ReminderMessageComponent;
-  let fixture: ComponentFixture<ReminderMessageComponent>;
+describe('AboutPageIsbeComponent', () => {
+  let component: AboutPageIsbeComponent;
+  let fixture: ComponentFixture<AboutPageIsbeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [ReminderMessageComponent, TranslateModule.forRoot()],
-})
+      imports: [AboutPageIsbeComponent,TranslateModule.forRoot()]
+    })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ReminderMessageComponent);
+    fixture = TestBed.createComponent(AboutPageIsbeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

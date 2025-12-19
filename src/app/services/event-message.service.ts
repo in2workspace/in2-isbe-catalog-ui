@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Subject} from "rxjs";
+import { Subject } from "rxjs";
 import {Category, cartProduct, FormChangeState, PricePlanChangeState} from "../models/interfaces";
 import { LoginInfo } from 'src/app/models/interfaces';
 
@@ -23,7 +23,7 @@ export class EventMessageService {
 
   // Tip: never expose the Subject itself.
   private eventMessageSubject = new Subject<EventMessage>();
-
+  
   /** Observable of all messages */
   messages$ = this.eventMessageSubject.asObservable();
 

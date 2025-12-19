@@ -534,7 +534,8 @@
         "_file_check": "You need to upload a file before proceeding.",
         "_self_attestation": "Self Attestation:",
         "_close_modal": "Close modal",
-        "_cancel": "Cancel",
+        "_cancel": "Cancel",       
+        "_aceptar": "Accept",
         "_upload": "Upload"
     },
     "UPDATE_PROD_SPEC":{
@@ -966,16 +967,17 @@
         "_actions": "Actions",
         "_load_more": "Load more",
         "_add_new_res": "Add new resource",
-        "_add_new_prod": "Add new product specification",
-        "_add_new_prod_short": "Add new product spec",
+        "_add_new_prod": "Create new product specification",
+        "_add_first_prod": "Create your first product specification",
+        "_add_new_prod_short": "Create new product spec",
         "_filter_type": "Filter by type",
         "_all": "All",
         "_simple": "Simple",
         "_bundle": "Bundle",
         "_type": "Type",
         "_prod_offer": "Product offer",
-        "_add_new_offer": "Add new product offer",
-        "_add_new_catalog": "Add new catalogue",
+        "_add_new_offer": "Create new product offer",
+        "_add_new_catalog": "Create new catalogue",
         "_filter_role": "Filter by role",
         "_seller": "Seller",
         "_owner": "Owner",
@@ -1523,5 +1525,8 @@
   },
   "REMINDER": {
     "_message": "You have modified object information. You must reset the status to Active before saving"
+  },
+  "ABOUT": {
+    "_visit_isbe":"VISIT ISBE"
   }
 }

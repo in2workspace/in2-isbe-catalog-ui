@@ -13,7 +13,6 @@ import {PricePlanDrawerComponent} from "./price-plan-drawer/price-plan-drawer.co
 import { v4 as uuidv4 } from 'uuid';
 import {pricePlanValidator, uniqueNameValidatorFactory} from "../../../../validators/validators";
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgClass } from "@angular/common";
 import { EventMessageService } from "src/app/services/event-message.service";
 import { FormChangeState, PricePlanChangeState } from "src/app/models/interfaces";
 import { Subscription, debounceTime, distinctUntilChanged, filter } from "rxjs";

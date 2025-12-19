@@ -33,7 +33,7 @@ export class SellerOfferComponent implements OnInit{
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
   loading: boolean = false;
   loading_more: boolean = false;
-  page_check:boolean = true;
+  page_check:boolean = false;
   filter:any=undefined;
   status:any[]=[];
   seller:any;

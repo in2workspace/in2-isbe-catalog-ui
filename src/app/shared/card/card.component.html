@@ -1,15 +1,12 @@
-<div class="flex flex-col w-full h-full bg-secondary-50 dark:bg-secondary-100 rounded-lg dark:border-secondary-100 border-secondary-50 border">
+<div class="flex flex-col gap-6 w-full h-full bg-white/50 backdrop-blur-md rounded-2xl p-6">
 
 
   <div (click)="toggleDetailsModal();$event.stopPropagation();" class="rounded overflow-hidden cursor-pointer">
-    <div class="relative h-48 flex justify-center items-center">
-      <div class="absolute inset-0 bg-cover bg-center opacity-75" [style.background-image]="'url(' + getProductImage() + ')'" style="filter: blur(20px);"></div>
-      <img class="h-5/6 w-5/6 object-contain z-10 dark:text-white" src="{{getProductImage()}}" alt="Product image">
-    </div>
+    <img class="w-20 aspect-square object-cover rounded-2xl z-10 text-white" src="{{getProductImage()}}" alt="Product image">
   </div>
 
-  <div class="flex-1 h-full bg-cover bg-right-bottom bg-opacity-25 rounded-lg" style="background-image: url(assets/logos/bg_2.png)">
-    <div class="flex-1 h-full px-5 py-5 bg-secondary-50/95 dark:bg-secondary-100/95 rounded-lg">
+  <div class="flex-1 h-full">
+    <div class="flex-1 h-full">
       <div class="overflow-y-hidden overflow-x-hidden">
       @if(!IS_ISBE){
         <a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2 mr-2"
@@ -25,20 +22,18 @@
             Professional+
         }
         </a>
-      }        
-      @for (cat of categories; track cat.id) {
-        <bae-badge class="mr-2" [category]=cat></bae-badge>
       }
-      @if(checkMoreCats){
-        <a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md text-secondary-50 bg-primary-100 dark:bg-secondary-50 dark:text-primary-100 mb-2 mr-2">
-          <fa-icon [icon]="faEllipsis" class="text-secondary-50 dark:text-primary-100"></fa-icon>
-        </a>
-      }
+
       </div>
-      <a (click)="toggleDetailsModal();$event.stopPropagation();" class="cursor-pointer">
-        <h5 class="text-xl font-semibold line-clamp-2 tracking-tight text-primary-100 dark:text-white text-wrap break-all">{{productOff?.name}}</h5>
-      </a>
-      <markdown class="min-h-19 h-19 line-clamp-2 text-gray-600 dark:text-gray-400" [data]="productOff?.description"></markdown>
+      <div class="flex flex-col gap-5">
+        <div class="flex flex-col">
+          <a (click)="toggleDetailsModal();$event.stopPropagation();" class="cursor-pointer">
+            <h5 class="text-xl font-semibold line-clamp-2 tracking-tight text-primary-100 text-wrap break-all">{{productOff?.name}}</h5>
+          </a>
+          <p class="text-base">Subtitle</p>
+        </div>
+        <markdown class="min-h-19 h-19 line-clamp-2 text-primary-100 text-base leading-tight" [data]="productOff?.description"></markdown>
+      </div>
       <!--<div class="flex w-full justify-between mt-2.5 mb-5 text-gray-500 font-mono">
         <div>V: {{productOff?.version || 'latest'}}</div>
         <div class="flex items-center">
@@ -54,35 +49,49 @@
           <svg class="w-4 h-4 text-yellow-300 mr-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
             <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
           </svg>
-          <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+          <svg class="w-4 h-4 text-gray-200 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
             <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
           </svg>
-          <span class="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-800 ml-3">5.0</span>
+          <span class="bg-purple-100 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded   ml-3">5.0</span>
         </div>
       </div>-->
 
-      <div class="flex sticky top-[100vh] items-center justify-center align-items-bottom rounded-lg mt-4">
+      <div class="flex sticky top-[100vh] items-center justify-start align-items-bottom rounded-lg mt-4">
 
-        <button (click)="toggleDetailsModal();$event.stopPropagation();"  type="button" class="flex items-center align-items-bottom text-white bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-100 dark:hover:bg-primary-50 dark:focus:ring-primary-100 mr-1">
-          <svg class="w-[18px] h-[18px] text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
+        <button (click)="toggleDetailsModal();$event.stopPropagation();"  type="button" class="flex items-center align-items-bottom text-base text-black font-semibold underline">
+          <!-- <svg class="w-[18px] h-[18px] text-white mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
             <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
               <path d="M10 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
               <path d="M10 13c4.97 0 9-2.686 9-6s-4.03-6-9-6-9 2.686-9 6 4.03 6 9 6Z"/>
             </g>
-          </svg>
+          </svg> -->
           {{ 'CARD._details' | translate }}
         </button>
         @if(check_logged && !IS_ISBE){
           <button id="add-to-cart" type="button" [disabled]="!PURCHASE_ENABLED || productAlreadyInCart"
                   (click)="openDrawer()"
                   [ngClass]="!PURCHASE_ENABLED || productAlreadyInCart ? 'opacity-50' : 'hover:bg-primary-50'"
-                  class="flex align-items-bottom text-white cursor-pointer bg-green-700 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                  class="flex align-items-bottom text-white cursor-pointer bg-green-700 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
             {{ 'CARD._add_cart' | translate }}
           </button>
         }
         </div>
     </div>
   </div>
+
+  <hr class="h-px border-black border-1">
+
+  <!-- TAGS -->
+   <ul class="flex gap-2.5 flex-wrap">
+    @for (cat of categories; track cat.id) {
+        <bae-badge [category]=cat></bae-badge>
+      }
+    @if(checkMoreCats){
+        <a class="w-fit py-1 px-3 rounded-md bg-black/5 text-black/60 font-semibold text-sm">
+          +1
+        </a>
+      }
+    </ul>
 </div>
 
 <!-- Drawer Reutilizable -->
@@ -98,23 +107,25 @@
 
 <!-- Main modal -->
 @if (showModal){
-  <app-product-details [productOff]="productOff" (closeModal)="showModal = false"></app-product-details>
+  <div class="overflow-x-hidden fixed inset-0 w-full h-screen z-[999]" [ngClass]="showModal ? 'backdrop-blur-sm bg-black/25': ''" >
+    <app-product-details [productOff]="productOff" (closeModal)="showModal = false" ></app-product-details>
+  </div>
 }
 
 
 <!-- ADD TO CART TOAST -->
 @if (toastVisibility) {
-  <div id="toast-add-cart" class="flex grid grid-flow-row mr-2 items-center w-auto max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 fixed top-1/2 right-0 z-50 justify-center" role="alert">
+  <div id="toast-add-cart" class="flex grid grid-flow-row mr-2 items-center w-auto max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow   fixed top-1/2 right-0 z-50 justify-center" role="alert">
     <div class="flex items-center justify-center">
-      <svg class="w-[18px] h-[18px] text-gray-800 dark:text-white mr-2 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+      <svg class="w-[18px] h-[18px] text-gray-800  mr-2 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"/>
       </svg>
       <div class="text-sm font-normal">
         {{ 'CARD._added_card' | translate }}.
       </div>
       <div class="flex items-center ms-auto space-x-2 rtl:space-x-reverse p-1.5">
-          <button type="button" (click)="deleteProduct(lastAddedProd)" class="px-3 py-2 text-xs font-medium text-center text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">{{ 'CARD._undo' | translate }}</button>
-          <button type="button" (click)="toastVisibility=false" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8 dark:text-gray-500 dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700" data-dismiss-target="#toast-add-cart" aria-label="Close">
+          <button type="button" (click)="deleteProduct(lastAddedProd)" class="px-3 py-2 text-xs font-medium text-center text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100      ">{{ 'CARD._undo' | translate }}</button>
+          <button type="button" (click)="toastVisibility=false" class="ms-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg focus:ring-2 focus:ring-gray-300 p-1.5 hover:bg-gray-100 inline-flex items-center justify-center h-8 w-8    " data-dismiss-target="#toast-add-cart" aria-label="Close">
           <span class="sr-only">{{ 'CARD._close_toast' | translate }}</span>
           <svg class="w-3 h-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
@@ -122,8 +133,8 @@
         </button>
       </div>
     </div>
-    <div class="flex w-full mt-2 rounded-full h-2.5 dark:bg-gray-700">
-      <div id="progress-bar" class="z-10 flex bg-green-600 h-2.5 rounded-full dark:bg-green-500 transition-width delay-200 duration-3000 ease-out" style="width: 0px;"></div>
+    <div class="flex w-full mt-2 rounded-full h-2.5 ">
+      <div id="progress-bar" class="z-10 flex bg-green-600 h-2.5 rounded-full  transition-width delay-200 duration-3000 ease-out" style="width: 0px;"></div>
     </div>
   </div>
 }

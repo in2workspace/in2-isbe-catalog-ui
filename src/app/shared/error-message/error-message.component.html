@@ -1,11 +1,19 @@
-<div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-red-900 dark:border-red-900 dark:text-white" role="alert">
-    <div class="flex items-center">
+<div id="alert-additional-content-2" class="flex flex-col items-center justify-center gap-8 py-10 px-5 text-primary-100 rounded-lg bg-white" role="alert">
+    <!-- <div class="flex items-center">
       <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
         <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
       </svg>
       <h3 class="text-lg font-medium">Error</h3>
-    </div>
+    </div> -->
     <div class="mt-2 mb-4 text-sm">
       {{message}}
+    </div>
+    <div class="flex items-center justify-center">
+      <button class="flex flex-row gap-2 px-4 py-2 rounded-full text-danger text-sm font-normal bg-danger/15">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11 1L6 6M6 6L1 11M6 6L11 11M6 6L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Cerrar
+      </button>
     </div>
 </div>

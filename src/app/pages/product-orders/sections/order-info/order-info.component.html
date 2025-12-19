@@ -1,26 +1,30 @@
-<div class="border-b border-gray-200 dark:border-gray-700 mb-2">
-    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+<div class="border-b border-gray-200  mb-2">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 ">
         <li class="me-2">
             <a (click)="onRoleChange('Customer')"
-                [ngClass]="role !== 'Customer' ? 'text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300' : 'text-purple-600 border-purple-600 active dark:text-purple-500 dark:border-purple-500'"
+                [ngClass]="role !== 'Customer' ? 'text-gray-400 group-hover:text-gray-500  ' : 'text-purple-600 border-purple-600 active  '"
                class="inline-flex cursor-pointer items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg group" aria-current="page">
-                <svg [ngClass]="role !== 'Customer' ? 'text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300' : 'text-purple-600 dark:text-purple-500'"
+                <svg [ngClass]="role !== 'Customer' ? 'text-gray-400 group-hover:text-gray-500  ' : 'text-purple-600 '"
                     class="w-4 h-4 me-2" aria-hidden="true"
                     fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 352l0-96 16 0 0 96-16 0zm-64 0l-88 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l120 0 80 0 376 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-344 0 0-191.1 28.6 47.5c9.1 15.1 28.8 20 43.9 10.9s20-28.8 10.9-43.9l-58.3-97c-17.4-28.9-48.6-46.6-82.3-46.6l-29.7 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 448zM464 64l0 242.7-25.4-25.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l80-80c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L528 306.7 528 64c0-17.7-14.3-32-32-32s-32 14.3-32 32z"/></svg>
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                  <path d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 352l0-96 16 0 0 96-16 0zm-64 0l-88 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l120 0 80 0 376 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-344 0 0-191.1 28.6 47.5c9.1 15.1 28.8 20 43.9 10.9s20-28.8 10.9-43.9l-58.3-97c-17.4-28.9-48.6-46.6-82.3-46.6l-29.7 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 448zM464 64l0 242.7-25.4-25.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l80 80c12.5 12.5 32.8 12.5 45.3 0l80-80c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L528 306.7 528 64c0-17.7-14.3-32-32-32s-32 14.3-32 32z"/>
+                </svg>
                   {{ 'PRODUCT_ORDERS._as_customer' | translate }}
             </a>
         </li>
         @if(isSeller){
             <li class="me-2">
                 <a (click)="onRoleChange('Seller')"
-                    [ngClass]="{'text-purple-600 border-purple-600 active dark:text-purple-500 dark:border-purple-500 group': role == 'Seller'}"
-                    class="inline-flex cursor-pointer items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 group">
+                    [ngClass]="{'text-purple-600 border-purple-600 active   group': role == 'Seller'}"
+                    class="inline-flex cursor-pointer items-center justify-center p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300  group">
                     <svg
-                        [ngClass]="role !== 'Seller' ? 'text-gray-400 group-hover:text-gray-500 dark:text-gray-500 dark:group-hover:text-gray-300' : 'text-purple-600 dark:text-purple-500'"
+                        [ngClass]="role !== 'Seller' ? 'text-gray-400 group-hover:text-gray-500  ' : 'text-purple-600 '"
                         class="w-4 h-4 me-2" fill="currentColor"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 352l0-96 16 0 0 96-16 0zm-64 0l-88 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l120 0 80 0 376 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-344 0 0-191.1 28.6 47.5c9.1 15.1 28.8 20 43.9 10.9s20-28.8 10.9-43.9l-58.3-97c-17.4-28.9-48.6-46.6-82.3-46.6l-29.7 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 448zM598.6 121.4l-80-80c-12.5-12.5-32.8-12.5-45.3 0l-80 80c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L464 141.3 464 384c0 17.7 14.3 32 32 32s32-14.3 32-32l0-242.7 25.4 25.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3z"/></svg>
-                      {{ 'PRODUCT_ORDERS._as_provider' | translate }}
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                      <path d="M192 96a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm-8 352l0-96 16 0 0 96-16 0zm-64 0l-88 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l120 0 80 0 376 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-344 0 0-191.1 28.6 47.5c9.1 15.1 28.8 20 43.9 10.9s20-28.8 10.9-43.9l-58.3-97c-17.4-28.9-48.6-46.6-82.3-46.6l-29.7 0c-33.7 0-64.9 17.7-82.3 46.6l-58.3 97c-9.1 15.1-4.2 34.8 10.9 43.9s34.8 4.2 43.9-10.9L120 256.9 120 448zM598.6 121.4l-80-80c-12.5-12.5-32.8-12.5-45.3 0l-80 80c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L464 141.3 464 384c0 17.7 14.3 32 32 32s32-14.3 32-32l0-242.7 25.4 25.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3z"/>
+                    </svg>
+                    {{ 'PRODUCT_ORDERS._as_provider' | translate }}
                 </a>
             </li>
         }
@@ -33,10 +37,10 @@
         <div class="p-8 w-full">
             <div class="flex flex-row mb-1">
                 <fa-icon [icon]="faSwatchbook" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
-                <h2 class="text-base dark:text-white font-bold">{{ 'PRODUCT_ORDERS._filter_state' | translate }}</h2>
+                <h2 class="text-base  font-bold">{{ 'PRODUCT_ORDERS._filter_state' | translate }}</h2>
             </div>
             <button id="dropdownStateButton" data-dropdown-toggle="dropdown"
-                    class="text-black border border-primary-100sa dark:text-white w-full justify-between bg-white dark:bg-secondary-200 hover:bg-gray-100 dark:hover:bg-secondary-300 focus:ring-2 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
+                    class="text-black border border-primary-100sa  w-full justify-between bg-white  hover:bg-gray-100  focus:ring-2 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center"
                     type="button">
                 {{ 'PRODUCT_ORDERS._filter_state' | translate }}
                 <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -45,69 +49,69 @@
                 </svg>
             </button>
 
-            <div id="dropdown" class="z-20 hidden w-fit md:w-1/5 p-3 bg-white rounded-lg border dark:bg-secondary-200">
-                <h6 class="mb-3 text-sm font-bold text-gray-900 dark:text-white">
+            <div id="dropdown" class="z-20 hidden w-fit md:w-1/5 p-3 bg-white rounded-lg border ">
+                <h6 class="mb-3 text-sm font-bold text-gray-900 ">
                     {{ 'PRODUCT_ORDERS._status' | translate }}
                 </h6>
                 <ul class="space-y-2 text-sm" aria-labelledby="dropdownStateButton">
                     <li class="flex items-center">
                         <input id="acknowledged" type="checkbox" value="" (change)="onStateFilterChange('acknowledged')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
 
-                        <label for="acknowledged" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <label for="acknowledged" class="ml-2 text-sm font-medium text-gray-900 ">
                             {{ 'PRODUCT_ORDERS._acknowledged' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
                         <input id="inProgress" type="checkbox" value="" (change)="onStateFilterChange('inProgress')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
 
-                        <label for="inProgress" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <label for="inProgress" class="ml-2 text-sm font-medium text-gray-900 ">
                             {{ 'PRODUCT_ORDERS._in_progress' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
                         <input id="completed" type="checkbox" value=""  (change)="onStateFilterChange('completed')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
 
-                        <label for="completed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <label for="completed" class="ml-2 text-sm font-medium text-gray-900 ">
                             {{ 'PRODUCT_ORDERS._completed' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
                         <input id="failed" type="checkbox" value="" (change)="onStateFilterChange('failed')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
 
-                        <label for="failed" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <label for="failed" class="ml-2 text-sm font-medium text-gray-900 ">
                             {{ 'PRODUCT_ORDERS._failed' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
                         <input id="pending" type="checkbox" value=""  (change)="onStateFilterChange('pending')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
 
-                        <label for="pending" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <label for="pending" class="ml-2 text-sm font-medium text-gray-900 ">
                             {{ 'PRODUCT_ORDERS._pending' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
                         <input id="cancelled" type="checkbox" value="" (change)="onStateFilterChange('cancelled')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
 
-                        <label for="cancelled" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                        <label for="cancelled" class="ml-2 text-sm font-medium text-gray-900 ">
                             {{ 'PRODUCT_ORDERS._cancelled' | translate }}
                         </label>
                     </li>
                     <li class="flex items-center">
                       <input id="unchecked" type="checkbox" value="" (change)="onStateFilterChange('unchecked')"
-                      class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 dark:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500" />
+                      class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
 
-                      <label for="unchecked" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-100">
+                      <label for="unchecked" class="ml-2 text-sm font-medium text-gray-900 ">
                           {{ 'PRODUCT_ORDERS._unchecked' | translate }}
                       </label>
                   </li>
@@ -121,7 +125,7 @@
 
         @if (loading && !loading_more) {
             <div role="status" class="w-3/4 md:w-4/5 h-full flex justify-center align-middle">
-              <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin  fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                   <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
               </svg>
@@ -129,59 +133,59 @@
             </div>
         } @else {
                 <div class="">
-                    <!-- <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 dark:text-white m-4">{{ 'PROFILE._order_list' | translate }}</h2>
-                    <hr class="h-px mr-4 ml-4 bg-primary-100 dark:bg-white border-0">-->
-                        <div class="m-4 relative overflow-x-auto border border-primary-100 dark:border-secondary-50 sm:rounded-lg">
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200">
-                                <thead class="text-xs text-gray-700 uppercase bg-secondary-50 dark:bg-primary-50 dark:text-secondary-100">
+                    <!-- <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._order_list' | translate }}</h2>
+                    <hr class="h-px mr-4 ml-4 bg-primary-100/70 border-0">-->
+                        <div class="m-4 relative overflow-x-auto border border-primary-100  sm:rounded-lg">
+                            <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-gray-500">
+                                <thead class="px-5 py-3 text-xs text-gray-700 uppercase bg-secondary-50">
                                     <tr>
-                                        <th scope="col" class="hidden md:table-cell px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 hidden md:table-cell text-center align-middle">
                                             {{ 'PRODUCT_INVENTORY._order_id' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 text-center align-middle">
                                             {{ 'PRODUCT_INVENTORY._status' | translate }}
                                         </th>
-                                        <th scope="col" class="hidden md:table-cell px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 hidden md:table-cell text-center align-middle">
                                             {{ 'PRODUCT_INVENTORY._bill' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 text-center align-middle">
                                             {{ 'PRODUCT_ORDERS._date' | translate }}
                                         </th>
-                                        <th scope="col" class="text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 text-center align-middle">
                                             {{ 'PRODUCT_ORDERS._actions' | translate }}
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @for (order of orders; track order.id; let idx = $index) {
-                                        <tr class="border-b bg-gray-100 hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
-                                            <td class="hidden md:table-cell px-6 py-4 text-center align-middle">
+                                        <tr class="px-5 py-3 border-b bg-gray-100 hover:bg-gray-200">
+                                            <td class="px-5 py-3 hidden md:table-cell text-center align-middle">
                                               <span title="{{order.id}}">...{{order.id.slice(-6)}}</span>
                                             </td>
-                                            <td class="px-6 py-4 text-center align-middle">
+                                            <td class="px-5 py-3 text-center align-middle">
                                                 @if(order.state == 'inProgress'){
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{order.state}}</span>
+                                                    <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{order.state}}</span>
                                                 } @else if(order.state ===  'completed') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{order.state}}</span>
+                                                    <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500">{{order.state}}</span>
                                                 } @else if(order.state === 'failed') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{order.state}}</span>
+                                                    <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{order.state}}</span>
                                                 } @else if(order.state === 'pending') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{order.state}}</span>
+                                                    <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{order.state}}</span>
                                                 }@else if(order.state === 'acknowledged'){
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{order.state}}</span>
+                                                    <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{order.state}}</span>
                                                 }@else if(order.state === 'cancelled' || order.state === 'cancelled') {
-                                                    <span class="bg-purple-100 dark:bg-secondary-300 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{order.state}}</span>
+                                                    <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{order.state}}</span>
                                                 } @else {
-                                                  <span class="bg-amber-500 dark:bg-amber-900 text-amber-900 dark:text-amber-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-amber-950">Unchecked</span>
+                                                  <span class="bg-amber-500  text-amber-900  text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-amber-950">Unchecked</span>
                                                 }
                                             </td>
-                                            <td class="hidden md:table-cell px-6 py-4 text-center align-middle">
+                                            <td class="px-5 py-3 hidden md:table-cell text-center align-middle">
                                                 {{order.billingAccount.name}}
                                             </td>
-                                            <td class="px-6 py-4 text-center align-middle">
+                                            <td class="px-5 py-3 text-center align-middle">
                                                 {{order?.orderDate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                             </td>
-                                            <td class="px-6 py-4 text-center align-middle">
+                                            <td class="px-5 py-3 text-center align-middle">
                                                 <button (click)="toggleShowDetails(order);$event.stopPropagation();" type="button" class="text-white bg-primary-100 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-2.5 text-center inline-flex items-center me-2">
                                                     <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 14">
                                                         <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -210,7 +214,7 @@
                             </table>
                             @if(orders.length == 0){
                                 <div class="text-center items-center w-full col-span-2">
-                                    <span class="text-gray-900 dark:text-primary-50 text-sm text-center w-full font-medium">{{ 'PROFILE._no_orders' | translate }}</span>
+                                    <span class="text-gray-900  text-sm text-center w-full font-medium">{{ 'PROFILE._no_orders' | translate }}</span>
                                 </div>
                             }
                         </div>
@@ -218,7 +222,7 @@
                     @if (!loading_more) {
                         @if (page_check) {
                         <div class="flex pb-6 justify-center align-middle">
-                            <button (click)="next()" class="flex cursor-pointer shadow-lg items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 dark:text-white bg-white dark:bg-primary-100 dark:hover:bg-secondary-100 border border-gray-300 dark:border-secondary-200 rounded-lg hover:bg-gray-200">
+                            <button (click)="next()" class="flex cursor-pointer shadow-lg items-center justify-center px-3 h-8 text-sm font-medium text-gray-500  bg-white   border border-gray-300  rounded-lg hover:bg-gray-200">
                             {{ 'CREATE_PROD_SPEC._load_more' | translate }}
                             <svg class="w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -228,7 +232,7 @@
                         }
                     } @else {
                         <div role="status" class="w-full h-full flex justify-center align-middle">
-                        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin dark:text-gray-600 fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg aria-hidden="true" class="w-12 h-12 text-gray-200 animate-spin  fill-purple-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
                             <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
                         </svg>
@@ -242,11 +246,11 @@
         <!-- ORDER DETAILS modal -->
         @if (showOrderDetails){
             <div id="order-details-modal" [ngClass]="showOrderDetails ? 'backdrop-blur-sm': ''" tabindex="-1" aria-hidden="true" class="flex justify-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full shadow-2xl">
-                <div class="w-full md:w-3/4 lg:w-1/2 relative bg-secondary-50 dark:bg-secondary-100 border border-secondary-50 dark:border-gray-800 rounded-lg shadow bg-cover bg-right-bottom" (click)="$event.stopPropagation();">
+                <div class="w-full md:w-3/4 lg:w-1/2 relative bg-white/60 rounded-lg shadow bg-cover bg-right-bottom" (click)="$event.stopPropagation();">
                     <!-- Modal header -->
-                    <div class="flex items-center justify-between p-2 rounded-t dark:border-gray-600 shadow-lg">
-                        <h2 class="md:text-3xl lg:text-4xl font-bold text-primary-100 ml-4 dark:text-white m-4">{{ 'PRODUCT_ORDERS._order_details' | translate }}</h2>
-                        <button (click)="showOrderDetails=false;" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                    <div class="flex items-center justify-between p-2 rounded-t  shadow-lg">
+                        <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PRODUCT_ORDERS._order_details' | translate }}</h2>
+                        <button (click)="showOrderDetails=false;" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center  ">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
                             </svg>
@@ -257,67 +261,67 @@
                     <div class="w-full h-full">
                         <div class="p-4 relative overflow-x-auto rounded-lg">
                             <div class="flex flex-row gap-2 pb-2 text-gray-600">
-                                <p class="w-fit text-base font-bold shrink-0 dark:text-white">
+                                <p class="w-fit text-base font-bold shrink-0 ">
                                     {{ 'PRODUCT_INVENTORY._order_id' | translate }}
                                 </p>
-                                <h3 class="text-base dark:text-gray-200">
+                                <h3 class="text-base ">
                                     {{orderToShow.id}}
                                 </h3>
                             </div>
                             <div class="flex flex-row gap-2 pb-2 text-gray-600">
-                                <p class="w-fit text-base font-bold shrink-0 dark:text-white">
+                                <p class="w-fit text-base font-bold shrink-0 ">
                                     {{ 'PRODUCT_INVENTORY._state' | translate }}
                                 </p>
                                 @if(orderToShow.state === 'inProgress'){
-                                    <span class="bg-purple-100 dark:bg-secondary-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400 w-fit">{{orderToShow.state}}</span>
+                                    <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400 w-fit">{{orderToShow.state}}</span>
                                 } @else if(orderToShow.state ===  'completed') {
-                                    <span class="bg-purple-100 dark:bg-secondary-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500 w-fit">{{orderToShow.state}}</span>
+                                    <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500 w-fit">{{orderToShow.state}}</span>
                                 } @else if(orderToShow.state === 'failed') {
-                                    <span class="bg-purple-100 dark:bg-secondary-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{orderToShow.state}}</span>
+                                    <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{orderToShow.state}}</span>
                                 } @else if(orderToShow.state === 'pending') {
-                                    <span class="bg-purple-100 dark:bg-secondary-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{orderToShow.state}}</span>
+                                    <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{orderToShow.state}}</span>
                                 }@else if(orderToShow.state === 'acknowledged'){
-                                    <span class="bg-purple-100 dark:bg-secondary-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{orderToShow.state}}</span>
+                                    <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{orderToShow.state}}</span>
                                 }@else if(orderToShow.state === 'cancelled' || orderToShow.state === 'cancelled') {
-                                    <span class="bg-purple-100 dark:bg-secondary-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{orderToShow.state}}</span>
+                                    <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{orderToShow.state}}</span>
                                 } @else {
-                                  <span class="bg-amber-500 dark:bg-amber-900 text-amber-900 dark:text-amber-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-amber-950">Unchecked</span>
+                                  <span class="bg-amber-500  text-amber-900  text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-amber-950">Unchecked</span>
                                 }
                             </div>
                             <div class="flex flex-row gap-2 pb-2 text-gray-600">
-                              <p class="w-fit text-base font-bold shrink-0 dark:text-white">
+                              <p class="w-fit text-base font-bold shrink-0 ">
                                   Date
                               </p>
-                              <h3 class="text-base dark:text-gray-200">
+                              <h3 class="text-base ">
                                   {{orderToShow?.orderDate | date:'EEEE, dd/MM/yy, HH:mm'}}
                               </h3>
                             </div>
                             <div class="flex flex-row gap-2 text-gray-600">
-                              <p class="w-fit text-base font-bold shrink-0 dark:text-white">
+                              <p class="w-fit text-base font-bold shrink-0 ">
                                   {{ 'PRODUCT_ORDERS._customer_info' | translate }}
                               </p>
                             </div>
                             <div class="flex flex-row gap-2 pb-2 pt-2 ml-2 text-gray-600">
-                              <p class="w-fit text-base font-bold shrink-0 dark:text-white">
+                              <p class="w-fit text-base font-bold shrink-0 ">
                                   {{ 'PRODUCT_ORDERS._name' | translate }}
                               </p>
-                              <h3 class="text-base dark:text-gray-200">
+                              <h3 class="text-base ">
                                 {{ customerName$ | async }}
                               </h3>
                           </div>
                             <div class="flex flex-row gap-2 pb-2 ml-2 text-gray-600">
-                                <p class="w-fit text-base font-bold shrink-0 dark:text-white">
+                                <p class="w-fit text-base font-bold shrink-0 ">
                                     {{ 'PRODUCT_ORDERS._billing_address' | translate }}
                                 </p>
-                                <h3 class="text-base dark:text-gray-200">
+                                <h3 class="text-base ">
                                     {{orderToShow.billingAccount.contact[0].contactMedium[1].characteristic.city}}, {{orderToShow.billingAccount.contact[0].contactMedium[1].characteristic.street1}}, {{orderToShow.billingAccount.contact[0].contactMedium[1].characteristic.country}} ({{orderToShow.billingAccount.name}})
                                 </h3>
                             </div>
                             <div class="flex flex-row gap-2 pb-2 ml-2 text-gray-600">
-                                <p class="w-fit text-base font-bold shrink-0 dark:text-white">
+                                <p class="w-fit text-base font-bold shrink-0 ">
                                     {{ 'PRODUCT_ORDERS._email' | translate }}
                                 </p>
-                                <h3 class="text-base dark:text-gray-200">
+                                <h3 class="text-base ">
                                     {{orderToShow.billingAccount.contact[0].contactMedium[0].characteristic.emailAddress}}
                                 </h3>
                             </div>
@@ -326,46 +330,46 @@
                                   {{ 'PRODUCT_ORDERS._show_customer_details' | translate }}
                               </a>
                             </div>
-                            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-200 rounded-lg border border-1 border-secondary-50 dark:border-gray-800">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-secondary-200 dark:text-white">
+                            <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-gray-500 rounded-lg border border-1 border-secondary-50">
+                                <thead class="px-5 py-3 text-xs text-gray-700 uppercase bg-gray-100">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 text-center align-middle">
                                             {{ 'PRODUCT_ORDERS._img' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 text-center align-middle">
                                           {{ 'PRODUCT_ORDERS._name' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 text-center align-middle">
                                           {{ 'PRODUCT_ORDERS._price_plan' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 text-center align-middle">
                                           {{ 'PRODUCT_ORDERS._state' | translate }}
                                         </th>
-                                        <th scope="col" class="px-6 py-3 text-center align-middle">
+                                        <th scope="col" class="px-5 py-3 text-center align-middle">
                                           {{ 'PRODUCT_ORDERS._actions' | translate }}
                                         </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @for (item of orderToShow.productOrderItems; track item.id; let idx = $index) {
-                                        <tr class="border-b hover:bg-gray-200 dark:bg-secondary-300 dark:border-gray-700 dark:hover:bg-secondary-200">
-                                            <td class="px-6 py-4 text-center align-middle flex justify-center items-center">
-                                                <img class="w-16 object-contain z-10 dark:text-white" src="{{getProductImage(item)}}" alt="Product image">
+                                        <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                            <td class="px-5 py-3 text-center align-middle flex justify-center items-center">
+                                                <img class="w-16 object-contain z-10 " src="{{getProductImage(item)}}" alt="Product image">
                                             </td>
-                                            <td class="px-6 py-4 text-center align-middle">
+                                            <td class="px-5 py-3 text-center align-middle">
                                                 {{item.name}}
                                             </td>
                                             @if(item.productOfferingPrice){
                                                 @if(item.productOfferingPrice.priceType == 'custom'){
-                                                    <td class="px-6 py-4 text-center align-middle">
+                                                    <td class="px-5 py-3 text-center align-middle">
                                                       {{item.productOfferingPrice.name ?? 'Custom'}}
                                                     </td>
                                                 } @else {
-                                                    <td class="px-6 py-4 text-center align-middle">
+                                                    <td class="px-5 py-3 text-center align-middle">
                                                         @if(item?.productOfferingPrice?.bundledPopRelationship?.length > 1){
                                                             Bundled price plan: {{item?.productOfferingPrice?.name}}
                                                         } @else {
-                                                          {{item?.productOfferingPrice?.price?.value}} {{item?.productOfferingPrice?.price?.unit}} 
+                                                          {{item?.productOfferingPrice?.price?.value}} {{item?.productOfferingPrice?.price?.unit}}
                                                           @if(item?.productOfferingPrice?.unitOfMeasure){
                                                               / {{item?.productOfferingPrice?.unitOfMeasure?.units}}
                                                           }
@@ -376,28 +380,28 @@
                                                     </td>
                                                 }
                                             } @else {
-                                                <td class="px-6 py-4 text-center align-middle">
+                                                <td class="px-5 py-3 text-center align-middle">
                                                     {{ 'SHOPPING_CART._free' | translate }}
                                                 </td>
                                             }
-                                          <td class="px-6 py-4 text-center align-middle">
+                                          <td class="px-5 py-3 text-center align-middle">
                                             @if(item.productOrderItem.state === 'inProgress'){
-                                              <span class="bg-purple-100 dark:bg-secondary-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400 w-fit">{{item.productOrderItem.state}}</span>
+                                              <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400 w-fit">{{item.productOrderItem.state}}</span>
                                             } @else if(item.productOrderItem.state ===  'completed') {
-                                              <span class="bg-purple-100 dark:bg-secondary-100 text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500 w-fit">{{item.productOrderItem.state}}</span>
+                                              <span class="bg-purple-100  text-green-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-green-500 w-fit">{{item.productOrderItem.state}}</span>
                                             } @else if(item.productOrderItem.state === 'failed') {
-                                              <span class="bg-purple-100 dark:bg-secondary-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{item.productOrderItem.state}}</span>
+                                              <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{item.productOrderItem.state}}</span>
                                             } @else if(item.productOrderItem.state === 'pending') {
-                                              <span class="bg-purple-100 dark:bg-secondary-100 text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{item.productOrderItem.state}}</span>
+                                              <span class="bg-purple-100  text-yellow-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-yellow-500">{{item.productOrderItem.state}}</span>
                                             }@else if(item.productOrderItem.state === 'acknowledged'){
-                                              <span class="bg-purple-100 dark:bg-secondary-100 text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{item.productOrderItem.state}}</span>
+                                              <span class="bg-purple-100  text-purple-600 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-purple-400">{{item.productOrderItem.state}}</span>
                                             }@else if(item.productOrderItem.state === 'cancelled' || item.productOrderItem.state === 'cancelled') {
-                                              <span class="bg-purple-100 dark:bg-secondary-100 text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{item.productOrderItem.state}}</span>
+                                              <span class="bg-purple-100  text-red-500 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-red-500">{{item.productOrderItem.state}}</span>
                                             } @else {
-                                              <span class="bg-amber-500 dark:bg-amber-900 text-amber-900 dark:text-amber-100 text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-amber-950">Unchecked</span>
+                                              <span class="bg-amber-500  text-amber-900  text-xs font-medium me-2 px-2.5 py-0.5 rounded border border-amber-950">Unchecked</span>
                                             }
                                           </td>
-                                          <td class="px-6 py-4 text-center align-middle flex justify-center">
+                                          <td class="px-5 py-3 text-center align-middle flex justify-center">
                                             @if (!hasProcurementAutomaticTerm(item)) {
                                               @if (!item.productOrderItem.state && role == 'Seller') {
                                                 <button type="button" title="Acknowledge the order item"
@@ -444,7 +448,7 @@
                                                       </button>
                                                     }
                                                   } @else {
-                                                    <td class="px-6 py-4 text-center align-middle flex justify-center">
+                                                    <td class="px-5 py-3 text-center align-middle flex justify-center">
                                                       n/a
                                                     </td>
                                                   }
@@ -465,38 +469,38 @@
 
 <!-- Confirm Modal -->
 <div #confirmModal id="confirmModal" tabindex="-1" aria-hidden="true"
-     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black bg-opacity-50">
+     class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-black/90">
   <div class="relative w-full max-w-md max-h-full">
     <!-- Contenedor del modal -->
-    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+    <div class="relative bg-white rounded-lg shadow ">
       <!-- Encabezado -->
-      <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600 bg-primary-100">
-        <h3 class="text-xl font-semibold text-secondary-50 dark:text-white">
+      <div class="flex items-start justify-between p-4 border-b rounded-t  bg-primary-100">
+        <h3 class="text-xl font-semibold text-secondary-50 ">
           Confirm Action
         </h3>
         <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900
-          rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600
-          dark:hover:text-white" (click)="closeModal()">
+          rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center
+          " (click)="closeModal()">
           ✖
         </button>
       </div>
       <!-- Cuerpo del modal -->
       <div class="p-6 text-center">
-        <p class="text-gray-500 dark:text-gray-300">
+        <p class="text-gray-500 ">
           Are you sure you want to update this order item to <strong>{{ actionType }}</strong> status?
         </p>
       </div>
       <!-- Botones de acción -->
-      <div class="flex items-center p-6 space-x-4 border-t border-gray-200 rounded-b dark:border-gray-600">
+      <div class="flex items-center p-6 space-x-4 border-t border-gray-200 rounded-b ">
         <button type="button" (click)="confirmAction()"
                 class="text-white bg-purple-600 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium
-          rounded-lg text-sm px-5 py-2.5 text-center dark:bg-purple-500 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+          rounded-lg text-sm px-5 py-2.5 text-center   ">
           Yes, Confirm
         </button>
         <button type="button" (click)="closeModal()"
                 class="text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100
-          focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-gray-700
-          dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-600 dark:focus:ring-gray-600">
+          focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5
+             ">
           Cancel
         </button>
       </div>
@@ -507,18 +511,18 @@
 
 <!-- Backdrop (se muestra cuando el menú está abierto) -->
 @if (isDrawerOpen) {
-  <div class="fixed inset-0 top-0 left-0 right-0 h-screen bg-black bg-opacity-50 z-40" (click)="closeDrawer()"></div>
+  <div class="fixed inset-0 top-0 left-0 right-0 h-screen bg-black/90 z-40" (click)="closeDrawer()"></div>
 
 <!-- Drawer for Notes -->
 <div id="drawer-notes"
-     class="fixed top-0 right-0 z-50 h-screen p-4 overflow-y-auto transition-transform bg-secondary-50 w-5/12 dark:bg-primary-100 flex flex-col"
+     class="fixed top-0 right-0 z-50 h-screen p-4 overflow-y-auto transition-transform bg-secondary-50 w-5/12  flex flex-col"
      [ngClass]="{'translate-x-0': isDrawerOpen, 'translate-x-full': !isDrawerOpen}"
      tabindex="-1"
      aria-labelledby="drawer-notes-label">
 
   <!-- Header -->
   <div class="flex justify-between items-center border-b pb-3">
-    <h5 id="drawer-notes-label" class="flex items-center text-base font-semibold text-gray-500 dark:text-gray-400">
+    <h5 id="drawer-notes-label" class="flex items-center text-base font-semibold text-gray-500 ">
       <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 448 512">
         <path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l224 0 0-112c0-26.5 21.5-48 48-48l112 0 0-224c0-35.3-28.7-64-64-64L64 32zM448 352l-45.3 0L336 352c-8.8 0-16 7.2-16 16l0 66.7 0 45.3 32-32 64-64 32-32z"/>
       </svg>
@@ -593,7 +597,7 @@
 <!-- FIXME: We need an standalone error message component-->
 @if(showError){
   <div class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
-    <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-red-900 dark:border-red-900 dark:text-white" role="alert">
+    <div id="alert-additional-content-2" class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50   " role="alert">
       <div class="flex items-center">
         <svg class="flex-shrink-0 w-4 h-4 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
           <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>

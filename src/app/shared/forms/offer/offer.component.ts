@@ -20,8 +20,9 @@ import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { environment } from 'src/environments/environment';
 import { ErrorMessageComponent } from '../../error-message/error-message.component';
-import { ReminderMessageComponent } from '../../reminder-message/reminder-message.component';
+import { AlertMessageComponent } from '../../alert-message/alert-message.component';
 import { hasNonStatusChanges } from '../../lifecycle-status/lifecycle-status';
+import { IsbeMessageComponent } from '../../isbe-message/isbe-message.component';
 
 type ProductOffering_Create = components["schemas"]["ProductOffering_Create"];
 type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
@@ -43,7 +44,8 @@ type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
     OfferSummaryComponent,
     NgClass,
     ErrorMessageComponent,
-    ReminderMessageComponent
+    AlertMessageComponent,
+    IsbeMessageComponent
   ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css'
@@ -66,6 +68,7 @@ export class OfferComponent implements OnInit, OnDestroy{
   errorMessage:any='';
   showError:boolean=false;
   showReminder:boolean=false;
+  showIsbeMessage:boolean=false;
   edited:boolean=false;
   reminderTimer: any = null;
   bundleChecked:boolean=false;
@@ -87,8 +90,8 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     if (this.IS_ISBE) {
       this.steps = [
-        'CREATE_OFFER._general',
         'CREATE_OFFER._prod_spec',
+        'CREATE_OFFER._general',
         'CREATE_OFFER._category',
         'CREATE_OFFER._price_plans',
         'CREATE_OFFER._summary'
@@ -101,8 +104,8 @@ export class OfferComponent implements OnInit, OnDestroy{
       });
     } else {
       this.steps = [
-        'CREATE_OFFER._general',
         'CREATE_OFFER._prod_spec',
+        'CREATE_OFFER._general',
         'CREATE_OFFER._catalog',
         'CREATE_OFFER._category',
         'CREATE_OFFER._license',
@@ -228,7 +231,13 @@ export class OfferComponent implements OnInit, OnDestroy{
           this.cdr.detectChanges();
         }, 3000);
       }
+    }else if (isSummary && this.formType === 'create') {
+      this.showIsbeMessage = true;
     }
+  }
+
+  onCloseSelect(){
+    this.showIsbeMessage = false;
   }
 
   validateCurrentStep(): boolean {
@@ -282,16 +291,16 @@ export class OfferComponent implements OnInit, OnDestroy{
       this.loadingData = true;
       if (this.IS_ISBE) {
         this.steps = [
-          'CREATE_OFFER._general',
           'CREATE_OFFER._prod_spec',
+          'CREATE_OFFER._general',
           'CREATE_OFFER._category',
           'CREATE_OFFER._price_plans',
           'CREATE_OFFER._summary'
         ];
       } else {
         this.steps = [
-          'CREATE_OFFER._general',
           'CREATE_OFFER._prod_spec',
+          'CREATE_OFFER._general',
           'CREATE_OFFER._category',
           'CREATE_OFFER._license',
           'CREATE_OFFER._price_plans',
@@ -947,6 +956,8 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     request$.subscribe({
       next: (data) => {
+        this.hasChanges = false;
+        this.productOfferForm.markAsPristine();
         this.goBack();          
       },
       error: (error) => {
@@ -1147,6 +1158,8 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     try {
       await lastValueFrom(this.api.updateProductOffering(basePayload, this.offer.id));
+      this.hasChanges = false;
+      this.productOfferForm.markAsPristine();
       this.goBack();
     } catch (error: any) {
       console.error('❌ Error updating offer:', error);
@@ -1179,6 +1192,10 @@ export class OfferComponent implements OnInit, OnDestroy{
         return false;
     }
     return true;
+  }
+
+  hasPendingChanges(): boolean {
+    return this.hasChanges || this.productOfferForm?.dirty;
   }
 
 }

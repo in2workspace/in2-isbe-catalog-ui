@@ -7,11 +7,20 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ['Blinker', 'IBM\\ Plex\\ Mono', 'Menlo', 'monospace'],
-      body: ['Blinker', 'IBM\\ Plex\\ Mono', 'Menlo', 'monospace'],
+      heading: ["GTStandardL", "sans-serif"],
+      body: ["GTStandardM", "sans-serif"],
     },
     extend: {
       colors: {
+        beige: "#F9F3E7",
+        green: "#76F276",
+        danger: "#F24822",
+        gray: {
+          0: '#F6F6F6',
+          25: '#ECECEC',
+          50: '#BDBDBD',
+          100: '#787878'
+        },
         primary: {
           //Primary light
           50: '#B88EFF',
@@ -22,12 +31,19 @@ module.exports = {
           //Secondary light
           50: '#BEA9FF',
           //Secondary dark
-          100: '#5A43A4',
+          100: "#7E5DF2",
           //Color they use as bg when dark theme
-          200: '#5A43A4',
+          200: "#7E5DF2",
           //Dark theme table background and inputs
           300: '#FF7E56'
         },
+      },
+      fontSize: {
+        xxs: ["0.625rem", { lineHeight: "0.75rem" }],
+        xl: ["1.25rem", { lineHeight: "1.33rem" }],
+        "2xl": ["1.5rem", { lineHeight: "1.75rem" }],
+        "4xl": ["2.813rem", { lineHeight: "3.188rem" }],
+        "7xl": ["4.25rem", { lineHeight: "4.625rem" }],
       },
       transitionProperty: {
         width: "width"

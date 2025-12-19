@@ -101,7 +101,8 @@ export class ApiServiceService {
       url=url+'&lifecycleStatus='+lifeStatus;
     }
 
-    return lastValueFrom(this.http.get<any>(url));
+    //return lastValueFrom(this.http.get<any>(url));
+    return Promise.resolve([]); // TODO: DELETE
   }
 
   getProductSpecification(id:any) {
@@ -119,14 +120,15 @@ export class ApiServiceService {
   getLaunchedCategories() {
     let url = `${ApiServiceService.BASE_URL}${ApiServiceService.PRODUCT_CATALOG_MANAGEMENT_URL}/category?limit=${ApiServiceService.CATEGORY_LIMIT}&lifecycleStatus=Launched`;
 
-    return lastValueFrom(
+    /*return lastValueFrom(
       this.http.get<any[]>(url).pipe(
         catchError(error => {
           console.error("Error getting categories:", error);
           return of([]);
         })
       )
-    );
+    );*/
+    return Promise.resolve([]); // TODO: DELETE
   }
 
   getCategories(status:any[]){
@@ -143,14 +145,15 @@ export class ApiServiceService {
       url=url+'&lifecycleStatus='+lifeStatus;
     }
 
-    return lastValueFrom(
+    /*return lastValueFrom(
       this.http.get<any[]>(url).pipe(
         catchError(error => {
           console.error("Error getting categories:", error);
           return of([]);
         })
       )
-    );
+    );*/
+    return Promise.resolve([]); // TODO: DELETE
   }
 
   async getDefaultCategories() {

@@ -1,8 +1,8 @@
 @if (!readOnly){
     <!-- Nombre y descripción -->
     <div class="my-2">
-      <h4 class="text-lg font-semibold text-primary-100 dark:text-gray-300">{{ characteristic.name }}</h4>
-      <markdown class="text-gray-500 dark:text-gray-400 text-wrap break-all" [data]="characteristic.description"></markdown>
+      <h4 class="text-lg font-semibold text-primary-100 ">{{ characteristic.name }}</h4>
+      <markdown class="text-gray-500  text-wrap break-all" [data]="characteristic.description"></markdown>
     </div>
 
     <!-- Slider -->
@@ -13,15 +13,15 @@
           [min]="getSliderRange()?.min"
           [max]="getSliderRange()?.max"
           [formControl]="control"
-          class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+          class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer "
         />
-        <span class="min-w-24 flex justify-center text-sm text-gray-600 dark:text-gray-400">{{ control.value }} {{ getUnit() }}</span>
+        <span class="min-w-24 flex justify-center text-sm text-gray-600 ">{{ control.value }} {{ getUnit() }}</span>
       </div>
     } @else {   <!-- Select -->
       <div>
         <select
           [formControl]="control"
-          class="block w-full px-3 py-2 border border-gray-300 rounded-lg text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-300 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600"
+          class="block w-full px-3 py-2 border border-gray-300 rounded-lg text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-300   "
         >
           <option
             *ngFor="let val of characteristic.productSpecCharacteristicValue"
@@ -35,7 +35,7 @@
 
 } @else {
   <div class="grid grid-cols-2 items-center">
-    <div class="text-base font-semibold text-primary-100 dark:text-gray-400 flex justify-between content-center">{{ characteristic.name }}:</div>
-    <span class="pl-4 min-w-24 flex text-sm text-gray-600 dark:text-gray-400">{{ control.value }} {{ getUnit() }}</span>
+    <div class="text-base font-semibold text-primary-100  flex justify-between content-center">{{ characteristic.name }}:</div>
+    <span class="pl-4 min-w-24 flex text-sm text-gray-600 ">{{ control.value }} {{ getUnit() }}</span>
   </div>
 }

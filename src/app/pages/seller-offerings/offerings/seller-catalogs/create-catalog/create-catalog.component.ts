@@ -18,6 +18,14 @@ import { AuthService } from 'src/app/guard/auth.service';
 import { catchError, EMPTY, finalize, switchMap, take, tap } from 'rxjs';
 type Catalog_Create = components["schemas"]["Catalog_Create"];
 type Category_Create = components["schemas"]["Category_Create"];
+type StepId = 'general-info' | 'summary';
+
+interface StepNavItem {
+  id: StepId;
+  labelKey: string;
+  onClick: () => void;
+  isDisabled: () => boolean;
+}
 
 @Component({
     selector: 'create-catalog',
@@ -32,8 +40,8 @@ export class CreateCatalogComponent implements OnInit {
   catalogToCreate:Catalog_Create | undefined;
   categoryToCreate:Category_Create | undefined;
 
-  stepsElements:string[]=['general-info','summary'];
-  stepsCircles:string[]=['general-circle','summary-circle'];
+  currentStep: StepId = 'general-info';
+  stepNavigation: StepNavItem[] = [];
 
   //markdown variables:
   showPreview:boolean=false;
@@ -80,6 +88,7 @@ export class CreateCatalogComponent implements OnInit {
 
   ngOnInit() {
     this.initPartyInfo();
+    this.initNavigationSteps();
   }
 
   initPartyInfo(){
@@ -95,7 +104,7 @@ export class CreateCatalogComponent implements OnInit {
   }
 
   toggleGeneral(){
-    this.selectStep('general-info','general-circle');
+    this.selectStep('general-info');
     this.showGeneral=true;
     this.showSummary=false;
     this.showPreview=false;
@@ -118,7 +127,7 @@ export class CreateCatalogComponent implements OnInit {
       }
       this.showGeneral=false;
       this.showSummary=true;
-      this.selectStep('summary','summary-circle');
+      this.selectStep('summary');
     }
     this.showPreview=false;
   }
@@ -174,56 +183,48 @@ export class CreateCatalogComponent implements OnInit {
     ).subscribe();
   }
 
-  //STEPS METHODS
-  removeClass(elem: HTMLElement, cls:string) {
-    var str = " " + elem.className + " ";
-    elem.className = str.replace(" " + cls + " ", " ").replace(/^\s+|\s+$/g, "");
-  }
-
-  addClass(elem: HTMLElement, cls:string) {
-      elem.className += (" " + cls);
-  }
-
-  unselectMenu(elem:HTMLElement | null,cls:string){
-    if(elem != null){
-      if(elem.className.match(cls)){
-        this.removeClass(elem,cls)
+  initNavigationSteps() {
+    this.stepNavigation = [
+      {
+        id: 'general-info',
+        labelKey: 'CREATE_CATALOG._general',
+        onClick: () => this.toggleGeneral(),
+        isDisabled: () => !this.generalDone && this.currentStep !== 'general-info'
+      },
+      {
+        id: 'summary',
+        labelKey: 'CREATE_CATALOG._finish',
+        onClick: () => this.showFinish(),
+        isDisabled: () => this.generalForm.invalid || !this.finishDone
       }
-    }
+    ];
   }
 
-  selectMenu(elem:HTMLElement| null,cls:string){
-    if(elem != null){
-      if(!elem.className.match(cls)){
-        this.addClass(elem,cls)
-      }
-    }
+  get currentStepIndex(): number {
+    return this.stepNavigation.findIndex(step => step.id === this.currentStep);
+  }
+
+  isStepComplete(index: number): boolean {
+    const activeIndex = this.currentStepIndex;
+    return activeIndex !== -1 && index < activeIndex;
+  }
+
+  isCurrentStep(stepId: StepId): boolean {
+    return this.currentStep === stepId;
+  }
+
+  isStepDisabled(step: StepNavItem): boolean {
+    return step.isDisabled();
+  }
+
+  handleStepClick(step: StepNavItem) {
+    if (this.isStepDisabled(step)) return;
+    this.selectStep(step.id);
+    step.onClick();
   }
   
-  //STEPS CSS EFFECTS:
-  selectStep(step:string,stepCircle:string){
-    const index = this.stepsElements.findIndex(item => item === step);
-    if (index !== -1) {
-      this.stepsElements.splice(index, 1);
-      this.selectMenu(document.getElementById(step),'text-primary-100 dark:text-primary-50')
-      this.unselectMenu(document.getElementById(step),'text-gray-500') 
-      for(let i=0; i<this.stepsElements.length;i++){
-        this.unselectMenu(document.getElementById(this.stepsElements[i]),'text-primary-100 dark:text-primary-50')
-        this.selectMenu(document.getElementById(this.stepsElements[i]),'text-gray-500') 
-      }
-      this.stepsElements.push(step);
-    }
-    const circleIndex = this.stepsCircles.findIndex(item => item === stepCircle);
-    if (index !== -1) {
-      this.stepsCircles.splice(circleIndex, 1);
-      this.selectMenu(document.getElementById(stepCircle),'border-primary-100 dark:border-primary-50')
-      this.unselectMenu(document.getElementById(stepCircle),'border-gray-400');
-      for(let i=0; i<this.stepsCircles.length;i++){
-        this.unselectMenu(document.getElementById(this.stepsCircles[i]),'border-primary-100 dark:border-primary-50')
-        this.selectMenu(document.getElementById(this.stepsCircles[i]),'border-gray-400');
-      }
-      this.stepsCircles.push(stepCircle);
-    }
+  selectStep(step: StepId){
+    this.currentStep = step;
   }
 
 }

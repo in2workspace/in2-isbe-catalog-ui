@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {faIdCard, faSort, faSwatchbook, faSparkles} from "@fortawesome/pro-solid-svg-icons";
+import { faIdCard, faSort, faSwatchbook, faSparkles} from "@fortawesome/pro-solid-svg-icons";
 import { environment } from 'src/environments/environment';
 import { ProductSpecServiceService } from 'src/app/services/product-spec-service.service';
 import { PaginationService } from 'src/app/services/pagination.service';
-import {LocalStorageService} from "src/app/services/local-storage.service";
-import {EventMessageService} from "src/app/services/event-message.service";
-import { LoginInfo } from 'src/app/models/interfaces';
+import { EventMessageService } from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
 import { TranslateModule } from '@ngx-translate/core';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { take } from 'rxjs';
@@ -20,13 +18,18 @@ import { AuthService } from 'src/app/guard/auth.service';
     templateUrl: './seller-product-spec.component.html',
     styleUrl: './seller-product-spec.component.css',
     standalone: true,
-    imports: [TranslateModule, DatePipe, FaIconComponent, ErrorMessageComponent]
+    imports: [CommonModule, TranslateModule, DatePipe, FaIconComponent, ErrorMessageComponent]
 })
 export class SellerProductSpecComponent implements OnInit{
   protected readonly faIdCard = faIdCard;
   protected readonly faSort = faSort;
   protected readonly faSwatchbook = faSwatchbook;
   protected readonly faSparkles = faSparkles;
+
+  private readonly eventMessage = inject(EventMessageService);  
+  private readonly prodSpecService = inject(ProductSpecServiceService);
+  private readonly auth = inject(AuthService);
+  private readonly paginationService = inject(PaginationService);
 
   searchField = new FormControl();
 
@@ -36,19 +39,14 @@ export class SellerProductSpecComponent implements OnInit{
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
   loading: boolean = false;
   loading_more: boolean = false;
-  page_check:boolean = true;
+  page_check:boolean = false;
   filter:any=undefined;
   status:any[]=[];
   seller:any;
   sort:any=undefined;
   isBundle:any=undefined;
 
-  constructor(
-    private readonly prodSpecService: ProductSpecServiceService,
-    private readonly auth: AuthService,
-    private readonly eventMessage: EventMessageService,
-    private readonly paginationService: PaginationService
-  ) {
+  constructor() {
     this.eventMessage.messages$.subscribe(ev => {
       if(ev.type === 'ChangedSession') {
         this.initProdSpecs();

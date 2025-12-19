@@ -17,6 +17,14 @@ import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textare
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 type Catalog_Update = components["schemas"]["Catalog_Update"];
+type StepId = 'general-info' | 'summary';
+
+interface StepNavItem {
+  id: StepId;
+  labelKey: string;
+  onClick: () => void;
+  isDisabled: () => boolean;
+}
 
 @Component({
     selector: 'update-catalog',
@@ -32,8 +40,8 @@ export class UpdateCatalogComponent implements OnInit {
 
   catalogToUpdate: Catalog_Update | undefined;
 
-  stepsElements:string[]=['general-info','summary'];
-  stepsCircles:string[]=['general-circle','summary-circle'];
+  currentStep: StepId = 'general-info';
+  stepNavigation: StepNavItem[] = [];
 
   //markdown variables:
   showPreview:boolean=false;
@@ -80,6 +88,7 @@ export class UpdateCatalogComponent implements OnInit {
   ngOnInit() {
     this.initPartyInfo();
     this.populateCatInfo();
+    this.initNavigationSteps();
   }
 
   populateCatInfo(){
@@ -102,7 +111,7 @@ export class UpdateCatalogComponent implements OnInit {
   }
 
   toggleGeneral(){
-    this.selectStep('general-info','general-circle');
+    this.selectStep('general-info');
     this.showGeneral=true;
     this.showSummary=false;
     this.showPreview=false;
@@ -124,7 +133,7 @@ export class UpdateCatalogComponent implements OnInit {
       }
       this.showGeneral=false;
       this.showSummary=true;
-      this.selectStep('summary','summary-circle');
+      this.selectStep('summary');
     }
     this.showPreview=false;
   }
@@ -150,56 +159,48 @@ export class UpdateCatalogComponent implements OnInit {
     })
   }
 
-  //STEPS METHODS
-  removeClass(elem: HTMLElement, cls:string) {
-    var str = " " + elem.className + " ";
-    elem.className = str.replace(" " + cls + " ", " ").replace(/^\s+|\s+$/g, "");
+  initNavigationSteps() {
+    this.stepNavigation = [
+      {
+        id: 'general-info',
+        labelKey: 'UPDATE_CATALOG._general',
+        onClick: () => this.toggleGeneral(),
+        isDisabled: () => false
+      },
+      {
+        id: 'summary',
+        labelKey: 'UPDATE_CATALOG._finish',
+        onClick: () => this.showFinish(),
+        isDisabled: () => this.generalForm.invalid
+      }
+    ];
   }
 
-  addClass(elem: HTMLElement, cls:string) {
-      elem.className += (" " + cls);
+  get currentStepIndex(): number {
+    return this.stepNavigation.findIndex(step => step.id === this.currentStep);
   }
 
-  unselectMenu(elem:HTMLElement | null,cls:string){
-    if(elem != null){
-      if(elem.className.match(cls)){
-        this.removeClass(elem,cls)
-      }
-    }
+  isStepComplete(index: number): boolean {
+    const activeIndex = this.currentStepIndex;
+    return activeIndex !== -1 && index < activeIndex;
   }
 
-  selectMenu(elem:HTMLElement| null,cls:string){
-    if(elem != null){
-      if(!elem.className.match(cls)){
-        this.addClass(elem,cls)
-      }
-    }
+  isCurrentStep(stepId: StepId): boolean {
+    return this.currentStep === stepId;
   }
 
-  //STEPS CSS EFFECTS:
-  selectStep(step:string,stepCircle:string){
-    const index = this.stepsElements.findIndex(item => item === step);
-    if (index !== -1) {
-      this.stepsElements.splice(index, 1);
-      this.selectMenu(document.getElementById(step),'text-primary-100 dark:text-primary-50')
-      this.unselectMenu(document.getElementById(step),'text-gray-500') 
-      for(let i=0; i<this.stepsElements.length;i++){
-        this.unselectMenu(document.getElementById(this.stepsElements[i]),'text-primary-100 dark:text-primary-50')
-        this.selectMenu(document.getElementById(this.stepsElements[i]),'text-gray-500') 
-      }
-      this.stepsElements.push(step);
-    }
-    const circleIndex = this.stepsCircles.findIndex(item => item === stepCircle);
-    if (index !== -1) {
-      this.stepsCircles.splice(circleIndex, 1);
-      this.selectMenu(document.getElementById(stepCircle),'border-primary-100 dark:border-primary-50')
-      this.unselectMenu(document.getElementById(stepCircle),'border-gray-400');
-      for(let i=0; i<this.stepsCircles.length;i++){
-        this.unselectMenu(document.getElementById(this.stepsCircles[i]),'border-primary-100 dark:border-primary-50')
-        this.selectMenu(document.getElementById(this.stepsCircles[i]),'border-gray-400');
-      }
-      this.stepsCircles.push(stepCircle);
-    }
+  isStepDisabled(step: StepNavItem): boolean {
+    return step.isDisabled();
+  }
+
+  handleStepClick(step: StepNavItem) {
+    if (this.isStepDisabled(step)) return;
+    this.selectStep(step.id);
+    step.onClick();
+  }
+
+  selectStep(step: StepId){
+    this.currentStep = step;
   }
 
   //Markdown actions:
@@ -282,4 +283,3 @@ export class UpdateCatalogComponent implements OnInit {
     }  
   }
 }
-
