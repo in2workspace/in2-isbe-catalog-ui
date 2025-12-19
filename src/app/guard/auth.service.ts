@@ -2,7 +2,7 @@ import { Injectable, signal, WritableSignal, inject } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { take, map, catchError, switchMap } from 'rxjs/operators';
-import { claimsToLoginInfo, LoginInfo } from './login-info.mapper';
+import { vcClaimsToLoginInfo, LoginInfo, claimsToLoginInfo } from './login-info.mapper';
 import { OrgContextService } from '../services/org-context.service';
 
 export interface AppUser {
@@ -52,9 +52,14 @@ export class AuthService {
 
         const u = this.mapUserFromClaims(claims);
         this.setState(true, u, accessToken ?? '', this.pickPrimaryRole(u));
+        let li = null;
 
         try {
-          const li = claimsToLoginInfo(claims, accessToken ?? '');
+          if(claims.vc === undefined) {
+            li = claimsToLoginInfo(claims, accessToken ?? '');
+          }else{
+            li = vcClaimsToLoginInfo(claims, accessToken ?? '');
+          }          
           this.loginInfoSubject.next(li);
         } catch {
           this.loginInfoSubject.next(null);
@@ -78,8 +83,7 @@ export class AuthService {
     map(([li, orgId]) => {
       if (!li) return '';
       const effective = orgId ?? li.logged_as ?? null;
-      if (!effective || effective === li.id) return li.id;
-      return li.organizations.find(o => o.id === effective)?.id ?? li.id;
+      return li.organizations.find(o => o.id === effective)?.id;
     })
   );
 

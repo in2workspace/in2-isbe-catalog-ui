@@ -99,9 +99,9 @@ export class BillingInfoComponent implements OnInit{
         if (!li) { initFlowbite(); return; }
 
         this.seller = sellerId || '';
-        const activeId = this.orgCtx.current ?? li.logged_as ?? li.id;
+        const activeId = this.orgCtx.current ?? li.logged_as;
 
-        if (activeId && activeId !== li.id) {
+        if (activeId) {
           const org = (li.organizations || []).find(o => o.id === activeId);
           this.partyInfo = {
             id: this.seller,

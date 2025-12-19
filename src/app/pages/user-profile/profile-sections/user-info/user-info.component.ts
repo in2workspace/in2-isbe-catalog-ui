@@ -76,7 +76,7 @@ export class UserInfoComponent implements OnInit {
     .subscribe(([sellerId, li, accessToken]) => {
       if (!li) { initFlowbite(); return; }
 
-      this.seller = sellerId;
+      this.seller = sellerId || '';
       this.email  = li.email || '';
       this.token  = accessToken || li.token || '';
       this.id = li.userId;
