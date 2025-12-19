@@ -39,8 +39,7 @@ export class ProductSpecServiceService {
       url=url+'&lifecycleStatus='+lifeStatus;
     }
 
-    //return lastValueFrom(this.http.get<any>(url));
-    return Promise.resolve([]); // TODO: DELETE  
+    return lastValueFrom(this.http.get<any>(url));
   }
 
   getResSpecById(id:any){
