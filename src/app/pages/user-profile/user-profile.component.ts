@@ -35,7 +35,6 @@ export class UserProfileComponent implements OnInit{
   show_revenue: boolean = false;
   loggedAsUser: boolean = true;
   profile:any;
-  seller:any='';
   token:string='';
   email:string='';
 
@@ -68,8 +67,7 @@ export class UserProfileComponent implements OnInit{
         this.token = aux.token;
         this.email = aux.email;
 
-        this.seller = aux.id;
-        this.loggedAsUser = aux.logged_as === aux.id;
+        this.loggedAsUser = aux.logged_as === aux.userId;
         this.show_profile = this.loggedAsUser;
         this.show_org_profile = !this.loggedAsUser;
 
