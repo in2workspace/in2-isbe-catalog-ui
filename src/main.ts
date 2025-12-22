@@ -60,8 +60,7 @@ bootstrapApplication(AppComponent, {
           historyCleanupOff: false,
           ignoreNonceAfterRefresh: true,
           triggerRefreshWhenIdTokenExpired: false,
-          autoUserInfo: false,
-          secureRoutes: [environment.BASE_URL, environment.AUTHORITY].filter((route): route is string => route !== undefined)
+          autoUserInfo: false
         },
       })
     ), 
