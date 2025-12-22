@@ -42,7 +42,6 @@ export const environment = {
         isRedirection: true,
         pollPath: "",
         pollCertPath: "",
-        //clientID: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
         clientID: "https://catalog.isbeonboard.com",
         callbackURL: "http://localhost:4200/dashboard",
         verifierHost: "https://verifier.dome-marketplace-sbx.org",
@@ -70,7 +69,7 @@ export const environment = {
     MAX_FILE_SIZE:3145728,
     SCOPE: "openid profile email",
     RESPONSE_TYPE: 'code',
-    AUTHORITY: "https://idp.pre.cloud-w.envs.redisbe.com/auth/realms/pre-isbe",
-    REDIRECT_URL: "https://catalog.pre.cloud-w.envs.redisbe.com/",
+    AUTHORITY: "https://idp.dev.cloud-w.envs.redisbe.com/auth/realms/dev-isbe",
+    REDIRECT_URL: "https://catalog.dev.cloud-w.envs.redisbe.com/",
     POST_LOGIN_ROUTE: '/dashboard'
 };
