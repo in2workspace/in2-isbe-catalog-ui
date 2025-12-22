@@ -14,7 +14,7 @@ COPY tsconfig.json /app/tsconfig.json
 COPY tailwind.config.js /app/tailwind.config.js
 COPY tsconfig.app.json /app/tsconfig.app.json
 COPY tsconfig.spec.json /app/tsconfig.spec.json
-ARG configuration=production
+ARG configuration=deployment
 RUN npm run build -- --output-path=./dist/out --configuration "$configuration"
 
 # Stage 1, based on Nginx, to have only the compiled app, ready for production with Nginx

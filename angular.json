@@ -30,11 +30,11 @@
             "scripts": []
           },
           "configurations": {
-            "production": {
+            "deployment": {
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.production.ts"
+                  "with": "src/environments/environment.deployment.ts"
                 }
               ],
               "budgets": [
@@ -57,22 +57,16 @@
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
-              "namedChunks": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.development.ts"
-                }
-              ]
+              "namedChunks": true
             }
           },
-          "defaultConfiguration": "production"
+          "defaultConfiguration": "deployment"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
-            "production": {
-              "buildTarget": "bae-frontend:build:production"
+            "deployment": {
+              "buildTarget": "bae-frontend:build:deployment"
             },
             "development": {
               "buildTarget": "bae-frontend:build:development"
