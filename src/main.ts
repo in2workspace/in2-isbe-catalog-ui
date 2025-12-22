@@ -65,12 +65,6 @@ bootstrapApplication(AppComponent, {
       })
     ), 
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    {
-      provide: APP_INITIALIZER,
-      multi: true,
-      useFactory: (auth: AuthService) => () => auth.checkAuth().toPromise(),
-      deps: [AuthService],
-    },
     { provide: LOCALE_ID, useValue: environment.locale }
   ]
 });
