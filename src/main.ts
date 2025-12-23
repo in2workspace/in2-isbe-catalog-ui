@@ -1,7 +1,7 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { APP_INITIALIZER, importProvidersFrom, LOCALE_ID } from '@angular/core';
-import { provideHttpClient, withInterceptorsFromDi, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, HttpClient, HTTP_INTERCEPTORS, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -13,9 +13,9 @@ import { appConfigFactory } from './app/app-config-factory';
 
 import { AuthModule, AuthInterceptor } from 'angular-auth-oidc-client';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './app/guard/auth.service';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { accessTokenInterceptor } from './app/interceptors/access-token.interceptor';
 
 registerLocaleData(localeEs);
 
@@ -26,7 +26,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withInterceptorsFromDi(),withInterceptors([accessTokenInterceptor])),
     provideAnimationsAsync(),
     {
       provide: APP_INITIALIZER,
