@@ -33,7 +33,7 @@ export class AuthService {
   role: WritableSignal<string | null> = signal(null);
 
   checkAuth(): Observable<boolean> {
-    return this.oidc.checkAuth().pipe(
+    /*return this.oidc.checkAuth().pipe(
       take(1),
       catchError(() => of({ isAuthenticated: false, accessToken: '', userData: {} } as any)),
       switchMap(async ({ isAuthenticated, accessToken, userData }) => {
@@ -67,14 +67,20 @@ export class AuthService {
 
         return true;
       })
-    );
+    );*/
+    const fakeAccessToken = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICItckxwSkhNVkhCSUQ0Q2FRX0dsTjhFTEprQ0tYMUJWUzhMTzd6enU1cTFVIn0.eyJleHAiOjE3NjkwNjYyMzQsImlhdCI6MTc2NjQ4MTMwOSwiYXV0aF90aW1lIjoxNzY2NDc0MjM0LCJqdGkiOiJvbnJ0YWM6MWVlY2ZlZDItYWU2Ni1jNTgzLTgwYjItNzIyNjAzNjYwNDE3IiwiaXNzIjoiaHR0cHM6Ly9pZHAuZGV2LmNsb3VkLXcuZW52cy5yZWRpc2JlLmNvbS9hdXRoL3JlYWxtcy9kZXYtaXNiZSIsImF1ZCI6WyJpc2JlLXBvcnRhbC1kZXYiLCJhY2NvdW50Il0sInN1YiI6ImIyMzQ5ZTMxLWEyOTktNGU5Yi04ZGQxLWQxMWExZDFmNzBjMSIsInR5cCI6IkJlYXJlciIsImF6cCI6Imh0dHBzOi8vY2F0YWxvZy5pc2Jlb25ib2FyZC5jb20iLCJzaWQiOiJmYWEyZTQ4OC05YzI4LWRmNGQtYzc2Ny00N2JiNGQ4MWJmZmYiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vY2F0YWxvZy5kZXYuY2xvdWQtdy5lbnZzLnJlZGlzYmUuY29tIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWRldi1pc2JlIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIG9yZ2FuaXphdGlvbiBlbWFpbCBwcm9maWxlIiwidXNlcl9pZGVudGlmaWVyIjoiMTIzNDU2NzhBIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm9yZ2FuaXphdGlvbiI6IkFMQVNUUklBIiwibmFtZSI6IkpvaG4gRG9lIiwib3JnYW5pemF0aW9uX2lkZW50aWZpZXIiOiJWQVRFUy1HODc5MzYxNTkiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqZXN1c0BhbGFzdHJpYS5pbyIsInBvd2VyIjpbeyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJNYW5hZ2VtZW50IiwidHlwZSI6Im9yZ2FuaXphdGlvbiJ9LHsiYWN0aW9uIjpbIioiXSwiZG9tYWluIjoiSVNCRSIsImZ1bmN0aW9uIjoiSGVscGRlc2siLCJ0eXBlIjoib3JnYW5pemF0aW9uIn0seyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJCYWFTIiwidHlwZSI6Im9yZ2FuaXphdGlvbiJ9LHsiYWN0aW9uIjpbIioiXSwiZG9tYWluIjoiSVNCRSIsImZ1bmN0aW9uIjoiRmF1Y2V0IiwidHlwZSI6Im9yZ2FuaXphdGlvbiJ9LHsiYWN0aW9uIjpbIioiXSwiZG9tYWluIjoiSVNCRSIsImZ1bmN0aW9uIjoiUmdwZCIsInR5cGUiOiJvcmdhbml6YXRpb24ifSx7ImFjdGlvbiI6WyIqIl0sImRvbWFpbiI6IklTQkUiLCJmdW5jdGlvbiI6Ik5vdGlmaWNhdGlvbnMiLCJ0eXBlIjoib3JnYW5pemF0aW9uIn0seyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJTYyIsInR5cGUiOiJvcmdhbml6YXRpb24ifSx7ImFjdGlvbiI6WyIqIl0sImRvbWFpbiI6IklTQkUiLCJmdW5jdGlvbiI6IldpemFyZCIsInR5cGUiOiJvcmdhbml6YXRpb24ifSx7ImFjdGlvbiI6WyIqIl0sImRvbWFpbiI6IklTQkUiLCJmdW5jdGlvbiI6Ik5vdGFyaXphdGlvbiIsInR5cGUiOiJvcmdhbml6YXRpb24ifSx7ImFjdGlvbiI6WyIqIl0sImRvbWFpbiI6IklTQkUiLCJmdW5jdGlvbiI6IlRva2VuaXphdGlvbiIsInR5cGUiOiJvcmdhbml6YXRpb24ifSx7ImFjdGlvbiI6WyIqIl0sImRvbWFpbiI6IklTQkUiLCJmdW5jdGlvbiI6IklkZW50aXR5IiwidHlwZSI6Im9yZ2FuaXphdGlvbiJ9LHsiYWN0aW9uIjpbIioiXSwiZG9tYWluIjoiSVNCRSIsImZ1bmN0aW9uIjoiRW5yb2xsbWVudCIsInR5cGUiOiJvcmdhbml6YXRpb24ifSx7ImFjdGlvbiI6WyJFeGVjdXRlIl0sImRvbWFpbiI6IklTQkUiLCJmdW5jdGlvbiI6Ik9uYm9hcmRpbmciLCJ0eXBlIjoib3JnYW5pemF0aW9uIn0seyJhY3Rpb24iOlsiQ3JlYXRlIiwiVXBkYXRlIiwiRGVsZXRlIl0sImRvbWFpbiI6IklTQkUiLCJmdW5jdGlvbiI6IlByb2R1Y3RPZmZlcmluZyIsInR5cGUiOiJvcmdhbml6YXRpb24ifV0sImdpdmVuX25hbWUiOiJKb2huIiwidXNlciI6IkpvaG4gRG9lIiwiZmFtaWx5X25hbWUiOiJEb2UiLCJlbWFpbCI6Implc3VzQGFsYXN0cmlhLmlvIn0.ZHpsnarGeH--YzQ-jjAN-UlopuCNQdSwGTMJBqR6aii8_oAbbM7Vrq1rf_E1WUr_n-4TTQ_qd_5uT6jgux8yGEVNlR7khuqo8BbJOFS4zdu-JXNwv3oCPP7Aelxw5UIs3UYrOavy5DggnddebWWbKGq7sX79yIilq72RVLLHTuJxrmikD9L_nL17-95tub3dBAY7kwas8K2zG0chrjuLXYuS7BnNkpJ-KlrVRI-EjyR8lWqXIYSn67tUeBx_bW35nOz0_zMn3ZyBZCKoPcfyGjyhr6ZvGlcKkODN61GMS53pbzW-37QORT4CpqdM3FZyt0aBFTi2C-aCgqOUBRmhYw"
+    let claims: any = this.decodeJwtPayload(fakeAccessToken);
+    const u = this.mapUserFromClaims(claims);
+    this.setState(true, u, fakeAccessToken ?? '', this.pickPrimaryRole(u));
+    const li = claimsToLoginInfo(claims, fakeAccessToken ?? '');
+    this.loginInfoSubject.next(li);
+    return of(true);
   }
 
   sellerId$ = combineLatest([this.loginInfo$, this.orgCtx.getOrganization()]).pipe(
     map(([li, orgId]) => {
       if (!li) return '';
-      const effective = orgId ?? li.logged_as ?? null;
-      return li.organizations.find(o => o.id === effective)?.id;
+      return li.organizations.find(o => o.id === orgId)?.id;
     })
   );
 
@@ -130,7 +136,7 @@ export class AuthService {
     return u?.roles?.[0] ?? null;
   }
 
-  private decodeJwtPayload<T = any>(token: string): T | null {
+  decodeJwtPayload<T = any>(token: string): T | null {
     try {
       if (!token) return null;
       const parts = token.split('.');

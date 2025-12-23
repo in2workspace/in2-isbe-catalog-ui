@@ -1,6 +1,6 @@
 
 export const environment = {
-    BASE_URL: 'https://tmf.dev.cloud-w.envs.redisbe.com/tmf-api/',
+    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/',
     FOUNDATION_ID: 'VATES-G87936159',
     locale: 'es-ES',
     PRODUCT_CATALOG_MANAGEMENT_URL: 'productCatalogManagement/v4',
@@ -70,6 +70,6 @@ export const environment = {
     SCOPE: "openid profile email",
     RESPONSE_TYPE: 'code',
     AUTHORITY: "https://idp.dev.cloud-w.envs.redisbe.com/auth/realms/dev-isbe",
-    REDIRECT_URL: "https://catalog.dev.cloud-w.envs.redisbe.com/",
+    REDIRECT_URL: "https://catalog.dev.cloud-w.envs.redisbe.com",
     POST_LOGIN_ROUTE: '/dashboard'
 };

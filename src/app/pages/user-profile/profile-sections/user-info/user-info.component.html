@@ -10,13 +10,12 @@
     <div class="flex flex-col gap-6 bg-white/60 p-4 md:p-8 rounded-2xl">
         <h1 class="font-semibold text-3xl lg:text-2xl">{{ 'PROFILE._profile' | translate }}</h1>
         <h2 class="ont-normal text-xl lg:text-2xl text-primary-100">{{ 'PROFILE._account' | translate }}</h2>
-
         <div class="flex flex-col gap-10 p-4 lg:py-8 lg:px-4 rounded-xl bg-white">
           <div class="flex flex-col lg:grid lg:grid-cols-2 gap-4">
               <div>
                   <span class="font-semibold">{{ 'PROFILE._user_id' | translate }}</span>
                   <input type="text" id="username"
-                  class="mb-2 bg-gray-0 text-primary-100 border-none text-sm rounded-lg w-full p-2.5 cursor-not-allowed" value="{{profile.externalReference[0].name}}" disabled readonly>
+                  class="mb-2 bg-gray-0 text-primary-100 border-none text-sm rounded-lg w-full p-2.5 cursor-not-allowed" [value]="profile?.user_identifier" disabled readonly>
                   <span class="font-semibold">{{ 'PROFILE._email' | translate }}</span>
                   <input type="text" id="email" class="mb-2 bg-gray-0 text-primary-100 border-none text-sm rounded-lg w-full p-2.5 cursor-not-allowed" value="{{email}}" disabled readonly>
               </div>
@@ -33,7 +32,7 @@
                     <div class="flex flex-col">
                       <label for="user-name" class="font-semibold">{{ 'PROFILE._name' | translate }}</label>
                       <input formControlName="name" type="text" id="user-name"
-                      class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"
+                      class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"
                       [ngClass]="(userProfileForm.get('name')?.invalid == true && userProfileForm.value.name!='') || (userProfileForm.get('name')?.touched && userProfileForm.value.name=='') ? 'border-red-600' : 'border-gray-300 '" />
                       @if(userProfileForm.get('name')?.invalid && userProfileForm.get('name')?.errors?.['required'] && (userProfileForm.get('name')?.touched && userProfileForm.value.name=='')){
                           <p class="text-sm text-red-600 "><span class="font-medium">This field is mandatory.</span></p>
@@ -42,7 +41,7 @@
                     <div class="flex flex-col">
                       <label for="treatment" class="font-semibold">{{ 'PROFILE._treatment' | translate }}</label>
                       <select id="treatment" formControlName="treatment"
-                      class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+                      class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
                           <option value="">{{ 'TREATMENT._NOT_SAY' | translate }}</option>
                           <option value="Miss">{{ 'TREATMENT._MISS' | translate }}</option>
                           <option value="Mrs">{{ 'TREATMENT._MRS' | translate }}</option>
@@ -53,7 +52,7 @@
                     <div class="flex flex-col">
                       <label for="gender" class="font-semibold">{{ 'PROFILE._gender' | translate }}</label>
                       <select id="gender" formControlName="gender"
-                      class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+                      class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
                           <option value="">{{ 'GENDER._NOT_SAY' | translate }}</option>
                           <option value="Female">{{ 'GENDER._FEMALE' | translate }}</option>
                           <option value="Male">{{ 'GENDER._MALE' | translate }}</option>
@@ -65,7 +64,7 @@
                   <div class="flex flex-col">
                     <label for="lastname" class="font-semibold">{{ 'PROFILE._lastname' | translate }}</label>
                     <input type="text" formControlName="lastname" id="lastname"
-                    class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"
+                    class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"
                     [ngClass]="(userProfileForm.get('lastname')?.invalid == true && userProfileForm.value.lastname!='') || (userProfileForm.get('lastname')?.touched && userProfileForm.value.lastname=='') ? 'border-red-600' : 'border-gray-300 '" />
                     @if(userProfileForm.get('lastname')?.invalid && userProfileForm.get('lastname')?.errors?.['required'] && (userProfileForm.get('lastname')?.touched && userProfileForm.value.lastname=='')){
                         <p class="text-sm text-red-600 "><span class="font-medium">This field is mandatory.</span></p>
@@ -74,7 +73,7 @@
                   <div class="flex flex-col">
                     <label for="marital-status" class="font-semibold">{{ 'PROFILE._marital_status' | translate }}</label>
                     <select id="marital-status" formControlName="maritalstatus"
-                    class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+                    class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
                         <option value="">{{ 'MATRIAL_STATUS._NOT_SAY' | translate }}</option>
                         <option value="Divorced">{{ 'MATRIAL_STATUS._DIVORCED' | translate }}</option>
                         <option value="Married">{{ 'MATRIAL_STATUS._MARRIED' | translate }}</option>
@@ -86,7 +85,7 @@
                   <div class="flex flex-col">
                     <label for="nationality" class="font-semibold">{{ 'PROFILE._nationality' | translate }}</label>
                     <input type="text" formControlName="nationality" id="nationality"
-                    class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
+                    class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
                   </div>
                 </div>
             </form>
@@ -99,18 +98,18 @@
                   <div class="flex flex-col">
                     <label for="birthdate" class="font-semibold">{{ 'PROFILE._date' | translate }}</label>
                     <input datepicker type="date" placeholder="Select date"  formControlName="birthdate" id="birthdate"
-                    class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
+                    class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
                   </div>
                   <div class="flex flex-col">
                     <label for="city" class="font-semibold">{{ 'PROFILE._city' | translate }}</label>
                     <input type="text" formControlName="city" id="city"
-                    class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
+                    class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
                   </div>
                 </div>
                 <div class="align-items-bottom align-bottom">
                     <label for="country" class="font-semibold">{{ 'PROFILE._country' | translate }}</label>
                     <select id="country" formControlName="country"
-                    class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+                    class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
                         <option value="">{{ 'COUNTRY._select_country' | translate }}</option>
                         @for(country of countries; track country.code){
                             <option value="{{country.code}}">{{ ('COUNTRY.' + country.code) | translate }}</option>
@@ -121,11 +120,11 @@
           </div>
         </div>
 
-        <div class="flex w-full justify-end">
+        <!--<div class="flex w-full justify-end">
             <button type="button" [disabled]="!userProfileForm.valid" [ngClass]="!userProfileForm.valid ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  (click)="updateProfile()"class="flex w-fit justify-center items-center py-1 px-5 text-base font-medium text-center text-white rounded-full bg-primary-100 focus:ring-4 focus:ring-black">
                 {{ 'PROFILE._update' | translate }}
             </button>
-        </div>
+        </div>-->
     </div>
 }
 @if(showError){
