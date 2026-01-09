@@ -66,31 +66,9 @@ export class DashboardComponent implements OnInit {
     }, this.delay);
   }
 
+  //TODO: Use /dashboard?token=local to enter "login" mode
   async ngOnInit() {
     this.isFilterPanelShown = JSON.parse(this.localStorage.getItem('is_filter_panel_shown') as string);
-    //TODO: check with verifier login
-    /*if(this.route.snapshot.queryParamMap.get('token') != null){    
-      this.loginService.getLogin(this.route.snapshot.queryParamMap.get('token')).then(data => {
-        let info = {
-          "id": data.id,
-          "user": data.username,
-          "email": data.email,
-          "token": data.accessToken,
-          "expire": data.expire,
-          "seller": data.seller,
-          "roles": data.roles,
-          "organizations": data.organizations,
-          "logged_as": data.id } as LoginInfo;
-
-        if (info.organizations != null && info.organizations.length > 0) {
-          info.logged_as = info.organizations[0].id
-        }
-
-        this.localStorage.setItem("accessToken",data.accessToken);
-        this.eventMessage.emitLogin(info);
-      })      
-      this.router.navigate(['/dashboard'])
-    }*/ 
     this.api.getLaunchedCategories().then((data: any[]) => {
       for(const element of data){
         if(element.isRoot){
