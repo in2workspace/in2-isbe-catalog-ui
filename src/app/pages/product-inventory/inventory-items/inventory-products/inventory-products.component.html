@@ -27,59 +27,61 @@
                     <!-- <fa-icon [icon]="faSwatchbook" class="fa-base text-primary-100 align-middle mr-2"></fa-icon> -->
                     <h2 class="text-base  font-semibold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
                     </div>
-                    <button id="dropdownDefault" data-dropdown-toggle="dropdown"
-                    class="text-black  w-full justify-between shadow bg-white  hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center shadow-lg"
-                    type="button">
-                    {{ 'OFFERINGS._filter_state' | translate }}
-                    <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                    </svg>
-                    </button>
+                    <div class="relative inline-block w-full">
+                      <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+                      class="text-black w-full justify-between bg-white border border-black font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center-lg"
+                      type="button">
+                      {{ 'OFFERINGS._filter_state' | translate }}
+                      <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                      </svg>
+                      </button>
 
-                    <div id="dropdown" class="z-20 hidden w-fit md:w-1/5 p-3 bg-white rounded-lg shadow ">
-                    <h6 class="mb-3 text-sm font-medium text-gray-900 ">
-                        {{ 'OFFERINGS._status' | translate }}
-                    </h6>
-                    <ul class="space-y-2 text-sm" aria-labelledby="dropdownDefault">
+                      <div id="dropdown" class="z-20 hidden w-full bg-white border border-black rounded-lg overflow-hidden">
+                      <!-- <h6 class="px-5 py-3 text-sm font-medium border-b border-black">
+                          {{ 'OFFERINGS._status' | translate }}
+                      </h6> -->
+                      <ul class="text-sm" aria-labelledby="dropdownDefault">
 
-                        <li class="flex items-center">
-                        <input id="created" type="checkbox" value="" checked (change)="onStateFilterChange('created')"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                          <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                          <input id="created" type="checkbox" value="" checked (change)="onStateFilterChange('created')"
+                              class="sr-only" />
 
-                        <label for="created" class="ml-2 text-sm font-medium text-gray-900 ">
-                            {{ 'PRODUCT_INVENTORY._created' | translate }}
-                        </label>
-                        </li>
+                          <label for="created" class="text-sm font-medium">
+                              {{ 'PRODUCT_INVENTORY._created' | translate }}
+                          </label>
+                          </li>
 
-                        <li class="flex items-center">
-                        <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                          <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                          <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
+                              class="sr-only" />
 
-                        <label for="active" class="ml-2 text-sm font-medium text-gray-900 ">
-                            {{ 'PRODUCT_INVENTORY._active' | translate }}
-                        </label>
-                        </li>
+                          <label for="active" class="text-sm font-medium">
+                              {{ 'PRODUCT_INVENTORY._active' | translate }}
+                          </label>
+                          </li>
 
-                        <li class="flex items-center">
-                        <input id="suspended" type="checkbox" value="" (change)="onStateFilterChange('suspended')"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                          <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                          <input id="suspended" type="checkbox" value="" (change)="onStateFilterChange('suspended')"
+                              class="sr-only" />
 
-                        <label for="suspended" class="ml-2 text-sm font-medium text-gray-900 ">
-                            {{ 'PRODUCT_INVENTORY._suspended' | translate }}
-                        </label>
-                        </li>
+                          <label for="suspended" class="text-sm font-medium">
+                              {{ 'PRODUCT_INVENTORY._suspended' | translate }}
+                          </label>
+                          </li>
 
-                        <li class="flex items-center">
-                        <input id="terminated" type="checkbox" value="" (change)="onStateFilterChange('terminated')"
-                            class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                          <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                          <input id="terminated" type="checkbox" value="" (change)="onStateFilterChange('terminated')"
+                              class="sr-only" />
 
-                        <label for="terminated" class="ml-2 text-sm font-medium text-gray-900 ">
-                            {{ 'PRODUCT_INVENTORY._terminated' | translate }}
-                        </label>
-                        </li>
+                          <label for="terminated" class="text-sm font-medium">
+                              {{ 'PRODUCT_INVENTORY._terminated' | translate }}
+                          </label>
+                          </li>
 
-                    </ul>
+                      </ul>
+                      </div>
                     </div>
                 </div>
             </div>
