@@ -250,9 +250,9 @@ export class OrgInfoComponent {
             this.errorMessage='¡Hubo un error al actualizar el perfil!';
           }
           this.showError=true;
-          setTimeout(() => {
-            this.showError = false;
-          }, 3000);
+          // setTimeout(() => {
+          //   this.showError = false;
+          // }, 3000);
       }
     });
   }
@@ -630,9 +630,9 @@ export class OrgInfoComponent {
                 this.errorMessage='File names can only include alphabetical characters (A-Z, a-z) and a limited set of symbols, such as underscores (_), hyphens (-), and periods (.)';
                 console.error('There was an error while uploading file!');
                 this.showError=true;
-                setTimeout(() => {
-                  this.showError = false;
-                }, 3000);
+                // setTimeout(() => {
+                //   this.showError = false;
+                // }, 3000);
                 return;
               }
               //IF FILES ARE HIGHER THAN 3MB THROW AN ERROR
@@ -640,9 +640,9 @@ export class OrgInfoComponent {
                 this.errorMessage='File size must be under 3MB.';
                 console.error('There was an error while uploading file!');
                 this.showError=true;
-                setTimeout(() => {
-                  this.showError = false;
-                }, 3000);
+                // setTimeout(() => {
+                //   this.showError = false;
+                // }, 3000);
                 return;
               }
               this.attachmentService.uploadFile(fileBody).subscribe({
@@ -654,9 +654,9 @@ export class OrgInfoComponent {
                       } else {
                         this.errorMessage='File must have a valid image format!';
                         this.showError=true;
-                        setTimeout(() => {
-                          this.showError = false;
-                        }, 3000);
+                        // setTimeout(() => {
+                        //   this.showError = false;
+                        // }, 3000);
                       }
                     }
                     this.cdr.detectChanges();
@@ -673,9 +673,9 @@ export class OrgInfoComponent {
                       this.errorMessage='¡El archivo es demasiado grande! Debe ser inferior a 3 MB.';
                     }
                     this.showError=true;
-                    setTimeout(() => {
-                      this.showError = false;
-                    }, 3000);
+                    // setTimeout(() => {
+                    //   this.showError = false;
+                    // }, 3000);
                 }
               });
             };

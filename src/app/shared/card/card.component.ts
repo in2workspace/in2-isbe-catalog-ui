@@ -286,7 +286,7 @@ export class CardComponent implements OnInit, AfterViewInit {
     console.error(defaultMessage, error);
     this.errorMessage = error?.error?.error ? `Error: ${error.error.error}` : defaultMessage;
     this.showError = true;
-    setTimeout(() => (this.showError = false), 3000);
+    // setTimeout(() => (this.showError = false), 3000);
   }
 
   private resetSelections() {

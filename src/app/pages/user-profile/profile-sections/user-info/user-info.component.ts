@@ -133,9 +133,9 @@ export class UserInfoComponent implements OnInit {
             this.errorMessage='¡Hubo un error al actualizar el perfil!';
           }
           this.showError=true;
-          setTimeout(() => {
-            this.showError = false;
-          }, 3000);
+          // setTimeout(() => {
+          //   this.showError = false;
+          // }, 3000);
       }
     });
   }

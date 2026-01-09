@@ -256,9 +256,9 @@ export class BillingAccountFormComponent implements OnInit {
             this.errorMessage='¡Hubo un error al crear la cuenta de facturación!';
           }
           this.showError=true;
-          setTimeout(() => {
-            this.showError = false;
-          }, 3000);
+          // setTimeout(() => {
+          //   this.showError = false;
+          // }, 3000);
         }
       });
     }
@@ -353,9 +353,9 @@ export class BillingAccountFormComponent implements OnInit {
               this.errorMessage='¡Hubo un error al actualizar la cuenta de facturación!';
             }
             this.showError=true;
-            setTimeout(() => {
-              this.showError = false;
-            }, 3000);
+            // setTimeout(() => {
+            //   this.showError = false;
+            // }, 3000);
           }
         });
       }

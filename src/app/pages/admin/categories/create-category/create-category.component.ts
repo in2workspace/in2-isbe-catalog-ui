@@ -245,9 +245,9 @@ export class CreateCategoryComponent implements OnInit {
           this.errorMessage='¡Hubo un error al crear la categoría!';
         }
         this.showError=true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
+        // setTimeout(() => {
+        //   this.showError = false;
+        // }, 3000);
       }
     })
   }

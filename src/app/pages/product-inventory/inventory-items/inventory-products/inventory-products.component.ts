@@ -202,9 +202,9 @@ export class InventoryProductsComponent implements OnInit {
             this.errorMessage='¡Hubo un error al cancelar la suscripción!';
           }
           this.showError=true;
-          setTimeout(() => {
-            this.showError = false;
-          }, 3000);
+          // setTimeout(() => {
+          //   this.showError = false;
+          // }, 3000);
       }
     });
   }

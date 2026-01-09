@@ -148,7 +148,7 @@ export class CreateCatalogComponent implements OnInit {
     if (!name) {
       this.errorMessage = 'Proporcione un nombre de catálogo.';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
       return;
     }
 
@@ -174,7 +174,7 @@ export class CreateCatalogComponent implements OnInit {
 
         this.errorMessage = this.getApiErrorMessage(err, fallback);
         this.showError = true;
-        setTimeout(() => (this.showError = false), 3000);
+        // setTimeout(() => (this.showError = false), 3000);
         return EMPTY;
       }),
       finalize(() => {

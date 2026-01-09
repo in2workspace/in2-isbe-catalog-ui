@@ -506,7 +506,7 @@ export class OfferComponent implements OnInit, OnDestroy{
     console.error('Error while creating offer price!', error);
     this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Error al crear precio de oferta!';
     this.showError = true;
-    setTimeout(() => (this.showError = false), 3000);
+    // setTimeout(() => (this.showError = false), 3000);
   }
 
   private async createPriceAlteration(component: any, currency: string): Promise<any> {
@@ -869,19 +869,19 @@ export class OfferComponent implements OnInit, OnDestroy{
     if (!v?.generalInfo?.name) {
       this.errorMessage = 'Falta la información general (nombre).';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
       return;
     }
     if (this.formType === 'create' && !this.bundleChecked && !v?.prodSpec?.id) {
       this.errorMessage = 'Debes seleccionar una Product Specification.';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
       return;
     }
     if (this.formType === 'create' && !v?.catalogue?.id && !this.IS_ISBE) {
       this.errorMessage = 'Debes seleccionar un Catálogo para crear la oferta.';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
       return;
     }
 
@@ -966,7 +966,7 @@ export class OfferComponent implements OnInit, OnDestroy{
           ? 'Error: ' + error.error.error
           : '¡Se produjo un error al guardar la oferta!';
         this.showError = true;
-        setTimeout(() => (this.showError = false), 3000);
+        // setTimeout(() => (this.showError = false), 3000);
       }
     });
   }
@@ -1165,7 +1165,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       console.error('❌ Error updating offer:', error);
       this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Se produjo un error al actualizar la oferta!';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
     }
   }
 
