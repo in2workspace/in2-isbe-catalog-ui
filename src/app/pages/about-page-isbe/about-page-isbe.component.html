@@ -2,7 +2,7 @@
 
   <div class="px-8 md:px-0 py-8 md:py-16 max-w-5xl">
     <!-- breadcrumbs -->
-    <button aria-label="Breadcrumb" (click)="goTo('/dashboard')"
+    <button (click)="goTo('/dashboard')"
       class="flex items-center gap-2 text-xs text-white bg-primary-100 py-0.5 px-2 rounded-lg">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_299_20420)">
@@ -17,19 +17,18 @@
           </clipPath>
         </defs>
       </svg>
-      Vuelve al Catálogo de Servicios Comerciales
+      {{ 'ABOUT_PAGE_ISBE._breadcrumb' | translate }}
     </button>
 
     <!-- title -->
-    <h1 class="text-4xl md:text-7xl font-semibold font-heading my-8">Catálogo de Servicios Comerciales de ISBE</h1>
-    <p class="text-base md:text-xl">El punto de encuentro entre las soluciones desplegadas en ISBE.</p>
+    <h1 class="text-4xl md:text-7xl font-semibold font-heading my-8">{{ 'ABOUT_PAGE_ISBE._title' | translate }}</h1>
+    <p class="text-base md:text-xl">{{ 'ABOUT_PAGE_ISBE._subtitle' | translate }}</p>
   </div>
 
   <div class="flex flex-col px-8 md:px-0 pb-8">
     <div class="flex relative ">
       <div class="absolute top-0 left-0 hidden md:flex flex-col gap-2 opacity-0">
-        <span
-          class="block border-black border-l-2 py-4 px-2  uppercase text-xxs font-semibold font-heading">Lorem</span>
+        <span class="block border-black border-l-2 py-4 px-2 uppercase text-xxs font-semibold font-heading"></span>
         <span class="block border-black/50 border-l-2 p-2"></span>
         <span class="block border-black/50 border-l-2 p-2"></span>
       </div>
@@ -39,7 +38,7 @@
 
           <!-- Small Banner -->
           <div class="w-full flex flex-col gap-7 py-6 px-7 banner__background_gradient rounded-3xl">
-            <h2 class="font-heading font-semibold text-2xl md:text-3xl">Próximamente</h2>
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE._coming_soon_title' | translate }}</h2>
             <div class="flex flex-col lg:flex-row justify-between lg:items-end gap-7">
               <div class="flex">
                 <svg width="99" height="36" viewBox="0 0 99 36" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -48,16 +47,15 @@
                 </svg>
               </div>
 
-              <p class="font-normal text-xl">Estamos trabajando para ofrecerte un espacio donde dar visibilidad a tus servicios blockchain 
-                  y compartir desarrollos y soluciones.</p>
+              <p class="font-normal text-xl">{{ 'ABOUT_PAGE_ISBE._coming_soon_desc' | translate }}</p>
             </div>
           </div>
 
-          <h2 class="font-heading font-semibold text-2xl md:text-3xl">¿Qué es y para qué sirve este catálogo?</h2>
+          <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE._what_is_title' | translate }}</h2>
 
-          <p>El Catálogo de Servicios Comerciales es un espacio donde empresas y administraciones pueden publicar, descubrir y conectar las soluciones blockchain desplegadas en ISBE.</p>
-          <p>Está dirigido a empresas, startups, administraciones públicas y proveedores tecnológicos, y sirve tanto para ofrecer los servicios propios, como para encontrar soluciones blockchain de terceros.</p>
-          <p>El catálogo da visibilidad y facilita la colaboración entre empresas, administraciones y desarrolladores.</p>
+          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_1' | translate }}</p>
+          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_2' | translate }}</p>
+          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_3' | translate }}</p>
         </div>
       </div>
     </div>
@@ -75,12 +73,11 @@
 
         <div class="flex flex-col md:flex-row gap-8 w-full">
           <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
-            <h2 class="font-heading font-semibold text-2xl md:text-3xl">Aporta visibilidad a tus soluciones blockchain
-            </h2>
-            <p>Publicar soluciones en el catálogo otorga visibilidad a tus servicios blockchain en un entorno de confianza. De esta forma, dispones de un escaparate en el que encontrar a potenciales interesados, tanto para usar tu solución como para colaborar contigo.</p>
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._1_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._1_desc' | translate }}</p>
           </div>
           <div class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
-            <img class="max-w-[178px] w-full h-autoobject-cover" src="/assets/images/image-visibilidad.png" alt="Product image" />
+            <img class="max-w-[178px] w-full h-autoobject-cover" src="/assets/images/image-visibilidad.png" alt="" />
           </div>
         </div>
       </div>
@@ -95,11 +92,11 @@
 
         <div class="flex flex-col md:flex-row gap-8 w-full">
           <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
-            <h2 class="font-heading font-semibold text-2xl md:text-3xl">Garantiza la confianza</h2>
-            <p>ISBE verifica que todas las ofertas publicadas son fiables y libres de información engañosa o inactiva. Esto otorga confianza y reputación, no solo a las soluciones blockchain, sino a las compañías que las ofrecen.</p>
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._2_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._2_desc' | translate }}</p>
           </div>
           <picture class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
-            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-validacion.png" alt="Product image" />
+            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-validacion.png" alt="" />
           </picture>
         </div>
       </div>
@@ -114,11 +111,11 @@
 
         <div class="flex flex-col md:flex-row gap-8">
           <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
-            <h2 class="font-heading font-semibold text-2xl md:text-3xl">Es un espacio de integración</h2>
-            <p>El catálogo está diseñado para que sea fácil identificar oportunidades de colaboración entre organizaciones, fomentando la creación de cadenas de valor digital. Es el caso, por ejemplo, de servicios que consumen APIs de otros participantes.</p>
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._3_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._3_desc' | translate }}</p>
           </div>
           <picture class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
-            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-integracion.png" alt="Product image" />
+            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-integracion.png" alt="" />
           </picture>
         </div>
       </div>
@@ -133,12 +130,11 @@
 
         <div class="flex flex-col md:flex-row gap-8">
           <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
-            <h2 class="font-heading font-semibold text-2xl md:text-3xl">Impulsa la interoperabilidad y el crecimiento</h2>
-            <p>Publicar en el catálogo fomenta la viralidad del ecosistema, lo que redunda en el beneficio de todos, aportando visibilidad y crecimiento a todos los participantes. 
-              Las soluciones que dependen de otras desplegadas en ISBE contribuyen al crecimiento mutuo, y amplían las oportunidades de negocio.</p>
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._4_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._4_desc' | translate }}</p>
           </div>
           <picture class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
-            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-impulso.png" alt="Product image" />
+            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-impulso.png" alt="" />
           </picture>
         </div>
       </div>
@@ -153,14 +149,11 @@
 
         <div class="flex flex-col md:flex-row gap-8">
           <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
-            <h2 class="font-heading font-semibold text-2xl md:text-3xl">Es una herramienta de innovación</h2>
-            <p>A través del Catálogo de Servicios, ISBE impulsa la innovación responsable, con una oferta visible y de calidad.
-                Publicar en el catálogo supone participar de forma activa en este movimiento  
-                y ser protagonista del mercado de soluciones blockchain.
-            </p>
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._5_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._5_desc' | translate }}</p>
           </div>
           <picture class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
-            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-gobernanza.png" alt="Product image" />
+            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-gobernanza.png" alt="" />
           </picture>
         </div>
       </div>
@@ -170,37 +163,31 @@
   <div class="px-8 md:px-0 py-8 md:py-16 max-w-5xl">
 
     <!-- title -->
-    <h1 class="text-4xl md:text-7xl font-semibold font-heading my-8">Beneficios para empresas y usuarios</h1>
-    <p class="text-base md:text-xl">Participar en el Catálogo de Servicios Comerciales de ISBE permite a las empresas:
-    </p>
+    <h1 class="text-4xl md:text-7xl font-semibold font-heading my-8">{{ 'ABOUT_PAGE_ISBE._benefits_title' | translate }}</h1>
+    <p class="text-base md:text-xl">{{ 'ABOUT_PAGE_ISBE._benefits_desc' | translate }}</p>
   </div>
 
   <!-- cards -->
   <ul class="grid md:grid-cols-3 gap-8 px-8 md:px-0 mb-8">
     <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
-      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-visibilidad.svg" alt="Product image" />
-      <p class="font-heading font-semibold text-2xl mb-3">Aumentar su visibilidad dentro del ecosistema blockchain nacional.
-      </p>
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-visibilidad.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._1' | translate }}</p>
     </li>
     <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
-      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-confianza.svg" alt="Product image" />
-      <p class="font-heading font-semibold text-2xl mb-3">Generar confianza ante clientes y socios.
-      </p>
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-confianza.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._2' | translate }}</p>
     </li>
     <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
-      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-sinergias.svg" alt="Product image" />
-      <p class="font-heading font-semibold text-2xl mb-3">Encontrar sinergias con otras soluciones desplegadas en ISBE.
-      </p>
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-sinergias.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._3' | translate }}</p>
     </li>
     <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
-      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-comercializacion.svg" alt="Product image" />
-      <p class="font-heading font-semibold text-2xl mb-3">Acelerar la comercialización de servicios compatibles con los estándares europeos.
-      </p>
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-comercializacion.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._4' | translate }}</p>
     </li>
     <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
-      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-desarollo.svg" alt="Product image" />
-      <p class="font-heading font-semibold text-2xl mb-3">Contribuir activamente al desarrollo y sostenibilidad de la infraestructura ISBE.
-      </p>
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-desarollo.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._5' | translate }}</p>
     </li>
   </ul>
 
@@ -209,12 +196,8 @@
     <div
       class="banner__background_gradient bg-cover rounded-3xl p-8 md:px-16 md:py-14 bg-white flex flex-col md:flex-row justify-between gap-8">
       <div class="flex flex-col gap-8">
-        <h3 class="text-2xl md:text-3xl font-heading font-semibold max-w-sm">Conecta estos servicios con la
-          infraestructura que los
-          hace posibles
-        </h3>
-        <p class="max-w-md">Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal.
-        </p>
+        <h3 class="text-2xl md:text-3xl font-heading font-semibold max-w-sm">{{ 'ABOUT_PAGE_ISBE._banner_title' | translate }}</h3>
+        <p class="max-w-md">{{ 'ABOUT_PAGE_ISBE._banner_desc' | translate }}</p>
         <button type="button" (click)="openWindow(isbeAbout)"
           class="w-fit flex items-center justify-start text-white bg-black font-medium rounded-full text-sm uppercase px-5 py-2.5 text-center  me-2 ">
           {{ 'ABOUT._visit_isbe' | translate }}
@@ -227,7 +210,7 @@
       </div>
 
       <picture class="rounded-3xl overflow-hidden max-w-md bg-gray-25">
-        <img class="size-full object-cover" src="/assets/images/ISBE_fondo.webp" alt="Product image" />
+        <img class="size-full object-cover" src="/assets/images/ISBE_fondo.webp" alt="" />
       </picture>
 
     </div>

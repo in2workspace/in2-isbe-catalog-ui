@@ -1534,6 +1534,81 @@
   "WARNING": {
     "_message": "Hay cambios sin guardar. Si abandonas esta página, los cambios realizados se perderán."
   },
+  "ABOUT_PAGE_ISBE": {
+    "_breadcrumb": "Vuelve al Catálogo de Servicios Comerciales",
+    "_title": "Catálogo de Servicios Comerciales de ISBE",
+    "_subtitle": "El punto de encuentro entre las soluciones desplegadas en ISBE.",
+    "_coming_soon_title": "Próximamente",
+    "_coming_soon_desc": "Estamos trabajando para ofrecerte un espacio donde dar visibilidad a tus servicios blockchain y compartir desarrollos y soluciones.",
+    "_what_is_title": "¿Qué es y para qué sirve este catálogo?",
+    "_what_is_desc_1": "El Catálogo de Servicios Comerciales es un espacio donde empresas y administraciones pueden publicar, descubrir y conectar las soluciones blockchain desplegadas en ISBE.",
+    "_what_is_desc_2": "Está dirigido a empresas, startups, administraciones públicas y proveedores tecnológicos, y sirve tanto para ofrecer los servicios propios, como para encontrar soluciones blockchain de terceros.",
+    "_what_is_desc_3": "El catálogo da visibilidad y facilita la colaboración entre empresas, administraciones y desarrolladores.",
+    "CARDS": {
+      "_1_title": "Aporta visibilidad a tus soluciones blockchain",
+      "_1_desc": "Publicar soluciones en el catálogo otorga visibilidad a tus servicios blockchain en un entorno de confianza. De esta forma, dispones de un escaparate en el que encontrar a potenciales interesados, tanto para usar tu solución como para colaborar contigo.",
+      "_2_title": "Garantiza la confianza",
+      "_2_desc": "ISBE verifica que todas las ofertas publicadas son fiables y libres de información engañosa o inactiva. Esto otorga confianza y reputación, no solo a las soluciones blockchain, sino a las compañías que las ofrecen.",
+      "_3_title": "Es un espacio de integración",
+      "_3_desc": "El catálogo está diseñado para que sea fácil identificar oportunidades de colaboración entre organizaciones, fomentando la creación de cadenas de valor digital. Es el caso, por ejemplo, de servicios que consumen APIs de otros participantes.",
+      "_4_title": "Impulsa la interoperabilidad y el crecimiento",
+      "_4_desc": "Publicar en el catálogo fomenta la viralidad del ecosistema, lo que redunda en el beneficio de todos, aportando visibilidad y crecimiento a todos los participantes. Las soluciones que dependen de otras desplegadas en ISBE contribuyen al crecimiento mutuo, y amplían las oportunidades de negocio.",
+      "_5_title": "Es una herramienta de innovación",
+      "_5_desc": "A través del Catálogo de Servicios, ISBE impulsa la innovación responsable, con una oferta visible y de calidad. Publicar en el catálogo supone participar de forma activa en este movimiento y ser protagonista del mercado de soluciones blockchain."
+    },
+    "_benefits_title": "Beneficios para empresas y usuarios",
+    "_benefits_desc": "Participar en el Catálogo de Servicios Comerciales de ISBE permite a las empresas:",
+    "BENEFITS": {
+      "_1": "Aumentar su visibilidad dentro del ecosistema blockchain nacional.",
+      "_2": "Generar confianza ante clientes y socios.",
+      "_3": "Encontrar sinergias con otras soluciones desplegadas en ISBE.",
+      "_4": "Acelerar la comercialización de servicios compatibles con los estándares europeos.",
+      "_5": "Contribuir activamente al desarrollo y sostenibilidad de la infraestructura ISBE."
+    },
+    "_banner_title": "Conecta estos servicios con la infraestructura que los hace posibles",
+    "_banner_desc": "Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal."
+  },
+  "PUBLISH_SERVICE": {
+    "_title": "Publica tu servicio",
+    "_subtitle": "Y da visibilidad a tus soluciones blockchain en el Catálogo Comercial de ISBE",
+    "_how_to_title": "¿Cómo publicar tu servicio?",
+    "_how_to_desc": "Ante todo, es fundamental que el caso ya esté desplegado en ISBE. Si es así, publicar un servicio en el Catálogo Comercial de ISBE es muy fácil y solo tienes que seguir estos pasos. Hemos diseñado un proceso muy sencillo, pensado para garantizar la confianza y la trazabilidad.",
+    "STEPS": {
+      "_1_title": "Registra tu entidad",
+      "_1_desc": "Accede a la Página de Registro y regístrate mediante tu <b>certificado digital de representante</b> de la empresa o administración pública. Esta fórmula asegura la identidad de la organización y automatiza el proceso de alta.",
+      "_2_title": "Accede a tu área privada",
+      "_2_desc": "Una vez registrado, accede a tu <i>Área de usuario</i>. Desde el menú <i>Mis servicios</i> puedes crear y gestionar tus ofertas, consultar su estado y editar la información publicada.",
+      "_3_title": "Crea el borrador de tu oferta",
+      "_3_desc": "Rellena el formulario con la información comercial y técnica del servicio que quieres publicar:",
+      "_3_items": {
+        "_1": "Nombre y descripción del servicio o solución.",
+        "_2": "Categoría y tipo de servicio.",
+        "_3": "Sube el logotipo o una imagen representativa del servicio.",
+        "_4": "Datos de contacto y enlace a la documentación o a la web oficial."
+      },
+      "_3_footer": "El sistema guardará esta información en estado de borrador, que solo será visible solo para ti y tu organización.",
+      "_4_title": "Revísalo y apruébalo internamente",
+      "_4_desc": "Antes de solicitar la publicación, otro miembro autorizado de tu organización debe <b>revisar y aprobar</b> el borrador. Una vez revisado, cambia el estado de <i>Borrador</i> a <i>Activo</i>, para que iniciemos el proceso de validación. En este punto, la oferta aún no es pública. Esta operación se realiza manualmente, bien sea el usuario u otra persona de su organización.",
+      "_5_title": "Validación por ISBE",
+      "_5_desc": "Una vez que el servicio está Activo, solo falta la validación. El equipo de ISBE comprobará que:",
+      "_5_items": {
+        "_1": "El texto, las imágenes y los datos se adecúan a nuestras políticas.",
+        "_2": "Existe coherencia entre la información comercial y los servicios realmente desplegados en ISBE.",
+        "_3": "Que las referencias a otros servicios o APIs, si las hay, son correctas."
+      },
+      "_5_footer": "Superada correctamente la comprobación, el servicio es validado y publicado, por lo que pasa a ser visible en el Catálogo Comercial de ISBE."
+    },
+    "_benefits_title": "Beneficios de publicar tu servicio en ISBE",
+    "_benefits_desc": "Publicar un servicio en el Catálogo Comercial de ISBE te permite:",
+    "BENEFITS": {
+      "_1": "Dar visibilidad a tus soluciones blockchain.",
+      "_2": "Aumentar la confianza y reputación de tu organización.",
+      "_3": "Facilitar alianzas con otras empresas del ecosistema.",
+      "_4": "Promocionar tus servicios en un entorno regulado y transparente."
+    },
+    "_banner_title": "Conecta estos servicios con la infraestructura que los hace posibles",
+    "_banner_desc": "Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal."
+  },
   "ABOUT": {
     "_visit_isbe":"VISIT ISBE",
     "_title": "Catálogo de Servicios Comerciales de ISBE",
