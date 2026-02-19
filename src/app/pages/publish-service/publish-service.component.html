@@ -1,21 +1,20 @@
 <div class="relative">
   <div class="w-full flex flex-col px-8 pb-32">
     <div class="py-8 md:py-16">
-      <h1 class="text-4xl md:text-7xl font-semibold font-heading mb-8">Publica tu servicio</h1>
-      <p class="text-base md:text-xl">Y da visibilidad a tus soluciones blockchain en el Catálogo Comercial de ISBE</p>
+      <h1 class="text-4xl md:text-7xl font-semibold font-heading mb-8">{{ 'PUBLISH_SERVICE._title' | translate }}</h1>
+      <p class="text-base md:text-xl">{{ 'PUBLISH_SERVICE._subtitle' | translate }}</p>
     </div>
 
     <div class="flex max-w-5xl">
       <div class="hidden md:flex flex-col gap-2 pr-8 opacity-0">
-        <span
-          class="block border-black border-l-2 py-4 px-2  uppercase text-xxs font-semibold font-heading">Lorem</span>
+        <span class="block border-black border-l-2 py-4 px-2 uppercase text-xxs font-semibold font-heading"></span>
         <span class="block border-black/50 border-l-2 p-2"></span>
         <span class="block border-black/50 border-l-2 p-2"></span>
       </div>
 
       <div class="flex flex-col">
-        <h2 class="font-heading font-semibold text-2xl md:text-3xl mb-8">¿Cómo publicar tu servicio?</h2>
-        <p class="max-w-xl">Ante todo, es fundamental que el caso ya esté desplegado en ISBE. Si es así, publicar un servicio en el Catálogo Comercial de ISBE es muy fácil y solo tienes que seguir estos pasos. Hemos diseñado un proceso muy sencillo, pensado para garantizar la confianza y la trazabilidad.</p>
+        <h2 class="font-heading font-semibold text-2xl md:text-3xl mb-8">{{ 'PUBLISH_SERVICE._how_to_title' | translate }}</h2>
+        <p class="max-w-xl">{{ 'PUBLISH_SERVICE._how_to_desc' | translate }}</p>
 
         <!-- Pasos -->
         <div class="flex items-baseline gap-6 border-black border-b py-8">
@@ -24,8 +23,8 @@
             <span class="font-semibold text-xl">1</span>
           </div>
           <div class="flex flex-col">
-            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">Regístrate tu entidad</h2>
-            <p>Accede a la Página de Registro y regístrate mediante tu <b>certificado digital de representante</b> de la empresa o administración pública. Esta fórmula asegura la identidad de la organización y automatiza el proceso de alta.</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">{{ 'PUBLISH_SERVICE.STEPS._1_title' | translate }}</h2>
+            <p [innerHTML]="'PUBLISH_SERVICE.STEPS._1_desc' | translate"></p>
           </div>
         </div>
 
@@ -35,8 +34,8 @@
             <span class="font-semibold text-xl">2</span>
           </div>
           <div class="flex flex-col">
-            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">Accede a tu área privada</h2>
-            <p>Una vez registrado, accede a tu <i>Área de usuario</i>. Desde el menú <i>Mis servicios</i> puedes crear y gestionar tus ofertas, consultar su estado y editar la información publicada.</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">{{ 'PUBLISH_SERVICE.STEPS._2_title' | translate }}</h2>
+            <p [innerHTML]="'PUBLISH_SERVICE.STEPS._2_desc' | translate"></p>
           </div>
         </div>
 
@@ -46,15 +45,15 @@
             <span class="font-semibold text-xl">3</span>
           </div>
           <div class="flex flex-col">
-            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">Crea el borrador de tu oferta</h2>
-            <p>Rellena el formulario con la información comercial y técnica del servicio que quieres publicar:</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">{{ 'PUBLISH_SERVICE.STEPS._3_title' | translate }}</h2>
+            <p>{{ 'PUBLISH_SERVICE.STEPS._3_desc' | translate }}</p>
             <ul class="list-disc pl-8 py-2">
-              <li>Nombre y descripción del servicio o solución.</li>
-              <li>Categoría y tipo de servicio.</li>
-              <li>Sube el logotipo o una imagen representativa del servicio.</li>
-              <li>Datos de contacto y enlace a la documentación o a la web oficial.</li>
+              <li>{{ 'PUBLISH_SERVICE.STEPS._3_items._1' | translate }}</li>
+              <li>{{ 'PUBLISH_SERVICE.STEPS._3_items._2' | translate }}</li>
+              <li>{{ 'PUBLISH_SERVICE.STEPS._3_items._3' | translate }}</li>
+              <li>{{ 'PUBLISH_SERVICE.STEPS._3_items._4' | translate }}</li>
             </ul>
-            <p>El sistema guardará esta información en estado de borrador, que solo será visible solo para ti y tu organización.</p>
+            <p>{{ 'PUBLISH_SERVICE.STEPS._3_footer' | translate }}</p>
           </div>
         </div>
 
@@ -64,8 +63,8 @@
             <span class="font-semibold text-xl">4</span>
           </div>
           <div class="flex flex-col">
-            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">Revísalo y apruébalo internamente</h2>
-            <p>Antes de solicitar la publicación, otro miembro autorizado de tu organización debe <b>revisar y aprobar</b> el borrador. Una vez revisado, cambia el estado de <i>Borrador</i> a <i>Activo</i>, para que iniciemos el proceso de validación. En este punto, la oferta aún no es pública. Esta operación se realiza manualmente, bien sea el usuario u otra persona de su organización.</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">{{ 'PUBLISH_SERVICE.STEPS._4_title' | translate }}</h2>
+            <p [innerHTML]="'PUBLISH_SERVICE.STEPS._4_desc' | translate"></p>
           </div>
         </div>
 
@@ -75,25 +74,25 @@
             <span class="font-semibold text-xl">5</span>
           </div>
           <div class="flex flex-col">
-            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">Validación por ISBE</h2>
-            <p>Una vez que el servicio está Activo, solo falta la validación. El equipo de ISBE comprobará que:</p>
+            <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">{{ 'PUBLISH_SERVICE.STEPS._5_title' | translate }}</h2>
+            <p>{{ 'PUBLISH_SERVICE.STEPS._5_desc' | translate }}</p>
             <ul class="list-disc pl-8 py-2">
-              <li>El texto, las imágenes y los datos se adecúan a nuestras  políticas.</li>
-              <li>Existe coherencia entre la información comercial y los servicios realmente desplegados en ISBE.</li>
-              <li>Que las referencias a otros servicios o APIs, si las hay, son correctas.</li>
+              <li>{{ 'PUBLISH_SERVICE.STEPS._5_items._1' | translate }}</li>
+              <li>{{ 'PUBLISH_SERVICE.STEPS._5_items._2' | translate }}</li>
+              <li>{{ 'PUBLISH_SERVICE.STEPS._5_items._3' | translate }}</li>
             </ul>
-            <p>Superada correctamente la comprobación, el servicio es validado y publicado, por lo que pasa a ser visible en el Catálogo Comercial de ISBE</p>
+            <p>{{ 'PUBLISH_SERVICE.STEPS._5_footer' | translate }}</p>
           </div>
         </div>
 
         <div class="w-full py-8">
-          <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">Beneficios de publicar tu servicio en ISBE</h2>
-          <p>Publicar un servicio en el Catálogo Comercial de ISBE te permite:</p>
+          <h2 class="font-heading text-2xl md:text-3xl font-semibold mb-1">{{ 'PUBLISH_SERVICE._benefits_title' | translate }}</h2>
+          <p>{{ 'PUBLISH_SERVICE._benefits_desc' | translate }}</p>
           <ul class="list-disc pl-8 py-2">
-            <li>Dar visibilidad a tus soluciones blockchain.</li>
-            <li>Aumentar la confianza y reputación de tu organización.</li>
-            <li>Facilitar alianzas con otras empresas del ecosistema.</li>
-            <li>Promocionar tus servicios en un entorno regulado y transparente.</li>
+            <li>{{ 'PUBLISH_SERVICE.BENEFITS._1' | translate }}</li>
+            <li>{{ 'PUBLISH_SERVICE.BENEFITS._2' | translate }}</li>
+            <li>{{ 'PUBLISH_SERVICE.BENEFITS._3' | translate }}</li>
+            <li>{{ 'PUBLISH_SERVICE.BENEFITS._4' | translate }}</li>
           </ul>
         </div>
 
@@ -107,12 +106,8 @@
       <div
         class="banner__background_gradient bg-cover rounded-3xl p-8 md:px-16 md:py-14 bg-white flex flex-col md:flex-row justify-between gap-8">
         <div class="flex flex-col gap-8">
-          <h3 class="text-2xl md:text-3xl font-heading font-semibold max-w-sm">Conecta estos servicios con la
-            infraestructura que los
-            hace posibles
-          </h3>
-          <p class="max-w-md">Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal.
-          </p>
+          <h3 class="text-2xl md:text-3xl font-heading font-semibold max-w-sm">{{ 'PUBLISH_SERVICE._banner_title' | translate }}</h3>
+          <p class="max-w-md">{{ 'PUBLISH_SERVICE._banner_desc' | translate }}</p>
           <button type="button" (click)="openWindow(isbeAbout)"
             class="w-fit flex items-center justify-start text-white bg-black font-medium rounded-full text-sm uppercase px-5 py-2.5 text-center  me-2 ">
             {{ 'ABOUT._visit_isbe' | translate }}
@@ -125,7 +120,7 @@
         </div>
 
         <picture class="rounded-3xl overflow-hidden bg-gray max-w-md">
-          <img class="size-full object-cover" src="/assets/images/ISBE_fondo.webp" alt="Product image" />
+          <img class="size-full object-cover" src="/assets/images/ISBE_fondo.webp" alt="" />
         </picture>
 
       </div>

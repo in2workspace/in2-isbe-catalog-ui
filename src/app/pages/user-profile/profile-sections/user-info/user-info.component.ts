@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { countries } from 'src/app/models/country.const'
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
+import Datepicker from 'flowbite-datepicker/Datepicker';
 import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
 import { NgClass } from '@angular/common';
@@ -44,6 +45,7 @@ export class UserInfoComponent implements OnInit {
   errorMessage:any='';
   showError:boolean=false;
   successVisibility:boolean=false;
+  private birthdatePicker: Datepicker | null = null;
 
   constructor(
     private readonly auth: AuthService,
@@ -65,6 +67,7 @@ export class UserInfoComponent implements OnInit {
     this.selectedDate = today.toISOString();
     this.initPartyInfo();
     this.userProfileForm.disable({ emitEvent: false });
+    // this.userProfileForm.get('birthdate')?.enable({ emitEvent: false });
   }
 
   initPartyInfo(): void {
@@ -97,6 +100,7 @@ export class UserInfoComponent implements OnInit {
     this.loading=false;
 
     this.cdr.detectChanges();
+    this.initBirthdatePicker();
     initFlowbite();
   }
 
@@ -133,9 +137,9 @@ export class UserInfoComponent implements OnInit {
             this.errorMessage='¡Hubo un error al actualizar el perfil!';
           }
           this.showError=true;
-          setTimeout(() => {
-            this.showError = false;
-          }, 3000);
+          // setTimeout(() => {
+          //   this.showError = false;
+          // }, 3000);
       }
     });
   }
@@ -206,6 +210,20 @@ export class UserInfoComponent implements OnInit {
 
     const profile = this.mapTokenToProfile(payload);
     this.loadProfileData(profile);
+  }
+
+  private initBirthdatePicker(): void {
+    const el = document.getElementById('birthdate') as HTMLInputElement | null;
+    if (!el) return;
+
+    if (this.birthdatePicker) {
+      this.birthdatePicker.destroy();
+    }
+
+    this.birthdatePicker = new Datepicker(el, {
+      autohide: true,
+      format: 'yyyy-mm-dd',
+    });
   }
 
 }

@@ -9,7 +9,7 @@
       {{message}}
     </div>
     <div class="flex items-center justify-center">
-      <button class="flex flex-row gap-2 px-4 py-2 rounded-full text-danger text-sm font-normal bg-danger/15">
+      <button type="button" class="flex flex-row items-center gap-2 px-4 py-2 rounded-full text-danger text-sm font-normal bg-danger/15" (click)="close.emit()">
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M11 1L6 6M6 6L1 11M6 6L11 11M6 6L1 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>

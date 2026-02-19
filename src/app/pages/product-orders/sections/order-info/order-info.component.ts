@@ -126,7 +126,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
   handleError(msg: string) {
     this.errorMessage = msg;
     this.showError = true;
-    setTimeout(() => (this.showError = false), 3000);
+    // setTimeout(() => (this.showError = false), 3000);
   }
 
   async confirmAction() {

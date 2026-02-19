@@ -605,9 +605,9 @@ export class UpdateProductSpecComponent implements OnInit {
                 this.errorMessage='File names can only include alphabetical characters (A-Z, a-z) and a limited set of symbols, such as underscores (_), hyphens (-), and periods (.)';
                 console.error('There was an error while uploading file!');
                 this.showError=true;
-                setTimeout(() => {
-                  this.showError = false;
-                }, 3000);
+                // setTimeout(() => {
+                //   this.showError = false;
+                // }, 3000);
                 return;
               }
               //IF FILES ARE HIGHER THAN 3MB THROW AN ERROR
@@ -615,9 +615,9 @@ export class UpdateProductSpecComponent implements OnInit {
                 this.errorMessage='File size must be under 3MB.';
                 console.error('There was an error while uploading file!');
                 this.showError=true;
-                setTimeout(() => {
-                  this.showError = false;
-                }, 3000);
+                // setTimeout(() => {
+                //   this.showError = false;
+                // }, 3000);
                 return;
               }
               if(this.showCompliance && !this.showUploadAtt){
@@ -640,9 +640,9 @@ export class UpdateProductSpecComponent implements OnInit {
                         this.errorMessage='File size too large! Must be under 3MB.';
                       }
                       this.showError=true;
-                      setTimeout(() => {
-                        this.showError = false;
-                      }, 3000);
+                      // setTimeout(() => {
+                      //   this.showError = false;
+                      // }, 3000);
                   }
                 });
               }
@@ -683,9 +683,9 @@ export class UpdateProductSpecComponent implements OnInit {
                         this.errorMessage='File size too large! Must be under 3MB.';
                       }
                       this.showError=true;
-                      setTimeout(() => {
-                        this.showError = false;
-                      }, 3000);
+                      // setTimeout(() => {
+                      //   this.showError = false;
+                      // }, 3000);
                   }
                 });
               }
@@ -704,9 +704,9 @@ export class UpdateProductSpecComponent implements OnInit {
                         } else {
                           this.errorMessage='File must have a valid image format!';
                           this.showError=true;
-                          setTimeout(() => {
-                            this.showError = false;
-                          }, 3000);
+                          // setTimeout(() => {
+                          //   this.showError = false;
+                          // }, 3000);
                         }
                       } else {
                         this.attachToCreate={url:data.content,attachmentType:file.type};
@@ -725,9 +725,9 @@ export class UpdateProductSpecComponent implements OnInit {
                         this.errorMessage='¡El archivo es demasiado grande! Debe ser inferior a 3 MB.';
                       }
                       this.showError=true;
-                      setTimeout(() => {
-                        this.showError = false;
-                      }, 3000);
+                      // setTimeout(() => {
+                      //   this.showError = false;
+                      // }, 3000);
                   }
                 });
               }
@@ -1224,9 +1224,9 @@ export class UpdateProductSpecComponent implements OnInit {
           this.errorMessage='¡Hubo un error al cargar el producto!';
         }
         this.showError=true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
+        // setTimeout(() => {
+        //   this.showError = false;
+        // }, 3000);
       }
     });
   }

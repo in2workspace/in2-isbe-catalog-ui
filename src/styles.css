@@ -40,20 +40,130 @@
 
 @import '@ctrl/ngx-emoji-mart/picker';
 
+/* Flowbite datepicker overrides */
+@layer components {
+  .datepicker {
+    font-family: "GTStandardM", system-ui, sans-serif;
+    @apply text-primary-100;
+  }
+
+  .datepicker.datepicker-dropdown {
+    @apply z-50;
+  }
+
+  .datepicker .datepicker-picker {
+    @apply rounded-2xl border border-gray-25 shadow-xl;
+    background-color: #ffffff !important;
+  }
+
+  .dark .datepicker .datepicker-picker {
+    background-color: #ffffff !important;
+    @apply shadow-none border-gray-50 border p-0;
+  }
+
+  .datepicker .datepicker-main {
+    @apply p-2;
+  }
+
+  .datepicker .datepicker-title {
+    @apply rounded-t-2xl bg-gray-0 px-3 py-2 text-sm font-semibold;
+    color: #000000 !important;
+  }
+
+  .datepicker .datepicker-header .datepicker-controls {
+    @apply gap-1 px-2 pt-2 pb-1;
+  }
+
+  .datepicker .datepicker-controls .button {
+    @apply rounded-lg border border-transparent bg-transparent px-2 py-1 text-sm transition hover:bg-transparent focus:outline-none focus:ring-2 focus:ring-primary-50;
+    color: #000000 !important;
+    background-color: transparent !important;
+    border-color: transparent !important;
+  }
+
+  .datepicker .datepicker-header .datepicker-controls .button {
+    @apply font-semibold;
+  }
+
+  .datepicker .datepicker-controls .prev-btn,
+  .datepicker .datepicker-controls .next-btn {
+    @apply w-8 bg-transparent;
+  }
+
+  .datepicker .datepicker-controls .prev-btn:hover,
+  .datepicker .datepicker-controls .next-btn:hover {
+    @apply bg-transparent;
+  }
+
+  .datepicker .datepicker-controls .prev-btn svg,
+  .datepicker .datepicker-controls .next-btn svg {
+    @apply text-black;
+  }
+
+  .datepicker .datepicker-controls .view-switch {
+    @apply rounded-lg bg-transparent px-2 py-1 text-sm;
+    color: #000000 !important;
+  }
+
+  .datepicker .datepicker-controls .view-switch:hover {
+    @apply bg-transparent;
+  }
+
+  .datepicker .datepicker-view .dow {
+    @apply text-xs uppercase tracking-wide;
+    color: #333333 !important;
+  }
+
+  .datepicker .datepicker-grid {
+    @apply gap-1 p-1;
+  }
+
+  .datepicker .datepicker-cell {
+    @apply w-[22px] h-[25px] flex items-center justify-center rounded-lg text-sm transition;
+    color: #000000 !important;
+  }
+
+  .datepicker .datepicker-cell:not(.disabled):hover {
+    @apply bg-gray-0;
+  }
+
+  .datepicker .datepicker-cell.selected,
+  .datepicker .datepicker-cell.selected:hover {
+    @apply bg-primary-50 text-white;
+  }
+
+  .datepicker .datepicker-cell.today:not(.selected) {
+    @apply bg-beige text-primary-100;
+  }
+
+  .datepicker .datepicker-cell.disabled {
+    @apply text-gray-50;
+  }
+
+  .datepicker .datepicker-cell.prev:not(.disabled),
+  .datepicker .datepicker-cell.next:not(.disabled) {
+    color: #999999 !important;
+    opacity: 0.3 !important;
+  }
+
+  .datepicker .datepicker-footer {
+    @apply border-t border-gray-25 bg-gray-0 px-2 py-1;
+  }
+
+  .datepicker .datepicker-footer .datepicker-controls .button {
+    @apply text-xs uppercase tracking-wider;
+  }
+
+  input.datepicker-input.in-edit {
+    @apply border-primary-50 ring-2 ring-primary-50 ring-offset-1;
+  }
+}
+
 :root {
   /* Default light mode colors */
   --blockquote-border-color: #ccc;
   --blockquote-bg-color: #dde6f6;
   --blockquote-text-color: black;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark mode colors */
-    --blockquote-border-color: #171717;
-    --blockquote-bg-color: #0c1c38;
-    --blockquote-text-color: #eee;
-  }
 }
 
 /* Default styles for Markdown elements */
@@ -230,10 +340,10 @@ markdown a:hover {
   --autofill-text-light: #000000; 
 }
 
-[data-theme='dark'] {
+/* [data-theme='dark'] {
   --autofill-bg-dark: #182740;  
   --autofill-text-dark: #ffffff; 
-}
+} */
 
 input:-webkit-autofill {
   background-color: var(--autofill-bg-light) !important;
@@ -241,7 +351,7 @@ input:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
 }
 
-[data-theme='dark'] input:-webkit-autofill {
+input:-webkit-autofill {
   background-color: var(--autofill-bg-dark) !important;
   color: var(--autofill-text-dark) !important;
 }
@@ -250,7 +360,7 @@ input:-webkit-autofill::first-line {
   color: inherit;
 }
 
-.dark input[type='radio']:checked {
+input[type='radio']:checked {
   background-size: 9px 6px;
   background-image: url("data:image/svg+xml,%3Csvg width='9' height='7' viewBox='0 0 9 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.0875 6.51354L0 3.42604L0.771875 2.65417L3.0875 4.96979L8.05729 0L8.82917 0.771875L3.0875 6.51354Z' fill='black'/%3E%3C/svg%3E");
 }
@@ -272,7 +382,7 @@ textarea:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s, color 5000s ease-in-out 0s;
 }
 
-[data-theme='dark'] textarea:-webkit-autofill {
+textarea:-webkit-autofill {
   background-color: var(--autofill-bg-dark) !important;
   color: var(--autofill-text-dark) !important;
 }

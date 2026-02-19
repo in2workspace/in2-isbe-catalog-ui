@@ -199,9 +199,9 @@ export class UsageSpecComponent implements OnInit {
           this.errorMessage='There was an error while creating the usageSpec!';
         }
         this.showError=true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
+        // setTimeout(() => {
+        //   this.showError = false;
+        // }, 3000);
       }
     });
 
@@ -245,7 +245,7 @@ export class UsageSpecComponent implements OnInit {
       console.error('❌ Error updating Usage Spec:', error);
       this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Se produjo un error al actualizar la especificación de uso!';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
     }
   }
 

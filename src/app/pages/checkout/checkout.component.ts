@@ -244,7 +244,7 @@ export class CheckoutComponent implements OnInit {
       ? `Error: ${error.error.error}`
       : defaultMessage;
     this.showError = true;
-    setTimeout(() => (this.showError = false), 3000);
+    // setTimeout(() => (this.showError = false), 3000);
   }
 
 

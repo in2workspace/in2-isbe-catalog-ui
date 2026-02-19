@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
     selector: 'error-message',
@@ -8,5 +8,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ErrorMessageComponent {
   @Input() message: any;
+  @Output() close = new EventEmitter<void>();
 
 }

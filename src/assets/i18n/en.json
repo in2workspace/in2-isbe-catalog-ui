@@ -201,6 +201,7 @@
         "_onboarding": "Onboarding",
         "_registration": "Registration form",
         "_about": "About",
+        "_about_isbe": "About this catalog",
         "_verify": "Publish your offering",
         "_info": "Info",
         "_orders": "Product Orders",
@@ -1525,6 +1526,81 @@
   },
   "REMINDER": {
     "_message": "You have modified object information. You must reset the status to Active before saving"
+  },
+  "ABOUT_PAGE_ISBE": {
+    "_breadcrumb": "Back to the Commercial Services Catalog",
+    "_title": "ISBE Commercial Services Catalog",
+    "_subtitle": "The meeting point for solutions deployed on ISBE.",
+    "_coming_soon_title": "Coming soon",
+    "_coming_soon_desc": "We are working to provide a space where you can showcase your blockchain services and share developments and solutions.",
+    "_what_is_title": "What is this catalog and what is it for?",
+    "_what_is_desc_1": "The Commercial Services Catalog is a space where companies and public administrations can publish, discover, and connect blockchain solutions deployed on ISBE.",
+    "_what_is_desc_2": "It is intended for companies, startups, public administrations, and technology providers, and serves both to offer your own services and to find third-party blockchain solutions.",
+    "_what_is_desc_3": "The catalog provides visibility and facilitates collaboration among companies, public administrations, and developers.",
+    "CARDS": {
+      "_1_title": "Increase the visibility of your blockchain solutions",
+      "_1_desc": "Publishing solutions in the catalog gives visibility to your blockchain services within a trusted environment. This provides a showcase where you can reach potential stakeholders, whether to use your solution or to collaborate with you.",
+      "_2_title": "Ensures trust",
+      "_2_desc": "ISBE verifies that all published offers are reliable and free from misleading or inactive information. This builds trust and reputation not only for the blockchain solutions but also for the companies offering them.",
+      "_3_title": "A space for integration",
+      "_3_desc": "The catalog is designed to make it easy to identify collaboration opportunities among organizations, fostering the creation of digital value chains. For example, services that consume APIs from other participants.",
+      "_4_title": "Drives interoperability and growth",
+      "_4_desc": "Publishing in the catalog promotes ecosystem virality, benefiting all participants by increasing visibility and growth. Solutions that depend on others deployed on ISBE contribute to mutual growth and expand business opportunities.",
+      "_5_title": "A tool for innovation",
+      "_5_desc": "Through the Services Catalog, ISBE promotes responsible innovation with a visible and high-quality offering. Publishing in the catalog means actively participating in this movement and becoming a key player in the blockchain solutions market."
+    },
+    "_benefits_title": "Benefits for companies and users",
+    "_benefits_desc": "Participating in the ISBE Commercial Services Catalog allows companies to:",
+    "BENEFITS": {
+      "_1": "Increase their visibility within the national blockchain ecosystem.",
+      "_2": "Build trust with clients and partners.",
+      "_3": "Identify synergies with other solutions deployed on ISBE.",
+      "_4": "Accelerate the commercialization of services aligned with European standards.",
+      "_5": "Actively contribute to the development and sustainability of the ISBE infrastructure."
+    },
+    "_banner_title": "Connect these services with the infrastructure that makes them possible",
+    "_banner_desc": "Discover how ISBE drives the national adoption of legally valid blockchain services."
+  },
+  "PUBLISH_SERVICE": {
+    "_title": "Publish your service",
+    "_subtitle": "And increase the visibility of your blockchain solutions in the ISBE Commercial Catalog",
+    "_how_to_title": "How to publish your service?",
+    "_how_to_desc": "First and foremost, it is essential that the use case is already deployed on ISBE. If so, publishing a service in the ISBE Commercial Catalog is very straightforward. You only need to follow these steps. We have designed a simple process aimed at ensuring trust and traceability.",
+    "STEPS": {
+      "_1_title": "Register your organization",
+      "_1_desc": "Access the Registration Page and register using your company's or public administration's <b>legal representative digital certificate</b>. This method guarantees the organization's identity and streamlines the onboarding process.",
+      "_2_title": "Access your private area",
+      "_2_desc": "Once registered, access your <i>User Area</i>. From the <i>My Services</i> menu, you can create and manage your offers, check their status, and edit the published information.",
+      "_3_title": "Create your offer draft",
+      "_3_desc": "Complete the form with the commercial and technical information of the service you want to publish:",
+      "_3_items": {
+        "_1": "Service or solution name and description.",
+        "_2": "Category and service type.",
+        "_3": "Upload the logo or a representative image of the service.",
+        "_4": "Contact details and link to documentation or the official website."
+      },
+      "_3_footer": "The system will save this information in draft status, which will only be visible to you and your organization.",
+      "_4_title": "Review and approve internally",
+      "_4_desc": "Before requesting publication, another authorized member of your organization must <b>review and approve</b> the draft. Once reviewed, change the status from <i>Draft</i> to <i>Active</i> so that we can begin the validation process. At this stage, the offer is not yet public. This operation is carried out manually, either by the user or by another person within the organization.",
+      "_5_title": "ISBE validation",
+      "_5_desc": "Once the service is Active, only validation remains. The ISBE team will verify that:",
+      "_5_items": {
+        "_1": "The text, images, and data comply with our policies.",
+        "_2": "There is consistency between the commercial information and the services actually deployed on ISBE.",
+        "_3": "Any references to other services or APIs, if applicable, are correct."
+      },
+      "_5_footer": "Once the review is successfully completed, the service is validated and published, becoming visible in the ISBE Commercial Catalog."
+    },
+    "_benefits_title": "Benefits of publishing your service on ISBE",
+    "_benefits_desc": "Publishing a service in the ISBE Commercial Catalog allows you to:",
+    "BENEFITS": {
+      "_1": "Increase the visibility of your blockchain solutions.",
+      "_2": "Enhance your organization's trust and reputation.",
+      "_3": "Facilitate partnerships with other companies in the ecosystem.",
+      "_4": "Promote your services within a regulated and transparent environment."
+    },
+    "_banner_title": "Connect these services with the infrastructure that makes them possible",
+    "_banner_desc": "Discover how ISBE drives the national adoption of legally valid blockchain services."
   },
   "ABOUT": {
     "_visit_isbe":"VISIT ISBE"
