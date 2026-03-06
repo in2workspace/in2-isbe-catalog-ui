@@ -11,6 +11,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {CategoriesPanelComponent} from "./categories-panel/categories-panel.component";
 import { CartDrawerComponent } from "./cart-drawer/cart-drawer.component";
 import { FeedbackModalComponent } from './feedback-modal/feedback-modal.component';
+import { InfoIconComponent } from './info-icon/info-icon.component';
 
 const imports: any[] = [
   CommonModule,
@@ -25,7 +26,8 @@ const declarations: any[] = [
   HeaderComponent,
   FooterComponent,
   CartDrawerComponent,
-  FeedbackModalComponent
+  FeedbackModalComponent,
+  InfoIconComponent
 ];
 
 
