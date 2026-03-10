@@ -149,8 +149,8 @@
           <div class="flex flex-col gap-3">
             <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._add_logo' | translate }}</h2>
             <hr class="h-px bg-primary-100/70 border-0">
-            <div class="flex flex-col">
-              <div class="w-full flex flex-row gap-4">
+            <div class="flex flex-col gap-2">
+              <div class="w-full flex flex-col md:flex-row gap-2 md:gap-4">
                 <span class="text-sm font-semibold text-black">{{ 'PROFILE._add_logo_description' | translate }} <span class="text-red-500">*</span></span>
                 <info-icon [tooltipText]="'PROFILE._add_logo_tooltip' | translate"></info-icon>
               </div>
@@ -201,16 +201,16 @@
                         <input #imgURL type="text" id="att-name"
                             [formControl]="attImageName"
                             (blur)="attImageName.markAsTouched()"
-                            class="w-1/2 bg-white border border-gray-300 text-gray-900  text-sm rounded-lg focus:ring-black focus:border-black "
-                            [ngClass]="attImageName.invalid && attImageName.touched ? 'border-red-500' : ''"
+                            class="w-full md:w-1/2 bg-white border border-gray-300 text-gray-900  text-sm rounded-lg focus:ring-black focus:border-black "
+                            [ngClass]="[attImageName.invalid && attImageName.touched ? 'border-red-500' : '', attImageName.valid ? 'border-darkgreen' : '']"
                         />
 
                         <!-- Submit Button -->
                         <button (click)="saveImgFromURL()"
                             [disabled]="!attImageName.valid"
-                            [ngClass]="!attImageName.valid ? 'opacity-50' : 'hover:bg-primary-50'"
-                            class="text-white bg-primary-100 rounded-3xl p-1 ml-2 h-fit">
-                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            [ngClass]="[!attImageName.valid ? ' bg-primary-100 text-white' : ' bg-green/15 text-darkgreen', attImageName.invalid && attImageName.touched ? 'bg-red-500': '']"
+                            class="rounded-3xl p-1 ml-2 h-fit">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
                             </svg>
                         </button>
@@ -302,7 +302,10 @@
               <form class="grid h-full md:grid-cols-2 gap-5" [formGroup]="mediumForm">
                   @if(emailSelected){
                       <div class="">
+                        <div class="flex flew-row gap-2">
                           <label class="font-semibold text-base">{{ 'PROFILE._email' | translate }} <span class="text-red-600">*</span></label>
+                          <info-icon [tooltipText]="'PROFILE._email_tooltip' | translate"></info-icon>
+                        </div>
                           <input formControlName="email" type="text" id="prod-name"
                           class=" bg-white  text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full "
                           [ngClass]="(mediumForm.get('email')?.invalid == true && mediumForm.value.email!='') || (mediumForm.get('email')?.touched == true && mediumForm.value.email=='') ? 'border-red-600' : 'border-gray-300 '"/>

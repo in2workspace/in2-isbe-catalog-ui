@@ -278,6 +278,7 @@
     "_username": "Usuario",
     "_token": "Token de acceso",
     "_email": "Correo electrónico",
+    "_email_tooltip": "Proporciona el correo electrónico de la persona encargada de gestionar la información de este Catálogo.",
     "_profile": "Perfil",
     "_name": "Nombre",
     "_name_tooltip": "Escribe el nombre de tu organización, ya sea empresa, marca personal, ONG, institución o cualquier otro tipo de entidad.",

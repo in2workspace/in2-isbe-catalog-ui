@@ -276,6 +276,7 @@
         "_username": "Username",
         "_token": "Access token",
         "_email": "Email",
+        "_email_tooltip": "Provide the email of the person in charge of managing the information of this Catalogue.",
         "_profile": "Profile",
         "_name": "Name",
         "_name_tooltip": "Write the name of your organization, whether it's a company, personal brand, NGO, institution or any other type of entity.",
