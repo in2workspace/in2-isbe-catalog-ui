@@ -19,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe, NgClass } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
+import { InfoIconComponent } from 'src/app/shared/info-icon/info-icon.component';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 
@@ -42,7 +43,7 @@ interface StepNavItem {
     templateUrl: './create-product-spec.component.html',
     styleUrl: './create-product-spec.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, DatePipe, MarkdownComponent, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
+    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, DatePipe, MarkdownComponent, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent, InfoIconComponent]
 })
 export class CreateProductSpecComponent implements OnInit {
 
@@ -156,6 +157,26 @@ export class CreateProductSpecComponent implements OnInit {
   fromValue: string = '';
   toValue: string = '';
   rangeUnit: string = '';
+  showStringSuggestions: boolean = false;
+
+  get stringSuggestions(): string[] {
+    const allValues: string[] = [];
+    for (const char of this.prodChars) {
+      for (const val of (char.productSpecCharacteristicValue || [])) {
+        if (typeof val.value === 'string' && val.value) {
+          allValues.push(val.value);
+        }
+      }
+    }
+    const unique = [...new Set(allValues)];
+    if (!this.stringValue) return unique;
+    return unique.filter(v => v.toLowerCase().includes(this.stringValue.toLowerCase()) && v !== this.stringValue);
+  }
+
+  selectStringSuggestion(value: string) {
+    this.stringValue = value;
+    this.showStringSuggestions = false;
+  }
 
   filenameRegex = /^[A-Za-z0-9_.-]+$/;
 
@@ -776,6 +797,15 @@ export class CreateProductSpecComponent implements OnInit {
     if (this.isStepDisabled(step)) return;
     this.selectStep(step.id);
     step.onClick();
+  }
+
+  goToPreviousStep() {
+    const prevIndex = this.currentStepIndex - 1;
+    if (prevIndex >= 0) {
+      const prevStep = this.stepNavigation[prevIndex];
+      this.selectStep(prevStep.id);
+      prevStep.onClick();
+    }
   }
 
   selectStep(step: StepId){

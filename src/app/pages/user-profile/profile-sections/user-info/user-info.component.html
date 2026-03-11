@@ -11,7 +11,7 @@
         <h1 class="font-semibold text-3xl lg:text-2xl">{{ 'PROFILE._profile' | translate }}</h1>
         <h2 class="ont-normal text-xl lg:text-2xl text-primary-100">{{ 'PROFILE._account' | translate }}</h2>
         <div class="flex flex-col gap-10 p-4 lg:py-8 lg:px-4 rounded-xl bg-white">
-          <div class="flex flex-col lg:grid lg:grid-cols-2 gap-4">
+          <div class="flex flex-col lg:grid lg:grid-cols-2 gap-2">
               <div>
                   <span class="font-semibold">{{ 'PROFILE._user_id' | translate }}</span>
                   <input type="text" id="username"
@@ -24,11 +24,11 @@
                   <input type="text" id="token" class="mb-2 bg-gray-0 text-primary-100 border-none text-sm rounded-lg w-full p-2.5 cursor-not-allowed" value="{{token}}" disabled readonly>
               </div>
           </div>
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
             <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._profile' | translate }}</h2>
             <hr class="h-px bg-primary-100/70 border-0">
-            <form class="flex flex-col lg:grid lg:grid-cols-2 gap-4" [formGroup]="userProfileForm">
-                <div class="flex flex-col gap-4">
+            <form class="flex flex-col lg:grid lg:grid-cols-2 gap-2" [formGroup]="userProfileForm">
+                <div class="flex flex-col gap-2">
                     <div class="flex flex-col">
                       <label for="user-name" class="font-semibold">{{ 'PROFILE._name' | translate }} <span class="text-red-600">*</span></label>
                       <input formControlName="name" type="text" id="user-name"
@@ -60,7 +60,7 @@
                       </select>
                     </div> -->
                 </div>
-                <div class="flex flex-col gap-4">
+                <div class="flex flex-col gap-2">
                   <div class="flex flex-col">
                     <label for="lastname" class="font-semibold">{{ 'PROFILE._lastname' | translate }} <span class="text-red-600">*</span></label>
                     <input type="text" formControlName="lastname" id="lastname"
@@ -90,11 +90,11 @@
                 </div>
             </form>
           </div>
-          <!-- <div class="flex flex-col gap-4"> -->
+          <!-- <div class="flex flex-col gap-2"> -->
             <!-- <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._birthdate' | translate }}</h2> -->
             <!-- <hr class="h-px bg-primary-100/70 border-0"> -->
-            <form class="flex flex-col lg:grid lg:grid-cols-2 gap-4" [formGroup]="userProfileForm">
-                <!-- <div class="flex flex-col gap-4">
+            <form class="flex flex-col lg:grid lg:grid-cols-2 gap-2" [formGroup]="userProfileForm">
+                <!-- <div class="flex flex-col gap-2">
                   <div class="flex flex-col">
                     <label for="birthdate" class="font-semibold">{{ 'PROFILE._date' | translate }}</label>
                     <input datepicker type="text" placeholder="Select date" formControlName="birthdate" id="birthdate" autocomplete="off"

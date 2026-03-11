@@ -12,7 +12,7 @@
         <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'PROFILE._organization' | translate }}</h2>
 
         <div class="flex flex-col gap-10 p-4 lg:py-8 lg:px-4 rounded-xl bg-white">
-          <form class="flex flex-col lg:grid lg:grid-cols-2 gap-4" [formGroup]="profileForm">
+          <form class="flex flex-col lg:grid lg:grid-cols-2 gap-2" [formGroup]="profileForm">
               <div>
                   <div class="flex flex-row gap-2"><span class="font-semibold">{{ 'PROFILE._name' | translate }}</span> <info-icon [tooltipText]="'PROFILE._name_tooltip' | translate"></info-icon></div>
                   <input type="text" formControlName="name" id="name"
@@ -150,7 +150,7 @@
             <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._add_logo' | translate }}</h2>
             <hr class="h-px bg-primary-100/70 border-0">
             <div class="flex flex-col gap-2">
-              <div class="w-full flex flex-col md:flex-row gap-2 md:gap-4">
+              <div class="w-full flex flex-col md:flex-row gap-2 md:gap-2">
                 <span class="text-sm font-semibold text-black">{{ 'PROFILE._add_logo_description' | translate }} <span class="text-red-500">*</span></span>
                 <info-icon [tooltipText]="'PROFILE._add_logo_tooltip' | translate"></info-icon>
               </div>

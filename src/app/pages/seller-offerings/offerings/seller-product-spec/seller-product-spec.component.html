@@ -1,12 +1,18 @@
 
 <div class="flex flex-col gap-6">
-    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'OFFERINGS._prod_spec' | translate }}</h2>
-    <div class="w-full h-fit bg-white rounded-lg grid lg:grid-cols-2 gap-4 md:gap-0 p-4">
+    <div class="flex flex-col gap-2">
+      <h2 class="font-semibold text-xl text-primary-100">{{ 'OFFERINGS._prod_spec' | translate }}</h2>
+      <p class="italic text-base">{{ 'OFFERINGS._prod_spec_description' | translate }}</p>
+    </div>
+
+    @if (prodSpecs.length > 0) {
+    <div class="w-full h-fit bg-white rounded-lg grid lg:grid-cols-2 gap-2 md:gap-0 p-4">
       <div class="w-full">
         <div class="flex flex-row mb-1">
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
         </div>
 
+        
         <div class="relative inline-block w-full">
           <button id="dropdownDefault" data-dropdown-toggle="dropdown"
           class="text-black w-full justify-between bg-white border border-black font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center-lg"
@@ -19,60 +25,58 @@
           </button>
 
           <div id="dropdown" class="z-20 hidden w-full bg-white border border-black rounded-lg overflow-hidden">
-        <!-- <h6 class="mb-3 text-sm font-medium text-gray-900 ">
-            {{ 'OFFERINGS._status' | translate }}
-        </h6> -->
-        <ul class="text-sm" aria-labelledby="dropdownDefault">
+          <!-- <h6 class="mb-3 text-sm font-medium text-gray-900 ">
+              {{ 'OFFERINGS._status' | translate }}
+          </h6> -->
+          <ul class="text-sm" aria-labelledby="dropdownDefault">
 
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-            <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
-                class="sr-only" />
-
-            <label for="in-design" class="text-sm font-medium">
-                {{ 'OFFERINGS._in_design' | translate }}
-            </label>
-            </li>
-
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-            <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
-                class="sr-only" />
-
-            <label for="active" class="text-sm font-medium">
-                {{ 'OFFERINGS._active' | translate }}
-            </label>
-            </li>
-
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-            <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
-                class="sr-only" />
-
-            <label for="launched" class="text-sm font-medium">
-                {{ 'OFFERINGS._launched' | translate }}
-            </label>
-            </li>
-
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-            <input id="retired" type="checkbox" value="" (change)="onStateFilterChange('Retired')"
-                class="sr-only" />
-
-            <label for="retired" class="text-sm font-medium">
-                {{ 'OFFERINGS._retired' | translate }}
-            </label>
-            </li>
-
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-              <input id="obsolete" type="checkbox" value="" (change)="onStateFilterChange('Obsolete')"
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
                   class="sr-only" />
 
-              <label for="obsolete" class="text-sm font-medium">
-                {{ 'OFFERINGS._obsolete' | translate }}
+              <label for="in-design" class="text-sm font-medium">
+                  {{ 'OFFERINGS._in_design' | translate }}
               </label>
-            </li>
-        </ul>
+              </li>
+
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
+                  class="sr-only" />
+
+              <label for="active" class="text-sm font-medium">
+                  {{ 'OFFERINGS._active' | translate }}
+              </label>
+              </li>
+
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
+                  class="sr-only" />
+
+              <label for="launched" class="text-sm font-medium">
+                  {{ 'OFFERINGS._launched' | translate }}
+              </label>
+              </li>
+
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="retired" type="checkbox" value="" (change)="onStateFilterChange('Retired')"
+                  class="sr-only" />
+
+              <label for="retired" class="text-sm font-medium">
+                  {{ 'OFFERINGS._retired' | translate }}
+              </label>
+              </li>
+
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                <input id="obsolete" type="checkbox" value="" (change)="onStateFilterChange('Obsolete')"
+                    class="sr-only" />
+
+                <label for="obsolete" class="text-sm font-medium">
+                  {{ 'OFFERINGS._obsolete' | translate }}
+                </label>
+              </li>
+          </ul>
           </div>
         </div>
-
-
 
       <!--<div class="p-8 w-full">
         <div class="flex flex-row mb-1">
@@ -98,7 +102,7 @@
           <option value="name">{{ 'OFFERINGS._name' | translate }}</option>
         </select>
       </div>-->
-      </div>
+        </div>
 
       <div class="flex flex-row w-full md:justify-end">
         @if (prodSpecs.length > 0) {
@@ -112,6 +116,7 @@
         }
       </div>
     </div>
+    }
 
 @if(loading){
     <div role="status" class="w-full h-full flex justify-center align-middle">

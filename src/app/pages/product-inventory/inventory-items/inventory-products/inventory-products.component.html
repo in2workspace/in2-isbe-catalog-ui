@@ -97,7 +97,7 @@
                 <span class="sr-only">Loading...</span>
             </div>
         } @else {
-            <div class="grid grid-cols-1 place-items-center sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 place-items-center sm:grid-cols-2 lg:grid-cols-3 gap-2">
                 @for (inv of inventory; track inv.id; let idx = $index) {
                     <div class="w-full h-full bg-secondary-50   rounded-lg border-secondary-50 border ">
 
@@ -262,7 +262,7 @@
                     <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-primary-100  text-center pb-8 pt-12">{{ 'PRODUCT_INVENTORY._pricing' | translate }}</h2>
                     @if(selectedProduct?.productPrice != undefined){
                         @if(checkCustom){
-                            <div class="grid grid-flow-row gap-4 lg:grid-cols-2 lg:auto-cols-auto justify-items-center p-2">
+                            <div class="grid grid-flow-row gap-2 lg:grid-cols-2 lg:auto-cols-auto justify-items-center p-2">
                                 @for (price of selectedProduct?.productPrice; track price.id) {
                                     @if (price.priceType == 'custom') {
                                         <div class="mx-auto bg-white border border-gray-200   rounded-lg shadow w-full p-4">
@@ -285,7 +285,7 @@
                                 }
                             </div>
                         } @else {
-                            <div class="grid grid-flow-row gap-4 lg:grid-cols-3 lg:auto-cols-auto justify-items-center p-2">
+                            <div class="grid grid-flow-row gap-2 lg:grid-cols-3 lg:auto-cols-auto justify-items-center p-2">
                                 @for (price of selectedProduct?.productPrice; track price) {
                                     @if (price.priceType == 'recurring') {
                                         <div class="max-w-sm bg-white   border border-gray-200 rounded-lg shadow w-full">

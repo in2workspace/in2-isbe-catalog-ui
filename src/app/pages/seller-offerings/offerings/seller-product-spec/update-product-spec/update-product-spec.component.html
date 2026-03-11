@@ -35,10 +35,10 @@
             </ol>
         </div>
         <hr class="h-px bg-gray-0 border-0">
-        <div class="flex flex-col gap-4 mt-8">
+        <div class="flex flex-col gap-2 mt-8">
                 @if(showGeneral){
                     <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2> -->
-                    <form class="md:grid md:grid-cols-2 gap-4" [formGroup]="generalForm">
+                    <form class="md:grid md:grid-cols-2 gap-2" [formGroup]="generalForm">
                         <div>
                             <label for="prod-sepec-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                             <input formControlName="name" type="text" id="prod-sepec-name" maxLength="100"
@@ -68,29 +68,29 @@
                     </form>
                     @if(BUNDLE_ENABLED){
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleBundle();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <button type="button" (click)="toggleBundle();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'UPDATE_PROD_SPEC._next' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
                     }@else if(IS_ISBE){
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleChars()" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <button type="button" (click)="toggleChars()" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
 
                     }@else{
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleCompliance();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <button type="button" (click)="toggleCompliance();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
@@ -196,10 +196,10 @@
                         }
                     }
                     <div class="flex w-full justify-items-end justify-end ">
-                        <button type="button" (click)="toggleCompliance();" [disabled]="prodSpecsBundle.length<2 && bundleChecked" [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                        <button type="button" (click)="toggleCompliance();" [disabled]="prodSpecsBundle.length<2 && bundleChecked" [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._next' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>
@@ -381,8 +381,8 @@
                                         focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5
                                         text-center inline-flex items-center">
                                 {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
@@ -480,7 +480,7 @@
                             </button>
                         </div>
                     } @else {
-                        <form class=" grid grid-cols-2 gap-4" [formGroup]="charsForm">
+                        <form class=" grid grid-cols-2 gap-2" [formGroup]="charsForm">
                             <div>
                                 <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
@@ -619,10 +619,10 @@
                         </div>
                     }
                     <div class="flex w-full justify-items-end justify-end  mt-4">
-                        <button type="button" (click)="toggleAttach();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                        <button type="button" (click)="toggleAttach();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._next' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>
@@ -774,7 +774,7 @@
                             </div>
                         } @else {
                             <div class="m-4 w-full">
-                                <div class="lg:flex lg:grid lg:grid-cols-2 w-full gap-4 align-items-middle align-middle border border-gray-200 rounded-lg p-4">
+                                <div class="lg:flex lg:grid lg:grid-cols-2 w-full gap-2 align-items-middle align-middle border border-gray-200 rounded-lg p-4">
                                     <div class="h-fit">
                                         <label for="att-file--name" class="font-semibold text-base ">{{ 'PROFILE._name' | translate }}</label>
                                         <input #attachName type="text" id="att-file-name" [formControl]="attFileName"
@@ -827,10 +827,10 @@
                     }
 
                     <div class="flex w-full justify-items-end justify-end  mt-4">
-                        <button type="button" (click)="toggleRelationship();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                        <button type="button" (click)="toggleRelationship();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._next' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>
@@ -997,10 +997,10 @@
                         }
                     </div>
                     <div class="flex w-full justify-items-end justify-end ">
-                        <button type="button" (click)="showFinish();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                        <button type="button" (click)="showFinish();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'UPDATE_PROD_SPEC._finish' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>
@@ -1008,7 +1008,7 @@
                 @if(showSummary){
                     <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
-                        <div class="mb-4 md:grid md:grid-cols-2 gap-4">
+                        <div class="mb-4 md:grid md:grid-cols-2 gap-2">
                             <div>
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
@@ -1220,10 +1220,10 @@
                             </div>
                         }
                         <div class="flex w-full justify-items-end justify-end ">
-                            <button type="button" (click)="updateProduct();" [disabled]="!isProdValid()" [ngClass]="!isProdValid() ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <button type="button" (click)="updateProduct();" [disabled]="!isProdValid()" [ngClass]="!isProdValid() ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'UPDATE_PROD_SPEC._update_prod' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
