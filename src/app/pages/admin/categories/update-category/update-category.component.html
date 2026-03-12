@@ -3,11 +3,11 @@
   <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'UPDATE_CATEGORIES._update' | translate }}</h2>
   <div class="bg-white/60 p-4 rounded-lg">
     <div class="overflow-x-auto">
-        <ol class="flex items-start w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
+        <ol class="flex items-start justify-center w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
             @for (step of stepNavigation; track step.id; let i = $index) {
                 <li
                   (click)="handleStepClick(step)"
-                  class="relative flex-1 flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[140px]"
+                  class="relative flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[140px]"
                   [class.text-primary-100]="isCurrentStep(step.id)"
                   [class.cursor-not-allowed]="isStepDisabled(step)"
                   [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)">
@@ -41,7 +41,7 @@
                         <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                        class="w-full md:w-1/2 mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block p-2.5" />
 
                         <label class="font-semibold text-base ">{{ 'UPDATE_CATALOG._status' | translate }}</label>
                         <app-status-selector [modelType]="'category'" [anchor]="catStatusAnchor" [(ngModel)]="catStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
@@ -122,7 +122,7 @@
             }
 
             @if(showSummary){
-                <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'UPDATE_CATEGORIES._finish' | translate }}</h2>
+                <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'UPDATE_CATEGORIES._finish' | translate }}</h2> -->
                 <div class="">
                     <div>
                         <label class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._name' | translate }}</label>
@@ -133,17 +133,7 @@
 
                     <div class="mb-4">
                         <label class="font-semibold text-base mr-4 ">{{ 'UPDATE_CATEGORIES._status' | translate }}</label>
-                        @if(categoryToUpdate?.lifecycleStatus == 'In design'){
-                            <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
-                        } @else if(categoryToUpdate?.lifecycleStatus == 'Active'){
-                            <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
-                        } @else if(categoryToUpdate?.lifecycleStatus == 'Launched') {
-                            <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
-                        } @else if(categoryToUpdate?.lifecycleStatus == 'Retired') {
-                            <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._retired' | translate }}</div>
-                        } @else if(categoryToUpdate?.lifecycleStatus == 'Obsolete') {
-                            <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
-                        }
+                        <app-status-selector [modelType]="'category'" [anchor]="catStatusAnchor" [statuses]="catStatusDraftAsArray" [(ngModel)]="catStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
                     </div>
 
                     @if(categoryToUpdate?.description !=''){

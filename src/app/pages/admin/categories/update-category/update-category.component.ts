@@ -459,6 +459,11 @@ export class UpdateCategoryComponent implements OnInit {
     }  
   }
 
+  get catStatusDraftAsArray(): StatusCode[] {
+    const internal = normalizeToInternal(this.catStatusDraft);
+    return internal ? [internal as StatusCode] : [];
+  }
+
   isCatValid(){
     if((this.edited && this.catStatusDraft === 'Launched')|| !this.generalForm.valid){
       return false;

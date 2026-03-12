@@ -110,6 +110,7 @@ export class SellerProductSpecComponent implements OnInit{
       this.page=data.page;
       this.loading=false;
       this.loading_more=false;
+      setTimeout(() => initFlowbite(), 0);
     })
   }
 

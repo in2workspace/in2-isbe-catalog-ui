@@ -7,6 +7,8 @@
           <!-- <fa-icon [icon]="faSwatchbook" class="fa-base text-primary-100 align-middle mr-2"></fa-icon> -->
           <h2 class="text-base font-semibold">{{ 'ADMIN._filter_state' | translate }}</h2>
         </div>
+
+        <!-- Dropdown -->
         <div class="relative inline-block w-full">
           <button id="dropdownDefault" data-dropdown-toggle="dropdown"
           class="text-black w-full justify-between bg-white border border-black font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center-lg"
@@ -19,10 +21,7 @@
           </button>
 
           <div id="dropdown" class="z-20 hidden w-full bg-white border border-black rounded-lg overflow-hidden">
-          <!-- <h6 class="px-5 py-3 text-sm font-medium border-b border-black">
-              {{ 'ADMIN._status' | translate }}
-          </h6> -->
-          <ul class="text-sm" aria-labelledby="dropdownDefault">
+            <ul class="text-sm" aria-labelledby="dropdownDefault">
               <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
               <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
                   class="sr-only" />
@@ -67,12 +66,12 @@
                   {{ 'ADMIN._obsolete' | translate }}
                 </label>
               </li>
-          </ul>
-        </div>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <div class="flex flex-row w-full md:justify-end">
+      <!-- <div class="flex flex-row w-full md:justify-end">
         @if(categories.length > 0){
             <button type="button" (click)="createCategory()" class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm px-2.5 py-1.5 text-center inline-flex items-center align-middle">
                 <p class="pl-2 pr-2">{{ 'CATEGORIES._add_new_cat' | translate }}</p>
@@ -81,7 +80,7 @@
                 </svg>
             </button>
         }
-      </div>
+      </div> -->
 
     </div>
 
@@ -203,6 +202,19 @@
                                   <p class="pl-2 pr-2">{{ 'CATEGORIES._add_new_cat' | translate }}</p>
                               </button>
                           </div>
+                        </td>
+                      </tr>
+                    }
+                    @if(categories.length > 0) {
+                      <tr class="px-5 py-3">
+                        <td class="px-5 py-3">
+                          <button type="button" (click)="createCategory()"
+                          class=" text-black font-medium rounded-full text-sm flex items-center gap-4">
+                            <svg class="bg-black rounded-full p-1 size-4.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                              </svg>    
+                            <p class="font-bold underline">{{ 'CATEGORIES._add_new_cat' | translate }}</p>
+                          </button>
                         </td>
                       </tr>
                     }
