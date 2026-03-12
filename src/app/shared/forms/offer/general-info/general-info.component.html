@@ -1,14 +1,17 @@
 <div class="flex flex-col md:grid md:grid-cols-2 gap-5 mt-8">
   @if (nameControl) {
     <div class="flex flex-col">
-      <label for="prod-name" class="font-semibold text-base text-primary-100">{{ 'CREATE_OFFER._name' | translate }}</label>
+      <label for="prod-name" class="font-semibold text-base text-primary-100">{{ 'CREATE_OFFER._name' | translate }} <span class="text-red-500">*</span></label>
       <input data-cy="offerName" id="prod-name" type="text" [formControl]="nameControl" maxLength="100"
             class="md:mb-4 bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"/>
     </div>
   }
   @if (versionControl) {
     <div class="flex flex-col">
-      <label for="prod-version" class="font-semibold text-base text-primary-100">{{ 'CREATE_OFFER._version' | translate }}</label>
+      <div class="flex flex-row gap-2 items-center">
+        <label for="prod-version" class="font-semibold text-base text-primary-100">{{ 'CREATE_OFFER._version' | translate }} <span class="text-red-500">*</span></label>
+        <info-icon [tooltipText]="'CREATE_OFFER._version_tooltip' | translate"></info-icon>
+      </div>
       <input data-cy="offerVersion" id="prod-version" type="text" [formControl]="versionControl"
             class="mb-5 md:mb-4 bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"/>
     </div>
@@ -16,7 +19,7 @@
 </div>
 
 @if (statusControl && formType === 'update') {
-  <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_OFFER._status' | translate }}</label>
+  <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_OFFER._status' | translate }} <span class="text-red-500">*</span></label>
   <app-status-selector class="col-span-2" [modelType]="'offering'" [allowLaunched]="isAdmin" [anchor]="statusAnchor" [formControl]="statusControl"></app-status-selector>
 
 }

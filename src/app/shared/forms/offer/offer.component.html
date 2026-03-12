@@ -163,7 +163,7 @@
     </svg>
   </button>
 
-  @if( (formType === 'create' && currentStep === steps.length - 1) || formType === 'update' ){
+  @if( currentStep === steps.length - 1 ){
     <button data-cy="offerFinish" (click)="submitForm()"
             [disabled]="!isOfferValid()"
             [ngClass]="!isOfferValid() ? 'opacity-50' : 'hover:bg-primary-50'"

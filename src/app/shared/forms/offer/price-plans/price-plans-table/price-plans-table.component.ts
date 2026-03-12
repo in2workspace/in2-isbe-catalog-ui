@@ -25,6 +25,7 @@ export class PricePlansTableComponent {
   }
   @Output() edit = new EventEmitter<any>(); // Emitir evento al editar
   @Output() delete = new EventEmitter<number>(); // Emitir evento al eliminar
+  @Output() openDrawer = new EventEmitter<void>();
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
@@ -34,6 +35,10 @@ export class PricePlansTableComponent {
 
   editPricePlan(plan: any) {
     this.edit.emit(plan); // Emitir el evento con el plan a editar
+  }
+
+  openPricePlanDrawer() {
+    this.openDrawer.emit();
   }
 
   confirmDelete(plan: any, index: number) {

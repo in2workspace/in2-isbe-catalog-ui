@@ -9,7 +9,7 @@
     <!-- Header -->
     <div class="flex justify-between items-center">
       <h2 class="text-2xl font-semibold text-primary-100 mb-4">
-        {{ pricePlanTranslationKey | translate }}
+        {{ pricePlanTranslationKey | translate }} <sup class="text-xs text-gray-500 italic">{{ 'FORMS.PRICE_PLANS._optional' | translate }}</sup>
       </h2>
       <button type="button" (click)="closeDrawer()"
               class="text-gray-500 hover:text-gray-700">
@@ -26,9 +26,9 @@
         <!-- Nombre -->
         <div class="mb-4">
           <label class="font-semibold text-base ">
-            {{ 'FORMS.PRICE_PLANS._name' | translate }}
+            {{ 'FORMS.PRICE_PLANS._name' | translate }} <span class="text-red-500">*</span>
           </label>
-          <input data-cy="pricePlanName" formControlName="name" type="text"
+          <input data-cy="pricePlanName" formControlName="name" type="text" placeholder="{{ 'FORMS.PRICE_PLANS._name' | translate }}"
           [ngClass]="(formGroup.get('name')?.invalid == true && formGroup.value.name!='') || (formGroup.get('name')?.touched && formGroup.value.name=='') || (formGroup.hasError('nonUniqueName') && formGroup.get('name')?.touched) ? 'border-red-600' : 'border-gray-300 '"
                  class="mt-1 w-full p-2 border rounded">
           @if(formGroup.hasError('nonUniqueName') && formGroup.get('name')?.touched){
@@ -41,9 +41,12 @@
 
         <!-- Descripción -->
         <div class="mb-4">
-          <label class="font-semibold text-base ">
-            {{ 'FORMS.PRICE_PLANS._description' | translate }}
-          </label>
+          <div class="flex flex-row gap-2">
+            <label class="font-semibold text-base ">
+              {{ 'FORMS.PRICE_PLANS._description' | translate }} <span class="text-red-500">*</span>
+            </label>
+            <info-icon [tooltipText]="'FORMS.PRICE_PLANS._description_tooltip' | translate"></info-icon>
+          </div>
           <app-markdown-textarea formControlName="description"></app-markdown-textarea>
         </div>
 
