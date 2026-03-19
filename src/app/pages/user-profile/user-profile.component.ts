@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/guard/auth.service';
 import { Subject, take, takeUntil } from 'rxjs';
 import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-menu/private-area-menu.component';
 import { MenuStateService } from 'src/app/services/menu-state.service';
+import { AccountServiceService } from 'src/app/services/account-service.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -38,6 +39,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   show_orders = false;
   show_billing = false;
   show_revenue = false;
+  orgProfileCompleted = true;
 
   loggedAsUser = true;
   seller: any = '';
@@ -54,7 +56,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private readonly cdr: ChangeDetectorRef,
     private readonly eventMessage: EventMessageService,
     private readonly router: Router,
-    private readonly menuStateService: MenuStateService
+    private readonly menuStateService: MenuStateService,
+    private readonly accountService: AccountServiceService
   ) {
     this.eventMessage.messages$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
       if (ev.type === 'ChangedSession') this.initPartyInfo();
@@ -93,6 +96,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       const initial = this.menuStateService.getActiveTab('profile') ?? fallbackTab;
     
       this.applySelection(initial);
+
+      if (!this.loggedAsUser) {
+        this.accountService.getOrgInfo(aux.userId).then(orgInfo => {
+          this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
+        });
+      }
 
       initFlowbite();
       this.cdr.detectChanges();

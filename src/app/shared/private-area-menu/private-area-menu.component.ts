@@ -26,7 +26,7 @@ export class PrivateAreaMenuComponent implements OnInit {
   @Output() select = new EventEmitter<MenuTab>();
   private readonly auth = inject(AuthService);
   private readonly accountService = inject(AccountServiceService);
-  orgProfileCompleted = false;
+  orgProfileCompleted = true;
   roles: string[] = [];
   isAdmin = false;
   loggedAsUser = true;

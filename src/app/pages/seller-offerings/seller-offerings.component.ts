@@ -19,6 +19,7 @@ import { HeaderBannerComponent } from 'src/app/shared/header/header-banner/heade
 import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-menu/private-area-menu.component';
 import { Router } from '@angular/router';
 import { MenuStateService } from 'src/app/services/menu-state.service';
+import { AccountServiceService } from 'src/app/services/account-service.service';
 
 @Component({
   selector: 'app-seller-offerings',
@@ -54,6 +55,9 @@ export class SellerOfferingsComponent implements OnInit, OnDestroy {
   feedback = false;
   userInfo: any;
   activeTab: MenuTab | null = null;
+  
+  orgProfileCompleted = true;
+  loggedAsUser = true;
 
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
   private readonly destroy$ = new Subject<void>();
@@ -63,7 +67,8 @@ export class SellerOfferingsComponent implements OnInit, OnDestroy {
     private readonly cdr: ChangeDetectorRef,
     private readonly eventMessage: EventMessageService,
     private readonly router: Router,
-    private readonly menuStateService: MenuStateService
+    private readonly menuStateService: MenuStateService,
+    private readonly accountService: AccountServiceService
   ) {
     this.eventMessage.messages$.subscribe((ev) => {
       switch (ev.type) {
@@ -123,6 +128,12 @@ export class SellerOfferingsComponent implements OnInit, OnDestroy {
 
     const initial = this.menuStateService.getActiveTab('offerings') ?? 'productspec';
     const effective = (this.IS_ISBE && initial === 'catalogs') ? 'productspec' : initial;
+    this.loggedAsUser = this.userInfo?.logged_as === this.userInfo?.userId;
+    if (!this.loggedAsUser) {
+      this.accountService.getOrgInfo(this.userInfo.userId).then(orgInfo => {
+        this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
+      });
+    }
     this.applySelection(effective); 
   }
 
