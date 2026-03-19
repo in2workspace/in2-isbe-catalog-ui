@@ -277,6 +277,7 @@
         "_token": "Access token",
         "_email": "Email",
         "_profile": "Profile",
+        "_profile_incomplete": "Profile pending",
         "_name": "Name",
         "_lastname": "Lastname",
         "_treatment": "Treatment",

@@ -279,6 +279,7 @@
     "_token": "Token de acceso",
     "_email": "Correo electrónico",
     "_profile": "Perfil",
+    "_profile_incomplete": "Perfil pendiente",
     "_name": "Nombre",
     "_lastname": "Apellidos",
     "_treatment": "Tratamiento",
