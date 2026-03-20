@@ -334,7 +334,9 @@
         "_price": "Price",
         "_img": "Img",
         "_custom": "Custom",
-        "_free": "Free"
+        "_free": "Free",
+        "_warning_title": "Your organization profile is pending update.",
+        "_warning_text": "Complete it and verify that all the information is correct so that your profile is complete."
     },
     "PRODUCT_INVENTORY":{
         "_loading": "Loading...",

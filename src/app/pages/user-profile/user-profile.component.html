@@ -33,11 +33,24 @@
     </div> -->
 
      <div class="w-full flex flex-col lg:grid lg:grid-cols-20/80 gap-x-8">
-        <div class="hidden lg:block">
+        <div class="hidden lg:flex flex-col gap-4">
             <private-area-menu [active]="activeTab" (select)="onMenuSelect($event)">
             </private-area-menu>
             @if(orgProfileCompleted && loggedAsUser){
-              <!--TODO: mensaje perfil incompleto-->
+            <div class="flex gap-2 bg-warning-50 border border-warning-100 rounded-lg p-4">
+              <div class="size-4 block">
+                <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10.1479 13.5271C10.1479 13.994 9.76942 14.3726 9.30249 14.3726C8.83555 14.3726 8.45703 13.994 8.45703 13.5271C8.45703 13.0602 8.83555 12.6816 9.30249 12.6816C9.76942 12.6816 10.1479 13.0602 10.1479 13.5271Z" fill="#803F2B"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.3 0C9.60704 0 9.88995 0.166463 10.0391 0.434866L18.4936 15.653C18.6391 15.9149 18.6351 16.2342 18.4832 16.4924C18.3313 16.7506 18.0541 16.9091 17.7545 16.9091H0.845455C0.545893 16.9091 0.268698 16.7506 0.116782 16.4924C-0.0351338 16.2342 -0.0390855 15.9149 0.106394 15.653L8.56094 0.434866C8.71005 0.166463 8.99296 0 9.3 0ZM2.28232 15.2182H16.3177L9.3 2.58635L2.28232 15.2182ZM9.3 5.91818C9.76693 5.91818 10.1455 6.2967 10.1455 6.76364V10.1455C10.1455 10.6124 9.76693 10.9909 9.3 10.9909C8.83307 10.9909 8.45455 10.6124 8.45455 10.1455V6.76364C8.45455 6.2967 8.83307 5.91818 9.3 5.91818Z" fill="#803F2B"/>
+                </svg>
+              </div>
+
+              <div class="flex flex-col w-auto gap-2 text-warning-100">
+                <span class="font-semibold text-sm leading-none">{{ 'PROFILE._warning_title' | translate }}</span>
+                <span class="text-xxs leading-[14px]">{{ 'PROFILE._warning_text' | translate }}</span>
+              </div>
+
+            </div>
             }
         <!-- <div class="h-fit text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg">
             @if(loggedAsUser){

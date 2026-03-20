@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'ok-message',
@@ -6,7 +6,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     styleUrl: './ok-message.component.css',
     standalone: true
 })
-export class OkMessageComponent {
+export class OkMessageComponent implements OnInit {
+  @Input() title: string = '';
   @Input() message: any;
   @Output() close = new EventEmitter<void>();
+
+  ngOnInit(): void {
+    setTimeout(() => this.close.emit(), 5000);
+  }
 }

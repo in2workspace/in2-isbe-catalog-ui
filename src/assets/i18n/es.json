@@ -336,7 +336,9 @@
     "_price": "Precio",
     "_img": "Imagen",
     "_custom": "Personalizado",
-    "_free": "Gratis"
+    "_free": "Gratis",
+    "_warning_title" : "El perfil de tu organización está pendiente de actualización.",
+    "_warning_text" : "Complétalo y verifica que toda la información sea correcta para que tu esté completo."
   },
   "PRODUCT_INVENTORY": {
     "_loading": "Cargando...",
@@ -852,7 +854,7 @@
     "_no_offer": "No hay ofertas.",
     "_previous": "Paso anterior",
     "_next_step": "Siguiente paso",
-    "_no_subcats": "No hay subcategorías", 
+    "_no_subcats": "No hay subcategorías",
     "_procurement": "Modo de adquisición"
   },
   "UPDATE_OFFER": {
@@ -1013,7 +1015,7 @@
     "_state": "Estado",
     "_order_by": "Ordenar por...",
     "_last_update": "Última actualización",
-    "_name": "Nombre",    
+    "_name": "Nombre",
     "_in_design": "En diseño",
     "_active": "En revisión",
     "_launched": "Publicado",
@@ -1533,7 +1535,7 @@
     "_MS": "Señora"
   },
   "GENDER": {
-    "_NOT_SAY": "Prefiero no decirlo", 
+    "_NOT_SAY": "Prefiero no decirlo",
     "_FEMALE": "Femenino",
     "_MALE": "Masculino",
     "_OTHER": "Otro"
@@ -1542,7 +1544,7 @@
     "_NOT_SAY": "Prefiero no decirlo",
     "_DIVORCED": "Divorciado/a",
     "_MARRIED": "Casado/a",
-    "_SEPARATED": "Separado/a", 
+    "_SEPARATED": "Separado/a",
     "_SINGLE": "Soltero/a",
     "_WIDOWED": "Viudo/a"
   },
@@ -1634,7 +1636,7 @@
     "_title": "Catálogo de Servicios Comerciales de ISBE",
     "_subtitle": "El punto de encuentro para las soluciones que operan sobre la Red ISBE."
   }
-  
+
 
 
 }

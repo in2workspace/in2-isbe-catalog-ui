@@ -38,6 +38,14 @@ module.exports = {
           //Dark theme table background and inputs
           300: '#FF7E56'
         },
+        warning: {
+          50: '#FFDCB6',
+          100: '#803F2B'
+        },
+        complete: {
+          50: '#D1FBD1',
+          100: '#3B793B'
+        }
       },
       fontSize: {
         xxs: ["0.625rem", { lineHeight: "0.75rem" }],
