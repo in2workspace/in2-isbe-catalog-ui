@@ -10,8 +10,10 @@ import { environment } from 'src/environments/environment';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { PrivateAreaMenuComponent, MenuTab } from 'src/app/shared/private-area-menu/private-area-menu.component';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { MenuStateService } from 'src/app/services/menu-state.service';
+import { AuthService } from 'src/app/guard/auth.service';
+import { AccountServiceService } from 'src/app/services/account-service.service';
 
 @Component({
   selector: 'app-admin',
@@ -39,15 +41,21 @@ export class AdminComponent implements OnInit, OnDestroy {
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   activeTab: MenuTab | null = null;
+  
+  orgProfileCompleted = true;
+  loggedAsUser = true;
 
   category_to_update: any;
   private destroy$ = new Subject<void>();
+  private userInfo: any;
 
   constructor(
     private readonly cdr: ChangeDetectorRef,
     private readonly eventMessage: EventMessageService,
     private readonly router: Router,
-    private readonly menuStateService: MenuStateService
+    private readonly menuStateService: MenuStateService,
+    private readonly auth: AuthService,
+    private readonly accountService: AccountServiceService
   ) {
     this.eventMessage.messages$.pipe(takeUntil(this.destroy$)).subscribe(ev => {
       if (ev.type === 'AdminCategories' && ev.value === true) this.goToCategories();
@@ -74,6 +82,16 @@ export class AdminComponent implements OnInit, OnDestroy {
     const initial = this.menuStateService.getActiveTab('admin') ?? 'categories';
     this.menuStateService.setActiveTab('admin', initial);
     this.activeTab = initial;
+    this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
+      if (!li) return;
+      this.userInfo = li;
+    });
+    this.loggedAsUser = this.userInfo?.logged_as === this.userInfo?.userId;
+    if (!this.loggedAsUser) {
+      this.accountService.getOrgInfo(this.userInfo.userId).then(orgInfo => {
+        this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
+      });
+    }
     this.goToCategories();
   }
 

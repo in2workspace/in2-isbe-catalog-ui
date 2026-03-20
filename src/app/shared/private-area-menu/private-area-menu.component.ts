@@ -4,6 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
+import { AccountServiceService } from 'src/app/services/account-service.service';
 
 export type MenuTab =
   | 'account' | 'org' | 'billing' | 'orders' | 'revenue' | 'general'
@@ -24,6 +25,8 @@ export class PrivateAreaMenuComponent implements OnInit {
   @Input() active: MenuTab | null = null;
   @Output() select = new EventEmitter<MenuTab>();
   private readonly auth = inject(AuthService);
+  private readonly accountService = inject(AccountServiceService);
+  orgProfileCompleted = true;
   roles: string[] = [];
   isAdmin = false;
   loggedAsUser = true;
@@ -34,6 +37,12 @@ export class PrivateAreaMenuComponent implements OnInit {
       this.loggedAsUser = li.logged_as === li.userId;
       this.roles = (li.roles || []).map(r => r.name ?? r.id ?? r);
       this.isAdmin = this.roles.includes('admin');
+
+      if (!this.loggedAsUser) {
+        this.accountService.getOrgInfo(li.userId).then(orgInfo => {
+          this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
+        });
+      }
     });
   }
   

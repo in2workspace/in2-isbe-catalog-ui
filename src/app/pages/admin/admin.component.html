@@ -13,6 +13,9 @@
     <div class="hidden lg:block">
       <private-area-menu [active]="activeTab" (select)="onMenuSelect($event)">
       </private-area-menu>
+      @if(orgProfileCompleted && loggedAsUser){
+        <!--TODO: mensaje perfil incompleto-->
+      }
     </div>
 
     <div class="flex flex-col gap-6 bg-white/60 p-4 md:p-8 rounded-2xl">
