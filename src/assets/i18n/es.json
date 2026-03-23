@@ -1007,7 +1007,9 @@
     "_role": "Rol",
     "_choose": "Elige entre nuestros catálogos",
     "_offerings": "Ofertas",
-    "_my_offerings": "Mis ofertas"
+    "_my_offerings": "Mis ofertas",
+    "_popup_text": "Ya puedes crear una oferta vinculada a una de las especificaciones que ya has creado.",
+    "_create_offer" : "Crear oferta"
   },
   "ADMIN": {
     "_admin": "Administración",

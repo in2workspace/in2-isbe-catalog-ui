@@ -45,6 +45,10 @@ module.exports = {
         complete: {
           50: '#D1FBD1',
           100: '#3B793B'
+        },
+        success: {
+          bcg: '#E8FFF2',
+          text: '#009943',
         }
       },
       fontSize: {

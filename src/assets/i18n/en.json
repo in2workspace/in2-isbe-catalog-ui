@@ -1004,8 +1004,10 @@
         "_role": "Role",
         "_choose": "Choose between our Catalogues",
         "_offerings": "Offerings",
-        "_my_offerings": "My offerings"
-    },
+        "_my_offerings": "My offerings",
+        "_popup_text": "You can now create an offering linked to one of the specifications you have already created.",
+        "_create_offer" : "Create offer"
+      },
     "ADMIN":{
         "_admin": "Administration",
         "_filter_state": "Filter by status",
