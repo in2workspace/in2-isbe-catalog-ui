@@ -254,6 +254,8 @@
         "_billing_check": "You should first create at least a billing address in order to checkout an order.",
         "_click_here": "Click here",
         "_free": "Free",
+        "_no_price": "Custom consulting service",
+        "_no_price_desc": " Contact the company",
         "_free_desc": "The offering is free",
         "_loading_purchase": "Loading purchase",
         "_contact": "Contact",
@@ -521,6 +523,7 @@
         "_value": "Value",
         "_actions": "Actions",
         "_no_chars": "No characteristics included.",
+        "_no_chars_description": "This step is optional; you can continue if you don't need to create any.",
         "_values": "Values",
         "_values_tooltip": "It refers to qualities and/or metrics that define the characteristic depending on the type chosen.",
         "_new_char": "Create new characteristic",
@@ -541,6 +544,8 @@
         "_save_att": "Save attachment",
         "_no_relationships": "No specifications available yet.",
         "_no_relationships_description": "This step is optional; you can continue with the process and link another specification later, once you have created them.",
+        "_relationships_title": "Link another specification",
+        "_relationships_description": "This step is optional; you can continue with the process. However, linking specifications provides clarity on dependencies, compatibilities, and possible substitutions.",
         "_relationship_type": "Relationship type",
         "_add_relationship": "Add new relationship",
         "_save_relationship": "Save relationship",
@@ -599,6 +604,7 @@
         "_value": "Value",
         "_actions": "Actions",
         "_no_chars": "No characteristics included.",
+        "_no_chars_description": "This step is optional; you can continue if you don't need to create any.",
         "_values": "Values",
         "_new_char": "Create new characteristic",
         "_add_values": "Add values",
@@ -927,6 +933,9 @@
         "_standard_license": "Standard open data licenses",
         "_treatment": "Treatment",
         "_exclusivity": "Exclusivity",
+        "_dependency": "Dependency",
+        "_substitution": "Substitution",
+        "_migration": "Migration",
         "_sector": "Sector",
         "_region": "Region",
         "_timeframe": "Timeframe",
@@ -979,7 +988,8 @@
         "_state": "State",
         "_order_by": "Order by...",
         "_last_update": "Last update",
-        "_name": "Name",
+        "_name": "Product/Service Specification",
+        "_offer_name": "Commercial offer name",
         "_in_design": "In design",
         "_active": "Active",
         "_launched": "Launched",
@@ -1552,7 +1562,12 @@
     "_WIDOWED": "Widowed"
   },
   "REMINDER": {
-    "_message": "You have modified object information. You must reset the status to Active before saving"
+    "_message": "You have modified object information. You must reset the status to Active before saving",
+    "_isbe": "Thank you for sharing your service, we will review it shortly to validate it.",
+    "_isbe_publish": "Remember that until your use case is deployed on ISBE, we will not be able to publish it."
+  },
+  "WARNING": {
+    "_message": "There are unsaved changes. If you leave this page, the changes made will be lost."
   },
   "ABOUT_PAGE_ISBE": {
     "_breadcrumb": "Back to the Commercial Services Catalog",
@@ -1630,6 +1645,8 @@
     "_banner_desc": "Discover how ISBE drives the national adoption of legally valid blockchain services."
   },
   "ABOUT": {
-    "_visit_isbe":"VISIT ISBE"
+    "_visit_isbe":"VISIT ISBE",
+    "_title": "ISBE Commercial Services Catalog",
+    "_subtitle": "The meeting point for solutions operating on the ISBE Network."
   }
 }
