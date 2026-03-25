@@ -5,7 +5,7 @@
         [ngClass]="billingForm.get('name')?.touched && billingForm.get('name')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 '"
-        class="mb-2 bg-gray-50 border text-gray-900   text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 border text-gray-900   text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
         @if(billingForm.get('name')?.touched && billingForm.get('name')?.hasError('required')){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -75,7 +75,7 @@
         [ngClass]="billingForm.get('street')?.touched && billingForm.get('street')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 '"
-        class="mb-2 min-h-fit bg-gray-50 text-gray-900   text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" rows="4"></textarea>
+        class="mb-2 min-h-fit bg-gray-50 text-gray-900   text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" rows="4"></textarea>
         @if(billingForm.get('street')?.touched && billingForm.get('street')?.hasError('required')){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -90,7 +90,7 @@
         ? 'border-red-600'
         : 'border-gray-300 '"
         formControlName="email" name="email"
-        class="mb-2 bg-gray-50 border text-gray-900   text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+        class="mb-2 bg-gray-50 border text-gray-900   text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
         @if(billingForm.get('email')?.invalid && billingForm.get('email')?.errors?.['maxlength']){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._too_long_email' | translate }}</span></p>
         }
@@ -137,7 +137,7 @@
                     </div>
                 }
                 <input id="phoneNumber" formControlName="telephoneNumber" name="phoneNumber" type="number" [ngClass]="billingForm.get('telephoneNumber')?.touched && billingForm.get('telephoneNumber')?.invalid == true ? 'border-red-600' : 'border-gray-300 '"
-                class="mb-2 bg-gray-50 border text-gray-900 text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5  ">
+                class="mb-2 bg-gray-50 border text-gray-900 text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5  ">
             </div>
             @if(billingForm.get('telephoneNumber')?.invalid  && billingForm.get('telephoneNumber')?.errors?.['min'] && billingForm.get('telephoneNumber')?.touched){
                 <p class="text-sm text-red-600 "><span class="font-medium">You cannot enter negative numbers.</span></p>

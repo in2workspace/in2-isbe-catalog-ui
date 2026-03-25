@@ -72,8 +72,8 @@ export class StatusSelectorComponent implements ControlValueAccessor, OnChanges 
 
   getStatusClasses(status: string): string {
     const statusColors: Record<string, string> = {
-      "in_design": 'text-primary-100 bg-primary-50/30',
-      "active": 'text-primary-100 bg-secondary-300/30',
+      "in_design": 'text-primary-100 bg-secondary-300/30',
+      "active": 'text-primary-100 bg-primary-50/30',
       "launched": 'text-primary-100 bg-green/30',
       "retired": 'text-primary-100 bg-gray-50/30',
       "obsolete": 'text-primary-100 bg-black/30'

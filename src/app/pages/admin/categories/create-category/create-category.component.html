@@ -40,8 +40,8 @@
                     <form [formGroup]="generalForm">
                         <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                        [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full md:w-1/2 p-2.5" />
+                        [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
+                        class="mb-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full md:w-1/2 p-2.5" />
 
                         <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._description' | translate }}</label>
                         <app-markdown-textarea formControlName="description"></app-markdown-textarea>
@@ -123,7 +123,7 @@
                 <div class="">
                     <div>
                         <label class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._name' | translate }}</label>
-                        <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                        <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                             {{categoryToCreate?.name}}
                         </label>
                     </div>

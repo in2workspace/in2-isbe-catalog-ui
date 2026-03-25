@@ -37,7 +37,7 @@
           (blur)="priceComponentForm.get('price')?.markAsTouched()"
           [ngClass]="(priceComponentForm.get('price')?.invalid == true && priceComponentForm.value.price!='') || (priceComponentForm.get('price')?.touched && priceComponentForm.value.price=='') ? 'border-red-600' : ''"
           class="mb-2 bg-gray-50  border text-sm rounded-lg block w-full p-2.5
-            text-gray-900  focus:ring-purple-500 focus:border-purple-500"
+            text-gray-900  focus:ring-primary-100 focus:border-primary-100"
         />
 
         <!-- Validation Messages -->
@@ -104,7 +104,7 @@
       </div>
       <div class="flex flex-row">
         <select id="type" (change)="changePriceComponentChar($event)"
-          class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+          class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
             @if(!selectedCharacteristic){
               <option value="">Select a characteristic</option>
               @for(char of filteredChars; track char){
@@ -121,7 +121,7 @@
           </select>
           @if(showValueSelect){
               <select id="type" (change)="changePriceComponentCharValue($event)"
-              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                   @for(val of selectedCharacteristic.productSpecCharacteristicValue; track val){
                       @if(hasKey(val, 'unitOfMeasure')){
                           <option value="{{val.value}}">{{val.value}} ({{val.unitOfMeasure}})</option>
@@ -159,7 +159,7 @@
       } @else if (priceComponentForm.get('priceType')?.value === 'usage') {
       <div class="flex flex-row">
         <select id="type" (change)="changePriceComponentUsageSpec($event)"
-          class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+          class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
             @if(!selectedUsageSpec){
               <option value="">Select a usage specification</option>
               @for(usage of usageSpecs; track usage){
@@ -176,7 +176,7 @@
           </select>
           @if(showMetricSelect){
               <select id="type" (change)="changePriceComponentMetric($event)"
-              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                   @if(!selectedMetric){
                     @for(metric of selectedUsageSpec.specCharacteristic; track metric){
                       <option value="{{metric.name}}">{{metric.name}}</option>

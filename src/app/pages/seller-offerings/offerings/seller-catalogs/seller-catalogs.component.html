@@ -9,7 +9,7 @@
         <div class="flex flex-row w-full justify-end">
             <!--<form class="max-w-lg w-1/2 pr-4 z-10">
                 <div class="relative">
-                    <input type="search" id="search" [formControl]="searchField" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-white shadow rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500"
+                    <input type="search" id="search" [formControl]="searchField" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-white shadow rounded-lg border border-gray-300 focus:ring-primary-100 focus:border-primary-100"
                     placeholder="Filter catalogs..." />
                     <button type="submit" (click)="filterInventoryByKeywords()" class="absolute shadow top-0 end-0 inline-flex items-center p-2.5 text-sm font-medium h-full text-white bg-primary-100 rounded-e-lg hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -98,7 +98,7 @@
           <fa-icon [icon]="faIdCard" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_role' | translate }}</h2>
         </div>
-        <select id="countries" class="shadow bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+        <select id="countries" class="shadow bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
           <option selected>{{ 'OFFERINGS._filter_role' | translate }}</option>
           <option value="all">{{ 'OFFERINGS._all' | translate }}</option>
           <option value="seller">{{ 'OFFERINGS._seller' | translate }}</option>
@@ -111,7 +111,7 @@
           <fa-icon [icon]="faSort" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._order_by' | translate }}</h2>
         </div>
-        <select id="countries" class="shadow bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+        <select id="countries" class="shadow bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
           <option selected>{{ 'OFFERINGS._order_by' | translate }}</option>
           <option value="update">{{ 'OFFERINGS._last_update' | translate }}</option>
           <option value="name">{{ 'OFFERINGS._name' | translate }}</option>
@@ -158,9 +158,9 @@
                         </td>
                         <td class="px-5 py-3">
                             @if(cat.lifecycleStatus == 'In design'){
-                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                             } @else if(cat.lifecycleStatus == 'Active'){
-                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                             } @else if(cat.lifecycleStatus == 'Launched') {
                                 <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                             } @else if(cat.lifecycleStatus == 'Retired') {

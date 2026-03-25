@@ -8,6 +8,7 @@ import {
   FormGroup,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
+import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 
 @Component({
   selector: 'app-offer-summary',
@@ -18,7 +19,8 @@ import {
     MarkdownComponent,
     NgClass,
     PickerComponent,
-    SharedModule],
+    SharedModule,
+    StatusSelectorComponent],
   templateUrl: './offer-summary.component.html',
   styleUrl: './offer-summary.component.css',
   providers: [

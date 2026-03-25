@@ -82,7 +82,7 @@
             <fa-icon [icon]="faSparkles" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
             <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_type' | translate }}</h2>
           </div>
-          <select id="type" (change)="onTypeChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+          <select id="type" (change)="onTypeChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
             <option value="none" selected>{{ 'OFFERINGS._filter_type' | translate }}</option>
             <option value="all">{{ 'OFFERINGS._all' | translate }}</option>
             <option value="simple">{{ 'OFFERINGS._simple' | translate }}</option>
@@ -95,7 +95,7 @@
             <fa-icon [icon]="faSort" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
             <h2 class="text-base font-semibold">{{ 'OFFERINGS._order_by' | translate }}</h2>
           </div>
-          <select id="sort" (change)="onSortChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+          <select id="sort" (change)="onSortChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
             <option value="none" selected>{{ 'OFFERINGS._order_by' | translate }}</option>
             <option value="update">{{ 'OFFERINGS._last_update' | translate }}</option>
             <option value="name">{{ 'OFFERINGS._name' | translate }}</option>
@@ -120,14 +120,14 @@
                 <thead class="px-5 py-3 text-base bg-gray-0">
                     <tr>
                         <th scope="col" class="px-5 py-3">
-                            {{ 'OFFERINGS._name' | translate }}
+                            {{ 'OFFERINGS._offer_name' | translate }}
                         </th>
                         <th scope="col" class="px-5 py-3">
                             {{ 'OFFERINGS._status' | translate }}
                         </th>
-                        <th scope="col" class="px-5 py-3 hidden md:table-cell">
+                        <!-- <th scope="col" class="px-5 py-3 hidden md:table-cell">
                             {{ 'OFFERINGS._type' | translate }}
-                        </th>
+                        </th> -->
                         <th scope="col" class="px-5 py-3 hidden md:table-cell">
                             {{ 'OFFERINGS._last_update' | translate }}
                         </th>
@@ -144,9 +144,9 @@
                             </td>
                             <td class="px-5 py-3">
                                 @if(offer.lifecycleStatus == 'In design'){
-                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                 } @else if(offer.lifecycleStatus == 'Active'){
-                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                 } @else if(offer.lifecycleStatus == 'Launched') {
                                     <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                 } @else if(offer.lifecycleStatus == 'Retired') {
@@ -155,13 +155,13 @@
                                     <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
                                 }
                             </td>
-                            <td class="px-5 py-3 hidden md:table-cell">
+                            <!-- <td class="px-5 py-3 hidden md:table-cell">
                                 @if(offer.isBundle == false){
                                     <div class="bg-primary-50/30 text-xs text-center font-medium px-2 py-0.5 rounded-md">{{ 'OFFERINGS._simple' | translate }}</div>
                                 } @else {
                                     <div class="bg-purple-100 text-green-500 text-center text-xs font-medium px-2 py-0.5 rounded-md">{{ 'OFFERINGS._bundle' | translate }}</div>
                                 }
-                            </td>
+                            </td> -->
                             <td class="px-5 py-3 hidden md:table-cell">
                                 {{offer.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                             </td>

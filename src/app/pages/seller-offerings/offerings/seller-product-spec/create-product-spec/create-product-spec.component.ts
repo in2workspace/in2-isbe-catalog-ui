@@ -20,6 +20,7 @@ import { DatePipe, NgClass } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
 import { InfoIconComponent } from 'src/app/shared/info-icon/info-icon.component';
+import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 
@@ -43,7 +44,7 @@ interface StepNavItem {
     templateUrl: './create-product-spec.component.html',
     styleUrl: './create-product-spec.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, DatePipe, MarkdownComponent, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent, InfoIconComponent]
+    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, DatePipe, MarkdownComponent, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent, InfoIconComponent, StatusSelectorComponent]
 })
 export class CreateProductSpecComponent implements OnInit {
 

@@ -42,21 +42,21 @@
                         <div>
                             <label for="prod-sepec-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                             <input formControlName="name" type="text" id="prod-sepec-name" maxLength="100"
-                            [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                             <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
                             <input formControlName="version" type="text" id="prod-version"
-                            [ngClass]="generalForm.get('version')?.invalid == true ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            [ngClass]="generalForm.get('version')?.invalid ? 'border-red-600' : (generalForm.value.version ? 'border-primary-100' : 'border-gray-300')"
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                         </div>
                         <div>
                             <label for="prod-brand" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
                             <input formControlName="brand" type="text" id="prod-brand"
-                            [ngClass]="generalForm.get('brand')?.invalid == true && generalForm.value.brand!='' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            [ngClass]="generalForm.get('brand')?.invalid && generalForm.value.brand!='' ? 'border-red-600' : (generalForm.value.brand ? 'border-primary-100' : 'border-gray-300')"
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                             <label for="prod-number" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
-                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                         </div>
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
@@ -144,9 +144,9 @@
                                             </td>
                                             <td class="px-5 py-3 hidden md:table-cell">
                                                 @if(prod.lifecycleStatus == 'In design'){
-                                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                 } @else if(prod.lifecycleStatus == 'Active'){
-                                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                                 } @else if(prod.lifecycleStatus == 'Launched') {
                                                     <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                                 } @else if(prod.lifecycleStatus == 'Retired') {
@@ -484,13 +484,13 @@
                             <div>
                                 <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                             </div>
                             <div>
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._type' | translate }}</label>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     <option selected value="string">String</option>
                                     <option value="number">Number</option>
                                     <option value="range">Number range</option>
@@ -499,7 +499,7 @@
                             <div class="col-span-2">
                                 <label for="description" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                                 <textarea id="description" formControlName="description" rows="4"
-                                class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"></textarea>
+                                class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
                             </div>
                         </form>
                         <div class="m-4">
@@ -547,7 +547,7 @@
                             @if(stringCharSelected){
                                 <div class="flex flex-row items-center align-items-middle">
                                     <input type="text" id="string-value" [(ngModel)]="stringValue"
-                                    class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"/>
+                                    class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"/>
                                     <button (click)="addCharValue()" [disabled]="!stringValue" [ngClass]="!stringValue ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -561,14 +561,14 @@
                                             {{ 'UPDATE_PROD_SPEC._value' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="number-value" [(ngModel)]="numberValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="unit-value" [(ngModel)]="numberUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
 
                                     <button (click)="addCharValue()" [disabled]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit" [ngClass]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
@@ -584,21 +584,21 @@
                                             {{ 'UPDATE_PROD_SPEC._from' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="from-value" [(ngModel)]="fromValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._to' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="to-value" [(ngModel)]="toValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="range-value" [(ngModel)]="rangeUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
                                     <button (click)="addCharValue()" [disabled]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit" [ngClass]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -696,7 +696,7 @@
                                 <input #imgURL type="text" id="att-name"
                                     [formControl]="attImageName"
                                     (blur)="attImageName.markAsTouched()"
-                                    class="w-full bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5"
+                                    class="w-full bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 p-2.5"
                                     [ngClass]="attImageName.invalid && attImageName.touched ? 'border-red-500' : ''"
                                 />
 
@@ -900,7 +900,7 @@
                         } @else {
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}</label>
                             <select id="rel-type" (change)="onRelChange($event)"
-                            class="shadow bg-white border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                            class="shadow bg-white border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
                                 <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>
@@ -1011,22 +1011,22 @@
                         <div class="mb-4 md:grid md:grid-cols-2 gap-2">
                             <div>
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.name}}
                                 </label>
                                 <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.version}}
                                 </label>
                             </div>
                             <div>
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" >
+                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
                                     {{productSpecToUpdate?.brand}}
                                 </label>
                                 @if(productSpecToUpdate?.productNumber!=''){
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.productNumber}}
                                 </label>
                                 }
@@ -1036,9 +1036,9 @@
                         <div class="mb-4 flex flex-row gap-2">
                             <label class="font-semibold text-base">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
                             @if(productSpecToUpdate?.lifecycleStatus == 'In design'){
-                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Active'){
-                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Launched') {
                                 <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                             } @else if(productSpecToUpdate?.lifecycleStatus == 'Retired') {
@@ -1084,9 +1084,9 @@
                                                 </td>
                                                 <td class="px-5 py-3">
                                                     @if(bun.lifecycleStatus == 'In design'){
-                                                        <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                                        <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                     }@else if(bun.lifecycleStatus == 'Active'){
-                                                        <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                                        <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                                     } @else if(bun.lifecycleStatus == 'Launched') {
                                                         <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                                     } @else if(bun.lifecycleStatus == 'Retired') {

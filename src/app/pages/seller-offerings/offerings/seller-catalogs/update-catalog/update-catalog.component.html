@@ -41,8 +41,8 @@
                     <form class=" gap-2" [formGroup]="generalForm">
                         <label for="prod-name" class="font-semibold text-lg ">{{ 'UPDATE_CATALOG._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                        [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                        [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
+                        class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                         <label class="font-semibold text-lg ">{{ 'UPDATE_CATALOG._status' | translate }}</label>
                         <div class="mb-2 w-full">
@@ -141,7 +141,7 @@
                 <div class="">
                     <div>
                         <label class="font-semibold text-lg ">{{ 'UPDATE_CATALOG._name' | translate }}</label>
-                        <label class="mb-2 bg-white text-wrap break-all  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                        <label class="mb-2 bg-white text-wrap break-all  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                             {{generalForm.value.name}}
                         </label>
                     </div>
@@ -149,9 +149,9 @@
                     <div class="mb-4">
                         <label class="font-semibold text-lg mr-4 ">{{ 'UPDATE_CATALOG._status' | translate }}</label>
                         @if(catalogToUpdate?.lifecycleStatus == 'In design'){
-                            <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                            <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                         } @else if(catalogToUpdate?.lifecycleStatus == 'Active'){
-                            <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                            <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                         } @else if(catalogToUpdate?.lifecycleStatus == 'Launched') {
                             <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                         } @else if(catalogToUpdate?.lifecycleStatus == 'Retired') {
