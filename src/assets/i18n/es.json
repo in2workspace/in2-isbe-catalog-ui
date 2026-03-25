@@ -210,8 +210,8 @@
   },
   "PRODUCT_DETAILS": {
     "_back": "Atrás",
-    "_details": "Detalles",
-    "_information": "Información",
+    "_details": "Detalles del Producto",
+    "_information": "Información del Producto",
     "_chars": "Características",
     "_attach": "Adjuntos",
     "_agreements": "Acuerdos",
@@ -226,10 +226,11 @@
     "_service_spec": "Esta oferta incluye las siguientes especificaciones de servicio",
     "_resource_spec": "Esta oferta incluye las siguientes especificaciones de recurso",
     "_self_attestation": "Puedes encontrar aquí el documento de auto-declaración.",
-    "_product_pricing": "Precios del producto",
-    "_product_chars": "Características del producto",
-    "_product_att": "Adjuntos del producto",
-    "_product_rels": "Relaciones del producto"
+    "_product_pricing": "Precios del producto/servicio",
+    "_product_chars": "Características del producto/servicio",
+    "_product_att": "Adjuntos del producto/servicio",
+    "_product_rels": "Relaciones del producto/servicio",
+    "_contact_company": "Contactar con Aerisense"
   },
   "CATALOGS": {
     "_all_catalogs": "Todos los catálogos",

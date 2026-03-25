@@ -5,8 +5,8 @@
     <img class="w-20 aspect-square object-cover rounded-2xl z-10 text-white" src="{{getProductImage()}}" alt="Product image">
   </div>
 
-  <div class="flex-1 h-full">
-    <div class="flex-1 h-full">
+  <div class="">
+    <div class="flex-1">
       <div class="overflow-y-hidden overflow-x-hidden">
       @if(!IS_ISBE){
         <a class="text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md mb-2 mr-2"
@@ -30,7 +30,6 @@
           <a (click)="toggleDetailsModal();$event.stopPropagation();" class="cursor-pointer">
             <h5 class="text-xl font-semibold line-clamp-2 tracking-tight text-primary-100 text-wrap break-all">{{productOff?.name}}</h5>
           </a>
-          <p class="text-base">Subtitle</p>
         </div>
         <markdown class="min-h-19 h-19 line-clamp-2 text-primary-100 text-base leading-tight" [data]="productOff?.description"></markdown>
       </div>
@@ -88,7 +87,7 @@
       }
     @if(checkMoreCats){
         <a class="w-fit py-1 px-3 rounded-md bg-black/5 text-black/60 font-semibold text-sm">
-          +1
+          +
         </a>
       }
     </ul>

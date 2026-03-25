@@ -50,15 +50,15 @@
                 <hr class="h-px border-black border-1">
 
                 <div class="flex flex-col">
-                  <div class="flex flex-col gap-2 justify-start py-8">
+                  <div class="flex flex-col gap-8 justify-start py-8">
                     <div class="justify-start">
-                        <h5 class="font-semibold tracking-tight text-xl md:text-lg mb-4 text-primary-100 ">{{ 'CARD._prod_details' | translate }}:</h5>
+                        <h5 class="font-semibold tracking-tight text-xl md:text-lg mb-4 text-primary-100 ">{{ 'CARD._prod_details' | translate }}</h5>
                         <markdown class="min-h-19 h-19  line-clamp-6 text-wrap break-all" [data]="productOff?.description"></markdown>
                         <markdown class="min-h-19 h-19  line-clamp-6 text-wrap break-all" [data]="prodSpec.description"></markdown>
                     </div>
 
                     <div class="justify-start">
-                      <h5 class="font-semibold tracking-tight text-xl md:text-lg mb-4 text-primary-100 ">{{ 'CARD._extra_info' | translate }}:</h5>
+                      <h5 class="font-semibold tracking-tight text-xl md:text-lg mb-4 text-primary-100 ">{{ 'CARD._extra_info' | translate }}</h5>
                       <ul class="max-w-md space-y-1 list-disc list-inside  text-wrap break-all line-clamp-8">
                         <li class="text-wrap break-all line-clamp-1">{{ 'CARD._offer_version' | translate }}: v{{productOff?.version}}</li>
                         <li class="text-wrap break-all line-clamp-2">{{ 'CARD._product_name' | translate }}: {{prodSpec.name}}</li>
@@ -132,8 +132,8 @@
                               }
                               @if(productOff?.productOfferingPrice?.length==0){
                                   <div class="mx-auto bg-white rounded-lg w-full">
-                                      <div class="bg-purple-500 rounded-lg w-full p-6">
-                                          <h5 class="flex justify-start  text-xl font-semibold text-white">{{ 'SHOPPING_CART._no_price' | translate }}</h5>
+                                      <div class="bg-purple-500 rounded-lg w-full flex flex-col gap-4 p-6">
+                                          <h5 class="flex justify-start text-xl font-semibold text-white">{{ 'SHOPPING_CART._no_price' | translate }}</h5>
                                           <p class="flex justify-start font-normal text-white text-base">{{ 'SHOPPING_CART._no_price_desc' | translate }}</p>
                                         </div>
                                   </div>
@@ -156,7 +156,7 @@
                                           @for (val of char?.productSpecCharacteristicValue; track val.value) {
                                               @if (val?.isDefault == true) {
                                                   <div class="flex items-center p-4">
-                                                      <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 p-2 text-primary-100 bg-gray-100 border-gray-300  rounded-full ">
+                                                      <input disabled checked id="disabled-checked-checkbox" type="checkbox" value="" class="w-4 h-4 p-2 text-primary-100 bg-gray-100 border-gray-300 rounded-full ">
                                                       @if(val.value){
                                                           <label for="disabled-checked-checkbox" class="ms-2 text-sm font-medium text-gray-700 text-wrap break-all">{{val.value}} ({{val.unitOfMeasure}})</label>
                                                       } @else {
@@ -193,8 +193,22 @@
                       </div>
                   </div>
 
-                  <hr class="h-px border-black border-1">
-                  <div class="flex">
+                  <hr class="h-px border-black border-1 ">
+                  <div class="flex items-center py-8">
+                    <button class="flex items-center gap-3 bg-primary-100 text-gray-0 uppercase rounded-full py-3 px-5">
+                      {{ 'PRODUCT_DETAILS._contact_company' | translate }}
+                      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_629_170460)">
+                        <path d="M8.82757 16.6279L7.74205 15.5423L14.0314 9.25295L0.767657 9.25295L0.767657 7.7172L14.0287 7.71721L7.73998 1.42851L8.8255 0.342993L15.8834 7.40094L15.8841 7.40025L16.9697 8.48577L8.82757 16.6279Z" fill="white"/>
+                        </g>
+                        <defs>
+                        <clipPath id="clip0_629_170460">
+                        <rect width="12" height="12" fill="white" transform="translate(0 8.48535) rotate(-45)"/>
+                        </clipPath>
+                        </defs>
+                      </svg>
+
+                    </button>
                   </div>
                 </div>
               </div>

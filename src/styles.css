@@ -373,7 +373,7 @@ input[type='radio']:not(.hidden):not(.sr-only) {
 
 input[type='checkbox']:not(.hidden):not(.sr-only):checked,
 input[type='radio']:not(.hidden):not(.sr-only):checked {
-  @apply bg-primary-50 border-primary-50 text-primary-100;
+  @apply bg-primary-100 border-primary-100 text-gray-0;
 }
 
 textarea:-webkit-autofill {
