@@ -159,8 +159,9 @@ export class CreateProductSpecComponent implements OnInit {
   toValue: string = '';
   rangeUnit: string = '';
   showStringSuggestions: boolean = false;
+  private cachedStringValues: string[] = [];
 
-  get stringSuggestions(): string[] {
+  private rebuildStringCache() {
     const allValues: string[] = [];
     for (const char of this.prodChars) {
       for (const val of (char.productSpecCharacteristicValue || [])) {
@@ -169,9 +170,12 @@ export class CreateProductSpecComponent implements OnInit {
         }
       }
     }
-    const unique = [...new Set(allValues)];
-    if (!this.stringValue) return unique;
-    return unique.filter(v => v.toLowerCase().includes(this.stringValue.toLowerCase()) && v !== this.stringValue);
+    this.cachedStringValues = [...new Set(allValues)];
+  }
+
+  get stringSuggestions(): string[] {
+    if (!this.stringValue) return this.cachedStringValues;
+    return this.cachedStringValues.filter(v => v.toLowerCase().includes(this.stringValue.toLowerCase()) && v !== this.stringValue);
   }
 
   selectStringSuggestion(value: string) {
@@ -911,6 +915,7 @@ export class CreateProductSpecComponent implements OnInit {
     this.stringCharSelected=true;
     this.numberCharSelected=false;
     this.rangeCharSelected=false;
+    this.rebuildStringCache();
     this.refreshChars();
     this.cdr.detectChanges();
   }
@@ -919,8 +924,9 @@ export class CreateProductSpecComponent implements OnInit {
     const index = this.prodChars.findIndex(item => item.id === char.id);
     if (index !== -1) {
       this.prodChars.splice(index, 1);
-    }   
-    this.cdr.detectChanges();   
+    }
+    this.rebuildStringCache();
+    this.cdr.detectChanges();
   }
 
   checkInput(value: string): boolean {
