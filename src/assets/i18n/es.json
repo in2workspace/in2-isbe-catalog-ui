@@ -340,7 +340,7 @@
     "_custom": "Personalizado",
     "_free": "Gratis",
     "_warning_title" : "El perfil de tu organización está pendiente de actualización.",
-    "_warning_text" : "Complétalo y verifica que toda la información sea correcta para que tu esté completo."
+    "_warning_text" : "Complétalo y verifica que toda la información sea correcta para que tu perfil esté completo."
   },
   "PRODUCT_INVENTORY": {
     "_loading": "Cargando...",
@@ -764,7 +764,7 @@
   "CREATE_OFFER": {
     "_back": "Atrás",
     "_create": "Crear oferta del producto/servicio",
-    "_new": "Nuevo oferta del producto/servicio",
+    "_new": "Nueva oferta del producto/servicio",
     "_steps": "Pasos",
     "_general": "General",
     "_general_info": "Información general de la oferta",
