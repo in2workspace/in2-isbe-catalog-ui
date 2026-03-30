@@ -18,8 +18,37 @@
 
               <div class="flex flex-col overflow-x-hidden gap-3">
                 <h5 class="md:text-3xl font-semibold tracking-tight text-primary-100 text-wrap break-all">{{productOff?.name}}</h5>
-                <div class="grid grid-cols-2">
+                <div class="flex flex-row gap-2">
+                    @if(orgName){
+                        <div class="min-h-19 text-gray-500 ">
+                            {{ orgName }}
+                        </div>
+                    }
+                    <div class="min-h-19 text-gray-500 ">·</div>
                     <div class="min-h-19 text-gray-500 ">V: {{productOff?.version || 'latest'}}</div>
+                    <div class="min-h-19 text-gray-500 ">·</div>
+                    @if(orgUrl){
+                        <div (click)="goToUrl()" class="flex flex-row gap-2 min-h-19 text-gray-500 cursor-pointer items-center">
+                            {{ orgUrl }}
+                            <svg 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                width="16" 
+                                height="16" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                stroke="currentColor" 
+                                stroke-width="2" 
+                                stroke-linecap="round" 
+                                stroke-linejoin="round">
+
+                                <path d="M14 3h7v7"></path>
+                                <path d="M10 14L21 3"></path>
+                                <path d="M21 14v7h-7"></path>
+                                <path d="M3 10V3h7"></path>
+
+                            </svg>
+                        </div>
+                    }
                 </div>
 
                 <ul class="flex gap-2.5 flex-wrap mb-4">
@@ -193,23 +222,25 @@
                       </div>
                   </div>
 
-                  <hr class="h-px border-black border-1 ">
-                  <div class="flex items-center py-8">
-                    <button class="flex items-center gap-3 bg-primary-100 text-gray-0 uppercase rounded-full py-3 px-5">
-                      {{ 'PRODUCT_DETAILS._contact_company' | translate }}
-                      <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_629_170460)">
-                        <path d="M8.82757 16.6279L7.74205 15.5423L14.0314 9.25295L0.767657 9.25295L0.767657 7.7172L14.0287 7.71721L7.73998 1.42851L8.8255 0.342993L15.8834 7.40094L15.8841 7.40025L16.9697 8.48577L8.82757 16.6279Z" fill="white"/>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0_629_170460">
-                        <rect width="12" height="12" fill="white" transform="translate(0 8.48535) rotate(-45)"/>
-                        </clipPath>
-                        </defs>
-                      </svg>
+                  @if(orgUrl){
+                    <hr class="h-px border-black border-1 ">
+                    <div class="flex items-center py-8">
+                        <button (click)="goToUrl()" class="flex items-center gap-3 bg-primary-100 text-gray-0 uppercase rounded-full py-3 px-5">
+                        {{ 'PRODUCT_DETAILS._contact_company' | translate }} {{orgName}}
+                        <svg width="17" height="17" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_629_170460)">
+                            <path d="M8.82757 16.6279L7.74205 15.5423L14.0314 9.25295L0.767657 9.25295L0.767657 7.7172L14.0287 7.71721L7.73998 1.42851L8.8255 0.342993L15.8834 7.40094L15.8841 7.40025L16.9697 8.48577L8.82757 16.6279Z" fill="white"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_629_170460">
+                            <rect width="12" height="12" fill="white" transform="translate(0 8.48535) rotate(-45)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
 
-                    </button>
-                  </div>
+                        </button>
+                    </div>
+                 }
                 </div>
               </div>
           </div>

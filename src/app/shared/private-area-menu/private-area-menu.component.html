@@ -31,11 +31,11 @@
         </button>
       </ng-container>
       <ng-template #orgButtons>
-        <button type="button" class="flex w-full pr-4 py-2" [ngClass]="{ 'text-green': active === 'org', 'pl-8' : variant === 'header', 'pl-10' : variant === 'sidebar' }"
+        <button type="button" class="flex w-full pr-4 py-2" [ngClass]="{ 'text-green': active === 'org', 'pl-8' : variant === 'header', 'pl-10' : variant === 'sidebar', 'text-warning-50': !orgProfileCompleted && !loggedAsUser && active === 'org' }"
           (click)="onSelect('org')">
           {{ 'PROFILE._organization' | translate }}
         </button>
-        <button type="button" class="flex w-full pr-4 py-2" [ngClass]="{ 'text-green': active === 'account', 'pl-8' : variant === 'header', 'pl-10' : variant === 'sidebar'  }"
+        <button type="button" class="flex w-full pr-4 py-2" [ngClass]="{ 'text-green': active === 'account', 'pl-8' : variant === 'header', 'pl-10' : variant === 'sidebar'}"
           (click)="onSelect('account')">
           {{ 'PROFILE._account' | translate }}
         </button>
