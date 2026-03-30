@@ -788,7 +788,7 @@
                 @if(showRelationships){
                     <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</h2> -->
                     <div class="">
-                        @if(prodChars.length === 0 && prodRelationships.length === 0){
+                        @if(prodSpecRels.length === 0 && prodRelationships.length === 0){
                             <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
                               <div class="flex flex-col gap-1 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
@@ -859,7 +859,7 @@
                                 </table>
                             </div>
                         }
-                        @if(prodChars.length > 0 && prodRelationships.length === 0 && showCreateRel==false){
+                        @if(prodSpecRels.length > 0 && prodRelationships.length === 0 && showCreateRel==false){
                             <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
                               <div class="flex flex-col gap-1 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
@@ -1027,7 +1027,17 @@
 
                         <div class="mb-4">
                             <label class="font-semibold text-base mr-4 ">{{ 'CREATE_PROD_SPEC._status' | translate }}</label>
-                            <app-status-selector [modelType]="'spec'" [(ngModel)]="productSpecToCreate!.lifecycleStatus" [ngModelOptions]="{ standalone: true }"></app-status-selector>
+                            @if(productSpecToCreate?.lifecycleStatus == 'In design'){
+                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                            } @else if(productSpecToCreate?.lifecycleStatus == 'Active'){
+                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
+                            } @else if(productSpecToCreate?.lifecycleStatus == 'Launched') {
+                                <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
+                            } @else if(productSpecToCreate?.lifecycleStatus == 'Retired') {
+                                <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._retired' | translate }}</div>
+                            } @else if(productSpecToCreate?.lifecycleStatus == 'Obsolete') {
+                                <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
+                            }
                         </div>
 
                         @if(productSpecToCreate?.description !=''){
@@ -1142,35 +1152,7 @@
                             </div>
                         }
 
-                        @if(prodAttachments.length>0){
-                            <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._attachments' | translate }}</label>
-                            <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
-                                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
-                                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
-                                        <tr>
-                                            <th scope="col" class="px-5 py-3">
-                                                {{ 'CREATE_PROD_SPEC._product_name' | translate }}
-                                            </th>
-                                            <th scope="col" class="px-5 py-3">
-                                                {{ 'CREATE_PROD_SPEC._value' | translate }}
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @for (att of productSpecToCreate?.attachment; track att) {
-                                            <tr class="px-5 py-3 border-b hover:bg-gray-200">
-                                                <td class="px-5 py-3 text-wrap break-all">
-                                                    {{att.name}}
-                                                </td>
-                                                <td class="px-5 py-3 text-wrap break-all">
-                                                    {{att.url}}
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        }
+                        
 
                         @if(prodRelationships.length>0){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</label>

@@ -12,7 +12,7 @@ import { SellerProductSpecComponent } from './offerings/seller-product-spec/sell
 import { SellerCatalogsComponent } from './offerings/seller-catalogs/seller-catalogs.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
-import { Subject, take, takeUntil } from 'rxjs';
+import { combineLatest, Subject, take, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 import { environment } from 'src/environments/environment';
 import { HeaderBannerComponent } from 'src/app/shared/header/header-banner/header-banner.component';
@@ -54,6 +54,7 @@ export class SellerOfferingsComponent implements OnInit, OnDestroy {
 
   feedback = false;
   userInfo: any;
+  seller: any = '';
   activeTab: MenuTab | null = null;
   
   orgProfileCompleted = true;
@@ -111,9 +112,14 @@ export class SellerOfferingsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
+    combineLatest([
+        this.auth.loginInfo$,
+        this.auth.sellerId$,
+    ]).
+    pipe(take(1)).subscribe(([li, sellerId]) => {
       if (!li) return;
       this.userInfo = li;
+      this.seller = sellerId;
     });
     this.menuStateService.tab$('offerings')
       .pipe(takeUntil(this.destroy$))
@@ -130,7 +136,7 @@ export class SellerOfferingsComponent implements OnInit, OnDestroy {
     const effective = (this.IS_ISBE && initial === 'catalogs') ? 'productspec' : initial;
     this.loggedAsUser = this.userInfo?.logged_as === this.userInfo?.userId;
     if (!this.loggedAsUser) {
-      this.accountService.getOrgInfo(this.userInfo.userId).then(orgInfo => {
+      this.accountService.getOrgInfo(this.seller).then(orgInfo => {
         this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
       });
     }
