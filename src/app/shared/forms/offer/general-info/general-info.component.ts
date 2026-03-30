@@ -75,7 +75,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
     if (this.isEditMode && this.data) {
       this.formGroup.addControl('name', new FormControl<string>(this.data.name, [Validators.required, Validators.maxLength(100), noWhitespaceValidator]));
       this.formGroup.addControl('status', new FormControl<string>(this.data.lifecycleStatus));
-      this.formGroup.addControl('description', new FormControl<string>(this.data.description, Validators.maxLength(100000)));
+      this.formGroup.addControl('description', new FormControl<string>(this.data.description, [Validators.required,Validators.maxLength(100000)]));
       this.formGroup.addControl('version', new FormControl<string>(this.data.version, [Validators.required,Validators.pattern('^-?[0-9]\\d*(\\.\\d*)?$'), noWhitespaceValidator]));
       
       this.statusAnchor = normalizeToInternal(this.data.lifecycleStatus) as StatusCode;
@@ -89,7 +89,7 @@ export class GeneralInfoComponent implements OnInit, OnDestroy {
     } else {
       this.formGroup.addControl('name', new FormControl<string>('', [Validators.required, Validators.maxLength(100), noWhitespaceValidator]));
       this.formGroup.addControl('status', new FormControl<string>('In design', [Validators.required]));
-      this.formGroup.addControl('description', new FormControl<string>(''));
+      this.formGroup.addControl('description', new FormControl<string>('', [Validators.required,Validators.maxLength(100000)]));
       this.formGroup.addControl('version', new FormControl<string>('0.1', [Validators.required,Validators.pattern('^-?[0-9]\\d*(\\.\\d*)?$'), noWhitespaceValidator]));
       this.statusAnchor = 'in_design';
     }

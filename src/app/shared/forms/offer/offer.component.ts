@@ -99,7 +99,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       this.productOfferForm = this.fb.group({
         generalInfo: this.fb.group({}),
         prodSpec: new FormControl(null, [Validators.required]),
-        category: new FormControl([]),
+        category: new FormControl(null, [Validators.required]),
         pricePlans: new FormControl([])
       });
     } else {
@@ -117,7 +117,7 @@ export class OfferComponent implements OnInit, OnDestroy{
         generalInfo: this.fb.group({}),
         prodSpec: new FormControl(null, [Validators.required]),
         catalogue: new FormControl(null, [Validators.required]),
-        category: new FormControl([]),
+        category: new FormControl([], [Validators.required]),
         license: this.fb.group({}),
         pricePlans: new FormControl([]),
         procurementMode: this.fb.group({}),
@@ -250,7 +250,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       case 'CREATE_OFFER._catalog':
         return !!this.productOfferForm.get('catalogue')?.value;
       case 'CREATE_OFFER._category':
-        return true;
+        return !!this.productOfferForm.get('category')?.value;
       case 'CREATE_OFFER._license':
         return this.productOfferForm.get('license')?.valid || false;
       case 'CREATE_OFFER._price_plans':

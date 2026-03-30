@@ -24,6 +24,6 @@
 
 }
 @if (descControl) {
-  <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_OFFER._description' | translate }}</label>
+  <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_OFFER._description' | translate }}<span class="text-red-500">*</span></label>
   <app-markdown-textarea [formControl]="descControl"></app-markdown-textarea>
 }
