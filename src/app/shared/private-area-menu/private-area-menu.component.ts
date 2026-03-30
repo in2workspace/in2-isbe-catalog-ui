@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/guard/auth.service';
-import { take } from 'rxjs';
+import { combineLatest, take } from 'rxjs';
 import { AccountServiceService } from 'src/app/services/account-service.service';
 
 export type MenuTab =
@@ -32,14 +32,18 @@ export class PrivateAreaMenuComponent implements OnInit {
   loggedAsUser = true;
 
   ngOnInit(): void {
-    this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
+    combineLatest([
+          this.auth.loginInfo$,
+          this.auth.sellerId$,
+      ]).
+      pipe(take(1)).subscribe(([li, sellerId]) => {
       if (!li) return;
       this.loggedAsUser = li.logged_as === li.userId;
       this.roles = (li.roles || []).map(r => r.name ?? r.id ?? r);
       this.isAdmin = this.roles.includes('admin');
 
       if (!this.loggedAsUser) {
-        this.accountService.getOrgInfo(li.userId).then(orgInfo => {
+        this.accountService.getOrgInfo(sellerId).then(orgInfo => {
           this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
         });
       }
