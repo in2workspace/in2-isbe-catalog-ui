@@ -472,7 +472,8 @@
                     }
                     @if(showCreateChar==false){
                         <div class="flex w-full justify-items-center justify-center">
-                            <button type="button" (click)="showCreateChar=!showCreateChar" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
+                            <button type="button" (click)="showCreateChar=!showCreateChar"
+                            class="inline-flex text-white justify-center bg-primary-100 font-semibold rounded-full text-sm px-5 py-1 text-center items-center">
                                 {{ 'UPDATE_PROD_SPEC._new_char' | translate }}
                                 <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -505,7 +506,7 @@
                         <div class="m-4">
                             @if(creatingChars.length>0){
                                 <label for="values" class="font-semibold text-base ">Values</label>
-                                <div class="flex flex-col items-start pl-4  shadow-md sm:rounded-lg w-full bg-white    border border-gray-300 mb-2">
+                                <div class="flex flex-col items-start pl-4  shadow-md sm:rounded-lg w-full bg-white border border-gray-300 mb-2">
                                     @if(rangeCharSelected){
                                         @for (char of creatingChars; track char; let idx = $index) {
                                             <div class="flex w-full justify-between">
@@ -548,7 +549,8 @@
                                 <div class="flex flex-row items-center align-items-middle">
                                     <input type="text" id="string-value" [(ngModel)]="stringValue"
                                     class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"/>
-                                    <button (click)="addCharValue()" [disabled]="!stringValue" [ngClass]="!stringValue ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
+                                    <button (click)="addCharValue()" [disabled]="!stringValue" [ngClass]="!stringValue ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" 
+                                    class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50font-medium rounded-full text-sm mt-4 p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                                         </svg>
@@ -571,7 +573,8 @@
                                         class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
 
-                                    <button (click)="addCharValue()" [disabled]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit" [ngClass]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
+                                    <button (click)="addCharValue()" [disabled]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit" [ngClass]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button"
+                                    class="text-white w-fit h-full bg-primary-100 font-medium rounded-full text-sm mt-4 p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                                         </svg>
@@ -600,7 +603,8 @@
                                         <input type="text" id="range-value" [(ngModel)]="rangeUnit"
                                         class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
-                                    <button (click)="addCharValue()" [disabled]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit" [ngClass]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
+                                    <button (click)="addCharValue()" [disabled]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit" [ngClass]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  type="button"
+                                    class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 font-medium rounded-full text-sm mt-4 p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                                         </svg>
@@ -608,7 +612,8 @@
                                 </div>
                             }
                             <div class="flex w-full justify-items-center justify-center mt-4">
-                                <button type="button" (click)="saveChar()"  [disabled]="!charsForm.valid || creatingChars.length==0" [ngClass]="!charsForm.valid || creatingChars.length==0 ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
+                                <button type="button" (click)="saveChar()"  [disabled]="!charsForm.valid || creatingChars.length==0" [ngClass]="!charsForm.valid || creatingChars.length==0 ? 'opacity-50' : 'hover:bg-primary-50'"
+                                class="inline-flex text-white justify-center bg-primary-100 font-semibold rounded-full text-sm px-5 py-1 mt-4 text-center items-center">
                                     {{ 'UPDATE_PROD_SPEC._save_char' | translate }}
                                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
@@ -715,7 +720,7 @@
                     @if(!IS_ISBE){
                         @if(showNewAtt==false){
                             <div class="flex w-full justify-items-center justify-center">
-                                <button type="button" (click)="showNewAtt=!showNewAtt" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
+                                <button type="button" (click)="showNewAtt=!showNewAtt" class="inline-flex text-white justify-center bg-primary-100 font-semibold rounded-full text-sm px-5 py-1 text-center items-center">
                                     {{ 'UPDATE_PROD_SPEC._new_att' | translate }}
                                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -764,7 +769,7 @@
                                 <div class="flex w-full justify-items-center justify-center mt-4">
                                     <button type="button" (click)="saveAtt()"
                                     [disabled]="!attFileName.valid || attachToCreate.url == ''" [ngClass]="!attFileName.valid || attachToCreate.url == '' ? 'opacity-50' : 'hover:bg-primary-50'"
-                                    class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
+                                    class="inline-flex text-white justify-center bg-primary-100 font-semibold rounded-full text-sm px-5 py-1 text-center items-center">
                                         {{ 'UPDATE_PROD_SPEC._save_att' | translate }}
                                         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
@@ -839,8 +844,8 @@
                             </div>
                         }
                         @if(showCreateRel==false){
-                            <div class="flex w-full justify-items-center justify-center">
-                                <button type="button" (click)="showCreateRel=!showCreateRel" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
+                            <div class="flex w-full justify-items-center justify-center mt-4">
+                                <button type="button" (click)="showCreateRel=!showCreateRel" class="inline-flex text-white justify-center bg-primary-100 font-semibold rounded-full text-sm px-5 py-1 text-center items-center">
                                     {{ 'UPDATE_PROD_SPEC._add_relationship' | translate }}
                                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
@@ -937,7 +942,8 @@
                                 }
                             }
                             <div class="flex w-full justify-items-center justify-center mt-4">
-                                <button type="button" (click)="saveRel()" [disabled]="prodSpecRels.length==0 || selectedProdSpec.id == ''" [ngClass]="prodSpecRels.length==0 || selectedProdSpec.id == '' ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
+                                <button type="button" (click)="saveRel()" [disabled]="prodSpecRels.length==0 || selectedProdSpec.id == ''" [ngClass]="prodSpecRels.length==0 || selectedProdSpec.id == '' ? 'opacity-50' : 'hover:bg-primary-50'"
+                                class="inline-flex text-white justify-center bg-primary-100 font-semibold rounded-full text-sm px-5 py-1 text-center items-center">
                                     {{ 'UPDATE_PROD_SPEC._save_relationship' | translate }}
                                     <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
@@ -961,53 +967,43 @@
                         <div class="mb-4 md:grid md:grid-cols-2 gap-2">
                             <div>
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                                <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.name}}
                                 </label>
                                 <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                                <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.version}}
                                 </label>
                             </div>
                             <div>
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
+                                <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
                                     {{productSpecToUpdate?.brand}}
                                 </label>
-                                @if(productSpecToUpdate?.productNumber!=''){
+                                <!-- @if(productSpecToUpdate?.productNumber!=''){
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                                <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.productNumber}}
                                 </label>
-                                }
+                                } -->
                             </div>
                         </div>
 
                         <div class="mb-4">
                             <label class="font-semibold text-base">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
-                            @if(productSpecToUpdate?.lifecycleStatus == 'In design'){
-                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
-                            } @else if(productSpecToUpdate?.lifecycleStatus == 'Active'){
-                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
-                            } @else if(productSpecToUpdate?.lifecycleStatus == 'Launched') {
-                                <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
-                            } @else if(productSpecToUpdate?.lifecycleStatus == 'Retired') {
-                                <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._retired' | translate }}</div>
-                            } @else if(productSpecToUpdate?.lifecycleStatus == 'Obsolete') {
-                                <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
-                            }
+                            <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [statuses]="[prodStatusAnchor]" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }" [disabled]="true"></app-status-selector>
                         </div>
 
                         @if(productSpecToUpdate?.description !=''){
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
-                            <div class="px-4 py-2 bg-white  border  rounded-lg p-4 mb-4">
+                            <div class="px-4 py-2 bg-gray-0 rounded-lg p-4 mb-4">
                                 <markdown class="bg-gray-50 text-wrap break-all   text-gray-900" [data]="productSpecToUpdate?.description"></markdown>
                             </div>
                         }
 
                         @if(imgPreview!=''){
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._profile_pic' | translate }}</label>
-                            <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full mx-auto m-4 shadow-lg">
+                            <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl pb-8 pt-40 max-w-sm w-full my-4 shadow-lg">
                                 <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             </div>
                         }
@@ -1052,7 +1048,7 @@
                             </div>
                         }
 
-                        @if(prodChars.length>0){
+                        <!-- @if(prodChars.length>0){
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._chars' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
                                 <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0">
@@ -1108,10 +1104,11 @@
                                     </tbody>
                                 </table>
                             </div>
-                        }
+                        } -->
 
                         @if(prodRelationships.length>0){
-                            <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</label>
+                            <h3 class="font-semibold text-2xl my-2.5">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</h3>
+                            <hr class="mb-4"/>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
                                 <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0">
                                     <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">

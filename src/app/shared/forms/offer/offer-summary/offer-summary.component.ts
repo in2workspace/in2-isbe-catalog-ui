@@ -9,6 +9,7 @@ import {
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
+import { normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
 
 @Component({
   selector: 'app-offer-summary',
@@ -34,6 +35,11 @@ import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-
 export class OfferSummaryComponent{
 
   @Input() productOfferForm!: FormGroup;
+
+  get offerStatusAnchor(): StatusCode {
+    const status = this.productOfferForm.get('generalInfo')?.get('status')?.value;
+    return (normalizeToInternal(status) || 'in_design') as StatusCode;
+  }
 
   get isLicenseEmpty(): boolean {
     const licenseValue = this.productOfferForm.get('license')?.value;

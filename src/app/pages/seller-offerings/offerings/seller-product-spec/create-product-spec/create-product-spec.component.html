@@ -994,7 +994,7 @@
                 }
 
                 @if(showSummary){
-                    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2>
+                    <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
                         <div class="mb-4 md:grid md:grid-cols-2 gap-2">
                             <div>
@@ -1027,17 +1027,7 @@
 
                         <div class="mb-4">
                             <label class="font-semibold text-base mr-4 ">{{ 'CREATE_PROD_SPEC._status' | translate }}</label>
-                            @if(productSpecToCreate?.lifecycleStatus == 'In design'){
-                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
-                            } @else if(productSpecToCreate?.lifecycleStatus == 'Active'){
-                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
-                            } @else if(productSpecToCreate?.lifecycleStatus == 'Launched') {
-                                <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
-                            } @else if(productSpecToCreate?.lifecycleStatus == 'Retired') {
-                                <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._retired' | translate }}</div>
-                            } @else if(productSpecToCreate?.lifecycleStatus == 'Obsolete') {
-                                <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
-                            }
+                            <app-status-selector [modelType]="'spec'" [anchor]="'in_design'" [statuses]="['in_design']" [(ngModel)]="productSpecToCreate!.lifecycleStatus" [ngModelOptions]="{ standalone: true }" [disabled]="true"></app-status-selector>
                         </div>
 
                         @if(productSpecToCreate?.description !=''){
