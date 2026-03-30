@@ -159,4 +159,9 @@ export class SellerProductSpecComponent implements OnInit, AfterViewChecked {
     }
     this.getProdSpecs(false);
   }
+
+  onCreateOfferClick() {
+    this.eventMessage.emitSellerCreateOffer(true);
+  }
+
 }
