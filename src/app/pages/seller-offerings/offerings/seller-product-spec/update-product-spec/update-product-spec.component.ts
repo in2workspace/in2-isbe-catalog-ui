@@ -23,6 +23,7 @@ import { take } from 'rxjs';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 import { hasNonStatusChanges, normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
 import { AlertMessageComponent } from 'src/app/shared/alert-message/alert-message.component';
+import { InfoIconComponent } from 'src/app/shared/info-icon/info-icon.component';
 
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
@@ -45,7 +46,7 @@ interface StepNavItem {
     templateUrl: './update-product-spec.component.html',
     styleUrl: './update-product-spec.component.css',
     standalone: true,
-    imports: [StatusSelectorComponent, ErrorMessageComponent, AlertMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
+    imports: [StatusSelectorComponent, ErrorMessageComponent, AlertMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule,InfoIconComponent, MarkdownTextareaComponent]
 })
 export class UpdateProductSpecComponent implements OnInit {
   @Input() prod: any;

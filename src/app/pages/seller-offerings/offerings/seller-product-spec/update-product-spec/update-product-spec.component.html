@@ -43,11 +43,14 @@
                             <label for="prod-sepec-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                             <input formControlName="name" type="text" id="prod-sepec-name" maxLength="100"
                             [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
-                            <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
+                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            <div class="flex flex-row items-center gap-2">
+                              <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
+                              <info-icon [tooltipText]="'CREATE_OFFER._version_tooltip' | translate"></info-icon>
+                            </div>
                             <input formControlName="version" type="text" id="prod-version"
                             [ngClass]="generalForm.get('version')?.invalid ? 'border-red-600' : (generalForm.value.version ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                         </div>
                         <div>
@@ -970,7 +973,10 @@
                                 <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.name}}
                                 </label>
-                                <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
+                                <div class="flex items-center gap-2">
+                                  <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
+                                  <info-icon [tooltipText]="'CREATE_OFFER._version_tooltip' | translate"></info-icon>
+                                </div>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.version}}
                                 </label>

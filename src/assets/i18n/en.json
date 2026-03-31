@@ -452,7 +452,7 @@
         "_description": "Description",
         "_next": "Next",
         "_summary": "Catalogue's summary",
-        "_finish": "Finish"
+        "_finish": "Summary"
     },
     "UPDATE_CATALOG": {
         "_back": "Back",
@@ -470,7 +470,7 @@
         "_description": "Description",
         "_next": "Next",
         "_summary": "Catalogue's summary",
-        "_finish": "Finish",
+        "_finish": "Summary",
         "_active": "Active",
         "_launched": "Launched",
         "_retired": "Retired",
@@ -550,7 +550,7 @@
         "_add_relationship": "Add new relationship",
         "_save_relationship": "Save relationship",
         "_profile_pic": "Profile picture",
-        "_finish": "Resume",
+        "_finish": "Summary",
         "_summary": "Product's summary",
         "_create_prod": "Create product",
         "_file_res": "File restrictions",
@@ -627,7 +627,7 @@
         "_add_relationship": "Add new relationship",
         "_save_relationship": "Save relationship",
         "_profile_pic": "Specification picture",
-        "_finish": "Finish",
+        "_finish": "Summary",
         "_summary": "Product's summary",
         "_update_prod": "Update product",
         "_verify": "Verify Certificates",
@@ -671,7 +671,7 @@
         "_name": "Name",
         "_description": "Description",
         "_next": "Next",
-        "_finish": "Finish",
+        "_finish": "Summary",
         "_create_res": "Create resource"
     },
     "UPDATE_RES_SPEC": {
@@ -700,7 +700,7 @@
         "_name": "Name",
         "_description": "Description",
         "_next": "Next",
-        "_finish": "Finish",
+        "_finish": "Summary",
         "_update_res": "Update resource"
     },
     "CREATE_SERV_SPEC": {
@@ -728,7 +728,7 @@
         "_name": "Name",
         "_description": "Description",
         "_next": "Next",
-        "_finish": "Finish",
+        "_finish": "Summary",
         "_create_serv": "Create service"
     },
     "UPDATE_SERV_SPEC": {
@@ -757,7 +757,7 @@
         "_name": "Name",
         "_description": "Description",
         "_next": "Next",
-        "_finish": "Finish",
+        "_finish": "Summary",
         "_update_serv": "Update service"
     },
     "CREATE_OFFER":{
@@ -821,7 +821,7 @@
         "_add_relationship": "Add new relationship",
         "_save_relationship": "Save relationship",
         "_profile_pic": "Profile picture",
-        "_finish": "Finish",
+        "_finish": "Summary",
         "_summary": "Product's summary",
         "_create_prod": "Create product",
         "_choose_license": "Choose a license",
