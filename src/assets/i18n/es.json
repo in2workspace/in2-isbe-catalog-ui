@@ -567,7 +567,7 @@
   "UPDATE_PROD_SPEC": {
     "_back": "Atrás",
     "_update": "Actualizar especificación de producto",
-    "_new": "Actualizar producto",
+    "_new": "Actualizar especificación de producto/servicio",
     "_steps": "Pasos",
     "_general": "General",
     "_general_info": "Información general del producto",
@@ -630,7 +630,8 @@
     "_profile_pic": "Imagen de la especificación",
     "_finish": "Resumen",
     "_summary": "Resumen",
-    "_update_prod": "Actualizar producto",
+    "_update_prod": "Actualizar especificación de producto/servicio",
+    "_update_prod_desc": "La especificación describe las características clave del producto/servicio sobre las que se construye esta oferta.",
     "_verify": "Verificar certificados",
     "_how_to_verify": "¿Cómo obtener una VC válida del certificado?",
     "_verify_text": "Para obtener una VC válida del certificado puedes acceder al ",
