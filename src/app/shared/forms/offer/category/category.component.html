@@ -34,7 +34,6 @@
       <table class="px-5 py-3 w-full text-sm text-left text-gray-500">
         <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
         <tr>
-          <th class="px-5 py-3"></th>
           <th class="px-5 py-3">{{ 'CREATE_OFFER._name' | translate }}</th>
           <th class="px-5 py-3 text-center">{{ 'CREATE_OFFER._select' | translate }}</th>
         </tr>
@@ -58,7 +57,7 @@
             (click)="manageCategory(category)">
 
           <!-- Botón Expandir -->
-            <td class="px-5 py-3">
+            <!-- <td class="px-5 py-3">
               <button
                 *ngIf="category.childrenLoaded || !category.childrenLoaded"
                 (click)="toggleCategory(category); $event.stopPropagation()"
@@ -78,12 +77,13 @@
                   />
                 </svg>
               </button>
-            </td>
+            </td> -->
 
 
             <!-- Nombre de la Categoría con Indentación -->
-            <td class="px-5 py-3" [style.padding-left.px]="level * 20">
-              {{ category.name }}
+            <td class="px-5 py-3">
+              <p class="text-base font-bold text-black">{{ category.name }}</p>
+              <p class="text-sm">{{category.description }}</p>
             </td>
 
             <!-- Checkbox -->

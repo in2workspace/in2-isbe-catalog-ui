@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { NgClass } from '@angular/common';
 import { AuthService } from 'src/app/guard/auth.service';
-import { Subject, take, takeUntil } from 'rxjs';
+import { combineLatest, Subject, take, takeUntil } from 'rxjs';
 import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-menu/private-area-menu.component';
 import { MenuStateService } from 'src/app/services/menu-state.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
@@ -84,7 +84,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   initPartyInfo() {
-    this.auth.loginInfo$.pipe(take(1)).subscribe((aux) => {
+    combineLatest([
+        this.auth.loginInfo$,
+        this.auth.sellerId$,
+    ]).
+    pipe(take(1)).subscribe(([aux, sellerId]) => {
       if (!aux) return;
 
       this.token = aux.token;
@@ -98,7 +102,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
       this.applySelection(initial);
 
       if (!this.loggedAsUser) {
-        this.accountService.getOrgInfo(aux.userId).then(orgInfo => {
+        this.accountService.getOrgInfo(sellerId).then(orgInfo => {
           this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
         });
       }

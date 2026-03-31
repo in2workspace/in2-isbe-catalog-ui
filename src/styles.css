@@ -367,13 +367,13 @@ input[type='radio']:checked {
 
 input[type='checkbox']:not(.hidden):not(.sr-only),
 input[type='radio']:not(.hidden):not(.sr-only) {
-  @apply w-4 h-4 text-primary-50 bg-gray-0 border-gray-0 rounded focus:ring-purple-500;
+  @apply size-6 text-primary-50 bg-gray-0 border-gray-0 rounded-full focus:ring-primary-100;
   accent-color: theme('colors.primary.50');
 }
 
 input[type='checkbox']:not(.hidden):not(.sr-only):checked,
 input[type='radio']:not(.hidden):not(.sr-only):checked {
-  @apply bg-primary-50 border-primary-50 text-primary-100;
+  @apply bg-primary-100 border-primary-100 text-gray-0;
 }
 
 textarea:-webkit-autofill {

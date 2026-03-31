@@ -38,6 +38,7 @@ function rolesFromPowers(powers: any[], orgiId: string): string[] {
         roleSet.add('certifier');
         break;
       default:
+        roleSet.add('seller');
         break;
     }
   }

@@ -17,6 +17,8 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { MarkdownComponent } from 'ngx-markdown';
 import { combineLatest, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
+import { InfoIconComponent } from 'src/app/shared/info-icon/info-icon.component';
+import { OkMessageComponent } from 'src/app/shared/ok-message/ok-message.component';
 
 type OrganizationUpdate = components["schemas"]["Organization_Update"];
 
@@ -37,7 +39,7 @@ enum PhoneContactType {
     templateUrl: './org-info.component.html',
     styleUrl: './org-info.component.css',
     standalone: true,
-    imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent, TranslateModule]
+    imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent, InfoIconComponent, OkMessageComponent]
 })
 export class OrgInfoComponent {
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
@@ -237,9 +239,6 @@ export class OrgInfoComponent {
         this.profileForm.reset();
         this.getProfile();
         this.successVisibility = true;
-        setTimeout(() => {
-          this.successVisibility = false
-        }, 2000);       
       },
       error: error => {
           console.error('There was an error while updating!', error);

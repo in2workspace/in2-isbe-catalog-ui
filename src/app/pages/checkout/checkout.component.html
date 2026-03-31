@@ -59,7 +59,7 @@
         <div id="billing-addresses" role="radiogroup" aria-labelledby="billing-addresses">
           <label class="sr-only" id="billing-addresses-label" role="none">{{ 'SHOPPING_CART._billingAddress' | translate }}</label>
           @if (billingAddresses.length > 0) {
-            <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3" role="none">
+            <div class="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3" role="none">
               @for(baddr of billingAddresses; track baddr.id; let pos = $index) {
                 <app-billing-address [data]="baddr" [position]="pos" (selectedEvent)="onSelected($event)" (deletedEvent)="onDeleted($event)"></app-billing-address>
               }

@@ -24,6 +24,7 @@ import { AlertMessageComponent } from '../../alert-message/alert-message.compone
 import { hasNonStatusChanges } from '../../lifecycle-status/lifecycle-status';
 import { IsbeMessageComponent } from '../../isbe-message/isbe-message.component';
 
+
 type ProductOffering_Create = components["schemas"]["ProductOffering_Create"];
 type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
  
@@ -97,9 +98,14 @@ export class OfferComponent implements OnInit, OnDestroy{
         'CREATE_OFFER._summary'
       ];
       this.productOfferForm = this.fb.group({
-        generalInfo: this.fb.group({}),
         prodSpec: new FormControl(null, [Validators.required]),
-        category: new FormControl([]),
+        generalInfo: this.fb.group({
+          name: [null, Validators.required],
+          status: [null],
+          description: [null, Validators.required],
+          version: [null, Validators.required]
+        }),
+        category: new FormControl(null, [Validators.required]),
         pricePlans: new FormControl([])
       });
     } else {
@@ -114,10 +120,15 @@ export class OfferComponent implements OnInit, OnDestroy{
         'CREATE_OFFER._summary'
       ];
       this.productOfferForm = this.fb.group({
-        generalInfo: this.fb.group({}),
         prodSpec: new FormControl(null, [Validators.required]),
+        generalInfo: this.fb.group({
+          name: [null, Validators.required],
+          status: [null],
+          description: [null, Validators.required],
+          version: [null, Validators.required]
+        }),
         catalogue: new FormControl(null, [Validators.required]),
-        category: new FormControl([]),
+        category: new FormControl([], [Validators.required]),
         license: this.fb.group({}),
         pricePlans: new FormControl([]),
         procurementMode: this.fb.group({}),
@@ -250,7 +261,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       case 'CREATE_OFFER._catalog':
         return !!this.productOfferForm.get('catalogue')?.value;
       case 'CREATE_OFFER._category':
-        return true;
+        return !!this.productOfferForm.get('category')?.value;
       case 'CREATE_OFFER._license':
         return this.productOfferForm.get('license')?.valid || false;
       case 'CREATE_OFFER._price_plans':
@@ -266,8 +277,13 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   canNavigate(index: number) {
     if (this.formType == 'create') {
-      return (this.productOfferForm.get('generalInfo')?.valid &&  (index <= this.currentStep)) ||
-             (this.productOfferForm.get('generalInfo')?.valid &&  (index <= this.highestStep));
+      if (index <= this.currentStep) {
+        return true;
+      }
+      if (index <= this.highestStep) {
+        return true;
+      }
+      return this.validateCurrentStep();
     } else {
       return this.productOfferForm.get('generalInfo')?.valid
     }
@@ -322,6 +338,22 @@ export class OfferComponent implements OnInit, OnDestroy{
         prodSpec: this.selectedProdSpec || null // Cargar si existe, o dejar en null
       });
     }
+
+    console.log(this.offer);
+
+    // General Info
+    if (this.offer.name || this.offer.description || this.offer.version || this.offer.lifecycleStatus){ 
+      this.productOfferForm.patchValue({
+        generalInfo: {
+          name: this.offer.name || '',
+          status: this.offer.lifecycleStatus || '',
+          description: this.offer.description || '',
+          version: this.offer.version || ''
+        }
+      })
+
+      console.log(this.productOfferForm.get('prodSpec')?.value);
+    };
 
     //CATEGORIES
     if(this.offer.category){

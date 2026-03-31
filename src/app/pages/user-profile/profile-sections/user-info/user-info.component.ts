@@ -7,6 +7,7 @@ import { initFlowbite } from 'flowbite';
 import Datepicker from 'flowbite-datepicker/Datepicker';
 import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { OkMessageComponent } from 'src/app/shared/ok-message/ok-message.component';
 import { NgClass } from '@angular/common';
 import { combineLatest, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
@@ -16,7 +17,7 @@ type TokenPayload = Record<string, any>;
     templateUrl: './user-info.component.html',
     styleUrl: './user-info.component.css',
     standalone: true,
-    imports: [TranslateModule, ErrorMessageComponent, NgClass,ReactiveFormsModule]
+    imports: [TranslateModule, ErrorMessageComponent, NgClass, ReactiveFormsModule, OkMessageComponent]
 })
 export class UserInfoComponent implements OnInit {
   loading: boolean = false;
@@ -123,9 +124,6 @@ export class UserInfoComponent implements OnInit {
         this.userProfileForm.reset();
         this.getProfile();
         this.successVisibility = true;
-        setTimeout(() => {
-          this.successVisibility = false
-        }, 2000);       
         this.getProfile();        
       },
       error: error => {

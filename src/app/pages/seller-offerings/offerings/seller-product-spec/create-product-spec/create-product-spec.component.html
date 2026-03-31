@@ -1,6 +1,9 @@
 
 <div class="flex flex-col gap-6">
-    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._new' | translate }}</h2>
+    <div class="flex flex-col gap-2">
+      <h2 class="font-semibold text-xl text-primary-100">{{ 'OFFERINGS._add_new_prod' | translate }}</h2>
+      <p class="font-italic">{{ 'OFFERINGS._prod_spec_description' | translate }}</p>
+    </div>
     <div class="bg-white/60 p-4 rounded-lg">
         <div class="overflow-x-auto">
             <ol class="flex items-start w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-300 pb-4 md:pb-6">
@@ -39,28 +42,32 @@
             </ol>
         </div>
         <hr class="h-px bg-gray-0 border-0">
-        <div class="flex flex-col gap-4 mt-8">
+        <div class="flex flex-col gap-2 mt-8">
                 @if(showGeneral){
-                    <form class="md:grid md:grid-cols-2 gap-4" [formGroup]="generalForm">
+                    <form class="md:grid md:grid-cols-2 gap-2" [formGroup]="generalForm">
                         <div>
-                            <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }}</label>
-                            <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                            [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-white border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
-                            <label for="prod-version" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_version' | translate }}</label>
+                            <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }} <span clasS="text-red-500">*</span></label>
+                            <input formControlName="name" type="text" id="name" maxLength="100" placeholder="{{ 'CREATE_PROD_SPEC._product_name' | translate }}"
+                            [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
+                            class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            <div class="flex flex-row gap-2">
+                              <label for="prod-version" class="font-semibold text-base flex flex-row gap-1">{{ 'CREATE_PROD_SPEC._product_version' | translate }}  <span clasS="text-red-500">*</span></label>
+                              <info-icon [tooltipText]="'CREATE_PROD_SPEC._product_version_tooltip' | translate"></info-icon>
+                            </div>
                             <input formControlName="version" type="text" id="prod-version"
-                            [ngClass]="generalForm.get('version')?.invalid == true ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-white  border border-gray-300   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            [ngClass]="generalForm.get('version')?.invalid ? 'border-red-600' : (generalForm.value.version ? 'border-primary-100' : 'border-gray-300')"
+                            class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                         </div>
                         <div>
-                            <label for="prod-brand" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}</label>
-                            <input formControlName="brand" type="text" id="prod-brand"
-                            [ngClass]="generalForm.get('brand')?.invalid == true && generalForm.value.brand!='' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-white  border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            <label for="prod-brand" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}  <span clasS="text-red-500">*</span></label>
+                            <input formControlName="brand" type="text" id="prod-brand" placeholder="{{ 'CREATE_PROD_SPEC._product_brand' | translate }}"
+                            [ngClass]="generalForm.get('brand')?.invalid && generalForm.value.brand!='' ? 'border-red-600' : (generalForm.value.brand ? 'border-primary-100' : 'border-gray-300')"
+                            class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                             <label for="prod-number" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._id_number' | translate }}</label>
-                            <input formControlName="number" type="text" id="prod-number"
-                            class="mb-2 bg-white  border border-gray-300   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                            <input formControlName="number" type="text" id="prod-number" placeholder="{{ 'CREATE_PROD_SPEC._id_number_placeholder' | translate }}"
+                            [ngClass]="generalForm.get('number')?.invalid && generalForm.value.number!='' ? 'border-red-600' : (generalForm.value.number ? 'border-primary-100' : 'border-gray-300')"
+                            class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                         </div>
                         <label for="prod-name" class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
@@ -69,29 +76,29 @@
                     </form>
                     @if(BUNDLE_ENABLED){
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleBundle();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <button type="button" (click)="toggleBundle();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
                     }@else if(IS_ISBE){
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleChars();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <button type="button" (click)="toggleChars();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
 
                     }@else{
                         <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleCompliance();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <button type="button" (click)="toggleCompliance();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
@@ -119,14 +126,14 @@
                             @if(prodSpecs.length==0){
                                 <div class="flex flex-col items-center justify-center w-full px-4 py-16">
                                     <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                                    <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
+                                    <div class="flex w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
                                       <div class="text-center">
                                         {{ 'OFFERINGS._no_prod' | translate }}
                                       </div>
                                     </div>
                                 </div>
                             }@else{
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
+                            <div class="relative overflow-x-auto rounded-lg w-full bg-white">
                                 <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
                                     <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                     <tr>
@@ -155,9 +162,9 @@
                                             </td>
                                             <td class="px-5 py-3 hidden md:table-cell">
                                                 @if(prod.lifecycleStatus == 'In design'){
-                                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                 } @else if(prod.lifecycleStatus == 'Active'){
-                                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                                 } @else if(prod.lifecycleStatus == 'Launched') {
                                                     <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                                 } @else if(prod.lifecycleStatus == 'Retired') {
@@ -207,11 +214,19 @@
                             </div>
                         }
                     }
-                    <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button type="button" (click)="toggleCompliance();bundleDone=true;" [disabled]="prodSpecsBundle.length<2 && bundleChecked" [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                    <div class="flex w-full justify-items-end justify-end gap-4 ml-4">
+                        @if(currentStepIndex > 0){
+                        <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
+                            </svg>
+                            {{ 'CREATE_PROD_SPEC._back' | translate }}
+                        </button>
+                        }
+                        <button type="button" (click)="toggleCompliance();bundleDone=true;" [disabled]="prodSpecsBundle.length<2 && bundleChecked" [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_PROD_SPEC._next' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>
@@ -221,7 +236,7 @@
                     <h3 class="font-semibold text-primary-100  text-left ml-4">
                         {{ 'CREATE_PROD_SPEC._self_attestation' | translate }}
                     </h3>
-                    <div class="flex items-center justify-between ml-4 border border-1 p-2 rounded-lg shadow bg-white  shadow-md">
+                    <div class="flex items-center justify-between ml-4 border border-1 p-2 rounded-lg bg-white">
 
                         <p class="mb-2 text-gray-800 ">
                             {{ selfAtt ? selfAtt.productSpecCharacteristicValue[0].value : 'Upload your self attestation document' }}
@@ -273,7 +288,7 @@
                         }
                     }
 
-                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white  m-4">
+                    <div class="relative overflow-x-auto rounded-lg w-full bg-white  m-4">
                         <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
                             <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                 <tr>
@@ -297,7 +312,7 @@
                                         <td class="px-5 py-3 text-wrap break-all">
                                             {{sel.url}}
                                             <!--<input readonly type="text" [(ngModel)]="selectedISOS[idx].url" value="{{sel.url}}" [id]="'iso-'+sel.name"
-                                            class="mb-2 bg-gray-50  border border-2 border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" /> -->
+                                            class="mb-2 bg-gray-50  border border-2 border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" /> -->
                                         </td>
                                         <td class="px-5 py-3 inline-flex">
                                             <button (click)="toggleUploadFile(sel);$event.stopPropagation();" type="button" class="text-white file-select-button mr-4 bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
@@ -329,7 +344,15 @@
                         </table>
                     </div>
                     <!-- Wrapper for button & tooltip -->
-                    <div class="relative flex w-full justify-end ml-4">
+                    <div class="relative flex w-full justify-end gap-4 ml-4">
+                        @if(currentStepIndex > 0){
+                        <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
+                            </svg>
+                            {{ 'CREATE_PROD_SPEC._back' | translate }}
+                        </button>
+                        }
                         <!-- Group container to enable hover effects -->
                         <div class="relative inline-block group">
                             <!-- Tooltip (Only exists if checkValidISOS() is true and only appears on hover) -->
@@ -349,12 +372,12 @@
                             <button type="button" (click)="toggleChars(); complianceDone = true;"
                                     [disabled]="checkValidISOS()"
                                     [ngClass]="checkValidISOS() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-50'"
-                                    class="flex text-white bg-primary-100 focus:ring-4 focus:outline-none
+                                    class="flex gap-2 text-white bg-primary-100 focus:ring-4 focus:outline-none
                                         focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5
-                                        text-center inline-flex items-center">
-                                {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                        text-center  items-center">
+                                <span>{{ 'CREATE_PROD_SPEC._next' | translate }}</span>
+                                <svg width="6" height="11" viewBox="0 0 6 11" class="block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>
@@ -363,24 +386,25 @@
 
                 }
                 @if(showChars){
-                    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._chars' | translate }}</h2>
-                    @if (prodChars.length === 0){
+                    <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._chars' | translate }}</h2> -->
+                    @if (prodChars.length === 0 && !showCreateChar){
                         <div class="flex flex-col items-center justify-center w-full px-4">
                           <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                          <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100 " role="alert">
+                          <div class="flex w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100 " role="alert">
                             <!-- <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                             </svg> -->
                             <span class="sr-only">Info</span>
-                            <div>
-                                {{ 'CREATE_PROD_SPEC._no_chars' | translate }}
+                            <div class="flex flex-col items-center gap-2">
+                                <span class="text-primary-100 font-semibold">{{ 'CREATE_PROD_SPEC._no_chars' | translate }}</span>
+                                <span class="text-gray-100">{{ 'CREATE_PROD_SPEC._no_chars_description' | translate }}</span>
                             </div>
                           </div>
                         </div>
-                    } @else {
-                        <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
-                            <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
-                                <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
+                    } @else if(!showCreateChar) {
+                        <div class="relative overflow-x-auto w-full bg-white">
+                            <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100">
+                                <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0 rounded-t-lg">
                                     <tr>
                                         <th scope="col" class="px-5 py-3">
                                             {{ 'CREATE_PROD_SPEC._product_name' | translate }}
@@ -398,7 +422,7 @@
                                 </thead>
                                 <tbody>
                                     @for (prod of prodChars; track prod;) {
-                                        <tr class="px-5 py-3 border-b hover:bg-gray-200">
+                                        <tr class="px-5 py-3 hover:bg-gray-200 border border-gray-300">
                                             <td class="px-5 py-3 max-w-1/6 text-wrap break-all">
                                                 {{prod.name}}
                                             </td>
@@ -431,9 +455,9 @@
                                                 }
                                             </td>
                                             <td class="px-5 py-3">
-                                                <button (click)="deleteChar(prod)" class="font-semibold text-white bg-red-500 rounded-3xl">
-                                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                                <button (click)="deleteChar(prod)" class="bg-red-300 text-red-700 transition font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center">
+                                                    <svg class="size-3.5" width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M0.583333 9.84929V1.39096H0V0.515958H2.625V0H6.125V0.515958H8.75V1.39096H8.16667V9.84929H0.583333ZM1.45833 8.97429H7.29167V1.39096H1.45833V8.97429ZM2.86067 7.80763H3.73552V2.55763H2.86067V7.80763ZM5.01448 7.80763H5.88933V2.55763H5.01448V7.80763Z" fill="currentColor"/>
                                                     </svg>
                                                 </button>
                                             </td>
@@ -442,7 +466,15 @@
                                 </tbody>
                             </table>
                         </div>
+                    } @else {
+                      <div class="flex flex-row items-center gap-4 bg-gray-25 rounded-lg px-5 py-3.5 mb-8">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M11 17H13V11H11V17ZM12 9C12.2833 9 12.5208 8.90417 12.7125 8.7125C12.9042 8.52083 13 8.28333 13 8C13 7.71667 12.9042 7.47917 12.7125 7.2875C12.5208 7.09583 12.2833 7 12 7C11.7167 7 11.4792 7.09583 11.2875 7.2875C11.0958 7.47917 11 7.71667 11 8C11 8.28333 11.0958 8.52083 11.2875 8.7125C11.4792 8.90417 11.7167 9 12 9ZM12 22C10.6167 22 9.31667 21.7375 8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22ZM12 20C14.2333 20 16.125 19.225 17.675 17.675C19.225 16.125 20 14.2333 20 12C20 9.76667 19.225 7.875 17.675 6.325C16.125 4.775 14.2333 4 12 4C9.76667 4 7.875 4.775 6.325 6.325C4.775 7.875 4 9.76667 4 12C4 14.2333 4.775 16.125 6.325 17.675C7.875 19.225 9.76667 20 12 20Z" fill="black"/>
+                        </svg>
+                        <span>{{ 'PRODUCT_DETAILS._no_chars' | translate }}</span>
+                      </div>
                     }
+
                     @if(showCreateChar==false){
                         <div class="flex w-full items-center justify-center">
                             <button type="button" (click)="showCreateChar=!showCreateChar" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
@@ -453,42 +485,48 @@
                             </button>
                         </div>
                     } @else {
-                        <form class=" grid grid-cols-2 gap-4" [formGroup]="charsForm">
+                        <form class=" grid grid-cols-2 gap-2" [formGroup]="charsForm">
                             <div>
-                                <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }}</label>
+                                <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }} <span class="text-red-500">*</span></label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                                class="mb-2 bg-white  border border-gray-300   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                             </div>
                             <div>
-                                <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._type' | translate }}</label>
+                              <div class="flex flex-row gap-2">
+                                <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._type' | translate }} <span class="text-red-500">*</span></label>
+                                <info-icon [tooltipText]="'CREATE_PROD_SPEC._type_tooltip' | translate"></info-icon>
+                              </div>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-white  border border-gray-300   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
-                                    <option selected value="string">String</option>
-                                    <option value="number">Number</option>
-                                    <option value="range">Number range</option>
+                                class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                                    <option selected value="string">{{ 'CREATE_PROD_SPEC._type_string' | translate }}</option>
+                                    <option value="number">{{ 'CREATE_PROD_SPEC._type_number' | translate }}</option>
+                                    <option value="range">{{ 'CREATE_PROD_SPEC._type_range' | translate }}</option>
                                 </select>
                             </div>
                             <div class="col-span-2">
                                 <label for="description" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
                                 <textarea id="description" formControlName="description" rows="4"
-                                class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"></textarea>
+                                class="mb-2 min-h-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
                             </div>
                         </form>
                         <div class="">
                             @if(creatingChars.length>0){
-                                <label for="values" class="font-semibold text-base ">Values</label>
-                                <div class="flex flex-col items-start pl-4  shadow-md sm:rounded-lg w-full bg-white    border border-gray-300 mb-2">
+                                <div class="flex flex-row gap-2">
+                                  <label for="values" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._values' | translate }} <span class="text-red-500">*</span></label>
+                                  <info-icon [tooltipText]="'CREATE_PROD_SPEC._values_tooltip' | translate"></info-icon>
+                                </div>
+                                <div class="flex flex-col items-start rounded-lg w-full bg-white border border-gray-300 mb-2">
                                     @if(rangeCharSelected){
                                         @for (char of creatingChars; track char; let idx = $index) {
-                                            <div class="flex w-full justify-between">
+                                            <div class="flex w-full justify-between p-3 ">
                                                 <div class="align-items-middle align-middle">
                                                     <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" id="disabled-checked-checkbox" type="checkbox" value=""
-                                                    class="align-middle w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
+                                                    class="align-middle size-6 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
                                                     <label for="disabled-checked-checkbox" class="ms-2 align-middle text-sm font-medium text-gray-700  text-wrap break-all">{{char.valueFrom}} - {{char.valueTo}} (<i>{{char?.unitOfMeasure}}</i>)</label>
                                                 </div>
-                                                <button (click)="removeCharValue(char,idx)" class="m-2 text-white bg-red-500 rounded-3xl">
-                                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <button (click)="removeCharValue(char,idx)" class="text-white bg-red-500 rounded-full">
+                                                    <svg class="size-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
                                                     </svg>
                                                 </button>
@@ -496,18 +534,18 @@
                                         }
                                     } @else {
                                         @for (char of creatingChars; track char; let idx = $index) {
-                                            <div class="flex w-full justify-between">
+                                            <div class="flex w-full justify-between p-3 ">
                                                 <div class="align-items-middle align-middle">
                                                     <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" id="disabled-checked-checkbox" type="checkbox" value=""
-                                                    class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
+                                                    class="size-6 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
                                                     @if(numberCharSelected){
                                                         <label for="disabled-checked-checkbox" class="ms-2 text-sm font-medium text-gray-700  text-wrap break-all">{{char.value}} (<i>{{char?.unitOfMeasure}}</i>)</label>
                                                     } @else {
                                                         <label for="disabled-checked-checkbox" class="ms-2 text-sm font-medium text-gray-700  text-wrap break-all">{{char.value}}</label>
                                                     }
                                                 </div>
-                                                <button (click)="removeCharValue(char,idx)" class="m-2 text-white bg-red-500 rounded-3xl">
-                                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <button (click)="removeCharValue(char,idx)" class="text-white bg-red-500 rounded-full">
+                                                    <svg class="size-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
                                                     </svg>
                                                 </button>
@@ -516,13 +554,29 @@
                                     }
                                 </div>
                             }
-                            <label for="values" [ngClass]="rangeCharSelected && creatingChars.length==1 ? 'hidden' : ''" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._add_values' | translate }}</label>
+                            <div class="flex flex-row gap-2">
+                            <label for="values" [ngClass]="rangeCharSelected && creatingChars.length==1 ? 'hidden' : ''" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._add_values' | translate }} <span class="text-red-500">*</span></label>
+                            </div>
                             @if(stringCharSelected){
                                 <div class="flex flex-row items-center align-items-middle">
-                                    <input type="text" id="value" [(ngModel)]="stringValue"
-                                    class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                    <div class="relative w-full md:w-1/2 mr-4">
+                                        <input type="text" id="value" [(ngModel)]="stringValue"
+                                            (focus)="showStringSuggestions = true"
+                                            (blur)="showStringSuggestions = false"
+                                            class="w-full bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block p-2.5" />
+                                        @if(showStringSuggestions && stringSuggestions.length > 0) {
+                                            <ul class="absolute z-10 w-full bg-white border border-black rounded-lg mt-1 max-h-48 overflow-y-auto">
+                                                @for(suggestion of stringSuggestions; track suggestion) {
+                                                    <li (mousedown)="selectStringSuggestion(suggestion)"
+                                                        class="px-3 py-2 text-sm text-gray-700 hover:bg-purple-50 cursor-pointer">
+                                                        {{ suggestion }}
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </div>
                                     <button (click)="addCharValue()" [disabled]="!stringValue" [ngClass]="!stringValue ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
-                                        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <svg class="size-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                                         </svg>
                                     </button>
@@ -534,18 +588,18 @@
                                             {{ 'CREATE_PROD_SPEC._value' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="value" [(ngModel)]="numberValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'CREATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="value" [(ngModel)]="numberUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
 
                                     <button (click)="addCharValue()" [disabled]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit" [ngClass]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
-                                        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                        <svg class="size-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                                         </svg>
                                     </button>
@@ -557,21 +611,21 @@
                                             {{ 'CREATE_PROD_SPEC._from' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="value" [(ngModel)]="fromValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'CREATE_PROD_SPEC._to' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="value" [(ngModel)]="toValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'CREATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="value" [(ngModel)]="rangeUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
                                     </div>
                                     <button (click)="addCharValue()" [disabled]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit" [ngClass]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -580,30 +634,38 @@
                                     </button>
                                 </div>
                             }
-                            <div class="flex w-full justify-items-center justify-center mt-4">
+                            <div class="flex w-full justify-items-start justify-start mt-4">
                                 <button type="button" (click)="saveChar()"  [disabled]="!charsForm.valid || creatingChars.length==0" [ngClass]="!charsForm.valid || creatingChars.length==0 ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
                                     {{ 'CREATE_PROD_SPEC._save_char' | translate }}
-                                    <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <!-- <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M11 16h2m6.707-9.293-2.414-2.414A1 1 0 0 0 16.586 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.414a1 1 0 0 0-.293-.707ZM16 20v-6a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v6h8ZM9 4h6v3a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V4Z"/>
-                                    </svg>
+                                    </svg> -->
                                 </button>
                             </div>
 
                         </div>
                     }
-                    <div class="flex w-full justify-items-end justify-end ml-4 mt-4">
-                        <button type="button" (click)="toggleAttach();charsDone=true;" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                    <div class="flex w-full justify-items-end justify-end gap-4 ml-4 mt-4">
+                        @if(currentStepIndex > 0){
+                        <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
+                            </svg>
+                            {{ 'CREATE_PROD_SPEC._back' | translate }}
+                        </button>
+                        }
+                        <button type="button" (click)="toggleAttach();charsDone=true;" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_PROD_SPEC._next' | translate }}
-                            <!-- <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                            </svg> -->
+                            <svg width="6" height="11" viewBox="0 0 6 11" class="block" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
+                            </svg>
                         </button>
                     </div>
                 }
 
                 @if(showAttach){
                     <div class="inline-flex">
-                        <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._attachments' | translate }}</h2>
+                        <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._attachments' | translate }}</h2> -->
                         @if(!IS_ISBE){
                             <div class="ml-4 flex">
                                 <svg data-popover-target="popover-default" class="flex self-center w-6 h-6 text-primary-100" clip-rule="evenodd" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -623,12 +685,24 @@
                         }
                     </div>
                     @if(!IS_ISBE){
-                        <h4 class="text-base font-semibold">{{ 'CREATE_PROD_SPEC._add_prod_img' | translate }}</h4>
+                        <div class="flex flex-col">
+                          <div class="w-full flex flex-col md:flex-row gap-2 md:gap-2">
+                            <span class="text-sm font-semibold text-black">{{ 'CREATE_PROD_SPEC._add_prod_img' | translate }} <span class="text-red-500">*</span></span>
+                            <info-icon [tooltipText]="'PROFILE._add_logo_tooltip' | translate"></info-icon>
+                          </div>
+                          <span class="text-sm text-black">{{ 'PROFILE._add_logo_requirements' | translate }}</span>
+                        </div>
                     }@else{
-                        <h4 class="text-base font-semibold ">{{ 'CREATE_PROD_SPEC._add_prod_img_url' | translate }}</h4>
+                        <div class="flex flex-col">
+                          <div class="w-full flex flex-col md:flex-row gap-2 md:gap-2">
+                            <span class="text-sm font-semibold text-black">{{ 'CREATE_PROD_SPEC._add_prod_img_url' | translate }} <span class="text-red-500">*</span></span>
+                            <info-icon [tooltipText]="'PROFILE._add_logo_tooltip' | translate"></info-icon>
+                          </div>
+                          <span class="text-sm text-black">{{ 'PROFILE._add_logo_requirements' | translate }}</span>
+                        </div>
                     }
                     @if(showImgPreview){
-                        <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full mx-auto m-4 shadow-lg">
+                        <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full aspect-square">
                             <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             <button (click)="removeImg()" class="z-10 absolute top-2 right-2 p-1 font-semibold text-white bg-red-500 rounded-3xl">
                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -667,12 +741,12 @@
                             }
 
 
-                            <div class="flex items-center h-fit w-full justify-between">
+                            <div class="flex h-fit w-full gap-2">
                                 <!-- Input Field -->
                                 <input #imgURL type="text" id="att-name"
                                     [formControl]="attImageName"
                                     (blur)="attImageName.markAsTouched()"
-                                    class="w-full bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 p-2.5"
+                                    class="w-full md:w-1/2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 p-2.5"
                                     [ngClass]="attImageName.invalid && attImageName.touched ? 'border-red-500' : ''"
                                 />
 
@@ -680,8 +754,8 @@
                                 <button (click)="saveImgFromURL()"
                                     [disabled]="!attImageName.valid"
                                     [ngClass]="!attImageName.valid ? 'opacity-50' : 'hover:bg-primary-50'"
-                                    class="text-white bg-primary-100 rounded-3xl p-1 ml-2 h-fit">
-                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    class="text-white bg-primary-100 rounded-3xl p-2 h-fit">
+                                    <svg class="size-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11.917 9.724 16.5 19 7.5"/>
                                     </svg>
                                 </button>
@@ -690,29 +764,43 @@
 
 
                     }
-                    <div class="flex w-full justify-items-end justify-end ml-4 mt-4">
-                        <button type="button" (click)="toggleRelationship();attachDone=true;" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                    <div class="flex w-full justify-items-end justify-end gap-4 ml-4 mt-4">
+                        @if(currentStepIndex > 0){
+                          <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                              <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
+                              </svg>
+                              {{ 'CREATE_PROD_SPEC._back' | translate }}
+                          </button>
+                        }
+                        <button type="button"
+                        [disabled]="!attImageName.valid && !showImgPreview"
+                        [ngClass]="!attImageName.valid && !showImgPreview ? 'opacity-50 disabled' : 'hover:bg-primary-50'"
+                        (click)="toggleRelationship();attachDone=true;"
+                        class="flex gap-2 text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_PROD_SPEC._next' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>
                 }
                 @if(showRelationships){
-                    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</h2>
+                    <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</h2> -->
                     <div class="">
-                        @if (prodRelationships.length === 0){
+                        @if(prodSpecRels.length === 0 && prodRelationships.length === 0){
                             <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                              <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
-                                <div class="text-center">
-                                  {{ 'CREATE_PROD_SPEC._no_relatioships' | translate }}
+                              <div class="flex flex-col gap-1 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
+                                <div class="text-center font-semibold text-black">
+                                  {{ 'CREATE_PROD_SPEC._no_relationships' | translate }}
                                 </div>
+                                <div class="text-center text-gray-100 max-w-xl">{{ 'CREATE_PROD_SPEC._no_relationships_description' | translate }}</div>
                               </div>
                             </div>
-                        } @else {
-                            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
+                        }
+                        @if (prodRelationships.length > 0){
+                            <div class="relative overflow-x-auto rounded-lg w-full bg-white">
                                 <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
                                     <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                         <tr>
@@ -744,9 +832,9 @@
                                                 </td>
                                                 <td class="px-5 py-3 hidden md:table-cell">
                                                     @if(rel.productSpec.lifecycleStatus == 'In design'){
-                                                        <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                                        <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                     } @else if(rel.productSpec.lifecycleStatus == 'Active'){
-                                                        <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                                        <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                                     } @else if(rel.productSpec.lifecycleStatus == 'Launched') {
                                                         <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                                     } @else if(rel.productSpec.lifecycleStatus == 'Retired') {
@@ -759,9 +847,9 @@
                                                     {{rel.productSpec.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                                                 </td>
                                                 <td class="px-5 py-3">
-                                                    <button (click)="deleteRel(rel)" class="font-semibold text-white bg-red-500 rounded-3xl">
-                                                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                                    <button (click)="deleteRel(rel)" class="bg-red-300 text-red-700 transition font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center">
+                                                        <svg class="size-3.5" width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M0.583333 9.84929V1.39096H0V0.515958H2.625V0H6.125V0.515958H8.75V1.39096H8.16667V9.84929H0.583333ZM1.45833 8.97429H7.29167V1.39096H1.45833V8.97429ZM2.86067 7.80763H3.73552V2.55763H2.86067V7.80763ZM5.01448 7.80763H5.88933V2.55763H5.01448V7.80763Z" fill="currentColor"/>
                                                         </svg>
                                                     </button>
                                                 </td>
@@ -771,19 +859,27 @@
                                 </table>
                             </div>
                         }
-                        @if(showCreateRel==false){
-                            <div class="flex w-full justify-items-center justify-center">
-                                <button type="button" (click)="showCreateRel=!showCreateRel" class="flex text-white justify-center bg-primary-100  focus:ring-4 focus:outline-none focus:ring-black font-semibold rounded-full text-sm px-5 py-1 text-center inline-flex items-center">
+                        @if(prodSpecRels.length > 0 && prodRelationships.length === 0 && showCreateRel==false){
+                            <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
+                              <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
+                              <div class="flex flex-col gap-1 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
+                                <div class="text-center font-semibold text-black">
+                                  {{ 'CREATE_PROD_SPEC._relationships_title' | translate }}
+                                </div>
+                                <div class="text-center text-gray-100 max-w-xl">{{ 'CREATE_PROD_SPEC._relationships_description' | translate }}</div>
+                              </div>
+                              <button type="button" (click)="showCreateRel=!showCreateRel" class="inline-flex text-white justify-center bg-primary-100 font-semibold rounded-full text-sm px-5 py-1 text-center items-center">
                                     {{ 'CREATE_PROD_SPEC._add_relationship' | translate }}
-                                    <!-- <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                    </svg> -->
-                                </button>
+                              </button>
                             </div>
-                        } @else {
-                            <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._relationship_type' | translate }}</label>
+                        }
+                        @if(showCreateRel){
+                            <div class="flex flex-row gap-2">
+                              <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._relationship_type' | translate }} <span class="text-red-500">*</span></label>
+                              <info-icon [tooltipText]="'CREATE_PROD_SPEC._relationship_type_tooltip' | translate"></info-icon>
+                            </div>
                             <select id="type" (change)="onRelChange($event)"
-                            class="mb-2 bg-white  border border-gray-300   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                            class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full md:w-1/2 p-2.5">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
                                 <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>
@@ -879,37 +975,50 @@
                             </div>
                         }
                     </div>
-                    <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button type="button" (click)="showFinish();relationshipDone=true;" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                    <div class="flex w-full justify-items-end justify-end gap-4 ml-4">
+                        @if(currentStepIndex > 0){
+                        <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
+                            </svg>
+                            {{ 'CREATE_PROD_SPEC._back' | translate }}
+                        </button>
+                        }
+                        <button type="button" (click)="showFinish();relationshipDone=true;" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_PROD_SPEC._finish' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>
                 }
+
                 @if(showSummary){
-                    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2>
+                    <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
-                        <div class="mb-4 md:grid md:grid-cols-2 gap-4">
+                        <div class="mb-4 md:grid md:grid-cols-2 gap-2">
                             <div>
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToCreate?.name}}
                                 </label>
-                                <label for="prod-version" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_version' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <!-- <label for="prod-version" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_version' | translate }}</label> -->
+                                <div class="flex flex-row gap-2">
+                                  <label for="prod-version" class="font-semibold text-base flex flex-row gap-1">{{ 'CREATE_PROD_SPEC._product_version' | translate }}</label>
+                                  <info-icon [tooltipText]="'CREATE_PROD_SPEC._product_version_tooltip' | translate"></info-icon>
+                                </div>
+                                <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToCreate?.version}}
                                 </label>
                             </div>
                             <div>
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" >
+                                <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
                                     {{productSpecToCreate?.brand}}
                                 </label>
                                 @if(productSpecToCreate?.productNumber!=''){
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._id_number' | translate }}</label>
-                                <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                                <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToCreate?.productNumber}}
                                 </label>
                                 }
@@ -918,17 +1027,7 @@
 
                         <div class="mb-4">
                             <label class="font-semibold text-base mr-4 ">{{ 'CREATE_PROD_SPEC._status' | translate }}</label>
-                            @if(productSpecToCreate?.lifecycleStatus == 'In design'){
-                                <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
-                            } @else if(productSpecToCreate?.lifecycleStatus == 'Active'){
-                                <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
-                            } @else if(productSpecToCreate?.lifecycleStatus == 'Launched') {
-                                <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
-                            } @else if(productSpecToCreate?.lifecycleStatus == 'Retired') {
-                                <div class="w-fit flex gap-1 items-center bg-gray-50/30 text-gray text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-gray-50"></span>{{ 'ADMIN._retired' | translate }}</div>
-                            } @else if(productSpecToCreate?.lifecycleStatus == 'Obsolete') {
-                                <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
-                            }
+                            <app-status-selector [modelType]="'spec'" [anchor]="'in_design'" [statuses]="['in_design']" [(ngModel)]="productSpecToCreate!.lifecycleStatus" [ngModelOptions]="{ standalone: true }" [disabled]="true"></app-status-selector>
                         </div>
 
                         @if(productSpecToCreate?.description !=''){
@@ -940,7 +1039,7 @@
 
                         @if(imgPreview!=''){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._profile_pic' | translate }}</label>
-                            <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full mx-auto m-4 shadow-lg">
+                            <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full aspect-square">
                                 <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             </div>
                         }
@@ -967,9 +1066,9 @@
                                                 </td>
                                                 <td class="px-5 py-3">
                                                     @if(bun.lifecycleStatus == 'In design'){
-                                                        <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                                        <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                     } @else if(bun.lifecycleStatus == 'Active'){
-                                                        <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                                        <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                                     } @else if(bun.lifecycleStatus == 'Launched') {
                                                         <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                                     } @else if(bun.lifecycleStatus == 'Retired') {
@@ -1043,35 +1142,7 @@
                             </div>
                         }
 
-                        @if(prodAttachments.length>0){
-                            <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._attachments' | translate }}</label>
-                            <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
-                                <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
-                                    <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
-                                        <tr>
-                                            <th scope="col" class="px-5 py-3">
-                                                {{ 'CREATE_PROD_SPEC._product_name' | translate }}
-                                            </th>
-                                            <th scope="col" class="px-5 py-3">
-                                                {{ 'CREATE_PROD_SPEC._value' | translate }}
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @for (att of productSpecToCreate?.attachment; track att) {
-                                            <tr class="px-5 py-3 border-b hover:bg-gray-200">
-                                                <td class="px-5 py-3 text-wrap break-all">
-                                                    {{att.name}}
-                                                </td>
-                                                <td class="px-5 py-3 text-wrap break-all">
-                                                    {{att.url}}
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        }
+                        
 
                         @if(prodRelationships.length>0){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</label>
@@ -1104,9 +1175,9 @@
                                                 </td>
                                                 <td class="px-5 py-3 hidden md:table-cell">
                                                     @if(rel.productSpec.lifecycleStatus == 'In design'){
-                                                        <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                                        <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                                     } @else if(rel.productSpec.lifecycleStatus == 'Active'){
-                                                        <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                                        <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                                     } @else if(rel.productSpec.lifecycleStatus == 'Launched') {
                                                         <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                                     } @else if(rel.productSpec.lifecycleStatus == 'Retired') {
@@ -1124,11 +1195,19 @@
                                 </table>
                             </div>
                         }
-                        <div class="flex w-full justify-items-end justify-end ml-4 mt-4">
-                            <button type="button" (click)="createProduct();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                        <div class="flex w-full justify-items-end justify-end gap-4 ml-4 mt-4">
+                            @if(currentStepIndex > 0){
+                            <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
+                                </svg>
+                                {{ 'CREATE_PROD_SPEC._back' | translate }}
+                            </button>
+                            }
+                            <button type="button" (click)="createProduct();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                                 {{ 'CREATE_PROD_SPEC._create_prod' | translate }}
-                                <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                                 </svg>
                             </button>
                         </div>

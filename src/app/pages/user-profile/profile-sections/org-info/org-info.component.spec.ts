@@ -6,6 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { AuthService } from 'src/app/guard/auth.service';
 import { authServiceMock, oidcSecurityServiceMock } from 'src/testing/mocks/oidc-security.service.mock';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe('OrgInfoComponent', () => {
   let component: OrgInfoComponent;
@@ -17,7 +18,7 @@ describe('OrgInfoComponent', () => {
         { provide: AuthService, useValue: authServiceMock }, 
         { provide: OidcSecurityService, useValue: oidcSecurityServiceMock },
       ],
-      imports: [OrgInfoComponent, HttpClientTestingModule]
+      imports: [OrgInfoComponent, HttpClientTestingModule, TranslateModule.forRoot()]
     })
     .compileComponents();
     

@@ -1,12 +1,13 @@
 
 <div class="flex flex-col gap-6">
   <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'OFFERINGS._prod_offer' | translate }}</h2>
-    <div class="w-full h-fit bg-white rounded-lg grid lg:grid-cols-2 gap-4 md:gap-0 p-4">
+    <div class="w-full h-fit bg-white rounded-lg grid lg:grid-cols-2 gap-2 md:gap-0 p-4">
       <div class="w-full">
         <div class="flex flex-row mb-1">
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
         </div>
 
+        @if (offers.length > 0) {
         <div class="relative inline-block w-full">
           <button id="dropdownDefault" data-dropdown-toggle="dropdown"
           class="text-black w-full justify-between bg-white border border-black font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center-lg"
@@ -71,6 +72,7 @@
             </ul>
           </div>
         </div>
+        }
 
 
 
@@ -80,7 +82,7 @@
             <fa-icon [icon]="faSparkles" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
             <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_type' | translate }}</h2>
           </div>
-          <select id="type" (change)="onTypeChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+          <select id="type" (change)="onTypeChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
             <option value="none" selected>{{ 'OFFERINGS._filter_type' | translate }}</option>
             <option value="all">{{ 'OFFERINGS._all' | translate }}</option>
             <option value="simple">{{ 'OFFERINGS._simple' | translate }}</option>
@@ -93,24 +95,12 @@
             <fa-icon [icon]="faSort" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
             <h2 class="text-base font-semibold">{{ 'OFFERINGS._order_by' | translate }}</h2>
           </div>
-          <select id="sort" (change)="onSortChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+          <select id="sort" (change)="onSortChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
             <option value="none" selected>{{ 'OFFERINGS._order_by' | translate }}</option>
             <option value="update">{{ 'OFFERINGS._last_update' | translate }}</option>
             <option value="name">{{ 'OFFERINGS._name' | translate }}</option>
           </select>
         </div>-->
-    </div>
-
-    <div class="flex flex-row w-full md:justify-end">
-        @if(offers.length > 0) {
-            <button data-cy="newOffering" type="button" (click)="goToCreate()"
-            class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm px-2.5 py-1.5 text-center inline-flex items-center align-middle">
-                <p class="pl-2 pr-2">{{ 'OFFERINGS._add_new_offer' | translate }}</p>
-                <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                </svg>
-            </button>
-        }
     </div>
 
   </div>
@@ -130,14 +120,14 @@
                 <thead class="px-5 py-3 text-base bg-gray-0">
                     <tr>
                         <th scope="col" class="px-5 py-3">
-                            {{ 'OFFERINGS._name' | translate }}
+                            {{ 'OFFERINGS._offer_name' | translate }}
                         </th>
                         <th scope="col" class="px-5 py-3">
                             {{ 'OFFERINGS._status' | translate }}
                         </th>
-                        <th scope="col" class="px-5 py-3 hidden md:table-cell">
+                        <!-- <th scope="col" class="px-5 py-3 hidden md:table-cell">
                             {{ 'OFFERINGS._type' | translate }}
-                        </th>
+                        </th> -->
                         <th scope="col" class="px-5 py-3 hidden md:table-cell">
                             {{ 'OFFERINGS._last_update' | translate }}
                         </th>
@@ -154,9 +144,9 @@
                             </td>
                             <td class="px-5 py-3">
                                 @if(offer.lifecycleStatus == 'In design'){
-                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                 } @else if(offer.lifecycleStatus == 'Active'){
-                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                 } @else if(offer.lifecycleStatus == 'Launched') {
                                     <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                 } @else if(offer.lifecycleStatus == 'Retired') {
@@ -165,18 +155,18 @@
                                     <div class="w-fit flex gap-1 items-center bg-black/30 text-white text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>{{ 'ADMIN._obsolete' | translate }}</div>
                                 }
                             </td>
-                            <td class="px-5 py-3 hidden md:table-cell">
+                            <!-- <td class="px-5 py-3 hidden md:table-cell">
                                 @if(offer.isBundle == false){
                                     <div class="bg-primary-50/30 text-xs text-center font-medium px-2 py-0.5 rounded-md">{{ 'OFFERINGS._simple' | translate }}</div>
                                 } @else {
                                     <div class="bg-purple-100 text-green-500 text-center text-xs font-medium px-2 py-0.5 rounded-md">{{ 'OFFERINGS._bundle' | translate }}</div>
                                 }
-                            </td>
+                            </td> -->
                             <td class="px-5 py-3 hidden md:table-cell">
                                 {{offer.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                             </td>
                             <td class="px-5 py-3">
-                                <button type="button" (click)="goToUpdate(offer)" class="bg-gray-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-1 text-center inline-flex items-center me-2">
+                                <button type="button" (click)="goToUpdate(offer)" class="bg-gray-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center">
                                     <svg class="text-gray-50" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M2.91602 11.0827H3.65189L9.62318 5.11139L8.88731 4.37552L2.91602 10.3468V11.0827ZM2.56835 11.9577C2.41892 11.9577 2.2937 11.9071 2.19268 11.806C2.09157 11.705 2.04102 11.5798 2.04102 11.4303V10.4197C2.04102 10.2775 2.06833 10.1419 2.12297 10.013C2.17752 9.88408 2.25267 9.77174 2.34843 9.67597L9.73547 2.29229C9.82365 2.21218 9.92102 2.15029 10.0276 2.10664C10.1342 2.06289 10.246 2.04102 10.363 2.04102C10.48 2.04102 10.5932 2.06177 10.7028 2.10329C10.8125 2.1448 10.9095 2.21081 10.994 2.30133L11.7064 3.02262C11.7969 3.10711 11.8614 3.20433 11.8999 3.31429C11.9384 3.42424 11.9577 3.5342 11.9577 3.64416C11.9577 3.76151 11.9377 3.87346 11.8976 3.98002C11.8575 4.08667 11.7938 4.18409 11.7064 4.27227L4.32272 11.6503C4.22696 11.746 4.11462 11.8212 3.9857 11.8757C3.85679 11.9304 3.72121 11.9577 3.57897 11.9577H2.56835ZM9.24883 4.74987L8.88731 4.37552L9.62318 5.11139L9.24883 4.74987Z" fill="currentColor"/>
                                     </svg>
@@ -191,6 +181,7 @@
                                 </button>-->
                             </td>
                         </tr>
+                        
                     } @empty {
                       <tr class="w-full">
                         <td colspan="5">
@@ -206,6 +197,19 @@
                                   <p class="pl-2 pr-2">{{ 'OFFERINGS._add_new_offer' | translate }}</p>
                               </button>
                           </div>
+                        </td>
+                      </tr>
+                    }
+                    @if(offers.length > 0) {
+                      <tr class="px-5 py-3">
+                        <td class="px-5 py-3">
+                          <button data-cy="newOffering" type="button" (click)="goToCreate()"
+                          class=" text-black font-medium rounded-full text-sm flex items-center gap-4">
+                            <svg class="bg-black rounded-full p-1 size-4.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                              </svg>    
+                            <p class="font-bold underline">{{ 'OFFERINGS._add_new_offer' | translate }}</p>
+                          </button>
                         </td>
                       </tr>
                     }

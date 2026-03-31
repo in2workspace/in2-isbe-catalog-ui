@@ -13,6 +13,9 @@ import { CategoriesRecursionComponent } from 'src/app/shared/categories-recursio
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
+import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
+import { normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
+import { FormsModule } from '@angular/forms';
 type Category_Create = components["schemas"]["Category_Create"];
 type StepId = 'general-info' | 'summary';
 
@@ -28,7 +31,7 @@ interface StepNavItem {
     templateUrl: './create-category.component.html',
     styleUrl: './create-category.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent,ReactiveFormsModule]
+    imports: [FormsModule, StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
 })
 export class CreateCategoryComponent implements OnInit {
   seller:any='';
@@ -366,6 +369,11 @@ export class CreateCategoryComponent implements OnInit {
     this.generalForm.patchValue({
       description: currentText + event.emoji.native
     });
+  }
+
+  get catStatusAsArray(): StatusCode[] {
+    const internal = normalizeToInternal('In design');
+    return internal ? [internal as StatusCode] : [];
   }
 
   togglePreview(){

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, AfterViewChecked } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { faIdCard, faSort, faSwatchbook, faSparkles} from "@fortawesome/pro-solid-svg-icons";
 import { environment } from 'src/environments/environment';
@@ -20,7 +20,7 @@ import { AuthService } from 'src/app/guard/auth.service';
     standalone: true,
     imports: [CommonModule, TranslateModule, DatePipe, FaIconComponent, ErrorMessageComponent]
 })
-export class SellerProductSpecComponent implements OnInit{
+export class SellerProductSpecComponent implements OnInit, AfterViewChecked {
   protected readonly faIdCard = faIdCard;
   protected readonly faSort = faSort;
   protected readonly faSwatchbook = faSwatchbook;
@@ -45,6 +45,7 @@ export class SellerProductSpecComponent implements OnInit{
   seller:any;
   sort:any=undefined;
   isBundle:any=undefined;
+  private needsFlowbiteInit = false;
 
   constructor() {
     this.eventMessage.messages$.subscribe(ev => {
@@ -82,6 +83,13 @@ export class SellerProductSpecComponent implements OnInit{
     initFlowbite();
   }
 
+  ngAfterViewChecked() {
+    if (this.needsFlowbiteInit) {
+      this.needsFlowbiteInit = false;
+      initFlowbite();
+    }
+  }
+
   goToCreate(){
     this.eventMessage.emitSellerCreateProductSpec(true);
   }
@@ -110,6 +118,7 @@ export class SellerProductSpecComponent implements OnInit{
       this.page=data.page;
       this.loading=false;
       this.loading_more=false;
+      this.needsFlowbiteInit = true;
     })
   }
 
@@ -150,4 +159,9 @@ export class SellerProductSpecComponent implements OnInit{
     }
     this.getProdSpecs(false);
   }
+
+  onCreateOfferClick() {
+    this.eventMessage.emitSellerCreateOffer(true);
+  }
+
 }

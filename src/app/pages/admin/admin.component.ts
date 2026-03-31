@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 import { NgClass } from '@angular/common';
 import { Router } from '@angular/router';
 import { PrivateAreaMenuComponent, MenuTab } from 'src/app/shared/private-area-menu/private-area-menu.component';
-import { Subject, take, takeUntil } from 'rxjs';
+import { combineLatest, Subject, take, takeUntil } from 'rxjs';
 import { MenuStateService } from 'src/app/services/menu-state.service';
 import { AuthService } from 'src/app/guard/auth.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
@@ -48,6 +48,7 @@ export class AdminComponent implements OnInit, OnDestroy {
   category_to_update: any;
   private destroy$ = new Subject<void>();
   private userInfo: any;
+  private seller: any = '';
 
   constructor(
     private readonly cdr: ChangeDetectorRef,
@@ -82,13 +83,18 @@ export class AdminComponent implements OnInit, OnDestroy {
     const initial = this.menuStateService.getActiveTab('admin') ?? 'categories';
     this.menuStateService.setActiveTab('admin', initial);
     this.activeTab = initial;
-    this.auth.loginInfo$.pipe(take(1)).subscribe((li) => {
+    combineLatest([
+        this.auth.loginInfo$,
+        this.auth.sellerId$,
+    ]).
+    pipe(take(1)).subscribe(([li, sellerId]) => {
       if (!li) return;
       this.userInfo = li;
+      this.seller = sellerId;
     });
     this.loggedAsUser = this.userInfo?.logged_as === this.userInfo?.userId;
     if (!this.loggedAsUser) {
-      this.accountService.getOrgInfo(this.userInfo.userId).then(orgInfo => {
+      this.accountService.getOrgInfo(this.seller).then(orgInfo => {
         this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
       });
     }

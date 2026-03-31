@@ -9,6 +9,7 @@ import { faClose, faEllipsis} from "@fortawesome/pro-solid-svg-icons";
 import { ApiServiceService } from 'src/app/services/product-service.service';
 import { BadgeComponent } from 'src/app/shared/badge/badge.component';
 import { AttachmentServiceService } from 'src/app/services/attachment-service.service';
+import { AccountServiceService } from 'src/app/services/account-service.service';
 type Product = components["schemas"]["ProductOffering"];
 type ProductSpecification = components["schemas"]["ProductSpecification"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
@@ -28,6 +29,7 @@ export class ProductDetailsComponent implements OnInit {
   protected readonly faEllipsis = faEllipsis;
 
   private readonly api = inject(ApiServiceService);
+  private readonly accountService = inject(AccountServiceService);
   private readonly attachmentService= inject(AttachmentServiceService);
  
   prodChars:any[]=[];
@@ -40,6 +42,8 @@ export class ProductDetailsComponent implements OnInit {
   categories: any[] | undefined  = [];
   categoriesMore: any[] | undefined  = [];
   category: string = 'none';
+  orgUrl: string | null = null;
+  orgName: string | null = null;
 
   ngOnInit(): void {
     this.initCategories();
@@ -83,6 +87,17 @@ export class ProductDetailsComponent implements OnInit {
 
     try {
       this.prodSpec = await this.api.getProductSpecification(specId);
+      const relatedPartySellerId = this.prodSpec.relatedParty?.at(0)?.id;
+      this.orgUrl = await this.accountService
+      .getOrgInfo(relatedPartySellerId)
+      .then(orgInfo =>
+        orgInfo?.partyCharacteristic?.find((pc: { name: string; }) => pc.name === 'website')?.value || null
+      );
+      this.orgName = await this.accountService
+      .getOrgInfo(relatedPartySellerId)
+      .then(orgInfo =>
+        orgInfo?.name || null
+      );
 
       const prodPrices = this.productOff?.productOfferingPrice ?? [];
       if (prodPrices.length === 0) return;
@@ -95,6 +110,11 @@ export class ProductDetailsComponent implements OnInit {
     } catch (error) {
       console.error('Error loading product specification or prices', error);
     }
+  }
+
+  goToUrl() {
+    if(!this.orgUrl) return;
+    window.open(this.orgUrl, '_blank');
   }
 
   private filterCharacteristics(): void {

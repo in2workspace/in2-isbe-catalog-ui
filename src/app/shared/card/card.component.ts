@@ -256,6 +256,7 @@ export class CardComponent implements OnInit, AfterViewInit {
     return {
       id: productOff.id,
       name: productOff.name,
+      subtitle: productOff.description ?? 'Subtitle',
       image: this.getProductImage(),
       href: productOff.href,
       options: {

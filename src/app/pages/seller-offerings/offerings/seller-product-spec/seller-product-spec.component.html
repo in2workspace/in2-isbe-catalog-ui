@@ -1,12 +1,18 @@
 
 <div class="flex flex-col gap-6">
-    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'OFFERINGS._prod_spec' | translate }}</h2>
-    <div class="w-full h-fit bg-white rounded-lg grid lg:grid-cols-2 gap-4 md:gap-0 p-4">
+    <div class="flex flex-col gap-2">
+      <h2 class="font-semibold text-xl text-primary-100">{{ 'OFFERINGS._serv_spec' | translate }}</h2>
+      <p class="italic text-base">{{ 'OFFERINGS._prod_spec_description' | translate }}</p>
+    </div>
+
+    @if (prodSpecs.length > 0) {
+    <div class="w-full h-fit bg-white rounded-lg grid lg:grid-cols-2 gap-2 md:gap-0 p-4">
       <div class="w-full">
         <div class="flex flex-row mb-1">
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
         </div>
 
+        
         <div class="relative inline-block w-full">
           <button id="dropdownDefault" data-dropdown-toggle="dropdown"
           class="text-black w-full justify-between bg-white border border-black font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center-lg"
@@ -19,67 +25,65 @@
           </button>
 
           <div id="dropdown" class="z-20 hidden w-full bg-white border border-black rounded-lg overflow-hidden">
-        <!-- <h6 class="mb-3 text-sm font-medium text-gray-900 ">
-            {{ 'OFFERINGS._status' | translate }}
-        </h6> -->
-        <ul class="text-sm" aria-labelledby="dropdownDefault">
+          <!-- <h6 class="mb-3 text-sm font-medium text-gray-900 ">
+              {{ 'OFFERINGS._status' | translate }}
+          </h6> -->
+          <ul class="text-sm" aria-labelledby="dropdownDefault">
 
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-            <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
-                class="sr-only" />
-
-            <label for="in-design" class="text-sm font-medium">
-                {{ 'OFFERINGS._in_design' | translate }}
-            </label>
-            </li>
-
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-            <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
-                class="sr-only" />
-
-            <label for="active" class="text-sm font-medium">
-                {{ 'OFFERINGS._active' | translate }}
-            </label>
-            </li>
-
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-            <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
-                class="sr-only" />
-
-            <label for="launched" class="text-sm font-medium">
-                {{ 'OFFERINGS._launched' | translate }}
-            </label>
-            </li>
-
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-            <input id="retired" type="checkbox" value="" (change)="onStateFilterChange('Retired')"
-                class="sr-only" />
-
-            <label for="retired" class="text-sm font-medium">
-                {{ 'OFFERINGS._retired' | translate }}
-            </label>
-            </li>
-
-            <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-              <input id="obsolete" type="checkbox" value="" (change)="onStateFilterChange('Obsolete')"
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
                   class="sr-only" />
 
-              <label for="obsolete" class="text-sm font-medium">
-                {{ 'OFFERINGS._obsolete' | translate }}
+              <label for="in-design" class="text-sm font-medium">
+                  {{ 'OFFERINGS._in_design' | translate }}
               </label>
-            </li>
-        </ul>
+              </li>
+
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
+                  class="sr-only" />
+
+              <label for="active" class="text-sm font-medium">
+                  {{ 'OFFERINGS._active' | translate }}
+              </label>
+              </li>
+
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
+                  class="sr-only" />
+
+              <label for="launched" class="text-sm font-medium">
+                  {{ 'OFFERINGS._launched' | translate }}
+              </label>
+              </li>
+
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="retired" type="checkbox" value="" (change)="onStateFilterChange('Retired')"
+                  class="sr-only" />
+
+              <label for="retired" class="text-sm font-medium">
+                  {{ 'OFFERINGS._retired' | translate }}
+              </label>
+              </li>
+
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                <input id="obsolete" type="checkbox" value="" (change)="onStateFilterChange('Obsolete')"
+                    class="sr-only" />
+
+                <label for="obsolete" class="text-sm font-medium">
+                  {{ 'OFFERINGS._obsolete' | translate }}
+                </label>
+              </li>
+          </ul>
           </div>
         </div>
-
-
 
       <!--<div class="p-8 w-full">
         <div class="flex flex-row mb-1">
           <fa-icon [icon]="faSparkles" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_type' | translate }}</h2>
         </div>
-        <select id="type" (change)="onTypeChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+        <select id="type" (change)="onTypeChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
           <option selected>{{ 'OFFERINGS._filter_type' | translate }}</option>
           <option value="all">{{ 'OFFERINGS._all' | translate }}</option>
           <option value="simple">{{ 'OFFERINGS._simple' | translate }}</option>
@@ -92,26 +96,15 @@
           <fa-icon [icon]="faSort" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._order_by' | translate }}</h2>
         </div>
-        <select id="sort" (change)="onSortChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+        <select id="sort" (change)="onSortChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
           <option selected>{{ 'OFFERINGS._order_by' | translate }}</option>
           <option value="update">{{ 'OFFERINGS._last_update' | translate }}</option>
           <option value="name">{{ 'OFFERINGS._name' | translate }}</option>
         </select>
       </div>-->
-      </div>
-
-      <div class="flex flex-row w-full md:justify-end">
-        @if (prodSpecs.length > 0) {
-            <button (click)="goToCreate()" type="button" class="h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm px-2.5 py-1.5 text-center inline-flex items-center align-middle">
-                <p class="hidden lg:block pl-2 pr-2">{{ 'OFFERINGS._add_new_prod' | translate }}</p>
-                <p class="block lg:hidden pl-2 pr-2">{{ 'OFFERINGS._add_new_prod_short' | translate }}</p>
-                <svg class="w-[18px] h-[18px] text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                </svg>
-            </button>
-        }
-      </div>
+        </div>
     </div>
+    }
 
 @if(loading){
     <div role="status" class="w-full h-full flex justify-center align-middle">
@@ -152,9 +145,9 @@
                             </td>
                             <td class="px-5 py-3">
                                 @if(prod.lifecycleStatus == 'In design'){
-                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                                 } @else if(prod.lifecycleStatus == 'Active'){
-                                    <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                                    <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                                 } @else if(prod.lifecycleStatus == 'Launched') {
                                     <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                                 } @else if(prod.lifecycleStatus == 'Retired') {
@@ -174,7 +167,7 @@
                                 {{prod.lastUpdate | date:'EEEE, dd/MM/yy, HH:mm'}}
                             </td>
                             <td class="px-5 py-3">
-                                <button type="button" (click)="goToUpdate(prod)" class="bg-gray-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-1 text-center inline-flex items-center me-2">
+                                <button type="button" (click)="goToUpdate(prod)" class="bg-gray-100 focus:ring-4 focus:outline-none font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center">
                                     <svg class="text-gray-50" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                       <path d="M2.91602 11.0827H3.65189L9.62318 5.11139L8.88731 4.37552L2.91602 10.3468V11.0827ZM2.56835 11.9577C2.41892 11.9577 2.2937 11.9071 2.19268 11.806C2.09157 11.705 2.04102 11.5798 2.04102 11.4303V10.4197C2.04102 10.2775 2.06833 10.1419 2.12297 10.013C2.17752 9.88408 2.25267 9.77174 2.34843 9.67597L9.73547 2.29229C9.82365 2.21218 9.92102 2.15029 10.0276 2.10664C10.1342 2.06289 10.246 2.04102 10.363 2.04102C10.48 2.04102 10.5932 2.06177 10.7028 2.10329C10.8125 2.1448 10.9095 2.21081 10.994 2.30133L11.7064 3.02262C11.7969 3.10711 11.8614 3.20433 11.8999 3.31429C11.9384 3.42424 11.9577 3.5342 11.9577 3.64416C11.9577 3.76151 11.9377 3.87346 11.8976 3.98002C11.8575 4.08667 11.7938 4.18409 11.7064 4.27227L4.32272 11.6503C4.22696 11.746 4.11462 11.8212 3.9857 11.8757C3.85679 11.9304 3.72121 11.9577 3.57897 11.9577H2.56835ZM9.24883 4.74987L8.88731 4.37552L9.62318 5.11139L9.24883 4.74987Z" fill="currentColor"/>
                                     </svg>
@@ -207,6 +200,19 @@
                         </td>
                       </tr>
                     }
+                    @if (prodSpecs.length > 0) {
+                      <tr class="px-5 py-3">
+                        <td class="px-5 py-3">
+                          <button data-cy="newOffering" type="button" (click)="goToCreate()"
+                          class=" text-black font-medium rounded-full text-sm flex items-center gap-4">
+                            <svg class="bg-black rounded-full p-1 size-4.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
+                              </svg>    
+                            <p class="font-bold underline">{{ 'OFFERINGS._add_first_prod' | translate }}</p>
+                          </button>
+                        </td>
+                      </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -231,5 +237,24 @@
         </div>
     }
   </div>
+
+  @if (prodSpecs.length > 0) {
+    <div class="flex flex-col md:flex-row gap-5 justify-between md:items-center p-4 rounded-lg border border-success-text bg-success-bcg text-success-text">
+      <div class="flex items-center gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"
+          class="h-5 min-w-5 block">
+          <path
+            d="M7.125 11.875H8.70833V7.125H7.125V11.875ZM7.91667 5.54167C8.14097 5.54167 8.32899 5.4658 8.48073 5.31406C8.63247 5.16233 8.70833 4.97431 8.70833 4.75C8.70833 4.52569 8.63247 4.33767 8.48073 4.18594C8.32899 4.0342 8.14097 3.95833 7.91667 3.95833C7.69236 3.95833 7.50434 4.0342 7.3526 4.18594C7.20087 4.33767 7.125 4.52569 7.125 4.75C7.125 4.97431 7.20087 5.16233 7.3526 5.31406C7.50434 5.4658 7.69236 5.54167 7.91667 5.54167ZM7.91667 15.8333C6.82153 15.8333 5.79236 15.6255 4.82917 15.2099C3.86597 14.7943 3.02813 14.2302 2.31563 13.5177C1.60313 12.8052 1.03906 11.9674 0.623438 11.0042C0.207813 10.041 0 9.01181 0 7.91667C0 6.82153 0.207813 5.79236 0.623438 4.82917C1.03906 3.86597 1.60313 3.02813 2.31563 2.31563C3.02813 1.60313 3.86597 1.03906 4.82917 0.623438C5.79236 0.207813 6.82153 0 7.91667 0C9.01181 0 10.041 0.207813 11.0042 0.623438C11.9674 1.03906 12.8052 1.60313 13.5177 2.31563C14.2302 3.02813 14.7943 3.86597 15.2099 4.82917C15.6255 5.79236 15.8333 6.82153 15.8333 7.91667C15.8333 9.01181 15.6255 10.041 15.2099 11.0042C14.7943 11.9674 14.2302 12.8052 13.5177 13.5177C12.8052 14.2302 11.9674 14.7943 11.0042 15.2099C10.041 15.6255 9.01181 15.8333 7.91667 15.8333ZM7.91667 14.25C9.68472 14.25 11.1823 13.6365 12.4094 12.4094C13.6365 11.1823 14.25 9.68472 14.25 7.91667C14.25 6.14861 13.6365 4.65104 12.4094 3.42396C11.1823 2.19688 9.68472 1.58333 7.91667 1.58333C6.14861 1.58333 4.65104 2.19688 3.42396 3.42396C2.19688 4.65104 1.58333 6.14861 1.58333 7.91667C1.58333 9.68472 2.19688 11.1823 3.42396 12.4094C4.65104 13.6365 6.14861 14.25 7.91667 14.25Z"
+            fill="currentColor" />
+        </svg>
+        {{ 'OFFERINGS._popup_text' | translate }}
+      </div>
+
+      <button type="button" (click)="onCreateOfferClick()"
+      class="w-fit h-fit text-white bg-primary-100 focus:ring-4 focus:outline-none focus:ring-black font-medium rounded-full text-sm px-2.5 py-1.5 text-center inline-flex items-center align-middle">
+          <p class="pl-2 pr-2">{{ 'OFFERINGS._create_offer' | translate }}</p>
+      </button>
+    </div>
+  }
 }
 </div>

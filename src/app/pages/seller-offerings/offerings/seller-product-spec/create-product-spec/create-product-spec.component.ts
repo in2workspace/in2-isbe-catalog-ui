@@ -19,6 +19,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DatePipe, NgClass } from '@angular/common';
 import { MarkdownComponent } from 'ngx-markdown';
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
+import { InfoIconComponent } from 'src/app/shared/info-icon/info-icon.component';
+import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 
@@ -42,7 +44,7 @@ interface StepNavItem {
     templateUrl: './create-product-spec.component.html',
     styleUrl: './create-product-spec.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, DatePipe, MarkdownComponent, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
+    imports: [ErrorMessageComponent, TranslateModule, NgxFileDropModule, NgClass, DatePipe, MarkdownComponent, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent, InfoIconComponent, StatusSelectorComponent]
 })
 export class CreateProductSpecComponent implements OnInit {
 
@@ -156,6 +158,30 @@ export class CreateProductSpecComponent implements OnInit {
   fromValue: string = '';
   toValue: string = '';
   rangeUnit: string = '';
+  showStringSuggestions: boolean = false;
+  private cachedStringValues: string[] = [];
+
+  private rebuildStringCache() {
+    const allValues: string[] = [];
+    for (const char of this.prodChars) {
+      for (const val of (char.productSpecCharacteristicValue || [])) {
+        if (typeof val.value === 'string' && val.value) {
+          allValues.push(val.value);
+        }
+      }
+    }
+    this.cachedStringValues = [...new Set(allValues)];
+  }
+
+  get stringSuggestions(): string[] {
+    if (!this.stringValue) return this.cachedStringValues;
+    return this.cachedStringValues.filter(v => v.toLowerCase().includes(this.stringValue.toLowerCase()) && v !== this.stringValue);
+  }
+
+  selectStringSuggestion(value: string) {
+    this.stringValue = value;
+    this.showStringSuggestions = false;
+  }
 
   filenameRegex = /^[A-Za-z0-9_.-]+$/;
 
@@ -778,6 +804,15 @@ export class CreateProductSpecComponent implements OnInit {
     step.onClick();
   }
 
+  goToPreviousStep() {
+    const prevIndex = this.currentStepIndex - 1;
+    if (prevIndex >= 0) {
+      const prevStep = this.stepNavigation[prevIndex];
+      this.selectStep(prevStep.id);
+      prevStep.onClick();
+    }
+  }
+
   selectStep(step: StepId){
     this.currentStep = step;
   }
@@ -880,6 +915,7 @@ export class CreateProductSpecComponent implements OnInit {
     this.stringCharSelected=true;
     this.numberCharSelected=false;
     this.rangeCharSelected=false;
+    this.rebuildStringCache();
     this.refreshChars();
     this.cdr.detectChanges();
   }
@@ -888,8 +924,9 @@ export class CreateProductSpecComponent implements OnInit {
     const index = this.prodChars.findIndex(item => item.id === char.id);
     if (index !== -1) {
       this.prodChars.splice(index, 1);
-    }   
-    this.cdr.detectChanges();   
+    }
+    this.rebuildStringCache();
+    this.cdr.detectChanges();
   }
 
   checkInput(value: string): boolean {

@@ -38,11 +38,11 @@
     <div>
             @if(showGeneral){
                 <h2 class="text-3xl font-semibold text-primary-100  ml-4">{{ 'CREATE_CATALOG._general' | translate }}</h2>
-                    <form class=" gap-4" [formGroup]="generalForm">
+                    <form class=" gap-2" [formGroup]="generalForm">
                         <label for="prod-name" class="font-semibold text-lg ">{{ 'CREATE_CATALOG._name' | translate }}</label>
                         <input data-cy="catalogName" formControlName="name" type="text" id="prod-name" maxLength="100"
-                        [ngClass]="generalForm.get('name')?.invalid == true && generalForm.value.name!='' ? 'border-red-600' : 'border-gray-300'"
-                        class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+                        [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
+                        class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
 
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_CATALOG._description' | translate }}</label>
@@ -50,10 +50,10 @@
 
                     </form>
                     <div class="flex w-full justify-items-end justify-end">
-                        <button data-cy="catalogNext" type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                        <button data-cy="catalogNext" type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_CATALOG._next' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>
@@ -64,7 +64,7 @@
                 <div class="">
                     <div>
                         <label class="font-semibold text-lg ">{{ 'CREATE_CATALOG._name' | translate }}</label>
-                        <label class="mb-2 bg-white text-wrap break-all  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                        <label class="mb-2 bg-white text-wrap break-all  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                             {{catalogToCreate?.name}}
                         </label>
                     </div>
@@ -72,9 +72,9 @@
                     <div class="mb-4">
                         <label class="font-semibold text-lg mr-4 ">{{ 'CREATE_CATALOG._status' | translate }}</label>
                         @if(catalogToCreate?.lifecycleStatus == 'In design'){
-                            <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._in_design' | translate }}</div>
+                            <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>
                         } @else if(catalogToCreate?.lifecycleStatus == 'Active'){
-                            <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._active' | translate }}</div>
+                            <div class="w-fit flex gap-1 items-center bg-primary-50/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-primary-50"></span>{{ 'ADMIN._active' | translate }}</div>
                         } @else if(catalogToCreate?.lifecycleStatus == 'Launched') {
                             <div class="w-fit flex gap-1 items-center bg-green/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-green"></span>{{ 'ADMIN._launched' | translate }}</div>
                         } @else if(catalogToCreate?.lifecycleStatus == 'Retired') {
@@ -93,10 +93,10 @@
 
 
                     <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button data-cy="catalogFinish" type="button" (click)="createCatalog();" class="flex text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
+                        <button data-cy="catalogFinish" type="button" (click)="createCatalog();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
                             {{ 'CREATE_CATALOG._create' | translate }}
-                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
                             </svg>
                         </button>
                     </div>

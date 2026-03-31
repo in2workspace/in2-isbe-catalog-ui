@@ -11,7 +11,7 @@
       </div>
     </div>
 } @else {
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white m-4">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white">
         <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0">
             <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                 <tr>
@@ -36,9 +36,9 @@
                             {{metric.description}}
                         </td>
                         <td class="px-5 py-3">
-                            <button (click)="deleteMetric(metric)" class="font-semibold text-white bg-red-500 rounded-3xl">
-                                <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                            <button (click)="deleteMetric(metric)" class="bg-red-300 text-red-700 transition font-medium rounded-full text-sm p-1.5 text-center inline-flex items-center">
+                                <svg class="size-3.5" width="9" height="10" viewBox="0 0 9 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0.583333 9.84929V1.39096H0V0.515958H2.625V0H6.125V0.515958H8.75V1.39096H8.16667V9.84929H0.583333ZM1.45833 8.97429H7.29167V1.39096H1.45833V8.97429ZM2.86067 7.80763H3.73552V2.55763H2.86067V7.80763ZM5.01448 7.80763H5.88933V2.55763H5.01448V7.80763Z" fill="currentColor"/>
                                 </svg>
                             </button>
                         </td>
@@ -62,13 +62,13 @@
         <div>
             <label for="prod-name" class="font-semibold text-lg ">{{ 'USAGE_SPECS._name' | translate }}</label>
             <input formControlName="name" type="text" id="prod-name" maxLength="100"
-            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5" />
+            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
         </div>
         <div>
             <label for="description" class="font-semibold text-lg ">{{ 'USAGE_SPECS._description' | translate }}</label>
             <textarea id="description" formControlName="description" rows="4"
-            class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5"></textarea>
+            class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
         </div>
     </form>
     <div class="flex w-full justify-items-center justify-center mt-4">

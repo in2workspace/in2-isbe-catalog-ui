@@ -154,7 +154,7 @@
             'hover:bg-gray-100 hover:text-gray-700 ': currentStep !== steps.length - 1 && (formType !== 'create' || validateCurrentStep() || canNavigate(currentStep)),
             'cursor-not-allowed opacity-50': currentStep === steps.length - 1 || (formType === 'create' && !validateCurrentStep() || !canNavigate(currentStep))
           }"
-          class="px-3 md:px-4 py-2 flex items-center justify-center text-sm md:text-base font-medium rounded-full text-gray-100 leading-none bg-gray-50">
+          class="px-3 md:px-4 py-2 flex items-center justify-center text-sm md:text-base font-medium rounded-full text-white leading-none bg-black">
     {{ 'CREATE_OFFER._next_step' | translate }}
     <svg class="min-w-4 w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
       <path fill="currentColor"
@@ -163,7 +163,7 @@
     </svg>
   </button>
 
-  @if( (formType === 'create' && currentStep === steps.length - 1) || formType === 'update' ){
+  @if( currentStep === steps.length - 1 ){
     <button data-cy="offerFinish" (click)="submitForm()"
             [disabled]="!isOfferValid()"
             [ngClass]="!isOfferValid() ? 'opacity-50' : 'hover:bg-primary-50'"
@@ -186,5 +186,5 @@
 }
 
 @if(showIsbeMessage){
-    <isbe-message (close)="onCloseSelect()" class="flex justify-center items-center fixed w-fit top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"></isbe-message>
+    <isbe-message (close)="onCloseSelect()"></isbe-message>
 }

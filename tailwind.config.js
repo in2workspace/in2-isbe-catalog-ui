@@ -14,6 +14,7 @@ module.exports = {
       colors: {
         beige: "#F9F3E7",
         green: "#76F276",
+        darkgreen: "#3B793B",
         danger: "#F24822",
         gray: {
           0: '#F6F6F6',
@@ -37,6 +38,18 @@ module.exports = {
           //Dark theme table background and inputs
           300: '#FF7E56'
         },
+        warning: {
+          50: '#FFDCB6',
+          100: '#803F2B'
+        },
+        complete: {
+          50: '#D1FBD1',
+          100: '#3B793B'
+        },
+        success: {
+          bcg: '#E8FFF2',
+          text: '#009943',
+        }
       },
       fontSize: {
         xxs: ["0.625rem", { lineHeight: "0.75rem" }],
