@@ -5,9 +5,6 @@ import { take, map, catchError, switchMap } from 'rxjs/operators';
 import { vcClaimsToLoginInfo, LoginInfo, claimsToLoginInfo } from './login-info.mapper';
 import { OrgContextService } from '../services/org-context.service';
 
-// TODO: LOGIN MODE
-const FORCE_LOCAL_LOGIN = true;
-
 export interface AppUser {
   sub?: string;
   name?: string;
@@ -36,11 +33,6 @@ export class AuthService {
   role: WritableSignal<string | null> = signal(null);
 
   checkAuth(): Observable<boolean> {
-    if (FORCE_LOCAL_LOGIN) {
-      this.applyLocalLogin(this.buildLocalLoginInfo());
-      return of(true);
-    }
-
     return this.oidc.checkAuth().pipe(
       take(1),
       catchError(() => of({ isAuthenticated: false, accessToken: '', userData: {} } as any)),
@@ -171,30 +163,5 @@ export class AuthService {
 
     this.setState(true, user, info.token, this.pickPrimaryRole(user));
     this.loginInfoSubject.next(info as LoginInfo);
-  }
-
-  private buildLocalLoginInfo(): LoginInfo {
-    return {
-      userId: 'local-user',
-      user: 'local',
-      email: 'local.user@example.com',
-      token: 'local-token',
-      expire: Math.floor(Date.now() / 1000) + 60 * 60,
-      seller: 'local-seller',
-      username: 'Local User',
-      roles: [
-        { id: 'orgAdmin', name: 'orgAdmin' },
-        { id: 'seller', name: 'seller' },
-        { id: 'admin', name: 'admin' }
-      ],
-      organizations: [
-        {
-          id: 'org-local',
-          name: 'Local Organization',
-          roles: [{ id: 'orgAdmin', name: 'orgAdmin' }]
-        }
-      ],
-      logged_as: 'org-local'
-    };
   }
 }
