@@ -310,40 +310,11 @@ describe('CreateProductSpecComponent', () => {
     expect(component.creatingChars.length).toBe(0);
   });
 
-  it('should removeClass remove class from element', () => {
-    const elem = { className: 'foo bar' } as any;
-    component.removeClass(elem, 'bar');
-    expect(elem.className.includes('bar')).toBe(false);
-  });
-
-  it('should addClass add class to element', () => {
-    const elem = { className: 'foo' } as any;
-    component.addClass(elem, 'bar');
-    expect(elem.className.includes('bar')).toBe(true);
-  });
-
-  it('should unselectMenu remove class if present', () => {
-    const elem = { className: 'foo bar', classNameMatch: true } as any;
-    component.unselectMenu(elem, 'bar');
-    expect(elem.className.includes('bar')).toBe(false);
-  });
-
-  it('should selectMenu add class if not present', () => {
-    const elem = { className: 'foo' } as any;
-    component.selectMenu(elem, 'bar');
-    expect(elem.className.includes('bar')).toBe(true);
-  });
-
-  it('should selectStep update stepsElements and stepsCircles', () => {
-    document.body.innerHTML = `
-      <div id="general-info" class="text-gray-500"></div>
-      <div id="general-circle" class="border-gray-400"></div>
-    `;
-    component.stepsElements = ['general-info', 'bundle'];
-    component.stepsCircles = ['general-circle', 'bundle-circle'];
-    component.selectStep('general-info', 'general-circle');
-    expect(component.stepsElements.includes('general-info')).toBe(true);
-    expect(component.stepsCircles.includes('general-circle')).toBe(true);
+  it('should selectStep update currentStep', () => {
+    component.selectStep('general-info');
+    expect(component.currentStep).toBe('general-info');
+    component.selectStep('bundle');
+    expect(component.currentStep).toBe('bundle');
   });
 
 
