@@ -1,6 +1,6 @@
 
 export const environment = {
-    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/',
+    BASE_URL: 'https://tmf.dev.portal.redisbe.com/tmf-api/',
     FOUNDATION_ID: 'VATES-G87936159',
     locale: 'es-ES',
     PRODUCT_CATALOG_MANAGEMENT_URL: 'productCatalogManagement/v4',
@@ -54,12 +54,12 @@ export const environment = {
     KNOWLEDGE_BASE_URL: "",
     KB_ONBOARDING_GUIDELINES_URL: "",
     KB_GUIDELNES_URL:"",
-    REGISTRATION_FORM_URL: "https://onboard-dev.redisbe.com/",
+    REGISTRATION_FORM_URL: "https://onboard-dev.redisbe.com/register",
     SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
     ISBE_TRUST_LINK: "",
     ISBE_ABOUT_LINK: 'https://redisbe.com/',
-    ISBE_REGISTER_LINK: 'https://onboard-dev.redisbe.com/',
+    ISBE_REGISTER_LINK: 'https://onboard-dev.redisbe.com/register',
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',
     ISBE_YOUTUBE: 'https://www.youtube.com/@REDISBE',
