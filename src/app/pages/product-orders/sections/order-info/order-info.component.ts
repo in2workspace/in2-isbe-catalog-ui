@@ -126,7 +126,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
   handleError(msg: string) {
     this.errorMessage = msg;
     this.showError = true;
-    setTimeout(() => (this.showError = false), 3000);
+    // setTimeout(() => (this.showError = false), 3000);
   }
 
   async confirmAction() {
@@ -213,7 +213,7 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
         const currentOrgId = this.orgCtx.current ?? li.logged_as ?? null;
         let roles: string[] = (li.roles || []).map(r => r.name ?? r.id ?? r);
 
-        if (currentOrgId && currentOrgId !== li.id) {
+        if (currentOrgId) {
           const org = (li.organizations || []).find(o => o.id === currentOrgId);
           if (org?.roles?.length) roles = org.roles.map(r => r.name ?? r.id ?? r);
         }

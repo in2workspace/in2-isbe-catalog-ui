@@ -25,6 +25,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/flowbite-datepicker/dist/css/datepicker.min.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -93,6 +94,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/flowbite-datepicker/dist/css/datepicker.min.css",
               "src/styles.css"
             ],
             "scripts": []

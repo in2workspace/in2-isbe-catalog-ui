@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import {faIdCard, faSort, faSwatchbook, faSparkles} from "@fortawesome/pro-solid-svg-icons";
 import { environment } from 'src/environments/environment';
@@ -19,7 +19,7 @@ import { AuthService } from 'src/app/guard/auth.service';
     standalone: true,
     imports: [TranslateModule, DatePipe, FaIconComponent]
 })
-export class SellerOfferComponent implements OnInit{
+export class SellerOfferComponent implements OnInit, AfterViewChecked {
   protected readonly faIdCard = faIdCard;
   protected readonly faSort = faSort;
   protected readonly faSwatchbook = faSwatchbook;
@@ -33,13 +33,14 @@ export class SellerOfferComponent implements OnInit{
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
   loading: boolean = false;
   loading_more: boolean = false;
-  page_check:boolean = true;
+  page_check:boolean = false;
   filter:any=undefined;
   status:any[]=[];
   seller:any;
   isAdmin:boolean;
   sort:any=undefined;
   isBundle:any=undefined;
+  private needsFlowbiteInit = false;
 
   constructor(
     private readonly api: ApiServiceService,
@@ -89,6 +90,13 @@ export class SellerOfferComponent implements OnInit{
     initFlowbite();
   }
 
+  ngAfterViewChecked() {
+    if (this.needsFlowbiteInit) {
+      this.needsFlowbiteInit = false;
+      initFlowbite();
+    }
+  }
+
   goToCreate(){
     this.eventMessage.emitSellerCreateOffer(true);
   }
@@ -118,6 +126,7 @@ export class SellerOfferComponent implements OnInit{
       this.page=data.page;
       this.loading=false;
       this.loading_more=false;
+      this.needsFlowbiteInit = true;
     })
   }
 

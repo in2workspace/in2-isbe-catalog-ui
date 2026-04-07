@@ -1,7 +1,6 @@
 import { environment } from "src/environments/environment";
 
 export interface LoginInfo {
-  id: string;
   user: string;
   email: string;
   token: string;
@@ -20,9 +19,7 @@ export interface LoginInfo {
   logged_as: string;
 }
 
-function rolesFromPowers(vc: any): string[] {
-  const powers: any[] = vc?.credentialSubject?.mandate?.power ?? [];
-  const mandator = vc?.credentialSubject?.mandate?.mandator ?? {};
+function rolesFromPowers(powers: any[], orgiId: string): string[] {
   const roleSet = new Set<string>();
 
   let hasOnboarding = false;
@@ -41,6 +38,7 @@ function rolesFromPowers(vc: any): string[] {
         roleSet.add('certifier');
         break;
       default:
+        roleSet.add('seller');
         break;
     }
   }
@@ -49,7 +47,6 @@ function rolesFromPowers(vc: any): string[] {
     roleSet.add('individual');
   }
 
-  const orgiId = (mandator?.organizationIdentifier || '').toUpperCase();
   if (orgiId.includes(environment.FOUNDATION_ID)) {
     roleSet.add('admin');
   }
@@ -57,8 +54,7 @@ function rolesFromPowers(vc: any): string[] {
   return Array.from(roleSet);
 }
 
-
-export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
+export function vcClaimsToLoginInfo(claims: any, token: string): LoginInfo {
   const exp: number = claims?.exp ?? 0;
 
   const vc = claims?.vc ?? {};
@@ -77,7 +73,7 @@ export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
   const orgId   = mandator?.organizationIdentifier ?? issuer?.organizationIdentifier ?? '';
   const orgName = mandator?.organization ?? issuer?.organization ?? '';
 
-  const roleStrings = rolesFromPowers(vc);
+  const roleStrings = rolesFromPowers(vc?.credentialSubject?.mandate?.power ?? [], orgId);
   const roleObjects = roleStrings.map(r => ({ id: r, name: r }));
 
   const organizations = orgId && orgName
@@ -89,7 +85,6 @@ export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
     : [];
 
   return {
-    id: vc?.id,
     userId: mandatee?.id || '',
     user: userLocalPart,
     email,
@@ -99,6 +94,44 @@ export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
     username,
     roles: roleObjects,
     organizations,
-    logged_as: roleStrings.includes('orgAdmin') && orgId ? orgId : vc?.id,
+    logged_as: roleStrings.includes('orgAdmin') && orgId ? orgId : mandatee?.id,
+  };
+}
+
+export function claimsToLoginInfo(claims: any, token: string): LoginInfo {
+  const exp: number = claims?.exp ?? 0;
+
+  const email: string = claims?.email ?? '';
+  const userLocalPart = email.includes('@') ? email.split('@')[0] : (claims?.given_name || 'user').toLowerCase();
+
+  const firstName = claims?.given_name ?? '';
+  const lastName  = claims?.family_name  ?? '';
+  const username  = [firstName, lastName].filter(Boolean).join(' ').trim() || claims?.family_name || userLocalPart;;
+
+  const orgId   = claims?.organization_identifier ?? '';
+  const orgName = claims?.organization ?? '';
+
+  const roleStrings = rolesFromPowers(claims.power, orgId);
+  const roleObjects = roleStrings.map(r => ({ id: r, name: r }));
+
+  const organizations = orgId && orgName
+    ? [{
+        id: orgId,
+        name: orgName,
+        roles: roleObjects
+      }]
+    : [];
+
+  return {
+    userId: claims?.user_identifier || '',
+    user: userLocalPart,
+    email,
+    token,
+    expire: exp,
+    seller: roleStrings.includes('seller') ? 'seller' : '',
+    username,
+    roles: roleObjects,
+    organizations,
+    logged_as: roleStrings.includes('orgAdmin') && orgId ? orgId : claims?.user_identifier,
   };
 }

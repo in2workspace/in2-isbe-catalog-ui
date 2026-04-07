@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnInit, OnDestroy, Output, EventEmitter} from '@angular/core';
+import {Component, forwardRef, Input, OnInit, OnDestroy, Output, EventEmitter, inject} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
@@ -11,6 +11,7 @@ import {PaginationService} from "../../../../services/pagination.service";
 import {environment} from "../../../../../environments/environment";
 import { FormChangeState } from "src/app/models/interfaces";
 import { Subscription } from "rxjs";
+import { EventMessageService } from 'src/app/services/event-message.service';
 
 interface ProductSpec {
   id: string;
@@ -45,6 +46,10 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
   @Input() seller: any;
   @Input() bundleChecked: boolean = false;
   @Output() formChange = new EventEmitter<FormChangeState>();
+  
+  private readonly eventMessage = inject(EventMessageService);  
+  private readonly prodSpecService = inject(ProductSpecServiceService);
+  private readonly paginationService = inject(PaginationService);
 
   selectedProdSpecInternal: ProductSpec | null = null;
   private originalValue: ProductSpec | null = null;
@@ -63,10 +68,6 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
   nextProdSpecs:any[]=[];
 
   protected readonly FormControl = FormControl;
-
-  constructor(private readonly prodSpecService: ProductSpecServiceService,
-              private readonly paginationService: PaginationService) {
-  }
 
   async ngOnInit() {
     this.isEditMode = this.formType === 'update';
@@ -92,6 +93,10 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
         this.formChange.emit(changeState);
       }
     } 
+  }
+
+  onCreateProductSpecClick() {
+    this.eventMessage.emitSellerCreateProductSpec(true);
   }
 
   async getSellerProdSpecs(next:boolean){
@@ -120,11 +125,12 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
   }
 
   getStatusClass(status: string): string {
-    const statusClasses: Record<string, string> = {
+    const statusClasses: Record<string, string> = {      
+      "{{ 'ADMIN._in_design' | translate }}": "text-purple-600 border-purple-400",
       "{{ 'ADMIN._active' | translate }}": "text-purple-600 border-purple-400",
-      "Launched": "text-green-500 border-green-500",
-      "Retired": "text-yellow-500 border-yellow-500",
-      "Obsolete": "text-red-500 border-red-500"
+      "{{ 'ADMIN._launched' | translate }}": "text-green-500 border-green-500",
+      "{{ 'ADMIN._retired' | translate }}": "text-yellow-500 border-yellow-500",
+      "{{ 'ADMIN._obsolete' | translate }}": "text-red-500 border-red-500"
     };
     return statusClasses[status] || "text-gray-500 border-gray-400";
   }
@@ -170,8 +176,8 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
 
   getRowClass(prodId: string): string {
     return prodId === this.selectedProdSpecInternal?.id
-      ? "bg-white dark:bg-secondary-100"
-      : "bg-white dark:bg-secondary-300";
+      ? "bg-white"
+      : "bg-white";
   }
 
   private getDirtyFields(): string[] {

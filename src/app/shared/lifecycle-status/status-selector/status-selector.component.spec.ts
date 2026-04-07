@@ -92,7 +92,7 @@ describe('StatusSelectorComponent', () => {
     component.disabled = false;
 
     const activeClasses = component.getStatusClasses('active');
-    expect(activeClasses).toContain('bg-[#d2e0f0]');
+    expect(activeClasses).toContain('bg-primary-50/30');
     expect(activeClasses).toContain('font-semibold');
     component.anchor = undefined as any;
     const disabledClasses = component.getStatusClasses('retired');
@@ -101,7 +101,7 @@ describe('StatusSelectorComponent', () => {
 
   it('getFillColor returns the mapped color for the selected status and default otherwise', () => {
     component.selectedStatus = 'active';
-    expect(component.getFillColor('active')).toBe('#0f9d58');
+    expect(component.getFillColor('active')).toBe('#000000');
     expect(component.getFillColor('in_design')).toBe('#808080');
   });
 });

@@ -22,7 +22,8 @@ import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
 import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
 import { hasNonStatusChanges, normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
-import { ReminderMessageComponent } from 'src/app/shared/reminder-message/reminder-message.component';
+import { AlertMessageComponent } from 'src/app/shared/alert-message/alert-message.component';
+import { InfoIconComponent } from 'src/app/shared/info-icon/info-icon.component';
 
 
 type CharacteristicValueSpecification = components["schemas"]["CharacteristicValueSpecification"];
@@ -31,13 +32,21 @@ type BundledProductSpecification = components["schemas"]["BundledProductSpecific
 type ProductSpecificationCharacteristic = components["schemas"]["ProductSpecificationCharacteristic"];
 type ProductSpecificationRelationship = components["schemas"]["ProductSpecificationRelationship"];
 type AttachmentRefOrValue = components["schemas"]["AttachmentRefOrValue"];
+type StepId = 'general-info' | 'bundle' | 'compliance' | 'chars' | 'attach' | 'relationships' | 'summary';
+
+interface StepNavItem {
+  id: StepId;
+  labelKey: string;
+  onClick: () => void;
+  isDisabled: () => boolean;
+}
 
 @Component({
     selector: 'update-product-spec',
     templateUrl: './update-product-spec.component.html',
     styleUrl: './update-product-spec.component.css',
     standalone: true,
-    imports: [StatusSelectorComponent, ErrorMessageComponent, ReminderMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule, MarkdownTextareaComponent]
+    imports: [StatusSelectorComponent, ErrorMessageComponent, AlertMessageComponent, TranslateModule, NgxFileDropModule, NgClass, MarkdownComponent, DatePipe, ReactiveFormsModule, FormsModule,InfoIconComponent, MarkdownTextareaComponent]
 })
 export class UpdateProductSpecComponent implements OnInit {
   @Input() prod: any;
@@ -58,8 +67,8 @@ export class UpdateProductSpecComponent implements OnInit {
   showRelationships:boolean=false;
   showSummary:boolean=false;
 
-  stepsElements:string[]=['general-info','bundle','compliance','chars','attach','relationships','summary'];
-  stepsCircles:string[]=['general-circle','bundle-circle','compliance-circle','chars-circle','attach-circle','relationships-circle','summary-circle'];
+  currentStep: StepId = 'general-info';
+  stepNavigation: StepNavItem[] = [];
 
   showPreview:boolean=false;
   showEmoji:boolean=false;
@@ -194,10 +203,7 @@ export class UpdateProductSpecComponent implements OnInit {
   ngOnInit() {
     this.initPartyInfo();
     this.populateProductInfo();
-    if (this.IS_ISBE) {
-      this.stepsElements = this.stepsElements.filter(s => s !== 'compliance');
-      this.stepsCircles = this.stepsCircles.filter(c => c !== 'compliance-circle');
-    }
+    this.initNavigationSteps();
     initFlowbite();
   }
 
@@ -319,6 +325,67 @@ export class UpdateProductSpecComponent implements OnInit {
       }
     }
 
+  }
+
+  initNavigationSteps() {
+    const steps: StepNavItem[] = [
+      {
+        id: 'general-info',
+        labelKey: 'UPDATE_PROD_SPEC._general',
+        onClick: () => this.toggleGeneral(),
+        isDisabled: () => false
+      },
+      {
+        id: 'bundle',
+        labelKey: 'UPDATE_PROD_SPEC._bundle',
+        onClick: () => this.toggleBundle(),
+        isDisabled: () => this.generalForm.invalid
+      },
+      {
+        id: 'compliance',
+        labelKey: 'UPDATE_PROD_SPEC._comp_profile',
+        onClick: () => this.toggleCompliance(),
+        isDisabled: () => this.generalForm.invalid
+      },
+      {
+        id: 'chars',
+        labelKey: 'UPDATE_PROD_SPEC._chars',
+        onClick: () => this.toggleChars(),
+        isDisabled: () => this.generalForm.invalid || this.checkValidISOS()
+      },
+      {
+        id: 'attach',
+        labelKey: 'UPDATE_PROD_SPEC._attachments',
+        onClick: () => this.toggleAttach(),
+        isDisabled: () => this.generalForm.invalid || this.checkValidISOS()
+      },
+      {
+        id: 'relationships',
+        labelKey: 'UPDATE_PROD_SPEC._relationships',
+        onClick: () => this.toggleRelationship(),
+        isDisabled: () => this.generalForm.invalid || this.checkValidISOS()
+      },
+      {
+        id: 'summary',
+        labelKey: 'UPDATE_PROD_SPEC._finish',
+        onClick: () => this.showFinish(),
+        isDisabled: () => this.generalForm.invalid || this.checkValidISOS()
+      }
+    ];
+
+    this.stepNavigation = steps.filter(step => {
+      if (step.id === 'bundle') {
+        return this.BUNDLE_ENABLED;
+      }
+      if (step.id === 'compliance') {
+        return !this.IS_ISBE;
+      }
+      return true;
+    });
+
+    if (this.stepNavigation.length) {
+      this.currentStep = this.stepNavigation[0].id;
+    }
   }
 
   setProdStatus(status: any) {
@@ -539,9 +606,9 @@ export class UpdateProductSpecComponent implements OnInit {
                 this.errorMessage='File names can only include alphabetical characters (A-Z, a-z) and a limited set of symbols, such as underscores (_), hyphens (-), and periods (.)';
                 console.error('There was an error while uploading file!');
                 this.showError=true;
-                setTimeout(() => {
-                  this.showError = false;
-                }, 3000);
+                // setTimeout(() => {
+                //   this.showError = false;
+                // }, 3000);
                 return;
               }
               //IF FILES ARE HIGHER THAN 3MB THROW AN ERROR
@@ -549,9 +616,9 @@ export class UpdateProductSpecComponent implements OnInit {
                 this.errorMessage='File size must be under 3MB.';
                 console.error('There was an error while uploading file!');
                 this.showError=true;
-                setTimeout(() => {
-                  this.showError = false;
-                }, 3000);
+                // setTimeout(() => {
+                //   this.showError = false;
+                // }, 3000);
                 return;
               }
               if(this.showCompliance && !this.showUploadAtt){
@@ -574,9 +641,9 @@ export class UpdateProductSpecComponent implements OnInit {
                         this.errorMessage='File size too large! Must be under 3MB.';
                       }
                       this.showError=true;
-                      setTimeout(() => {
-                        this.showError = false;
-                      }, 3000);
+                      // setTimeout(() => {
+                      //   this.showError = false;
+                      // }, 3000);
                   }
                 });
               }
@@ -617,9 +684,9 @@ export class UpdateProductSpecComponent implements OnInit {
                         this.errorMessage='File size too large! Must be under 3MB.';
                       }
                       this.showError=true;
-                      setTimeout(() => {
-                        this.showError = false;
-                      }, 3000);
+                      // setTimeout(() => {
+                      //   this.showError = false;
+                      // }, 3000);
                   }
                 });
               }
@@ -638,9 +705,9 @@ export class UpdateProductSpecComponent implements OnInit {
                         } else {
                           this.errorMessage='File must have a valid image format!';
                           this.showError=true;
-                          setTimeout(() => {
-                            this.showError = false;
-                          }, 3000);
+                          // setTimeout(() => {
+                          //   this.showError = false;
+                          // }, 3000);
                         }
                       } else {
                         this.attachToCreate={url:data.content,attachmentType:file.type};
@@ -659,9 +726,9 @@ export class UpdateProductSpecComponent implements OnInit {
                         this.errorMessage='¡El archivo es demasiado grande! Debe ser inferior a 3 MB.';
                       }
                       this.showError=true;
-                      setTimeout(() => {
-                        this.showError = false;
-                      }, 3000);
+                      // setTimeout(() => {
+                      //   this.showError = false;
+                      // }, 3000);
                   }
                 });
               }
@@ -875,55 +942,34 @@ export class UpdateProductSpecComponent implements OnInit {
     this.creatingChars=[];
   }
 
-  removeClass(elem: HTMLElement, cls:string) {
-    var str = " " + elem.className + " ";
-    elem.className = str.replace(" " + cls + " ", " ").replace(/^\s+|\s+$/g, "");
+  get currentStepIndex(): number {
+    return this.stepNavigation.findIndex(step => step.id === this.currentStep);
   }
 
-  addClass(elem: HTMLElement, cls:string) {
-      elem.className += (" " + cls);
+  isStepComplete(index: number): boolean {
+    const activeIndex = this.currentStepIndex;
+    return activeIndex !== -1 && index < activeIndex;
   }
 
-  unselectMenu(elem:HTMLElement | null,cls:string){
-    if(elem != null){
-      if(elem.className.match(cls)){
-        this.removeClass(elem,cls)
-      }
+  isCurrentStep(stepId: StepId): boolean {
+    return this.currentStep === stepId;
+  }
+
+  isStepDisabled(step: StepNavItem): boolean {
+    return step.isDisabled();
+  }
+
+  handleStepClick(step: StepNavItem) {
+    if (this.isStepDisabled(step)) {
+      return;
     }
-  }
-
-  selectMenu(elem:HTMLElement| null,cls:string){
-    if(elem != null){
-      if(!elem.className.match(cls)){
-        this.addClass(elem,cls)
-      }
-    }
+    this.selectStep(step.id);
+    step.onClick();
   }
   
   //STEPS CSS EFFECTS:
-  selectStep(step:string,stepCircle:string){
-    const index = this.stepsElements.findIndex(item => item === step);
-    if (index !== -1) {
-      this.stepsElements.splice(index, 1);
-      this.selectMenu(document.getElementById(step),'text-primary-100 dark:text-primary-50')
-      this.unselectMenu(document.getElementById(step),'text-gray-500') 
-      for(const element of this.stepsElements){
-        this.unselectMenu(document.getElementById(element),'text-primary-100 dark:text-primary-50')
-        this.selectMenu(document.getElementById(element),'text-gray-500') 
-      }
-      this.stepsElements.push(step);
-    }
-    const circleIndex = this.stepsCircles.findIndex(item => item === stepCircle);
-    if (index !== -1) {
-      this.stepsCircles.splice(circleIndex, 1);
-      this.selectMenu(document.getElementById(stepCircle),'border-primary-100 dark:border-primary-50')
-      this.unselectMenu(document.getElementById(stepCircle),'border-gray-400');
-      for(const element of this.stepsCircles){
-        this.unselectMenu(document.getElementById(element),'border-primary-100 dark:border-primary-50')
-        this.selectMenu(document.getElementById(element),'border-gray-400');
-      }
-      this.stepsCircles.push(stepCircle);
-    }
+  selectStep(step: StepId, _stepCircle?: string){
+    this.currentStep = step;
   }
 
   onTypeChange(event: any) {
@@ -1041,6 +1087,7 @@ export class UpdateProductSpecComponent implements OnInit {
   }
 
   showFinish() {
+    this.selectStep('summary');
     for(const element of this.prodChars){
       const index = this.finishChars.findIndex(item => item.name === element.name);
       if (index == -1) {
@@ -1178,9 +1225,9 @@ export class UpdateProductSpecComponent implements OnInit {
           this.errorMessage='¡Hubo un error al cargar el producto!';
         }
         this.showError=true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
+        // setTimeout(() => {
+        //   this.showError = false;
+        // }, 3000);
       }
     });
   }

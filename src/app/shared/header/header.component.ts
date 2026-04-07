@@ -10,6 +10,7 @@ import {
   OnDestroy,
   inject,
 } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   faCartShopping,
   faHandHoldingBox,
@@ -29,7 +30,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import * as uuid from 'uuid';
-import { combineLatest, Subject, Subscription, takeUntil } from 'rxjs';
+import { combineLatest, filter, Subject, Subscription, takeUntil } from 'rxjs';
 
 import { LocalStorageService } from '../../services/local-storage.service';
 import { EventMessageService } from '../../services/event-message.service';
@@ -43,13 +44,15 @@ import { environment } from 'src/environments/environment';
 
 import { OrgContextService } from 'src/app/services/org-context.service';
 import { AuthService } from 'src/app/guard/auth.service';
+import { MenuTab, PrivateAreaMenuComponent } from '../private-area-menu/private-area-menu.component';
+import { MenuStateService } from 'src/app/services/menu-state.service';
 
 @Component({
   selector: 'bae-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   standalone: true,
-  imports: [FaLayersComponent, FaIconComponent, FaLayersCounterComponent, CartDrawerComponent, TranslateModule]
+  imports: [CommonModule, PrivateAreaMenuComponent, FaLayersComponent, FaIconComponent, FaLayersCounterComponent, CartDrawerComponent, TranslateModule]
 })
 export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestroy {
 
@@ -66,6 +69,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   private readonly sc = inject(ShoppingCartServiceService);
   private readonly auth = inject(AuthService);
   private readonly orgCtx = inject(OrgContextService);
+  private readonly menuStateService = inject(MenuStateService);
 
   qrWindow: Window | null = null;
   statePair: string = '';
@@ -76,6 +80,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   is_logged = false;
   showLogin = false;
   loggedAsOrg = false;
+  loggedAsUser = true;
   isAdmin = false;
   orgs: any[] = [];
   roles: string[] = [];
@@ -99,6 +104,10 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
 
   loginSubscription: Subscription = new Subscription();
+  activeTab: MenuTab | null = null;
+  private tabSub?: Subscription;
+  private currentScope: 'profile' | 'offerings' | 'admin' | null = null;
+
   private readonly destroy$ = new Subject<void>();
 
   protected readonly faCartShopping = faCartShopping;
@@ -229,12 +238,45 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     });
 
     this.router.events
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(event => {
-        if (event instanceof NavigationEnd) {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-      });
+    .pipe(
+      takeUntil(this.destroy$),
+      filter(e => e instanceof NavigationEnd)
+    )
+    .subscribe((e: any) => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      const url = e.urlAfterRedirects as string;
+
+      const isProfile = url.startsWith('/profile');
+      const isOfferings = url.startsWith('/my-offerings');
+      const isAdmin = url.startsWith('/admin');
+
+      if (!isProfile && !isOfferings && !isAdmin) {
+        this.currentScope = null;
+        this.tabSub?.unsubscribe();
+        this.activeTab = null;
+        this.cdr.detectChanges();
+        return;
+      }
+
+      const nextScope: 'profile' | 'offerings' | 'admin' =
+        isProfile ? 'profile' : isOfferings ? 'offerings' : 'admin';
+
+      if (this.currentScope !== nextScope) {
+        this.currentScope = nextScope;
+        this.tabSub?.unsubscribe();
+
+        this.tabSub = this.menuStateService
+          .tab$(nextScope)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(tab => {
+            this.activeTab = tab;
+            this.cdr.detectChanges();
+          });
+      }
+    });
+
+
   }
 
   ngAfterViewInit() {
@@ -405,4 +447,30 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     this.usercharacters = '';
     this.loggedAsOrg = false;
   }
+
+  onMenuSelect(tab: MenuTab) {
+    this.activeTab = tab;
+    if (tab === 'account' || tab === 'org' || tab === 'general' || tab === 'billing' || tab === 'orders' || tab === 'revenue') {
+      const effective = tab === 'general' ? 'org' : tab;
+      this.menuStateService.setActiveTab('profile', effective);
+      if (!this.router.url.startsWith('/profile')) this.router.navigate(['/profile']);
+      return;
+    }
+
+    if (tab === 'offers' || tab === 'productspec' || tab === 'catalogs') {
+      const effective = (this.IS_ISBE && tab === 'catalogs') ? 'productspec' : tab;
+      this.menuStateService.setActiveTab('offerings', effective);
+      if (!this.router.url.startsWith('/my-offerings')) this.router.navigate(['/my-offerings']);
+      return;
+    }
+
+    if (tab === 'categories') {
+      this.menuStateService.setActiveTab('admin', 'categories');
+      if (!this.router.url.startsWith('/admin')) this.router.navigate(['/admin']);
+      return;
+    }
+  }
+
+
+
 }

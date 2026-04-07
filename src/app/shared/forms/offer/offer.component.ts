@@ -20,8 +20,10 @@ import * as moment from 'moment';
 import { certifications } from 'src/app/models/certification-standards.const';
 import { environment } from 'src/environments/environment';
 import { ErrorMessageComponent } from '../../error-message/error-message.component';
-import { ReminderMessageComponent } from '../../reminder-message/reminder-message.component';
+import { AlertMessageComponent } from '../../alert-message/alert-message.component';
 import { hasNonStatusChanges } from '../../lifecycle-status/lifecycle-status';
+import { IsbeMessageComponent } from '../../isbe-message/isbe-message.component';
+
 
 type ProductOffering_Create = components["schemas"]["ProductOffering_Create"];
 type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
@@ -43,7 +45,8 @@ type ProductOfferingPrice = components["schemas"]["ProductOfferingPrice"]
     OfferSummaryComponent,
     NgClass,
     ErrorMessageComponent,
-    ReminderMessageComponent
+    AlertMessageComponent,
+    IsbeMessageComponent
   ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css'
@@ -66,6 +69,7 @@ export class OfferComponent implements OnInit, OnDestroy{
   errorMessage:any='';
   showError:boolean=false;
   showReminder:boolean=false;
+  showIsbeMessage:boolean=false;
   edited:boolean=false;
   reminderTimer: any = null;
   bundleChecked:boolean=false;
@@ -87,22 +91,27 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     if (this.IS_ISBE) {
       this.steps = [
-        'CREATE_OFFER._general',
         'CREATE_OFFER._prod_spec',
+        'CREATE_OFFER._general',
         'CREATE_OFFER._category',
         'CREATE_OFFER._price_plans',
         'CREATE_OFFER._summary'
       ];
       this.productOfferForm = this.fb.group({
-        generalInfo: this.fb.group({}),
         prodSpec: new FormControl(null, [Validators.required]),
-        category: new FormControl([]),
+        generalInfo: this.fb.group({
+          name: [null, Validators.required],
+          status: [null],
+          description: [null, Validators.required],
+          version: [null, Validators.required]
+        }),
+        category: new FormControl(null, [Validators.required]),
         pricePlans: new FormControl([])
       });
     } else {
       this.steps = [
-        'CREATE_OFFER._general',
         'CREATE_OFFER._prod_spec',
+        'CREATE_OFFER._general',
         'CREATE_OFFER._catalog',
         'CREATE_OFFER._category',
         'CREATE_OFFER._license',
@@ -111,10 +120,15 @@ export class OfferComponent implements OnInit, OnDestroy{
         'CREATE_OFFER._summary'
       ];
       this.productOfferForm = this.fb.group({
-        generalInfo: this.fb.group({}),
         prodSpec: new FormControl(null, [Validators.required]),
+        generalInfo: this.fb.group({
+          name: [null, Validators.required],
+          status: [null],
+          description: [null, Validators.required],
+          version: [null, Validators.required]
+        }),
         catalogue: new FormControl(null, [Validators.required]),
-        category: new FormControl([]),
+        category: new FormControl([], [Validators.required]),
         license: this.fb.group({}),
         pricePlans: new FormControl([]),
         procurementMode: this.fb.group({}),
@@ -228,7 +242,13 @@ export class OfferComponent implements OnInit, OnDestroy{
           this.cdr.detectChanges();
         }, 3000);
       }
+    }else if (isSummary && this.formType === 'create') {
+      this.showIsbeMessage = true;
     }
+  }
+
+  onCloseSelect(){
+    this.showIsbeMessage = false;
   }
 
   validateCurrentStep(): boolean {
@@ -241,7 +261,7 @@ export class OfferComponent implements OnInit, OnDestroy{
       case 'CREATE_OFFER._catalog':
         return !!this.productOfferForm.get('catalogue')?.value;
       case 'CREATE_OFFER._category':
-        return true;
+        return !!this.productOfferForm.get('category')?.value;
       case 'CREATE_OFFER._license':
         return this.productOfferForm.get('license')?.valid || false;
       case 'CREATE_OFFER._price_plans':
@@ -257,8 +277,13 @@ export class OfferComponent implements OnInit, OnDestroy{
 
   canNavigate(index: number) {
     if (this.formType == 'create') {
-      return (this.productOfferForm.get('generalInfo')?.valid &&  (index <= this.currentStep)) ||
-             (this.productOfferForm.get('generalInfo')?.valid &&  (index <= this.highestStep));
+      if (index <= this.currentStep) {
+        return true;
+      }
+      if (index <= this.highestStep) {
+        return true;
+      }
+      return this.validateCurrentStep();
     } else {
       return this.productOfferForm.get('generalInfo')?.valid
     }
@@ -282,16 +307,16 @@ export class OfferComponent implements OnInit, OnDestroy{
       this.loadingData = true;
       if (this.IS_ISBE) {
         this.steps = [
-          'CREATE_OFFER._general',
           'CREATE_OFFER._prod_spec',
+          'CREATE_OFFER._general',
           'CREATE_OFFER._category',
           'CREATE_OFFER._price_plans',
           'CREATE_OFFER._summary'
         ];
       } else {
         this.steps = [
-          'CREATE_OFFER._general',
           'CREATE_OFFER._prod_spec',
+          'CREATE_OFFER._general',
           'CREATE_OFFER._category',
           'CREATE_OFFER._license',
           'CREATE_OFFER._price_plans',
@@ -313,6 +338,18 @@ export class OfferComponent implements OnInit, OnDestroy{
         prodSpec: this.selectedProdSpec || null // Cargar si existe, o dejar en null
       });
     }
+
+    // General Info
+    if (this.offer.name || this.offer.description || this.offer.version || this.offer.lifecycleStatus){ 
+      this.productOfferForm.patchValue({
+        generalInfo: {
+          name: this.offer.name || '',
+          status: this.offer.lifecycleStatus || '',
+          description: this.offer.description || '',
+          version: this.offer.version || ''
+        }
+      })
+    };
 
     //CATEGORIES
     if(this.offer.category){
@@ -497,7 +534,7 @@ export class OfferComponent implements OnInit, OnDestroy{
     console.error('Error while creating offer price!', error);
     this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Error al crear precio de oferta!';
     this.showError = true;
-    setTimeout(() => (this.showError = false), 3000);
+    // setTimeout(() => (this.showError = false), 3000);
   }
 
   private async createPriceAlteration(component: any, currency: string): Promise<any> {
@@ -860,19 +897,19 @@ export class OfferComponent implements OnInit, OnDestroy{
     if (!v?.generalInfo?.name) {
       this.errorMessage = 'Falta la información general (nombre).';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
       return;
     }
     if (this.formType === 'create' && !this.bundleChecked && !v?.prodSpec?.id) {
       this.errorMessage = 'Debes seleccionar una Product Specification.';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
       return;
     }
     if (this.formType === 'create' && !v?.catalogue?.id && !this.IS_ISBE) {
       this.errorMessage = 'Debes seleccionar un Catálogo para crear la oferta.';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
       return;
     }
 
@@ -947,6 +984,8 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     request$.subscribe({
       next: (data) => {
+        this.hasChanges = false;
+        this.productOfferForm.markAsPristine();
         this.goBack();          
       },
       error: (error) => {
@@ -955,7 +994,7 @@ export class OfferComponent implements OnInit, OnDestroy{
           ? 'Error: ' + error.error.error
           : '¡Se produjo un error al guardar la oferta!';
         this.showError = true;
-        setTimeout(() => (this.showError = false), 3000);
+        // setTimeout(() => (this.showError = false), 3000);
       }
     });
   }
@@ -1147,12 +1186,14 @@ export class OfferComponent implements OnInit, OnDestroy{
 
     try {
       await lastValueFrom(this.api.updateProductOffering(basePayload, this.offer.id));
+      this.hasChanges = false;
+      this.productOfferForm.markAsPristine();
       this.goBack();
     } catch (error: any) {
       console.error('❌ Error updating offer:', error);
       this.errorMessage = error?.error?.error ? 'Error: ' + error.error.error : '¡Se produjo un error al actualizar la oferta!';
       this.showError = true;
-      setTimeout(() => (this.showError = false), 3000);
+      // setTimeout(() => (this.showError = false), 3000);
     }
   }
 
@@ -1179,6 +1220,10 @@ export class OfferComponent implements OnInit, OnDestroy{
         return false;
     }
     return true;
+  }
+
+  hasPendingChanges(): boolean {
+    return this.hasChanges || this.productOfferForm?.dirty;
   }
 
 }

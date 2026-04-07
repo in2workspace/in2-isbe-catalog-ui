@@ -1,6 +1,6 @@
 
 export const environment = {
-    BASE_URL: 'https://tmf.evidenceledger.eu/tmf-api/',
+    BASE_URL: 'https://tmf.dev.portal.redisbe.com/tmf-api/',
     FOUNDATION_ID: 'VATES-G87936159',
     locale: 'es-ES',
     PRODUCT_CATALOG_MANAGEMENT_URL: 'productCatalogManagement/v4',
@@ -42,7 +42,6 @@ export const environment = {
         isRedirection: true,
         pollPath: "",
         pollCertPath: "",
-        //clientID: "did:key:zDnaeupc9BmNtUg7obyrLScXwaWkYPR7ucyNXc5VykdG4vUMf",
         clientID: "https://catalog.isbeonboard.com",
         callbackURL: "http://localhost:4200/dashboard",
         verifierHost: "https://verifier.dome-marketplace-sbx.org",
@@ -55,12 +54,12 @@ export const environment = {
     KNOWLEDGE_BASE_URL: "",
     KB_ONBOARDING_GUIDELINES_URL: "",
     KB_GUIDELNES_URL:"",
-    REGISTRATION_FORM_URL: "https://onboard.evidenceledger.eu/",
+    REGISTRATION_FORM_URL: "https://onboard-dev.redisbe.com/register",
     SEARCH_ENABLED: false,
     PURCHASE_ENABLED: false,
     ISBE_TRUST_LINK: "",
     ISBE_ABOUT_LINK: 'https://redisbe.com/',
-    ISBE_REGISTER_LINK: 'https://onboard.evidenceledger.eu/',
+    ISBE_REGISTER_LINK: 'https://onboard-dev.redisbe.com/register',
     ISBE_PUBLISH_LINK:'',
     ISBE_LINKEDIN: 'https://www.linkedin.com/company/redisbe/posts/?feedView=all',
     ISBE_YOUTUBE: 'https://www.youtube.com/@REDISBE',
@@ -68,9 +67,9 @@ export const environment = {
     BUNDLE_ENABLED: false,
     DFT_CATALOG_ID: '',
     MAX_FILE_SIZE:3145728,
-    SCOPE: "openid eidas",
+    SCOPE: "openid profile email",
     RESPONSE_TYPE: 'code',
-    AUTHORITY: "https://certauth.evidenceledger.eu",
-    REDIRECT_URL: "https://isbecatalog.netlify.app/",
+    AUTHORITY: "https://idp.dev.cloud-w.envs.redisbe.com/auth/realms/dev-isbe",
+    REDIRECT_URL: "https://catalog.dev.cloud-w.envs.redisbe.com",
     POST_LOGIN_ROUTE: '/dashboard'
 };

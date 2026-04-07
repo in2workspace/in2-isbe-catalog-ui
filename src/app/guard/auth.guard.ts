@@ -15,8 +15,9 @@ export class AuthGuard implements CanActivate {
     return combineLatest([this.auth.isAuthenticated$, this.auth.loginInfo$]).pipe(
       take(1),
       map(([isAuth, li]) => {
+        const isCallback = _state.url.includes('code=') || _state.url.includes('state=');
         if (!isAuth || !li) {
-          this.auth.login(); 
+          if (!isCallback) this.auth.login();
           return false;
         }
 

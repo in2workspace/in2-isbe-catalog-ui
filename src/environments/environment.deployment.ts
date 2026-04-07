@@ -71,7 +71,7 @@ export const environment = {
     BUNDLE_ENABLED: false,
     DFT_CATALOG_ID: '',
     MAX_FILE_SIZE:3145728,
-    SCOPE: "openid eidas",
+    SCOPE: "openid profile email",
     RESPONSE_TYPE: 'code',
     AUTHORITY: (window as any)["env"]["AUTHORITY"] || "",
     REDIRECT_URL: (window as any)["env"]["REDIRECT_URL"] || "",

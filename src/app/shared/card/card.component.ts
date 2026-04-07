@@ -256,6 +256,7 @@ export class CardComponent implements OnInit, AfterViewInit {
     return {
       id: productOff.id,
       name: productOff.name,
+      subtitle: productOff.description ?? 'Subtitle',
       image: this.getProductImage(),
       href: productOff.href,
       options: {
@@ -286,7 +287,7 @@ export class CardComponent implements OnInit, AfterViewInit {
     console.error(defaultMessage, error);
     this.errorMessage = error?.error?.error ? `Error: ${error.error.error}` : defaultMessage;
     this.showError = true;
-    setTimeout(() => (this.showError = false), 3000);
+    // setTimeout(() => (this.showError = false), 3000);
   }
 
   private resetSelections() {

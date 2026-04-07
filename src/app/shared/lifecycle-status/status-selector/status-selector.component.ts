@@ -72,31 +72,31 @@ export class StatusSelectorComponent implements ControlValueAccessor, OnChanges 
 
   getStatusClasses(status: string): string {
     const statusColors: Record<string, string> = {
-      "in_design": 'text-[#269c43]',
-      "active": 'text-[#269c43]',
-      "launched": 'text-[#269c43]',
-      "retired": 'text-[#b40404]',
-      "obsolete": 'text-gray-800'
+      "in_design": 'text-primary-100 bg-secondary-300/30',
+      "active": 'text-primary-100 bg-primary-50/30',
+      "launched": 'text-primary-100 bg-green/30',
+      "retired": 'text-primary-100 bg-gray-50/30',
+      "obsolete": 'text-primary-100 bg-black/30'
     };
 
-    const base = "flex items-center justify-center p-4 rounded-lg space-x-4 transition-all";
+    const base = "flex items-center justify-center px-2 py-1.5 rounded gap-2 transition-all";
     const active = this.selectedStatus === status;
-    const color = statusColors[status] || 'text-gray-500';
+    const color = statusColors[status] || 'text-primary-100';
 
     const disabled = this.disabled || !this.displayedStatuses.includes(status as StatusCode);
 
     if (active) {
-      return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} bg-[#d2e0f0] dark:bg-primary-100 font-semibold ${color}`;
+      return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}  font-semibold ${color}`;
     }
-    return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} text-gray-500 dark:text-gray-200 hover:bg-[#d2e0f0] dark:hover:bg-gray-700`;
+    return `${base} ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'} text-gray-500  hover:bg-gray-0`; 
   }
 
   getFillColor(status: string): string {
     const statusColors: Record<string, string> = {
-      "in_design": "#a8a8a8",
-      "active": "#0f9d58",
-      "launched": "#269c43",
-      "retired": "#b40404",
+      "in_design": "#000000",
+      "active": "#000000",
+      "launched": "#000000",
+      "retired": "#000000",
       "obsolete": "#000000"
     };
     return this.selectedStatus === status ? statusColors[status] : "#808080";

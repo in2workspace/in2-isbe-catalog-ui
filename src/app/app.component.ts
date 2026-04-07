@@ -37,6 +37,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     initFlowbite();
+    this.auth.checkAuth().subscribe();
     if (!this.localStorage.getObject('selected_categories')) {
       this.localStorage.setObject('selected_categories', []);
     }

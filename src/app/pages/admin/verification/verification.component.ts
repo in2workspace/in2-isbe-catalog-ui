@@ -53,9 +53,9 @@ export class VerificationComponent {
           this.errorMessage = '¡Hubo un error al cargar el producto!';
         }
         this.showError = true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
+        // setTimeout(() => {
+        //   this.showError = false;
+        // }, 3000);
       }
     })
   }

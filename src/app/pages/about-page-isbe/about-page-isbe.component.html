@@ -1,0 +1,220 @@
+<div class="relative w-full flex flex-col md:px-8 pb-8 overflow-hidden">
+
+  <div class="px-8 md:px-0 py-8 md:py-16 max-w-5xl">
+    <!-- breadcrumbs -->
+    <button (click)="goTo('/dashboard')"
+      class="flex items-center gap-2 text-xs text-white bg-primary-100 py-0.5 px-2 rounded-lg">
+      <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_299_20420)">
+          <path
+            d="M0.000426107 6.02887L0.578403 6.60685L0.579784 6.60547L4.33491 10.3606L4.91219 9.7833L1.56656 6.43767L8.62105 6.43767L8.62105 5.62007L1.56518 5.62008L4.91081 2.27444L4.33284 1.69646L0.000426107 6.02887Z"
+            fill="white" />
+        </g>
+        <defs>
+          <clipPath id="clip0_299_20420">
+            <rect width="8.52661" height="8.52661" fill="white"
+              transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 12.0586 6.0293)" />
+          </clipPath>
+        </defs>
+      </svg>
+      {{ 'ABOUT_PAGE_ISBE._breadcrumb' | translate }}
+    </button>
+
+    <!-- title -->
+    <h1 class="text-4xl md:text-7xl font-semibold font-heading my-8">{{ 'ABOUT_PAGE_ISBE._title' | translate }}</h1>
+    <p class="text-base md:text-xl">{{ 'ABOUT_PAGE_ISBE._subtitle' | translate }}</p>
+  </div>
+
+  <div class="flex flex-col px-8 md:px-0 pb-8">
+    <div class="flex relative ">
+      <div class="absolute top-0 left-0 hidden md:flex flex-col gap-2 opacity-0">
+        <span class="block border-black border-l-2 py-4 px-2 uppercase text-xxs font-semibold font-heading"></span>
+        <span class="block border-black/50 border-l-2 p-2"></span>
+        <span class="block border-black/50 border-l-2 p-2"></span>
+      </div>
+
+      <div class="flex justify-end container mx-auto md:px-16">
+        <div class="md:w-2/3 flex flex-col gap-8">
+
+          <!-- Small Banner -->
+          <div class="w-full flex flex-col gap-7 py-6 px-7 banner__background_gradient rounded-3xl">
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE._coming_soon_title' | translate }}</h2>
+            <div class="flex flex-col lg:flex-row justify-between lg:items-end gap-7">
+              <div class="flex">
+                <svg width="99" height="36" viewBox="0 0 99 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M74.0541 35.1831L88.1748 21.0624H56.4922V14.1207H88.1748L74.0541 0H82.7757L98.3204 15.604V19.5791L82.7757 35.1831H74.0541Z" fill="black"/>
+                <path d="M17.5619 35.1831L31.6826 21.0624H0V14.1207H31.6826L17.5619 0H26.2835L41.8282 15.604V19.5791L26.2835 35.1831H17.5619Z" fill="black"/>
+                </svg>
+              </div>
+
+              <p class="font-normal text-xl">{{ 'ABOUT_PAGE_ISBE._coming_soon_desc' | translate }}</p>
+            </div>
+          </div>
+
+          <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE._what_is_title' | translate }}</h2>
+
+          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_1' | translate }}</p>
+          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_2' | translate }}</p>
+          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_3' | translate }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- cards -->
+  <div class="md:px-8 container mx-auto flex flex-col gap-8">
+    <!-- card -->
+    <div class="rounded-3xl bg-primary-50 p-7">
+      <div class="flex flex-col md:flex-row">
+
+        <div class="w-full max-w-[33%] flex items-start justify-start">
+          <span class="text-[210px] leading-none md:leading-[133px]">1</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8 w-full">
+          <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._1_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._1_desc' | translate }}</p>
+          </div>
+          <div class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
+            <img class="max-w-[178px] w-full h-autoobject-cover" src="/assets/images/image-visibilidad.png" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- card -->
+    <div class="rounded-3xl bg-green p-7">
+      <div class="flex flex-col md:flex-row">
+
+        <div class="w-full max-w-[33%] flex items-start justify-start">
+          <span class="text-[210px] leading-none md:leading-[133px]">2</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8 w-full">
+          <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._2_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._2_desc' | translate }}</p>
+          </div>
+          <picture class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
+            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-validacion.png" alt="" />
+          </picture>
+        </div>
+      </div>
+    </div>
+    <!-- card -->
+    <div class="rounded-3xl bg-white p-7">
+      <div class="flex flex-col md:flex-row">
+
+        <div class="w-full max-w-[33%] flex items-start justify-start">
+          <span class="text-[210px] leading-none md:leading-[133px]">3</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._3_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._3_desc' | translate }}</p>
+          </div>
+          <picture class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
+            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-integracion.png" alt="" />
+          </picture>
+        </div>
+      </div>
+    </div>
+    <!-- card -->
+    <div class="rounded-3xl bg-secondary-300 p-7">
+      <div class="flex flex-col md:flex-row">
+
+        <div class="w-full max-w-[33%] flex items-start justify-start">
+          <span class="text-[210px] leading-none md:leading-[133px]">4</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._4_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._4_desc' | translate }}</p>
+          </div>
+          <picture class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
+            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-impulso.png" alt="" />
+          </picture>
+        </div>
+      </div>
+    </div>
+    <!-- card -->
+    <div class="rounded-3xl bg-secondary-100 p-7">
+      <div class="flex flex-col md:flex-row">
+
+        <div class="w-full max-w-[33%] flex items-start justify-start">
+          <span class="text-[210px] leading-none md:leading-[133px]">5</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-8">
+          <div class="w-fit flex flex-col gap-8 md:gap-24 justify-between">
+            <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE.CARDS._5_title' | translate }}</h2>
+            <p>{{ 'ABOUT_PAGE_ISBE.CARDS._5_desc' | translate }}</p>
+          </div>
+          <picture class="rounded-3xl flex items-center justify-center w-full aspect-video overflow-hidden bg-gray-25">
+            <img class="max-w-[178px] w-full h-auto object-cover" src="/assets/images/image-gobernanza.png" alt="" />
+          </picture>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="px-8 md:px-0 py-8 md:py-16 max-w-5xl">
+
+    <!-- title -->
+    <h1 class="text-4xl md:text-7xl font-semibold font-heading my-8">{{ 'ABOUT_PAGE_ISBE._benefits_title' | translate }}</h1>
+    <p class="text-base md:text-xl">{{ 'ABOUT_PAGE_ISBE._benefits_desc' | translate }}</p>
+  </div>
+
+  <!-- cards -->
+  <ul class="grid md:grid-cols-3 gap-8 px-8 md:px-0 mb-8">
+    <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-visibilidad.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._1' | translate }}</p>
+    </li>
+    <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-confianza.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._2' | translate }}</p>
+    </li>
+    <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-sinergias.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._3' | translate }}</p>
+    </li>
+    <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-comercializacion.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._4' | translate }}</p>
+    </li>
+    <li class="flex flex-col justify-between items-start bg-white/50 backdrop-blur-sm rounded-3xl p-8">
+      <img class="w-[125px] h-auto mb-14" src="/assets/logos/icon-desarollo.svg" alt="" />
+      <p class="font-heading font-semibold text-2xl mb-3">{{ 'ABOUT_PAGE_ISBE.BENEFITS._5' | translate }}</p>
+    </li>
+  </ul>
+
+  <!-- BANNER COMPONENT -->
+  <section class="px-8 md:px-0 my-8">
+    <div
+      class="banner__background_gradient bg-cover rounded-3xl p-8 md:px-16 md:py-14 bg-white flex flex-col md:flex-row justify-between gap-8">
+      <div class="flex flex-col gap-8">
+        <h3 class="text-2xl md:text-3xl font-heading font-semibold max-w-sm">{{ 'ABOUT_PAGE_ISBE._banner_title' | translate }}</h3>
+        <p class="max-w-md">{{ 'ABOUT_PAGE_ISBE._banner_desc' | translate }}</p>
+        <button type="button" (click)="openWindow(isbeAbout)"
+          class="w-fit flex gap-2 items-center justify-start text-white bg-black font-medium rounded-full text-sm uppercase px-5 py-2.5 text-center me-2">
+          {{ 'ABOUT._visit_isbe' | translate }}
+          <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
+          </svg>
+        </button>
+      </div>
+
+      <picture class="rounded-3xl overflow-hidden max-w-md bg-gray-25">
+        <img class="size-full object-cover" src="/assets/images/ISBE_fondo.webp" alt="" />
+      </picture>
+
+    </div>
+  </section>
+
+  <div class="green-footer-gradient absolute bottom-0 left-0 w-full h-[800px] scale-150 bg-center -z-[1]"></div>
+
+
+</div>

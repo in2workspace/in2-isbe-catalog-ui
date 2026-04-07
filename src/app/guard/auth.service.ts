@@ -2,7 +2,7 @@ import { Injectable, signal, WritableSignal, inject } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { take, map, catchError, switchMap } from 'rxjs/operators';
-import { claimsToLoginInfo, LoginInfo } from './login-info.mapper';
+import { vcClaimsToLoginInfo, LoginInfo, claimsToLoginInfo } from './login-info.mapper';
 import { OrgContextService } from '../services/org-context.service';
 
 export interface AppUser {
@@ -52,9 +52,14 @@ export class AuthService {
 
         const u = this.mapUserFromClaims(claims);
         this.setState(true, u, accessToken ?? '', this.pickPrimaryRole(u));
+        let li = null;
 
         try {
-          const li = claimsToLoginInfo(claims, accessToken ?? '');
+          if(claims.vc === undefined) {
+            li = claimsToLoginInfo(claims, accessToken ?? '');
+          }else{
+            li = vcClaimsToLoginInfo(claims, accessToken ?? '');
+          }          
           this.loginInfoSubject.next(li);
         } catch {
           this.loginInfoSubject.next(null);
@@ -68,9 +73,7 @@ export class AuthService {
   sellerId$ = combineLatest([this.loginInfo$, this.orgCtx.getOrganization()]).pipe(
     map(([li, orgId]) => {
       if (!li) return '';
-      const effective = orgId ?? li.logged_as ?? null;
-      if (!effective || effective === li.id) return li.id;
-      return li.organizations.find(o => o.id === effective)?.id ?? li.id;
+      return li.organizations.find(o => o.id === orgId)?.id;
     })
   );
 
@@ -126,7 +129,7 @@ export class AuthService {
     return u?.roles?.[0] ?? null;
   }
 
-  private decodeJwtPayload<T = any>(token: string): T | null {
+  decodeJwtPayload<T = any>(token: string): T | null {
     try {
       if (!token) return null;
       const parts = token.split('.');
@@ -138,5 +141,27 @@ export class AuthService {
     } catch {
       return null;
     }
+  }
+
+  applyLocalLogin(info: Partial<LoginInfo>): void {
+    if (!info || !info.token) {
+      this.clearState();
+      this.loginInfoSubject.next(null);
+      return;
+    }
+
+    const roleStrings = Array.isArray(info.roles)
+      ? info.roles.map(r => (r as any)?.name ?? (r as any)?.id ?? r).filter(Boolean)
+      : [];
+
+    const user: AppUser = {
+      sub: (info as any).userId ?? (info as any).id ?? info.user ?? '',
+      name: info.username ?? info.user ?? '',
+      email: info.email,
+      roles: roleStrings as string[]
+    };
+
+    this.setState(true, user, info.token, this.pickPrimaryRole(user));
+    this.loginInfoSubject.next(info as LoginInfo);
   }
 }

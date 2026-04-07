@@ -1,0 +1,18 @@
+<div class="fixed inset-0 w-full h-dvh bg-black/90 z-99 flex items-center justify-center">
+  <div id="alert-additional-content-2" class="w-full max-w-[400px] flex flex-col justify-between items-center gap-8 text-center bg-white px-5 py-10 rounded-lg" role="alert">
+      <div class="flex flex-col">
+        <div class="font-bold text-sm">
+          {{ 'REMINDER._isbe' | translate }}
+        </div>
+        <div class=" text-sm">
+          {{ 'REMINDER._isbe_publish' | translate }}
+        </div>
+      </div>
+      <button type="button" (click)="closeMessage()" class="w-fit px-4 py-2 flex items-center gap-2 bg-danger/15 text-danger rounded-full">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M5.33464 15.8327L4.16797 14.666L8.83464 9.99935L4.16797 5.33268L5.33464 4.16602L10.0013 8.83268L14.668 4.16602L15.8346 5.33268L11.168 9.99935L15.8346 14.666L14.668 15.8327L10.0013 11.166L5.33464 15.8327Z" fill="currentColor" fill-opacity="0.6"/>
+        </svg>
+        {{ 'CARD._close_toast' | translate }}
+      </button>
+  </div>
+</div>

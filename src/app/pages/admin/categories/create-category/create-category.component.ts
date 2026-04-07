@@ -13,14 +13,25 @@ import { CategoriesRecursionComponent } from 'src/app/shared/categories-recursio
 import { MarkdownTextareaComponent } from 'src/app/shared/forms/markdown-textarea/markdown-textarea.component';
 import { AuthService } from 'src/app/guard/auth.service';
 import { take } from 'rxjs';
+import { StatusSelectorComponent } from 'src/app/shared/lifecycle-status/status-selector/status-selector.component';
+import { normalizeToInternal, StatusCode } from 'src/app/shared/lifecycle-status/lifecycle-status';
+import { FormsModule } from '@angular/forms';
 type Category_Create = components["schemas"]["Category_Create"];
+type StepId = 'general-info' | 'summary';
+
+interface StepNavItem {
+  id: StepId;
+  labelKey: string;
+  onClick: () => void;
+  isDisabled: () => boolean;
+}
 
 @Component({
     selector: 'create-category',
     templateUrl: './create-category.component.html',
     styleUrl: './create-category.component.css',
     standalone: true,
-    imports: [ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent,ReactiveFormsModule]
+    imports: [FormsModule, StatusSelectorComponent, ErrorMessageComponent, TranslateModule, MarkdownComponent, NgClass, CategoriesRecursionComponent, DatePipe, MarkdownTextareaComponent, ReactiveFormsModule]
 })
 export class CreateCategoryComponent implements OnInit {
   seller:any='';
@@ -29,8 +40,8 @@ export class CreateCategoryComponent implements OnInit {
   categories:any[]=[];
   unformattedCategories:any[]=[];
 
-  stepsElements:string[]=['general-info','summary'];
-  stepsCircles:string[]=['general-circle','summary-circle'];
+  currentStep: StepId = 'general-info';
+  stepNavigation: StepNavItem[] = [];
 
   //markdown variables:
   showPreview:boolean=false;
@@ -83,6 +94,7 @@ export class CreateCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.initPartyInfo();
+    this.initNavigationSteps();
   }
 
   initPartyInfo() {
@@ -160,7 +172,7 @@ export class CreateCategoryComponent implements OnInit {
   }
 
   toggleGeneral(){
-    this.selectStep('general-info','general-circle');
+    this.selectStep('general-info');
     this.showGeneral=true;
     this.showSummary=false;
     this.showPreview=false;
@@ -206,6 +218,7 @@ export class CreateCategoryComponent implements OnInit {
 
   showFinish(){
     if(this.generalForm.value.name!=null){
+      this.generalDone=true;
       this.categoryToCreate={
         name: this.generalForm.value.name,
         description: this.generalForm.value.description != null ? this.generalForm.value.description : '',
@@ -217,7 +230,7 @@ export class CreateCategoryComponent implements OnInit {
       }
       this.showGeneral=false;
       this.showSummary=true;
-      this.selectStep('summary','summary-circle');
+      this.selectStep('summary');
     }
     this.showPreview=false;
   }
@@ -235,63 +248,55 @@ export class CreateCategoryComponent implements OnInit {
           this.errorMessage='¡Hubo un error al crear la categoría!';
         }
         this.showError=true;
-        setTimeout(() => {
-          this.showError = false;
-        }, 3000);
+        // setTimeout(() => {
+        //   this.showError = false;
+        // }, 3000);
       }
     })
   }
 
-  //STEPS METHODS
-  removeClass(elem: HTMLElement, cls:string) {
-    var str = " " + elem.className + " ";
-    elem.className = str.replace(" " + cls + " ", " ").replace(/^\s+|\s+$/g, "");
+  initNavigationSteps() {
+    this.stepNavigation = [
+      {
+        id: 'general-info',
+        labelKey: 'CREATE_CATEGORIES._general',
+        onClick: () => this.toggleGeneral(),
+        isDisabled: () => !this.generalDone && this.currentStep !== 'general-info'
+      },
+      {
+        id: 'summary',
+        labelKey: 'CREATE_CATEGORIES._finish',
+        onClick: () => this.showFinish(),
+        isDisabled: () => true
+      }
+    ];
   }
 
-  addClass(elem: HTMLElement, cls:string) {
-      elem.className += (" " + cls);
+  get currentStepIndex(): number {
+    return this.stepNavigation.findIndex(step => step.id === this.currentStep);
   }
 
-  unselectMenu(elem:HTMLElement | null,cls:string){
-    if(elem != null){
-      if(elem.className.match(cls)){
-        this.removeClass(elem,cls)
-      }
-    }
+  isStepComplete(index: number): boolean {
+    const activeIndex = this.currentStepIndex;
+    return activeIndex !== -1 && index < activeIndex;
   }
 
-  selectMenu(elem:HTMLElement| null,cls:string){
-    if(elem != null){
-      if(!elem.className.match(cls)){
-        this.addClass(elem,cls)
-      }
-    }
+  isCurrentStep(stepId: StepId): boolean {
+    return this.currentStep === stepId;
   }
 
-  //STEPS CSS EFFECTS:
-  selectStep(step:string,stepCircle:string){
-    const index = this.stepsElements.findIndex(item => item === step);
-    if (index !== -1) {
-      this.stepsElements.splice(index, 1);
-      this.selectMenu(document.getElementById(step),'text-primary-100 dark:text-primary-50')
-      this.unselectMenu(document.getElementById(step),'text-gray-500') 
-      for(let i=0; i<this.stepsElements.length;i++){
-        this.unselectMenu(document.getElementById(this.stepsElements[i]),'text-primary-100 dark:text-primary-50')
-        this.selectMenu(document.getElementById(this.stepsElements[i]),'text-gray-500') 
-      }
-      this.stepsElements.push(step);
-    }
-    const circleIndex = this.stepsCircles.findIndex(item => item === stepCircle);
-    if (index !== -1) {
-      this.stepsCircles.splice(circleIndex, 1);
-      this.selectMenu(document.getElementById(stepCircle),'border-primary-100 dark:border-primary-50')
-      this.unselectMenu(document.getElementById(stepCircle),'border-gray-400');
-      for(let i=0; i<this.stepsCircles.length;i++){
-        this.unselectMenu(document.getElementById(this.stepsCircles[i]),'border-primary-100 dark:border-primary-50')
-        this.selectMenu(document.getElementById(this.stepsCircles[i]),'border-gray-400');
-      }
-      this.stepsCircles.push(stepCircle);
-    }
+  isStepDisabled(step: StepNavItem): boolean {
+    return step.isDisabled();
+  }
+
+  handleStepClick(step: StepNavItem) {
+    if (this.isStepDisabled(step)) return;
+    this.selectStep(step.id);
+    step.onClick();
+  }
+
+  selectStep(step: StepId){
+    this.currentStep = step;
   }
 
   //Markdown actions:
@@ -364,6 +369,11 @@ export class CreateCategoryComponent implements OnInit {
     this.generalForm.patchValue({
       description: currentText + event.emoji.native
     });
+  }
+
+  get catStatusAsArray(): StatusCode[] {
+    const internal = normalizeToInternal('In design');
+    return internal ? [internal as StatusCode] : [];
   }
 
   togglePreview(){

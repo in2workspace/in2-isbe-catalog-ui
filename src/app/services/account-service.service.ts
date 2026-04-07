@@ -62,4 +62,27 @@ export class AccountServiceService {
     let url = `${AccountServiceService.BASE_URL}${AccountServiceService.PARTY_URL}${AccountServiceService.ORGANIZATION}/urn:ngsi-ld:organization:${seller}`;   
     return this.http.patch<any>(url, profile);
   }
+
+  isOrgInfoComplete(orgInfo: any): boolean {
+    // Verificar que la organización existe
+    if (!orgInfo) {
+      return false;
+    }
+
+    // Verificar contactMedium
+    if (!orgInfo.contactMedium || orgInfo.contactMedium.length === 0) {
+      return false;
+    }
+
+    const requiredCharacteristics = ['description', 'website', 'country', 'logo'];
+    const existingCharacteristics = orgInfo.partyCharacteristic
+      .filter((char: any) => char.value && char.value.trim() !== '')
+      .map((char: any) => char.name);
+
+    const hasAllRequired = requiredCharacteristics.every(
+      (required) => existingCharacteristics.includes(required)
+    );
+
+    return hasAllRequired;
+  }
 }

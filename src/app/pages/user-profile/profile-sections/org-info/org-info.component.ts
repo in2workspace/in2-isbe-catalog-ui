@@ -17,6 +17,8 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { MarkdownComponent } from 'ngx-markdown';
 import { combineLatest, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
+import { InfoIconComponent } from 'src/app/shared/info-icon/info-icon.component';
+import { OkMessageComponent } from 'src/app/shared/ok-message/ok-message.component';
 
 type OrganizationUpdate = components["schemas"]["Organization_Update"];
 
@@ -37,7 +39,7 @@ enum PhoneContactType {
     templateUrl: './org-info.component.html',
     styleUrl: './org-info.component.css',
     standalone: true,
-    imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent, TranslateModule]
+    imports: [TranslateModule,NgClass,ReactiveFormsModule,ErrorMessageComponent,NgxFileDropModule,PickerModule,MarkdownComponent, InfoIconComponent, OkMessageComponent]
 })
 export class OrgInfoComponent {
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
@@ -237,9 +239,6 @@ export class OrgInfoComponent {
         this.profileForm.reset();
         this.getProfile();
         this.successVisibility = true;
-        setTimeout(() => {
-          this.successVisibility = false
-        }, 2000);       
       },
       error: error => {
           console.error('There was an error while updating!', error);
@@ -250,9 +249,9 @@ export class OrgInfoComponent {
             this.errorMessage='¡Hubo un error al actualizar el perfil!';
           }
           this.showError=true;
-          setTimeout(() => {
-            this.showError = false;
-          }, 3000);
+          // setTimeout(() => {
+          //   this.showError = false;
+          // }, 3000);
       }
     });
   }
@@ -630,9 +629,9 @@ export class OrgInfoComponent {
                 this.errorMessage='File names can only include alphabetical characters (A-Z, a-z) and a limited set of symbols, such as underscores (_), hyphens (-), and periods (.)';
                 console.error('There was an error while uploading file!');
                 this.showError=true;
-                setTimeout(() => {
-                  this.showError = false;
-                }, 3000);
+                // setTimeout(() => {
+                //   this.showError = false;
+                // }, 3000);
                 return;
               }
               //IF FILES ARE HIGHER THAN 3MB THROW AN ERROR
@@ -640,9 +639,9 @@ export class OrgInfoComponent {
                 this.errorMessage='File size must be under 3MB.';
                 console.error('There was an error while uploading file!');
                 this.showError=true;
-                setTimeout(() => {
-                  this.showError = false;
-                }, 3000);
+                // setTimeout(() => {
+                //   this.showError = false;
+                // }, 3000);
                 return;
               }
               this.attachmentService.uploadFile(fileBody).subscribe({
@@ -654,9 +653,9 @@ export class OrgInfoComponent {
                       } else {
                         this.errorMessage='File must have a valid image format!';
                         this.showError=true;
-                        setTimeout(() => {
-                          this.showError = false;
-                        }, 3000);
+                        // setTimeout(() => {
+                        //   this.showError = false;
+                        // }, 3000);
                       }
                     }
                     this.cdr.detectChanges();
@@ -673,9 +672,9 @@ export class OrgInfoComponent {
                       this.errorMessage='¡El archivo es demasiado grande! Debe ser inferior a 3 MB.';
                     }
                     this.showError=true;
-                    setTimeout(() => {
-                      this.showError = false;
-                    }, 3000);
+                    // setTimeout(() => {
+                    //   this.showError = false;
+                    // }, 3000);
                 }
               });
             };

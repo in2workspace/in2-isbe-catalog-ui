@@ -9,6 +9,7 @@ import {currencies} from "currencies.json";
 import {
   ConfigurationProfileDrawerComponent
 } from "../configuration-profile-drawer/configuration-profile-drawer.component";
+import {InfoIconComponent} from "../../../../info-icon/info-icon.component";
 
 
 @Component({
@@ -24,7 +25,8 @@ import {
     PriceComponentDrawerComponent,
     PriceComponentsTableComponent,
     ConfigurationProfileDrawerComponent,
-    NgForOf
+    NgForOf,
+    InfoIconComponent
   ],
   styleUrl: './price-plan-drawer.component.css'
 })

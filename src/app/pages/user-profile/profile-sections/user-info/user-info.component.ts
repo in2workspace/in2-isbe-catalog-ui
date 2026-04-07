@@ -4,18 +4,20 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { countries } from 'src/app/models/country.const'
 import {EventMessageService} from "src/app/services/event-message.service";
 import { initFlowbite } from 'flowbite';
+import Datepicker from 'flowbite-datepicker/Datepicker';
 import { TranslateModule } from '@ngx-translate/core';
 import { ErrorMessageComponent } from 'src/app/shared/error-message/error-message.component';
+import { OkMessageComponent } from 'src/app/shared/ok-message/ok-message.component';
 import { NgClass } from '@angular/common';
 import { combineLatest, take } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
-
+type TokenPayload = Record<string, any>;
 @Component({
     selector: 'user-info',
     templateUrl: './user-info.component.html',
     styleUrl: './user-info.component.css',
     standalone: true,
-    imports: [TranslateModule, ErrorMessageComponent, NgClass,ReactiveFormsModule]
+    imports: [TranslateModule, ErrorMessageComponent, NgClass, ReactiveFormsModule, OkMessageComponent]
 })
 export class UserInfoComponent implements OnInit {
   loading: boolean = false;
@@ -44,6 +46,7 @@ export class UserInfoComponent implements OnInit {
   errorMessage:any='';
   showError:boolean=false;
   successVisibility:boolean=false;
+  private birthdatePicker: Datepicker | null = null;
 
   constructor(
     private readonly auth: AuthService,
@@ -64,6 +67,8 @@ export class UserInfoComponent implements OnInit {
     today.setMonth(today.getMonth()-1);
     this.selectedDate = today.toISOString();
     this.initPartyInfo();
+    this.userProfileForm.disable({ emitEvent: false });
+    // this.userProfileForm.get('birthdate')?.enable({ emitEvent: false });
   }
 
   initPartyInfo(): void {
@@ -76,25 +81,27 @@ export class UserInfoComponent implements OnInit {
     .subscribe(([sellerId, li, accessToken]) => {
       if (!li) { initFlowbite(); return; }
 
-      this.seller = sellerId;
+      this.seller = sellerId || '';
       this.email  = li.email || '';
       this.token  = accessToken || li.token || '';
       this.id = li.userId;
-
+      this.loadFromAccessToken(this.token);
       this.getProfile();
       initFlowbite();
     });
   }
 
   getProfile(){
-    this.accountService.getUserInfo(this.id).then(data=> { 
+    /*this.accountService.getUserInfo(this.id).then(data=> { 
       this.profile=data[0];
       this.loadProfileData(this.profile)
-      this.loading=false;
+      
       this.cdr.detectChanges();
-    })
+    })*/
+    this.loading=false;
 
     this.cdr.detectChanges();
+    this.initBirthdatePicker();
     initFlowbite();
   }
 
@@ -117,9 +124,6 @@ export class UserInfoComponent implements OnInit {
         this.userProfileForm.reset();
         this.getProfile();
         this.successVisibility = true;
-        setTimeout(() => {
-          this.successVisibility = false
-        }, 2000);       
         this.getProfile();        
       },
       error: error => {
@@ -131,9 +135,9 @@ export class UserInfoComponent implements OnInit {
             this.errorMessage='¡Hubo un error al actualizar el perfil!';
           }
           this.showError=true;
-          setTimeout(() => {
-            this.showError = false;
-          }, 3000);
+          // setTimeout(() => {
+          //   this.showError = false;
+          // }, 3000);
       }
     });
   }
@@ -151,6 +155,73 @@ export class UserInfoComponent implements OnInit {
     this.userProfileForm.controls['birthdate'].setValue(profile.birthDate);
     this.userProfileForm.controls['city'].setValue(profile.placeOfBirth);
     this.userProfileForm.controls['country'].setValue(profile.countryOfBirth);
+  }
+
+  private mapTokenToProfile(payload: TokenPayload): any {
+    const pick = (...keys: string[]) => {
+      for (const k of keys) {
+        const v = payload?.[k];
+        if (v !== undefined && v !== null && v !== '') return v;
+      }
+      return '';
+    };
+
+    const rawBirth = pick('birthdate', 'birthDate', 'date_of_birth', 'dob');
+    const birthDate = this.normalizeBirthDate(rawBirth);
+
+    return {
+      givenName: pick('given_name', 'givenName', 'name', 'first_name'),
+      familyName: pick('family_name', 'familyName', 'lastname', 'last_name'),
+      title: pick('title', 'treatment', 'salutation'),
+      maritalStatus: pick('marital_status', 'maritalStatus'),
+      gender: pick('gender'),
+      nationality: pick('nationality'),
+      placeOfBirth: pick('place_of_birth', 'placeOfBirth', 'city'),
+      countryOfBirth: pick('country_of_birth', 'countryOfBirth', 'country'),
+      birthDate,
+    };
+  }
+
+  private normalizeBirthDate(value: any): string {
+    if (!value) return '';
+
+    if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+
+    if (typeof value === 'string') {
+      const d = new Date(value);
+      if (!isNaN(d.getTime())) return d.toISOString().slice(0, 10);
+      return value;
+    }
+
+    if (typeof value === 'number') {
+      const ms = value < 10_000_000_000 ? value * 1000 : value;
+      const d = new Date(ms);
+      return isNaN(d.getTime()) ? '' : d.toISOString().slice(0, 10);
+    }
+
+    return '';
+  }
+
+  private loadFromAccessToken(token: string): void {
+    const payload = this.auth.decodeJwtPayload(token);
+    if (!payload) return;
+
+    const profile = this.mapTokenToProfile(payload);
+    this.loadProfileData(profile);
+  }
+
+  private initBirthdatePicker(): void {
+    const el = document.getElementById('birthdate') as HTMLInputElement | null;
+    if (!el) return;
+
+    if (this.birthdatePicker) {
+      this.birthdatePicker.destroy();
+    }
+
+    this.birthdatePicker = new Datepicker(el, {
+      autohide: true,
+      format: 'yyyy-mm-dd',
+    });
   }
 
 }
