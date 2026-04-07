@@ -339,8 +339,6 @@ export class OfferComponent implements OnInit, OnDestroy{
       });
     }
 
-    console.log(this.offer);
-
     // General Info
     if (this.offer.name || this.offer.description || this.offer.version || this.offer.lifecycleStatus){ 
       this.productOfferForm.patchValue({
@@ -351,8 +349,6 @@ export class OfferComponent implements OnInit, OnDestroy{
           version: this.offer.version || ''
         }
       })
-
-      console.log(this.productOfferForm.get('prodSpec')?.value);
     };
 
     //CATEGORIES
