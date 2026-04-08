@@ -124,14 +124,14 @@
             @if(showSummary){
                 <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'UPDATE_CATEGORIES._finish' | translate }}</h2> -->
                 <div class="">
-                    <div>
+                    <div class="flex flex-col gap-1">
                         <label class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._name' | translate }}</label>
                         <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                             {{categoryToUpdate?.name}}
                         </label>
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-4 flex flex-col gap-1">
                         <label class="font-semibold text-base mr-4 ">{{ 'UPDATE_CATEGORIES._status' | translate }}</label>
                         <app-status-selector [modelType]="'category'" [anchor]="catStatusAnchor" [statuses]="catStatusDraftAsArray" [(ngModel)]="catStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
                     </div>

@@ -12,14 +12,16 @@
         <h2 class="ont-normal text-xl text-primary-100">{{ 'PROFILE._account' | translate }}</h2>
         <div class="flex flex-col gap-10 p-4 lg:py-8 lg:px-4 rounded-xl bg-white">
           <div class="flex flex-col lg:grid lg:grid-cols-2 gap-2">
-              <div>
+              <div class="flex flex-col gap-1">
                   <span class="font-semibold">{{ 'PROFILE._user_id' | translate }}</span>
                   <input type="text" id="username"
                   class="mb-2 bg-gray-0 text-primary-100 border-none text-sm rounded-lg w-full p-2.5 cursor-not-allowed" [value]="profile?.user_identifier" disabled readonly>
+              </div>
+              <div class="flex flex-col gap-1">
                   <span class="font-semibold">{{ 'PROFILE._email' | translate }}</span>
                   <input type="text" id="email" class="mb-2 bg-gray-0 text-primary-100 border-none text-sm rounded-lg w-full p-2.5 cursor-not-allowed" value="{{email}}" disabled readonly>
               </div>
-              <div>
+              <div class="flex flex-col gap-1">
                   <span class="font-semibold">{{ 'PROFILE._token' | translate }}</span>
                   <input type="text" id="token" class="mb-2 bg-gray-0 text-primary-100 border-none text-sm rounded-lg w-full p-2.5 cursor-not-allowed" value="{{token}}" disabled readonly>
               </div>
@@ -29,7 +31,7 @@
             <hr class="h-px bg-primary-100/70 border-0">
             <form class="flex flex-col lg:grid lg:grid-cols-2 gap-2" [formGroup]="userProfileForm">
                 <div class="flex flex-col gap-2">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col gap-1">
                       <label for="user-name" class="font-semibold">{{ 'PROFILE._name' | translate }} <span class="text-red-600">*</span></label>
                       <input formControlName="name" type="text" id="user-name"
                       class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"
@@ -61,7 +63,7 @@
                     </div> -->
                 </div>
                 <div class="flex flex-col gap-2">
-                  <div class="flex flex-col">
+                  <div class="flex flex-col gap-1">
                     <label for="lastname" class="font-semibold">{{ 'PROFILE._lastname' | translate }} <span class="text-red-600">*</span></label>
                     <input type="text" formControlName="lastname" id="lastname"
                     class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2"
@@ -106,7 +108,7 @@
                     class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
                   </div>
                 </div> -->
-                <div class="align-items-bottom align-bottom">
+                <div class="flex flex-col gap-1">
                     <label for="country" class="font-semibold">{{ 'PROFILE._country' | translate }} <span class="text-red-600">*</span></label>
                     <select id="country" formControlName="country"
                     class="cursor-not-allowed bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">

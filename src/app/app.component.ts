@@ -5,6 +5,7 @@ import { LocalStorageService } from './services/local-storage.service';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HeaderComponent } from './shared/header/header.component';
+import { HeaderBannerComponent } from './shared/header/header-banner/header-banner.component';
 import { AuthService } from './guard/auth.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { AuthService } from './guard/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [FooterComponent, RouterOutlet, HeaderComponent]
+  imports: [FooterComponent, RouterOutlet, HeaderComponent, HeaderBannerComponent]
 })
 export class AppComponent implements OnInit {
   title = 'ISBE Catalog';

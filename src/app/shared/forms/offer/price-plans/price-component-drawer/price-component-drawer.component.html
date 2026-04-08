@@ -14,19 +14,19 @@
     <form [formGroup]="priceComponentForm" (ngSubmit)="submitForm()" class="mt-4 space-y-4">
 
       <!-- Nombre -->
-      <div>
+      <div class="flex flex-col gap-1">
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._name' | translate }}</label>
         <input data-cy="priceComponentName" formControlName="name" type="text"
                class="mt-1 w-full p-2 border rounded   ">
       </div>
 
       <!-- Descripción -->
-      <div data-cy="priceComponentDescription">
+      <div data-cy="priceComponentDescription" class="flex flex-col gap-1">
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._description' | translate }}</label>
         <app-markdown-textarea formControlName="description"></app-markdown-textarea>
       </div>
 
-      <div>
+      <div class="flex flex-col gap-1">
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._base_price' | translate }}</label>
 
         <input
@@ -135,7 +135,7 @@
       }
 
       <!-- Tipo de Precio -->
-      <div>
+      <div class="flex flex-col gap-1">
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._type_of_price' | translate }}</label>
         <select data-cy="priceType" formControlName="priceType" class="mt-1 w-full p-2 border rounded   ">
           <option value="one time">{{ 'FORMS.PRICE_PLAN_COMPONENT._one_time' | translate }}</option>
@@ -147,7 +147,7 @@
 
       <!-- Opciones dinámicas según el tipo de precio -->
       @if (priceComponentForm.get('priceType')?.value === 'recurring' || priceComponentForm.get('priceType')?.value === 'recurring-prepaid') {
-        <div>
+        <div class="flex flex-col gap-1">
           <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT.recurring_period' | translate }}</label>
           <select data-cy="recurringType" formControlName="recurringPeriod" class="w-full p-2 border rounded   ">
             <option value="day">{{ 'FORMS.PRICE_PLAN_COMPONENT._daily' | translate }}</option>

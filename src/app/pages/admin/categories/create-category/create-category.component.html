@@ -38,13 +38,16 @@
     <div class="mt-8">
             @if(showGeneral){
                     <form [formGroup]="generalForm">
+                      <div class="flex flex-col gap-1">
                         <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
                         class="mb-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full md:w-1/2 p-2.5" />
-
+                      </div>
+                      <div class="flex flex-col gap-1">
                         <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._description' | translate }}</label>
                         <app-markdown-textarea formControlName="description"></app-markdown-textarea>
+                      </div>
                         <label class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._choose_parent' | translate }}</label>
                         <label class="inline-flex items-center me-5 cursor-pointer ml-4">
                             <input type="checkbox" (change)="toggleParent()" [checked]="parentSelectionCheck" class="sr-only peer">
@@ -121,14 +124,14 @@
             @if(showSummary){
                 <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_CATEGORIES._finish' | translate }}</h2> -->
                 <div class="">
-                    <div>
+                    <div class="flex flex-col gap-1">
                         <label class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._name' | translate }}</label>
                         <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                             {{categoryToCreate?.name}}
                         </label>
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-4 flex flex-col gap-1">
                         <label class="font-semibold text-base mr-4 ">{{ 'CREATE_CATEGORIES._status' | translate }}</label>
                         <app-status-selector [modelType]="'category'" [statuses]="catStatusAsArray" [anchor]="catStatusAsArray[0]" [ngModel]="categoryToCreate?.lifecycleStatus" [ngModelOptions]="{ standalone: true }"></app-status-selector>
                     </div>

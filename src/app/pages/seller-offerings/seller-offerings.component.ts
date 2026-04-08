@@ -15,7 +15,6 @@ import { ErrorMessageComponent } from 'src/app/shared/error-message/error-messag
 import { combineLatest, Subject, take, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/guard/auth.service';
 import { environment } from 'src/environments/environment';
-import { HeaderBannerComponent } from 'src/app/shared/header/header-banner/header-banner.component';
 import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-menu/private-area-menu.component';
 import { Router } from '@angular/router';
 import { MenuStateService } from 'src/app/services/menu-state.service';
@@ -27,7 +26,7 @@ import { AccountServiceService } from 'src/app/services/account-service.service'
   styleUrl: './seller-offerings.component.css',
   standalone: true,
   imports: [
-    HeaderBannerComponent, FeedbackModalComponent,
+    FeedbackModalComponent,
     UpdateCatalogComponent, UpdateOfferComponent, UpdateProductSpecComponent,
     CreateCatalogComponent, CreateOfferComponent, CreateProductSpecComponent,
     SellerOfferComponent, SellerProductSpecComponent, SellerCatalogsComponent,

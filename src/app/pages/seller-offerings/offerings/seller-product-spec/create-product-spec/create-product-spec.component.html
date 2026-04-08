@@ -45,11 +45,13 @@
         <div class="flex flex-col gap-2 mt-8">
                 @if(showGeneral){
                     <form class="md:grid md:grid-cols-2 gap-2" [formGroup]="generalForm">
-                        <div>
+                        <div class="flex flex-col gap-1">
                             <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }} <span clasS="text-red-500">*</span></label>
                             <input formControlName="name" type="text" id="name" maxLength="100" placeholder="{{ 'CREATE_PROD_SPEC._product_name' | translate }}"
                             [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
                             class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                        </div>
+                        <div class="flex flex-col gap-1">
                             <div class="flex flex-row gap-2">
                               <label for="prod-version" class="font-semibold text-base flex flex-row gap-1">{{ 'CREATE_PROD_SPEC._product_version' | translate }}  <span clasS="text-red-500">*</span></label>
                               <info-icon [tooltipText]="'CREATE_PROD_SPEC._product_version_tooltip' | translate"></info-icon>
@@ -57,18 +59,18 @@
                             <input formControlName="version" type="text" id="prod-version"
                             [ngClass]="generalForm.get('version')?.invalid ? 'border-red-600' : (generalForm.value.version ? 'border-primary-100' : 'border-gray-300')"
                             class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
-
                         </div>
-                        <div>
+                        <div class="flex flex-col gap-1">
                             <label for="prod-brand" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}  <span clasS="text-red-500">*</span></label>
                             <input formControlName="brand" type="text" id="prod-brand" placeholder="{{ 'CREATE_PROD_SPEC._product_brand' | translate }}"
                             [ngClass]="generalForm.get('brand')?.invalid && generalForm.value.brand!='' ? 'border-red-600' : (generalForm.value.brand ? 'border-primary-100' : 'border-gray-300')"
                             class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                        </div>
+                        <div class="flex flex-col gap-1">
                             <label for="prod-number" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._id_number' | translate }}</label>
                             <input formControlName="number" type="text" id="prod-number" placeholder="{{ 'CREATE_PROD_SPEC._id_number_placeholder' | translate }}"
                             [ngClass]="generalForm.get('number')?.invalid && generalForm.value.number!='' ? 'border-red-600' : (generalForm.value.number ? 'border-primary-100' : 'border-gray-300')"
                             class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
-
                         </div>
                         <label for="prod-name" class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
                         <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>
@@ -486,13 +488,13 @@
                         </div>
                     } @else {
                         <form class=" grid grid-cols-2 gap-2" [formGroup]="charsForm">
-                            <div>
-                                <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }} <span class="text-red-500">*</span></label>
+                            <div class="flex flex-col gap-1">
+                                <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._chars_name' | translate }} <span class="text-red-500">*</span></label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
                                 class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
 
                             </div>
-                            <div>
+                            <div class="flex flex-col gap-1">
                               <div class="flex flex-row gap-2">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._type' | translate }} <span class="text-red-500">*</span></label>
                                 <info-icon [tooltipText]="'CREATE_PROD_SPEC._type_tooltip' | translate"></info-icon>
@@ -504,13 +506,13 @@
                                     <option value="range">{{ 'CREATE_PROD_SPEC._type_range' | translate }}</option>
                                 </select>
                             </div>
-                            <div class="col-span-2">
+                            <div class="col-span-2 flex flex-col gap-1">
                                 <label for="description" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
                                 <textarea id="description" formControlName="description" rows="4"
                                 class="mb-2 min-h-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
                             </div>
                         </form>
-                        <div class="">
+                        <div class="flex flex-col gap-1">
                             @if(creatingChars.length>0){
                                 <div class="flex flex-row gap-2">
                                   <label for="values" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._values' | translate }} <span class="text-red-500">*</span></label>
@@ -997,7 +999,7 @@
                     <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
                         <div class="mb-4 md:grid md:grid-cols-2 gap-2">
-                            <div>
+                            <div class="flex flex-col gap-1">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToCreate?.name}}
@@ -1011,7 +1013,7 @@
                                     {{productSpecToCreate?.version}}
                                 </label>
                             </div>
-                            <div>
+                            <div class="flex flex-col gap-1">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
                                     {{productSpecToCreate?.brand}}
@@ -1025,7 +1027,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-4 flex flex-col gap-1">
                             <label class="font-semibold text-base mr-4 ">{{ 'CREATE_PROD_SPEC._status' | translate }}</label>
                             <app-status-selector [modelType]="'spec'" [anchor]="'in_design'" [statuses]="['in_design']" [(ngModel)]="productSpecToCreate!.lifecycleStatus" [ngModelOptions]="{ standalone: true }" [disabled]="true"></app-status-selector>
                         </div>

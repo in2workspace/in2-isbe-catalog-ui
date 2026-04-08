@@ -18,7 +18,7 @@
     <form [formGroup]="contactForm" class="relative -top-20 items-center mx-auto max-w-screen-xl w-full items-center bg-secondary-50  rounded-lg shadow-lg p-8">
         <h2 class="text-left text-2xl mb-2 font-semibold">{{ 'CONTACTUS._fill' | translate }}</h2>
         <div class="grid grid-cols-3 gap-2">
-            <div>
+            <div class="flex flex-col gap-1">
                 <label for="email" class="font-semibold text-lg ">{{ 'CONTACTUS._email' | translate }}</label>
                 <input formControlName="email" type="text" id="email"
                 [ngClass]="contactForm.get('email')?.touched && contactForm.get('email')?.invalid
@@ -35,7 +35,7 @@
                     <p class="text-sm text-red-600 "><span class="font-medium">{{ 'CONTACTUS._mandatory' | translate }}</span></p>
                 }
             </div>
-            <div>
+            <div class="flex flex-col gap-1">
                 <label for="name" class="font-semibold text-lg ">{{ 'CONTACTUS._firstname' | translate }}</label>
                 <input formControlName="name" type="text" id="name"
                 [ngClass]="contactForm.get('name')?.touched && contactForm.get('name')?.invalid
@@ -49,7 +49,7 @@
                     <p class="text-sm text-red-600 "><span class="font-medium">{{ 'CONTACTUS._mandatory' | translate }}</span></p>
                 }
             </div>
-            <div>
+            <div class="flex flex-col gap-1">
                 <label for="lastname" class="font-semibold text-lg ">{{ 'CONTACTUS._lastname' | translate }}</label>
                 <input formControlName="lastname" type="text" id="lastname"
                 [ngClass]="contactForm.get('lastname')?.touched && contactForm.get('lastname')?.invalid
@@ -65,7 +65,7 @@
             </div>
         </div>
         <div class="grid grid-cols-2 gap-2">
-            <div>
+            <div class="flex flex-col gap-1">
                 <label for="organization" class="font-semibold text-lg ">{{ 'CONTACTUS._organization' | translate }}</label>
                 <input formControlName="organization" type="text" id="organization"
                 [ngClass]="contactForm.get('organization')?.touched && contactForm.get('organization')?.invalid
@@ -79,7 +79,7 @@
                     <p class="text-sm text-red-600 "><span class="font-medium">{{ 'CONTACTUS._fieldlong' | translate }}</span></p>
                 }
             </div>
-            <div>
+            <div class="flex flex-col gap-1">
                 <label for="role" class="font-semibold text-lg ">{{ 'CONTACTUS._role' | translate }}</label>
                 <input formControlName="role" type="text" id="role"
                 [ngClass]="contactForm.get('role')?.touched && contactForm.get('role')?.invalid
@@ -94,7 +94,7 @@
                 }
             </div>
         </div>
-        <div>
+        <div class="flex flex-col gap-1">
             <label for="organization" class="font-semibold text-lg ">{{ 'CONTACTUS._message' | translate }}</label>
             <textarea id="editor" formControlName="message" rows="8"
             [ngClass]="contactForm.get('message')?.touched && contactForm.get('message')?.invalid
