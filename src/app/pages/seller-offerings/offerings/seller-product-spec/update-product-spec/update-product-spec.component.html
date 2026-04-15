@@ -39,31 +39,31 @@
         <div class="flex flex-col gap-2 mt-8">
                 @if(showGeneral){
                     <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2> -->
-                    <form class="md:grid md:grid-cols-2 gap-2" [formGroup]="generalForm">
-                        <div class="flex flex-col gap-1">
+                    <form class="md:grid md:grid-cols-2 gap-[18px]" [formGroup]="generalForm">
+                        <div class="flex flex-col gap-2">
                             <label for="prod-sepec-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                             <input formControlName="name" type="text" id="prod-sepec-name" maxLength="100"
                             [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-2">
                             <div class="flex flex-row items-center gap-2">
                               <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
                               <info-icon [tooltipText]="'CREATE_OFFER._version_tooltip' | translate"></info-icon>
                             </div>
                             <input formControlName="version" type="text" id="prod-version"
                             [ngClass]="generalForm.get('version')?.invalid ? 'border-red-600' : (generalForm.value.version ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-2">
                             <label for="prod-brand" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
                             <input formControlName="brand" type="text" id="prod-brand"
                             [ngClass]="generalForm.get('brand')?.invalid && generalForm.value.brand!='' ? 'border-red-600' : (generalForm.value.brand ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-2">
                             <label for="prod-number" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
-                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
                         <app-status-selector class="col-span-2" [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
@@ -487,29 +487,29 @@
                             </button>
                         </div>
                     } @else {
-                        <form class=" grid grid-cols-2 gap-2" [formGroup]="charsForm">
-                            <div class="flex flex-col gap-1">
+                        <form class=" grid grid-cols-2 gap-[18px]" [formGroup]="charsForm">
+                            <div class="flex flex-col gap-2">
                                 <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 
                             </div>
-                            <div class="flex flex-col gap-1">
+                            <div class="flex flex-col gap-2">
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._type' | translate }}</label>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                                     <option selected value="string">String</option>
                                     <option value="number">Number</option>
                                     <option value="range">Number range</option>
                                 </select>
                             </div>
-                            <div class="col-span-2 flex flex-col gap-1">
+                            <div class="col-span-2 flex flex-col gap-2">
                                 <label for="description" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                                 <textarea id="description" formControlName="description" rows="4"
                                 class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
                             </div>
                         </form>
-                        <div class="flex flex-col gap-1 m-4">
+                        <div class="flex flex-col gap-2 m-4">
                             @if(creatingChars.length>0){
                                 <label for="values" class="font-semibold text-base ">Values</label>
                                 <div class="flex flex-col items-start pl-4  shadow-md sm:rounded-lg w-full bg-white border border-gray-300 mb-2">
@@ -554,7 +554,7 @@
                             @if(stringCharSelected){
                                 <div class="flex flex-row items-center align-items-middle">
                                     <input type="text" id="string-value" [(ngModel)]="stringValue"
-                                    class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"/>
+                                    class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]"/>
                                     <button (click)="addCharValue()" [disabled]="!stringValue" [ngClass]="!stringValue ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" 
                                     class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50font-medium rounded-full text-sm mt-4 p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -569,14 +569,14 @@
                                             {{ 'UPDATE_PROD_SPEC._value' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="number-value" [(ngModel)]="numberValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="unit-value" [(ngModel)]="numberUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
 
                                     <button (click)="addCharValue()" [disabled]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit" [ngClass]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button"
@@ -593,21 +593,21 @@
                                             {{ 'UPDATE_PROD_SPEC._from' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="from-value" [(ngModel)]="fromValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._to' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="to-value" [(ngModel)]="toValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="range-value" [(ngModel)]="rangeUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <button (click)="addCharValue()" [disabled]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit" [ngClass]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  type="button"
                                     class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 font-medium rounded-full text-sm mt-4 p-1 text-center inline-flex items-center">
@@ -707,7 +707,7 @@
                                 <input #imgURL type="text" id="att-name"
                                     [formControl]="attImageName"
                                     (blur)="attImageName.markAsTouched()"
-                                    class="w-full bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 p-2.5"
+                                    class="w-full bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 p-2.5 leading-[1.75]"
                                     [ngClass]="attImageName.invalid && attImageName.touched ? 'border-red-500' : ''"
                                 />
 
@@ -736,11 +736,11 @@
                         } @else {
                             <div class="m-4 w-full">
                                 <div class="lg:flex lg:grid lg:grid-cols-2 w-full gap-2 align-items-middle align-middle border border-gray-200 rounded-lg p-4">
-                                    <div class="h-fit flex flex-col gap-1">
+                                    <div class="h-fit flex flex-col gap-2">
                                         <label for="att-file--name" class="font-semibold text-base ">{{ 'PROFILE._name' | translate }}</label>
                                         <input #attachName type="text" id="att-file-name" [formControl]="attFileName"
                                         [ngClass]="attFileName.invalid == true ? 'border-red-600' : 'border-gray-300'"
-                                        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
+                                        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]" />
                                     </div>
                                     @if(attachToCreate.url==''){
                                         <ngx-file-drop class="p-4 w-full" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event,'attach')" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
@@ -861,7 +861,7 @@
                         } @else {
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}</label>
                             <select id="rel-type" (change)="onRelChange($event)"
-                            class="shadow bg-white border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                            class="shadow bg-white border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
                                 <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>
@@ -970,8 +970,8 @@
                 @if(showSummary){
                     <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
-                        <div class="mb-4 md:grid md:grid-cols-2 gap-2">
-                            <div class="flex flex-col gap-1">
+                        <div class="mb-4 md:grid md:grid-cols-2 gap-[18px]">
+                            <div class="flex flex-col gap-2">
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.name}}
@@ -984,7 +984,7 @@
                                     {{productSpecToUpdate?.version}}
                                 </label>
                             </div>
-                            <div class="flex flex-col gap-1">
+                            <div class="flex flex-col gap-2">
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
                                     {{productSpecToUpdate?.brand}}
@@ -998,7 +998,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 flex flex-col gap-1">
+                        <div class="mb-4 flex flex-col gap-2">
                             <label class="font-semibold text-base">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
                             <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [statuses]="[prodStatusAnchor]" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }" [disabled]="true"></app-status-selector>
                         </div>

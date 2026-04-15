@@ -83,7 +83,7 @@
           <fa-icon [icon]="faSparkles" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_type' | translate }}</h2>
         </div>
-        <select id="type" (change)="onTypeChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+        <select id="type" (change)="onTypeChange($event)" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
           <option selected>{{ 'OFFERINGS._filter_type' | translate }}</option>
           <option value="all">{{ 'OFFERINGS._all' | translate }}</option>
           <option value="simple">{{ 'OFFERINGS._simple' | translate }}</option>
@@ -96,7 +96,7 @@
           <fa-icon [icon]="faSort" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._order_by' | translate }}</h2>
         </div>
-        <select id="sort" (change)="onSortChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+        <select id="sort" (change)="onSortChange($event)" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
           <option selected>{{ 'OFFERINGS._order_by' | translate }}</option>
           <option value="update">{{ 'OFFERINGS._last_update' | translate }}</option>
           <option value="name">{{ 'OFFERINGS._name' | translate }}</option>

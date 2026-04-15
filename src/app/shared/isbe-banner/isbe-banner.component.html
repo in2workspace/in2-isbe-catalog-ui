@@ -1,0 +1,23 @@
+<section>
+  <div
+    [class]="(variant === 'green' ? 'bg-green' : 'banner__background_gradient bg-white') + ' bg-cover rounded-3xl p-8 md:px-16 md:py-14 flex flex-col md:flex-row justify-between gap-8'">
+    <div class="flex flex-col gap-8">
+      <h3 class="text-2xl md:text-3xl font-heading font-semibold max-w-sm">{{ titleKey | translate }}</h3>
+      <p class="max-w-md">{{ descKey | translate }}</p>
+      <button type="button" (click)="openWindow(isbeAbout)"
+        class="w-fit text-left px-5 py-2.5 pr-10 hover:pr-[60px] relative rounded-full border uppercase tracking-tight text-sm font-semibold transition-all duration-300 cursor-pointer group/button bg-black border-black text-white">
+        <span>{{ 'ABOUT._visit_isbe' | translate }}</span>
+        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 transition-opacity duration-300 group-hover/button:opacity-0 right-5" aria-hidden="true">
+          <path d="M9.63574 2.56185L1.06066 11.1369L0 10.0763L8.57508 1.50119L0.519371 1.50119L0.53033 0H11.1369V10.6066L9.63574 10.6176V2.56185Z" fill="currentColor"/>
+        </svg>
+        <svg viewBox="0 0 40 15" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute top-1/2 -translate-y-1/2 w-[30px] h-auto opacity-0 transition-opacity duration-300 group-hover/button:opacity-100 right-5" aria-hidden="true">
+          <path d="M37.127 8.25H0V6.75H37.127L31.4307 1.05375L32.5 0L40 7.5L32.5 15L31.4307 13.9462L37.127 8.25Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+
+    <picture class="rounded-3xl overflow-hidden max-w-md bg-gray-25">
+      <img class="size-full object-cover" src="/assets/images/ISBE_fondo.webp" alt="" />
+    </picture>
+  </div>
+</section>

@@ -9,7 +9,7 @@
                     <label for="verif-id" class="font-semibold text-lg ">{{ 'ADMIN._productId' | translate }}</label>
                     <input formControlName="productId" type="text" id="verif-id"
                             [ngClass]="verificationForm.get('productId')?.invalid == true && verificationForm.value.productId != '' ? 'border-red-600' : 'border-gray-300'"
-                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 
                     <label for="vc" class="font-semibold text-lg ">{{ 'ADMIN._vc' | translate }}</label>
                     <textarea formControlName="vc" rows="8" class="block w-full min-h-fit px-0 text-sm text-gray-800  bg-white  border-0" placeholder="Add credential..." ></textarea>

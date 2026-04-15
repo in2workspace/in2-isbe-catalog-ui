@@ -20,7 +20,9 @@
         "_view_serv": "View services",
         "_close_menu": "Close menu",
         "_all_catalogs": "All catalogues",
-        "_categories_single": "Categories"
+        "_categories_single": "Categories",
+        "_banner_title": "Connect these services with the infrastructure that makes them possible",
+        "_banner_desc": "Discover how ISBE drives the national adoption of legally valid blockchain services."
     },
     "FEATURED": {
         "_title": "Featured offerings",
@@ -1648,7 +1650,7 @@
     "_banner_desc": "Discover how ISBE drives the national adoption of legally valid blockchain services."
   },
   "ABOUT": {
-    "_visit_isbe":"VISIT ISBE",
+    "_visit_isbe":"Visit ISBE",
     "_title": "ISBE Commercial Services Catalog",
     "_subtitle": "The meeting point for solutions operating on the ISBE Network."
   }

@@ -42,7 +42,7 @@
                         <label for="prod-name" class="font-semibold text-lg ">{{ 'CREATE_CATALOG._name' | translate }}</label>
                         <input data-cy="catalogName" formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
-                        class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                        class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 
 
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_CATALOG._description' | translate }}</label>
@@ -62,14 +62,14 @@
             @if(showSummary){
                 <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_CATALOG._finish' | translate }}</h2>
                 <div class="">
-                    <div class="flex flex-col gap-1">
+                    <div class="flex flex-col gap-2">
                         <label class="font-semibold text-lg ">{{ 'CREATE_CATALOG._name' | translate }}</label>
                         <label class="mb-2 bg-white text-wrap break-all  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                             {{catalogToCreate?.name}}
                         </label>
                     </div>
 
-                    <div class="mb-4 flex flex-col gap-1">
+                    <div class="mb-4 flex flex-col gap-2">
                         <label class="font-semibold text-lg mr-4 ">{{ 'CREATE_CATALOG._status' | translate }}</label>
                         @if(catalogToCreate?.lifecycleStatus == 'In design'){
                             <div class="w-fit flex gap-1 items-center bg-secondary-300/30 text-xs font-medium px-2 py-0.5 rounded-md"><span class="w-1.5 h-1.5 rounded-full bg-secondary-300"></span>{{ 'ADMIN._in_design' | translate }}</div>

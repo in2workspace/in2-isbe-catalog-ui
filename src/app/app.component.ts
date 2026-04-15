@@ -18,6 +18,7 @@ import { AuthService } from './guard/auth.service';
 export class AppComponent implements OnInit {
   title = 'ISBE Catalog';
   showPanel = false;
+  currentUrl = '';
 
   constructor(
     private readonly translate: TranslateService,
@@ -36,6 +37,10 @@ export class AppComponent implements OnInit {
     }
   }
 
+  get showFooterGradient(): boolean {
+    return ['/about', '/publish'].some(route => this.currentUrl.startsWith(route));
+  }
+
   ngOnInit(): void {
     initFlowbite();
     this.auth.checkAuth().subscribe();
@@ -48,6 +53,7 @@ export class AppComponent implements OnInit {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
+        this.currentUrl = event.urlAfterRedirects;
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });

@@ -3,7 +3,7 @@
   "_no": "No",
   "DASHBOARD": {
     "_title": "¡ISBE Catalog ya está aquí! Descubre las novedades",
-    "_header": "Catálogo de servicios comerciales ISBE",
+    "_header": "Catálogo de Servicios Comerciales ISBE",
     "_subheader": "Encuentra los servicios que necesitas para tu caso de uso aquí",
     "_new": "Nuevo",
     "_learn_more": "Más información",
@@ -20,7 +20,9 @@
     "_view_serv": "Ver servicios",
     "_close_menu": "Cerrar menú",
     "_all_catalogs": "Todos los catálogos",
-    "_categories_single": "Categorías"
+    "_categories_single": "Categorías",
+    "_banner_title": "Conecta estos servicios con la infraestructura que los hace posibles",
+    "_banner_desc": "Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal."
   },
   "FEATURED": {
     "_title": "Ofertas destacadas",
@@ -1647,7 +1649,7 @@
     "_banner_desc": "Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal."
   },
   "ABOUT": {
-    "_visit_isbe":"VISIT ISBE",
+    "_visit_isbe":"Visita ISBE",
     "_title": "Catálogo de Servicios Comerciales de ISBE",
     "_subtitle": "El punto de encuentro para las soluciones que operan sobre la Red ISBE."
   }

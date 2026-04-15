@@ -22,7 +22,7 @@
     </div>
 
     @if(characteristics.length>0){
-      <div class="grid grid-cols-2 gap-2">
+      <div class="grid grid-cols-2 gap-[18px]">
         @for(char of characteristics.controls; track $index){
           <div class="min-h-19 pb-2">
             <h5 class="text-xl font-semibold tracking-tight text-primary-100">{{char.value.name}}:</h5>
@@ -43,7 +43,7 @@
             }@else{
               <!-- Dropdown Selector -->
               <select *ngIf="!char.value.options?.[0]?.valueFrom"
-                      class="mb-2 bg-gray-50  border text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 "
+                      class="mb-2 bg-gray-50  border text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]"
                       (change)="changeProfileValue($index, $event)">
                 <option *ngFor="let opt of char.value.options" [value]="opt.value" [selected]="opt.isDefault">
                   {{ opt.value }} <span *ngIf="opt.unitOfMeasure">({{ opt.unitOfMeasure }})</span>

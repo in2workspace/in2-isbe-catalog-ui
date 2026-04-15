@@ -3,7 +3,7 @@
   <div class="px-8 md:px-0 py-8 md:py-16 max-w-5xl">
     <!-- breadcrumbs -->
     <button (click)="goTo('/dashboard')"
-      class="flex items-center gap-2 text-xs text-white bg-primary-100 py-0.5 px-2 rounded-lg">
+      class="flex items-center gap-2 text-xs text-white bg-primary-100 py-1 px-2 rounded-lg">
       <svg width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g clip-path="url(#clip0_299_20420)">
           <path
@@ -34,7 +34,7 @@
       </div>
 
       <div class="flex justify-end container mx-auto md:px-16">
-        <div class="md:w-2/3 flex flex-col gap-8">
+        <div class="md:w-2/3 flex flex-col gap-16">
 
           <!-- Small Banner -->
           <div class="w-full flex flex-col gap-7 py-6 px-7 banner__background_gradient rounded-3xl">
@@ -47,16 +47,16 @@
                 </svg>
               </div>
 
-              <p class="font-normal text-xl">{{ 'ABOUT_PAGE_ISBE._coming_soon_desc' | translate }}</p>
+              <p class="font-normal leading-normal text-xl">{{ 'ABOUT_PAGE_ISBE._coming_soon_desc' | translate }}</p>
             </div>
           </div>
 
-          <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE._what_is_title' | translate }}</h2>
-
-          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_1' | translate }}</p>
-          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_2' | translate }}</p>
-          <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_3' | translate }}</p>
-        </div>
+          <div class="flex flex-col gap-8 pb-16">
+            <!-- <h2 class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE._what_is_title' | translate }}</h2> -->
+            <p class="font-heading font-semibold text-2xl md:text-3xl">{{ 'ABOUT_PAGE_ISBE._what_is_desc_1' | translate }}</p>
+            <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_2' | translate }}</p>
+            <p>{{ 'ABOUT_PAGE_ISBE._what_is_desc_3' | translate }}</p>
+          </div>
       </div>
     </div>
   </div>
@@ -192,29 +192,10 @@
   </ul>
 
   <!-- BANNER COMPONENT -->
-  <section class="px-8 md:px-0 my-8">
-    <div
-      class="banner__background_gradient bg-cover rounded-3xl p-8 md:px-16 md:py-14 bg-white flex flex-col md:flex-row justify-between gap-8">
-      <div class="flex flex-col gap-8">
-        <h3 class="text-2xl md:text-3xl font-heading font-semibold max-w-sm">{{ 'ABOUT_PAGE_ISBE._banner_title' | translate }}</h3>
-        <p class="max-w-md">{{ 'ABOUT_PAGE_ISBE._banner_desc' | translate }}</p>
-        <button type="button" (click)="openWindow(isbeAbout)"
-          class="w-fit flex gap-2 items-center justify-start text-white bg-black font-medium rounded-full text-sm uppercase px-5 py-2.5 text-center me-2">
-          {{ 'ABOUT._visit_isbe' | translate }}
-          <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-          </svg>
-        </button>
-      </div>
-
-      <picture class="rounded-3xl overflow-hidden max-w-md bg-gray-25">
-        <img class="size-full object-cover" src="/assets/images/ISBE_fondo.webp" alt="" />
-      </picture>
-
-    </div>
-  </section>
-
-  <div class="green-footer-gradient absolute bottom-0 left-0 w-full h-[800px] scale-150 bg-center -z-[1]"></div>
-
+  <app-isbe-banner
+    class="px-8 md:px-0 my-8 block"
+    titleKey="ABOUT_PAGE_ISBE._banner_title"
+    descKey="ABOUT_PAGE_ISBE._banner_desc">
+  </app-isbe-banner>
 
 </div>

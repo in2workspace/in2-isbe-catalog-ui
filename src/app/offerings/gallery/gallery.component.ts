@@ -26,6 +26,17 @@ import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-m
 })
 export class GalleryComponent implements OnInit {
 
+  // TODO: remove mock mode once real products are loading again
+  MOCK_MODE: boolean = true;
+  MOCK_PRODUCTS: ProductOffering[] = [
+    { id: '1', name: 'Mock Product Alpha', description: 'A sample data service for layout testing purposes.', category: [{ id: 'c1', name: 'Data' }], attachment: [], productOfferingPrice: [{ name: 'Free tier', priceType: 'free' }] },
+    { id: '2', name: 'Mock Product Beta', description: 'An AI-powered analytics offering for layout testing.', category: [{ id: 'c2', name: 'AI & Analytics' }], attachment: [], productOfferingPrice: [{ name: 'Monthly', priceType: 'recurring', price: { value: 99, unit: 'EUR' } }] },
+    { id: '3', name: 'Mock Product Gamma', description: 'Cloud infrastructure service for layout testing.', category: [{ id: 'c3', name: 'Infrastructure' }], attachment: [], productOfferingPrice: [{ name: 'Pay per use', priceType: 'usage' }] },
+    { id: '4', name: 'Mock Product Delta', description: 'Security and compliance tool for layout testing.', category: [{ id: 'c4', name: 'Security' }], attachment: [], productOfferingPrice: [{ name: 'Enterprise', priceType: 'recurring', price: { value: 499, unit: 'EUR' } }] },
+    { id: '5', name: 'Mock Product Epsilon', description: 'IoT connectivity platform for layout testing.', category: [{ id: 'c5', name: 'IoT' }], attachment: [], productOfferingPrice: [{ name: 'Starter', priceType: 'recurring', price: { value: 29, unit: 'EUR' } }] },
+    { id: '6', name: 'Mock Product Zeta', description: 'Developer tools and APIs for layout testing.', category: [{ id: 'c6', name: 'Developer Tools' }], attachment: [], productOfferingPrice: [{ name: 'Free', priceType: 'free' }] },
+  ];
+
   products: ProductOffering[]=[];
   nextProducts: ProductOffering[]=[];
   loading: boolean = false;
@@ -72,13 +83,17 @@ export class GalleryComponent implements OnInit {
       this.keywords = keywords;
       this.searchField.setValue(this.keywords);
     }
-    await this.getProducts(false);
+    if (this.MOCK_MODE) {
+      this.products = this.MOCK_PRODUCTS;
+    } else {
+      await this.getProducts(false);
 
-    this.eventMessage.messages$.subscribe(ev => {
-      if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
-        this.getProducts(false);
-      }
-    })
+      this.eventMessage.messages$.subscribe(ev => {
+        if(ev.type === 'AddedFilter' || ev.type === 'RemovedFilter') {
+          this.getProducts(false);
+        }
+      })
+    }
 
     let input = document.querySelector('[type=search]')
     if(input!=undefined){

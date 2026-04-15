@@ -1,5 +1,5 @@
 <footer class="w-full py-6 px-4 md:p-7 bg-black md:flex md:items-center md:justify-end">
-  <div class="flex flex-col gap-6 md:gap-12 w-full">
+  <div class="max-w-[1800px] mx-auto flex flex-col gap-6 md:gap-12 w-full">
     <!-- Social Links -->
     <!-- TODO: Removed this a per design -->
     <!-- <div class="flex justify-start text-gray-500">
@@ -41,13 +41,13 @@
             </li>
           }
           <li>
-            <a target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._privacy' | translate }}</a>
+            <a [href]="legalLinks.privacy" target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._privacy' | translate }}</a>
           </li>
           <li>
-            <a target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._cookies' | translate }}</a>
+            <a [href]="legalLinks.cookies" target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._cookies' | translate }}</a>
           </li>
           <li>
-            <a target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._licensing' | translate }}</a>
+            <a [href]="legalLinks.licensing" target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._licensing' | translate }}</a>
           </li>
           @if(!IS_ISBE){
             <li>

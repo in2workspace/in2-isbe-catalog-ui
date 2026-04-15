@@ -44,33 +44,33 @@
         <hr class="h-px bg-gray-0 border-0">
         <div class="flex flex-col gap-2 mt-8">
                 @if(showGeneral){
-                    <form class="md:grid md:grid-cols-2 gap-2" [formGroup]="generalForm">
-                        <div class="flex flex-col gap-1">
+                    <form class="md:grid md:grid-cols-2 gap-[18px]" [formGroup]="generalForm">
+                        <div class="flex flex-col gap-2">
                             <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }} <span clasS="text-red-500">*</span></label>
                             <input formControlName="name" type="text" id="name" maxLength="100" placeholder="{{ 'CREATE_PROD_SPEC._product_name' | translate }}"
                             [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-2">
                             <div class="flex flex-row gap-2">
                               <label for="prod-version" class="font-semibold text-base flex flex-row gap-1">{{ 'CREATE_PROD_SPEC._product_version' | translate }}  <span clasS="text-red-500">*</span></label>
                               <info-icon [tooltipText]="'CREATE_PROD_SPEC._product_version_tooltip' | translate"></info-icon>
                             </div>
                             <input formControlName="version" type="text" id="prod-version"
                             [ngClass]="generalForm.get('version')?.invalid ? 'border-red-600' : (generalForm.value.version ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-2">
                             <label for="prod-brand" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}  <span clasS="text-red-500">*</span></label>
                             <input formControlName="brand" type="text" id="prod-brand" placeholder="{{ 'CREATE_PROD_SPEC._product_brand' | translate }}"
                             [ngClass]="generalForm.get('brand')?.invalid && generalForm.value.brand!='' ? 'border-red-600' : (generalForm.value.brand ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-2">
                             <label for="prod-number" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._id_number' | translate }}</label>
                             <input formControlName="number" type="text" id="prod-number" placeholder="{{ 'CREATE_PROD_SPEC._id_number_placeholder' | translate }}"
                             [ngClass]="generalForm.get('number')?.invalid && generalForm.value.number!='' ? 'border-red-600' : (generalForm.value.number ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
                         <label for="prod-name" class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
                         <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>
@@ -487,32 +487,32 @@
                             </button>
                         </div>
                     } @else {
-                        <form class=" grid grid-cols-2 gap-2" [formGroup]="charsForm">
-                            <div class="flex flex-col gap-1">
+                        <form class=" grid grid-cols-2 gap-[18px]" [formGroup]="charsForm">
+                            <div class="flex flex-col gap-2">
                                 <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._chars_name' | translate }} <span class="text-red-500">*</span></label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                                class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 
                             </div>
-                            <div class="flex flex-col gap-1">
+                            <div class="flex flex-col gap-2">
                               <div class="flex flex-row gap-2">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._type' | translate }} <span class="text-red-500">*</span></label>
                                 <info-icon [tooltipText]="'CREATE_PROD_SPEC._type_tooltip' | translate"></info-icon>
                               </div>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                                class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                                     <option selected value="string">{{ 'CREATE_PROD_SPEC._type_string' | translate }}</option>
                                     <option value="number">{{ 'CREATE_PROD_SPEC._type_number' | translate }}</option>
                                     <option value="range">{{ 'CREATE_PROD_SPEC._type_range' | translate }}</option>
                                 </select>
                             </div>
-                            <div class="col-span-2 flex flex-col gap-1">
+                            <div class="col-span-2 flex flex-col gap-2">
                                 <label for="description" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
                                 <textarea id="description" formControlName="description" rows="4"
                                 class="mb-2 min-h-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
                             </div>
                         </form>
-                        <div class="flex flex-col gap-1">
+                        <div class="flex flex-col gap-2">
                             @if(creatingChars.length>0){
                                 <div class="flex flex-row gap-2">
                                   <label for="values" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._values' | translate }} <span class="text-red-500">*</span></label>
@@ -565,7 +565,7 @@
                                         <input type="text" id="value" [(ngModel)]="stringValue"
                                             (focus)="showStringSuggestions = true"
                                             (blur)="showStringSuggestions = false"
-                                            class="w-full bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block p-2.5" />
+                                            class="w-full bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block p-2.5 leading-[1.75]" />
                                         @if(showStringSuggestions && stringSuggestions.length > 0) {
                                             <ul class="absolute z-10 w-full bg-white border border-black rounded-lg mt-1 max-h-48 overflow-y-auto">
                                                 @for(suggestion of stringSuggestions; track suggestion) {
@@ -590,14 +590,14 @@
                                             {{ 'CREATE_PROD_SPEC._value' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="value" [(ngModel)]="numberValue"
-                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'CREATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="value" [(ngModel)]="numberUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
 
                                     <button (click)="addCharValue()" [disabled]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit" [ngClass]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
@@ -613,21 +613,21 @@
                                             {{ 'CREATE_PROD_SPEC._from' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="value" [(ngModel)]="fromValue"
-                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'CREATE_PROD_SPEC._to' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="value" [(ngModel)]="toValue"
-                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'CREATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="value" [(ngModel)]="rangeUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <button (click)="addCharValue()" [disabled]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit" [ngClass]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  type="button" class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -748,7 +748,7 @@
                                 <input #imgURL type="text" id="att-name"
                                     [formControl]="attImageName"
                                     (blur)="attImageName.markAsTouched()"
-                                    class="w-full md:w-1/2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 p-2.5"
+                                    class="w-full md:w-1/2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 p-2.5 leading-[1.75]"
                                     [ngClass]="attImageName.invalid && attImageName.touched ? 'border-red-500' : ''"
                                 />
 
@@ -793,7 +793,7 @@
                         @if(prodSpecRels.length === 0 && prodRelationships.length === 0){
                             <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                              <div class="flex flex-col gap-1 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
+                              <div class="flex flex-col gap-2 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
                                 <div class="text-center font-semibold text-black">
                                   {{ 'CREATE_PROD_SPEC._no_relationships' | translate }}
                                 </div>
@@ -864,7 +864,7 @@
                         @if(prodSpecRels.length > 0 && prodRelationships.length === 0 && showCreateRel==false){
                             <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                              <div class="flex flex-col gap-1 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
+                              <div class="flex flex-col gap-2 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
                                 <div class="text-center font-semibold text-black">
                                   {{ 'CREATE_PROD_SPEC._relationships_title' | translate }}
                                 </div>
@@ -881,7 +881,7 @@
                               <info-icon [tooltipText]="'CREATE_PROD_SPEC._relationship_type_tooltip' | translate"></info-icon>
                             </div>
                             <select id="type" (change)="onRelChange($event)"
-                            class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full md:w-1/2 p-2.5">
+                            class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full md:w-1/2 p-2.5 leading-[1.75]">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
                                 <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>
@@ -998,8 +998,8 @@
                 @if(showSummary){
                     <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
-                        <div class="mb-4 md:grid md:grid-cols-2 gap-2">
-                            <div class="flex flex-col gap-1">
+                        <div class="mb-4 md:grid md:grid-cols-2 gap-[18px]">
+                            <div class="flex flex-col gap-2">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToCreate?.name}}
@@ -1013,7 +1013,7 @@
                                     {{productSpecToCreate?.version}}
                                 </label>
                             </div>
-                            <div class="flex flex-col gap-1">
+                            <div class="flex flex-col gap-2">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
                                     {{productSpecToCreate?.brand}}
@@ -1027,7 +1027,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 flex flex-col gap-1">
+                        <div class="mb-4 flex flex-col gap-2">
                             <label class="font-semibold text-base mr-4 ">{{ 'CREATE_PROD_SPEC._status' | translate }}</label>
                             <app-status-selector [modelType]="'spec'" [anchor]="'in_design'" [statuses]="['in_design']" [(ngModel)]="productSpecToCreate!.lifecycleStatus" [ngModelOptions]="{ standalone: true }" [disabled]="true"></app-status-selector>
                         </div>
