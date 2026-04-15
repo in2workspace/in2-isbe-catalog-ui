@@ -9,7 +9,7 @@
   } @else { -->
     <div class="flex flex-col gap-6 bg-white/60 p-4 md:p-8 rounded-2xl">
         <h1 class="font-semibold text-3xl">{{ 'PROFILE._profile' | translate }}</h1>
-        <h2 class="font-normal text-xl text-primary-100">{{ 'PROFILE._organization' | translate }}</h2>
+        <h2 class="text-xl text-primary-100">{{ 'PROFILE._organization' | translate }}</h2>
 
         <div class="flex flex-col gap-10 p-4 lg:py-8 lg:px-4 rounded-xl bg-white">
           <form class="flex flex-col lg:grid lg:grid-cols-2 gap-[18px]" [formGroup]="profileForm">
@@ -35,7 +35,7 @@
               <div class="flex flex-col gap-2">
                   <span class="font-semibold">{{ 'PROFILE._country' | translate }} <span class="text-red-600">*</span></span>
                   <select id="country" formControlName="country"
-                      class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]"
+                      class="bg-white border-black text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]"
                       [ngClass]="(profileForm.get('country')?.invalid && profileForm.value.country!='') || (profileForm.get('country')?.touched && profileForm.value.country=='') ? 'border-red-600' : (profileForm.value.country ? 'border-primary-100' : 'border-gray-300')"
                       >
                       <option value="">Selecciona un país…</option>
@@ -153,15 +153,15 @@
               </div>
           </form>
 
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-4">
             <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._add_logo' | translate }}</h2>
             <hr class="h-px bg-primary-100/70 border-0">
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col">
               <div class="w-full flex flex-col md:flex-row gap-2 md:gap-2">
                 <span class="text-sm font-semibold text-black">{{ 'PROFILE._add_logo_description' | translate }} <span class="text-red-500">*</span></span>
                 <info-icon [tooltipText]="'PROFILE._add_logo_tooltip' | translate"></info-icon>
               </div>
-              <span class="text-sm text-black">{{ 'PROFILE._add_logo_requirements' | translate }}</span>
+              <span class="font-body text-sm text-black">{{ 'PROFILE._add_logo_requirements' | translate }}</span>
             </div>
             @if(showImgPreview){
                 <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl aspect-square px-8 pb-8 pt-40 max-w-sm">
@@ -228,7 +228,7 @@
           </div>
 
           
-          <div class="flex flex-col gap-3">
+          <div class="flex flex-col gap-4">
             <h2 class="text-xl lg:text-2xl font-semibold text-primary-100">{{ 'PROFILE._contact_info' | translate }}</h2>
             <hr class="h-px bg-primary-100/70 border-0">
 

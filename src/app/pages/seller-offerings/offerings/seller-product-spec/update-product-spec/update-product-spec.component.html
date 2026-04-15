@@ -1,7 +1,7 @@
 
 <div>
   <h2 class="font-semibold text-xl text-primary-100">{{ 'UPDATE_PROD_SPEC._update_prod' | translate }}</h2>
-  <p class="italic text-base">{{ 'UPDATE_PROD_SPEC._update_prod_desc' | translate }}</p>
+  <p class="font-body italic text-base">{{ 'UPDATE_PROD_SPEC._update_prod_desc' | translate }}</p>
     <div class="flex flex-col bg-white mt-4 p-4 rounded-lg">
         <div class="overflow-x-auto">
             <ol class="flex items-start w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
@@ -497,7 +497,7 @@
                             <div class="flex flex-col gap-2">
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._type' | translate }}</label>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
+                                class="mb-2 bg-white  border border-black   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                                     <option selected value="string">String</option>
                                     <option value="number">Number</option>
                                     <option value="range">Number range</option>
@@ -861,7 +861,7 @@
                         } @else {
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}</label>
                             <select id="rel-type" (change)="onRelChange($event)"
-                            class="shadow bg-white border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
+                            class="shadow bg-white border border-black text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
                                 <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>

@@ -82,7 +82,7 @@
             <fa-icon [icon]="faSparkles" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
             <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_type' | translate }}</h2>
           </div>
-          <select id="type" (change)="onTypeChange($event)" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
+          <select id="type" (change)="onTypeChange($event)" class="bg-white border border-black text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
             <option value="none" selected>{{ 'OFFERINGS._filter_type' | translate }}</option>
             <option value="all">{{ 'OFFERINGS._all' | translate }}</option>
             <option value="simple">{{ 'OFFERINGS._simple' | translate }}</option>
@@ -95,7 +95,7 @@
             <fa-icon [icon]="faSort" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
             <h2 class="text-base font-semibold">{{ 'OFFERINGS._order_by' | translate }}</h2>
           </div>
-          <select id="sort" (change)="onSortChange($event)" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
+          <select id="sort" (change)="onSortChange($event)" class="bg-white border border-black text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
             <option value="none" selected>{{ 'OFFERINGS._order_by' | translate }}</option>
             <option value="update">{{ 'OFFERINGS._last_update' | translate }}</option>
             <option value="name">{{ 'OFFERINGS._name' | translate }}</option>
@@ -187,7 +187,7 @@
                         <td colspan="5">
                           <div class="flex flex-col items-center justify-center w-full px-4 py-16">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                              <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
+                              <div class="flex w-full justify-center items-center p-4 text-base text-black" role="alert">
                                 <div class="text-center">
                                   {{ 'OFFERINGS._no_offerings' | translate }}
                                 </div>

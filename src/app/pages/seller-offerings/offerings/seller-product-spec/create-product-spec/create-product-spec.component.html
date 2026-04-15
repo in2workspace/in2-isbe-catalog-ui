@@ -128,7 +128,7 @@
                             @if(prodSpecs.length==0){
                                 <div class="flex flex-col items-center justify-center w-full px-4 py-16">
                                     <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                                    <div class="flex w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
+                                    <div class="flex w-full justify-center items-center p-4 text-base text-primary-100" role="alert">
                                       <div class="text-center">
                                         {{ 'OFFERINGS._no_prod' | translate }}
                                       </div>
@@ -392,7 +392,7 @@
                     @if (prodChars.length === 0 && !showCreateChar){
                         <div class="flex flex-col items-center justify-center w-full px-4">
                           <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                          <div class="flex w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100 " role="alert">
+                          <div class="flex w-full justify-center items-center p-4 text-base text-primary-100" role="alert">
                             <!-- <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                               <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
                             </svg> -->
@@ -500,7 +500,7 @@
                                 <info-icon [tooltipText]="'CREATE_PROD_SPEC._type_tooltip' | translate"></info-icon>
                               </div>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
+                                class="mb-2 bg-white  border border-black   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                                     <option selected value="string">{{ 'CREATE_PROD_SPEC._type_string' | translate }}</option>
                                     <option value="number">{{ 'CREATE_PROD_SPEC._type_number' | translate }}</option>
                                     <option value="range">{{ 'CREATE_PROD_SPEC._type_range' | translate }}</option>
@@ -881,7 +881,7 @@
                               <info-icon [tooltipText]="'CREATE_PROD_SPEC._relationship_type_tooltip' | translate"></info-icon>
                             </div>
                             <select id="type" (change)="onRelChange($event)"
-                            class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full md:w-1/2 p-2.5 leading-[1.75]">
+                            class="mb-2 bg-white border border-black text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full md:w-1/2 p-2.5 leading-[1.75]">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
                                 <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>
