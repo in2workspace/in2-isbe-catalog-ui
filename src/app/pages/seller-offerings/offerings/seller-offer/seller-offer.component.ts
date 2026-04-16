@@ -26,7 +26,7 @@ export class SellerOfferComponent implements OnInit, AfterViewChecked {
   protected readonly faSparkles = faSparkles;
 
   // TODO: remove mock mode once real offers are loading again
-  MOCK_MODE: boolean = true;
+  MOCK_MODE: boolean = false;
   MOCK_OFFERS: any[] = [
     { id: '1', name: 'Mock Offer Alpha', description: 'A sample data service offering for layout testing.', version: '1.0', lifecycleStatus: 'Active', isBundle: false, isSellable: true, lastUpdate: '2024-01-15T10:00:00Z', productOfferingPrice: [{ name: 'Free tier', priceType: 'free' }], productSpecification: { id: 'ps1', name: 'Mock Spec A' } },
     { id: '2', name: 'Mock Offer Beta', description: 'An AI-powered analytics offering for layout testing.', version: '2.1', lifecycleStatus: 'Launched', isBundle: false, isSellable: true, lastUpdate: '2024-02-20T14:30:00Z', productOfferingPrice: [{ name: 'Monthly', priceType: 'recurring', price: { value: 99, unit: 'EUR' } }], productSpecification: { id: 'ps2', name: 'Mock Spec B' } },
