@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NgClass } from '@angular/common';
 import { faLinkedin, faYoutube, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
@@ -13,7 +14,7 @@ import { AuthService } from 'src/app/guard/auth.service';
     templateUrl: './footer.component.html',
     styleUrls: ['./footer.component.css'],
     standalone: true,
-    imports: [FaIconComponent, FeedbackModalComponent, TranslateModule]
+    imports: [FaIconComponent, FeedbackModalComponent, TranslateModule, NgClass]
 })
 export class FooterComponent {
   protected readonly faLinkedin = faLinkedin;
@@ -63,6 +64,11 @@ export class FooterComponent {
   }
 
   
+  get isBeigeBackground(): boolean {
+    const url = this.router.url.split('?')[0];
+    return ['/profile', '/my-offerings', '/admin'].some(p => url === p || url.startsWith(p + '/'));
+  }
+
   goTo(path:string) {
     this.router.navigate([path]);
   }

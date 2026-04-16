@@ -171,7 +171,9 @@
         "_cookies": "Cookies Policy",
         "_licensing": "Terms of Use",
         "_contact": "Contact",
-        "_rights": "All Rights Reserved"
+        "_rights": "All Rights Reserved",
+        "_credits_text": "Project 'BLOCKCHAIN SERVICES INFRASTRUCTURE OF SPAIN (ISBE)', within the framework of the Collaboration Agreement signed between the Community of Madrid and the Red Alastria Consortium, under the Territorial Networks of Technological Specialisation Programme within the Recovery, Transformation and Resilience Plan – funded by the European Union – Next Generation EU."
+
     },
     "HEADER": {
         "_marketplace": "ISBE Catalog",
