@@ -512,6 +512,7 @@
     "_preview": "Vista previa",
     "_show_preview": "Mostrar vista previa",
     "_next": "Siguiente",
+    "_prev": "Anterior",
     "_is_bundled": "¿Producto empaquetado?",
     "_status": "Estado",
     "_type": "Tipo",
@@ -598,6 +599,7 @@
     "_preview": "Vista previa",
     "_show_preview": "Mostrar vista previa",
     "_next": "Siguiente",
+    "_prev": "Anterior",
     "_is_bundled": "¿Oferta empaquetada?",
     "_status": "Estado",
     "_type": "Tipo",
@@ -650,7 +652,9 @@
     "_self_attestation": "Auto-declaración:",
     "_close_modal": "Cerrar modal",
     "_cancel": "Cancelar",
-    "_upload": "Subir"
+    "_upload": "Subir",
+    "_add_logo_tooltip":"Sube una imagen de tu organización en formato .png, .jpg, .jpeg, .gif, .bmp o .webp. Puede ser una imagen en Drive o Cloud. Si no dispones de una imagen específica de producto o servicio, puedes subir nuevamente el logo de tu organización.",
+    "_add_logo_requirements":"Tamaño mínimo: 300x300 px. Formato: cuadrado."
   },
   "CREATE_RES_SPEC": {
     "_back": "Atrás",

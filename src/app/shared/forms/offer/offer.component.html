@@ -1,5 +1,5 @@
 
-<h2 class="font-normal text-xl lg:text-2xl text-primary-100">
+<h2 class="font-normal text-xl text-primary-100">
   @if(formType === 'update'){
     {{ 'UPDATE_OFFER._update' | translate }}
   } @else {
@@ -19,13 +19,12 @@
   } @else {
     <form [formGroup]="productOfferForm">
       <div class="overflow-x-auto">
-        <ol class="flex items-start w-max md:w-full text-sm font-medium text-center mt-8 border-b border-gray-0 pb-6">
+        <ol class="max-w-[1000px] mx-auto flex items-start gap-[25px] md:gap-[50px] w-max md:w-full text-sm font-medium text-center mt-8 border-b border-gray-0 pb-6">
           @for (step of steps; track i; let i = $index) {
             <li
               (click)="handleStepClick(i)"
-              
               [class.text-primary-100]="currentStep === i"
-              class="relative flex-1 flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0">
+              class="relative flex-1 flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[70px] md:min-w-[140px]">
               <div class="md:relative flex items-center justify-center w-full">
                 <span class="flex items-center justify-center cursor-pointer w-4 h-4 md:w-10 md:h-10 border text-[10px] md:text-base text-white shrink-0 rounded-full"
                       [class.bg-primary-100]="currentStep === i"
@@ -36,18 +35,18 @@
                         'bg-green border-green text-white': i < currentStep,
                         'bg-primary-100 border-primary-100 text-white': i === currentStep,
                         'bg-white border-gray-300 text-gray-500': i > currentStep
-                      }">                      
+                      }">
                   {{ i + 1 }}
                 </span>
                 @if(i < steps.length - 1){
                   <span
-                    class="absolute -right-7 md:right-[-25px] w-5 md:w-[50px] h-px md:ml-4 bg-black"
+                    class="absolute -right-[42px] md:right-[-50px] w-5 md:w-[50px] h-px md:ml-4 bg-black"
                     >
                   </span>
                 }
               </div>
-              <span 
-                class="text-sm whitespace-nowrap cursor-pointer" 
+              <span
+                class="text-sm whitespace-nowrap cursor-pointer"
                 [ngClass]="{
                   'text-primary-100': i === currentStep,
                   'text-black': i < currentStep,
@@ -132,7 +131,7 @@
 
 </div>
 
-<div class="flex justify-between md:justify-end space-x-4 mt-10">
+<div class="flex justify-between md:justify-end space-x-4 mt-8">
   <button (click)="goToStep(currentStep - 1)"
           [disabled]="currentStep === 0"
           [ngClass]="{

@@ -27,7 +27,7 @@ import { FeedbackModalComponent } from 'src/app/shared/feedback-modal/feedback-m
 export class GalleryComponent implements OnInit {
 
   // TODO: remove mock mode once real products are loading again
-  MOCK_MODE: boolean = true;
+  MOCK_MODE: boolean = false;
   MOCK_PRODUCTS: ProductOffering[] = [
     { id: '1', name: 'Mock Product Alpha', description: 'A sample data service for layout testing purposes.', category: [{ id: 'c1', name: 'Data' }], attachment: [], productOfferingPrice: [{ name: 'Free tier', priceType: 'free' }] },
     { id: '2', name: 'Mock Product Beta', description: 'An AI-powered analytics offering for layout testing.', category: [{ id: 'c2', name: 'AI & Analytics' }], attachment: [], productOfferingPrice: [{ name: 'Monthly', priceType: 'recurring', price: { value: 99, unit: 'EUR' } }] },

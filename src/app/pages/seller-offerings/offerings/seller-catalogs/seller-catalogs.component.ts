@@ -26,6 +26,14 @@ export class SellerCatalogsComponent implements OnInit{
   protected readonly faSort = faSort;
   protected readonly faSwatchbook = faSwatchbook;
 
+  // TODO: remove mock mode once real catalogs are loading again
+  MOCK_MODE: boolean = true;
+  MOCK_CATALOGS: Catalog[] = [
+    { id: 'cat1', name: 'Mock Catalog Alpha', description: 'A sample product catalog for layout testing.', version: '1.0', catalogType: 'ProductCatalog', lifecycleStatus: 'Active', lastUpdate: '2024-01-10T09:00:00Z' },
+    { id: 'cat2', name: 'Mock Catalog Beta', description: 'A secondary product catalog for layout testing.', version: '2.0', catalogType: 'ProductCatalog', lifecycleStatus: 'Launched', lastUpdate: '2024-02-15T11:00:00Z' },
+    { id: 'cat3', name: 'Mock Catalog Gamma', description: 'A draft catalog under development for layout testing.', version: '0.9', catalogType: 'ProductCatalog', lifecycleStatus: 'In design', lastUpdate: '2024-03-05T14:00:00Z' },
+  ];
+
   searchField = new FormControl();
   catalogs:Catalog[]=[];
   nextCatalogs:Catalog[]=[];
@@ -73,6 +81,12 @@ export class SellerCatalogsComponent implements OnInit{
       .pipe(take(1))
       .subscribe(id => {
         this.seller = id || '';
+
+        if (this.MOCK_MODE) {
+          this.catalogs = this.MOCK_CATALOGS;
+          this.loading = false;
+          return;
+        }
 
         this.getCatalogs(false);
 

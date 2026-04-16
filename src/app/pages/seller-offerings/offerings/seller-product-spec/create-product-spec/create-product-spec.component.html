@@ -1,16 +1,16 @@
 
 <div class="flex flex-col gap-6">
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2.5">
       <h2 class="font-semibold text-xl text-primary-100">{{ 'OFFERINGS._add_new_prod' | translate }}</h2>
-      <p class="font-italic">{{ 'OFFERINGS._prod_spec_description' | translate }}</p>
+      <p class="font-body text-base font-italic">{{ 'OFFERINGS._prod_spec_description' | translate }}</p>
     </div>
     <div class="bg-white/60 p-4 rounded-lg">
         <div class="overflow-x-auto">
-            <ol class="flex items-start w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-300 pb-4 md:pb-6">
+            <ol class="max-w-[1000px] mx-auto flex items-start gap-[25px] md:gap-[50px] w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-300 pb-4 md:pb-6">
                 @for (step of stepNavigation; track step.id; let i = $index) {
                     <li
                       (click)="handleStepClick(step)"
-                      class="relative flex-1 flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[140px]"
+                      class="relative flex-1 flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[70px] md:min-w-[140px]"
                       [class.text-primary-100]="isCurrentStep(step.id)"
                       [class.cursor-not-allowed]="isStepDisabled(step)"
                       [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)">
@@ -28,7 +28,7 @@
                                 {{ i + 1 }}
                             </span>
                             @if(i < stepNavigation.length - 1){
-                                <span class="absolute -right-7 md:right-[-25px] w-5 md:w-[50px] h-px md:ml-4 bg-black"></span>
+                                <span class="absolute -right-[42px] md:right-[-50px] w-5 md:w-[50px] h-px md:ml-4 bg-black"></span>
                             }
                         </div>
                         <span
@@ -42,16 +42,16 @@
             </ol>
         </div>
         <hr class="h-px bg-gray-0 border-0">
-        <div class="flex flex-col gap-2 mt-8">
+        <div class="flex flex-col gap-2.5 mt-[42px]">
                 @if(showGeneral){
                     <form class="md:grid md:grid-cols-2 gap-[18px]" [formGroup]="generalForm">
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2.5">
                             <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }} <span clasS="text-red-500">*</span></label>
                             <input formControlName="name" type="text" id="name" maxLength="100" placeholder="{{ 'CREATE_PROD_SPEC._product_name' | translate }}"
                             [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
                             class="mb-2 bg-white border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2.5">
                             <div class="flex flex-row gap-2">
                               <label for="prod-version" class="font-semibold text-base flex flex-row gap-1">{{ 'CREATE_PROD_SPEC._product_version' | translate }}  <span clasS="text-red-500">*</span></label>
                               <info-icon [tooltipText]="'CREATE_PROD_SPEC._product_version_tooltip' | translate"></info-icon>
@@ -60,13 +60,13 @@
                             [ngClass]="generalForm.get('version')?.invalid ? 'border-red-600' : (generalForm.value.version ? 'border-primary-100' : 'border-gray-300')"
                             class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2.5">
                             <label for="prod-brand" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}  <span clasS="text-red-500">*</span></label>
                             <input formControlName="brand" type="text" id="prod-brand" placeholder="{{ 'CREATE_PROD_SPEC._product_brand' | translate }}"
                             [ngClass]="generalForm.get('brand')?.invalid && generalForm.value.brand!='' ? 'border-red-600' : (generalForm.value.brand ? 'border-primary-100' : 'border-gray-300')"
                             class="mb-2 bg-white  border border-gray-300 text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2.5">
                             <label for="prod-number" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._id_number' | translate }}</label>
                             <input formControlName="number" type="text" id="prod-number" placeholder="{{ 'CREATE_PROD_SPEC._id_number_placeholder' | translate }}"
                             [ngClass]="generalForm.get('number')?.invalid && generalForm.value.number!='' ? 'border-red-600' : (generalForm.value.number ? 'border-primary-100' : 'border-gray-300')"
@@ -76,38 +76,9 @@
                         <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>
 
                     </form>
-                    @if(BUNDLE_ENABLED){
-                        <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleBundle();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
-                    }@else if(IS_ISBE){
-                        <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleChars();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                    }@else{
-                        <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleCompliance();generalDone=true;" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
-                    }
                 }
                 @if(showBundle){
-                    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._bundle' | translate }}</h2>
+                    <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._bundle' | translate }}</h2>
                     <div class="col-span-2 flex align-items-middle h-fit m-4">
                         <label for="prod-brand" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._is_bundled' | translate }}</label>
                         <label class="inline-flex items-center me-5 cursor-pointer ml-4">
@@ -216,25 +187,9 @@
                             </div>
                         }
                     }
-                    <div class="flex w-full justify-items-end justify-end gap-4 ml-4">
-                        @if(currentStepIndex > 0){
-                        <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
-                            </svg>
-                            {{ 'CREATE_PROD_SPEC._back' | translate }}
-                        </button>
-                        }
-                        <button type="button" (click)="toggleCompliance();bundleDone=true;" [disabled]="prodSpecsBundle.length<2 && bundleChecked" [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'CREATE_PROD_SPEC._next' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
                 }
                 @if(showCompliance){
-                    <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._comp_profile' | translate }}</h2>
+                    <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._comp_profile' | translate }}</h2>
                     <h3 class="font-semibold text-primary-100  text-left ml-4">
                         {{ 'CREATE_PROD_SPEC._self_attestation' | translate }}
                     </h3>
@@ -345,50 +300,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- Wrapper for button & tooltip -->
-                    <div class="relative flex w-full justify-end gap-4 ml-4">
-                        @if(currentStepIndex > 0){
-                        <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
-                            </svg>
-                            {{ 'CREATE_PROD_SPEC._back' | translate }}
-                        </button>
-                        }
-                        <!-- Group container to enable hover effects -->
-                        <div class="relative inline-block group">
-                            <!-- Tooltip (Only exists if checkValidISOS() is true and only appears on hover) -->
-                            @if(checkValidISOS()) {
-                                <div
-                                class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2
-                                    bg-gray-900 text-white text-xs rounded-lg p-2 shadow-lg z-50
-                                    transition-opacity duration-200 w-max max-w-xs whitespace-normal break-words
-                                    opacity-0 invisible group-hover:opacity-100 group-hover:visible">
-                                    {{ 'CREATE_PROD_SPEC._file_check' | translate }}
-                                <!-- Tooltip Arrow -->
-                                <div class="absolute left-1/2 transform -translate-x-1/2 translate-y-1 w-2 h-2 bg-gray-900 rotate-45"></div>
-                                </div>
-                            }
-
-                            <!-- Button -->
-                            <button type="button" (click)="toggleChars(); complianceDone = true;"
-                                    [disabled]="checkValidISOS()"
-                                    [ngClass]="checkValidISOS() ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-50'"
-                                    class="flex gap-2 text-white bg-primary-100 focus:ring-4 focus:outline-none
-                                        focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5
-                                        text-center  items-center">
-                                <span>{{ 'CREATE_PROD_SPEC._next' | translate }}</span>
-                                <svg width="6" height="11" viewBox="0 0 6 11" class="block" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-
                 }
                 @if(showChars){
-                    <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._chars' | translate }}</h2> -->
+                    <!-- <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._chars' | translate }}</h2> -->
                     @if (prodChars.length === 0 && !showCreateChar){
                         <div class="flex flex-col items-center justify-center w-full px-4">
                           <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
@@ -488,13 +402,13 @@
                         </div>
                     } @else {
                         <form class=" grid grid-cols-2 gap-[18px]" [formGroup]="charsForm">
-                            <div class="flex flex-col gap-2">
+                            <div class="flex flex-col gap-2.5">
                                 <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._chars_name' | translate }} <span class="text-red-500">*</span></label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
                                 class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 
                             </div>
-                            <div class="flex flex-col gap-2">
+                            <div class="flex flex-col gap-2.5">
                               <div class="flex flex-row gap-2">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._type' | translate }} <span class="text-red-500">*</span></label>
                                 <info-icon [tooltipText]="'CREATE_PROD_SPEC._type_tooltip' | translate"></info-icon>
@@ -506,13 +420,13 @@
                                     <option value="range">{{ 'CREATE_PROD_SPEC._type_range' | translate }}</option>
                                 </select>
                             </div>
-                            <div class="col-span-2 flex flex-col gap-2">
+                            <div class="col-span-2 flex flex-col gap-2.5">
                                 <label for="description" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
                                 <textarea id="description" formControlName="description" rows="4"
                                 class="mb-2 min-h-fit border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
                             </div>
                         </form>
-                        <div class="flex flex-col gap-2">
+                        <div class="flex flex-col gap-2.5">
                             @if(creatingChars.length>0){
                                 <div class="flex flex-row gap-2">
                                   <label for="values" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._values' | translate }} <span class="text-red-500">*</span></label>
@@ -647,43 +561,13 @@
 
                         </div>
                     }
-                    <div class="flex w-full justify-items-end justify-end gap-4 ml-4 mt-4">
-                        @if(currentStepIndex > 0){
-                        <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
-                            </svg>
-                            {{ 'CREATE_PROD_SPEC._back' | translate }}
-                        </button>
-                        }
-                        <button type="button" (click)="toggleAttach();charsDone=true;" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'CREATE_PROD_SPEC._next' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" class="block" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
                 }
 
                 @if(showAttach){
                     <div class="inline-flex">
-                        <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._attachments' | translate }}</h2> -->
+                        <!-- <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._attachments' | translate }}</h2> -->
                         @if(!IS_ISBE){
-                            <div class="ml-4 flex">
-                                <svg data-popover-target="popover-default" class="flex self-center w-6 h-6 text-primary-100" clip-rule="evenodd" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                                </svg>
-                            </div>
-                            <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0   ">
-                                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg  ">
-                                    <h3 class="font-semibold text-gray-900 ">{{ 'CREATE_PROD_SPEC._file_res' | translate }}</h3>
-                                </div>
-                                <div class="px-3 py-2 inline-block">
-                                    <p class="inline-block">{{ 'CREATE_PROD_SPEC._restrictions' | translate }}
-                                    </p>
-                                </div>
-                                <div data-popper-arrow></div>
-                            </div>
+                            <info-icon [tooltipText]="'CREATE_PROD_SPEC._restrictions' | translate"></info-icon>
                         }
                     </div>
                     @if(!IS_ISBE){
@@ -692,7 +576,7 @@
                             <span class="text-sm font-semibold text-black">{{ 'CREATE_PROD_SPEC._add_prod_img' | translate }} <span class="text-red-500">*</span></span>
                             <info-icon [tooltipText]="'PROFILE._add_logo_tooltip' | translate"></info-icon>
                           </div>
-                          <span class="text-sm text-black">{{ 'PROFILE._add_logo_requirements' | translate }}</span>
+                          <span class="font-body text-sm text-black">{{ 'PROFILE._add_logo_requirements' | translate }}</span>
                         </div>
                     }@else{
                         <div class="flex flex-col">
@@ -700,7 +584,7 @@
                             <span class="text-sm font-semibold text-black">{{ 'CREATE_PROD_SPEC._add_prod_img_url' | translate }} <span class="text-red-500">*</span></span>
                             <info-icon [tooltipText]="'PROFILE._add_logo_tooltip' | translate"></info-icon>
                           </div>
-                          <span class="text-sm text-black">{{ 'PROFILE._add_logo_requirements' | translate }}</span>
+                          <span class="font-body text-sm text-black">{{ 'PROFILE._add_logo_requirements' | translate }}</span>
                         </div>
                     }
                     @if(showImgPreview){
@@ -766,34 +650,14 @@
 
 
                     }
-                    <div class="flex w-full justify-items-end justify-end gap-4 ml-4 mt-4">
-                        @if(currentStepIndex > 0){
-                          <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                              <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
-                              </svg>
-                              {{ 'CREATE_PROD_SPEC._back' | translate }}
-                          </button>
-                        }
-                        <button type="button"
-                        [disabled]="!attImageName.valid && !showImgPreview"
-                        [ngClass]="!attImageName.valid && !showImgPreview ? 'opacity-50 disabled' : 'hover:bg-primary-50'"
-                        (click)="toggleRelationship();attachDone=true;"
-                        class="flex gap-2 text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'CREATE_PROD_SPEC._next' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
                 }
                 @if(showRelationships){
-                    <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</h2> -->
+                    <!-- <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</h2> -->
                     <div class="">
                         @if(prodSpecRels.length === 0 && prodRelationships.length === 0){
                             <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                              <div class="flex flex-col gap-2 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
+                              <div class="flex flex-col gap-2.5 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
                                 <div class="text-center font-semibold text-black">
                                   {{ 'CREATE_PROD_SPEC._no_relationships' | translate }}
                                 </div>
@@ -864,7 +728,7 @@
                         @if(prodSpecRels.length > 0 && prodRelationships.length === 0 && showCreateRel==false){
                             <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                              <div class="flex flex-col gap-2 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
+                              <div class="flex flex-col gap-2.5 w-full justify-center items-center p-4 text-sm text-primary-100 placeholder:text-gray-100" role="alert">
                                 <div class="text-center font-semibold text-black">
                                   {{ 'CREATE_PROD_SPEC._relationships_title' | translate }}
                                 </div>
@@ -977,29 +841,13 @@
                             </div>
                         }
                     </div>
-                    <div class="flex w-full justify-items-end justify-end gap-4 ml-4">
-                        @if(currentStepIndex > 0){
-                        <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
-                            </svg>
-                            {{ 'CREATE_PROD_SPEC._back' | translate }}
-                        </button>
-                        }
-                        <button type="button" (click)="showFinish();relationshipDone=true;" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'CREATE_PROD_SPEC._finish' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
                 }
 
                 @if(showSummary){
-                    <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2> -->
+                    <!-- <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
                         <div class="mb-4 md:grid md:grid-cols-2 gap-[18px]">
-                            <div class="flex flex-col gap-2">
+                            <div class="flex flex-col gap-2.5">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_name' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToCreate?.name}}
@@ -1013,7 +861,7 @@
                                     {{productSpecToCreate?.version}}
                                 </label>
                             </div>
-                            <div class="flex flex-col gap-2">
+                            <div class="flex flex-col gap-2.5">
                                 <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._product_brand' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all border border-gray-0 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
                                     {{productSpecToCreate?.brand}}
@@ -1027,7 +875,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-4 flex flex-col gap-2">
+                        <div class="mb-4 flex flex-col gap-2.5">
                             <label class="font-semibold text-base mr-4 ">{{ 'CREATE_PROD_SPEC._status' | translate }}</label>
                             <app-status-selector [modelType]="'spec'" [anchor]="'in_design'" [statuses]="['in_design']" [(ngModel)]="productSpecToCreate!.lifecycleStatus" [ngModelOptions]="{ standalone: true }" [disabled]="true"></app-status-selector>
                         </div>
@@ -1144,7 +992,7 @@
                             </div>
                         }
 
-                        
+
 
                         @if(prodRelationships.length>0){
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</label>
@@ -1197,27 +1045,39 @@
                                 </table>
                             </div>
                         }
-                        <div class="flex w-full justify-items-end justify-end gap-4 ml-4 mt-4">
-                            @if(currentStepIndex > 0){
-                            <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1.72464 5.32539L5.78352 1.26676C5.92136 1.12875 5.99194 0.955284 5.99527 0.746357C5.99842 0.537596 5.92784 0.360971 5.78352 0.216483C5.63903 0.0721611 5.46398 -9.37203e-08 5.25838 -1.29669e-07C5.05277 -1.65619e-07 4.87773 0.0721609 4.73324 0.216483L0.25485 4.69487C0.16168 4.78821 0.0959111 4.88661 0.0575472 4.99008C0.0191827 5.09354 9.97223e-07 5.20531 9.76228e-07 5.32539C9.55234e-07 5.44546 0.0191827 5.55723 0.0575471 5.6607C0.095911 5.76417 0.16168 5.86257 0.254849 5.9559L4.73324 10.4343C4.87125 10.5721 5.04472 10.6427 5.25364 10.646C5.4624 10.6492 5.63903 10.5786 5.78351 10.4343C5.92784 10.2898 6 10.1148 6 9.90915C6 9.70355 5.92784 9.5285 5.78352 9.38401L1.72464 5.32539Z" fill="white"/>
-                                </svg>
-                                {{ 'CREATE_PROD_SPEC._back' | translate }}
-                            </button>
-                            }
-                            <button type="button" (click)="createProduct();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                {{ 'CREATE_PROD_SPEC._create_prod' | translate }}
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
                     </div>
                 }
 
             </div>
     </div>
+    <div class="flex w-full justify-end gap-6">
+        @if(currentStepIndex > 0){
+            <button type="button" (click)="goToPreviousStep()" class="flex gap-2 text-white bg-primary-100 justify-start border border-primary-100 hover:bg-primary-50 hover:text-white focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-base px-5 py-2.5 text-center items-center">
+                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-180">
+                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="currentColor"/>
+                </svg>
+                {{ 'CREATE_PROD_SPEC._prev' | translate }}
+            </button>
+        }@else{
+            <div></div>
+        }
+        @if(!isLastStep){
+            <button type="button" (click)="goToNextStep()" [disabled]="!canGoNext" [ngClass]="!canGoNext ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-base px-5 py-2.5 text-center items-center">
+                {{ 'CREATE_PROD_SPEC._next' | translate }}
+                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
+                </svg>
+            </button>
+        }@else{
+            <button type="button" (click)="createProduct();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-base px-5 py-2.5 text-center items-center">
+                {{ 'CREATE_PROD_SPEC._create_prod' | translate }}
+                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
+                </svg>
+            </button>
+        }
+    </div>
+    
 </div>
 
 <!-- BILL ADDRESS DELETE modal -->

@@ -31,6 +31,15 @@ export class SellerProductSpecComponent implements OnInit, AfterViewChecked {
   private readonly auth = inject(AuthService);
   private readonly paginationService = inject(PaginationService);
 
+  // TODO: remove mock mode once real product specs are loading again
+  MOCK_MODE: boolean = true;
+  MOCK_PROD_SPECS: any[] = [
+    { id: 'ps1', name: 'Mock Spec Alpha', brand: 'AcmeCorp', version: '1.0', productNumber: 'ACME-001', description: 'A sample data product specification for layout testing.', lifecycleStatus: 'Active', isBundle: false, lastUpdate: '2024-01-15T10:00:00Z', productSpecCharacteristic: [{ name: 'Format', productSpecCharacteristicValue: [{ value: 'CSV' }] }] },
+    { id: 'ps2', name: 'Mock Spec Beta', brand: 'TechLab', version: '2.0', productNumber: 'TL-002', description: 'An AI model specification for layout testing.', lifecycleStatus: 'Launched', isBundle: false, lastUpdate: '2024-02-10T08:00:00Z', productSpecCharacteristic: [{ name: 'Model type', productSpecCharacteristicValue: [{ value: 'LLM' }] }] },
+    { id: 'ps3', name: 'Mock Bundle Spec', brand: 'DataHub', version: '1.2', productNumber: 'DH-003', description: 'A bundle specification combining multiple data assets.', lifecycleStatus: 'In design', isBundle: true, lastUpdate: '2024-03-01T12:00:00Z', productSpecCharacteristic: [] },
+    { id: 'ps4', name: 'Mock Spec Delta', brand: 'SecureOps', version: '3.1', productNumber: 'SO-004', description: 'A security toolset specification for layout testing.', lifecycleStatus: 'Active', isBundle: false, lastUpdate: '2024-03-20T15:30:00Z', productSpecCharacteristic: [{ name: 'Compliance', productSpecCharacteristicValue: [{ value: 'ISO 27001' }] }] },
+  ];
+
   searchField = new FormControl();
 
   prodSpecs:any[]=[];
@@ -65,6 +74,12 @@ export class SellerProductSpecComponent implements OnInit, AfterViewChecked {
     this.auth.sellerId$.pipe(take(1)).subscribe(id => {
       this.seller = id ?? '';
     });
+
+    if (this.MOCK_MODE) {
+      this.prodSpecs = this.MOCK_PROD_SPECS;
+      this.loading = false;
+      return;
+    }
 
     this.getProdSpecs(false);
     let input = document.querySelector('[type=search]')

@@ -30,15 +30,15 @@
                     @if(orgUrl){
                         <div (click)="goToUrl()" class="flex flex-row gap-2 min-h-19 text-gray-500 cursor-pointer items-center">
                             {{ orgUrl }}
-                            <svg 
-                                xmlns="http://www.w3.org/2000/svg" 
-                                width="16" 
-                                height="16" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                stroke-width="2" 
-                                stroke-linecap="round" 
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
                                 stroke-linejoin="round">
 
                                 <path d="M14 3h7v7"></path>
@@ -65,7 +65,7 @@
                         +
                     </a>
                 }
-                @if(closeCats){                                  
+                @if(closeCats){
                     <a (click)="closeCategories()" class="cursor-pointer w-fit py-1 px-3 rounded-md bg-black/5 text-black/60 font-semibold text-sm">
                         <fa-icon [icon]="faClose"></fa-icon>
                     </a>
@@ -103,14 +103,14 @@
 
                   <hr class="h-px border-black border-1">
 
-                  <div class="flex flex-col gap-2 justify-start py-8">
+                  <div class="flex flex-col gap-2.5 justify-start py-8">
                     <h5 class="font-semibold tracking-tight text-xl md:text-lg text-primary-100 ">{{ 'PRODUCT_DETAILS._product_pricing' | translate }}:</h5>
                     @if(productOff?.productOfferingPrice != undefined){
                       @if(checkCustom){
                           <div class="max-w-[70%] w-full">
                               @for (price of productOff?.productOfferingPrice; track price.id) {
                                 @if (price.priceType == 'custom') {
-                                  <div class="mx-auto bg-purple-500 rounded-lg w-full flex flex-col gap-2 p-8">
+                                  <div class="mx-auto bg-purple-500 rounded-lg w-full flex flex-col gap-2.5 p-8">
                                       <h2 class="text-xl font-semibold text-white">{{price.name}}</h2>
                                       <markdown class="text-white w-full text-wrap break-all" [data]="price?.description"></markdown>
                                   </div>
@@ -174,7 +174,7 @@
 
                   <hr class="h-px border-black border-1">
 
-                  <div class="flex flex-col gap-2 justify-start py-8">
+                  <div class="flex flex-col gap-2.5 justify-start py-8">
                     <h5 class="font-semibold tracking-tight text-xl md:text-lg text-primary-100 ">{{ 'PRODUCT_DETAILS._product_chars' | translate }}</h5>
                       <div class="container mx-auto">
                           <div class="flex flex-col flex-wrap">

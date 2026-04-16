@@ -972,6 +972,30 @@ export class UpdateProductSpecComponent implements OnInit {
     this.currentStep = step;
   }
 
+  get isLastStep(): boolean {
+    return this.currentStepIndex === this.stepNavigation.length - 1;
+  }
+
+  get canGoNext(): boolean {
+    const nextIndex = this.currentStepIndex + 1;
+    if (nextIndex >= this.stepNavigation.length) return false;
+    return !this.stepNavigation[nextIndex].isDisabled();
+  }
+
+  goToNextStep() {
+    const nextIndex = this.currentStepIndex + 1;
+    if (nextIndex < this.stepNavigation.length) {
+      this.stepNavigation[nextIndex].onClick();
+    }
+  }
+
+  goToPrevStep() {
+    const prevIndex = this.currentStepIndex - 1;
+    if (prevIndex >= 0) {
+      this.stepNavigation[prevIndex].onClick();
+    }
+  }
+
   onTypeChange(event: any) {
     if(event.target.value=='string'){
       this.stringCharSelected=true;
