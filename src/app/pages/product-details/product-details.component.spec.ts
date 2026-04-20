@@ -126,13 +126,25 @@ describe('ProductDetailsComponent', () => {
       productOfferingPrice: [{ id: 'price1' }]
     } as any;
 
-    mockApi.getProductSpecification.mockResolvedValue({});
+    mockApi.getProductSpecification.mockResolvedValue({ 
+      relatedParty: [{ id: 'seller1' }] 
+    });
     mockApi.getProductPrice.mockResolvedValue({ priceType: 'custom' });
+    
+    // Mock accountService methods
+    const mockAccountService = component['accountService'] as any;
+    if (mockAccountService) {
+      mockAccountService.getOrgInfo = jest.fn().mockResolvedValue({
+        name: 'Test Org',
+        partyCharacteristic: []
+      });
+    }
 
     component.ngOnInit();
     await fixture.whenStable();
 
-    await Promise.resolve();
+    // Wait for all promises to resolve
+    await new Promise(resolve => setTimeout(resolve, 0));
 
     expect(mockApi.getProductSpecification).toHaveBeenCalledWith('spec1');
     expect(mockApi.getProductPrice).toHaveBeenCalledWith('price1');

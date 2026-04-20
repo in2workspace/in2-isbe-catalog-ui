@@ -57,9 +57,15 @@ describe('OfferComponent', () => {
   it('should set isFormValid to true when form is valid', () => {
     component.productOfferForm.patchValue({
       prodSpec: { id: '1' },
-      catalogue: { id: '1' }
+      catalogue: { id: '1' },
+      category: [{ id: 'cat1' }],
+      generalInfo: {
+        name: 'Test Offer',
+        description: 'Test Description',
+        version: '1.0'
+      }
     });
-    component.productOfferForm.get('generalInfo')?.setValue({});
+    fixture.detectChanges();
     expect(component.isFormValid).toBe(true);
   });
 

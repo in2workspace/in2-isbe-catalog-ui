@@ -66,11 +66,11 @@ export class AuthService {
         let li = null;
 
         try {
-          if (claims.vc === undefined) {
+          if(claims.vc === undefined) {
             li = claimsToLoginInfo(claims, accessToken ?? '');
-          } else {
+          }else{
             li = vcClaimsToLoginInfo(claims, accessToken ?? '');
-          }
+          }          
           this.loginInfoSubject.next(li);
         } catch {
           this.loginInfoSubject.next(null);
