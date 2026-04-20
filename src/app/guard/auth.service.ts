@@ -1,12 +1,10 @@
-import { Injectable, signal, WritableSignal, inject } from '@angular/core';
+import { Injectable, signal, WritableSignal, inject, isDevMode } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, lastValueFrom, Observable, of } from 'rxjs';
 import { take, map, catchError, switchMap } from 'rxjs/operators';
 import { vcClaimsToLoginInfo, LoginInfo, claimsToLoginInfo } from './login-info.mapper';
 import { OrgContextService } from '../services/org-context.service';
-
-// TODO: LOGIN MODE
-const FORCE_LOCAL_LOGIN = true;
+import { environment } from '../../environments/environment';
 
 export interface AppUser {
   sub?: string;
@@ -36,8 +34,13 @@ export class AuthService {
   role: WritableSignal<string | null> = signal(null);
 
   checkAuth(): Observable<boolean> {
-    /*if (FORCE_LOCAL_LOGIN) {
-      this.applyLocalLogin(this.buildLocalLoginInfo());
+    if (isDevMode()) {
+      const fakeAccessToken = environment.DEV_ACCESS_TOKEN;
+      const claims: any = this.decodeJwtPayload(fakeAccessToken);
+      const u = this.mapUserFromClaims(claims);
+      this.setState(true, u, fakeAccessToken, this.pickPrimaryRole(u));
+      const li = claimsToLoginInfo(claims, fakeAccessToken);
+      this.loginInfoSubject.next(li);
       return of(true);
     }
 
@@ -51,7 +54,7 @@ export class AuthService {
           return false;
         }
 
-        const idToken = await this.oidc.getAccessToken().pipe(take(1)).toPromise().catch(() => '');
+        const idToken = await lastValueFrom(this.oidc.getAccessToken().pipe(take(1))).catch(() => '');
         let claims: any =
           (idToken && this.decodeJwtPayload(idToken)) ||
           (accessToken && this.decodeJwtPayload(accessToken)) ||
@@ -63,11 +66,11 @@ export class AuthService {
         let li = null;
 
         try {
-          if(claims.vc === undefined) {
+          if (claims.vc === undefined) {
             li = claimsToLoginInfo(claims, accessToken ?? '');
-          }else{
+          } else {
             li = vcClaimsToLoginInfo(claims, accessToken ?? '');
-          }          
+          }
           this.loginInfoSubject.next(li);
         } catch {
           this.loginInfoSubject.next(null);
@@ -75,14 +78,7 @@ export class AuthService {
 
         return true;
       })
-    );*/
-    const fakeAccessToken = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICItckxwSkhNVkhCSUQ0Q2FRX0dsTjhFTEprQ0tYMUJWUzhMTzd6enU1cTFVIn0.eyJleHAiOjE3NzcyMDU4NjYsImlhdCI6MTc3NDg1MDUwMSwiYXV0aF90aW1lIjoxNzc0NjEzODY2LCJqdGkiOiJvbnJ0YWM6NDNiYmQxNDctODcxMS01MmUyLTU3NWUtN2M2OTc1ZjMwNWM4IiwiaXNzIjoiaHR0cHM6Ly9pZHAuZGV2LmNsb3VkLXcuZW52cy5yZWRpc2JlLmNvbS9hdXRoL3JlYWxtcy9kZXYtaXNiZSIsImF1ZCI6WyJpc2JlLXBvcnRhbC1kZXYiLCJhY2NvdW50Il0sInN1YiI6ImIyMzQ5ZTMxLWEyOTktNGU5Yi04ZGQxLWQxMWExZDFmNzBjMSIsInR5cCI6IkJlYXJlciIsImF6cCI6Imh0dHBzOi8vY2F0YWxvZy5pc2Jlb25ib2FyZC5jb20iLCJzaWQiOiIyMTQyZThmMC0zZTFiLTkwZjEtZjQxNC0wOWIwMjM0MjIyMTEiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vY2F0YWxvZy5kZXYuY2xvdWQtdy5lbnZzLnJlZGlzYmUuY29tIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWRldi1pc2JlIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7ImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIG9yZ2FuaXphdGlvbiBlbWFpbCBwcm9maWxlIiwidXNlcl9pZGVudGlmaWVyIjoiMTIzNDU2NzhBIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm9yZ2FuaXphdGlvbiI6IkFMQVNUUklBIiwibmFtZSI6IkpvaG4gRG9lIiwib3JnYW5pemF0aW9uX2lkZW50aWZpZXIiOiJWQVRFUy1HODc5MzYxNTkiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJqZXN1c0BhbGFzdHJpYS5pbyIsInBvd2VyIjpbeyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJNYW5hZ2VtZW50IiwidHlwZSI6Im9yZ2FuaXphdGlvbiJ9LHsiYWN0aW9uIjpbIioiXSwiZG9tYWluIjoiSVNCRSIsImZ1bmN0aW9uIjoiSGVscGRlc2siLCJ0eXBlIjoib3JnYW5pemF0aW9uIn0seyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJGYXVjZXQiLCJ0eXBlIjoib3JnYW5pemF0aW9uIn0seyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJXaXphcmQiLCJ0eXBlIjoib3JnYW5pemF0aW9uIn0seyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJOb3Rhcml6YXRpb24iLCJ0eXBlIjoib3JnYW5pemF0aW9uIn0seyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJOb3RpZmljYXRpb25zIiwidHlwZSI6Im9yZ2FuaXphdGlvbiJ9LHsiYWN0aW9uIjpbIioiXSwiZG9tYWluIjoiSVNCRSIsImZ1bmN0aW9uIjoiSWRlbnRpdHkiLCJ0eXBlIjoib3JnYW5pemF0aW9uIn0seyJhY3Rpb24iOlsiKiJdLCJkb21haW4iOiJJU0JFIiwiZnVuY3Rpb24iOiJFbnJvbGxtZW50IiwidHlwZSI6Im9yZ2FuaXphdGlvbiJ9LHsiYWN0aW9uIjpbIkV4ZWN1dGUiXSwiZG9tYWluIjoiSVNCRSIsImZ1bmN0aW9uIjoiT25ib2FyZGluZyIsInR5cGUiOiJvcmdhbml6YXRpb24ifV0sImdpdmVuX25hbWUiOiJKb2huIiwidXNlciI6IkpvaG4gRG9lIiwiZmFtaWx5X25hbWUiOiJEb2UiLCJlbWFpbCI6Imhlc3VzLnJ1aXpAZ21haWwuY29tIn0.a__P_BHOhBqHyetIgFLO2zMy63X8Ul6Fxx-zS3SlsB-X_tL-wP0r8H-cLoRKactjoKqbx5EVCrT0I5DE1BrWbS492vSgcyEVOcV334Tfndw57FwslU5OA3W-teDqkQPHJnbnWGb7WyO4h81xnLZFf-Ymgg0Ho3Cmgjn0TctjnPMzHcpEjw9h1_A-uzN0XBdK-cApsbk2y2ywY8kTS7HjZ221zW7Rgzs9ftB3-jodxOSStl8ygOQZ3Iy9P-txMP8_cNMlV4ggKgD6kHDlzRp87TFS1nKcDHG2aX_XJAXICWn2wcTN6G7-x7urMvNWj6kSJb98vjLbllg0BIAQenhfsQ";
-    let claims: any = this.decodeJwtPayload(fakeAccessToken);
-    const u = this.mapUserFromClaims(claims);
-    this.setState(true, u, fakeAccessToken ?? '', this.pickPrimaryRole(u));
-    const li = claimsToLoginInfo(claims, fakeAccessToken ?? '');
-    this.loginInfoSubject.next(li);
-    return of(true);
+    );
   }
 
   sellerId$ = combineLatest([this.loginInfo$, this.orgCtx.getOrganization()]).pipe(
