@@ -302,7 +302,6 @@
                     </div>
                 }
                 @if(showChars){
-                    <!-- <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._chars' | translate }}</h2> -->
                     @if (prodChars.length === 0 && !showCreateChar){
                         <div class="flex flex-col items-center justify-center w-full px-4">
                           <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
@@ -565,7 +564,6 @@
 
                 @if(showAttach){
                     <div class="inline-flex">
-                        <!-- <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._attachments' | translate }}</h2> -->
                         @if(!IS_ISBE){
                             <info-icon [tooltipText]="'CREATE_PROD_SPEC._restrictions' | translate"></info-icon>
                         }
@@ -652,7 +650,6 @@
                     }
                 }
                 @if(showRelationships){
-                    <!-- <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</h2> -->
                     <div class="">
                         @if(prodSpecRels.length === 0 && prodRelationships.length === 0){
                             <div class="flex flex-col items-center justify-center w-full px-4 mb-4">
@@ -844,7 +841,6 @@
                 }
 
                 @if(showSummary){
-                    <!-- <h2 class="font-normal text-xl text-primary-100">{{ 'CREATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
                         <div class="mb-4 md:grid md:grid-cols-2 gap-[18px]">
                             <div class="flex flex-col gap-2.5">

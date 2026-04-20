@@ -26,7 +26,6 @@ export class SellerCatalogsComponent implements OnInit{
   protected readonly faSort = faSort;
   protected readonly faSwatchbook = faSwatchbook;
 
-  // TODO: remove mock mode once real catalogs are loading again
   MOCK_MODE: boolean = false;
   MOCK_CATALOGS: Catalog[] = [
     { id: 'cat1', name: 'Mock Catalog Alpha', description: 'A sample product catalog for layout testing.', version: '1.0', catalogType: 'ProductCatalog', lifecycleStatus: 'Active', lastUpdate: '2024-01-10T09:00:00Z' },

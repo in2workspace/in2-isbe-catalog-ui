@@ -77,7 +77,6 @@ export class OfferComponent implements OnInit, OnDestroy{
   loadingData:boolean=false;
   
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
-  // TODO: remove mock mode once real offers are loading again
   MOCK_MODE: boolean = false;
 
   offerToCreate:ProductOffering_Create | undefined;

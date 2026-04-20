@@ -60,7 +60,6 @@ export class ProdSpecComponent implements ControlValueAccessor, OnInit, OnDestro
   //PAGE SIZES:
   PROD_SPEC_LIMIT: number = environment.PROD_SPEC_LIMIT;
 
-  // TODO: remove mock mode once real product specs are loading again
   MOCK_MODE: boolean = false;
   MOCK_PROD_SPECS: any[] = [
     { id: 'ps1', name: 'Mock Spec Alpha', brand: 'AcmeCorp', version: '1.0', productNumber: 'ACME-001', description: 'A sample data product specification for layout testing.', lifecycleStatus: 'Active', isBundle: false, lastUpdate: '2024-01-15T10:00:00Z', productSpecCharacteristic: [{ name: 'Format', productSpecCharacteristicValue: [{ value: 'CSV' }] }] },
