@@ -13,13 +13,13 @@
         <label for="inline-checked-radio" class="ms-2 text-sm font-medium text-gray-900 ">This marketplace only</label>
     </div>
 </div>
-<div class="grid grid-cols-2 gap-2 mt-4">
+<div class="grid grid-cols-2 gap-[18px] mt-4">
     <multiple-select [options]="availableCountries"></multiple-select>
     <multiple-select [options]="availableMarketplaces"></multiple-select>
 </div>
 <h3 class="font-semibold text-black  mt-4">Exceptions</h3>
 <p class="mb-3 text-gray-500 ">Within the above selection, never publish in the following marketplaces:</p>
-<div class="grid grid-cols-2 gap-2 mt-4">
+<div class="grid grid-cols-2 gap-[18px] mt-4">
     <multiple-select [options]="availableCountries"></multiple-select>
     <multiple-select [options]="availableMarketplaces"></multiple-select>
 </div>
@@ -37,7 +37,7 @@
         <input id="inline-2-radio" type="radio" value="" name="visibility-buttons" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500   focus:ring-2  ">
         <label for="inline-2-radio" class="ms-2 text-sm font-medium text-gray-900 ">Authenticated customers from any country</label>
     </div>
-    <div class="grid grid-cols-2 gap-2">
+    <div class="grid grid-cols-2 gap-[18px]">
         <div class="flex items-center me-4">
             <input id="inline-checked-radio" type="radio" value="" name="visibility-buttons" class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 focus:ring-purple-500   focus:ring-2  ">
             <label for="inline-checked-radio" class="ms-2 text-sm font-medium text-gray-900 ">Authenticated customers from companies incorporated in specific countries:</label>

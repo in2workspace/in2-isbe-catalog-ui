@@ -59,13 +59,13 @@
     </div>
 } @else {
     <form class="" [formGroup]="metricsForm">
-        <div>
+        <div class="flex flex-col gap-2.5">
             <label for="prod-name" class="font-semibold text-lg ">{{ 'USAGE_SPECS._name' | translate }}</label>
             <input formControlName="name" type="text" id="prod-name" maxLength="100"
-            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 
         </div>
-        <div>
+        <div class="flex flex-col gap-2.5">
             <label for="description" class="font-semibold text-lg ">{{ 'USAGE_SPECS._description' | translate }}</label>
             <textarea id="description" formControlName="description" rows="4"
             class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>

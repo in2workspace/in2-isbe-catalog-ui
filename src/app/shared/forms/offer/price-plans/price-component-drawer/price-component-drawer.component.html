@@ -14,19 +14,19 @@
     <form [formGroup]="priceComponentForm" (ngSubmit)="submitForm()" class="mt-4 space-y-4">
 
       <!-- Nombre -->
-      <div>
+      <div class="flex flex-col gap-2.5">
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._name' | translate }}</label>
         <input data-cy="priceComponentName" formControlName="name" type="text"
-               class="mt-1 w-full p-2 border rounded   ">
+               class="mt-1 w-full p-2 border border-black rounded leading-[1.75]">
       </div>
 
       <!-- Descripción -->
-      <div data-cy="priceComponentDescription">
+      <div data-cy="priceComponentDescription" class="flex flex-col gap-2.5">
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._description' | translate }}</label>
         <app-markdown-textarea formControlName="description"></app-markdown-textarea>
       </div>
 
-      <div>
+      <div class="flex flex-col gap-2.5">
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._base_price' | translate }}</label>
 
         <input
@@ -37,7 +37,7 @@
           (blur)="priceComponentForm.get('price')?.markAsTouched()"
           [ngClass]="(priceComponentForm.get('price')?.invalid == true && priceComponentForm.value.price!='') || (priceComponentForm.get('price')?.touched && priceComponentForm.value.price=='') ? 'border-red-600' : ''"
           class="mb-2 bg-gray-50  border text-sm rounded-lg block w-full p-2.5
-            text-gray-900  focus:ring-primary-100 focus:border-primary-100"
+            text-gray-900  focus:ring-primary-100 focus:border-primary-100 leading-[1.75]"
         />
 
         <!-- Validation Messages -->
@@ -104,7 +104,7 @@
       </div>
       <div class="flex flex-row">
         <select id="type" (change)="changePriceComponentChar($event)"
-          class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+          class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
             @if(!selectedCharacteristic){
               <option value="">Select a characteristic</option>
               @for(char of filteredChars; track char){
@@ -121,7 +121,7 @@
           </select>
           @if(showValueSelect){
               <select id="type" (change)="changePriceComponentCharValue($event)"
-              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                   @for(val of selectedCharacteristic.productSpecCharacteristicValue; track val){
                       @if(hasKey(val, 'unitOfMeasure')){
                           <option value="{{val.value}}">{{val.value}} ({{val.unitOfMeasure}})</option>
@@ -135,9 +135,9 @@
       }
 
       <!-- Tipo de Precio -->
-      <div>
+      <div class="flex flex-col gap-2.5">
         <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT._type_of_price' | translate }}</label>
-        <select data-cy="priceType" formControlName="priceType" class="mt-1 w-full p-2 border rounded   ">
+        <select data-cy="priceType" formControlName="priceType" class="mt-1 w-full p-2 border border-black rounded leading-[1.75]">
           <option value="one time">{{ 'FORMS.PRICE_PLAN_COMPONENT._one_time' | translate }}</option>
           <option value="recurring">{{ 'FORMS.PRICE_PLAN_COMPONENT._recurring' | translate }}</option>
           <option value="recurring-prepaid">{{ 'FORMS.PRICE_PLAN_COMPONENT._recurring_prepaid' | translate }}</option>
@@ -147,9 +147,9 @@
 
       <!-- Opciones dinámicas según el tipo de precio -->
       @if (priceComponentForm.get('priceType')?.value === 'recurring' || priceComponentForm.get('priceType')?.value === 'recurring-prepaid') {
-        <div>
+        <div class="flex flex-col gap-2.5">
           <label class="block text-sm font-medium text-gray-700 ">{{ 'FORMS.PRICE_PLAN_COMPONENT.recurring_period' | translate }}</label>
-          <select data-cy="recurringType" formControlName="recurringPeriod" class="w-full p-2 border rounded   ">
+          <select data-cy="recurringType" formControlName="recurringPeriod" class="w-full p-2 border border-black rounded leading-[1.75]">
             <option value="day">{{ 'FORMS.PRICE_PLAN_COMPONENT._daily' | translate }}</option>
             <option value="week">{{ 'FORMS.PRICE_PLAN_COMPONENT._weekly' | translate }}</option>
             <option value="month">{{ 'FORMS.PRICE_PLAN_COMPONENT._monthly' | translate }}</option>
@@ -159,7 +159,7 @@
       } @else if (priceComponentForm.get('priceType')?.value === 'usage') {
       <div class="flex flex-row">
         <select id="type" (change)="changePriceComponentUsageSpec($event)"
-          class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+          class="mb-2 mr-2 bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
             @if(!selectedUsageSpec){
               <option value="">Select a usage specification</option>
               @for(usage of usageSpecs; track usage){
@@ -176,7 +176,7 @@
           </select>
           @if(showMetricSelect){
               <select id="type" (change)="changePriceComponentMetric($event)"
-              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+              class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                   @if(!selectedMetric){
                     @for(metric of selectedUsageSpec.specCharacteristic; track metric){
                       <option value="{{metric.name}}">{{metric.name}}</option>
@@ -222,12 +222,12 @@
               formControlName="discountValue"
               type="number"
               placeholder="Amount"
-              class="w-1/2 p-2 border rounded  "
+              class="w-1/2 p-2 border rounded leading-[1.75]"
               [ngClass]="(priceComponentForm.get('discountValue')?.invalid == true && priceComponentForm.value.discountValue!='') || (priceComponentForm.get('discountValue')?.touched && priceComponentForm.value.discountValue=='') ? 'border-red-600' : ''"
             >
             <select
               formControlName="discountUnit"
-              class="w-1/2 p-2 border rounded   "
+              class="w-1/2 p-2 border rounded leading-[1.75]"
             >
               <option value="percentage">{{ 'FORMS.PRICE_PLAN_COMPONENT._percentage' | translate }}</option>
               <option value="fixed">{{ 'FORMS.PRICE_PLAN_COMPONENT._fixed' | translate }}</option>
@@ -262,12 +262,12 @@
               formControlName="discountDuration"
               type="number"
               placeholder="Duration"
-              class="w-1/2 p-2 rounded  "
+              class="w-1/2 p-2 rounded leading-[1.75]"
               [ngClass]="(priceComponentForm.get('discountDuration')?.invalid == true && priceComponentForm.value.discountDuration!='') || (priceComponentForm.get('discountDuration')?.touched && priceComponentForm.value.discountDuration=='') ? 'border-red-600' : ''"
             >
             <select
               formControlName="discountDurationUnit"
-              class="w-1/2 p-2 border rounded   "
+              class="w-1/2 p-2 border rounded leading-[1.75]"
             >
               <option value="days">{{ 'FORMS.PRICE_PLAN_COMPONENT._days' | translate }}</option>
               <option value="weeks">{{ 'FORMS.PRICE_PLAN_COMPONENT._weeks' | translate }}</option>

@@ -1,9 +1,10 @@
-import { Injectable, signal, WritableSignal, inject } from '@angular/core';
+import { Injectable, signal, WritableSignal, inject, isDevMode } from '@angular/core';
 import { OidcSecurityService } from 'angular-auth-oidc-client';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, lastValueFrom, Observable, of } from 'rxjs';
 import { take, map, catchError, switchMap } from 'rxjs/operators';
 import { vcClaimsToLoginInfo, LoginInfo, claimsToLoginInfo } from './login-info.mapper';
 import { OrgContextService } from '../services/org-context.service';
+import { environment } from '../../environments/environment';
 
 export interface AppUser {
   sub?: string;
@@ -33,6 +34,16 @@ export class AuthService {
   role: WritableSignal<string | null> = signal(null);
 
   checkAuth(): Observable<boolean> {
+    if (isDevMode()) {
+      const fakeAccessToken = environment.DEV_ACCESS_TOKEN;
+      const claims: any = this.decodeJwtPayload(fakeAccessToken);
+      const u = this.mapUserFromClaims(claims);
+      this.setState(true, u, fakeAccessToken, this.pickPrimaryRole(u));
+      const li = claimsToLoginInfo(claims, fakeAccessToken);
+      this.loginInfoSubject.next(li);
+      return of(true);
+    }
+
     return this.oidc.checkAuth().pipe(
       take(1),
       catchError(() => of({ isAuthenticated: false, accessToken: '', userData: {} } as any)),
@@ -43,7 +54,7 @@ export class AuthService {
           return false;
         }
 
-        const idToken = await this.oidc.getAccessToken().pipe(take(1)).toPromise().catch(() => '');
+        const idToken = await lastValueFrom(this.oidc.getAccessToken().pipe(take(1))).catch(() => '');
         let claims: any =
           (idToken && this.decodeJwtPayload(idToken)) ||
           (accessToken && this.decodeJwtPayload(accessToken)) ||
@@ -163,5 +174,30 @@ export class AuthService {
 
     this.setState(true, user, info.token, this.pickPrimaryRole(user));
     this.loginInfoSubject.next(info as LoginInfo);
+  }
+
+  private buildLocalLoginInfo(): LoginInfo {
+    return {
+      userId: 'local-user',
+      user: 'local',
+      email: 'local.user@example.com',
+      token: 'local-token',
+      expire: Math.floor(Date.now() / 1000) + 60 * 60,
+      seller: 'local-seller',
+      username: 'Local User',
+      roles: [
+        { id: 'orgAdmin', name: 'orgAdmin' },
+        { id: 'seller', name: 'seller' },
+        { id: 'admin', name: 'admin' }
+      ],
+      organizations: [
+        {
+          id: 'org-local',
+          name: 'Local Organization',
+          roles: [{ id: 'orgAdmin', name: 'orgAdmin' }]
+        }
+      ],
+      logged_as: 'org-local'
+    };
   }
 }

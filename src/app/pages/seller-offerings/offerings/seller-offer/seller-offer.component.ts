@@ -25,6 +25,14 @@ export class SellerOfferComponent implements OnInit, AfterViewChecked {
   protected readonly faSwatchbook = faSwatchbook;
   protected readonly faSparkles = faSparkles;
 
+  MOCK_MODE: boolean = false;
+  MOCK_OFFERS: any[] = [
+    { id: '1', name: 'Mock Offer Alpha', description: 'A sample data service offering for layout testing.', version: '1.0', lifecycleStatus: 'Active', isBundle: false, isSellable: true, lastUpdate: '2024-01-15T10:00:00Z', productOfferingPrice: [{ name: 'Free tier', priceType: 'free' }], productSpecification: { id: 'ps1', name: 'Mock Spec A' } },
+    { id: '2', name: 'Mock Offer Beta', description: 'An AI-powered analytics offering for layout testing.', version: '2.1', lifecycleStatus: 'Launched', isBundle: false, isSellable: true, lastUpdate: '2024-02-20T14:30:00Z', productOfferingPrice: [{ name: 'Monthly', priceType: 'recurring', price: { value: 99, unit: 'EUR' } }], productSpecification: { id: 'ps2', name: 'Mock Spec B' } },
+    { id: '3', name: 'Mock Offer Gamma', description: 'Cloud infrastructure bundle for layout testing.', version: '1.5', lifecycleStatus: 'In design', isBundle: true, isSellable: false, lastUpdate: '2024-03-05T09:15:00Z', productOfferingPrice: [{ name: 'Pay per use', priceType: 'usage' }], productSpecification: { id: 'ps3', name: 'Mock Spec C' } },
+    { id: '4', name: 'Mock Offer Delta', description: 'Security and compliance offering for layout testing.', version: '3.0', lifecycleStatus: 'Active', isBundle: false, isSellable: true, lastUpdate: '2024-03-22T16:45:00Z', productOfferingPrice: [{ name: 'Enterprise', priceType: 'recurring', price: { value: 499, unit: 'EUR' } }], productSpecification: { id: 'ps4', name: 'Mock Spec D' } },
+  ];
+
   searchField = new FormControl();
 
   offers:any[]=[];
@@ -64,12 +72,18 @@ export class SellerOfferComponent implements OnInit, AfterViewChecked {
     this.offers = [];
     this.nextOffers = [];
 
+    if (this.MOCK_MODE) {
+      this.offers = this.MOCK_OFFERS;
+      this.loading = false;
+      return;
+    }
+
     combineLatest([
       this.auth.sellerId$,
       this.auth.loginInfo$
     ])
     .pipe(take(1))
-    .subscribe(([sellerId, li]) => {   
+    .subscribe(([sellerId, li]) => {
       this.seller = sellerId || '';
       this.isAdmin = (li?.roles || []).map(r => r.name ?? r.id ?? r).includes('admin');
       this.getOffers(false);

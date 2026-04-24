@@ -1,14 +1,14 @@
 
-<div>
+<div class="flex flex-col gap-6">
   <h2 class="font-semibold text-xl text-primary-100">{{ 'UPDATE_PROD_SPEC._update_prod' | translate }}</h2>
-  <p class="italic text-base">{{ 'UPDATE_PROD_SPEC._update_prod_desc' | translate }}</p>
+  <p class="font-body italic text-base">{{ 'UPDATE_PROD_SPEC._update_prod_desc' | translate }}</p>
     <div class="flex flex-col bg-white mt-4 p-4 rounded-lg">
         <div class="overflow-x-auto">
-            <ol class="flex items-start w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
+            <ol class="max-w-[1000px] mx-auto flex items-start gap-[25px] md:gap-[50px] w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
                 @for (step of stepNavigation; track step.id; let i = $index) {
                     <li
                       (click)="handleStepClick(step)"
-                      class="relative flex-1 flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[140px]"
+                      class="relative flex-1 flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[70px] md:min-w-[140px]"
                       [class.text-primary-100]="isCurrentStep(step.id)"
                       [class.cursor-not-allowed]="isStepDisabled(step)"
                       [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)">
@@ -22,7 +22,7 @@
                                 {{ i + 1 }}
                             </span>
                             @if(i < stepNavigation.length - 1){
-                                <span class="absolute -right-7 md:right-[-25px] w-5 md:w-[50px] h-px bg-black"></span>
+                                <span class="absolute -right-[42px] md:right-[-50px] w-5 md:w-[50px] h-px bg-black"></span>
                             }
                         </div>
                         <span
@@ -36,32 +36,34 @@
             </ol>
         </div>
         <hr class="h-px bg-gray-0 border-0">
-        <div class="flex flex-col gap-2 mt-8">
+        <div class="flex flex-col gap-2.5 mt-[42px]">
                 @if(showGeneral){
                     <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._general' | translate }}</h2> -->
-                    <form class="md:grid md:grid-cols-2 gap-2" [formGroup]="generalForm">
-                        <div>
+                    <form class="md:grid md:grid-cols-2 gap-[18px]" [formGroup]="generalForm">
+                        <div class="flex flex-col gap-2.5">
                             <label for="prod-sepec-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                             <input formControlName="name" type="text" id="prod-sepec-name" maxLength="100"
                             [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
+                        </div>
+                        <div class="flex flex-col gap-2.5">
                             <div class="flex flex-row items-center gap-2">
                               <label for="prod-version" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_version' | translate }}</label>
                               <info-icon [tooltipText]="'CREATE_OFFER._version_tooltip' | translate"></info-icon>
                             </div>
                             <input formControlName="version" type="text" id="prod-version"
                             [ngClass]="generalForm.get('version')?.invalid ? 'border-red-600' : (generalForm.value.version ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
-
+                            class="mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <div>
+                        <div class="flex flex-col gap-2.5">
                             <label for="prod-brand" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
                             <input formControlName="brand" type="text" id="prod-brand"
                             [ngClass]="generalForm.get('brand')?.invalid && generalForm.value.brand!='' ? 'border-red-600' : (generalForm.value.brand ? 'border-primary-100' : 'border-gray-300')"
-                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
+                        </div>
+                        <div class="flex flex-col gap-2.5">
                             <label for="prod-number" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._id_number' | translate }}</label>
-                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
-
+                            <input formControlName="number" type="text" id="prod-number" class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
                         <app-status-selector class="col-span-2" [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
@@ -70,35 +72,6 @@
                         <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>
 
                     </form>
-                    @if(BUNDLE_ENABLED){
-                        <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleBundle();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                {{ 'UPDATE_PROD_SPEC._next' | translate }}
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
-                    }@else if(IS_ISBE){
-                        <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleChars()" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
-
-                    }@else{
-                        <div class="flex w-full justify-items-end justify-end">
-                            <button type="button" (click)="toggleCompliance();" [disabled]="!generalForm.valid" [ngClass]="!generalForm.valid ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                {{ 'CREATE_PROD_SPEC._next' | translate }}
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
-                    }
                 }
                 @if(showBundle){
                     <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</h2> -->
@@ -199,14 +172,6 @@
                             </div>
                         }
                     }
-                    <div class="flex w-full justify-items-end justify-end ">
-                        <button type="button" (click)="toggleCompliance();" [disabled]="prodSpecsBundle.length<2 && bundleChecked" [ngClass]="(prodSpecsBundle.length<2 && bundleChecked) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'UPDATE_PROD_SPEC._next' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
                 }
                 @if(showCompliance){
                     <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._comp_profile' | translate }}</h2> -->
@@ -273,23 +238,7 @@
                             </svg>
                         </button> -->
 
-                        <div class=" flex">
-                            <svg data-popover-target="popover-default" class="flex self-center w-6 h-6 text-primary-100" clip-rule="evenodd" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    <div data-popover id="popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0   ">
-                        <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg  ">
-                            <h3 class="font-semibold text-gray-900 ">{{ 'UPDATE_PROD_SPEC._how_to_verify' | translate }}</h3>
-                        </div>
-                        <div class="px-3 py-2 inline-block">
-                            <p class="inline-block">{{ 'UPDATE_PROD_SPEC._verify_text' | translate }}
-                                <a target="_blank" class="font-medium text-purple-600  hover:underline">
-                                    {{ 'UPDATE_PROD_SPEC._dome_trust' | translate }}.</a>
-                            </p>
-                        </div>
-                        <div data-popper-arrow></div>
+                        <info-icon [tooltipText]="'UPDATE_PROD_SPEC._verify_text' | translate"></info-icon>
                     </div>
 
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full bg-white  m-4">
@@ -485,35 +434,35 @@
                             </button>
                         </div>
                     } @else {
-                        <form class=" grid grid-cols-2 gap-2" [formGroup]="charsForm">
-                            <div>
+                        <form class=" grid grid-cols-2 gap-[18px] pt-6" [formGroup]="charsForm">
+                            <div class="flex flex-col gap-2.5">
                                 <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
-                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                class="mb-2 bg-white border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 
                             </div>
-                            <div>
+                            <div class="flex flex-col gap-2.5">
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._type' | translate }}</label>
                                 <select id="type" (change)="onTypeChange($event)"
-                                class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                                class="mb-2 bg-white  border border-black   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                                     <option selected value="string">String</option>
                                     <option value="number">Number</option>
                                     <option value="range">Number range</option>
                                 </select>
                             </div>
-                            <div class="col-span-2">
+                            <div class="col-span-2 flex flex-col gap-2.5">
                                 <label for="description" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                                 <textarea id="description" formControlName="description" rows="4"
-                                class="mb-2 min-h-fit bg-gray-50  border border-gray-300   text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
+                                class="mb-2 min-h-fit bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"></textarea>
                             </div>
                         </form>
-                        <div class="m-4">
+                        <div class="flex flex-col gap-2.5">
                             @if(creatingChars.length>0){
                                 <label for="values" class="font-semibold text-base ">Values</label>
-                                <div class="flex flex-col items-start pl-4  shadow-md sm:rounded-lg w-full bg-white border border-gray-300 mb-2">
+                                <div class="flex flex-col items-start pl-4 sm:rounded-lg w-full bg-white border border-gray-300 py-1 mb-2">
                                     @if(rangeCharSelected){
                                         @for (char of creatingChars; track char; let idx = $index) {
-                                            <div class="flex w-full justify-between">
+                                            <div class="flex w-full justify-between items-center">
                                                 <div class="align-items-middle align-middle">
                                                     <input [checked]="char?.isDefault" (click)="selectDefaultChar(char,idx)" (keydown)="selectDefaultChar(char,idx)" id="disabled-checked-checkbox" type="checkbox" value=""
                                                     class="align-middle w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded-full focus:ring-purple-500 focus:ring-2">
@@ -552,9 +501,9 @@
                             @if(stringCharSelected){
                                 <div class="flex flex-row items-center align-items-middle">
                                     <input type="text" id="string-value" [(ngModel)]="stringValue"
-                                    class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5"/>
-                                    <button (click)="addCharValue()" [disabled]="!stringValue" [ngClass]="!stringValue ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button" 
-                                    class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50font-medium rounded-full text-sm mt-4 p-1 text-center inline-flex items-center">
+                                    class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]"/>
+                                    <button (click)="addCharValue()" [disabled]="!stringValue" [ngClass]="!stringValue ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button"
+                                    class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50font-medium rounded-full text-sm p-1 text-center inline-flex items-center">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
                                         </svg>
@@ -567,14 +516,14 @@
                                             {{ 'UPDATE_PROD_SPEC._value' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="number-value" [(ngModel)]="numberValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900    bg-gray-200 border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="unit-value" [(ngModel)]="numberUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
 
                                     <button (click)="addCharValue()" [disabled]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit" [ngClass]="(numberValue === '' || numberValue === null || numberValue === undefined) || !numberUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'" type="button"
@@ -591,21 +540,21 @@
                                             {{ 'UPDATE_PROD_SPEC._from' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="from-value" [(ngModel)]="fromValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._to' | translate }}
                                         </span>
                                         <input type="number" pattern="[0-9]*" id="to-value" [(ngModel)]="toValue"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <div class="flex w-full mb-2 md:mb-0">
                                         <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200    border rounded-e-0 border-gray-300 border-e-0 rounded-s-md">
                                             {{ 'UPDATE_PROD_SPEC._unit' | translate }}
                                         </span>
                                         <input type="text" id="range-value" [(ngModel)]="rangeUnit"
-                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" />
+                                        class="mr-4 bg-white border border-gray-300 text-gray-100    text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                                     </div>
                                     <button (click)="addCharValue()" [disabled]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit" [ngClass]="(fromValue === '' || fromValue === null || fromValue === undefined) || (toValue === '' || toValue === null || toValue === undefined) || !rangeUnit ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'"  type="button"
                                     class="text-white w-fit h-full bg-primary-100 hover:bg-primary-50 font-medium rounded-full text-sm mt-4 p-1 text-center inline-flex items-center">
@@ -627,42 +576,22 @@
 
                         </div>
                     }
-                    <div class="flex w-full justify-items-end justify-end  mt-4">
-                        <button type="button" (click)="toggleAttach();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'UPDATE_PROD_SPEC._next' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
                 }
 
                 @if(showAttach){
-                    <div class="inline-flex">
-                        <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._attachments' | translate }}</h2> -->
-                        <div class=" flex">
-                            <svg data-popover-target="data-popover-default" class="flex self-center w-6 h-6 text-primary-100" clip-rule="evenodd" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.592-8.5h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
-                            </svg>
-                        </div>
-                        <div data-popover id="data-popover-default" role="tooltip" class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0   ">
-                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg  ">
-                                <h3 class="font-semibold text-gray-900 ">{{ 'UPDATE_PROD_SPEC._file_res' | translate }}</h3>
-                            </div>
-                            <div class="px-3 py-2 inline-block">
-                                <p class="inline-block">{{ 'UPDATE_PROD_SPEC._restrictions' | translate }}
-                                </p>
-                            </div>
-                            <div data-popper-arrow></div>
-                        </div>
+                    <div class="flex flex-col">
+                      <div class="w-full flex flex-col md:flex-row gap-2 md:gap-2">
+                        @if(!IS_ISBE){
+                            <h4 class="text-base font-semibold  ">{{ 'UPDATE_PROD_SPEC._add_prod_img' | translate }}</h4>
+                        }@else{
+                            <h4 class="text-base font-semibold  ">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</h4>
+                        }
+                        <info-icon [tooltipText]="'UPDATE_PROD_SPEC._add_logo_tooltip' | translate"></info-icon>
+                      </div>
+                      <span class="font-body text-sm text-black">{{ 'UPDATE_PROD_SPEC._add_logo_requirements' | translate }}</span>
                     </div>
-                    @if(!IS_ISBE){
-                        <h4 class="text-base font-semibold  ">{{ 'UPDATE_PROD_SPEC._add_prod_img' | translate }}</h4>
-                    }@else{
-                        <h4 class="text-base font-semibold  ">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</h4>
-                    }
                     @if(showImgPreview){
-                        <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full mx-auto m-4 shadow-lg">
+                        <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl py-8 aspect-square max-w-sm w-full">
                             <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             <button (click)="removeImg()" class="z-10 absolute top-2 right-2 p-1 font-semibold text-white bg-red-500 rounded-3xl">
                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -690,7 +619,7 @@
                             </div>
                             <label class="font-semibold ml-6 ">{{ 'UPDATE_PROD_SPEC._add_prod_img_url' | translate }}</label>
                         }
-                        <div class="relative w-full ml-6 mt-2 mb-2">
+                        <div class="relative w-full">
                             <!-- Tooltip (Above the Input, Positioned Up) -->
                             @if(attImageName.invalid && attImageName.touched){
                                 <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 w-max bg-gray-900 text-white text-xs rounded-lg p-2 shadow-lg z-50">
@@ -700,12 +629,12 @@
                                 </div>
                             }
 
-                            <div class="flex items-center h-fit w-full justify-between">
+                            <div class="flex items-center h-fit w-1/2 justify-between">
                                 <!-- Input Field -->
                                 <input #imgURL type="text" id="att-name"
                                     [formControl]="attImageName"
                                     (blur)="attImageName.markAsTouched()"
-                                    class="w-full bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 p-2.5"
+                                    class="w-full bg-white border border-gray-300 text-gray-100    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 p-2.5 leading-[1.75]"
                                     [ngClass]="attImageName.invalid && attImageName.touched ? 'border-red-500' : ''"
                                 />
 
@@ -734,11 +663,11 @@
                         } @else {
                             <div class="m-4 w-full">
                                 <div class="lg:flex lg:grid lg:grid-cols-2 w-full gap-2 align-items-middle align-middle border border-gray-200 rounded-lg p-4">
-                                    <div class="h-fit">
+                                    <div class="h-fit flex flex-col gap-2.5">
                                         <label for="att-file--name" class="font-semibold text-base ">{{ 'PROFILE._name' | translate }}</label>
                                         <input #attachName type="text" id="att-file-name" [formControl]="attFileName"
                                         [ngClass]="attFileName.invalid == true ? 'border-red-600' : 'border-gray-300'"
-                                        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2" />
+                                        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]" />
                                     </div>
                                     @if(attachToCreate.url==''){
                                         <ngx-file-drop class="p-4 w-full" dropZoneLabel="Drop files here" (onFileDrop)="dropped($event,'attach')" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
@@ -784,18 +713,8 @@
                         }
 
                     }
-
-                    <div class="flex w-full justify-items-end justify-end  mt-4">
-                        <button type="button" (click)="toggleRelationship();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'UPDATE_PROD_SPEC._next' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
                 }
                 @if(showRelationships){
-                    <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._relationships' | translate }}</h2> -->
                     <div class="m-4">
                         @if (prodRelationships.length === 0){
                             <div class="flex justify-center w-full mb-4">
@@ -859,7 +778,7 @@
                         } @else {
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._relationship_type' | translate }}</label>
                             <select id="rel-type" (change)="onRelChange($event)"
-                            class="shadow bg-white border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+                            class="shadow bg-white border border-black text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
                                 <option selected value="migration">{{ 'UPDATE_OFFER._migration' | translate }}</option>
                                 <option value="dependency">{{ 'UPDATE_OFFER._dependency' | translate }}</option>
                                 <option value="exclusivity">{{ 'UPDATE_OFFER._exclusivity' | translate }}</option>
@@ -956,20 +875,11 @@
                             </div>
                         }
                     </div>
-                    <div class="flex w-full justify-items-end justify-end ">
-                        <button type="button" (click)="showFinish();" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'UPDATE_PROD_SPEC._finish' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
                 }
                 @if(showSummary){
-                    <!-- <h2 class="text-3xl font-semibold text-primary-100  ">{{ 'UPDATE_PROD_SPEC._finish' | translate }}</h2> -->
                     <div class="">
-                        <div class="mb-4 md:grid md:grid-cols-2 gap-2">
-                            <div>
+                        <div class="mb-4 md:grid md:grid-cols-2 gap-[18px]">
+                            <div class="flex flex-col gap-2.5">
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                                     {{productSpecToUpdate?.name}}
@@ -982,7 +892,7 @@
                                     {{productSpecToUpdate?.version}}
                                 </label>
                             </div>
-                            <div>
+                            <div class="flex flex-col gap-2.5">
                                 <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_brand' | translate }}</label>
                                 <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5" >
                                     {{productSpecToUpdate?.brand}}
@@ -996,7 +906,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-4">
+                        <div class="mb-4 flex flex-col gap-2.5">
                             <label class="font-semibold text-base">{{ 'UPDATE_PROD_SPEC._status' | translate }}</label>
                             <app-status-selector [modelType]="'spec'" [anchor]="prodStatusAnchor" [statuses]="[prodStatusAnchor]" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }" [disabled]="true"></app-status-selector>
                         </div>
@@ -1010,7 +920,7 @@
 
                         @if(imgPreview!=''){
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._profile_pic' | translate }}</label>
-                            <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl pb-8 pt-40 max-w-sm w-full my-4 shadow-lg">
+                            <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl aspect-square py-8 max-w-sm w-full">
                                 <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             </div>
                         }
@@ -1143,19 +1053,40 @@
                                 </table>
                             </div>
                         }
-                        <div class="flex w-full justify-items-end justify-end ">
-                            <button type="button" (click)="updateProduct();" [disabled]="!isProdValid()" [ngClass]="!isProdValid() ? 'opacity-50' : 'hover:bg-primary-50'"  class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                                {{ 'UPDATE_PROD_SPEC._update_prod' | translate }}
-                                <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                                </svg>
-                            </button>
-                        </div>
                     </div>
                 }
 
         </div>
+
     </div>
+
+  <div class="flex w-full justify-end gap-6">
+      @if(currentStepIndex > 0){
+          <button type="button" (click)="goToPrevStep()" class="flex gap-2 text-white bg-primary-100 justify-start border border-primary-100 hover:bg-primary-50 hover:text-white focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-base px-5 py-2.5 text-center items-center">
+              <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="rotate-180">
+              <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="currentColor"/>
+              </svg>
+              {{ 'UPDATE_PROD_SPEC._prev' | translate }}
+          </button>
+      }@else{
+          <div></div>
+      }
+      @if(!isLastStep){
+          <button type="button" (click)="goToNextStep()" [disabled]="!canGoNext" [ngClass]="!canGoNext ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end align-end bg-primary-100 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-full text-base px-5 py-2.5 text-center items-center">
+              {{ 'UPDATE_PROD_SPEC._next' | translate }}
+              <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
+              </svg>
+          </button>
+      }@else{
+          <button type="button" (click)="updateProduct();" [disabled]="!isProdValid()" [ngClass]="!isProdValid() ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-base px-5 py-2.5 text-center items-center">
+              {{ 'UPDATE_PROD_SPEC._update_prod' | translate }}
+              <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
+              </svg>
+          </button>
+      }
+  </div>
 
 </div>
 

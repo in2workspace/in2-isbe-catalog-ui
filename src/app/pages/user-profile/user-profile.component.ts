@@ -145,4 +145,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   getProfile() { this.onMenuSelect('account'); }
   getOrgProfile() { this.onMenuSelect('org'); }
   getBilling() { this.onMenuSelect('billing'); }
+  getRevenue() { this.onMenuSelect('revenue'); }
+  goToOrders() { this.onMenuSelect('orders'); }
 }

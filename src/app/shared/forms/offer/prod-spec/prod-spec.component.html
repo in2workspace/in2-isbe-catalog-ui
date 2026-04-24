@@ -23,9 +23,10 @@
     @if(prodSpecs.length==0){
       <div class="flex flex-col items-center justify-center w-full px-4 py-16">
           <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-          <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
+          <div class="flex w-full justify-center items-center p-4 text-base text-primary-100" role="alert">
             <div class="text-center">
-              {{ 'OFFERINGS._no_prod' | translate }}
+              <span class="text-primary-100 font-bold">{{ 'OFFERINGS._no_prod' | translate }}</span>
+              <p class="text-gray-500">{{ 'OFFERINGS._no_prod_desc' | translate }}</p>
             </div>
           </div>
           <button data-cy="newOffering" type="button" (click)="onCreateProductSpecClick()"

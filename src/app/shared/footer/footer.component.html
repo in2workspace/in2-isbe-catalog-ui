@@ -1,35 +1,30 @@
-<footer class="w-full py-6 px-4 md:p-7 bg-black md:flex md:items-center md:justify-end">
-  <div class="flex flex-col gap-6 md:gap-12 w-full">
-    <!-- Social Links -->
-    <!-- TODO: Removed this a per design -->
-    <!-- <div class="flex justify-start text-gray-500">
-      <fa-icon (click)="open(ISBE_LINKEDIN)" (keydown.enter)="open(ISBE_LINKEDIN)" tabindex="0" class="mr-4 cursor-pointer" [icon]="faLinkedin"></fa-icon>
-      <fa-icon (click)="open(ISBE_X)" (keydown.enter)="open(ISBE_X)" tabindex="0" class="mr-4 cursor-pointer" [icon]="faXTwitter"></fa-icon>
-      <fa-icon (click)="open(ISBE_YOUTUBE)" (keydown.enter)="open(ISBE_YOUTUBE)" tabindex="0" class="cursor-pointer" [icon]="faYoutube"></fa-icon>
-    </div> -->
+<footer class="w-full py-6 px-4 md:p-7 md:flex md:items-center md:justify-end" [ngClass]="isBeigeBackground ? 'bg-beige text-black' : 'bg-black text-white'">
+  <div class="max-w-[1800px] mx-auto flex flex-col gap-6 md:gap-12 w-full">
 
     <!-- Pre Footer -->
     <div class="flex flex-wrap gap-8 pt-8 pb-5 md:pt-14 md:pb-10">
-      <img src="assets/logos/partner_logo_white.svg" class="w-auto h-8" alt="Logo" />
-      <img src="assets/logos/gobierno_white.svg" class="w-auto h-8" alt="Logo" />
-      <img src="assets/logos/plan_white.svg" class="w-auto h-8" alt="Logo" />
-      <img src="assets/logos/madrid_white.svg" class="w-auto h-8" alt="Logo" />
-      <img src="assets/logos/alastria_white.svg" class="w-auto h-8" alt="Logo" />
+      @if(isBeigeBackground) {
+        <img src="assets/logos/Europa.svg" class="w-auto h-8" alt="Logo" />
+        <img src="assets/logos/Gobierno.svg" class="w-auto h-8" alt="Logo" />
+        <img src="assets/logos/PRT.svg" class="w-auto h-8" alt="Logo" />
+        <img src="assets/logos/Madrid.svg" class="w-auto h-8" alt="Logo" />
+        <img src="assets/logos/Alastria.svg" class="w-auto h-8" alt="Logo" />
+      } @else {
+        <img src="assets/logos/partner_logo_white.svg" class="w-auto h-8" alt="Logo" />
+        <img src="assets/logos/gobierno_white.svg" class="w-auto h-8" alt="Logo" />
+        <img src="assets/logos/plan_white.svg" class="w-auto h-8" alt="Logo" />
+        <img src="assets/logos/madrid_white.svg" class="w-auto h-8" alt="Logo" />
+        <img src="assets/logos/alastria_white.svg" class="w-auto h-8" alt="Logo" />
+      }
     </div>
 
-    <hr class="h-px bg-white border-0">
+    <hr class="h-px border-0" [ngClass]="isBeigeBackground ? 'bg-black' : 'bg-white'">
 
     <!-- Footer -->
-    <div class="flex flex-col md:flex-row justify-between gap-6 text-white">
+    <div class="font-body flex flex-col md:flex-row justify-between gap-6">
 
       <div class="credits text-base leading-tight max-w-3xl">
-        Proyecto ‘INFRAESTRUCTURA DE SERVICIOS BLOCKCHAIN DE ESPAÑA (ISBE)’, en el marco del Convenio
-        de Colaboración firmado
-        entre la Comunidad de Madrid y Consorcio Red Alastria, dentro del Programa de Redes Territoriales de
-        Especialización
-        Tecnológica en el Marco del Plan de Recuperación, Transformación y Resiliencia – financiado por la Unión Europea
-        – Next
-        Generation EU.
+        {{ 'FOOTER._credits_text' | translate }}
       </div>
 
       <div class="flex flex-col md:flex-row gap-10 md:gap-20 items-baseline">
@@ -41,13 +36,13 @@
             </li>
           }
           <li>
-            <a target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._privacy' | translate }}</a>
+            <a [href]="legalLinks.privacy" target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._privacy' | translate }}</a>
           </li>
           <li>
-            <a target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._cookies' | translate }}</a>
+            <a [href]="legalLinks.cookies" target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._cookies' | translate }}</a>
           </li>
           <li>
-            <a target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._licensing' | translate }}</a>
+            <a [href]="legalLinks.licensing" target="_blank" class="mr-4 underline md:mr-6">{{ 'FOOTER._licensing' | translate }}</a>
           </li>
           @if(!IS_ISBE){
             <li>
@@ -62,7 +57,7 @@
 
 </footer>
 @if(feedback && !IS_ISBE){
-  <feedback-modal 
+  <feedback-modal
   rateMessage="How would you rate your overall experience with DOME?"
   writeMessage="How can we improve DOME?"
   type="experience"

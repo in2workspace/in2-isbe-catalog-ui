@@ -1,11 +1,11 @@
 <form novalidate="" class="grid h-full grid-cols-2 gap-5 m-4" [formGroup]="billingForm">
-    <div class="col-span-2">
+    <div class="col-span-2 flex flex-col gap-2.5">
         <label for="title" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._title' | translate }} (*)</label>
         <input id="title" formControlName="name" name="title" type="text"
         [ngClass]="billingForm.get('name')?.touched && billingForm.get('name')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 '"
-        class="mb-2 bg-gray-50 border text-gray-900   text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+        class="mb-2 bg-gray-50 border text-gray-900   text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
         @if(billingForm.get('name')?.touched && billingForm.get('name')?.hasError('required')){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -13,13 +13,13 @@
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._too_long' | translate }}</span></p>
         }
     </div>
-    <div>
+    <div class="flex flex-col gap-2.5">
         <label for="address.country" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._country' | translate }} (*)</label>
         <input id="address.country" formControlName="country" name="address.country" type="text"
         [ngClass]="billingForm.get('country')?.touched && billingForm.get('country')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 '"
-        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]">
         @if(billingForm.get('country')?.touched && billingForm.get('country')?.hasError('required')){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -27,13 +27,13 @@
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._too_long' | translate }}</span></p>
         }
     </div>
-    <div>
+    <div class="flex flex-col gap-2.5">
         <label for="address.city" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._city' | translate }} (*)</label>
         <input id="address.city" formControlName="city" name="address.city" type="text"
         [ngClass]="billingForm.get('city')?.touched && billingForm.get('city')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 '"
-        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]">
         @if(billingForm.get('city')?.touched && billingForm.get('city')?.hasError('required')){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -41,13 +41,13 @@
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._too_long' | translate }}</span></p>
         }
     </div>
-    <div>
+    <div class="flex flex-col gap-2.5">
         <label for="address.state" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._state' | translate }} (*)</label>
         <input id="address.state" formControlName="stateOrProvince" name="address.state" type="text"
         [ngClass]="billingForm.get('stateOrProvince')?.touched && billingForm.get('stateOrProvince')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 '"
-        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]">
         @if(billingForm.get('stateOrProvince')?.touched && billingForm.get('stateOrProvince')?.hasError('required')){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -55,13 +55,13 @@
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._too_long' | translate }}</span></p>
         }
     </div>
-    <div>
+    <div class="flex flex-col gap-2.5">
         <label for="address.zip" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._post_code' | translate }} (*)</label>
         <input id="address.zip" formControlName="postCode" name="address.zip" type="text"
         [ngClass]="billingForm.get('postCode')?.touched && billingForm.get('postCode')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 '"
-        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]">
         @if(billingForm.get('postCode')?.touched && billingForm.get('postCode')?.hasError('required')){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
@@ -69,7 +69,7 @@
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._too_long' | translate }}</span></p>
         }
     </div>
-    <div class="col-span-2">
+    <div class="col-span-2 flex flex-col gap-2.5">
         <label for="address.street_address" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._street' | translate }} (*)</label>
         <textarea id="address.street_address" formControlName="street" name="address.street_address"
         [ngClass]="billingForm.get('street')?.touched && billingForm.get('street')?.invalid
@@ -83,14 +83,14 @@
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._too_long_larger' | translate }}</span></p>
         }
     </div>
-    <div class="col-span-2">
+    <div class="col-span-2 flex flex-col gap-2.5">
         <label for="email" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._email' | translate }} (*)</label>
         <input id="email"
         [ngClass]="billingForm.get('email')?.touched && billingForm.get('email')?.invalid
         ? 'border-red-600'
         : 'border-gray-300 '"
         formControlName="email" name="email"
-        class="mb-2 bg-gray-50 border text-gray-900   text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+        class="mb-2 bg-gray-50 border text-gray-900   text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
         @if(billingForm.get('email')?.invalid && billingForm.get('email')?.errors?.['maxlength']){
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._too_long_email' | translate }}</span></p>
         }
@@ -101,10 +101,10 @@
             <p class="text-sm text-red-600 "><span class="font-medium">{{ 'BILLING._mandatory' | translate }}</span></p>
         }
     </div>
-    <div class="col-span-2 lg:col-span-1">
+    <div class="col-span-2 lg:col-span-1 flex flex-col gap-2.5">
         <label for="phoneType" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._phone_type' | translate }}</label>
         <select id="phoneType" formControlName="telephoneType"
-        class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2">
+        class="bg-white border-black text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]">
             <option value="Mobile">Mobile</option>
             <option value="Landline">Landline</option>
             <option value="Office">Office</option>
@@ -112,7 +112,7 @@
             <option value="Other">Other</option>
         </select>
     </div>
-    <div class="col-span-2 lg:col-span-1">
+    <div class="col-span-2 lg:col-span-1 flex flex-col gap-2.5">
         <label for="phoneNumber" class="mb-3 block text-sm font-semibold leading-none text-body-dark ">{{ 'BILLING._phone' | translate }} (*)</label>
         <div class="w-full">
             <div class="relative flex items-center">
@@ -137,7 +137,7 @@
                     </div>
                 }
                 <input id="phoneNumber" formControlName="telephoneNumber" name="phoneNumber" type="number" [ngClass]="billingForm.get('telephoneNumber')?.touched && billingForm.get('telephoneNumber')?.invalid == true ? 'border-red-600' : 'border-gray-300 '"
-                class="mb-2 bg-gray-50 border text-gray-900 text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5  ">
+                class="mb-2 bg-gray-50 border text-gray-900 text-sm rounded-r-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
             </div>
             @if(billingForm.get('telephoneNumber')?.invalid  && billingForm.get('telephoneNumber')?.errors?.['min'] && billingForm.get('telephoneNumber')?.touched){
                 <p class="text-sm text-red-600 "><span class="font-medium">You cannot enter negative numbers.</span></p>

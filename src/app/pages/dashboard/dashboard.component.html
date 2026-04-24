@@ -9,9 +9,7 @@
           </a>-->
           <div class="flex flex-col md:flex-row justify-start max-w-screen-xl">
             <div data-cy="mainText" class="max-w-4xl">
-              <!-- TODO: title doesnt break
-              <h1 class="mb-4 text-left text-5xl lg:text-7xl font-semibold tracking-tight text-primary-100">{{ 'DASHBOARD._header' | translate }}</h1> -->
-              <h1 class="mb-4 text-left text-5xl lg:text-7xl font-semibold tracking-tight text-primary-100">{{ 'DASHBOARD._header' | translate }}</h1>
+              <h1 class="mb-6 text-left text-5xl lg:text-7xl font-semibold tracking-tight text-primary-100 break-words md:break-normal">{{ 'DASHBOARD._header' | translate }}</h1>
 
               <p class="text-left text-base lg:text-xl font-normal text-primary-100">{{ 'DASHBOARD._subheader' | translate }}</p>
               <!--<button data-cy="browseServices" id="browseServices" (click)="goTo('/search')"
@@ -72,7 +70,7 @@
         <form class="mx-5 w-full">
           <div class="flex">
             <div class="relative w-full">
-              <input type="search" id="dashboardSearchBar" [formControl]="searchField" (keydown.enter)="filterSearch($event)" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-100 focus:border-primary-100       " placeholder="{{ 'DASHBOARD._search_ph' | translate }}" required>
+              <input type="search" id="dashboardSearchBar" [formControl]="searchField" (keydown.enter)="filterSearch($event)" class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-100 focus:border-primary-100       leading-[1.75]" placeholder="{{ 'DASHBOARD._search_ph' | translate }}" required>
               <button type="submit" id="dashboardSearchButton" (click)="filterSearch($event)" class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-purple-700 rounded-e-lg border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300   ">
                 <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
@@ -88,29 +86,12 @@
     <bae-off-gallery></bae-off-gallery>
 
     <!-- BANNER COMPONENT -->
-    <section class="px-8 pb-8">
-      <div class="rounded-3xl p-8 md:px-16 md:py-14 bg-green flex flex-col md:flex-row justify-between gap-8">
-        <div class="flex flex-col gap-8">
-          <h3 class="text-2xl md:text-3xl font-heading font-semibold max-w-sm">Conecta estos servicios con la
-            infraestructura que los
-            hace posibles
-          </h3>
-          <p class="max-w-md">Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal.</p>
-          <button type="button" (click)="openWindow(isbeAbout)"
-            class="w-fit flex gap-2 items-center justify-start text-white bg-black font-medium rounded-full text-sm uppercase px-5 py-2.5 text-center me-2">
-            {{ 'ABOUT._visit_isbe' | translate }}
-            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-            </svg>
-          </button>
-        </div>
-
-        <picture class="rounded-3xl overflow-hidden max-w-md bg-gray">
-          <img class="size-full object-cover" src="/assets/images/ISBE_fondo.webp" alt="Product image" />
-        </picture>
-
-      </div>
-    </section>
+    <app-isbe-banner
+      class="mt-[7.5rem] px-8 pb-8 block"
+      titleKey="DASHBOARD._banner_title"
+      descKey="DASHBOARD._banner_desc"
+      variant="green">
+    </app-isbe-banner>
     
     @if(!IS_ISBE){
       <app-platform-benefits></app-platform-benefits>  

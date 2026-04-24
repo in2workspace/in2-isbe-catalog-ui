@@ -10,13 +10,14 @@ import { PlatformBenefitsComponent } from 'src/app/offerings/platform-benefits/p
 import { GalleryComponent } from 'src/app/offerings/gallery/gallery.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgClass } from '@angular/common';
+import { IsbeBannerComponent } from 'src/app/shared/isbe-banner/isbe-banner.component';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrl: './dashboard.component.css',
     standalone: true,
-    imports: [PlatformBenefitsComponent, GalleryComponent, TranslateModule, NgClass, ReactiveFormsModule]
+    imports: [PlatformBenefitsComponent, GalleryComponent, TranslateModule, NgClass, ReactiveFormsModule, IsbeBannerComponent]
 })
 export class DashboardComponent implements OnInit {
 

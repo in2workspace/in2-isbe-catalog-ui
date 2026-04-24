@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { beforeEach, describe, expect, it, jest } from '@jest/globals';
+import { beforeEach, describe, expect, it } from '@jest/globals';
 
 import { UserProfileComponent } from './user-profile.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,12 +14,6 @@ import {
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
-
-  const hasActive = (el?: HTMLElement | null) =>
-    !!el && el.classList.contains('text-green');
-
-  const notActive = (el?: HTMLElement | null) =>
-    !el || !el.classList.contains('text-green');
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -71,4 +65,23 @@ describe('UserProfileComponent', () => {
     expect(component.show_revenue).toBe(false);
   });
 
+  it('should toggle billing, revenue and orders views', () => {
+    component.getBilling();
+    expect(component.show_billing).toBe(true);
+    expect(component.show_profile).toBe(false);
+    expect(component.show_orders).toBe(false);
+    expect(component.show_org_profile).toBe(false);
+    expect(component.show_revenue).toBe(false);
+
+    component.getRevenue();
+    expect(component.show_revenue).toBe(true);
+    expect(component.show_billing).toBe(false);
+
+    component.goToOrders();
+    expect(component.show_orders).toBe(true);
+    expect(component.show_profile).toBe(false);
+    expect(component.show_billing).toBe(false);
+    expect(component.show_org_profile).toBe(false);
+    expect(component.show_revenue).toBe(false);
+  });
 });

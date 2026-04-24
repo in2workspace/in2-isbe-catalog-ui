@@ -1,6 +1,7 @@
 // this file is the used when deploying (see Dockerfile);
 // its values will be overwriten by env variables (see env.js & env.template.js)
 export const environment = {
+    DEV_ACCESS_TOKEN: "",
     BASE_URL: (window as any)["env"]["BASE_URL"] || "",
     FOUNDATION_ID: 'VATES-G87936159',
     locale: 'es-ES',

@@ -817,6 +817,40 @@ export class CreateProductSpecComponent implements OnInit {
     this.currentStep = step;
   }
 
+  get isLastStep(): boolean {
+    return this.currentStepIndex === this.stepNavigation.length - 1;
+  }
+
+  get canGoNext(): boolean {
+    if (this.isLastStep) return false;
+    switch (this.currentStep) {
+      case 'general-info': return this.generalForm.valid;
+      case 'bundle': return !(this.prodSpecsBundle.length < 2 && this.bundleChecked);
+      case 'compliance': return !this.checkValidISOS();
+      case 'chars': return true;
+      case 'attach': return this.attImageName.valid || this.showImgPreview;
+      case 'relationships': return true;
+      default: return false;
+    }
+  }
+
+  goToNextStep() {
+    const nextIndex = this.currentStepIndex + 1;
+    if (nextIndex < this.stepNavigation.length) {
+      switch (this.currentStep) {
+        case 'general-info': this.generalDone = true; break;
+        case 'bundle': this.bundleDone = true; break;
+        case 'compliance': this.complianceDone = true; break;
+        case 'chars': this.charsDone = true; break;
+        case 'attach': this.attachDone = true; break;
+        case 'relationships': this.relationshipDone = true; break;
+      }
+      const next = this.stepNavigation[nextIndex];
+      this.selectStep(next.id);
+      next.onClick();
+    }
+  }
+
   onTypeChange(event: any) {
     if(event.target.value=='string'){
       this.stringCharSelected=true;

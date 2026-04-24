@@ -1,5 +1,11 @@
 <bae-header class="fixed w-full h-full lg:h-auto z-50 top-0 start-0 overflow-y-auto lg:overflow-y-visible pointer-events-none"></bae-header>
-<main class="bg-fixed bg-no-repeat bg-right pt-[160px] md:pt-[136px]">
+<main class="relative overflow-hidden bg-fixed bg-no-repeat bg-right pt-[160px] md:pt-[136px]">
+  <bae-header-banner class="w-full"></bae-header-banner>
+  <div class="max-w-[1800px] mx-auto">
     <router-outlet></router-outlet>
+  </div>
+  @if (showFooterGradient) {
+    <div class="green-footer-gradient absolute bottom-0 left-0 w-full h-[800px] scale-150 bg-top -z-[1]"></div>
+  }
 </main>
 <bae-footer></bae-footer>

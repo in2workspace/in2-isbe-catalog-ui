@@ -1,13 +1,13 @@
 
 <div class="flex flex-col gap-6">
-  <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'UPDATE_CATEGORIES._update' | translate }}</h2>
+  <h2 class="font-normal text-xl text-primary-100">{{ 'UPDATE_CATEGORIES._update' | translate }}</h2>
   <div class="bg-white/60 p-4 rounded-lg">
     <div class="overflow-x-auto">
-        <ol class="flex items-start justify-center w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
+        <ol class="max-w-[1000px] mx-auto flex items-start gap-[25px] md:gap-[50px] w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
             @for (step of stepNavigation; track step.id; let i = $index) {
                 <li
                   (click)="handleStepClick(step)"
-                  class="relative flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[140px]"
+                  class="relative flex flex-row md:flex-col md:items-center gap-2 mr-9 md:mr-0 min-w-[70px] md:min-w-[140px]"
                   [class.text-primary-100]="isCurrentStep(step.id)"
                   [class.cursor-not-allowed]="isStepDisabled(step)"
                   [class.opacity-50]="isStepDisabled(step) && !isCurrentStep(step.id)">
@@ -21,7 +21,7 @@
                             {{ i + 1 }}
                         </span>
                         @if(i < stepNavigation.length - 1){
-                            <span class="absolute -right-7 md:right-[-25px] w-5 md:w-[50px] h-px md:ml-4 bg-black"></span>
+                            <span class="absolute -right-[42px] md:right-[-50px] w-5 md:w-[50px] h-px md:ml-4 bg-black"></span>
                         }
                     </div>
                     <span
@@ -41,7 +41,7 @@
                         <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
-                        class="w-full md:w-1/2 mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block p-2.5" />
+                        class="w-full md:w-1/2 mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block p-2.5 leading-[1.75]" />
 
                         <label class="font-semibold text-base ">{{ 'UPDATE_CATALOG._status' | translate }}</label>
                         <app-status-selector [modelType]="'category'" [anchor]="catStatusAnchor" [(ngModel)]="catStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
@@ -111,27 +111,18 @@
                         }
 
                     </form>
-                    <div class="flex w-full justify-items-end justify-end">
-                        <button type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid || (parentSelectionCheck == true && selectedCategory==undefined)" [ngClass]="!generalForm.valid || (parentSelectionCheck == true && selectedCategory==undefined) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'UPDATE_CATEGORIES._next' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
             }
 
             @if(showSummary){
-                <!-- <h2 class="font-normal text-xl lg:text-2xl text-primary-100">{{ 'UPDATE_CATEGORIES._finish' | translate }}</h2> -->
                 <div class="">
-                    <div>
+                    <div class="flex flex-col gap-2.5">
                         <label class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._name' | translate }}</label>
                         <label class="mb-2 bg-white text-wrap break-all border border-gray-300 text-gray-900    text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
                             {{categoryToUpdate?.name}}
                         </label>
                     </div>
 
-                    <div class="mb-4">
+                    <div class="mb-4 flex flex-col gap-2.5">
                         <label class="font-semibold text-base mr-4 ">{{ 'UPDATE_CATEGORIES._status' | translate }}</label>
                         <app-status-selector [modelType]="'category'" [anchor]="catStatusAnchor" [statuses]="catStatusDraftAsArray" [(ngModel)]="catStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
                     </div>
@@ -151,18 +142,27 @@
                     }
 
 
-                    <div class="flex w-full justify-items-end justify-end ml-4">
-                        <button type="button" (click)="updateCategory();" [disabled]="!isCatValid()" [ngClass]="!isCatValid() ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-sm px-5 py-2.5 text-center items-center">
-                            {{ 'UPDATE_CATEGORIES._update' | translate }}
-                            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
-                            </svg>
-                        </button>
-                    </div>
-
                 </div>
             }
     </div>
+  </div>
+
+  <div class="flex w-full justify-items-end justify-end">
+      @if(showSummary){
+        <button type="button" (click)="updateCategory();" [disabled]="!isCatValid()" [ngClass]="!isCatValid() ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-base px-5 py-2.5 text-center items-center">
+            {{ 'UPDATE_CATEGORIES._update' | translate }}
+            <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
+            </svg>
+        </button>
+      } @else {
+        <button type="button" (click)="showFinish();generalDone=true;" [disabled]="!generalForm.valid || (parentSelectionCheck == true && selectedCategory==undefined)" [ngClass]="!generalForm.valid || (parentSelectionCheck == true && selectedCategory==undefined) ? 'opacity-50' : 'hover:bg-primary-50'" class="flex gap-2 text-white justify-end bg-primary-100 hover:bg-primary-50 focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-full text-base px-5 py-2.5 text-center items-center">
+          {{ 'UPDATE_CATEGORIES._next' | translate }}
+          <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4.27536 5.3211L0.216483 9.37972C0.0786384 9.51773 0.00805503 9.6912 0.00473343 9.90013C0.0015779 10.1089 0.0721612 10.2855 0.216483 10.43C0.360971 10.5743 0.536018 10.6465 0.741623 10.6465C0.947228 10.6465 1.12227 10.5743 1.26676 10.43L5.74515 5.95161C5.83832 5.85828 5.90409 5.75988 5.94245 5.65641C5.98082 5.55294 6 5.44117 6 5.3211C6 5.20102 5.98082 5.08925 5.94245 4.98579C5.90409 4.88232 5.83832 4.78392 5.74515 4.69058L1.26676 0.212192C1.12875 0.0743467 0.955285 0.00376337 0.746358 0.000442635C0.537597 -0.00271311 0.360973 0.0678692 0.216485 0.212192C0.0721629 0.35668 1.76852e-06 0.531727 1.73257e-06 0.737332C1.69662e-06 0.942937 0.0721628 1.11798 0.216485 1.26247L4.27536 5.3211Z" fill="white"/>
+          </svg>
+        </button>
+      }
   </div>
 
 </div>

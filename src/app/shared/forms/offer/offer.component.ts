@@ -77,6 +77,7 @@ export class OfferComponent implements OnInit, OnDestroy{
   loadingData:boolean=false;
   
   IS_ISBE: boolean = environment.ISBE_CATALOGUE;
+  MOCK_MODE: boolean = false;
 
   offerToCreate:ProductOffering_Create | undefined;
 
@@ -329,6 +330,37 @@ export class OfferComponent implements OnInit, OnDestroy{
   }
 
   async loadOfferData() {
+    if (this.MOCK_MODE) {
+      if (this.offer.productSpecification) {
+        this.selectedProdSpec = this.offer.productSpecification;
+        this.productOfferForm.patchValue({ prodSpec: this.selectedProdSpec });
+      }
+      if (this.offer.name || this.offer.description || this.offer.version || this.offer.lifecycleStatus) {
+        this.productOfferForm.patchValue({
+          generalInfo: {
+            name: this.offer.name || '',
+            status: this.offer.lifecycleStatus || '',
+            description: this.offer.description || '',
+            version: this.offer.version || ''
+          }
+        });
+      }
+      if (this.offer.category) {
+        this.productOfferForm.patchValue({ category: this.offer.category || null });
+      }
+      if (Array.isArray(this.offer.productOfferingPrice) && this.offer.productOfferingPrice.length > 0) {
+        this.pricePlans = this.offer.productOfferingPrice.map((pop: any) => ({
+          id: pop.id,
+          name: pop.name,
+          priceType: pop.priceType,
+          price: pop.price?.value,
+          currency: pop.price?.unit || 'EUR',
+        }));
+        this.productOfferForm.patchValue({ pricePlans: this.pricePlans });
+      }
+      return;
+    }
+
     // Product Specification
     if (this.offer.productSpecification) {
       await this.api.getProductSpecification(this.offer.productSpecification.id).then(async data => {
@@ -338,6 +370,8 @@ export class OfferComponent implements OnInit, OnDestroy{
         prodSpec: this.selectedProdSpec || null // Cargar si existe, o dejar en null
       });
     }
+
+    console.log(this.offer);
 
     // General Info
     if (this.offer.name || this.offer.description || this.offer.version || this.offer.lifecycleStatus){ 
@@ -349,6 +383,8 @@ export class OfferComponent implements OnInit, OnDestroy{
           version: this.offer.version || ''
         }
       })
+
+      console.log(this.productOfferForm.get('prodSpec')?.value);
     };
 
     //CATEGORIES

@@ -1,8 +1,8 @@
 
 <div class="flex flex-col gap-6">
-    <div class="flex flex-col gap-2">
+    <div class="flex flex-col gap-2.5">
       <h2 class="font-semibold text-xl text-primary-100">{{ 'OFFERINGS._serv_spec' | translate }}</h2>
-      <p class="italic text-base">{{ 'OFFERINGS._prod_spec_description' | translate }}</p>
+      <p class="font-body italic text-base">{{ 'OFFERINGS._prod_spec_description' | translate }}</p>
     </div>
 
     @if (prodSpecs.length > 0) {
@@ -12,7 +12,7 @@
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
         </div>
 
-        
+
         <div class="relative inline-block w-full">
           <button id="dropdownDefault" data-dropdown-toggle="dropdown"
           class="text-black w-full justify-between bg-white border border-black font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center-lg"
@@ -30,47 +30,47 @@
           </h6> -->
           <ul class="text-sm" aria-labelledby="dropdownDefault">
 
-              <li (click)="onStateFilterChange('In design')" class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-              <input id="in-design" type="checkbox" value="" 
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
                   class="sr-only" />
 
-              <label for="in-design" class="text-sm font-medium cursor-pointer">
+              <label for="in-design" class="text-sm font-medium">
                   {{ 'OFFERINGS._in_design' | translate }}
               </label>
               </li>
 
-              <li (click)="onStateFilterChange('Active')" class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-              <input id="active" type="checkbox" value="" 
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
                   class="sr-only" />
 
-              <label for="active" class="text-sm font-medium cursor-pointer">
+              <label for="active" class="text-sm font-medium">
                   {{ 'OFFERINGS._active' | translate }}
               </label>
               </li>
 
-              <li (click)="onStateFilterChange('Launched')" class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-              <input id="launched" type="checkbox" value="" 
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
                   class="sr-only" />
 
-              <label for="launched" class="text-sm font-medium cursor-pointer">
+              <label for="launched" class="text-sm font-medium">
                   {{ 'OFFERINGS._launched' | translate }}
               </label>
               </li>
 
-              <li (click)="onStateFilterChange('Retired')" class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-              <input id="retired" type="checkbox" value="" 
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+              <input id="retired" type="checkbox" value="" (change)="onStateFilterChange('Retired')"
                   class="sr-only" />
 
-              <label for="retired" class="text-sm font-medium cursor-pointer">
+              <label for="retired" class="text-sm font-medium">
                   {{ 'OFFERINGS._retired' | translate }}
               </label>
               </li>
 
-              <li (click)="onStateFilterChange('Obsolete')" class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-                <input id="obsolete" type="checkbox" value="" 
+              <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                <input id="obsolete" type="checkbox" value="" (change)="onStateFilterChange('Obsolete')"
                     class="sr-only" />
 
-                <label for="obsolete" class="text-sm font-medium cursor-pointer">
+                <label for="obsolete" class="text-sm font-medium">
                   {{ 'OFFERINGS._obsolete' | translate }}
                 </label>
               </li>
@@ -83,7 +83,7 @@
           <fa-icon [icon]="faSparkles" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_type' | translate }}</h2>
         </div>
-        <select id="type" (change)="onTypeChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+        <select id="type" (change)="onTypeChange($event)" class="bg-white border border-black text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
           <option selected>{{ 'OFFERINGS._filter_type' | translate }}</option>
           <option value="all">{{ 'OFFERINGS._all' | translate }}</option>
           <option value="simple">{{ 'OFFERINGS._simple' | translate }}</option>
@@ -96,7 +96,7 @@
           <fa-icon [icon]="faSort" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._order_by' | translate }}</h2>
         </div>
-        <select id="sort" (change)="onSortChange($event)" class= bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+        <select id="sort" (change)="onSortChange($event)" class="bg-white border border-black text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]">
           <option selected>{{ 'OFFERINGS._order_by' | translate }}</option>
           <option value="update">{{ 'OFFERINGS._last_update' | translate }}</option>
           <option value="name">{{ 'OFFERINGS._name' | translate }}</option>
@@ -187,7 +187,7 @@
                         <td colspan="5">
                           <div class="flex flex-col items-center justify-center w-full px-4 py-16">
                               <img class="size-20" src="assets/images/empty-box.svg" alt="No offerings">
-                              <div class="flex w-full justify-center items-center p-4 text-sm text-gray-100" role="alert">
+                              <div class="flex w-full justify-center items-center p-4 text-base text-black" role="alert">
                                 <div class="text-center">
                                   {{ 'OFFERINGS._no_prod' | translate }}
                                 </div>
@@ -207,7 +207,7 @@
                           class=" text-black font-medium rounded-full text-sm flex items-center gap-4">
                             <svg class="bg-black rounded-full p-1 size-4.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                              </svg>    
+                              </svg>
                             <p class="font-bold underline">{{ 'OFFERINGS._add_first_prod' | translate }}</p>
                           </button>
                         </td>

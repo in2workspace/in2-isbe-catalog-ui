@@ -3,7 +3,7 @@
   "_no": "No",
   "DASHBOARD": {
     "_title": "¡ISBE Catalog ya está aquí! Descubre las novedades",
-    "_header": "Catálogo de servicios comerciales ISBE",
+    "_header": "Catálogo de Servicios Comerciales ISBE",
     "_subheader": "Encuentra los servicios que necesitas para tu caso de uso aquí",
     "_new": "Nuevo",
     "_learn_more": "Más información",
@@ -20,7 +20,9 @@
     "_view_serv": "Ver servicios",
     "_close_menu": "Cerrar menú",
     "_all_catalogs": "Todos los catálogos",
-    "_categories_single": "Categorías"
+    "_categories_single": "Categorías",
+    "_banner_title": "Conecta estos servicios con la infraestructura que los hace posibles",
+    "_banner_desc": "Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal."
   },
   "FEATURED": {
     "_title": "Ofertas destacadas",
@@ -134,6 +136,7 @@
     "_added_card": "Añadido al carrito",
     "_undo": "Deshacer",
     "_close_toast": "Cerrar",
+    "_agree": "De acuerdo",
     "_from": "Desde",
     "_full_desc": "Descripción completa",
     "_price_plans": "Planes de precios",
@@ -168,7 +171,8 @@
     "_cookies": "Política de Cookies",
     "_licensing": "Términos de uso",
     "_contact": "Contacto",
-    "_rights": "Todos los derechos reservados"
+    "_rights": "Todos los derechos reservados",
+    "_credits_text": "Proyecto 'INFRAESTRUCTURA DE SERVICIOS BLOCKCHAIN DE ESPAÑA (ISBE)', en el marco del Convenio de Colaboración firmado entre la Comunidad de Madrid y Consorcio Red Alastria, dentro del Programa de Redes Territoriales de Especialización Tecnológica en el Marco del Plan de Recuperación, Transformación y Resiliencia – financiado por la Unión Europea – Next Generation EU."
   },
   "HEADER": {
     "_marketplace": "ISBE Catalog",
@@ -489,6 +493,7 @@
     "_comp_profile_info": "Perfil de cumplimiento",
     "_no_comp_profile": "No se ha incluido perfil de cumplimiento.",
     "_chars": "Características",
+    "_chars_name": "Nombre de la característica",
     "_chars_info": "Características del producto",
     "_resource": "Especificaciones de recurso",
     "_resource_info": "Especificaciones de recurso del producto",
@@ -508,6 +513,7 @@
     "_preview": "Vista previa",
     "_show_preview": "Mostrar vista previa",
     "_next": "Siguiente",
+    "_prev": "Anterior",
     "_is_bundled": "¿Producto empaquetado?",
     "_status": "Estado",
     "_type": "Tipo",
@@ -594,6 +600,7 @@
     "_preview": "Vista previa",
     "_show_preview": "Mostrar vista previa",
     "_next": "Siguiente",
+    "_prev": "Anterior",
     "_is_bundled": "¿Oferta empaquetada?",
     "_status": "Estado",
     "_type": "Tipo",
@@ -646,7 +653,9 @@
     "_self_attestation": "Auto-declaración:",
     "_close_modal": "Cerrar modal",
     "_cancel": "Cancelar",
-    "_upload": "Subir"
+    "_upload": "Subir",
+    "_add_logo_tooltip":"Sube una imagen de tu organización en formato .png, .jpg, .jpeg, .gif, .bmp o .webp. Puede ser una imagen en Drive o Cloud. Si no dispones de una imagen específica de producto o servicio, puedes subir nuevamente el logo de tu organización.",
+    "_add_logo_requirements":"Tamaño mínimo: 300x300 px. Formato: cuadrado."
   },
   "CREATE_RES_SPEC": {
     "_back": "Atrás",
@@ -970,8 +979,9 @@
     "_catalogs": "Catálogos",
     "_offers": "Oferta",
     "_no_offer": "No se han incluido ofertas.",
-    "_no_offerings": "No hay ofertas de producto.",
-    "_no_prod": "Todavía no se ha creado ninguna especificación de producto",
+    "_no_offerings": "Esta organización no ha creado todavía ninguna oferta de producto/servicio",
+    "_no_prod": "No hay especificaciones de producto/servicio",
+    "_no_prod_desc": "Crea tu primera especificación desde la sección Especificaciones, dentro del menú Mis productos/servicios.",
     "_no_prod_rel": "No hay especificaciones de producto, por lo que no puedes crear relaciones.",
     "_no_cat": "No hay catálogos.",
     "_no_categories": "No hay categorías.",
@@ -1644,7 +1654,7 @@
     "_banner_desc": "Descubre cómo ISBE impulsa la adopción nacional de servicios blockchain con validez legal."
   },
   "ABOUT": {
-    "_visit_isbe":"VISIT ISBE",
+    "_visit_isbe":"Visita ISBE",
     "_title": "Catálogo de Servicios Comerciales de ISBE",
     "_subtitle": "El punto de encuentro para las soluciones que operan sobre la Red ISBE."
   }
