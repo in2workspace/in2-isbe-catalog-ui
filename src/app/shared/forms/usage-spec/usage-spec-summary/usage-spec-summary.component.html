@@ -1,18 +1,19 @@
 <div class="">
 
     <div class="mb-4 flex flex-col gap-2.5">
-        <label class="font-semibold text-lg ">{{ 'USAGE_SPECS._name' | translate }}</label>
-        <label class="mb-2 bg-white text-wrap break-all    border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
-            {{ usageSpecForm.get('generalInfo.name')?.value }}
-        </label>
-
+      <label class="font-semibold text-lg ">{{ 'USAGE_SPECS._name' | translate }}</label>
+      <label class="mb-2 bg-white text-wrap break-all    border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
+          {{ usageSpecForm.get('generalInfo.name')?.value }}
+      </label>
     </div>
 
    @if(usageSpecForm.get('generalInfo.description')?.value !=''){
+    <div class="mb-4 flex flex-col gap-2.5">
         <label class="font-semibold text-lg ">{{ 'USAGE_SPECS._description' | translate }}</label>
         <div class="px-4 py-2 bg-white rounded-lg p-4 mb-4   border ">
             <markdown class="bg-gray-50   text-gray-900 text-wrap break-all" [data]="usageSpecForm.get('generalInfo.description')?.value"></markdown>
         </div>
+      </div>
     }
 
     @if(usageSpecForm.get('metrics')?.value){

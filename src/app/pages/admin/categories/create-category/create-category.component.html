@@ -37,7 +37,7 @@
     <hr class="h-px bg-gray-0 border-0">
     <div class="mt-8">
             @if(showGeneral){
-                    <form [formGroup]="generalForm">
+                    <form [formGroup]="generalForm" class="flex flex-col gap-4 ">
                       <div class="flex flex-col gap-2.5">
                         <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
@@ -114,7 +114,7 @@
             }
 
             @if(showSummary){
-                <div class="">
+                <div class="flex flex-col gap-4">
                     <div class="flex flex-col gap-2.5">
                         <label class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._name' | translate }}</label>
                         <label class="mb-2 bg-gray-0 text-wrap break-all text-gray-900 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5">
@@ -122,16 +122,18 @@
                         </label>
                     </div>
 
-                    <div class="mb-4 flex flex-col gap-2.5">
+                    <div class="flex flex-col gap-2.5">
                         <label class="font-semibold text-base mr-4 ">{{ 'CREATE_CATEGORIES._status' | translate }}</label>
                         <app-status-selector [modelType]="'category'" [statuses]="catStatusAsArray" [anchor]="catStatusAsArray[0]" [ngModel]="categoryToCreate?.lifecycleStatus" [ngModelOptions]="{ standalone: true }"></app-status-selector>
                     </div>
 
                     @if(categoryToCreate?.description !=''){
+                      <div class="flex flex-col gap-2.5">
                         <label class="font-semibold text-base ">{{ 'CREATE_CATEGORIES._description' | translate }}</label>
                         <div class="px-4 py-2 bg-gray-0 rounded-lg p-4 mb-4">
                             <markdown class="bg-gray-50   text-gray-900 text-wrap break-all" [data]="categoryToCreate?.description"></markdown>
                         </div>
+                      </div>
                     }
 
                     @if(isParent==false){

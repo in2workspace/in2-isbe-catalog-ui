@@ -68,8 +68,10 @@
                         <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'UPDATE_RES_SPEC._status' | translate }}</label>
                         <app-status-selector class="col-span-2" [modelType]="'spec'" [anchor]="prodStatusAnchor" [(ngModel)]="prodStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
 
-                        <label for="prod-description" class="font-semibold text-base col-span-2 text-primary-100">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
-                        <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>
+                        <div class="flex flex-col gap-2.5 col-span-2">
+                          <label for="prod-description" class="font-semibold text-base text-primary-100">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
+                          <app-markdown-textarea formControlName="description"></app-markdown-textarea>
+                        </div>
 
                     </form>
                 }
@@ -912,20 +914,25 @@
                         </div>
 
                         @if(productSpecToUpdate?.description !=''){
+                          <div class="flex flex-col gap-2.5">
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                             <div class="px-4 py-2 bg-gray-0 rounded-lg p-4 mb-4">
                                 <markdown class="bg-gray-50 text-wrap break-all   text-gray-900" [data]="productSpecToUpdate?.description"></markdown>
                             </div>
+                          </div>
                         }
 
                         @if(imgPreview!=''){
+                          <div class="flex flex-col gap-2.5">
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._profile_pic' | translate }}</label>
                             <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl aspect-square py-8 max-w-sm w-full">
                                 <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             </div>
+                          </div>
                         }
 
                         @if(prodSpecsBundle.length>0){
+                          <div class="flex flex-col gap-2.5">
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._bundle' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
                                 <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-0">
@@ -963,6 +970,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                          </div>
                         }
 
                         <!-- @if(prodChars.length>0){

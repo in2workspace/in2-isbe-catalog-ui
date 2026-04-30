@@ -211,7 +211,10 @@
         "_info": "Info",
         "_orders": "Product Orders",
         "_banner_message": "Remember that you will not be able to publish your use case until it is deployed and validated in ISBE. More information ",
-        "_here": " here."
+        "_here": " here.",
+        "_login": "Login",
+        "_login_message": "If you are already a user",
+        "_register_message": "Not a user yet?"
     },
     "PRODUCT_DETAILS": {
         "_back": "Back",
