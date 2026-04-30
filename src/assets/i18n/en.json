@@ -205,13 +205,16 @@
         "_guideline_publish": "Guideline to publish",
         "_onboarding": "Onboarding",
         "_registration": "Registration form",
-        "_about": "About",
+        "_about": "ISBE",
         "_about_isbe": "About this catalog",
         "_verify": "Publish your offering",
         "_info": "Info",
         "_orders": "Product Orders",
         "_banner_message": "Remember that you will not be able to publish your use case until it is deployed and validated in ISBE. More information ",
-        "_here": " here."
+        "_here": "here",
+        "_login": "Login",
+        "_login_message": "If you are already a user",
+        "_register_message": "Not a user yet?"
     },
     "PRODUCT_DETAILS": {
         "_back": "Back",
@@ -308,7 +311,6 @@
         "_contact_info": "Contact information",
         "_info": "Info",
         "_actions": "Actions",
-        "_add_new_contact": "Add a new contact medium",
         "_select_type": "Select contact type",
         "_postalAddress": "Postal address",
         "_phone": "Phone number",

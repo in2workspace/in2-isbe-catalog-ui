@@ -204,13 +204,16 @@
     "_guideline_publish": "Guía para publicar",
     "_onboarding": "Incorporación",
     "_registration": "Formulario de registro",
-    "_about": "Sobre ISBE",
+    "_about": "ISBE",
     "_about_isbe": "Sobre este catálogo",
     "_verify": "Publica tu servicio",
     "_info": "Información",
     "_orders": "Pedidos de producto",
     "_banner_message": "Recuerda que no podrás publicar tu caso de uso hasta que no esté desplegado y validado en ISBE. Más información ",
-    "_here": " aquí"
+    "_here": "aquí",
+    "_login": "Iniciar sesión",
+    "_login_message": "Si ya eres usuario",
+    "_register_message": "¿Todavía no eres usuario?"
   },
   "PRODUCT_DETAILS": {
     "_back": "Atrás",
@@ -307,7 +310,6 @@
     "_contact_info": "Información de contacto",
     "_info": "Información",
     "_actions": "Acciones",
-    "_add_new_contact": "Añadir un nuevo medio de contacto",
     "_select_type": "Selecciona tipo de contacto",
     "_postalAddress": "Dirección postal",
     "_phone": "Número de teléfono",

@@ -72,8 +72,10 @@
                             [ngClass]="generalForm.get('number')?.invalid && generalForm.value.number!='' ? 'border-red-600' : (generalForm.value.number ? 'border-primary-100' : 'border-gray-300')"
                             class="mb-2 bg-white  border border-gray-300   text-primary-100 placeholder:text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
                         </div>
-                        <label for="prod-name" class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
-                        <app-markdown-textarea class="col-span-2" formControlName="description"></app-markdown-textarea>
+                        <div class="flex flex-col gap-2.5 col-span-2">
+                          <label for="prod-name" class="font-semibold text-base text-primary-100">{{ 'CREATE_PROD_SPEC._product_description' | translate }}</label>
+                          <app-markdown-textarea formControlName="description"></app-markdown-textarea>
+                        </div>
 
                     </form>
                 }
@@ -877,20 +879,25 @@
                         </div>
 
                         @if(productSpecToCreate?.description !=''){
+                          <div class="flex flex-col gap-2.5">
                             <label class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_description' | translate }}</label>
                             <div class="px-4 py-2 bg-white rounded-lg p-4  border ">
                                 <markdown class="bg-gray-50 text-wrap break-all   text-gray-900" [data]="productSpecToCreate?.description"></markdown>
                             </div>
+                          </div>
                         }
 
                         @if(imgPreview!=''){
+                          <div class="flex flex-col gap-2.5">
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._profile_pic' | translate }}</label>
                             <div class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl px-8 pb-8 pt-40 max-w-sm w-full aspect-square">
                                 <img src="{{imgPreview}}" class="absolute inset-0 h-full w-full object-cover">
                             </div>
+                          </div>
                         }
 
                         @if(prodSpecsBundle.length>0){
+                          <div class="flex flex-col gap-2.5">
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._bundle' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
                                 <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
@@ -928,9 +935,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                          </div>
                         }
 
                         @if(prodChars.length>0){
+                          <div class="flex flex-col gap-2.5">
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._chars' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
                                 <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
@@ -986,10 +995,12 @@
                                     </tbody>
                                 </table>
                             </div>
+                          </div>
                         }
 
 
                         @if(prodRelationships.length>0){
+                          <div class="flex flex-col gap-2.5">
                             <label class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._relationships' | translate }}</label>
                             <div class="relative overflow-x-auto rounded-lg w-full bg-white mb-4">
                                 <table class="px-5 py-3 w-full text-sm text-left rtl:text-right text-primary-100 border border-gray-300">
@@ -1039,6 +1050,7 @@
                                     </tbody>
                                 </table>
                             </div>
+                          </div>
                         }
                     </div>
                 }

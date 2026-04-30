@@ -3,7 +3,7 @@
   <h2 class="font-normal text-xl text-primary-100">{{ 'UPDATE_CATEGORIES._update' | translate }}</h2>
   <div class="bg-white/60 p-4 rounded-lg">
     <div class="overflow-x-auto">
-        <ol class="max-w-[1000px] mx-auto flex items-start gap-[25px] md:gap-[50px] w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
+        <ol class="max-w-[1000px] mx-auto flex justify-center items-start gap-[25px] md:gap-[50px] w-max md:w-full text-sm font-medium text-center mt-4 md:mt-8 border-b border-gray-0 pb-4 md:pb-6">
             @for (step of stepNavigation; track step.id; let i = $index) {
                 <li
                   (click)="handleStepClick(step)"
@@ -38,16 +38,23 @@
     <div class="mt-8">
             @if(showGeneral){
                     <form class=" gap-2" [formGroup]="generalForm">
+                      <div class="flex flex-col gap-2.5">
                         <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._name' | translate }}</label>
                         <input formControlName="name" type="text" id="prod-name" maxLength="100"
                         [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
                         class="w-full md:w-1/2 mb-2 bg-white  border border-gray-0 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block p-2.5 leading-[1.75]" />
+                      </div>
 
-                        <label class="font-semibold text-base ">{{ 'UPDATE_CATALOG._status' | translate }}</label>
+                      <div class="flex flex-col gap-2.5">
+                        <label class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._status' | translate }}</label>
                         <app-status-selector [modelType]="'category'" [anchor]="catStatusAnchor" [(ngModel)]="catStatusDraft" [ngModelOptions]="{ standalone: true }"></app-status-selector>
+                      </div>
 
+                      <div class="flex flex-col gap-2.5">
                         <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._description' | translate }}</label>
                         <app-markdown-textarea formControlName="description"></app-markdown-textarea>
+                      </div>
+
                         <label class="font-semibold text-base ">{{ 'UPDATE_CATEGORIES._choose_parent' | translate }}</label>
                         <label class="inline-flex items-center me-5 cursor-pointer ml-4">
                             <input type="checkbox" (change)="toggleParent()" [disabled]="checkDisableParent" [checked]="parentSelectionCheck" class="sr-only peer">

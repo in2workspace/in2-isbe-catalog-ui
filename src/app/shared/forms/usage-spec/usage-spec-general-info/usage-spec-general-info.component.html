@@ -4,6 +4,8 @@
            class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]"/>
   }
   @if (descControl) {
-    <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'USAGE_SPECS._description' | translate }}</label>
-    <app-markdown-textarea [formControl]="descControl"></app-markdown-textarea>
+    <div class="flex flex-col gap-2.5">
+      <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'USAGE_SPECS._description' | translate }}</label>
+      <app-markdown-textarea [formControl]="descControl"></app-markdown-textarea>
+    </div>
   }

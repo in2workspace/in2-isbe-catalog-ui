@@ -44,9 +44,10 @@
                         [ngClass]="generalForm.get('name')?.invalid && generalForm.value.name!='' ? 'border-red-600' : (generalForm.value.name ? 'border-primary-100' : 'border-gray-300')"
                         class="mb-2 bg-white  border border-gray-0   text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 
-
-                        <label class="font-semibold text-base col-span-2 text-primary-100">{{ 'CREATE_CATALOG._description' | translate }}</label>
-                        <app-markdown-textarea data-cy=catalogDsc formControlName="description"></app-markdown-textarea>
+                        <div class="flex flex-col gap-2.5 col-span-2">
+                          <label class="font-semibold text-base text-primary-100">{{ 'CREATE_CATALOG._description' | translate }}</label>
+                          <app-markdown-textarea data-cy="catalogDsc" formControlName="description"></app-markdown-textarea>
+                        </div>
 
                     </form>
                     <div class="flex w-full justify-items-end justify-end">
