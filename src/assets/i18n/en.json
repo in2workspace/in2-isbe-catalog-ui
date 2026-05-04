@@ -331,7 +331,7 @@
         "_add_logo": "Add organization logo",
         "_add_logo_description": "Add organization image using a URL.",
         "_add_logo_requirements": "Minimum size: 300x300 px. Format: square.",
-        "_add_logo_tooltip": "Upload your organization's image in .png, .jpg, .jpeg, .gif, .bmp or .webp format. It can be an image in Drive or Cloud. If you don't have a specific product or service image, you can upload your organization's logo again.",
+        "_add_logo_tooltip": "Upload your organization's image in .png, .jpg, .jpeg, .gif, .bmp or .webp format. If you don't have a specific product or service image, you can upload your organization's logo again.",
         "_add_logo_url": "Add organization logo using a URL",
         "_add_logo_placeholder": "Picture Url",
         "_acknowledged": "Acknowledged",
@@ -655,7 +655,7 @@
         "_close_modal": "Close modal",
         "_cancel": "Cancel",
         "_upload": "Upload",
-        "_add_logo_tooltip":"Upload an image of your organization in .png, .jpg, .jpeg, .gif, .bmp or .webp format. It can be an image from Drive or Cloud. If you don't have a specific product or service image, you can upload your organization's logo again.",
+        "_add_logo_tooltip":"Upload an image of your organization in .png, .jpg, .jpeg, .gif, .bmp or .webp format. If you don't have a specific product or service image, you can upload your organization's logo again.",
         "_add_logo_requirements":"Minimum size: 300x300 px. Format: square."
     },
     "CREATE_RES_SPEC": {
