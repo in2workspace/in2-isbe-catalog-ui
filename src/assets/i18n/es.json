@@ -330,7 +330,7 @@
     "_add_logo": "Añadir logo de la organización",
     "_add_logo_description": "Añadir imagen de la organización mediante URL.",
     "_add_logo_requirements": "Tamaño mínimo: 300x300 px. Formato: cuadrado.",
-    "_add_logo_tooltip": "Sube una imagen de tu organización en formato .png, .jpg, .jpeg, .gif, .bmp o .webp. Puede ser una imagen en Drive o Cloud. Si no dispones de una imagen específica de producto o servicio, puedes subir nuevamente el logo de tu organización.",
+    "_add_logo_tooltip": "Sube una imagen de tu organización en formato .png, .jpg, .jpeg, .gif, .bmp o .webp. Si no dispones de una imagen específica de producto o servicio, puedes subir nuevamente el logo de tu organización.",
     "_add_logo_url": "Añadir logo de la organización mediante URL",
     "_add_logo_placeholder": "Url de la imagen",
     "_acknowledged": "Recibido",
@@ -656,7 +656,7 @@
     "_close_modal": "Cerrar modal",
     "_cancel": "Cancelar",
     "_upload": "Subir",
-    "_add_logo_tooltip":"Sube una imagen de tu organización en formato .png, .jpg, .jpeg, .gif, .bmp o .webp. Puede ser una imagen en Drive o Cloud. Si no dispones de una imagen específica de producto o servicio, puedes subir nuevamente el logo de tu organización.",
+    "_add_logo_tooltip":"Sube una imagen de tu organización en formato .png, .jpg, .jpeg, .gif, .bmp o .webp. Si no dispones de una imagen específica de producto o servicio, puedes subir nuevamente el logo de tu organización.",
     "_add_logo_requirements":"Tamaño mínimo: 300x300 px. Formato: cuadrado."
   },
   "CREATE_RES_SPEC": {
