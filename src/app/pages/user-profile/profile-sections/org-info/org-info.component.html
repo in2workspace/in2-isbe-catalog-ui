@@ -298,7 +298,7 @@
                   </select>
               </div>
             </div>
-          
+
             <div class="flex flex-col gap-3">
               <form class="grid h-full md:grid-cols-2 gap-5" [formGroup]="mediumForm">
                   @if(emailSelected){
@@ -309,38 +309,38 @@
                         </div>
                           <input formControlName="email" type="text" id="prod-name"
                           class=" bg-white  text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full leading-[1.75]"
-                          [ngClass]="(mediumForm.get('email')?.invalid && mediumForm.value.email!='') ? 'border-red-600' : (mediumForm.value.email ? 'border-primary-100' : 'border-gray-300')"/>
+                          [ngClass]="(mediumForm.get('email')?.invalid && !!mediumForm.value.email) ? 'border-red-600' : (mediumForm.value.email ? 'border-primary-100' : 'border-gray-300')"/>
                       </div>
                   } @else if(addressSelected){
                       <div class="flex flex-col gap-2.5">
                           <label for="address.country" class="mb-3 block text-sm font-semibold leading-none text-body-dark">{{ 'PROFILE._country' | translate }}</label>
                           <input id="address.country" formControlName="country" name="address.country" type="text"
                           class="bg-white border-gray-100 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]"
-                          [ngClass]="(mediumForm.get('country')?.invalid && mediumForm.value.country!='') ? 'border-red-600' : (mediumForm.value.country ? 'border-primary-100' : 'border-gray-300')">
+                          [ngClass]="(mediumForm.get('country')?.invalid && !!mediumForm.value.country) ? 'border-red-600' : (mediumForm.value.country ? 'border-primary-100' : 'border-gray-300')">
                       </div>
                       <div class="flex flex-col gap-2.5">
                           <label for="address.city" class="mb-3 block text-sm font-semibold leading-none text-body-dark">{{ 'PROFILE._city' | translate }}</label>
                           <input id="address.city" formControlName="city" name="address.city" type="text"
                           class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]"
-                          [ngClass]="(mediumForm.get('city')?.invalid && mediumForm.value.city!='') ? 'border-red-600' : (mediumForm.value.city ? 'border-primary-100' : 'border-gray-300')">
+                          [ngClass]="(mediumForm.get('city')?.invalid && !!mediumForm.value.city) ? 'border-red-600' : (mediumForm.value.city ? 'border-primary-100' : 'border-gray-300')">
                       </div>
                       <div class="flex flex-col gap-2.5">
                           <label for="address.state" class="mb-3 block text-sm font-semibold leading-none text-body-dark">{{ 'PROFILE._state' | translate }}</label>
                           <input id="address.state" formControlName="stateOrProvince" name="address.state" type="text"
                           class="mb-2 bg-white text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full leading-[1.75]"
-                          [ngClass]="(mediumForm.get('stateOrProvince')?.invalid && mediumForm.value.stateOrProvince!='') ? 'border-red-600' : (mediumForm.value.stateOrProvince ? 'border-primary-100' : 'border-gray-300')">
+                          [ngClass]="(mediumForm.get('stateOrProvince')?.invalid && !!mediumForm.value.stateOrProvince) ? 'border-red-600' : (mediumForm.value.stateOrProvince ? 'border-primary-100' : 'border-gray-300')">
                       </div>
                       <div class="flex flex-col gap-2.5">
                           <label for="address.zip" class="mb-3 block text-sm font-semibold leading-none text-body-dark">{{ 'PROFILE._post_code' | translate }}</label>
                           <input id="address.zip" formControlName="postCode" name="address.zip" type="text"
                           class="bg-white border-gray-50 text-gray-100 text-sm rounded-lg focus:ring-black focus:border-black block w-full px-4 py-2 leading-[1.75]"
-                          [ngClass]="(mediumForm.get('postCode')?.invalid && mediumForm.value.postCode!='') ? 'border-red-600' : (mediumForm.value.postCode ? 'border-primary-100' : 'border-gray-300')">
+                          [ngClass]="(mediumForm.get('postCode')?.invalid && !!mediumForm.value.postCode) ? 'border-red-600' : (mediumForm.value.postCode ? 'border-primary-100' : 'border-gray-300')">
                       </div>
                       <div class="col-span-2 flex flex-col gap-2.5">
                           <label for="address.street_address" class="mb-3 block text-sm font-semibold leading-none text-body-dark">{{ 'PROFILE._street' | translate }}</label>
                           <textarea id="address.street_address" formControlName="street" name="address.street_address"
-                          class="mb-2 min-h-fit bg-white text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full " rows="4"
-                          [ngClass]="(mediumForm.get('street')?.invalid && mediumForm.value.street!='') ? 'border-red-600' : (mediumForm.value.street ? 'border-primary-100' : 'border-gray-300')"></textarea>
+                          class="mb-2 min-h-fit bg-white text-gray-900 text-sm rounded-lg focus:ring-black focus:border-black block w-full" rows="4"
+                          [ngClass]="(mediumForm.get('street')?.invalid && !!mediumForm.value.street) ? 'border-red-600' : (mediumForm.value.street ? 'border-primary-100' : 'border-gray-300')"></textarea>
                       </div>
                   } @else {
                       <div class="col-span-2 lg:col-span-1 flex flex-col gap-2.5">
