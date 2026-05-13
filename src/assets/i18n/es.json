@@ -1616,7 +1616,8 @@
   },
   "PUBLISH_SERVICE": {
     "_title": "Publica tu servicio",
-    "_subtitle": "Y da visibilidad a tus soluciones blockchain en el Catálogo Comercial de ISBE",
+    "_subtitle": "Publica tu Producto o Servicio en el Catálogo Comercial de ISBE",
+    "_here": "aquí",
     "_how_to_title": "¿Cómo publicar tu servicio?",
     "_how_to_desc": "Ante todo, es fundamental que el caso ya esté desplegado en ISBE. Si es así, publicar un servicio en el Catálogo Comercial de ISBE es muy fácil y solo tienes que seguir estos pasos. Hemos diseñado un proceso muy sencillo, pensado para garantizar la confianza y la trazabilidad.",
     "STEPS": {

@@ -51,7 +51,7 @@
         <span class="sr-only">Loading...</span>
       </div>
     } @else {
-      <div class="grid grid-cols-1 place-items-center lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 place-items-center lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
         @for (prod of products; track prod.id; let index = $index) {
           <bae-off-card [productOff]=prod [cardId]="index" class="w-full h-full"></bae-off-card>
         } @empty {

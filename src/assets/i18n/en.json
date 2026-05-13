@@ -1618,7 +1618,8 @@
   },
   "PUBLISH_SERVICE": {
     "_title": "Publish your service",
-    "_subtitle": "And increase the visibility of your blockchain solutions in the ISBE Commercial Catalog",
+    "_subtitle": "Publish your Product or Service in the ISBE Commercial Catalog",
+    "_here": "here",
     "_how_to_title": "How to publish your service?",
     "_how_to_desc": "First and foremost, it is essential that the use case is already deployed on ISBE. If so, publishing a service in the ISBE Commercial Catalog is very straightforward. You only need to follow these steps. We have designed a simple process aimed at ensuring trust and traceability.",
     "STEPS": {
