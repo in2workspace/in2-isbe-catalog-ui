@@ -365,7 +365,7 @@
                                 <thead class="px-5 py-3 text-base text-primary-100 bg-gray-0">
                                     <tr>
                                         <th scope="col" class="px-5 py-3">
-                                            {{ 'UPDATE_PROD_SPEC._product_name' | translate }}
+                                            {{ 'CREATE_PROD_SPEC._chars_name' | translate }}
                                         </th>
                                         <th scope="col" class="px-5 py-3 hidden lg:table-cell">
                                             {{ 'UPDATE_PROD_SPEC._product_description' | translate }}
@@ -438,7 +438,7 @@
                     } @else {
                         <form class=" grid grid-cols-2 gap-[18px] pt-6" [formGroup]="charsForm">
                             <div class="flex flex-col gap-2.5">
-                                <label for="prod-name" class="font-semibold text-base ">{{ 'UPDATE_PROD_SPEC._product_name' | translate }}</label>
+                                <label for="prod-name" class="font-semibold text-base ">{{ 'CREATE_PROD_SPEC._chars_name' | translate }}</label>
                                 <input formControlName="name" type="text" id="prod-name" maxLength="100"
                                 class="mb-2 bg-white border border-gray-300 text-gray-100 text-sm rounded-lg focus:ring-primary-100 focus:border-primary-100 block w-full p-2.5 leading-[1.75]" />
 

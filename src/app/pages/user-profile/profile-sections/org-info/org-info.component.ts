@@ -239,6 +239,7 @@ export class OrgInfoComponent {
         this.profileForm.reset();
         this.getProfile();
         this.successVisibility = true;
+        this.eventMessage.emitOrgProfileUpdated();
       },
       error: error => {
           console.error('There was an error while updating!', error);
@@ -260,7 +261,8 @@ export class OrgInfoComponent {
     this.profileForm.controls['name'].setValue(profile.tradingName);
     if(profile.contactMedium){
       for(let i=0; i<this.profile.contactMedium.length; i++){
-        if(profile.contactMedium[i].mediumType == 'Email'){
+        const mediumType = profile.contactMedium[i].mediumType?.toLowerCase();
+        if(mediumType == 'email'){
           this.contactmediums.push({
             id: uuidv4(),
             mediumType: MediumType.Email,
@@ -270,10 +272,10 @@ export class OrgInfoComponent {
               emailAddress: profile.contactMedium[i].characteristic.emailAddress
             }
           })
-        } else if(profile.contactMedium[i].mediumType == 'PostalAddress'){
+        } else if(mediumType == 'postaladdress'){
           this.contactmediums.push({
             id: uuidv4(),
-            mediumType: profile.contactMedium[i].mediumType,
+            mediumType: MediumType.PostalAddress,
             preferred: profile.contactMedium[i].preferred,
             characteristic: {
               contactType: 'PostalAddress',
@@ -287,13 +289,13 @@ export class OrgInfoComponent {
         } else {
           this.contactmediums.push({
             id: uuidv4(),
-            mediumType: profile.contactMedium[i].mediumType,
+            mediumType: MediumType.TelephoneNumber,
             preferred: profile.contactMedium[i].preferred,
             characteristic: {
               contactType: profile.contactMedium[i].characteristic.contactType,
               phoneNumber: profile.contactMedium[i].characteristic.phoneNumber
             }
-          })          
+          })
         }
       }
     }
