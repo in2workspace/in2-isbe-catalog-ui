@@ -61,6 +61,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ) {
     this.eventMessage.messages$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
       if (ev.type === 'ChangedSession') this.initPartyInfo();
+      if (ev.type === 'OrgProfileUpdated') this.refreshOrgProfileStatus();
     });
   }
 
@@ -147,4 +148,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   getBilling() { this.onMenuSelect('billing'); }
   getRevenue() { this.onMenuSelect('revenue'); }
   goToOrders() { this.onMenuSelect('orders'); }
+
+  private refreshOrgProfileStatus() {
+    this.auth.sellerId$.pipe(take(1)).subscribe(sellerId => {
+      if (!sellerId) return;
+      this.accountService.getOrgInfo(sellerId).then(orgInfo => {
+        this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
+        this.cdr.detectChanges();
+      });
+    });
+  }
 }
