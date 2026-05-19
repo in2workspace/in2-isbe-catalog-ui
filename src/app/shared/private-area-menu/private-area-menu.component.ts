@@ -1,10 +1,11 @@
-import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { AuthService } from 'src/app/guard/auth.service';
-import { combineLatest, take } from 'rxjs';
+import { combineLatest, Subject, take, takeUntil } from 'rxjs';
 import { AccountServiceService } from 'src/app/services/account-service.service';
+import { EventMessageService } from 'src/app/services/event-message.service';
 
 export type MenuTab =
   | 'account' | 'org' | 'billing' | 'orders' | 'revenue' | 'general'
@@ -19,13 +20,15 @@ export type MenuVariant = 'sidebar' | 'header';
   templateUrl: './private-area-menu.component.html',
   styleUrls: ['./private-area-menu.component.css']
 })
-export class PrivateAreaMenuComponent implements OnInit {
-  
+export class PrivateAreaMenuComponent implements OnInit, OnDestroy {
+
   @Input() variant: MenuVariant = 'sidebar';
   @Input() active: MenuTab | null = null;
   @Output() select = new EventEmitter<MenuTab>();
   private readonly auth = inject(AuthService);
   private readonly accountService = inject(AccountServiceService);
+  private readonly eventMessage = inject(EventMessageService);
+  private readonly destroy$ = new Subject<void>();
   orgProfileCompleted = true;
   roles: string[] = [];
   isAdmin = false;
@@ -47,6 +50,24 @@ export class PrivateAreaMenuComponent implements OnInit {
           this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
         });
       }
+    });
+
+    this.eventMessage.messages$.pipe(takeUntil(this.destroy$)).subscribe(ev => {
+      if (ev.type === 'OrgProfileUpdated') this.refreshOrgProfileStatus();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private refreshOrgProfileStatus(): void {
+    this.auth.sellerId$.pipe(take(1)).subscribe(sellerId => {
+      if (!sellerId) return;
+      this.accountService.getOrgInfo(sellerId).then(orgInfo => {
+        this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
+      });
     });
   }
   
