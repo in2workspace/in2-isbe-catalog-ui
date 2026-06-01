@@ -30,7 +30,10 @@ export class AppComponent implements OnInit {
     this.translate.addLangs(['en', 'es']);
     this.translate.setDefaultLang('es');
     const currLang = this.localStorage.getItem('current_language');
-    this.translate.use(currLang ?? 'es');
+    const browserLang = this.translate.getBrowserLang();
+    const supportedLangs = ['en', 'es'];
+    const langToUse = currLang ?? (browserLang && supportedLangs.includes(browserLang) ? browserLang : 'es');
+    this.translate.use(langToUse);
 
     if (!this.localStorage.getObject('selected_categories')) {
       this.localStorage.setObject('selected_categories', []);
