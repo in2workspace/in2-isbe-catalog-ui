@@ -22,7 +22,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { AboutPageIsbeComponent } from './pages/about-page-isbe/about-page-isbe.component';
 import { PublishServiceComponent } from './pages/publish-service/publish-service.component';
 
-export const routes: Routes = [
+const appRoutes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'aboutDome', component: AboutDomeComponent ,
     canActivate: [AuthGuard],
@@ -37,11 +37,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
   },
-  { path: 'catalogues', 
+  { path: 'catalogues',
     component: CatalogsComponent ,
     canActivate: [AuthGuard],
     data: { roles: [], is_isbe: environment.ISBE_CATALOGUE }
-  },  
+  },
   {
     path: 'shopping-cart',
     component: ShoppingCartComponent,
@@ -98,6 +98,14 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['seller'], is_isbe: environment.ISBE_CATALOGUE }
   },
+];
+
+export const routes: Routes = [
+  ...appRoutes,
+  { path: 'en', children: [
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    ...appRoutes,
+  ]},
   { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
 ];
 

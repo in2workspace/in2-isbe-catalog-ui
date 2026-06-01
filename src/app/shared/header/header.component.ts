@@ -161,9 +161,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
 
   async ngOnInit() {
     this.langs = this.translate.getLangs().length ? this.translate.getLangs() : ['es', 'en'];
-    const currLang = this.localStorage.getItem('current_language');
-    this.defaultLang = currLang ?? 'es';
-    this.translate.use(this.defaultLang);
+    this.defaultLang = this.translate.currentLang ?? 'es';
     
     if (!this.localStorage.getObject('selected_categories')) {
       this.localStorage.setObject('selected_categories', []);
@@ -246,10 +244,11 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       const url = e.urlAfterRedirects as string;
+      const cleanUrl = url.replace(/^\/en/, '');
 
-      const isProfile = url.startsWith('/profile');
-      const isOfferings = url.startsWith('/my-offerings');
-      const isAdmin = url.startsWith('/admin');
+      const isProfile = cleanUrl.startsWith('/profile');
+      const isOfferings = cleanUrl.startsWith('/my-offerings');
+      const isAdmin = cleanUrl.startsWith('/admin');
 
       if (!isProfile && !isOfferings && !isAdmin) {
         this.currentScope = null;
@@ -324,13 +323,18 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     }
   }
 
+  private langNavigate(path: string): void {
+    const prefix = this.defaultLang === 'en' ? '/en' : '';
+    this.router.navigate([prefix + path]);
+  }
+
   goToCatalogSearch(id: any) {
-    this.router.navigate(['/search/catalogue', id]);
+    this.langNavigate(`/search/catalogue/${id}`);
   }
 
   goTo(path: string) {
     this.closeUserDropdown();
-    this.router.navigate([path]);
+    this.langNavigate(path);
   }
 
   toggleCartDrawer() {
@@ -348,10 +352,11 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     this.closeUserDropdown();
     this.resetUserUI();
     await this.auth.logout();
-    if (this.router.url === '/dashboard') {
+    const cleanUrl = this.router.url.replace(/^\/en/, '');
+    if (cleanUrl === '/dashboard' || cleanUrl === '') {
       window.location.reload();
     } else {
-      this.router.navigate(['/dashboard']);
+      this.langNavigate('/dashboard');
     }
     this.cdr.detectChanges();
   }
@@ -422,6 +427,14 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     this.translate.use(language);
     this.localStorage.setItem('current_language', language);
     this.defaultLang = language;
+
+    const currentUrl = this.router.url;
+    if (language === 'en' && !currentUrl.startsWith('/en')) {
+      this.router.navigate(['/en' + currentUrl]);
+    } else if (language === 'es' && currentUrl.startsWith('/en')) {
+      const newPath = currentUrl.replace(/^\/en/, '') || '/dashboard';
+      this.router.navigate([newPath]);
+    }
   }
 
   closeUserDropdown() {
@@ -453,20 +466,23 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
     if (tab === 'account' || tab === 'org' || tab === 'general' || tab === 'billing' || tab === 'orders' || tab === 'revenue') {
       const effective = tab === 'general' ? 'org' : tab;
       this.menuStateService.setActiveTab('profile', effective);
-      if (!this.router.url.startsWith('/profile')) this.router.navigate(['/profile']);
+      const cleanUrl = this.router.url.replace(/^\/en/, '');
+      if (!cleanUrl.startsWith('/profile')) this.langNavigate('/profile');
       return;
     }
 
     if (tab === 'offers' || tab === 'productspec' || tab === 'catalogs') {
       const effective = (this.IS_ISBE && tab === 'catalogs') ? 'productspec' : tab;
       this.menuStateService.setActiveTab('offerings', effective);
-      if (!this.router.url.startsWith('/my-offerings')) this.router.navigate(['/my-offerings']);
+      const cleanUrl = this.router.url.replace(/^\/en/, '');
+      if (!cleanUrl.startsWith('/my-offerings')) this.langNavigate('/my-offerings');
       return;
     }
 
     if (tab === 'categories') {
       this.menuStateService.setActiveTab('admin', 'categories');
-      if (!this.router.url.startsWith('/admin')) this.router.navigate(['/admin']);
+      const cleanUrl = this.router.url.replace(/^\/en/, '');
+      if (!cleanUrl.startsWith('/admin')) this.langNavigate('/admin');
       return;
     }
   }

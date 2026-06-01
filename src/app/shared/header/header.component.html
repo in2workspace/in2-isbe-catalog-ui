@@ -28,6 +28,13 @@
                           class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 "
                           aria-current="page">{{ 'HEADER._about' | translate }}</a>
                       </li>
+                      <li>
+                          @if (defaultLang === 'es') {
+                              <button (click)="switchLanguage('en')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 underline">English</button>
+                          } @else {
+                              <button (click)="switchLanguage('es')" class="block cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 underline">Español</button>
+                          }
+                      </li>
                       <li class="sm:block lg:hidden">
                           <a href="{{isbeRegister}}" class="cursor-pointer py-2 pl-3 pr-4 text-white rounded hover:bg-gray-100 lg:hover:bg-transparent
                           lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._register' | translate }}</a>
@@ -111,6 +118,13 @@
                             class="block text-white" aria-current="page">{{ 'HEADER._register' | translate }}</a>
                         </li>
                     }
+                    <li>
+                        @if (defaultLang === 'es') {
+                            <button (click)="switchLanguage('en')" class="block text-white underline">English</button>
+                        } @else {
+                            <button (click)="switchLanguage('es')" class="block text-white underline">Español</button>
+                        }
+                    </li>
                     <!--<li> <button data-dropdown-toggle="support-dropdown" data-dropdown-placement="bottom-end" class="block py-2 pl-3 pr-4 text-white rounded hover:bg-secondary-100 lg:hover:bg-transparent lg:border-0 lg:hover:text-secondary-50 lg:p-0 " aria-current="page">{{ 'HEADER._support' | translate }}</button> </li>-->
                 </ul>
 
