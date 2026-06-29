@@ -424,16 +424,12 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
   }
 
   switchLanguage(language: string) {
-    this.translate.use(language);
-    this.localStorage.setItem('current_language', language);
-    this.defaultLang = language;
-
     const currentUrl = this.router.url;
+
     if (language === 'en' && !currentUrl.startsWith('/en')) {
-      this.router.navigate(['/en' + currentUrl]);
+      window.location.href = '/en' + currentUrl;
     } else if (language === 'es' && currentUrl.startsWith('/en')) {
-      const newPath = currentUrl.replace(/^\/en/, '') || '/dashboard';
-      this.router.navigate([newPath]);
+      window.location.href = currentUrl.replace(/^\/en/, '') || '/';
     }
   }
 

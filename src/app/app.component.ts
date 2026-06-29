@@ -29,14 +29,11 @@ export class AppComponent implements OnInit {
     // Idioma
     this.translate.addLangs(['en', 'es']);
     this.translate.setDefaultLang('es');
-    const isEnUrl = window.location.pathname.startsWith('/en/') || window.location.pathname === '/en';
-    const langFromUrl = isEnUrl ? 'en' : null;
-    const currLang = this.localStorage.getItem('current_language');
-    const browserLang = this.translate.getBrowserLang();
-    const supportedLangs = ['en', 'es'];
-    const langToUse = langFromUrl ?? currLang ?? (browserLang && supportedLangs.includes(browserLang) ? browserLang : 'es');
-    if (langFromUrl) this.localStorage.setItem('current_language', langFromUrl);
-    this.translate.use(langToUse);
+    const lang = window.location.pathname.startsWith('/en/') ||
+             window.location.pathname === '/en'
+    ? 'en'
+    : 'es';
+    this.translate.use(lang);
 
     if (!this.localStorage.getObject('selected_categories')) {
       this.localStorage.setObject('selected_categories', []);
