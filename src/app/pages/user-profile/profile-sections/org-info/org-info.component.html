@@ -259,7 +259,7 @@
                                       @if(medium.mediumType == 'Email'){
                                           {{medium.characteristic.emailAddress}}
                                       } @else if(medium.mediumType == 'PostalAddress') {
-                                          {{medium.characteristic.street1}}, {{medium.characteristic.postCode}} ({{medium.characteristic.city}}) {{medium.characteristic.stateOrProvince}}, {{medium.characteristic.country}}
+                                          {{medium.characteristic.street1}}@if(medium.characteristic.postCode){, {{medium.characteristic.postCode}}}@if(medium.characteristic.city){ ({{medium.characteristic.city}})}@if(medium.characteristic.stateOrProvince){ {{medium.characteristic.stateOrProvince}}}, {{medium.characteristic.country}}
                                       } @else {
                                           ({{medium.characteristic.contactType}}) {{medium.characteristic.phoneNumber}}
                                       }
