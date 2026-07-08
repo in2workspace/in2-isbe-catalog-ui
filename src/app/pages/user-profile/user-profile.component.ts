@@ -15,6 +15,7 @@ import { combineLatest, Subject, take, takeUntil } from 'rxjs';
 import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-menu/private-area-menu.component';
 import { MenuStateService } from 'src/app/services/menu-state.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
+import { LanguageNavService } from 'src/app/services/language-nav.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -57,10 +58,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private readonly eventMessage: EventMessageService,
     private readonly router: Router,
     private readonly menuStateService: MenuStateService,
-    private readonly accountService: AccountServiceService
+    private readonly accountService: AccountServiceService,
+    private readonly langNav: LanguageNavService
   ) {
     this.eventMessage.messages$.pipe(takeUntil(this.destroy$)).subscribe((ev) => {
       if (ev.type === 'ChangedSession') this.initPartyInfo();
+      if (ev.type === 'OrgProfileUpdated') this.refreshOrgProfileStatus();
     });
   }
 
@@ -122,13 +125,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     if (tab === 'offers' || tab === 'productspec' || tab === 'catalogs') {
       const effective = (this.IS_ISBE && tab === 'catalogs') ? 'productspec' : tab;
       this.menuStateService.setActiveTab('offerings', effective);
-      this.router.navigate(['/my-offerings']);
+      this.langNav.navigate('/my-offerings');
       return;
     }
 
     if (tab === 'categories') {
       this.menuStateService.setActiveTab('admin', 'categories');
-      this.router.navigate(['/admin']);
+      this.langNav.navigate('/admin');
       return;
     }
   }
@@ -147,4 +150,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   getBilling() { this.onMenuSelect('billing'); }
   getRevenue() { this.onMenuSelect('revenue'); }
   goToOrders() { this.onMenuSelect('orders'); }
+
+  private refreshOrgProfileStatus() {
+    this.auth.sellerId$.pipe(take(1)).subscribe(sellerId => {
+      if (!sellerId) return;
+      this.accountService.getOrgInfo(sellerId).then(orgInfo => {
+        this.orgProfileCompleted = this.accountService.isOrgInfoComplete(orgInfo);
+        this.cdr.detectChanges();
+      });
+    });
+  }
 }

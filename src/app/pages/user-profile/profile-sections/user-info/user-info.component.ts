@@ -207,6 +207,7 @@ export class UserInfoComponent implements OnInit {
     if (!payload) return;
 
     const profile = this.mapTokenToProfile(payload);
+    console.log('Profile loaded from access token:', profile);
     this.loadProfileData(profile);
   }
 

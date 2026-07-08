@@ -19,6 +19,7 @@ import { MenuTab, PrivateAreaMenuComponent } from 'src/app/shared/private-area-m
 import { Router } from '@angular/router';
 import { MenuStateService } from 'src/app/services/menu-state.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
+import { LanguageNavService } from 'src/app/services/language-nav.service';
 
 @Component({
   selector: 'app-seller-offerings',
@@ -68,7 +69,8 @@ export class SellerOfferingsComponent implements OnInit, OnDestroy {
     private readonly eventMessage: EventMessageService,
     private readonly router: Router,
     private readonly menuStateService: MenuStateService,
-    private readonly accountService: AccountServiceService
+    private readonly accountService: AccountServiceService,
+    private readonly langNav: LanguageNavService
   ) {
     this.eventMessage.messages$.subscribe((ev) => {
       switch (ev.type) {
@@ -173,13 +175,13 @@ export class SellerOfferingsComponent implements OnInit, OnDestroy {
 
     if (tab === 'categories') {
       this.menuStateService.setActiveTab('admin', 'categories');
-      this.router.navigate(['/admin']);
+      this.langNav.navigate('/admin');
       return;
     }
 
     if (tab === 'general' || tab === 'account' || tab === 'org') {
       this.menuStateService.setActiveTab('profile', tab === 'general' ? 'account' : tab);
-      this.router.navigate(['/profile']);
+      this.langNav.navigate('/profile');
       return;
     }
   }

@@ -14,6 +14,7 @@ import { combineLatest, Subject, take, takeUntil } from 'rxjs';
 import { MenuStateService } from 'src/app/services/menu-state.service';
 import { AuthService } from 'src/app/guard/auth.service';
 import { AccountServiceService } from 'src/app/services/account-service.service';
+import { LanguageNavService } from 'src/app/services/language-nav.service';
 
 @Component({
   selector: 'app-admin',
@@ -56,7 +57,8 @@ export class AdminComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly menuStateService: MenuStateService,
     private readonly auth: AuthService,
-    private readonly accountService: AccountServiceService
+    private readonly accountService: AccountServiceService,
+    private readonly langNav: LanguageNavService
   ) {
     this.eventMessage.messages$.pipe(takeUntil(this.destroy$)).subscribe(ev => {
       if (ev.type === 'AdminCategories' && ev.value === true) this.goToCategories();
@@ -114,14 +116,14 @@ export class AdminComponent implements OnInit, OnDestroy {
     if (tab === 'offers' || tab === 'productspec' || tab === 'catalogs') {
       const effective = (this.IS_ISBE && tab === 'catalogs') ? 'productspec' : tab;
       this.menuStateService.setActiveTab('offerings', effective);
-      this.router.navigate(['/my-offerings']);
+      this.langNav.navigate('/my-offerings');
       return;
     }
 
     if (tab === 'general' || tab === 'account' || tab === 'org' || tab === 'billing' || tab === 'orders' || tab === 'revenue') {
       const effective = tab === 'general' ? 'account' : tab;
       this.menuStateService.setActiveTab('profile', effective);
-      this.router.navigate(['/profile']);
+      this.langNav.navigate('/profile');
       return;
     }
   }
