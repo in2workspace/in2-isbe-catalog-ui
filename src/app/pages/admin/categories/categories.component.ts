@@ -114,7 +114,7 @@ export class CategoriesComponent {
     parent["children"] = childs;
     // When filtering by status, a matching category's parent may be excluded
     // from the results; show such orphans at top level instead of dropping them
-    if(parent.isRoot == true || !data.some(p => p.id === parent.parentId)){
+    if(parent.isRoot || !data.some(p => p.id === parent.parentId)){
       this.categories.push(parent)
     } else {
       this.saveChildren(this.categories,parent)
