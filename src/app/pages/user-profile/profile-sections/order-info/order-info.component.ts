@@ -49,6 +49,14 @@ export class OrderInfoComponent implements OnInit {
   page: number=0;
   ORDER_LIMIT: number = environment.ORDER_LIMIT;
   filters: any[]=[];
+  protected readonly stateLabels: Record<string, string> = {
+    'acknowledged': 'PROFILE._acknowledged',
+    'inProgress': 'PROFILE._in_progress',
+    'completed': 'PROFILE._completed',
+    'failed': 'PROFILE._failed',
+    'pending': 'PROFILE._pending',
+    'cancelled': 'PROFILE._cancelled',
+  };
   check_custom:boolean=false;
   isSeller:boolean=false;
   role:any='Customer'
@@ -156,12 +164,8 @@ export class OrderInfoComponent implements OnInit {
   }
 
   onStateFilterChange(filter:string){
-    const index = this.filters.findIndex(item => item === filter);
-    if (index !== -1) {
-      this.filters.splice(index, 1);
-    } else {
-      this.filters.push(filter)
-    }
+    // Single-select: picking a state replaces the previous one; picking it again clears the filter
+    this.filters = this.filters.includes(filter) ? [] : [filter];
     this.getOrders(false);
   }
 

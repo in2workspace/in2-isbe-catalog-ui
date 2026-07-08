@@ -50,6 +50,13 @@ export class SellerProductSpecComponent implements OnInit, AfterViewChecked {
   page_check:boolean = false;
   filter:any=undefined;
   status:any[]=[];
+  protected readonly stateLabels: Record<string, string> = {
+    'In design': 'OFFERINGS._in_design',
+    'Active': 'OFFERINGS._active',
+    'Launched': 'OFFERINGS._launched',
+    'Retired': 'OFFERINGS._retired',
+    'Obsolete': 'OFFERINGS._obsolete',
+  };
   seller:any;
   sort:any=undefined;
   isBundle:any=undefined;
@@ -145,12 +152,8 @@ export class SellerProductSpecComponent implements OnInit, AfterViewChecked {
   }
 
   onStateFilterChange(filter:string){
-    const index = this.status.findIndex(item => item === filter);
-    if (index !== -1) {
-      this.status.splice(index, 1);
-    } else {
-      this.status.push(filter)
-    }
+    // Single-select: picking a state replaces the previous one; picking it again clears the filter
+    this.status = this.status.includes(filter) ? [] : [filter];
     this.getProdSpecs(false);
   }
 

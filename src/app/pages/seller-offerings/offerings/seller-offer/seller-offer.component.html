@@ -7,13 +7,19 @@
           <h2 class="text-base font-semibold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
         </div>
 
-        @if (offers.length > 0) {
+        @if (offers.length > 0 || status.length > 0) {
         <div class="relative inline-block w-full">
-          <button id="dropdownDefault" data-dropdown-toggle="dropdown"
+          <button id="dropdownDefault" #stateDropdownBtn data-dropdown-toggle="dropdown"
           class="text-black w-full justify-between bg-white border border-black font-medium rounded-lg text-sm px-5 py-3 text-center inline-flex items-center-lg"
           type="button">
-          {{ 'OFFERINGS._filter_state' | translate }}
-            <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+          <span class="min-w-0 truncate text-left">
+            @if (status.length === 0) {
+              {{ 'OFFERINGS._filter_state' | translate }}
+            } @else {
+              @for (s of status; track s) {<span>@if (!$first) {, }{{ stateLabels[s] | translate }}</span>}
+            }
+          </span>
+            <svg class="w-4 h-4 ml-2 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
@@ -23,50 +29,65 @@
             <!-- <h6 class="px-5 py-3 text-sm font-medium border-b border-black">
                 {{ 'OFFERINGS._status' | translate }}
             </h6> -->
-            <ul class="text-sm" aria-labelledby="dropdownDefault">
+            <ul class="text-sm" aria-labelledby="dropdownDefault" (change)="stateDropdownBtn.click()">
 
-                <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-                <input id="in-design" type="checkbox" value="" (change)="onStateFilterChange('In design')"
+                <li class="flex items-center cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                <input id="in-design" type="checkbox" value="" [checked]="status.includes('In design')" (change)="onStateFilterChange('In design')"
                     class="sr-only" />
 
-                <label for="in-design" class="text-sm font-medium">
+                <label for="in-design" class="flex items-center justify-between w-full px-5 py-3 text-sm font-medium cursor-pointer">
                     {{ 'OFFERINGS._in_design' | translate }}
+                    @if (status.includes('In design')) {
+                      <svg class="w-4 h-4 ml-2 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    }
                 </label>
                 </li>
 
-                <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-                <input id="active" type="checkbox" value="" (change)="onStateFilterChange('Active')"
+                <li class="flex items-center cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                <input id="active" type="checkbox" value="" [checked]="status.includes('Active')" (change)="onStateFilterChange('Active')"
                     class="sr-only" />
 
-                <label for="active" class="text-sm font-medium">
+                <label for="active" class="flex items-center justify-between w-full px-5 py-3 text-sm font-medium cursor-pointer">
                     {{ 'OFFERINGS._active' | translate }}
+                    @if (status.includes('Active')) {
+                      <svg class="w-4 h-4 ml-2 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    }
                 </label>
                 </li>
 
-                <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-                <input id="launched" type="checkbox" value="" (change)="onStateFilterChange('Launched')"
+                <li class="flex items-center cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                <input id="launched" type="checkbox" value="" [checked]="status.includes('Launched')" (change)="onStateFilterChange('Launched')"
                     class="sr-only" />
 
-                <label for="launched" class="text-sm font-medium">
+                <label for="launched" class="flex items-center justify-between w-full px-5 py-3 text-sm font-medium cursor-pointer">
                     {{ 'OFFERINGS._launched' | translate }}
+                    @if (status.includes('Launched')) {
+                      <svg class="w-4 h-4 ml-2 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    }
                 </label>
                 </li>
 
-                <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-                <input id="retired" type="checkbox" value="" (change)="onStateFilterChange('Retired')"
+                <li class="flex items-center cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                <input id="retired" type="checkbox" value="" [checked]="status.includes('Retired')" (change)="onStateFilterChange('Retired')"
                     class="sr-only" />
 
-                <label for="retired" class="text-sm font-medium">
+                <label for="retired" class="flex items-center justify-between w-full px-5 py-3 text-sm font-medium cursor-pointer">
                     {{ 'OFFERINGS._retired' | translate }}
+                    @if (status.includes('Retired')) {
+                      <svg class="w-4 h-4 ml-2 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    }
                 </label>
                 </li>
 
-                <li class="flex items-center px-5 py-3 cursor-pointer border-b border-black hover:bg-black hover:text-white">
-                  <input id="obsolete" type="checkbox" value="" (change)="onStateFilterChange('Obsolete')"
+                <li class="flex items-center cursor-pointer border-b border-black hover:bg-black hover:text-white">
+                  <input id="obsolete" type="checkbox" value="" [checked]="status.includes('Obsolete')" (change)="onStateFilterChange('Obsolete')"
                       class="sr-only" />
 
-                  <label for="obsolete" class="text-sm font-medium">
+                  <label for="obsolete" class="flex items-center justify-between w-full px-5 py-3 text-sm font-medium cursor-pointer">
                     {{ 'OFFERINGS._obsolete' | translate }}
+                    @if (status.includes('Obsolete')) {
+                      <svg class="w-4 h-4 ml-2 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                    }
                   </label>
                 </li>
             </ul>

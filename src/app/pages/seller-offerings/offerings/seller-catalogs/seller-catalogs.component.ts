@@ -44,6 +44,12 @@ export class SellerCatalogsComponent implements OnInit{
   filter:any=undefined;
   seller:any;
   status:any[]=[];
+  protected readonly stateLabels: Record<string, string> = {
+    'Active': 'OFFERINGS._active',
+    'Launched': 'OFFERINGS._launched',
+    'Retired': 'OFFERINGS._retired',
+    'Obsolete': 'OFFERINGS._obsolete',
+  };
 
   constructor(
     private readonly api: ApiServiceService,
@@ -140,12 +146,8 @@ export class SellerCatalogsComponent implements OnInit{
   }
 
   onStateFilterChange(filter:string){
-    const index = this.status.findIndex(item => item === filter);
-    if (index !== -1) {
-      this.status.splice(index, 1);
-    } else {
-      this.status.push(filter)
-    }
+    // Single-select: picking a state replaces the previous one; picking it again clears the filter
+    this.status = this.status.includes(filter) ? [] : [filter];
     this.loading=true;
     this.page=0;
     this.catalogs=[];
