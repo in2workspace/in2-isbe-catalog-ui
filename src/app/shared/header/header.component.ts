@@ -183,6 +183,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
       .subscribe(isAuth => {
         this.is_logged = isAuth;
         this.cdr.detectChanges();
+        setTimeout(() => initFlowbite(), 0);
       });
 
     combineLatest([
@@ -233,6 +234,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, DoCheck, OnDestro
 
       this.isAdmin = this.roles.includes('admin');
       this.cdr.detectChanges();
+      setTimeout(() => initFlowbite(), 0);
     });
 
     this.router.events
