@@ -35,6 +35,13 @@ export class CategoriesComponent {
   loading: boolean = false;
   seller:any;
   status:any[]=[];
+  protected readonly stateLabels: Record<string, string> = {
+    'In design': 'OFFERINGS._in_design',
+    'Active': 'ADMIN._active',
+    'Launched': 'ADMIN._launched',
+    'Retired': 'ADMIN._retired',
+    'Obsolete': 'ADMIN._obsolete',
+  };
   
 
   constructor(
@@ -105,7 +112,9 @@ export class CategoriesComponent {
   findChildren(parent:any,data:any[]){
     let childs = data.filter((p => p.parentId === parent.id));
     parent["children"] = childs;
-    if(parent.isRoot == true){
+    // When filtering by status, a matching category's parent may be excluded
+    // from the results; show such orphans at top level instead of dropping them
+    if(parent.isRoot || !data.some(p => p.id === parent.parentId)){
       this.categories.push(parent)
     } else {
       this.saveChildren(this.categories,parent)
@@ -165,14 +174,11 @@ export class CategoriesComponent {
   }*/
 
   onStateFilterChange(filter:string){
-    const index = this.status.findIndex(item => item === filter);
-    if (index !== -1) {
-      this.status.splice(index, 1);
-    } else {
-      this.status.push(filter)
-    }
+    // Single-select: picking a state replaces the previous one; picking it again clears the filter
+    this.status = this.status.includes(filter) ? [] : [filter];
     this.loading=true;
     this.categories=[];
+    this.unformattedCategories=[];
     this.getCategories();
   }
 

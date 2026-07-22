@@ -49,6 +49,12 @@ export class InventoryProductsComponent implements OnInit {
   prodToUnsubscribe:any;
   prices: any[]=[];
   filters: any[]=['active','created'];
+  protected readonly stateLabels: Record<string, string> = {
+    'created': 'PRODUCT_INVENTORY._created',
+    'active': 'PRODUCT_INVENTORY._active',
+    'suspended': 'PRODUCT_INVENTORY._suspended',
+    'terminated': 'PRODUCT_INVENTORY._terminated',
+  };
   loading_more: boolean = false;
   page_check:boolean = true;
   page: number=0;
@@ -169,12 +175,8 @@ export class InventoryProductsComponent implements OnInit {
   }
 
   onStateFilterChange(filter:string){
-    const index = this.filters.findIndex(item => item === filter);
-    if (index !== -1) {
-      this.filters.splice(index, 1);
-    } else {
-      this.filters.push(filter)
-    }
+    // Single-select: picking a state replaces the previous one; picking it again clears the filter
+    this.filters = this.filters.includes(filter) ? [] : [filter];
     this.getInventory(false);
   }
 

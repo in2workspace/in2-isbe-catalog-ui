@@ -54,6 +54,15 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
   page: number=0;
   ORDER_LIMIT: number = environment.ORDER_LIMIT;
   filters: any[]=[];
+  protected readonly stateLabels: Record<string, string> = {
+    'acknowledged': 'PRODUCT_ORDERS._acknowledged',
+    'inProgress': 'PRODUCT_ORDERS._in_progress',
+    'completed': 'PRODUCT_ORDERS._completed',
+    'failed': 'PRODUCT_ORDERS._failed',
+    'pending': 'PRODUCT_ORDERS._pending',
+    'cancelled': 'PRODUCT_ORDERS._cancelled',
+    'unchecked': 'PRODUCT_ORDERS._unchecked',
+  };
   check_custom:boolean=false;
   isSeller:boolean=false;
   role:any='Customer'
@@ -321,12 +330,8 @@ export class OrderInfoComponent implements OnInit, AfterViewInit {
   }
 
   onStateFilterChange(filter:string){
-    const index = this.filters.findIndex(item => item === filter);
-    if (index !== -1) {
-      this.filters.splice(index, 1);
-    } else {
-      this.filters.push(filter)
-    }
+    // Single-select: picking a state replaces the previous one; picking it again clears the filter
+    this.filters = this.filters.includes(filter) ? [] : [filter];
     this.getOrders(false);
   }
 

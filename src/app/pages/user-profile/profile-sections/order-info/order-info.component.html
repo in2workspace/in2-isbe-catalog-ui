@@ -12,11 +12,17 @@
                 <fa-icon [icon]="faSwatchbook" class="fa-base text-primary-100 align-middle mr-2"></fa-icon>
                 <h2 class="text-base  font-semibold">{{ 'OFFERINGS._filter_state' | translate }}</h2>
                 </div>
-                <button id="dropdownStateButton" data-dropdown-toggle="dropdown"
+                <button id="dropdownStateButton" #stateDropdownBtn data-dropdown-toggle="dropdown"
                 class="text-black  w-full justify-between shadow bg-white  hover:bg-gray-100  focus:ring-4 focus:outline-none focus:ring-primary-100 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center shadow-lg"
                 type="button">
-                {{ 'OFFERINGS._filter_state' | translate }}
-                <svg class="w-4 h-4 ml-2" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                <span class="min-w-0 truncate text-left">
+                  @if (filters.length === 0) {
+                    {{ 'OFFERINGS._filter_state' | translate }}
+                  } @else {
+                    @for (s of filters; track s) {<span>@if (!$first) {, }{{ stateLabels[s] | translate }}</span>}
+                  }
+                </span>
+                <svg class="w-4 h-4 ml-2 flex-shrink-0" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
@@ -26,57 +32,57 @@
                 <h6 class="mb-3 text-sm font-medium text-gray-900 ">
                     {{ 'OFFERINGS._status' | translate }}
                 </h6>
-                <ul class="space-y-2 text-sm" aria-labelledby="dropdownStateButton">
+                <ul class="space-y-2 text-sm" aria-labelledby="dropdownStateButton" (change)="stateDropdownBtn.click()">
                     <li class="flex items-center">
-                        <input id="acknowledged" type="checkbox" value="" (change)="onStateFilterChange('acknowledged')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                        <input id="acknowledged" type="checkbox" value="" [checked]="isFilterSelected('acknowledged')" (change)="onStateFilterChange('acknowledged')"
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 cursor-pointer" />
 
-                        <label for="acknowledged" class="ml-2 text-sm font-medium text-gray-900 ">
+                        <label for="acknowledged" class="w-full ml-2 text-sm font-medium text-gray-900 cursor-pointer">
                         {{ 'PROFILE._acknowledged' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
-                        <input id="inProgress" type="checkbox" value="" (change)="onStateFilterChange('inProgress')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                        <input id="inProgress" type="checkbox" value="" [checked]="isFilterSelected('inProgress')" (change)="onStateFilterChange('inProgress')"
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 cursor-pointer" />
 
-                        <label for="inProgress" class="ml-2 text-sm font-medium text-gray-900 ">
+                        <label for="inProgress" class="w-full ml-2 text-sm font-medium text-gray-900 cursor-pointer">
                         {{ 'PROFILE._in_progress' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
-                        <input id="completed" type="checkbox" value=""  (change)="onStateFilterChange('completed')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                        <input id="completed" type="checkbox" value=""  [checked]="isFilterSelected('completed')" (change)="onStateFilterChange('completed')"
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 cursor-pointer" />
 
-                        <label for="completed" class="ml-2 text-sm font-medium text-gray-900 ">
+                        <label for="completed" class="w-full ml-2 text-sm font-medium text-gray-900 cursor-pointer">
                         {{ 'PROFILE._completed' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
-                        <input id="failed" type="checkbox" value="" (change)="onStateFilterChange('failed')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                        <input id="failed" type="checkbox" value="" [checked]="isFilterSelected('failed')" (change)="onStateFilterChange('failed')"
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 cursor-pointer" />
 
-                        <label for="failed" class="ml-2 text-sm font-medium text-gray-900 ">
+                        <label for="failed" class="w-full ml-2 text-sm font-medium text-gray-900 cursor-pointer">
                         {{ 'PROFILE._failed' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
-                        <input id="pending" type="checkbox" value=""  (change)="onStateFilterChange('pending')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                        <input id="pending" type="checkbox" value=""  [checked]="isFilterSelected('pending')" (change)="onStateFilterChange('pending')"
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 cursor-pointer" />
 
-                        <label for="pending" class="ml-2 text-sm font-medium text-gray-900 ">
+                        <label for="pending" class="w-full ml-2 text-sm font-medium text-gray-900 cursor-pointer">
                         {{ 'PROFILE._pending' | translate }}
                         </label>
                     </li>
 
                     <li class="flex items-center">
-                        <input id="cancelled" type="checkbox" value="" (change)="onStateFilterChange('cancelled')"
-                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500   focus:ring-2  " />
+                        <input id="cancelled" type="checkbox" value="" [checked]="isFilterSelected('cancelled')" (change)="onStateFilterChange('cancelled')"
+                        class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2 cursor-pointer" />
 
-                        <label for="cancelled" class="ml-2 text-sm font-medium text-gray-900 ">
+                        <label for="cancelled" class="w-full ml-2 text-sm font-medium text-gray-900 cursor-pointer">
                         {{ 'PROFILE._cancelled' | translate }}
                         </label>
                     </li>
